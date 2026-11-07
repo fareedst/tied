@@ -183,7 +183,7 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 
 ## Cross-model notes (PROMPT-WF-08)
 
-No peer **PROMPT-WF-08** readout besides this cell.
+Pairs [Claude Haiku @ 1794064806](trial-readout-PROMPT-WF-08-claudehaiku55-1794064806-wf-agentstream-wf-08-claude-claudehaiku55.md): both **complete** with orchestrator **`0`**; Composer **4** tests + ARCH/IMPL + REQ **Implemented** on **4.2.0**; Haiku **3** tests + REQ **Planned** on **4.2.1**.
 
 Compared with [WF-07 Composer @ 1794057839](trial-readout-PROMPT-WF-07-composer25-1794057839-wf-agentstream-wf-07-cursor-composer25.md) (open-question closure; CITDP in traceable commit): same four-turn complete pattern; WF-08 stresses **explicit transition table + illegal-event tests** rather than null/missing config merge.
 

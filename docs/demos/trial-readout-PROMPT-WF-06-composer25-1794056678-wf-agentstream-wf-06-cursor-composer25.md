@@ -182,7 +182,7 @@ Build an in-memory token-bucket rate limiter library with configurable rate and 
 
 ## Cross-model notes (PROMPT-WF-06)
 
-No peer **PROMPT-WF-06** readout yet for direct comparison.
+Compared with [WF-06 Haiku @ 1794062924](trial-readout-PROMPT-WF-06-claudehaiku55-1794062924-wf-agentstream-wf-06-claude-claudehaiku55.md) (**split signal** — **9** tests uncommitted; close-out blocked): this Composer cell completes traceable close-out with **`c129dd1`**.
 
 Compared with [WF-04 Haiku @ 1793853737](trial-readout-PROMPT-WF-04-claudehaiku55-1793853737-wf-agentstream-wf-04-claude-claudehaiku55.md) (**gate honesty** partial — no gate receipt files; machine close_out pass): this cell persists `close_out-advisory-allowed.v1.json` and envelope with **0** gaps.
 
