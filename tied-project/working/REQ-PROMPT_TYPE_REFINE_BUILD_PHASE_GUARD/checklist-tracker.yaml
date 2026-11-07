@@ -18,16 +18,16 @@ metadata:
 profile:
   depth_tier: "minimal"
 steps:
-  - slug: sub-adversarial-inquiry-pass
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: "Minimal depth; field case in CITDP evidence_references."
+  - disposition: "not_applicable"
     evidence_refs:
-      - tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/not-applicable-receipt.v1.json
-      - tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/sub-adversarial-inquiry-pass-na.md
+      - "tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/not-applicable-receipt.v1.json"
+      - "tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth; field case in CITDP evidence_references."
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
-      status: not_applicable
-      policy: minimal-depth-no-inquiry
       evidence_refs:
-        - tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/not-applicable-receipt.v1.json
-        - tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/sub-adversarial-inquiry-pass-na.md
+        - "tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/sub-adversarial-inquiry-pass-na.md"
+      policy: "minimal-depth-no-inquiry"
+      status: "not_applicable"

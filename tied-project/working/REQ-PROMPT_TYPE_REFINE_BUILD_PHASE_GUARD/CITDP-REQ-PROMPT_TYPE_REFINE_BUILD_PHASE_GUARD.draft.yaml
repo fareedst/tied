@@ -3,10 +3,10 @@ CITDP-REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
     current_behavior: "Leaf skills state refine-plan hands off to @build-plan, and session-handoff Plan execution steps record work on disk ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]). Field case fb-mw68y52s-ixqm8x (client 1794045120, REQ-SEMVER_COMPARATOR): build-plan shipped implementation before sponsor refine-plan; a later refine-plan set post-build phase; sponsor @build-plan received silent idempotent pass while expecting pre-build sequencing."
     desired_behavior: "prompt-shared/plan-build-sequence-guard.md defines plan_phase, Do next rules, build-plan preflight (DIAGNOSTIC PLAN_BUILD_SEQUENCE_VIOLATION), and non-silent idempotent re-entry. session-handoff-structure.md documents plan_phase. refine-plan and build-plan skills reference the guard doc. Static e2e and bootstrap handoff lint tests enforce contracts."
     non_goals:
-      - "Fix workflow_trial_agentstream harness (WritableIterable, expanded_batch)"
       - "Blocking MCP checklist gate on phase mismatch"
-      - "Ingest fb-mw68y52s-ixqm8x into store feedback.yaml"
       - "Change add-refine-build Task sequencer behavior"
+      - "Fix workflow_trial_agentstream harness (WritableIterable, expanded_batch)"
+      - "Ingest fb-mw68y52s-ixqm8x into store feedback.yaml"
     success_criteria:
       - "T-SKILL-CONTRACT-01 and T-HANDOFF-LINT-01 pass"
       - "tied_validate_consistency ok after build-plan"
@@ -14,9 +14,9 @@ CITDP-REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
   impact_analysis:
     modules_or_boundaries: "tools/bundled-prompt-type-skills/prompt-shared; leaf SKILL.md; mcp-server/src/e2e/prompt-type-skills.test.ts; tools/bootstrap/lib/plan-build-sequence-handoff.test.mjs"
     tied_tokens_new:
-      - "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
       - "ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
       - "IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+      - "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
   profile:
     depth_tier: "minimal"
     gate_policy: "advisory"
@@ -28,11 +28,11 @@ CITDP-REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
         - "plan_phase omitted; Do next still chat-only"
       depth_tier: "minimal"
       disconfirming_observations:
-        - "T-SKILL-CONTRACT-01 fails if guard doc unlinked"
         - "T-HANDOFF-LINT-01 fails on invalid fixture"
+        - "T-SKILL-CONTRACT-01 fails if guard doc unlinked"
       evidence_references:
-        - "tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/field-case-fb-mw68y52s.md"
         - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+        - "tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/field-case-fb-mw68y52s.md"
       falsification_questions:
         - "Can build-plan pass e2e without PLAN_BUILD_SEQUENCE_VIOLATION language?"
       gate_policy: "advisory"

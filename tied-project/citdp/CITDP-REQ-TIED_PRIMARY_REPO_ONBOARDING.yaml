@@ -4,8 +4,8 @@ CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING:
     desired_behavior: "Dedicated README H2 documents store-root install into primary repos; install flags and MCP env keys live in tools/bootstrap/README.md and docs/tied-first-party-env-catalog.md—not root README."
     non_goals:
       - "Duplicate full MCP tool catalog in root README"
-      - "Teach process environment variables in root README"
       - "Edit methodology stubs under tied-bundle/docs in linked clients"
+      - "Teach process environment variables in root README"
     success_criteria:
       - "SC-PRI-001 through SC-PRI-005 satisfied"
   completion_criteria:

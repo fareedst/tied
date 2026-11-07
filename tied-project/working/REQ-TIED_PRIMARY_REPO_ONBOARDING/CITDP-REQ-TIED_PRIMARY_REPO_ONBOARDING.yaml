@@ -4,8 +4,8 @@ CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING:
     desired_behavior: "Dedicated README H2 documents store-root install into primary repos (same command spine as external clients); install flags, store resolution, and MCP env keys live in tools/bootstrap/README.md and docs/tied-first-party-env-catalog.md—not root README."
     non_goals:
       - "Duplicate full MCP tool catalog in root README"
-      - "Teach process environment variables in root README"
       - "Edit methodology stubs under tied-bundle/docs in linked clients"
+      - "Teach process environment variables in root README"
     success_criteria:
       - "SC-PRI-001 through SC-PRI-005 satisfied"
       - "store-readme-structure.test.ts passes"
@@ -33,8 +33,8 @@ CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING:
   risk_analysis:
     adversarial_inquiry:
       counterexamples:
-        - "Reader runs tied-install from primary repo cwd without store checkout and expects README to document recovery."
         - "Reader edits mcp.json without env catalog and mis-wires paths."
+        - "Reader runs tied-install from primary repo cwd without store checkout and expects README to document recovery."
       depth_tier: "minimal"
       disconfirming_observations:
         - "README cites tied_config_get_base_path and bootstrap README for advanced wiring."
@@ -42,11 +42,11 @@ CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING:
       eligibility_triggers_matched: []
       evidence_references:
         - "README.md"
-        - "tools/bootstrap/README.md"
         - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md"
+        - "tools/bootstrap/README.md"
       falsification_questions:
-        - "Does README still document --store or TIED_STORE_ROOT?"
         - "Does operator-lens disagree with README Greenfield commands?"
+        - "Does README still document --store or TIED_STORE_ROOT?"
       gate_policy: "advisory"
       prior_depth_tier: "minimal"
       rationale: "Documentation-only change."

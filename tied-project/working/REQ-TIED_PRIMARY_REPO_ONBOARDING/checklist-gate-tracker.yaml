@@ -76,10 +76,10 @@ steps:
         - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md"
       status: "completed"
   - disposition: "not_applicable"
-    policy: "minimal-depth-no-inquiry"
-    rationale: "Minimal depth documentation change; not-applicable-receipt.v1 on disk."
     evidence_refs:
       - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth documentation change; not-applicable-receipt.v1 on disk."
     slug: "sub-adversarial-inquiry-pass"
   - disposition: "completed"
     evidence_refs:
@@ -91,9 +91,9 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
+      - "docs/tied-experience/operator-lens.md"
       - "README.md"
       - "tools/bootstrap/README.md"
-      - "docs/tied-experience/operator-lens.md"
     slug: "verification-gate"
     tracking:
       evidence_refs:
@@ -112,20 +112,20 @@ steps:
   - disposition: "completed"
     evidence_refs:
       - "CHANGELOG.md"
-      - "README.md"
       - "docs/tied-experience/operator-lens.md"
-      - "tools/bootstrap/README.md"
-      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md"
-      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+      - "README.md"
       - "tied-project/citdp/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md"
+      - "tools/bootstrap/README.md"
     slug: "traceable-commit"
     tracking:
       evidence_refs:
         - "CHANGELOG.md"
-        - "README.md"
         - "docs/tied-experience/operator-lens.md"
-        - "tools/bootstrap/README.md"
-        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md"
-        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+        - "README.md"
         - "tied-project/citdp/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md"
+        - "tools/bootstrap/README.md"
       status: "completed"

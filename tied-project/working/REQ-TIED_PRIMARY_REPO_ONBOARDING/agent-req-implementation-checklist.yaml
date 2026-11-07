@@ -1286,6 +1286,50 @@ steps:
       state_history: []
       status: "completed"
 sub_procedures:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json"
+    flow:
+      return_to: "caller"
+    goals: "Bind SELECT_ADVERSARIAL_INQUIRY_DEPTH, MAP_ADVERSARIAL_OBLIGATIONS, EVALUATE_ADVERSARIAL_FINDINGS, ROUTE_UNRESOLVED_CRITICAL_FINDINGS, and PERSIST_WORKING_ARTIFACTS behind one checklist-callable name for bounded adversarial inquiry."
+    invoked_by:
+      - "flag-contradictory-specs"
+      - "flag-insufficient-specs"
+      - "gate-pseudocode-validation"
+      - "three-way-alignment-unit"
+      - "traceable-commit"
+      - "verification-gate"
+    outcomes: "Report path, proof-boundary summary, and open-finding count returned to caller; canonical TIED YAML unchanged; observed findings remain review-gated; blocking only when caller blocking=true, strict-eligible, and error-severity finding unresolved."
+    policy: "minimal-depth-no-inquiry"
+    preconditions:
+      - "Artifact root is working/{REQ-TOKEN}/adversarial-inquiry; generated evidence is not canonical TIED intent."
+      - "Caller supplies scope, phase (pre_implementation|verification|close_out), proof_boundaries, blocking (default false), and profile_depth (minimal|integrated|strict_candidate) selected before this call."
+    rationale: "Minimal depth documentation change; not-applicable-receipt.v1 on disk."
+    references:
+      - "mcp-server/src/adversarial-inquiry/checklist-integration.ts"
+      - "tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md"
+      - "tied-project/vocab/fidelity-research.md"
+      - "tied-project/vocab/quality-assurance.md"
+    slug: "sub-adversarial-inquiry-pass"
+    tasks:
+      - "IF profile_depth >= integrated: CALL tied_adversarial_inquiry_run via MAP_ADVERSARIAL_OBLIGATIONS with explicit scope, phase, and read-only guarantee; persist only under working/{REQ-TOKEN}/adversarial-inquiry."
+      - "Partition results by proof boundary: traceability_structure | pseudo_code_structure | semantic_fidelity | executable_behavior | human_decision."
+      - "PRELOAD tied-project/vocab/fidelity-research.md; RESOLVE adversarial case, proof boundary, and finding lifecycle terms per caller mode ([PROC-VOCABULARY_INDEX])."
+      - "RETURN report path, proof-boundary summary, and open-finding count to caller."
+      - "Run EVALUATE_ADVERSARIAL_FINDINGS: append observed findings to the per-request finding ledger; never mutate canonical TIED YAML."
+      - "Run PERSIST_WORKING_ARTIFACTS: write obligation-report.json, finding-ledger.jsonl, gate-result.json, and evidence-provenance.json deterministically under the working artifact directory."
+      - "Run ROUTE_UNRESOLVED_CRITICAL_FINDINGS: IF blocking AND strict-eligible AND unresolved error-severity finding remains THEN RETURN failure to caller with GOTO target per finding proof boundary; otherwise warn-only."
+      - "Run SELECT_ADVERSARIAL_INQUIRY_DEPTH: resolve research profile, assurance profiles, and gate policy independently before tool invocation."
+    title: "Checklist-local adversarial inquiry pass"
+    tracking:
+      consideration_before_proceeding: "Minimal depth: not applicable; receipt on disk."
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json"
+      policy: "minimal-depth-no-inquiry"
+      rationale: "Minimal depth documentation change; not-applicable-receipt.v1 on disk."
+      retry_count: "0"
+      state_history: []
+      status: "not_applicable"
   - flow:
       return_to: "caller"
     goals: "Apply presentation-only client YAML styling after baseline canonical formatting; fail closed when semantics change or formatter misbehaves."
@@ -1316,50 +1360,6 @@ sub_procedures:
       retry_count: "0"
       state_history: []
       status: "pending"
-  - flow:
-      return_to: "caller"
-    goals: "Bind SELECT_ADVERSARIAL_INQUIRY_DEPTH, MAP_ADVERSARIAL_OBLIGATIONS, EVALUATE_ADVERSARIAL_FINDINGS, ROUTE_UNRESOLVED_CRITICAL_FINDINGS, and PERSIST_WORKING_ARTIFACTS behind one checklist-callable name for bounded adversarial inquiry."
-    invoked_by:
-      - "flag-contradictory-specs"
-      - "flag-insufficient-specs"
-      - "gate-pseudocode-validation"
-      - "three-way-alignment-unit"
-      - "traceable-commit"
-      - "verification-gate"
-    outcomes: "Report path, proof-boundary summary, and open-finding count returned to caller; canonical TIED YAML unchanged; observed findings remain review-gated; blocking only when caller blocking=true, strict-eligible, and error-severity finding unresolved."
-    preconditions:
-      - "Artifact root is working/{REQ-TOKEN}/adversarial-inquiry; generated evidence is not canonical TIED intent."
-      - "Caller supplies scope, phase (pre_implementation|verification|close_out), proof_boundaries, blocking (default false), and profile_depth (minimal|integrated|strict_candidate) selected before this call."
-    references:
-      - "mcp-server/src/adversarial-inquiry/checklist-integration.ts"
-      - "tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md"
-      - "tied-project/vocab/fidelity-research.md"
-      - "tied-project/vocab/quality-assurance.md"
-    slug: "sub-adversarial-inquiry-pass"
-    disposition: "not_applicable"
-    policy: "minimal-depth-no-inquiry"
-    rationale: "Minimal depth documentation change; not-applicable-receipt.v1 on disk."
-    evidence_refs:
-      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json"
-    tasks:
-      - "IF profile_depth >= integrated: CALL tied_adversarial_inquiry_run via MAP_ADVERSARIAL_OBLIGATIONS with explicit scope, phase, and read-only guarantee; persist only under working/{REQ-TOKEN}/adversarial-inquiry."
-      - "Partition results by proof boundary: traceability_structure | pseudo_code_structure | semantic_fidelity | executable_behavior | human_decision."
-      - "PRELOAD tied-project/vocab/fidelity-research.md; RESOLVE adversarial case, proof boundary, and finding lifecycle terms per caller mode ([PROC-VOCABULARY_INDEX])."
-      - "RETURN report path, proof-boundary summary, and open-finding count to caller."
-      - "Run EVALUATE_ADVERSARIAL_FINDINGS: append observed findings to the per-request finding ledger; never mutate canonical TIED YAML."
-      - "Run PERSIST_WORKING_ARTIFACTS: write obligation-report.json, finding-ledger.jsonl, gate-result.json, and evidence-provenance.json deterministically under the working artifact directory."
-      - "Run ROUTE_UNRESOLVED_CRITICAL_FINDINGS: IF blocking AND strict-eligible AND unresolved error-severity finding remains THEN RETURN failure to caller with GOTO target per finding proof boundary; otherwise warn-only."
-      - "Run SELECT_ADVERSARIAL_INQUIRY_DEPTH: resolve research profile, assurance profiles, and gate policy independently before tool invocation."
-    title: "Checklist-local adversarial inquiry pass"
-    tracking:
-      consideration_before_proceeding: "Minimal depth: not applicable; receipt on disk."
-      retry_count: "0"
-      state_history: []
-      status: "not_applicable"
-      policy: "minimal-depth-no-inquiry"
-      rationale: "Minimal depth documentation change; not-applicable-receipt.v1 on disk."
-      evidence_refs:
-        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json"
   - flow:
       return_to: "caller"
     goals: "Ensure every TIED YAML file is syntactically valid, skill-routed where applicable, and consistent before use. Use lint_yaml per [PROC-YAML_EDIT_LOOP] (processes.md); it accepts one or more paths and must process each file independently. Never use raw multi-argument `yq` pretty-print on multiple paths in one process."

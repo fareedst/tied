@@ -10,18 +10,18 @@ CITDP-REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
     gate_policy: "advisory"
   risk_analysis:
     adversarial_inquiry:
-      depth_tier: "minimal"
-      gate_policy: "advisory"
       assurance_profile: "baseline-functional"
       counterexamples:
         - "A test bypasses ensureWritableClientTree and still mutates store tied-project/.cursor/mcp.json"
-      falsification_questions:
-        - "Does assertSafeMcpJsonWriteTarget refuse paths outside temp fixtures?"
+      depth_tier: "minimal"
       disconfirming_observations:
         - "grep finds direct writeMcpJson without guard on store paths"
       evidence_references:
-        - "tied-project/working/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION/evidence/not-applicable-receipt.v1.json"
         - "mcp-server/src/test-helpers/client-path-env.test.ts"
+        - "tied-project/working/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION/evidence/not-applicable-receipt.v1.json"
+      falsification_questions:
+        - "Does assertSafeMcpJsonWriteTarget refuse paths outside temp fixtures?"
+      gate_policy: "advisory"
   risk_assessment:
     depth_tier: "minimal"
     gate_policy: "advisory"

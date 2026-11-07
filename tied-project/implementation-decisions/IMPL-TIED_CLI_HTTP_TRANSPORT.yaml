@@ -11,8 +11,8 @@ IMPL-TIED_CLI_HTTP_TRANSPORT:
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLI_HTTP_TRANSPORT-pseudocode.md"
   implementation_approach:
     details:
-      - "TIED_CLI_MCP_URL selects HTTP client; stdio client unchanged otherwise"
       - "Authorization from TIED_CLI_MCP_BEARER or TIED_MCP_HTTP_BEARER_TOKEN"
+      - "TIED_CLI_MCP_URL selects HTTP client; stdio client unchanged otherwise"
     summary: "Bundled tied-cli HTTP transport branch"
   metadata:
     created:

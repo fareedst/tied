@@ -3,27 +3,27 @@ CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS:
     current_behavior: "TIED YAML MCP serves only on stdio via mcp-server/dist/index.js. tied-cli spawns a stdio child. No supported path for LAN, Docker-sidecar, or IDE remote MCP URL over HTTPS."
     desired_behavior: "Same tool profiles (core and optin) available over MCP Streamable HTTP on plain HTTP behind a TLS reverse proxy; bearer authentication at the Node app; tied mcp serve CLI; tied-cli optional HTTP client; stdio remains default install transport; operator docs and compose examples for Docker."
     non_goals:
-      - "OAuth or MCP SDK auth server"
-      - "mTLS or IP allowlists in v1"
       - "Auto-replacing stdio entries in .cursor/mcp.json on tied-install refresh"
       - "Integrated adversarial inquiry activation"
+      - "mTLS or IP allowlists in v1"
+      - "OAuth or MCP SDK auth server"
     sponsor_decisions:
+      auth_v1: "Bearer token in TIED_MCP_HTTP_BEARER_TOKEN"
       clients_v1: "IDE remote MCP url and headless/Docker callers"
       tls_model: "Terminate TLS at reverse proxy; Node HTTP inside"
-      auth_v1: "Bearer token in TIED_MCP_HTTP_BEARER_TOKEN"
     success_criteria:
-      - "SC-MHR-STDIO"
-      - "SC-MHR-HTTP-TOOLS"
       - "SC-MHR-BEARER"
       - "SC-MHR-BIND"
       - "SC-MHR-CLI"
-      - "SC-MHR-SERVER-INFO"
       - "SC-MHR-DOCKER"
       - "SC-MHR-DOCS"
+      - "SC-MHR-HTTP-TOOLS"
+      - "SC-MHR-SERVER-INFO"
+      - "SC-MHR-STDIO"
     unchanged_behavior:
       - "buildTiedMcpServerEntry stdio type for default install"
-      - "TIED_CLI_MCP_JSON_BASE_PATH stdio spawn and path authority"
       - "MCP config preservation on existing .cursor/mcp.json"
+      - "TIED_CLI_MCP_JSON_BASE_PATH stdio spawn and path authority"
       - "TIED_MCP_TOOL_PROFILE core/optin split"
   completion_criteria:
     activation:
@@ -49,10 +49,10 @@ CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS:
       - "REQ-MCP_SERVER_INFO"
       - "REQ-TIED_UNIFIED_TOOLCHAIN"
     tied_tokens_new:
-      - "REQ-MCP_HTTPS_REMOTE_ACCESS"
       - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
       - "IMPL-MCP_HTTP_SERVER"
       - "IMPL-TIED_CLI_HTTP_TRANSPORT"
+      - "REQ-MCP_HTTPS_REMOTE_ACCESS"
   record_identity:
     change_request_id: "REQ-MCP_HTTPS_REMOTE_ACCESS"
     depth_tier: "minimal"
@@ -65,16 +65,16 @@ CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS:
       assurance_profile: "baseline-functional"
       counterexamples:
         - "Bearer token leaked via compose env committed to git"
-        - "Wide bind without token if guard regresses"
         - "Remote MCP points at wrong TIED_CLIENT_PROJECT_PATH and corrupts store tree"
+        - "Wide bind without token if guard regresses"
       depth_tier: "minimal"
       disconfirming_observations:
         - "Bind+token guard fails closed in unit tests"
         - "Install still defaults to stdio"
       eligibility_triggers_matched: []
       evidence_references:
-        - "tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/PLAN-refine.md"
         - "mcp-server/src/index.ts"
+        - "tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/PLAN-refine.md"
         - "tools/bootstrap/lib/mcp-config.mjs"
       falsification_questions:
         - "Does any HTTP listener start on 0.0.0.0 without a configured bearer?"
@@ -88,9 +88,9 @@ CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS:
       costly:
         - "Exposing YAML write MCP on LAN or public Internet"
       reversible:
-        - "Stateful vs stateless HTTP session (default stateful)"
         - "Caddy vs Traefik in examples (default Caddy)"
         - "Separate vhosts vs path routing (default vhosts)"
+        - "Stateful vs stateless HTTP session (default stateful)"
     summary: "Additive remote transport with proxy TLS; primary risk is unauthorized network access to write tools."
   test_strategy:
     integration_command_seq:

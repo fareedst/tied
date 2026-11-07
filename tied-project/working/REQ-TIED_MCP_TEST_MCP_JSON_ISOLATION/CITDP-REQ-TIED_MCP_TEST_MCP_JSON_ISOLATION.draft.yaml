@@ -3,18 +3,18 @@ CITDP-REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
     current_behavior: "bindWritableProjectCorpus writes minimal .cursor/mcp.json via writeInstallMcpJson. mcp-http-server.test.ts calls it on the live store tied-project path, clobbering developer MCP config with env-only tied-yaml."
     desired_behavior: "Helper fail-closed when target projectRoot is the store/methodology checkout; mcp-http-server tests use isolated temp workspaces; static guard prevents regression."
     non_goals:
-      - "Change tied-install byte-preservation policy"
       - "Block legitimate temp-dir bindWritableProjectCorpus"
+      - "Change tied-install byte-preservation policy"
     success_criteria:
-      - "Running mcp-http-server.test.ts does not mutate store .cursor/mcp.json"
       - "Guard unit test passes"
+      - "Running mcp-http-server.test.ts does not mutate store .cursor/mcp.json"
     unchanged_behavior: "Temp-dir corpus binding for yaml-loader and related suites"
   impact_analysis:
     modules_or_boundaries: "mcp-server/src/test-helpers/client-path-env.ts; mcp-server/src/mcp-http-server.test.ts; optional new client-path-env.test.ts"
     tied_tokens_new:
-      - "REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION"
       - "ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION"
       - "IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION"
+      - "REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION"
   profile:
     depth_tier: "minimal"
     gate_policy: "advisory"
@@ -22,12 +22,12 @@ CITDP-REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Guard too strict; breaks intentional store-self tests"
         - "Escape hatch env abused in CI"
+        - "Guard too strict; breaks intentional store-self tests"
       depth_tier: "minimal"
       disconfirming_observations:
-        - "Temp fixture migration keeps HTTP MCP tests green"
         - "Static scan catches reintroduced store path"
+        - "Temp fixture migration keeps HTTP MCP tests green"
       evidence_references:
         - "mcp-server/src/mcp-http-server.test.ts"
         - "mcp-server/src/test-helpers/client-path-env.ts"
@@ -45,8 +45,8 @@ CITDP-REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
     depth_tier: "minimal"
     gate_policy: "advisory"
   test_strategy:
+    composition:
+      - "optional static offender scan test"
     unit:
       - "client-path-env guard tests"
       - "mcp-http-server.test.ts on temp corpus"
-    composition:
-      - "optional static offender scan test"

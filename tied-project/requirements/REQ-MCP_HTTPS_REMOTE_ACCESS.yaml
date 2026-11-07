@@ -12,8 +12,8 @@ REQ-MCP_HTTPS_REMOTE_ACCESS:
   priority: "P2"
   rationale:
     benefits:
-      - "Remote Cursor or Claude MCP url entries for core and optin surfaces"
       - "Docker and LAN deployment behind TLS-terminating proxy"
+      - "Remote Cursor or Claude MCP url entries for core and optin surfaces"
       - "tied-cli may call Streamable HTTP without spawning stdio"
     problems_solved:
       - "MCP available only on stdio"
@@ -21,21 +21,21 @@ REQ-MCP_HTTPS_REMOTE_ACCESS:
     why: "Operators need optional Streamable HTTP for LAN, Docker, and remote IDE clients while preserving stdio as the default install transport."
   related_requirements:
     depends_on:
-      - "REQ-TIED_UNIFIED_TOOLCHAIN"
       - "REQ-MCP_SERVER_INFO"
       - "REQ-TIED_SETUP"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
     related_to:
       - "REQ-MCP_USAGE_METRICS"
       - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
     supersedes: []
   satisfaction_criteria:
-    - criterion: "Stdio dist/index.js behavior unchanged"
-      metric: "npm test --prefix mcp-server"
-    - criterion: "HTTP bearer returns 401 when missing or wrong"
-      metric: "mcp-http-auth.test.ts and mcp-http-server.test.ts"
     - criterion: "Core and optin tools/list counts match profiles over HTTP"
       metric: "mcp-http-server.test.ts"
+    - criterion: "HTTP bearer returns 401 when missing or wrong"
+      metric: "mcp-http-auth.test.ts and mcp-http-server.test.ts"
     - criterion: "Non-loopback bind refuses start without bearer token"
       metric: "mcp-http-auth.test.ts resolveHttpBearerRequirement"
     - criterion: "server_info extensions include tied.transport"
       metric: "server-info.test.ts schema valid with HTTP context"
+    - criterion: "Stdio dist/index.js behavior unchanged"
+      metric: "npm test --prefix mcp-server"
