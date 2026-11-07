@@ -1,0 +1,10 @@
+docs(readme): store-root install; env flags in bootstrap
+
+Narrow root README and operator-lens to install/refresh from the
+TIED store root only; move --store, mode profiles, and MCP env keys
+to tools/bootstrap/README.md and the first-party env catalog.
+
+Verification: store-readme-structure.test.ts pass; README has no
+--store / TIED_* env operator prose.
+
+REQ-TIED_PRIMARY_REPO_ONBOARDING REQ-TIED_ENVIRONMENT_VARIABLE_POLICY

@@ -1336,6 +1336,11 @@ sub_procedures:
       - "tied-project/vocab/fidelity-research.md"
       - "tied-project/vocab/quality-assurance.md"
     slug: "sub-adversarial-inquiry-pass"
+    disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth documentation change; not-applicable-receipt.v1 on disk."
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json"
     tasks:
       - "IF profile_depth >= integrated: CALL tied_adversarial_inquiry_run via MAP_ADVERSARIAL_OBLIGATIONS with explicit scope, phase, and read-only guarantee; persist only under working/{REQ-TOKEN}/adversarial-inquiry."
       - "Partition results by proof boundary: traceability_structure | pseudo_code_structure | semantic_fidelity | executable_behavior | human_decision."
@@ -1347,10 +1352,14 @@ sub_procedures:
       - "Run SELECT_ADVERSARIAL_INQUIRY_DEPTH: resolve research profile, assurance profiles, and gate policy independently before tool invocation."
     title: "Checklist-local adversarial inquiry pass"
     tracking:
-      consideration_before_proceeding: "Report persisted under working/{REQ-TOKEN}/adversarial-inquiry; caller receives summary; blocking only when caller blocking=true, strict-eligible, and error finding unresolved."
+      consideration_before_proceeding: "Minimal depth: not applicable; receipt on disk."
       retry_count: "0"
       state_history: []
-      status: "pending"
+      status: "not_applicable"
+      policy: "minimal-depth-no-inquiry"
+      rationale: "Minimal depth documentation change; not-applicable-receipt.v1 on disk."
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json"
   - flow:
       return_to: "caller"
     goals: "Ensure every TIED YAML file is syntactically valid, skill-routed where applicable, and consistent before use. Use lint_yaml per [PROC-YAML_EDIT_LOOP] (processes.md); it accepts one or more paths and must process each file independently. Never use raw multi-argument `yq` pretty-print on multiple paths in one process."

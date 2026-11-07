@@ -31,7 +31,7 @@ cd tied
 | Build script help | `./build-workspace.sh --help` |
 | Install script help (no args = styled help) | `./tied-install.sh --help` |
 | Methodology refresh on an existing client | `./tied-install.sh --refresh /path/to/client` |
-| Linked primary repo | [Greenfield routing](#greenfield-routing) → primary row, or [README primary implementation](../../README.md#primary-implementation-repository) |
+| Primary implementation repo | [Greenfield routing](#greenfield-routing) → primary row, or [README primary implementation](../../README.md#primary-implementation-repository) |
 
 Windows: [README Install and use](../../README.md#install-and-use).
 
@@ -45,11 +45,11 @@ Windows: [README Install and use](../../README.md#install-and-use).
 | --- | --- | --- |
 | Disposable smoke client | `source scripts/build-commands.sh && test-new-tied-client` | Open client in Cursor; enable MCP |
 | External client directory | `./tied-install.sh /path/to/your/project` | [Getting started with a new client project](../../README.md#getting-started-with-a-new-client-project) |
-| Primary implementation repo | `tied-install.sh --mode linked --store /abs/path/to/tied-store .` from **primary** root | [Primary implementation repository](../../README.md#primary-implementation-repository) |
+| Primary implementation repo | `./tied-install.sh /path/to/primary` | [Primary implementation repository](../../README.md#primary-implementation-repository) |
 
 After bootstrap: confirm MCP base path, then [Compact feature rhythm](../../README.md#compact-feature-rhythm).
 
-**Store-as-primary note:** This git repository is both store and TIED client. To linked-install into **other** primaries, use a **separate store clone** as `--store`.
+**Store-as-primary note:** This git repository is both store and TIED client. To install into **other** primaries, keep a **separate store clone** and run install from that checkout ([tools/bootstrap/README.md](../../tools/bootstrap/README.md)).
 
 ---
 
@@ -57,7 +57,7 @@ After bootstrap: confirm MCP base path, then [Compact feature rhythm](../../READ
 
 | Situation | Start here |
 | --- | --- |
-| Methodology refresh | [methodology-migration.md](../../tied-bundle/docs/methodology-migration.md) and `tied-install --refresh` |
+| Methodology refresh | [methodology-migration.md](../../tied-bundle/docs/methodology-migration.md) and `./tied-install.sh --refresh /path/to/client` (from store root) |
 | Architecture recovery | [EASAR](../methodologies/evidence-assured-software-architecture-recovery.md) |
 | External workflows | [Operating environment externalities](../tied-operating-environment-externalities.md) |
 
@@ -71,12 +71,7 @@ Bootstrap details: [tools/bootstrap/README.md](../../tools/bootstrap/README.md) 
 
 Read-only MCP/CLI layer for `[REQ-TIED_PROCESS_CERTIFICATION_READINESS]`: `tied certification spec-validate`, `conformance-evaluate`, `capability-evaluate`, and related commands — see [Sponsor lens](sponsor-lens.md) for what readiness does **not** claim.
 
-After `cd mcp-server && npm run build`:
-
-```bash
-export TIED_BASE_PATH="/absolute/path/to/tied-project"
-node --import tsx --test src/process-certification-readiness/*.test.ts
-```
+Harness invocation and workspace setup: [Engineer lens — certifiability readiness tooling](engineer-agent-lens.md#certifiability-readiness-tooling) and [mcp-server/README.md](../../mcp-server/README.md).
 
 ---
 

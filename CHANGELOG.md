@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Store README install spine (disk-first operators)** — Root [README.md](README.md) documents `tied-install` only **from the store root** with a client/primary path; no `--store`, default `--mode`, or process env keys in the README. Primary-repo flags, store resolution, and MCP env catalog: [tools/bootstrap/README.md](tools/bootstrap/README.md) and [docs/tied-first-party-env-catalog.md](docs/tied-first-party-env-catalog.md). [operator-lens.md](docs/tied-experience/operator-lens.md) aligned. Evidence: [readme-store-root-policy-2026-11-07.md](tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md). Cross-ref [REQ-TIED_PRIMARY_REPO_ONBOARDING], [REQ-TIED_ENVIRONMENT_VARIABLE_POLICY].
+
 ### Added
 
 - **Store README manual MCP acceptance ([REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE], [ARCH-TIED_STORE_README_MCP_ONBOARDING], [IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE])** — README documents Cursor **Settings → Customize → MCPs** and Claude CLI **2 new MCP servers** enable flow (`#manual-mcp-acceptance`); structure-test substrings; operator-lens cross-link; delivery-path tables and copy-paste spine; prerequisites drop obsolete Go references. CITDP: [CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml](tied-project/citdp/CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/PLAN.md).

@@ -22,7 +22,44 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 
 **Runtime resolver fixtures ([REQ-TIED_RUNTIME_DISK_CONFIG] SC-RDC-FIXTURE-PARITY):** Shared catalog under `tools/bootstrap/fixtures/tied-runtime/` (`manifest.json` + loader `lib/tied-runtime-fixture-loader.mjs`) drives bootstrap and agentstream resolver tests; cross-runtime gate: `node --test tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs`.
 
-**Operator journey (macOS quick start, full install):** root [README.md](../../README.md) · visual methodology [TIED Experience Hub](../../docs/tied-experience/index.md). **Primary implementation repositories** (product repo + `tied-project/` in one tree, separate TIED store): see [README § Primary implementation repository](../../README.md#primary-implementation-repository).
+**Operator journey (macOS quick start, full install):** root [README.md](../../README.md) · visual methodology [TIED Experience Hub](../../docs/tied-experience/index.md). **Primary implementation repositories** (below) · store-root install in [README § Primary implementation repository](../../README.md#primary-implementation-repository).
+
+## Primary implementation repositories
+
+One git repo holds application code and `tied-project/` (**primary implementation repository**). The **TIED store** is a separate checkout with a built `mcp-server/dist/index.js`.
+
+**Recommended (from store root after `./build-workspace.sh`):**
+
+```bash
+./tied-install.sh /path/to/primary
+./tied-install.sh --refresh /path/to/primary
+```
+
+Windows: `tied-install.cmd C:\path\to\primary` or `.\tied-install.ps1 C:\path\to\primary` from the store root.
+
+**When install is not launched from the store tree**, pass the store explicitly:
+
+```bash
+./tied-install.sh --mode linked --store /abs/tied-store /path/to/primary
+```
+
+**Refresh from the primary repo root** (after first install wrote store paths into `.cursor/mcp.json`):
+
+```bash
+tied-install --mode linked .
+```
+
+**Store resolution order** (implementation): `--store` → process `TIED_STORE_ROOT` → MCP config on disk → `TIED_REPO_ROOT` when invoked from the store tree. See [lib/layers/store.mjs](lib/layers/store.mjs).
+
+**Self-install:** `SELF_INSTALL_REFUSED` when store root equals primary root or trees nest; use a separate store clone or `--allow-self-install` only when you intend store-as-client. See [lib/layout.mjs](lib/layout.mjs).
+
+**Install profiles:** `--mode linked` (default: stubs + disk MCP config) vs `--mode full` (offline materialized `tied-bundle/`). Full flag matrix: `./tied-install.sh --help` and `source scripts/build-commands.sh && how install-matrix`.
+
+## Environment and MCP configuration (disk-first)
+
+MCP spawn paths and operator toggles are documented in [docs/tied-first-party-env-catalog.md](../../docs/tied-first-party-env-catalog.md). Install writes `.cursor/mcp.json` (and Claude `.mcp.json`) with store, traceability, and bundle paths—prefer verifying with MCP **`tied_config_get_base_path`** rather than shell exports.
+
+Optional effective-settings snapshot: MCP **`tied_config_report`** ([REQ-TIED_CONFIG_REPORT](../../tied-project/requirements/REQ-TIED_CONFIG_REPORT.yaml)).
 
 **Operator matrix:** `source scripts/build-commands.sh && how install-matrix` — maps smoke flags (`test-new-tied-client --install-mode full`, layer subsets) to committed vs gitignored paths; see `tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md`.
 
@@ -124,9 +161,21 @@ Environment: `TIED_TEST_ROOT`, `TIED_CURSOR_AGENT_CMD` (optional). Global store/
 
 ## Usage
 
+**Preferred:** run install from the **TIED store root** with an absolute path to the client or primary repo.
+
+```bash
+./tied-install.sh /path/to/client
+```
+
+```cmd
+tied-install.cmd C:\path\to\client
+```
+
+Alternate (client cwd): install into the current directory from the store checkout:
+
 ```cmd
 cd C:\dev\my-client-app
-..\dev\tied\tied-install.cmd .
+C:\dev\tied\tied-install.cmd .
 ```
 
 ```bash

@@ -1,0 +1,124 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "no_run_id",
+    "run_id": null
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "REQ-TIED_PRIMARY_REPO_ONBOARDING",
+      "findings": [
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/gates/close_out-2026-11-07T04-35-58-882Z.json",
+            "stored_tracker_hash": "sha256:e34f0265f3b44ce27a6b4ca92e509f4df65446b66e73bafaa82e2e0f48abba54",
+            "current_tracker_hash": "sha256:fd980ee9ad2c4d1be63fd401dfcd1a5c2ea51c8b82bc0b13dcd6075694cacf74",
+            "stored_citdp_hash": "sha256:4634a942e1805d245a9edf2f803fcbdd7738859a786c7f0edcd7b5d08ac74d4a",
+            "current_citdp_hash": "sha256:b3b3ab1a2d840300b7d7badcb77f66ac0044f93b8ead752de167e2c2d45a5c3a"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/gates/close_out-2026-11-07T04-38-13-648Z.json",
+            "stored_tracker_hash": "sha256:79014a21b19bbb10817004a1626080f2c7624d9ad715e80506df4f33a9cbe2ae",
+            "current_tracker_hash": "sha256:fd980ee9ad2c4d1be63fd401dfcd1a5c2ea51c8b82bc0b13dcd6075694cacf74",
+            "stored_citdp_hash": "sha256:4634a942e1805d245a9edf2f803fcbdd7738859a786c7f0edcd7b5d08ac74d4a",
+            "current_citdp_hash": "sha256:b3b3ab1a2d840300b7d7badcb77f66ac0044f93b8ead752de167e2c2d45a5c3a"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/gates/close_out-2026-11-07T04-39-05-023Z.json",
+            "stored_tracker_hash": "sha256:5885286771443e85792a21efb88b46f9a3511d6b93fa1fe608151d816d489076",
+            "current_tracker_hash": "sha256:fd980ee9ad2c4d1be63fd401dfcd1a5c2ea51c8b82bc0b13dcd6075694cacf74",
+            "stored_citdp_hash": "sha256:859fbf6c5829f404b8a7a6d69120621da2b42c6169f32ef6f46fc2668737be44",
+            "current_citdp_hash": "sha256:b3b3ab1a2d840300b7d7badcb77f66ac0044f93b8ead752de167e2c2d45a5c3a"
+          }
+        }
+      ],
+      "ledger_rows": 11,
+      "read_only": true,
+      "process_grade": {
+        "score": 88,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": false,
+    "hydration_diagnostics": []
+  },
+  "gate_receipt_persist": {
+    "ok": true,
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/gates/close_out-2026-11-07T04-39-05-023Z.json",
+    "hash": "sha256:9d4cbff21bd5f23f6f7bbda55ecfb09c3932dcf097c01d03afa73f6141d4231e"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 1,
+    "diagnostics": []
+  }
+}
