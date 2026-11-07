@@ -84,6 +84,7 @@ waves:
     title: "Checklist slice"
   P6:
     child_folder: "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK"
+    exit_commit: "PENDING"
     linked_plan: "docs/langgraph/plan-tied-lg-p6-multi-task.md"
     mode: "implement"
     status: "implement_close_out_complete"
