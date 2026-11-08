@@ -34,8 +34,8 @@ steps:
     notes: Wave 3 bundle compose; build-plan-wave3-handoff.md.
     status: done
   traceable-commit:
-    notes: Phase 0; sponsor or non-tied-close — build-plan did not auto-commit.
-    status: pending
+    notes: "4257f91b docs(comparisons) morluto/rea bundle + Wave 3 compose."
+    status: done
   translate-sponsor-intent:
     notes: add-feature wave 3 — default reversible doc compose.
     status: done
