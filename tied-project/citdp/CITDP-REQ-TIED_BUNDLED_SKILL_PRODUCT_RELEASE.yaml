@@ -1,0 +1,100 @@
+CITDP-REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  change_definition:
+    current_behavior: "Bundled store skills have partial harness contracts (prompt-type e2e frontmatter/size/refs; standalone install manifest) but no per-skill semver, eval suite scaffold, report staleness checks, or optional heavy-eval PR trigger."
+    desired_behavior: "REQ-tracked product-release harness for every tools/bundled-* package: quoted metadata.version, evals/suite.v1.yaml + reports/latest.json with content-hash staleness, manifest BUNDLED_SKILL_RELEASE_CATALOG, validators in bootstrap + mcp-server e2e, optional non-blocking /run-evals GitHub workflow — without replacing checklist gates or claiming Google eval as Q1 proof."
+    non_goals:
+      - "Blocking AI reviewer as sole quality gate"
+      - "Import Google 170-skill catalog via tied-install default"
+      - "Mandatory LLM eval on every PR"
+      - "methodology-composition-matrix §2 row without separate REQ"
+      - "Replace tied_checklist_gate_validate with skill linter green"
+      - "Skill eval pass rate as TIED methodology effectiveness"
+    success_criteria:
+      - "bundled-skill-product-release.md and manifest catalog list all release-governed roots"
+      - "pre_implementation and verification gate receipts under working/REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE/gates/"
+      - "REQ/ARCH/IMPL registered; pseudocode_validate and tied_validate_consistency pass after implement"
+      - "skill-product-release-validate and bundled-skill-product-release e2e pass after implement"
+    unchanged_behavior: "Checklist gate authority, MCP YAML writes, LEAP promotion boundary, operator-local docs/comparisons publish policy."
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/skill-product-release-validate.test.mjs (after implement)"
+      - "cd mcp-server && npx tsx --test src/e2e/bundled-skill-product-release.test.ts (after implement)"
+      - "pseudocode_validate IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE gate_mode"
+      - "tied_checklist_gate_validate phase pre_implementation"
+    manifest_reference: "tools/bootstrap/manifest.json BUNDLED_SKILL_RELEASE_CATALOG"
+    proof_boundaries:
+      - "google_reported_gate_stack_literacy_only"
+      - "skill_eval_stub_green_not_q1_defect_arm"
+  impact_analysis:
+    impl_inventory_notes: "tools/bundled-*; tools/bootstrap/lib; manifest.json; mcp-server e2e; tied-bundle/docs; .github/workflows; docs/comparisons google wave 2 phased table"
+    methodology_surface_change_class: "prompt_type_workflow"
+    modules_or_boundaries: "Bootstrap validators; manifest catalog; all bundled SKILL.md frontmatter; optional GH workflow"
+    tied_tokens_affected:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+    tied_tokens_new:
+      - "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+      - "IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+      - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "draft"
+    tied_stack_updates_required: []
+  persist_policy: "Persist CITDP at refine-plan; update record_status to complete after implement persist-citdp-record"
+  record_identity:
+    change_request_id: "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "not_measured"
+    recorded_at: "2026-11-07"
+    title: "Bundled skill product release gates (Google Agent Skills Wave 3)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Catalog omits new bundled skill until manifest updated"
+      - "run-evals workflow promoted to required check without sponsor REQ"
+      - "Semver gate blocks prompt-shared typo fixes outside behavioral globs"
+      - "Skill eval receipt marketed as low ship defect rate"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Semver CI blocks prompt-shared-only edit outside behavioral globs"
+        - "Skill eval stub green cited as Q1 low ship defect rate"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "BUNDLED_SKILL_RELEASE_CATALOG omitted tied-yaml or facilitator skill"
+        - "run-evals workflow made a required merge check without sponsor REQ"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/bundled_skill_wave_3_a48fb38f.plan.md"
+        - "docs/comparisons/google-agent-skills-vs-tied-agent-management.md"
+        - "tied-project/working/REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE/PLAN.md"
+      falsification_questions:
+        - "Are checklist gates still required for REQ-track YAML mutations?"
+        - "Does semver gate apply only to behavioral path globs in test-strategy?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Harness validation and CI wiring; no auth/secrets in default fast path."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "skill-product-release-validate.test.mjs + bundled-skill-product-release e2e"
+        evidence_method: "TDD bootstrap + mcp-server e2e"
+        limitation: "Does not prove agent outcomes improve with semver discipline"
+        owner: "agent"
+        rationale: "Enforce catalog and staleness contracts"
+  test_strategy:
+    documentation_only: false
+    integration_tests:
+      - "mcp-server/src/e2e/bundled-skill-product-release.test.ts"
+    mandatory_order: "RED validator tests before baseline semver/eval trees"
+    unit_tests:
+      - "tools/bootstrap/lib/skill-product-release-validate.test.mjs"

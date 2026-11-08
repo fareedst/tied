@@ -1,0 +1,22 @@
+ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  cross_references:
+    - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  decision: "Harness catalog + validators + optional heavy workflow; not REQ gate replacement."
+  implementation_approach:
+    details:
+      - "Single BUNDLED_SKILL_RELEASE_CATALOG"
+      - "Staged cheap-before-expensive CI"
+    summary: "Manifest catalog, bootstrap validator, mcp e2e, optional GH workflow"
+  name: "Bundled skill product release architecture"
+  rationale:
+    benefits:
+      - "Clear harness/platform split"
+    problems_solved:
+      - "Skill linter green mistaken for gate receipts"
+    why: "Google Agent Skills Wave 3 compose-don't-replace"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    requirements:
+      - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"

@@ -1,0 +1,31 @@
+IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  code_locations:
+    files:
+      - description: "Slice A guide"
+        path: "tied-bundle/docs/bundled-skill-product-release.md"
+      - description: "Slice B e2e"
+        path: "mcp-server/src/e2e/bundled-skill-product-release.test.ts"
+      - description: "Slice B validator"
+        path: "tools/bootstrap/lib/skill-product-release-validate.mjs"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  decision: "Execute PLAN slices A–F per pseudo-code sidecar."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Slice A manifest"
+      - "Slice B validate.mjs"
+      - "Slice C semver/evals"
+      - "Slice D workflow"
+      - "Slice E compose"
+      - "Slice F verify"
+    summary: "RED validators then baseline trees then CI"
+  name: "Bundled skill product release implementation"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    requirements:
+      - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"

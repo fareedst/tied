@@ -2279,6 +2279,16 @@ REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
   name: "Brownfield Intent Elevation (Phase 1)"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  category: "Methodology"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    implementation:
+      - "IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  detail_file: "requirements/REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE.yaml"
+  name: "Bundled skill product release gates"
+  status: "Planned"
 REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   category: "Tooling"
   cross_references:

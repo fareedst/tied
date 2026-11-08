@@ -1,0 +1,8 @@
+REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  category: "Methodology"
+  description: "Per-skill semver, eval scaffold, report staleness, and optional /run-evals for all tools/bundled-* packages (Google Agent Skills Wave 3 compose)."
+  name: "Bundled skill product release gates"
+  priority: "P2"
+  proof_boundary: "Skill eval stub green is not Q1 defect evidence."
+  source_analysis: "docs/comparisons/google-agent-skills-vs-tied-agent-management.md"
+  status: "Planned"

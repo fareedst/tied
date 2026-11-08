@@ -1774,6 +1774,13 @@ ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
   detail_file: "architecture-decisions/ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL.yaml"
   name: "Brownfield Evidence Model"
   status: "Active"
+ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  cross_references:
+    - "IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  detail_file: "architecture-decisions/ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE.yaml"
+  name: "Bundled skill product release architecture"
+  status: "Active"
 ARCH-TIED_CHANGE_IMPACT_PROFILE:
   cross_references:
     - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"

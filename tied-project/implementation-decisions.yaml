@@ -2083,6 +2083,13 @@ IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE:
   detail_file: "implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE.yaml"
   name: "build-commands how() output texture"
   status: "Implemented"
+IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  cross_references:
+    - "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  detail_file: "implementation-decisions/IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE.yaml"
+  name: "Bundled skill product release implementation"
+  status: "Planned"
 IMPL-TIED_CHANGE_IMPACT_PROFILE:
   cross_references:
     - "ARCH-TIED_CHANGE_IMPACT_PROFILE"

@@ -803,6 +803,13 @@ ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  cross_references:
+    - "IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  description: "Harness catalog and validators compose-don't-replace"
+  name: "Bundled skill product release architecture"
+  status: "Active"
 ARCH-TIED_CHANGE_IMPACT_PROFILE:
   description: "Change impact profile architecture"
   type: "architecture"
@@ -2595,6 +2602,13 @@ IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  cross_references:
+    - "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    - "REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  description: "PLAN slices A–F validators and CI"
+  name: "Bundled skill product release implementation"
+  status: "Planned"
 IMPL-TIED_CHANGE_IMPACT_PROFILE:
   description: "Change impact profile implementation"
   type: "implementation"
@@ -4717,6 +4731,13 @@ REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_BUNDLED_SKILL_PRODUCT_RELEASE:
+  cross_references:
+    - "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+    - "IMPL-TIED_BUNDLED_SKILL_PRODUCT_RELEASE"
+  description: "Per-skill semver, eval scaffold, and optional /run-evals for bundled skills"
+  name: "Bundled skill product release gates"
+  status: "Planned"
 REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
