@@ -19,8 +19,8 @@ All PLAN steps complete (2026-11-07).
 
 ## Next step
 
-Optional `@non-tied-close` if sponsor wants git hygiene on committed charter only. Wave 3 **Defer** unless `add-feature` for per-skill semver/eval gates.
+Sponsor requested **publish** — `.gitignore` allowlist + comparison paths in git (2026-11-08). Wave 3 **Defer** unless `add-feature` for per-skill semver/eval gates.
 
 ## Forbidden completed
 
-No project REQ/ARCH/IMPL writes; no matrix row; no `.gitignore` allowlist for comparisons.
+No project REQ/ARCH/IMPL writes; no matrix row in comparison bodies.

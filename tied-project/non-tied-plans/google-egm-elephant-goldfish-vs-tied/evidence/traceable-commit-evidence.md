@@ -13,4 +13,4 @@
 
 ## Post-commit pin
 
-Record `git log -1 --format=%H` for the publish commit in sponsor notes when traceability is required.
+This commit: `7756bcf8` for the publish commit in sponsor notes when traceability is required.
