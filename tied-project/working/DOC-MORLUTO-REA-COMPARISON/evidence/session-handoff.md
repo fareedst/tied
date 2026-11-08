@@ -58,6 +58,7 @@
 - 2026-11-08 add-feature: Wave 3 PLAN, tracker, test-strategy, CITDP draft, session-handoff Plan execution steps
 - 2026-11-08 build-plan: dual-mcp-operator-checklist — REA → `@add-feature` to TIED (existing-implementation R+A+I or transform R+A+I)
 - 2026-11-08 refine: REA+TIED handoff — add-feature **to the TIED system**; goals **existing implementation R+A+I** vs **transform R+A+I** (other platform)
+- 2026-11-08 traceable-commit: `eb2c9dd1` dual-MCP checklist + vocab/matrix/handoff sync
 
 ## Environment
 
@@ -75,7 +76,7 @@
 
 ## Do next
 
-1. **`@non-tied-close`** or sponsor **traceable commit** — batch checklist + compose paths
+1. **`git push`** — publish `eb2c9dd1` (sponsor-owned)
 2. Optional: **`@add-feature`** only if sponsor wants REQ-backed enforcement checklist (separate token)
 
 ## Constraints

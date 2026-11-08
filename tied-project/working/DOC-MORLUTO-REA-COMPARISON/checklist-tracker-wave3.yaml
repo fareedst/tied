@@ -34,7 +34,7 @@ steps:
     notes: Wave 3 bundle compose; build-plan-wave3-handoff.md.
     status: done
   traceable-commit:
-    notes: "4257f91b docs(comparisons) morluto/rea bundle + Wave 3 compose."
+    notes: "4257f91b initial bundle; eb2c9dd1 dual-MCP checklist + REA→TIED handoff."
     status: done
   translate-sponsor-intent:
     notes: add-feature wave 3 — default reversible doc compose.
