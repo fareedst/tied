@@ -140,9 +140,9 @@
     "tracker_path": null
   },
   "envelope_meta": {
-    "generated_at": "2026-11-02T05:18:35.564Z",
+    "generated_at": "2026-11-08T22:41:29.161Z",
     "generator": "request_evidence_envelope_patch",
-    "revision": 2380
+    "revision": 2385
   },
   "gaps": [
     {

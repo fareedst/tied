@@ -77,9 +77,9 @@ waves:
     title: "Acceptance gate"
   P5:
     child_folder: "tied-project/working/PLAN-TIED-LG-P5-CHECKLIST"
+    exit_commit: "a997b6d6"
     linked_plan: "docs/langgraph/plan-tied-lg-p5-checklist-slice.md"
     mode: "implement"
-    exit_commit: "a997b6d6"
     status: "implement_close_out_complete"
     title: "Checklist slice"
   P6:

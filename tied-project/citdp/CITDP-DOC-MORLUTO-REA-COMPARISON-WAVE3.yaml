@@ -1,48 +1,48 @@
 CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3:
-  record_identity:
-    title: morluto/rea comparison Wave 3 harness compose
-    change_request_id: DOC-MORLUTO-REA-COMPARISON-WAVE3
-    depth_tier: minimal
-    gate_policy: outreach_doc_only
-    profile_depth: minimal
-    record_status: complete
-    recorded_at: "2026-11-08"
   change_definition:
-    current_behavior: Waves 1–2 comparison published; Wave 3 phase 1 compose deferred.
-    desired_behavior: Bundle quick-read + HTOL dual-MCP literacy links; working plan artifacts on disk.
+    current_behavior: "Waves 1–2 comparison published; Wave 3 phase 1 compose deferred."
+    desired_behavior: "Bundle quick-read + HTOL dual-MCP literacy links; working plan artifacts on disk."
     non_goals:
-      - Project REQ/ARCH/IMPL YAML mint
+      - "Project REQ/ARCH/IMPL YAML mint"
     success_criteria:
-      - client-development-index and HTOL updated
-      - Wave 2 phased table phase 1 Done
-      - CITDP persisted
-    unchanged_behavior: TIED MCP sole writer for tied-project YAML; REA optional external read.
+      - "CITDP persisted"
+      - "client-development-index and HTOL updated"
+      - "Wave 2 phased table phase 1 Done"
+    unchanged_behavior: "TIED MCP sole writer for tied-project YAML; REA optional external read."
+  evidence:
+    evidence_references:
+      - "docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md"
+      - "tied-project/working/DOC-MORLUTO-REA-COMPARISON/PLAN.md"
+      - "tied-project/working/DOC-MORLUTO-REA-COMPARISON/test-strategy.md"
+    proof_boundaries:
+      - "docs_and_citdp_only"
+      - "no_rea_mcp_execution_in_stdd"
   impact_analysis:
     files:
-      - tied-bundle/docs/client-development-index.md
-      - tied-bundle/docs/harness-trace-observation-loop.md
-      - docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md
-      - docs/comparisons/methodology-composition-matrix.md
-      - tied-project/working/DOC-MORLUTO-REA-COMPARISON/
+      - "docs/comparisons/methodology-composition-matrix.md"
+      - "docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md"
+      - "tied-bundle/docs/client-development-index.md"
+      - "tied-bundle/docs/harness-trace-observation-loop.md"
+      - "tied-project/working/DOC-MORLUTO-REA-COMPARISON/"
     tied_tokens_affected: []
     tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "DOC-MORLUTO-REA-COMPARISON-WAVE3"
+    depth_tier: "minimal"
+    gate_policy: "outreach_doc_only"
+    profile_depth: "minimal"
+    record_status: "complete"
+    recorded_at: "2026-11-08"
+    title: "morluto/rea comparison Wave 3 harness compose"
   risk_analysis:
     risks:
-      - id: RISK-W3-001
-        summary: Dual MCP .cursor/mcp.json merges may mis-route TIED_BASE_PATH
-        mitigation: Bundle prose cites tied_config_get_base_path
-      - id: RISK-W3-002
-        summary: REA Evidence mistaken for gate receipts
-        mitigation: HTOL failure-mode row + comparison proof boundary
-  evidence:
-    proof_boundaries:
-      - docs_and_citdp_only
-      - no_rea_mcp_execution_in_stdd
-    evidence_references:
-      - docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md
-      - tied-project/working/DOC-MORLUTO-REA-COMPARISON/PLAN.md
-      - tied-project/working/DOC-MORLUTO-REA-COMPARISON/test-strategy.md
-  leap_feedback:
-    divergences_from_analysis: none
-    record_status: complete
-    tied_stack_updates_required: []
+      - id: "RISK-W3-001"
+        mitigation: "Bundle prose cites tied_config_get_base_path"
+        summary: "Dual MCP .cursor/mcp.json merges may mis-route TIED_BASE_PATH"
+      - id: "RISK-W3-002"
+        mitigation: "HTOL failure-mode row + comparison proof boundary"
+        summary: "REA Evidence mistaken for gate receipts"

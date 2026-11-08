@@ -1,29 +1,26 @@
-# Draft — persist to tied-project/citdp/ after build-plan close if sponsor retains audit trail
-token: CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3
-request_token: DOC-MORLUTO-REA-COMPARISON
-status: draft
-change_summary: |
-  Wave 3 harness-compose doc edits linking morluto/rea dual-MCP literacy into
-  client-development-index and harness-trace-observation-loop; publish Waves 1-2.
-profile_depth: minimal
-gate_policy: outreach_doc_only
-no_req_mint: true
-risk_analysis:
-  - id: RISK-W3-001
-    summary: Dual MCP .cursor/mcp.json merges may point TIED_BASE_PATH at wrong repo
-    mitigation: Bundle prose cites tied_config_get_base_path; REA read-only for targets
-  - id: RISK-W3-002
-    summary: REA Evidence mistaken for gate receipts
-    mitigation: Proof boundary restated in compose links
+change_summary: "Wave 3 harness-compose doc edits linking morluto/rea dual-MCP literacy into\nclient-development-index and harness-trace-observation-loop; publish Waves 1-2.\n"
+gate_policy: "outreach_doc_only"
 impact:
   files:
-    - tied-bundle/docs/client-development-index.md
-    - tied-bundle/docs/harness-trace-observation-loop.md
-    - docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md
-    - tied-project/working/DOC-MORLUTO-REA-COMPARISON/multi-step-phase-wave-handoff.md
-test_strategy_ref: test-strategy.md
+    - "docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md"
+    - "tied-bundle/docs/client-development-index.md"
+    - "tied-bundle/docs/harness-trace-observation-loop.md"
+    - "tied-project/working/DOC-MORLUTO-REA-COMPARISON/multi-step-phase-wave-handoff.md"
+no_req_mint: true
 out_of_scope:
-  - methodology-composition-matrix.md row
-  - tied-project/vocab RECORD for REA Evidence
-  - REA install or CI bundling (separate effort)
-  - project REQ/ARCH/IMPL YAML
+  - "methodology-composition-matrix.md row"
+  - "project REQ/ARCH/IMPL YAML"
+  - "REA install or CI bundling (separate effort)"
+  - "tied-project/vocab RECORD for REA Evidence"
+profile_depth: "minimal"
+request_token: "DOC-MORLUTO-REA-COMPARISON"
+risk_analysis:
+  - id: "RISK-W3-001"
+    mitigation: "Bundle prose cites tied_config_get_base_path; REA read-only for targets"
+    summary: "Dual MCP .cursor/mcp.json merges may point TIED_BASE_PATH at wrong repo"
+  - id: "RISK-W3-002"
+    mitigation: "Proof boundary restated in compose links"
+    summary: "REA Evidence mistaken for gate receipts"
+status: "draft"
+test_strategy_ref: "test-strategy.md"
+token: "CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3"

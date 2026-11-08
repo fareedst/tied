@@ -1,6 +1,6 @@
 {
-  "built_at": "2026-11-02T05:18:33.562Z",
-  "content_hash": "e327fb78c7026ad87c7b7ac9709a10e716a6706322670e1093161a2b5c80b661",
+  "built_at": "2026-11-08T22:41:26.934Z",
+  "content_hash": "c74cf4eaf5385f2112b91b9cfcb0e5b0ed7be098cf8352e7659eb4e69c33fe3b",
   "edges": [
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/adherence-evidence-resolve.ts#fileContentHash",
@@ -1403,6 +1403,56 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#resolveResumePolicyForWorkspace"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts#agentArgv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#agentArgv"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts#claudeAddDirArgs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeAddDirArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts#claudeMcpConfigArgs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeMcpConfigArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts#claudeSkipPermissionsArgs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeSkipPermissionsArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeAddDirArgs",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#normalizeExistingDir"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeAddDirArgs",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeMcpConfigArgs",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#resolveClientMcpConfigPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#resolveTiedRuntimeConfigFromWorkspace",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.test.ts#claudeAgentDriverLaunchAndParse",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#claudeAgentDriverLaunchAndParse"
@@ -1481,6 +1531,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#collectClaudeStreamFromSpawn",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#resolve"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#collectClaudeStreamFromSpawn",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#String"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#collectClaudeStreamFromSpawn",
@@ -2135,6 +2190,21 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#agentArgv",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeAddDirArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#agentArgv",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeMcpConfigArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#agentArgv",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeSkipPermissionsArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#agentArgv",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/harness-select.ts#defaultAgentBinForHarness"
     },
     {
@@ -2156,6 +2226,21 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#chainBetween",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/pipeline-session.ts#chainBetween"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#claudeAddDirArgs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeAddDirArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#claudeMcpConfigArgs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeMcpConfigArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#claudeSkipPermissionsArgs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeSkipPermissionsArgs"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#defaultAgentBinForHarness",
@@ -2628,6 +2713,41 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/harness-select.ts#readHarnessFlag"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts#appendHarnessTurnTrace",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#appendHarnessTurnTrace"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts#buildHarnessTurnTraceRecord",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#buildHarnessTurnTraceRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts#defaultHarnessTracePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#defaultHarnessTracePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts#HARNESS_TURN_TRACE_SCHEMA",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#HARNESS_TURN_TRACE_SCHEMA"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#resolveHarnessTracePath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#defaultHarnessTracePath"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/htmlformat.ts#applyNonCompactHtmlToTurns",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/htmlformat.ts#formatNonCompactHtml"
@@ -3050,6 +3170,11 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.ts#createContextLogPruneHook",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.ts#createContextLogPruneHook",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveProjectRootForJev"
     },
     {
@@ -3101,6 +3226,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.ts#readRepoTiedYaml",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#readRepoTiedYaml"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.ts#resolveJevHarnessDistStoreRoot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.ts#resolveProjectRootForJev",
@@ -3398,11 +3528,6 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#isHarnessDistBuilt"
     },
     {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-preflight.ts#runJevHarnessPreflight",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveProjectRootForJev"
-    },
-    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-preflight.ts#runJevHarnessPreflightLive",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-preflight.ts#append"
@@ -3485,11 +3610,6 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-preflight.ts#runJevHarnessPreflightLive",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveProjectRootForJev"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-preflight.ts#runJevHarnessPreflightLive",
-      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#taskSummaryFromCfg"
     },
     {
@@ -3498,9 +3618,69 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#taskSummaryFromCfg"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#afterEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#afterEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#DryRunConfig",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/dry-run-config.ts#DryRunConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#harnessDistModulePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#harnessDistModulePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#isHarnessDistBuilt",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#isHarnessDistBuilt"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#packageAnchorStoreRootFromModuleUrl",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#packageAnchorStoreRootFromModuleUrl"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#resolveJevHarnessDistStoreRoot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#writeClientMcpJson",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#writeFakeMcpIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#writeFakeHarnessDist",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#harnessDistModulePath"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#DryRunConfig",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/dry-run-config.ts#DryRunConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:url.ts#fileURLToPath"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#findRepoRootFromPath",
@@ -3515,7 +3695,7 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#isHarnessDistBuilt",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#harnessDistModulePath"
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#jevHarnessMissingDistAbortMessage",
@@ -3526,6 +3706,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#loadJevHarnessDistModule",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#harnessDistModulePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#loadJevHarnessDistModule",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#loadJevHarnessDistModule",
@@ -3548,6 +3733,16 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#readRepoTiedYaml"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#packageAnchorStoreRootFromModuleUrl",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#storeRootHasHarnessDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#packageAnchorStoreRootFromModuleUrl",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:url.ts#fileURLToPath"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#pathToFileURL",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/node:url.ts#pathToFileURL"
@@ -3568,9 +3763,44 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveProjectConfigFile"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#packageAnchorStoreRootFromModuleUrl"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveProjectRootForJev"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#storeRootHasHarnessDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#storeRootHasHarnessDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveProjectRootForJev",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/repo-root.ts#findRepoRootFromPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveTiedRuntimeConfigFromWorkspace",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#storeRootHasHarnessDist",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#harnessDistModulePath"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-driver-bind.test.ts#bindLiveExecutorDriver",
@@ -3773,6 +4003,11 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/adherence-live.ts#appendAgentAcknowledged"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#appendHarnessTurnTrace",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#appendHarnessTurnTrace"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#appendInstructionRendered",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/adherence-live.ts#appendInstructionRendered"
@@ -3796,6 +4031,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#bindLiveExecutorDriver",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/live-driver-bind.ts#bindLiveExecutorDriver"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#buildHarnessTurnTraceRecord",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#buildHarnessTurnTraceRecord"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#buildTurnsFromConfig",
@@ -3920,12 +4160,37 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/dry-run-config.ts#trackerRequestTokenFromVars"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#runTiedPreflight"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/executor-run.ts#agentArgv"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#appendHarnessTurnTrace"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#buildHarnessTurnTraceRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#harnessTraceEnabled"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#resolveHarnessTracePath"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
@@ -4045,6 +4310,11 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/pipeline-route.ts#knownStepStubs"
     },
     {
@@ -4065,6 +4335,11 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/repo-root.ts#findRepoRootFromPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts#buildTurnsFromConfig"
     },
     {
@@ -4076,6 +4351,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/tracker-writer.ts#invalidateTrackerDownstream"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#findRepoRootFromPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/repo-root.ts#findRepoRootFromPath"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#handleTrackerTurn",
@@ -4141,6 +4421,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#handleTrackerTurn",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/tracker-writer.ts#applyTrackerDisposition"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#harnessTraceEnabled",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#harnessTraceEnabled"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#hashRenderedInstructionParts",
@@ -4221,6 +4506,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#resolveEvidenceRefsSync",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/adherence-evidence-resolve.ts#resolveEvidenceRefsSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#resolveHarnessTracePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#resolveHarnessTracePath"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#resolveWorkingPath",
@@ -4616,6 +4906,156 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/tied-layout.ts#resolveTiedLayout",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/tied-layout.ts#resolveProjectDirName"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts#deriveStoreRootFromMcpDist",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#deriveStoreRootFromMcpDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts#listSharedParityFixtureCases",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/tied-runtime-fixture-loader.mjs.ts#listSharedParityFixtureCases"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts#materializeTiedRuntimeFixture",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/tied-runtime-fixture-loader.mjs.ts#materializeTiedRuntimeFixture"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts#pathsSameResolved",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pathsSameResolved"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts#resolveTiedRuntimeConfigFromWorkspace",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#assertMcpDistUnderStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#deriveStoreRootFromMcpDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#assertMcpDistUnderStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pathsSameResolved"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#mcpEnvHasClientProjectPath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#Boolean"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#mcpEnvHasClientProjectPath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pickClientProjectPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pathsSameResolved",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#normalize"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pathsSameResolved",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#normalize"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pathsSameResolved",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#stripPrivate"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pathsSameResolved",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#stripPrivate"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#readTiedYamlServerEntryFromProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#mcpEnvHasClientProjectPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#assertMcpDistUnderStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#deriveStoreRootFromMcpDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#findStoreRootWithTiedConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pathsSameResolved"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pickClientBundlePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pickClientProjectPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#validateTiedProjectLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromStoreYaml",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#assertMcpDistUnderStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromStoreYaml",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#loadMergedStoreYaml"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromStoreYaml",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveMcpDistFromStoreYaml"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#findStoreRootWithTiedConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#readTiedYamlServerEntryFromProject"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromStoreYaml"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/tiedpreflight.test.ts#analyze",
@@ -5935,6 +6375,11 @@
     {
       "from_symbol_id": "mcp-server/packages/cli/src/index.ts#main",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/cli/src/index.ts#runNodeEntry"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/cli/src/index.ts#main",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#bootstrapCopyFilesEntryFromCliModule"
     },
     {
@@ -5965,6 +6410,11 @@
     {
       "from_symbol_id": "mcp-server/packages/cli/src/index.ts#main",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#mcpHttpEntryFromCliModule"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/cli/src/index.ts#main",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#mcpStdioEntryFromCliModule"
     },
     {
@@ -5991,6 +6441,11 @@
       "from_symbol_id": "mcp-server/packages/cli/src/index.ts#main",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#yamlCliEntryFromCliModule"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/cli/src/index.ts#mcpHttpEntryFromCliModule",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#mcpHttpEntryFromCliModule"
     },
     {
       "from_symbol_id": "mcp-server/packages/cli/src/index.ts#mcpStdioEntryFromCliModule",
@@ -6079,6 +6534,11 @@
     },
     {
       "from_symbol_id": "mcp-server/packages/cli/src/paths.ts#handoffValidateCliEntryFromCliModule",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#workspaceRootFromCliModule"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/cli/src/paths.ts#mcpHttpEntryFromCliModule",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#workspaceRootFromCliModule"
     },
@@ -23623,6 +24083,11 @@
       "to_symbol_id": "mcp-server/src/e2e/node:test.ts#afterEach"
     },
     {
+      "from_symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#assertScriptsResolveRuntimeFromDisk",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#effectiveScriptTextForRuntimeDiskCheck"
+    },
+    {
       "from_symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#bashAvailable",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/e2e/node:child_process.ts#execFileSync"
@@ -23708,6 +24173,11 @@
       "to_symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#rp"
     },
     {
+      "from_symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#withStoreOperatorCollectMetrics",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#withStoreOperatorCollectMetrics"
+    },
+    {
       "from_symbol_id": "mcp-server/src/e2e/brownfield-client-doc-stack-contract.test.ts#describe",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
@@ -23756,6 +24226,26 @@
       "from_symbol_id": "mcp-server/src/e2e/client-feedback-capture-contract.test.ts#it",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/e2e/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#seedStoreOperatorCollectMetrics",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#loadBaseStoreTemplate"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#withStoreOperatorCollectMetrics",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#fn"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#withStoreOperatorCollectMetrics",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#seedStoreOperatorCollectMetrics"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#withStoreOperatorCollectMetrics",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#snapshotStoreYaml"
     },
     {
       "from_symbol_id": "mcp-server/src/e2e/feedback-skill.test.ts#describe",
@@ -23931,6 +24421,41 @@
       "from_symbol_id": "mcp-server/src/e2e/prompt-type-subagent.test.ts#readAgent",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/e2e/prompt-type-subagent.test.ts#agentPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/readme-information-architecture-skill.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/readme-information-architecture-skill.test.ts#installStoreFacilitatorSkillsCopy",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/store-facilitator-skills.mjs.ts#installStoreFacilitatorSkillsCopy"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/readme-information-architecture-skill.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/readme-information-architecture-skill.test.ts#loadStoreFacilitatorSkills",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/store-facilitator-skills.mjs.ts#loadStoreFacilitatorSkills"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/skill-checklist-gate-operator.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/skill-checklist-gate-operator.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/skill-checklist-gate-operator.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#it"
     },
     {
       "from_symbol_id": "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts#describe",
@@ -26221,6 +26746,11 @@
       "from_symbol_id": "mcp-server/src/feature-orchestration/defaults.ts#resolveLocalDefaults",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/feature-orchestration/defaults.ts#item"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/feature-orchestration/defaults.ts#resolveLocalDefaults",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/feature-orchestration/defaults.ts#readMcpProjectPaths"
     },
     {
       "from_symbol_id": "mcp-server/src/feature-orchestration/entry.ts#main",
@@ -31673,6 +32203,61 @@
       "to_symbol_id": "mcp-server/src/hooks/claude-adherence-normalize.ts#String"
     },
     {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#assertHttpBindAllowed",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#assertHttpBindAllowed"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#createTiedYamlMcpServer",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#main",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/http-entry.ts#Boolean"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#main",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#assertHttpBindAllowed"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#main",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#resolveMcpHttpListenOptions"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#main",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#main",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#main",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#resolveTiedMcpProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#resolveMcpHttpListenOptions",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#resolveMcpHttpListenOptions"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#resolveTiedMcpProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#resolveTiedMcpProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/http-entry.ts#startMcpHttpServer",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer"
+    },
+    {
       "from_symbol_id": "mcp-server/src/impl-pseudocode-input.test.ts#beforeEach",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/node:test.ts#beforeEach"
@@ -31708,44 +32293,24 @@
       "to_symbol_id": "mcp-server/src/impl-pseudocode-input.ts#normalizePseudocodePathForTiedBase"
     },
     {
-      "from_symbol_id": "mcp-server/src/index.ts#allTools",
+      "from_symbol_id": "mcp-server/src/index.ts#createTiedYamlMcpServer",
       "kind": "imports",
-      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer"
     },
     {
-      "from_symbol_id": "mcp-server/src/index.ts#instrumentToolHandlers",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/usage-metrics.ts#instrumentToolHandlers"
+      "from_symbol_id": "mcp-server/src/index.ts#main",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer"
     },
     {
-      "from_symbol_id": "mcp-server/src/index.ts#InvalidToolProfileError",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/tool-profiles.ts#InvalidToolProfileError"
+      "from_symbol_id": "mcp-server/src/index.ts#main",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#resolveTiedMcpProfile"
     },
     {
-      "from_symbol_id": "mcp-server/src/index.ts#McpServer",
+      "from_symbol_id": "mcp-server/src/index.ts#resolveTiedMcpProfile",
       "kind": "imports",
-      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/mcp.ts#McpServer"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/index.ts#registerResources",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/resources.ts#registerResources"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/index.ts#resolveToolProfile",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/tool-profiles.ts#resolveToolProfile"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/index.ts#selectToolsForProfile",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/tool-profiles.ts#selectToolsForProfile"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/index.ts#shouldRegisterResources",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/tool-profiles.ts#shouldRegisterResources"
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#resolveTiedMcpProfile"
     },
     {
       "from_symbol_id": "mcp-server/src/index.ts#StdioServerTransport",
@@ -33523,11 +34088,6 @@
       "to_symbol_id": "mcp-server/src/tied-layout.ts#BUNDLE_DIR_NAME"
     },
     {
-      "from_symbol_id": "mcp-server/src/jev/merged-routing-baseline.ts#getMethodologyBasePath",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getMethodologyBasePath"
-    },
-    {
       "from_symbol_id": "mcp-server/src/jev/merged-routing-baseline.ts#glossaryIdFromFile",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/jev/routing-table.ts#glossaryIdFromFile"
@@ -33571,11 +34131,6 @@
       "from_symbol_id": "mcp-server/src/jev/merged-routing-baseline.ts#loadMergedRoutingBaseline",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/jev/routing-table.ts#parseRoutingTableMarkdown"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/jev/merged-routing-baseline.ts#loadMergedRoutingBaseline",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getMethodologyBasePath"
     },
     {
       "from_symbol_id": "mcp-server/src/jev/merged-routing-baseline.ts#mergeRoutingRows",
@@ -34931,6 +35486,216 @@
       "from_symbol_id": "mcp-server/src/kaizen-feedback-mcp-handlers.ts#runOutcomeLoop",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/feedback-outcome-loop.ts#runOutcomeLoop"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.test.ts#bearerTokensMatch",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#bearerTokensMatch"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.test.ts#parseBearerToken",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#parseBearerToken"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.test.ts#resolveHttpBearerRequirement",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#resolveHttpBearerRequirement"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.ts#assertHttpBindAllowed",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#resolveHttpBearerRequirement"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.ts#createBearerGateMiddleware",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#bearerTokensMatch"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.ts#createBearerGateMiddleware",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#next"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.ts#createBearerGateMiddleware",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#parseBearerToken"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.ts#NextFunction",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/express.ts#NextFunction"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.ts#Request",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/express.ts#Request"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-auth.ts#Response",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/express.ts#Response"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#after",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#after"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#afterEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#afterEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#allTools",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#beforeEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#beforeEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#bindWritableProjectCorpus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#clearYamlLoaderCache",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#Client",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/client/index.ts#Client"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#createTiedYamlMcpServer",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#selectToolsForProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#selectToolsForProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#startMcpHttpServer",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.test.ts#StreamableHTTPClientTransport",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/client/streamableHttp.ts#StreamableHTTPClientTransport"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#createBearerGateMiddleware",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#createBearerGateMiddleware"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#createMcpExpressApp",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/express.ts#createMcpExpressApp"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#createServer",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:http.ts#createServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#HttpServer",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:http.ts#Server"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#McpServer",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/mcp.ts#McpServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#randomUUID",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:crypto.ts#randomUUID"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#resolveMcpHttpListenOptions",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#parseAllowedHosts"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#resolveMcpHttpListenOptions",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/express.ts#createMcpExpressApp"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-auth.ts#createBearerGateMiddleware"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#reject"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#resolve"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-http-server.ts#resolve"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:crypto.ts#randomUUID"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:http.ts#createServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-http-server.ts#StreamableHTTPServerTransport",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/streamableHttp.ts#StreamableHTTPServerTransport"
     },
     {
       "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard-side-effect.ts#installMcpStdioConsoleGuard",
@@ -39288,21 +40053,6 @@
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/node:fs.ts#writeFileSync"
     },
     {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#adversarialSection",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#isRecord"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#adversarialSection",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#isRecord"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#adversarialSection",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#isRecord"
-    },
-    {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#backfillRequestEvidenceEnvelope",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#contentHashHex"
@@ -39320,11 +40070,6 @@
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#backfillRequestEvidenceEnvelope",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveDepthTierForBackfill"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#backfillRequestEvidenceEnvelope",
-      "kind": "calls",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#summarizeEnvelopeGaps"
     },
     {
@@ -39336,6 +40081,11 @@
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#backfillRequestEvidenceEnvelope",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#buildRequestEvidenceEnvelope"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#backfillRequestEvidenceEnvelope",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveDepthTierForBackfill"
     },
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#backfillRequestEvidenceEnvelope",
@@ -39378,31 +40128,6 @@
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/node:crypto.ts#createHash"
     },
     {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#depthFromRecord",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#adversarialSection"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#depthFromRecord",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#identityValue"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#depthFromRecord",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#identityValue"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#depthFromRecord",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#identityValue"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#depthFromRecord",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#isRecord"
-    },
-    {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#DepthTier",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#DepthTier"
@@ -39418,21 +40143,6 @@
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#GatePhase"
     },
     {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#gatePolicyFromRecord",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#adversarialSection"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#gatePolicyFromRecord",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#identityValue"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#gatePolicyFromRecord",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#identityValue"
-    },
-    {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#normalizeEnvelope",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/normalize.ts#normalizeEnvelope"
@@ -39443,44 +40153,9 @@
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#readOptional"
     },
     {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveCitdpContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#isRecord"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveCitdpContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#readOptional"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveCitdpContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#relPath"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveCitdpContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#unwrapCitdpDocument"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveCitdpContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/working-root.ts#resolveWorkingPath"
-    },
-    {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveDepthTierForBackfill",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#depthFromRecord"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveDepthTierForBackfill",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#gatePolicyFromRecord"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveDepthTierForBackfill",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveCitdpContext"
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveDepthTierForBackfill"
     },
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveWorkingPath",
@@ -39491,11 +40166,6 @@
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#serializeEnvelope",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/normalize.ts#serializeEnvelope"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#unwrapCitdpDocument",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#isRecord"
     },
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#validateRequestEvidenceEnvelope",
@@ -39851,6 +40521,11 @@
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#buildRequestEvidenceEnvelope",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#toEnvelopeArtifacts"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#buildRequestEvidenceEnvelope",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveDepthTierForBackfill"
     },
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#buildRequestEvidenceEnvelope",
@@ -40288,6 +40963,11 @@
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#RequestEvidenceEnvelope"
     },
     {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#resolveDepthTierForBackfill",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveDepthTierForBackfill"
+    },
+    {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#resolveProjectIdentity",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/project-identity.ts#resolveProjectIdentity"
@@ -40381,6 +41061,121 @@
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#validateRequestEvidenceEnvelope",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/validate.ts#validateRequestEvidenceEnvelope"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#adversarialSection",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#adversarialSection",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#adversarialSection",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#depthFromRecord",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#adversarialSection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#depthFromRecord",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#identityValue"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#depthFromRecord",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#identityValue"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#depthFromRecord",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#identityValue"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#depthFromRecord",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#DepthTier",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#DepthTier"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#fs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/node:fs.ts#promises"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#gatePolicyFromRecord",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#adversarialSection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#gatePolicyFromRecord",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#identityValue"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#gatePolicyFromRecord",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#identityValue"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveCitdpContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveCitdpContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#readOptional"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveCitdpContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#relPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveCitdpContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#unwrapCitdpDocument"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveCitdpContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/working-root.ts#resolveWorkingPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveDepthTierForBackfill",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#depthFromRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveDepthTierForBackfill",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#gatePolicyFromRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveDepthTierForBackfill",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveCitdpContext"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveWorkingPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/working-root.ts#resolveWorkingPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#unwrapCitdpDocument",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#isRecord"
     },
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.composition.test.ts#describe",
@@ -41993,6 +42788,71 @@
       "to_symbol_id": "mcp-server/src/residuality/stressor-residue-validate.ts#pushMissing"
     },
     {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#findMonolithicRepoRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#storeRootHasAgentstreamDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#packageAnchorStoreRootForAgentstream",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#packageAnchorStoreRootForAgentstream",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#packageAnchorStoreRootForAgentstream",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#storeRootHasAgentstreamDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#findMonolithicRepoRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#findMonolithicRepoRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#packageAnchorStoreRootForAgentstream"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#storeRootHasAgentstreamDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#storeRootHasAgentstreamDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveRuntimeIntrospection",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#storeRootHasAgentstreamDist",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#agentstreamCliEntry"
+    },
+    {
       "from_symbol_id": "mcp-server/src/resolve-essence-pseudocode-source.test.ts#describe",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/node:test.ts#describe"
@@ -42221,6 +43081,466 @@
       "from_symbol_id": "mcp-server/src/resources.ts#toYamlLike",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/storage-dump.ts#prettyCanonicalJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info-mcp.composition.test.ts#allTools",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info-mcp.composition.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info-mcp.composition.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info-mcp.composition.test.ts#normalizeObjectSchema",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/zod-compat.ts#normalizeObjectSchema"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info-mcp.composition.test.ts#OPTIN_TOOL_NAMES",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#OPTIN_TOOL_NAMES"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info-mcp.composition.test.ts#safeParseAsync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/zod-compat.ts#safeParseAsync"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#anonymizedProjectId",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity.ts#anonymizedProjectId"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#API_SCHEMA_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/constants.ts#API_SCHEMA_VERSION"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#assembleHealthChecks",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildFeatures",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/usage-metrics.ts#isMetricsEnabled"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildInstanceId",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity.ts#anonymizedProjectId"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildInstanceId",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity.ts#resolveProjectIdentity"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildInstanceId",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#buildFeatures"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#buildInstanceId"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#buildTiedMethodologyExtension"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#buildTiedTransportExtension"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#pickMcpProtocolVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#resolveBuildMetadata"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/configuration.ts#mapConfigurationSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/health.ts#deriveHealthState"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-config-report.ts#resolveTiedConfigReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getClientProjectRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildTiedMethodologyExtension",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildTiedMethodologyExtension",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#buildTiedMethodologyExtension",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#deriveHealthState",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/health.ts#deriveHealthState"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#FeatureState",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#FeatureState"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#getBasePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#getClientProjectRoot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getClientProjectRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#isMetricsEnabled",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/usage-metrics.ts#isMetricsEnabled"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#mapConfigurationSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/configuration.ts#mapConfigurationSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#PROCESS_STARTED_AT",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/constants.ts#PROCESS_STARTED_AT"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#resolveProjectIdentity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity.ts#resolveProjectIdentity"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#resolveTiedConfigReport",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-config-report.ts#resolveTiedConfigReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#resolveTiedMethodologyVersion",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#RESPONSE_SCHEMA_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/constants.ts#RESPONSE_SCHEMA_VERSION"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#ServerInfoBuildOptions",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#ServerInfoBuildOptions"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#ServerInfoSnapshot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#ServerInfoSnapshot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#SUPPORTED_MCP_PROTOCOL_VERSIONS",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/constants.ts#SUPPORTED_MCP_PROTOCOL_VERSIONS"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#SUPPORTED_OPERATIONS",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/constants.ts#SUPPORTED_OPERATIONS"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/build.ts#TOOL_CONTRACT_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/constants.ts#TOOL_CONTRACT_VERSION"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/configuration.ts#ServerInfoSnapshot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#ServerInfoSnapshot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#bindingStatus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/health.ts#bindingCode"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/health.ts#bindingToCheckStatus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/health.ts#isoNow"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-layout.ts#resolveTiedLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getClientProjectRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getMethodologyBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#validateIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#BindingStatus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#BindingStatus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#bindingStatus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#bindingStatus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#getBasePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#getClientProjectRoot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getClientProjectRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#getMethodologyBasePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getMethodologyBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#HealthCheck",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#HealthCheck"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#HealthCheckStatus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#HealthCheckStatus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#HealthState",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#HealthState"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#resolveRuntimeIntrospection",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#resolveTiedLayout",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-layout.ts#resolveTiedLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/health.ts#validateIndex",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#validateIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/runtime-context.ts#ServerInfoBuildOptions",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#ServerInfoBuildOptions"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/schema.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/schema.ts#loadServerInfoOutputSchema",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/schema.ts#resolveServerInfoOutputSchemaPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#afterEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/node:test.ts#afterEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#bindWritableProjectCorpus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#buildServerInfoSnapshot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#clearBasePathCache",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#createValidator",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/schema.ts#loadServerInfoOutputSchema"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#createValidator",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/server-info.test.ts#addFormats"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#getServerInfoRuntimeContext",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/runtime-context.ts#getServerInfoRuntimeContext"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#loadFixtureHelpers",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#loadServerInfoOutputSchema",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/schema.ts#loadServerInfoOutputSchema"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#pathToFileURL",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#resetServerInfoRuntimeContextForTests",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/runtime-context.ts#resetServerInfoRuntimeContextForTests"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#resolveServerInfoOutputSchemaPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/schema.ts#resolveServerInfoOutputSchemaPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#RESPONSE_SCHEMA_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/constants.ts#RESPONSE_SCHEMA_VERSION"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/server-info.test.ts#setServerInfoRuntimeContext",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/runtime-context.ts#setServerInfoRuntimeContext"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/tool-handler.ts#buildServerInfoSnapshot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/tool-handler.ts#getServerInfoRuntimeContext",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/runtime-context.ts#getServerInfoRuntimeContext"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/tool-handler.ts#handleServerInfoTool",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/tool-handler.ts#handleServerInfoTool",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/runtime-context.ts#getServerInfoRuntimeContext"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/tool-handler.ts#handleServerInfoTool",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/types.ts#structuredToolResult"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/tool-handler.ts#structuredToolResult",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/types.ts#structuredToolResult"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/server-info/types.ts#ToolProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#ToolProfile"
     },
     {
       "from_symbol_id": "mcp-server/src/source-graph/index-builder.ts#checkSourceGraphFreshness",
@@ -42633,9 +43953,49 @@
       "to_symbol_id": "mcp-server/src/node:test.ts#it"
     },
     {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.test.ts#afterEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/node:test.ts#afterEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.test.ts#bindWritableProjectCorpus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.test.ts#restoreClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#restoreClientPathEnv"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.test.ts#snapshotClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#snapshotClientPathEnv"
+    },
+    {
       "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#useLegacyProjectPathOnly"
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#applyInstallPathEnvFromMcpJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#writeInstallMcpJson"
     },
     {
       "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus",
@@ -42661,6 +44021,86 @@
       "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#LEGACY_ENV_CLIENT_PROJECT_PATH",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/tied-path-env.ts#LEGACY_ENV_CLIENT_PROJECT_PATH"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#useLegacyProjectPathOnly",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#applyInstallPathEnvFromMcpJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#useLegacyProjectPathOnly",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#writeInstallMcpJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#writeInstallMcpJson",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#assertSafeMcpJsonWriteTarget"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.test.ts#loadFixtureHelpers",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.test.ts#pathToFileURL",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.test.ts#resolveTiedConfigReport",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-config-report.ts#resolveTiedConfigReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.ts#formatTiedConfigReportForProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-config-report.ts#loadBootstrapReportModule"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.ts#formatTiedConfigReportForProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-config-report.ts#resolveTiedConfigReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.ts#loadBootstrapReportModule",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.ts#loadBootstrapReportModule",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-config-report.ts#resolveBootstrapReportModulePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.ts#pathToFileURL",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.ts#resolveTiedConfigReport",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-config-report.ts#loadBootstrapReportModule"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-config-report.ts#resolveTiedConfigReport",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-config-report.ts#String"
     },
     {
       "from_symbol_id": "mcp-server/src/tied-layout.js#detectLegacyLayout",
@@ -42723,6 +44163,91 @@
       "to_symbol_id": "mcp-server/src/tied-layout.ts#resolveProjectDirName"
     },
     {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#allTools",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resources.ts#registerResources"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/server-info/runtime-context.ts#setServerInfoRuntimeContext"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#selectToolsForProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#shouldRegisterResources"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/usage-metrics.ts#instrumentToolHandlers"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#instrumentToolHandlers",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/usage-metrics.ts#instrumentToolHandlers"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#InvalidToolProfileError",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#InvalidToolProfileError"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#McpServer",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/mcp.ts#McpServer"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#registerResources",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/resources.ts#registerResources"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#resolveTiedMcpProfile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#resolveToolProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#resolveToolProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#resolveToolProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#selectToolsForProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#selectToolsForProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#ServerInfoBuildOptions",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/types.ts#ServerInfoBuildOptions"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#setServerInfoRuntimeContext",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/runtime-context.ts#setServerInfoRuntimeContext"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#shouldRegisterResources",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#shouldRegisterResources"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#ToolProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#ToolProfile"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#clearTiedMethodologyVersionCache",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#clearTiedMethodologyVersionCache"
@@ -42753,6 +44278,11 @@
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion"
     },
     {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#resolveTiedMethodologyVersion",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#writeFileSync",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/node:fs.ts#writeFileSync"
@@ -42765,40 +44295,45 @@
     {
       "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.ts#projectRootFromTiedBase"
     },
     {
-      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#findVersionPath"
     },
     {
-      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#findVersionPath"
     },
     {
-      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readAgentsMdVersion"
     },
     {
-      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readInstallConfigVersion"
     },
     {
-      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readVersionFile"
     },
     {
-      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readVersionFile"
     },
     {
-      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#uniqueProjectRoots"
     },
@@ -42946,6 +44481,86 @@
       "from_symbol_id": "mcp-server/src/tied-project-config.ts#validateProjectConfigRecord",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-project-config.ts#validateIdentityConfigSection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#loadBootstrapResolver",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#loadFixtureHelpers",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#pathsSameResolved",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#pathsSameResolved"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#pathToFileURL",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#resolveRuntimeIntrospection",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#pathsSameResolved",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#normalize"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#pathsSameResolved",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#normalize"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#pathsSameResolved",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#stripPrivate"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#pathsSameResolved",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#stripPrivate"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#pathToFileURL",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:url.ts#pathToFileURL"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveBootstrapModulePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-runtime-introspection.ts#String"
     },
     {
       "from_symbol_id": "mcp-server/src/token-rename.test.ts#afterEach",
@@ -43273,6 +44888,51 @@
       "to_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#runAdherenceReconcile"
     },
     {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#agentstreamCliEntry",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#agentstreamCliEntry"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#monolithicStoreRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#storeRootHasAgentstreamDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#packageAnchorStoreRootForAgentstream",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#packageAnchorStoreRootForAgentstream"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#resolveAdherenceReconcileArgv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#resolveAdherenceReconcileArgv"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#runAdherenceReconcile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#runAdherenceReconcile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#storeRootHasAgentstreamDist",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#storeRootHasAgentstreamDist"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#agentstreamCliEntry",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#agentstreamCliEntry"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#captureProcess",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#resolve"
@@ -43290,7 +44950,17 @@
     {
       "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#resolveAdherenceReconcileArgv",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#findRepoRoot"
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#agentstreamCliEntry"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#resolveAdherenceReconcileArgv",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#resolveAgentstreamStoreRoot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot"
     },
     {
       "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#runAdherenceReconcile",
@@ -43871,6 +45541,11 @@
       "from_symbol_id": "mcp-server/src/tools/index.ts#handleOrchestrationTool",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/feature-orchestration/mcp.ts#handleOrchestrationTool"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#handleServerInfoTool",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/server-info/tool-handler.ts#handleServerInfoTool"
     },
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#handleTiedFeedbackAnalysisDigest",
@@ -47438,6 +49113,11 @@
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
     },
     {
+      "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#CLIENT_PATH_ENV_KEYS",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#CLIENT_PATH_ENV_KEYS"
+    },
+    {
       "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#describe",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/node:test.ts#describe"
@@ -47595,7 +49275,22 @@
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-path-env.ts#pickClientProjectPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#pickClientProjectPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-project-config.ts#loadProjectConfig"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
@@ -47610,17 +49305,42 @@
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-project-config.ts#readIdentityRoutingFromRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#discoverDefaultBasePath"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#failClosedInstallPathAuthority"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#failClosedInstallPathAuthority"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#remapLegacyTiedBasePathIfNeeded"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#remapLegacyTiedBasePathIfNeeded"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#remapLegacyTiedBasePathIfNeeded"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#requirementsIndexAt"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
@@ -55478,6 +57198,16 @@
       "to_symbol_id": "tied-project/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/node:fs/promises.ts#writeFile"
     },
     {
+      "from_symbol_id": "tools/bootstrap/fixtures/tied-runtime/tied-runtime-fixture-probe.ts#normalizeResolveSnapshot",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/tied-runtime-fixture-loader.mjs.ts#normalizeResolveSnapshot"
+    },
+    {
+      "from_symbol_id": "tools/bootstrap/fixtures/tied-runtime/tied-runtime-fixture-probe.ts#resolveTiedRuntimeConfigFromWorkspace",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace"
+    },
+    {
       "from_symbol_id": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/compare-constraint-reports.ts#CONSTRAINT_PATHS",
       "kind": "imports",
       "to_symbol_id": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/constraint-paths.ts#CONSTRAINT_PATHS"
@@ -62509,6 +64239,8 @@
     "mcp-server/packages/agentstream/src/checklist-preview.ts",
     "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts",
     "mcp-server/packages/agentstream/src/checklist-resume-config.ts",
+    "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts",
+    "mcp-server/packages/agentstream/src/claude-agent-argv.ts",
     "mcp-server/packages/agentstream/src/claude-driver.test.ts",
     "mcp-server/packages/agentstream/src/claude-driver.ts",
     "mcp-server/packages/agentstream/src/claude-stream.test.ts",
@@ -62527,6 +64259,8 @@
     "mcp-server/packages/agentstream/src/fixture-oracle.ts",
     "mcp-server/packages/agentstream/src/harness-dry-run-composition.test.ts",
     "mcp-server/packages/agentstream/src/harness-select.ts",
+    "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts",
+    "mcp-server/packages/agentstream/src/harness-turn-trace.ts",
     "mcp-server/packages/agentstream/src/htmlformat.ts",
     "mcp-server/packages/agentstream/src/index.ts",
     "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.test.ts",
@@ -62535,6 +64269,7 @@
     "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts",
     "mcp-server/packages/agentstream/src/jev-harness-preflight.test.ts",
     "mcp-server/packages/agentstream/src/jev-harness-preflight.ts",
+    "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts",
     "mcp-server/packages/agentstream/src/jev-harness-shared.ts",
     "mcp-server/packages/agentstream/src/live-driver-bind.test.ts",
     "mcp-server/packages/agentstream/src/live-driver-bind.ts",
@@ -62552,6 +64287,8 @@
     "mcp-server/packages/agentstream/src/run-pipeline-prep.ts",
     "mcp-server/packages/agentstream/src/tddloop-load.ts",
     "mcp-server/packages/agentstream/src/tied-layout.ts",
+    "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts",
+    "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
     "mcp-server/packages/agentstream/src/tiedpreflight.test.ts",
     "mcp-server/packages/agentstream/src/tiedpreflight.ts",
     "mcp-server/packages/agentstream/src/tracker-atomic-write.ts",
@@ -62811,6 +64548,7 @@
     "mcp-server/src/e2e/brownfield-client-doc-stack-contract.test.ts",
     "mcp-server/src/e2e/client-bootstrap-skills.test.ts",
     "mcp-server/src/e2e/client-feedback-capture-contract.test.ts",
+    "mcp-server/src/e2e/e2e-store-operator-seed.ts",
     "mcp-server/src/e2e/feedback-skill.test.ts",
     "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts",
     "mcp-server/src/e2e/gf05-verify-gate-checklist-contract.test.ts",
@@ -62818,6 +64556,8 @@
     "mcp-server/src/e2e/new-tied-client.test.ts",
     "mcp-server/src/e2e/prompt-type-skills.test.ts",
     "mcp-server/src/e2e/prompt-type-subagent.test.ts",
+    "mcp-server/src/e2e/readme-information-architecture-skill.test.ts",
+    "mcp-server/src/e2e/skill-checklist-gate-operator.test.ts",
     "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts",
     "mcp-server/src/e2e/tied-gate-check-cli.test.ts",
     "mcp-server/src/e2e/workflow-visualization-skill.test.ts",
@@ -62976,6 +64716,7 @@
     "mcp-server/src/hooks/claude-adherence-bridge.ts",
     "mcp-server/src/hooks/claude-adherence-normalize.test.ts",
     "mcp-server/src/hooks/claude-adherence-normalize.ts",
+    "mcp-server/src/http-entry.ts",
     "mcp-server/src/impl-pseudocode-input.test.ts",
     "mcp-server/src/impl-pseudocode-input.ts",
     "mcp-server/src/index.ts",
@@ -63026,6 +64767,10 @@
     "mcp-server/src/jev/tool-safety-benchmark.ts",
     "mcp-server/src/jev/types.ts",
     "mcp-server/src/kaizen-feedback-mcp-handlers.ts",
+    "mcp-server/src/mcp-http-auth.test.ts",
+    "mcp-server/src/mcp-http-auth.ts",
+    "mcp-server/src/mcp-http-server.test.ts",
+    "mcp-server/src/mcp-http-server.ts",
     "mcp-server/src/mcp-stdio-console-guard-side-effect.ts",
     "mcp-server/src/mcp-stdio-console-guard.test.ts",
     "mcp-server/src/mcp-stdio-console-guard.ts",
@@ -63129,6 +64874,7 @@
     "mcp-server/src/request-evidence-envelope/batch-collect.ts",
     "mcp-server/src/request-evidence-envelope/build.ts",
     "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts",
+    "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
     "mcp-server/src/request-evidence-envelope/gap-codes.ts",
     "mcp-server/src/request-evidence-envelope/hooks.composition.test.ts",
     "mcp-server/src/request-evidence-envelope/hooks.ts",
@@ -63148,9 +64894,20 @@
     "mcp-server/src/research-records.ts",
     "mcp-server/src/residuality/stressor-residue-validate.test.ts",
     "mcp-server/src/residuality/stressor-residue-validate.ts",
+    "mcp-server/src/resolve-agentstream-store.ts",
     "mcp-server/src/resolve-essence-pseudocode-source.test.ts",
     "mcp-server/src/resolve-essence-pseudocode-source.ts",
     "mcp-server/src/resources.ts",
+    "mcp-server/src/server-info-mcp.composition.test.ts",
+    "mcp-server/src/server-info/build.ts",
+    "mcp-server/src/server-info/configuration.ts",
+    "mcp-server/src/server-info/constants.ts",
+    "mcp-server/src/server-info/health.ts",
+    "mcp-server/src/server-info/runtime-context.ts",
+    "mcp-server/src/server-info/schema.ts",
+    "mcp-server/src/server-info/server-info.test.ts",
+    "mcp-server/src/server-info/tool-handler.ts",
+    "mcp-server/src/server-info/types.ts",
     "mcp-server/src/source-graph/index-builder.ts",
     "mcp-server/src/source-graph/mcp-handlers.ts",
     "mcp-server/src/source-graph/source-graph-composition.test.ts",
@@ -63159,23 +64916,30 @@
     "mcp-server/src/storage-dump.test.ts",
     "mcp-server/src/storage-dump.ts",
     "mcp-server/src/store-readme-structure.test.ts",
+    "mcp-server/src/test-helpers/client-path-env.test.ts",
     "mcp-server/src/test-helpers/client-path-env.ts",
+    "mcp-server/src/tied-config-report.test.ts",
+    "mcp-server/src/tied-config-report.ts",
     "mcp-server/src/tied-layout.d.ts",
     "mcp-server/src/tied-layout.js",
     "mcp-server/src/tied-layout.test.ts",
     "mcp-server/src/tied-layout.ts",
+    "mcp-server/src/tied-mcp-server-factory.ts",
     "mcp-server/src/tied-methodology-version.test.ts",
     "mcp-server/src/tied-methodology-version.ts",
     "mcp-server/src/tied-path-env.test.ts",
     "mcp-server/src/tied-path-env.ts",
     "mcp-server/src/tied-project-config.test.ts",
     "mcp-server/src/tied-project-config.ts",
+    "mcp-server/src/tied-runtime-introspection.test.ts",
+    "mcp-server/src/tied-runtime-introspection.ts",
     "mcp-server/src/token-rename.test.ts",
     "mcp-server/src/token-rename.ts",
     "mcp-server/src/tool-profile-stdio.test.ts",
     "mcp-server/src/tool-profiles.test.ts",
     "mcp-server/src/tool-profiles.ts",
     "mcp-server/src/tools/adherence-reconcile-mcp.test.ts",
+    "mcp-server/src/tools/adherence-reconcile-resolve.test.ts",
     "mcp-server/src/tools/adherence-reconcile-runner.ts",
     "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts",
     "mcp-server/src/tools/batch-5-mcp.test.ts",
@@ -63321,6 +65085,7 @@
     "tied-project/working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/validate-receipts-sample.ts",
     "tied-project/working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/write-f11-fp-thresholds.ts",
     "tied-project/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/run-constraint-annotation-study.ts",
+    "tools/bootstrap/fixtures/tied-runtime/tied-runtime-fixture-probe.ts",
     "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/compare-constraint-reports.ts",
     "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/compare-reports.ts",
     "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/analyzer-runner.ts",
@@ -64126,6 +65891,48 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts",
+      "kind": "function",
+      "name": "writeLinkedClientMcp",
+      "symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts#writeLinkedClientMcp"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/claude-agent-argv.ts",
+      "kind": "function",
+      "name": "normalizeExistingDir",
+      "symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#normalizeExistingDir"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/claude-agent-argv.ts",
+      "kind": "function",
+      "name": "claudeAddDirArgs",
+      "symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeAddDirArgs"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/claude-agent-argv.ts",
+      "kind": "function",
+      "name": "claudeMcpConfigArgs",
+      "symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeMcpConfigArgs"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/claude-agent-argv.ts",
+      "kind": "function",
+      "name": "claudeSkipPermissionsArgs",
+      "symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#claudeSkipPermissionsArgs"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/claude-agent-argv.ts",
+      "kind": "function",
+      "name": "resolveClientMcpConfigPath",
+      "symbol_id": "mcp-server/packages/agentstream/src/claude-agent-argv.ts#resolveClientMcpConfigPath"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/packages/agentstream/src/claude-driver.test.ts",
       "kind": "function",
       "name": "readClaudeFixture",
@@ -64650,6 +66457,41 @@
       "symbol_id": "mcp-server/packages/agentstream/src/harness-select.ts#selectAgentHarness"
     },
     {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/harness-turn-trace.ts",
+      "kind": "function",
+      "name": "appendHarnessTurnTrace",
+      "symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#appendHarnessTurnTrace"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/harness-turn-trace.ts",
+      "kind": "function",
+      "name": "buildHarnessTurnTraceRecord",
+      "symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#buildHarnessTurnTraceRecord"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/harness-turn-trace.ts",
+      "kind": "function",
+      "name": "defaultHarnessTracePath",
+      "symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#defaultHarnessTracePath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/harness-turn-trace.ts",
+      "kind": "function",
+      "name": "harnessTraceEnabled",
+      "symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#harnessTraceEnabled"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/harness-turn-trace.ts",
+      "kind": "function",
+      "name": "resolveHarnessTracePath",
+      "symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#resolveHarnessTracePath"
+    },
+    {
       "exported": false,
       "file": "mcp-server/packages/agentstream/src/htmlformat.ts",
       "kind": "function",
@@ -64903,6 +66745,41 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts",
+      "kind": "function",
+      "name": "minimalCfg",
+      "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#minimalCfg"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts",
+      "kind": "function",
+      "name": "seedLinkedClientRoot",
+      "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#seedLinkedClientRoot"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts",
+      "kind": "function",
+      "name": "writeClientMcpJson",
+      "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#writeClientMcpJson"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts",
+      "kind": "function",
+      "name": "writeFakeHarnessDist",
+      "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#writeFakeHarnessDist"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts",
+      "kind": "function",
+      "name": "writeFakeMcpIndex",
+      "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.test.ts#writeFakeMcpIndex"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/packages/agentstream/src/jev-harness-shared.ts",
       "kind": "function",
       "name": "flatProjectConfigView",
@@ -64921,6 +66798,13 @@
       "kind": "function",
       "name": "resolveProjectConfigFile",
       "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveProjectConfigFile"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/jev-harness-shared.ts",
+      "kind": "function",
+      "name": "storeRootHasHarnessDist",
+      "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#storeRootHasHarnessDist"
     },
     {
       "exported": true,
@@ -64968,8 +66852,22 @@
       "exported": true,
       "file": "mcp-server/packages/agentstream/src/jev-harness-shared.ts",
       "kind": "function",
+      "name": "packageAnchorStoreRootFromModuleUrl",
+      "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#packageAnchorStoreRootFromModuleUrl"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/jev-harness-shared.ts",
+      "kind": "function",
       "name": "readRepoTiedYaml",
       "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#readRepoTiedYaml"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/jev-harness-shared.ts",
+      "kind": "function",
+      "name": "resolveJevHarnessDistStoreRoot",
+      "symbol_id": "mcp-server/packages/agentstream/src/jev-harness-shared.ts#resolveJevHarnessDistStoreRoot"
     },
     {
       "exported": true,
@@ -65250,6 +67148,104 @@
       "kind": "function",
       "name": "resolveTiedLayout",
       "symbol_id": "mcp-server/packages/agentstream/src/tied-layout.ts#resolveTiedLayout"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "assertMcpDistUnderStoreRoot",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#assertMcpDistUnderStoreRoot"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "findStoreRootWithTiedConfig",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#findStoreRootWithTiedConfig"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "loadMergedStoreYaml",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#loadMergedStoreYaml"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "mcpEnvHasClientProjectPath",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#mcpEnvHasClientProjectPath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "pickClientBundlePath",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pickClientBundlePath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "pickClientProjectPath",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pickClientProjectPath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "readTiedYamlServerEntryFromProject",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#readTiedYamlServerEntryFromProject"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "resolveMcpDistFromStoreYaml",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveMcpDistFromStoreYaml"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "resolveRuntimeFromMcpEntry",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromMcpEntry"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "resolveRuntimeFromStoreYaml",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveRuntimeFromStoreYaml"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "validateTiedProjectLayout",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#validateTiedProjectLayout"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "deriveStoreRootFromMcpDist",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#deriveStoreRootFromMcpDist"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "pathsSameResolved",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#pathsSameResolved"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+      "kind": "function",
+      "name": "resolveTiedRuntimeConfigFromWorkspace",
+      "symbol_id": "mcp-server/packages/agentstream/src/tied-runtime-config.ts#resolveTiedRuntimeConfigFromWorkspace"
     },
     {
       "exported": false,
@@ -65908,6 +67904,13 @@
       "kind": "function",
       "name": "handoffValidateCliEntryFromCliModule",
       "symbol_id": "mcp-server/packages/cli/src/paths.ts#handoffValidateCliEntryFromCliModule"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/cli/src/paths.ts",
+      "kind": "function",
+      "name": "mcpHttpEntryFromCliModule",
+      "symbol_id": "mcp-server/packages/cli/src/paths.ts#mcpHttpEntryFromCliModule"
     },
     {
       "exported": true,
@@ -72185,8 +74188,8 @@
       "exported": false,
       "file": "mcp-server/src/e2e/bootstrap-and-load.test.ts",
       "kind": "function",
-      "name": "assertLinkedWrapperBakesStoreRoot",
-      "symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#assertLinkedWrapperBakesStoreRoot"
+      "name": "assertScriptsResolveRuntimeFromDisk",
+      "symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#assertScriptsResolveRuntimeFromDisk"
     },
     {
       "exported": false,
@@ -72194,6 +74197,13 @@
       "kind": "function",
       "name": "bashAvailable",
       "symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#bashAvailable"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/e2e/bootstrap-and-load.test.ts",
+      "kind": "function",
+      "name": "effectiveScriptTextForRuntimeDiskCheck",
+      "symbol_id": "mcp-server/src/e2e/bootstrap-and-load.test.ts#effectiveScriptTextForRuntimeDiskCheck"
     },
     {
       "exported": false,
@@ -72243,6 +74253,34 @@
       "kind": "function",
       "name": "read",
       "symbol_id": "mcp-server/src/e2e/brownfield-client-doc-stack-contract.test.ts#read"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/e2e/e2e-store-operator-seed.ts",
+      "kind": "function",
+      "name": "loadBaseStoreTemplate",
+      "symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#loadBaseStoreTemplate"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/e2e/e2e-store-operator-seed.ts",
+      "kind": "function",
+      "name": "seedStoreOperatorCollectMetrics",
+      "symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#seedStoreOperatorCollectMetrics"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/e2e/e2e-store-operator-seed.ts",
+      "kind": "function",
+      "name": "snapshotStoreYaml",
+      "symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#snapshotStoreYaml"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/e2e/e2e-store-operator-seed.ts",
+      "kind": "function",
+      "name": "withStoreOperatorCollectMetrics",
+      "symbol_id": "mcp-server/src/e2e/e2e-store-operator-seed.ts#withStoreOperatorCollectMetrics"
     },
     {
       "exported": false,
@@ -73027,6 +75065,13 @@
       "kind": "function",
       "name": "item",
       "symbol_id": "mcp-server/src/feature-orchestration/defaults.ts#item"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/feature-orchestration/defaults.ts",
+      "kind": "function",
+      "name": "readMcpProjectPaths",
+      "symbol_id": "mcp-server/src/feature-orchestration/defaults.ts#readMcpProjectPaths"
     },
     {
       "exported": true,
@@ -75074,6 +77119,13 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/src/http-entry.ts",
+      "kind": "function",
+      "name": "main",
+      "symbol_id": "mcp-server/src/http-entry.ts#main"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/src/impl-pseudocode-input.ts",
       "kind": "function",
       "name": "normalizePseudocodePathForTiedBase",
@@ -76338,6 +78390,62 @@
       "kind": "function",
       "name": "resolveFeedbackProjectRoot",
       "symbol_id": "mcp-server/src/kaizen-feedback-mcp-handlers.ts#resolveFeedbackProjectRoot"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-http-auth.ts",
+      "kind": "function",
+      "name": "assertHttpBindAllowed",
+      "symbol_id": "mcp-server/src/mcp-http-auth.ts#assertHttpBindAllowed"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-http-auth.ts",
+      "kind": "function",
+      "name": "bearerTokensMatch",
+      "symbol_id": "mcp-server/src/mcp-http-auth.ts#bearerTokensMatch"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-http-auth.ts",
+      "kind": "function",
+      "name": "createBearerGateMiddleware",
+      "symbol_id": "mcp-server/src/mcp-http-auth.ts#createBearerGateMiddleware"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-http-auth.ts",
+      "kind": "function",
+      "name": "parseBearerToken",
+      "symbol_id": "mcp-server/src/mcp-http-auth.ts#parseBearerToken"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-http-auth.ts",
+      "kind": "function",
+      "name": "resolveHttpBearerRequirement",
+      "symbol_id": "mcp-server/src/mcp-http-auth.ts#resolveHttpBearerRequirement"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/mcp-http-server.ts",
+      "kind": "function",
+      "name": "parseAllowedHosts",
+      "symbol_id": "mcp-server/src/mcp-http-server.ts#parseAllowedHosts"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-http-server.ts",
+      "kind": "function",
+      "name": "resolveMcpHttpListenOptions",
+      "symbol_id": "mcp-server/src/mcp-http-server.ts#resolveMcpHttpListenOptions"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-http-server.ts",
+      "kind": "function",
+      "name": "startMcpHttpServer",
+      "symbol_id": "mcp-server/src/mcp-http-server.ts#startMcpHttpServer"
     },
     {
       "exported": false,
@@ -77855,36 +79963,8 @@
       "exported": false,
       "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
       "kind": "function",
-      "name": "adversarialSection",
-      "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#adversarialSection"
-    },
-    {
-      "exported": false,
-      "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
-      "kind": "function",
       "name": "contentHashHex",
       "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#contentHashHex"
-    },
-    {
-      "exported": false,
-      "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
-      "kind": "function",
-      "name": "depthFromRecord",
-      "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#depthFromRecord"
-    },
-    {
-      "exported": false,
-      "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
-      "kind": "function",
-      "name": "gatePolicyFromRecord",
-      "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#gatePolicyFromRecord"
-    },
-    {
-      "exported": false,
-      "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
-      "kind": "function",
-      "name": "identityValue",
-      "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#identityValue"
     },
     {
       "exported": false,
@@ -77915,13 +79995,6 @@
       "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#relPath"
     },
     {
-      "exported": false,
-      "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
-      "kind": "function",
-      "name": "unwrapCitdpDocument",
-      "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#unwrapCitdpDocument"
-    },
-    {
       "exported": true,
       "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
       "kind": "function",
@@ -77934,20 +80007,6 @@
       "kind": "function",
       "name": "buildNotApplicableReceipt",
       "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#buildNotApplicableReceipt"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
-      "kind": "function",
-      "name": "resolveCitdpContext",
-      "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveCitdpContext"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/src/request-evidence-envelope/backfill.ts",
-      "kind": "function",
-      "name": "resolveDepthTierForBackfill",
-      "symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#resolveDepthTierForBackfill"
     },
     {
       "exported": true,
@@ -78214,6 +80273,76 @@
       "kind": "function",
       "name": "envelopeWithProofs",
       "symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#envelopeWithProofs"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "adversarialSection",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#adversarialSection"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "depthFromRecord",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#depthFromRecord"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "gatePolicyFromRecord",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#gatePolicyFromRecord"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "identityValue",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#identityValue"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#isRecord"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "readOptional",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#readOptional"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "relPath",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#relPath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "unwrapCitdpDocument",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#unwrapCitdpDocument"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "resolveCitdpContext",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveCitdpContext"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts",
+      "kind": "function",
+      "name": "resolveDepthTierForBackfill",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts#resolveDepthTierForBackfill"
     },
     {
       "exported": true,
@@ -78769,6 +80898,41 @@
       "symbol_id": "mcp-server/src/residuality/stressor-residue-validate.ts#validateStressorResidueRecordObject"
     },
     {
+      "exported": true,
+      "file": "mcp-server/src/resolve-agentstream-store.ts",
+      "kind": "function",
+      "name": "agentstreamCliEntry",
+      "symbol_id": "mcp-server/src/resolve-agentstream-store.ts#agentstreamCliEntry"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/resolve-agentstream-store.ts",
+      "kind": "function",
+      "name": "findMonolithicRepoRoot",
+      "symbol_id": "mcp-server/src/resolve-agentstream-store.ts#findMonolithicRepoRoot"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/resolve-agentstream-store.ts",
+      "kind": "function",
+      "name": "packageAnchorStoreRootForAgentstream",
+      "symbol_id": "mcp-server/src/resolve-agentstream-store.ts#packageAnchorStoreRootForAgentstream"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/resolve-agentstream-store.ts",
+      "kind": "function",
+      "name": "resolveAgentstreamStoreRoot",
+      "symbol_id": "mcp-server/src/resolve-agentstream-store.ts#resolveAgentstreamStoreRoot"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/resolve-agentstream-store.ts",
+      "kind": "function",
+      "name": "storeRootHasAgentstreamDist",
+      "symbol_id": "mcp-server/src/resolve-agentstream-store.ts#storeRootHasAgentstreamDist"
+    },
+    {
       "exported": false,
       "file": "mcp-server/src/resolve-essence-pseudocode-source.test.ts",
       "kind": "function",
@@ -78823,6 +80987,153 @@
       "kind": "function",
       "name": "registerResources",
       "symbol_id": "mcp-server/src/resources.ts#registerResources"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/build.ts",
+      "kind": "function",
+      "name": "buildFeatures",
+      "symbol_id": "mcp-server/src/server-info/build.ts#buildFeatures"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/build.ts",
+      "kind": "function",
+      "name": "buildInstanceId",
+      "symbol_id": "mcp-server/src/server-info/build.ts#buildInstanceId"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/build.ts",
+      "kind": "function",
+      "name": "buildTiedMethodologyExtension",
+      "symbol_id": "mcp-server/src/server-info/build.ts#buildTiedMethodologyExtension"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/build.ts",
+      "kind": "function",
+      "name": "buildTiedTransportExtension",
+      "symbol_id": "mcp-server/src/server-info/build.ts#buildTiedTransportExtension"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/build.ts",
+      "kind": "function",
+      "name": "pickMcpProtocolVersion",
+      "symbol_id": "mcp-server/src/server-info/build.ts#pickMcpProtocolVersion"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/build.ts",
+      "kind": "function",
+      "name": "resolveBuildMetadata",
+      "symbol_id": "mcp-server/src/server-info/build.ts#resolveBuildMetadata"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/build.ts",
+      "kind": "function",
+      "name": "buildServerInfoSnapshot",
+      "symbol_id": "mcp-server/src/server-info/build.ts#buildServerInfoSnapshot"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/configuration.ts",
+      "kind": "function",
+      "name": "mapConfigurationSummary",
+      "symbol_id": "mcp-server/src/server-info/configuration.ts#mapConfigurationSummary"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/health.ts",
+      "kind": "function",
+      "name": "bindingCode",
+      "symbol_id": "mcp-server/src/server-info/health.ts#bindingCode"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/health.ts",
+      "kind": "function",
+      "name": "bindingToCheckStatus",
+      "symbol_id": "mcp-server/src/server-info/health.ts#bindingToCheckStatus"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/health.ts",
+      "kind": "function",
+      "name": "isoNow",
+      "symbol_id": "mcp-server/src/server-info/health.ts#isoNow"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/health.ts",
+      "kind": "function",
+      "name": "assembleHealthChecks",
+      "symbol_id": "mcp-server/src/server-info/health.ts#assembleHealthChecks"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/health.ts",
+      "kind": "function",
+      "name": "deriveHealthState",
+      "symbol_id": "mcp-server/src/server-info/health.ts#deriveHealthState"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/runtime-context.ts",
+      "kind": "function",
+      "name": "getServerInfoRuntimeContext",
+      "symbol_id": "mcp-server/src/server-info/runtime-context.ts#getServerInfoRuntimeContext"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/runtime-context.ts",
+      "kind": "function",
+      "name": "resetServerInfoRuntimeContextForTests",
+      "symbol_id": "mcp-server/src/server-info/runtime-context.ts#resetServerInfoRuntimeContextForTests"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/runtime-context.ts",
+      "kind": "function",
+      "name": "setServerInfoRuntimeContext",
+      "symbol_id": "mcp-server/src/server-info/runtime-context.ts#setServerInfoRuntimeContext"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/schema.ts",
+      "kind": "function",
+      "name": "loadServerInfoOutputSchema",
+      "symbol_id": "mcp-server/src/server-info/schema.ts#loadServerInfoOutputSchema"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/schema.ts",
+      "kind": "function",
+      "name": "resolveServerInfoOutputSchemaPath",
+      "symbol_id": "mcp-server/src/server-info/schema.ts#resolveServerInfoOutputSchemaPath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/server-info.test.ts",
+      "kind": "function",
+      "name": "createValidator",
+      "symbol_id": "mcp-server/src/server-info/server-info.test.ts#createValidator"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/server-info/server-info.test.ts",
+      "kind": "function",
+      "name": "loadFixtureHelpers",
+      "symbol_id": "mcp-server/src/server-info/server-info.test.ts#loadFixtureHelpers"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/server-info/tool-handler.ts",
+      "kind": "function",
+      "name": "handleServerInfoTool",
+      "symbol_id": "mcp-server/src/server-info/tool-handler.ts#handleServerInfoTool"
     },
     {
       "exported": false,
@@ -78982,6 +81293,20 @@
       "exported": true,
       "file": "mcp-server/src/test-helpers/client-path-env.ts",
       "kind": "function",
+      "name": "applyInstallPathEnvFromMcpJson",
+      "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#applyInstallPathEnvFromMcpJson"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/test-helpers/client-path-env.ts",
+      "kind": "function",
+      "name": "assertSafeMcpJsonWriteTarget",
+      "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#assertSafeMcpJsonWriteTarget"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/test-helpers/client-path-env.ts",
+      "kind": "function",
       "name": "bindWritableProjectCorpus",
       "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
     },
@@ -79010,8 +81335,57 @@
       "exported": true,
       "file": "mcp-server/src/test-helpers/client-path-env.ts",
       "kind": "function",
+      "name": "writeInstallMcpJson",
+      "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#writeInstallMcpJson"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/test-helpers/client-path-env.ts",
+      "kind": "function",
       "name": "writeMinimalProjectCorpus",
       "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#writeMinimalProjectCorpus"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-config-report.test.ts",
+      "kind": "function",
+      "name": "loadFixtureHelpers",
+      "symbol_id": "mcp-server/src/tied-config-report.test.ts#loadFixtureHelpers"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-config-report.test.ts",
+      "kind": "function",
+      "name": "stripVolatile",
+      "symbol_id": "mcp-server/src/tied-config-report.test.ts#stripVolatile"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-config-report.ts",
+      "kind": "function",
+      "name": "loadBootstrapReportModule",
+      "symbol_id": "mcp-server/src/tied-config-report.ts#loadBootstrapReportModule"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-config-report.ts",
+      "kind": "function",
+      "name": "resolveBootstrapReportModulePath",
+      "symbol_id": "mcp-server/src/tied-config-report.ts#resolveBootstrapReportModulePath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-config-report.ts",
+      "kind": "function",
+      "name": "formatTiedConfigReportForProject",
+      "symbol_id": "mcp-server/src/tied-config-report.ts#formatTiedConfigReportForProject"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-config-report.ts",
+      "kind": "function",
+      "name": "resolveTiedConfigReport",
+      "symbol_id": "mcp-server/src/tied-config-report.ts#resolveTiedConfigReport"
     },
     {
       "exported": true,
@@ -79098,6 +81472,20 @@
       "symbol_id": "mcp-server/src/tied-layout.ts#resolveTiedLayout"
     },
     {
+      "exported": true,
+      "file": "mcp-server/src/tied-mcp-server-factory.ts",
+      "kind": "function",
+      "name": "createTiedYamlMcpServer",
+      "symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#createTiedYamlMcpServer"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-mcp-server-factory.ts",
+      "kind": "function",
+      "name": "resolveTiedMcpProfile",
+      "symbol_id": "mcp-server/src/tied-mcp-server-factory.ts#resolveTiedMcpProfile"
+    },
+    {
       "exported": false,
       "file": "mcp-server/src/tied-methodology-version.ts",
       "kind": "function",
@@ -79145,6 +81533,13 @@
       "kind": "function",
       "name": "readTiedMethodologyVersion",
       "symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-methodology-version.ts",
+      "kind": "function",
+      "name": "resolveTiedMethodologyVersion",
+      "symbol_id": "mcp-server/src/tied-methodology-version.ts#resolveTiedMethodologyVersion"
     },
     {
       "exported": true,
@@ -79243,6 +81638,41 @@
       "kind": "function",
       "name": "validateIdentityConfigSection",
       "symbol_id": "mcp-server/src/tied-project-config.ts#validateIdentityConfigSection"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-runtime-introspection.test.ts",
+      "kind": "function",
+      "name": "loadBootstrapResolver",
+      "symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#loadBootstrapResolver"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-runtime-introspection.test.ts",
+      "kind": "function",
+      "name": "loadFixtureHelpers",
+      "symbol_id": "mcp-server/src/tied-runtime-introspection.test.ts#loadFixtureHelpers"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-runtime-introspection.ts",
+      "kind": "function",
+      "name": "resolveBootstrapModulePath",
+      "symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveBootstrapModulePath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-runtime-introspection.ts",
+      "kind": "function",
+      "name": "pathsSameResolved",
+      "symbol_id": "mcp-server/src/tied-runtime-introspection.ts#pathsSameResolved"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-runtime-introspection.ts",
+      "kind": "function",
+      "name": "resolveRuntimeIntrospection",
+      "symbol_id": "mcp-server/src/tied-runtime-introspection.ts#resolveRuntimeIntrospection"
     },
     {
       "exported": false,
@@ -79365,17 +81795,17 @@
     },
     {
       "exported": false,
-      "file": "mcp-server/src/tools/adherence-reconcile-runner.ts",
+      "file": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts",
       "kind": "function",
-      "name": "captureProcess",
-      "symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#captureProcess"
+      "name": "monolithicStoreRoot",
+      "symbol_id": "mcp-server/src/tools/adherence-reconcile-resolve.test.ts#monolithicStoreRoot"
     },
     {
       "exported": false,
       "file": "mcp-server/src/tools/adherence-reconcile-runner.ts",
       "kind": "function",
-      "name": "findRepoRoot",
-      "symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#findRepoRoot"
+      "name": "captureProcess",
+      "symbol_id": "mcp-server/src/tools/adherence-reconcile-runner.ts#captureProcess"
     },
     {
       "exported": true,
@@ -79761,6 +82191,13 @@
       "kind": "function",
       "name": "toolHandler",
       "symbol_id": "mcp-server/src/tools/yaml-client-styling-mcp.test.ts#toolHandler"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/types.ts",
+      "kind": "function",
+      "name": "structuredToolResult",
+      "symbol_id": "mcp-server/src/types.ts#structuredToolResult"
     },
     {
       "exported": true,
@@ -80797,6 +83234,13 @@
       "kind": "function",
       "name": "discoverDefaultBasePath",
       "symbol_id": "mcp-server/src/yaml-loader.ts#discoverDefaultBasePath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/yaml-loader.ts",
+      "kind": "function",
+      "name": "failClosedInstallPathAuthority",
+      "symbol_id": "mcp-server/src/yaml-loader.ts#failClosedInstallPathAuthority"
     },
     {
       "exported": false,
