@@ -30,7 +30,7 @@
 
 ### Required
 
-- [ ] `wave3-phase0-traceable-commit` — Commit comparisons, working folder, bundle doc edits, CITDP (`@non-tied-close` or sponsor)
+- [x] `wave3-phase0-traceable-commit` — `4257f91b` on `main`
 - [x] `wave3-phase1-client-dev-index` — Quick reads row in `tied-bundle/docs/client-development-index.md`
 - [x] `wave3-phase1-htol-pointer` — Dual-MCP compose in `tied-bundle/docs/harness-trace-observation-loop.md`
 - [x] `wave3-phase1-phased-table-sync` — Wave 2 § Phased recommendations phase 1 **Done**
@@ -49,6 +49,7 @@
 
 ### Changelog (this REQ)
 
+- 2026-11-08 traceable-commit: `4257f91b` docs(comparisons) morluto/rea bundle + Wave 3 compose
 - 2026-11-08 build-plan: Wave 3 doc compose implemented; CITDP persisted; plan_phase post-build
 - 2026-11-08 add-feature: Wave 3 PLAN, tracker, test-strategy, CITDP draft, session-handoff Plan execution steps
 

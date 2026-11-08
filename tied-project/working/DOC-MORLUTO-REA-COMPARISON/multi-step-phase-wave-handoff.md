@@ -5,7 +5,7 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | Waves **1–3** harness compose **done** · commit **pending** |
+| **Status** | Waves **1–3** **done** · traceable commit **`4257f91b`** |
 | **Active** | `wave_3` / `phase_0_git_closeout` |
 | **Depth** | `minimal` · outreach doc-only · **no REQ mint** |
 | **Proof** | No REA run from stdd · no `tied_validate_consistency` |
@@ -34,7 +34,7 @@
 | 04 | 2 | Wave 2 analysis (14 sections) | done |
 | 05 | 2 | `.gitignore` allowlist | done |
 | 06 | 2 | Doc verification ([build-plan-handoff](./evidence/build-plan-handoff.md)) | done |
-| 07 | 3 | **Traceable commit** (sponsor) | **pending** |
+| 07 | 3 | **Traceable commit** | **done** (`4257f91b`) |
 | 08 | 3 | Wave 3 harness compose (`build-plan`) | **done** |
 
 ---
@@ -81,11 +81,10 @@ Canonical plan: [PLAN.md](./PLAN.md) · Tracker: [checklist-tracker-wave3.yaml](
 
 Promotion requires **`build-plan`** for disk edits — not comparison prose alone.
 
-### Phase 0 — Publish Waves 1–2 · **pending**
+### Phase 0 — Publish Waves 1–2 · **done**
 
 - [x] Git allowlist `!docs/comparisons/morluto-rea-*.md`
-- [ ] **Traceable commit** — scope: both comparison md, `DOC-MORLUTO-REA-COMPARISON/**`, `.gitignore`  
-  → `@non-tied-close` or sponsor commit
+- [x] **Traceable commit** `4257f91b` — comparisons, working folder, bundle docs, CITDP, `.gitignore`
 
 ### Phase 1 — Doc compose · **done** 2026-11-08
 
@@ -106,8 +105,8 @@ Promotion requires **`build-plan`** for disk edits — not comparison prose alon
 
 ## Do next (priority)
 
-1. **Commit** — step 07 (`@non-tied-close` or sponsor) — bundle + CITDP + `tied-bundle/docs/` edits.
-2. **REQ / matrix / CI** — optional slugs in [session-handoff](./evidence/session-handoff.md) only if sponsor promotes.
+1. **REQ / matrix / CI** — optional slugs in [session-handoff](./evidence/session-handoff.md) only if sponsor promotes.
+2. **`git push`** — branch is ahead of `origin/main` (sponsor-owned).
 
 ## Non-adoptions
 
