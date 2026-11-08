@@ -35,8 +35,8 @@ procedure READ_METHODOLOGY_SEMVER:
     EFFECTS: read-only
     FAILURE_MODES: missing all sources
     TERMINATION: total
+  TRY install.json store_methodology_version FOR each anchor
   TRY ancestor VERSION FOR each anchor
-  TRY install.json store_methodology_version
   TRY AGENTS.md TIED Methodology Version line
   THROW if none
 

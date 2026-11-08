@@ -1182,6 +1182,12 @@ ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
 ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE:
   description: "Independent proof envelope extension"
   type: "architecture"
+ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER:
+  cross_references:
+    - "IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER"
+    - "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
+  detail_file: "architecture-decisions/ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER.yaml"
+  name: "Install manifest semver refresh architecture"
 ARCH-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING"
@@ -3069,6 +3075,12 @@ IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
 IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE:
   description: "Independent proof envelope implementation"
   type: "implementation"
+IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER:
+  cross_references:
+    - "ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER"
+    - "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
+  detail_file: "implementation-decisions/IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER.yaml"
+  name: "Install manifest semver refresh implementation"
 IMPL-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING"
@@ -5114,6 +5126,13 @@ REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   source_index: "requirements.yaml"
   status: "Implemented"
   type: "REQ"
+REQ-TIED_INSTALL_JSON_REFRESH_SEMVER:
+  cross_references:
+    - "ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER"
+    - "IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER"
+  description: "Refresh writes install.json store methodology pin; MCP prefers pin over client VERSION"
+  detail_file: "requirements/REQ-TIED_INSTALL_JSON_REFRESH_SEMVER.yaml"
+  name: "Install manifest semver refresh"
 REQ-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING"

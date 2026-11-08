@@ -33,6 +33,16 @@ PROCEDURE INSTALL_TIED_LAYERS(projectRoot, options)
   WRITE_INSTALL_MANIFEST(projectRoot, selections)
 END PROCEDURE
 
+// [IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER] [ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER] [REQ-TIED_INSTALL_JSON_REFRESH_SEMVER]
+// How: Manifest pins store methodology semver from store VERSION/AGENTS on every install and refresh.
+PROCEDURE WRITE_INSTALL_MANIFEST_STORE_PIN(projectRoot, storeRoot, selections)
+  PRE: installTiedLayers completed without doctor-only exit
+  POST: tied-bundle/install.json includes store_methodology_version, tied_version, installer_version from store
+  EFFECTS: writes machine-local install.json
+  storeSemver := READ_STORE_METHODOLOGY_SEMVER(storeRoot)
+  WRITE_INSTALL_MANIFEST(projectRoot, { ...selections, store_methodology_version: storeSemver, tied_version: storeSemver, installer_version: storeSemver })
+END PROCEDURE
+
 // [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_RUNTIME_DISK_CONFIG]
 // How: Linked skill script stubs are thin bash wrappers that exec jsonSafeAbsolute store canonical scripts; on-disk runtime resolver (resolve-tied-cli-env.mjs) lives in the store target, verified by bootstrap-and-load e2e exec follow-through.
 PROCEDURE WRITE_EXEC_WRAPPER(wrapperPath, storeScriptPath, storeRoot, marker)

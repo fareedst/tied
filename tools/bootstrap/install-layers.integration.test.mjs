@@ -11,6 +11,7 @@ import { readInstallManifest } from "./lib/layers/install-manifest.mjs";
 import { TIED_REPO_ROOT, manifestPaths } from "./lib/constants.mjs";
 import { resolveTiedLayout } from "./lib/layout.mjs";
 import { refreshInstallFromManifest } from "./lib/install-layers-core.mjs";
+import { readStoreMethodologySemver } from "./lib/store-methodology-version.mjs";
 import { migrateLayout } from "./lib/migrate-layout.mjs";
 import { detectLegacyLayout } from "./lib/layout.mjs";
 import {
@@ -60,6 +61,9 @@ describe("install-layers integration [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
     });
     const manifest = readInstallManifest(tmp);
     assert.equal(manifest?.mode, "linked");
+    const expectedStore = readStoreMethodologySemver(TIED_REPO_ROOT);
+    assert.equal(manifest?.store_methodology_version, expectedStore);
+    assert.equal(manifest?.tied_version, expectedStore);
     assert.ok(fs.existsSync(path.join(tmp, ".cursor", "skills", "tied-yaml", "SKILL.md")));
     const tiedDir = resolveTiedLayout(tmp).tiedDir;
     assert.ok(fs.existsSync(path.join(tiedDir, "requirements.yaml")));

@@ -2563,6 +2563,17 @@ REQ-TIED_CLIENT_OPERATOR_TOOLING:
       - "REQ-REQUEST_EVIDENCE_ENVELOPE"
       - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "REQ-TIED_SETUP"
+  satisfaction_criteria:
+    - criterion: "Checklist gate validates dispositions for slugs listed under sub_procedures as well as main steps."
+      criterion_id: "gate-sub-procedures"
+    - criterion: "Methodology semver resolves from install.json before ancestor VERSION walk, then AGENTS.md when root VERSION is absent or stale."
+      criterion_id: "semver-without-version-file"
+    - criterion: "pseudocode_validate accepts repo-root-relative tied-project/ paths when TIED_BASE_PATH is tied-project/."
+      criterion_id: "pseudocode-repo-path"
+    - criterion: "run-close-out-gates resolves MCP dist from client MCP config and runs reconcile after gate receipt persist."
+      criterion_id: "closeout-runner-client-root"
+    - criterion: "tied_adherence_reconcile_run and run-close-out-gates --reconcile resolve @tied/agentstream from the TIED store on linked clients without ADHERENCE_RECONCILE_BIN when store dist is built."
+      criterion_id: "linked-reconcile-store-resolve"
   status: "Implemented"
 REQ-TIED_CLIENT_PATH_ENV_MIGRATION:
   category: "Tooling"
@@ -3068,6 +3079,30 @@ REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   name: "Incident/revert evaluation corpus (Claude comparison Phase 4)"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_INSTALL_JSON_REFRESH_SEMVER:
+  category: "Infrastructure"
+  description: "tied-install --refresh rewrites tied-bundle/install.json store methodology pin from store VERSION; MCP prefers install pin over frozen client VERSION."
+  detail_file: "requirements/REQ-TIED_INSTALL_JSON_REFRESH_SEMVER.yaml"
+  name: "Install manifest semver refresh"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+  satisfaction_criteria:
+    - criterion: "After tied-install, install.json store_methodology_version equals store VERSION"
+      criterion_id: "SC-IJRS-MANIFEST"
+      metric: "store-methodology-version.test.mjs + install-layers.integration.test.mjs"
+    - criterion: "resolveTiedMethodologyVersion prefers install.json over client root VERSION"
+      criterion_id: "SC-IJRS-RESOLVER"
+      metric: "mcp-server/src/tied-methodology-version.test.ts"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER"
+    implementation:
+      - "IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER"
 REQ-TIED_INTENT_CONTROL_PLANE:
   category: "Architecture"
   cross_references:

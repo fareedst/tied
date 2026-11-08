@@ -10,6 +10,7 @@ import { describe, it } from "node:test";
 import {
   clearTiedMethodologyVersionCache,
   readTiedMethodologyVersion,
+  resolveTiedMethodologyVersion,
 } from "./tied-methodology-version.js";
 
 describe("readTiedMethodologyVersion [REQ-TIED_SETUP]", () => {
@@ -74,6 +75,22 @@ describe("readTiedMethodologyVersion [REQ-TIED_SETUP]", () => {
       "utf8",
     );
     assert.equal(readTiedMethodologyVersion({ project_root: root }), "4.0.0");
+  });
+
+  it("prefers install.json over client root VERSION [REQ-TIED_INSTALL_JSON_REFRESH_SEMVER]", () => {
+    clearTiedMethodologyVersionCache();
+    const root = mkdtempSync(path.join(os.tmpdir(), "tied-ver-priority-"));
+    writeFileSync(path.join(root, "VERSION"), "4.0.0\n");
+    mkdirSync(path.join(root, "tied-bundle"), { recursive: true });
+    writeFileSync(
+      path.join(root, "tied-bundle", "install.json"),
+      JSON.stringify({ store_methodology_version: "4.2.1" }),
+      "utf8",
+    );
+    const resolved = resolveTiedMethodologyVersion({ project_root: root });
+    assert.equal(resolved.version, "4.2.1");
+    assert.equal(resolved.source, "install_json");
+    assert.equal(readTiedMethodologyVersion({ project_root: root }), "4.2.1");
   });
 
   it("reads semver from tied-bundle/install.json store_methodology_version [REQ-TIED_CLIENT_OPERATOR_TOOLING]", () => {

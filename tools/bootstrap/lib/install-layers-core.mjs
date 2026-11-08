@@ -10,6 +10,7 @@ import { installMcpLayer } from "./layers/mcp.mjs";
 import { installSkillsLinked, installSkillsFull } from "./layers/skills-linked.mjs";
 import { installMethodologyLinked, installMethodologyFull } from "./layers/methodology.mjs";
 import { writeInstallManifest, readInstallManifest } from "./layers/install-manifest.mjs";
+import { readStoreMethodologySemver } from "./store-methodology-version.mjs";
 import { checkStoreReachable, resolveStoreRoot } from "./layers/store.mjs";
 import { runPostInstallVerification, runDoctor } from "./layers/verify-store.mjs";
 import fs from "node:fs";
@@ -107,6 +108,7 @@ export function installTiedLayers(projectRoot, options = {}) {
     });
   }
 
+  const storeMethodologyVersion = readStoreMethodologySemver(storeRoot);
   const manifest = writeInstallManifest(projectRoot, {
     store: storeRoot,
     layers,
@@ -114,26 +116,13 @@ export function installTiedLayers(projectRoot, options = {}) {
     harness,
     methodology_bundle: methodologyBundle,
     tool_profile: toolUseProfile ?? null,
-    tied_version: readTiedVersionFromAgents(projectRoot, storeRoot),
+    store_methodology_version: storeMethodologyVersion,
+    tied_version: storeMethodologyVersion,
+    installer_version: storeMethodologyVersion,
   });
 
   sayOk(`Layered TIED install complete (${mode}, layers=${layers.join(",")}).`);
   return { projectRoot, storeRoot, manifest };
-}
-
-/**
- * @param {string} projectRoot
- * @param {string} storeRoot
- */
-function readTiedVersionFromAgents(projectRoot, storeRoot) {
-  for (const root of [projectRoot, storeRoot]) {
-    const agents = path.join(root, "AGENTS.md");
-    if (!fs.existsSync(agents)) continue;
-    const text = fs.readFileSync(agents, "utf8");
-    const match = text.match(/TIED Methodology Version\*\*:\s*([0-9.]+)/);
-    if (match) return match[1];
-  }
-  return "unknown";
 }
 
 /**

@@ -1,0 +1,29 @@
+copy_hygiene: "Fresh tracker for REQ-TIED_INSTALL_JSON_REFRESH_SEMVER; refine-plan 2026-11-08."
+description: "Install manifest semver refresh + MCP resolver order"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-TIED_INSTALL_JSON_REFRESH_SEMVER/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INSTALL_JSON_REFRESH_SEMVER/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth; tooling-only change."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      policy: "minimal-depth-no-inquiry"
+      status: "not_applicable"

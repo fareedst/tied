@@ -1,0 +1,44 @@
+CITDP-REQ-TIED_INSTALL_JSON_REFRESH_SEMVER:
+  change_definition:
+    current_behavior: "tied-install --refresh ends with writeInstallManifest but only sets tied_version from client AGENTS.md before store; store_methodology_version is never written. resolveTiedMethodologyVersion and server_info walk client root VERSION before install.json, so greenfield create-if-absent VERSION freezes an old semver after store bumps."
+    desired_behavior: "Every install/refresh writes store_methodology_version (and aligned tied_version/installer_version) from store VERSION or store AGENTS.md. MCP and CLI resolvers prefer install.json pin over client root VERSION. server_info extensions.tied.methodology agrees with refresh witness on clients."
+    non_goals:
+      - "Overwrite client root VERSION on refresh"
+      - "Methodology release version bump by itself"
+      - "Backfill trial readouts"
+    success_criteria:
+      - "SC-IJRS-MANIFEST, SC-IJRS-RESOLVER pass per working test-strategy.md"
+    unchanged_behavior: "Store mode without client install.json still resolves from store VERSION walk. linked/full layer orchestration unchanged aside from manifest fields."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/install-layers-core.mjs; tools/bootstrap/lib/store-methodology-version.mjs; mcp-server/src/tied-methodology-version.ts; mcp-server/src/server-info/build.ts; scripts/lib/read-tied-methodology-version.mjs"
+    tied_tokens_affected:
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+      - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+    tied_tokens_new:
+      - "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
+      - "ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER"
+      - "IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Refresh updates bundle indexes but manifest pin left stale — server_info still old"
+        - "Client VERSION newer than store pin — wrong semver if install.json ignored"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Install/bootstrap and read-only semver resolution; no production data path."
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/store-methodology-version.test.mjs"
+      - "mcp-server/src/tied-methodology-version.test.ts"
+    integration:
+      - "tools/bootstrap/lib/install-layers-core.test.mjs refresh manifest case"
+    composition: []

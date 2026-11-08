@@ -2855,6 +2855,21 @@ IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE:
   detail_file: "implementation-decisions/IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE.yaml"
   name: "Independent proof envelope implementation"
   status: "Active"
+IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER:
+  description: "readStoreMethodologySemver, manifest fields, resolveTiedMethodologyVersion reorder, CLI parity."
+  detail_file: "implementation-decisions/IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER.yaml"
+  name: "Install manifest semver refresh implementation"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
+    implements:
+      - "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER"
+    requirements:
+      - "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
 IMPL-TIED_INTENT_CONTROL_PLANE:
   cross_references:
     - "ARCH-TIED_INTENT_CONTROL_PLANE"

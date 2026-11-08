@@ -1,0 +1,10 @@
+fix(bootstrap): refresh install.json methodology pin [REQ-TIED_INSTALL_JSON_REFRESH_SEMVER]
+
+tied-install writes store_methodology_version from store VERSION on every
+refresh; MCP and CLI resolvers prefer install.json over frozen client VERSION.
+
+Tokens: REQ/ARCH/IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER; LEAP operator tooling semver criterion.
+
+Gate: close-out-req-tied-install-json-refresh-semver-20261108-r2 allowed=true; envelope blocking_gap_count=0.
+
+Upstream feedback: N/A (store bootstrap slice).

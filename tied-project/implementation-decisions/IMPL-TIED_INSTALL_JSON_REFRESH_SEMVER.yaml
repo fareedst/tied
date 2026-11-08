@@ -1,0 +1,8 @@
+IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER"
+    requirements:
+      - "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
+  decision: "tools/bootstrap/lib/store-methodology-version.mjs; install-layers-core manifest; tied-methodology-version.ts + read-tied-methodology-version.mjs resolver order."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER-pseudocode.md"

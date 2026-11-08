@@ -96,7 +96,7 @@ export type ReadTiedMethodologyVersionInput = {
 };
 
 const RESOLUTION_ERROR =
-  "Methodology semver not found (checked VERSION walk, tied-bundle/install.json store_methodology_version, AGENTS.md)";
+  "Methodology semver not found (checked tied-bundle/install.json store_methodology_version, VERSION walk, AGENTS.md)";
 
 /**
  * PRE: search roots derived from project_root and/or tied_base_path.
@@ -119,21 +119,6 @@ export function resolveTiedMethodologyVersion(
 
   const searchRoots = uniqueProjectRoots(anchors);
 
-  for (const anchor of searchRoots) {
-    const versionPath = findVersionPath(anchor);
-    if (!versionPath) continue;
-    if (cached?.anchor === versionPath) {
-      return {
-        version: cached.version,
-        source: cached.source,
-        resolution_error: null,
-      };
-    }
-    const version = readVersionFile(versionPath);
-    cached = { anchor: versionPath, version, source: "version_file" };
-    return { version, source: "version_file", resolution_error: null };
-  }
-
   for (const root of searchRoots) {
     const fromInstall = readInstallConfigVersion(root);
     if (fromInstall) {
@@ -148,6 +133,21 @@ export function resolveTiedMethodologyVersion(
       cached = { anchor: cacheKey, version: fromInstall, source: "install_json" };
       return { version: fromInstall, source: "install_json", resolution_error: null };
     }
+  }
+
+  for (const anchor of searchRoots) {
+    const versionPath = findVersionPath(anchor);
+    if (!versionPath) continue;
+    if (cached?.anchor === versionPath) {
+      return {
+        version: cached.version,
+        source: cached.source,
+        resolution_error: null,
+      };
+    }
+    const version = readVersionFile(versionPath);
+    cached = { anchor: versionPath, version, source: "version_file" };
+    return { version, source: "version_file", resolution_error: null };
   }
 
   for (const root of searchRoots) {

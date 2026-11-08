@@ -1,0 +1,7 @@
+REQ-TIED_INSTALL_JSON_REFRESH_SEMVER:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_INSTALL_JSON_REFRESH_SEMVER"
+    implementation:
+      - "IMPL-TIED_INSTALL_JSON_REFRESH_SEMVER"
+  description: "Bootstrap write and MCP read of install manifest methodology semver on refresh."

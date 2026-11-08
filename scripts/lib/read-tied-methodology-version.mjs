@@ -54,13 +54,13 @@ function readAgentsMdVersion(projectRoot) {
  */
 export function readTiedMethodologyVersionFromProjectRoot(projectRoot) {
   const root = path.resolve(projectRoot);
-  const fromFile = findVersionPath(root);
-  if (fromFile) return fromFile;
   const fromInstall = readInstallConfigVersion(root);
   if (fromInstall) return fromInstall;
+  const fromFile = findVersionPath(root);
+  if (fromFile) return fromFile;
   const fromAgents = readAgentsMdVersion(root);
   if (fromAgents) return fromAgents;
   throw new Error(
-    `Methodology semver not found from ${root} (checked VERSION walk, install.json, AGENTS.md)`,
+    `Methodology semver not found from ${root} (checked install.json, VERSION walk, AGENTS.md)`,
   );
 }
