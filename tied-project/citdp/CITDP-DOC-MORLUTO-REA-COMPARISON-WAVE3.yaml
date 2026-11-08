@@ -12,8 +12,6 @@ CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3:
     desired_behavior: Bundle quick-read + HTOL dual-MCP literacy links; working plan artifacts on disk.
     non_goals:
       - Project REQ/ARCH/IMPL YAML mint
-      - methodology-composition-matrix row
-      - rea-agents CI bundle
     success_criteria:
       - client-development-index and HTOL updated
       - Wave 2 phased table phase 1 Done
@@ -24,6 +22,7 @@ CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3:
       - tied-bundle/docs/client-development-index.md
       - tied-bundle/docs/harness-trace-observation-loop.md
       - docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md
+      - docs/comparisons/methodology-composition-matrix.md
       - tied-project/working/DOC-MORLUTO-REA-COMPARISON/
     tied_tokens_affected: []
     tied_tokens_new: []

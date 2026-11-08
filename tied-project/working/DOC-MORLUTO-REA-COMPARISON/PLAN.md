@@ -29,10 +29,11 @@
 | HTOL external-investigation pointer | Phase 1 **Defer** | Harness compose | **Required** — context-discovery compose |
 | Vocab RECORD (`REA Evidence`, dual MCP seam) | Phase 2 **Defer** | Vocab | **Optional** — costly; separate sponsor ask |
 | Matrix §2 row | Phase 2 **Defer** | Matrix | **Optional** — sponsor review |
-| Bundle `rea-agents` in stdd CI | Phase 3 **Defer** | REQ-behavior | **Defer** — scoped `add-feature` + new `[REQ-*]` |
-| Dual-MCP operator checklist (bundle doc) | Phase 3 **Defer** | REQ-behavior | **Defer** — new REQ if promoted |
+| Dual-MCP operator checklist (working doc) | Phase 3 **Defer** | doc-only | **Done** — [dual-mcp-operator-checklist.md](./dual-mcp-operator-checklist.md); R/A/I only via separate **`@add-feature`** |
 
-**Consequence ladder:** Phase 0–1 = **reversible** (doc + git). Matrix, vocab RECORD, CI bundle = **costly** — remain optional/defer unless sponsor reopens.
+**Out of scope (separate effort):** Installing or CI-bundling **REA** / `rea-agents`, native RE engines, or vendor MCP setup in stdd — not part of `DOC-MORLUTO-REA-COMPARISON`.
+
+**Consequence ladder:** Phase 0–1 = **reversible** (doc + git). Matrix / vocab RECORD = **costly** when promoted; REA install is **not** on this initiative's ladder.
 
 **Authority:** REA **Evidence** ≠ gate receipts; only **TIED YAML MCP** may mutate `tied-project/` YAML ([Wave 2 proof boundary](../../../docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md#proof-boundary)).
 
@@ -58,7 +59,7 @@
 | Wave 2 status sync | `docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md` § Phased recommendations | Phase 1 items → **Planned** or **Done** per build outcome |
 | Handoff tracker | `multi-step-phase-wave-handoff.md` | Steps 07–08; Wave 3 phase table |
 
-**Forbidden in this plan:** project REQ/ARCH/IMPL YAML; `methodology-composition-matrix.md` row without sponsor promotion; `rea setup` / vendor MCP in CI; effectiveness claims from REA badges.
+**Forbidden in this plan:** project REQ/ARCH/IMPL YAML; `methodology-composition-matrix.md` row without sponsor promotion; **REA install or CI bundling** (separate effort); effectiveness claims from REA badges.
 
 ---
 
@@ -76,14 +77,24 @@
 | **Out of scope** | REA as required TIED dependency; Ghidra/IDA in checklist |
 | **Status** | done (2026-11-08 build-plan) |
 
-### Wave 3 initiative: Matrix / CI / vocab (deferred)
+### Wave 3 initiative: Dual-MCP operator checklist
 
 | Field | Value |
 | --- | --- |
-| **Finding** | Wave 2 § Phased recommendations phases 2–3 |
-| **Change class** | REQ-behavior or matrix |
-| **REQ token** | none until sponsor promotes |
-| **Status** | defer |
+| **Finding** | Wave 2 § dual-MCP checklist + **REA → `@add-feature` to TIED** (existing-implementation R+A+I or transform R+A+I for another platform) |
+| **Change class** | doc-only working checklist |
+| **REQ token** | none (enforcement REQ optional via future sponsor **`@add-feature`**) |
+| **Proof** | [build-plan-dual-mcp-checklist-handoff.md](./evidence/build-plan-dual-mcp-checklist-handoff.md) |
+| **Status** | done (2026-11-08 build-plan) |
+
+### Out of scope: REA install / CI (separate effort)
+
+| Field | Value |
+| --- | --- |
+| **Finding** | Operator may install REA locally; not tracked here |
+| **Change class** | — |
+| **REQ token** | none (future effort owns scope) |
+| **Status** | **OutOfScope** for `DOC-MORLUTO-REA-COMPARISON` |
 
 ---
 

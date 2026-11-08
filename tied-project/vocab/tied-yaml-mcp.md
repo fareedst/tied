@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) · [ARCH-TIED_STRUCTURE](../architecture-decisions/ARCH-TIED_STRUCTURE.yaml) · [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [PROC-YAML_DB_OPERATIONS](../../tied-bundle/docs/processes.md) · [PROC-TIED_VERIFICATION_GATED](../../tied-bundle/docs/processes.md)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-product-configuration.md`](tied-product-configuration.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-product-configuration.md`](tied-product-configuration.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`external-investigation-mcp.md`](external-investigation-mcp.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md)
 
 ---
 
@@ -49,6 +49,8 @@
 | **default TIED rename scope** | yaml rename | Built-in `tied_token_rename` targets: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames |
 | **extra substitution targets** | extra files, glob rename | Client-repo files outside default TIED rename scope; selected via `extra_globs` and `extra_extensions` on `tied_token_rename` |
 | **project YAML write** | any yaml under tied | MCP writes **only** project indexes/detail dirs; never `tied-bundle/` |
+| **dual MCP seam** | two MCPs, dual server | Optional **external investigation MCP** beside **TIED YAML MCP** in one client — write authority stays on TIED only; define once in [`external-investigation-mcp.md`](external-investigation-mcp.md) |
+| **TIED MCP write authority** | yaml write plane | Same as **project YAML write** at the seam: external investigation tools must not mutate `tied-project/` YAML |
 | **project index write isolation** | merged write bleed, full-index materialization | Index mutations persist **only** keys touched in `tied-project/{requirements,architecture-decisions,implementation-decisions,semantic-tokens}.yaml`; never the merged methodology ∪ project map |
 | **methodology index duplication** | index pollution, duplicated methodology row | Identical copy of an inherited methodology index row in a project index file; prune candidate; not an **override row** |
 | **override row** | project override, intentional collision | Single project index row for a token that **differs** from methodology (by design); one key on disk |
@@ -267,7 +269,9 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | MCP config preservation | Preferred terms |
 | metrics JSONL | MCP usage metrics |
 | signature coverage | Preferred terms |
+| dual MCP seam | Preferred terms |
 | TIED base path | Preferred terms |
+| TIED MCP write authority | Preferred terms |
 | client bundle path env | Preferred terms |
 | client project path env | Preferred terms |
 | TIED_CLIENT_BUNDLE_PATH | Recorded sponsor choice |

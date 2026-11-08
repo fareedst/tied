@@ -11,7 +11,8 @@
 | W3-PHASE-01 | Phased table | Read Wave 2 § Phased recommendations | Phase 0–1 status matches disk after build |
 | W3-GIT-01 | Allowlist | `git check-ignore -v docs/comparisons/morluto-rea-reverse-engineering.md` | Not ignored (allowlist active) |
 | W3-HANDOFF-01 | Plan execution steps | Read `evidence/session-handoff.md` | Required slugs align with `PLAN.md` |
+| W3-CHECKLIST-01 | Dual-MCP checklist | Read `dual-mcp-operator-checklist.md` | TIED-write authority; **REA → TIED add-feature** (existing-implementation R+A+I vs transform R+A+I); links resolve |
 
-**Security / ops:** Document install-order warning (TIED vs REA MCP config merges) in bundle edits only — no credential or vendor setup in stdd CI.
+**Security / ops:** Dual-MCP install-order literacy lives in bundle/vocab docs only — no REA install or vendor CI in this initiative.
 
 **Proof boundary:** No REA MCP execution, no `tied_validate_consistency` unless project YAML is touched (forbidden in default scope).

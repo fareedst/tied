@@ -92,25 +92,27 @@ Promotion requires **`build-plan`** for disk edits — not comparison prose alon
 - [x] Harness-trace external-investigation MCP pointer
 - [x] Evidence: [build-plan-wave3-handoff.md](./evidence/build-plan-wave3-handoff.md)
 
-### Phase 2 — Matrix row · **defer** (costly)
+### Phase 2 — Matrix row · **done** 2026-11-08
 
-- [ ] `methodology-composition-matrix.md` §2 row — sponsor review
+- [x] `methodology-composition-matrix.md` §2 row **19** — sponsor review per matrix §0
+- [x] Evidence: [build-plan-matrix-row-handoff.md](./evidence/build-plan-matrix-row-handoff.md)
 
-### Phase 3 — Behavior (optional) · **defer** (costly)
+### Phase 3 — Behavior (optional)
 
-- [ ] Bundle `rea-agents` in stdd CI → `add-feature` → `build-plan`
-- [ ] Vocab RECORD (`REA Evidence`, dual MCP seam) → sponsor ask
+- [x] Vocab RECORD — [`external-investigation-mcp.md`](../../../vocab/external-investigation-mcp.md) (2026-11-08)
+- [x] Dual-MCP operator checklist — [dual-mcp-operator-checklist.md](./dual-mcp-operator-checklist.md) (2026-11-08); REA → **`@add-feature` to TIED** (existing-implementation or transform R+A+I); no R/A/I mint from investigation
+- [—] **REA install / stdd CI bundle** — **OutOfScope** for this initiative; separate sponsor effort
 
 ---
 
 ## Do next (priority)
 
-1. **REQ / matrix / CI** — optional slugs in [session-handoff](./evidence/session-handoff.md) only if sponsor promotes.
+1. Sponsor **traceable commit** / **`@non-tied-close`** — see [session-handoff](./evidence/session-handoff.md).
 2. **`git push`** — branch is ahead of `origin/main` (sponsor-owned).
 
 ## Non-adoptions
 
-- REA as TIED core · Ghidra/Hopper/IDA as methodology deps · REA badges as TIED effectiveness · YAML/LEAP from comparison text.
+- REA as TIED core · Ghidra/Hopper/IDA as methodology deps · REA badges as TIED effectiveness · YAML/LEAP from comparison text · **REA install / stdd CI** (separate effort).
 
 ## Verify
 
@@ -123,6 +125,9 @@ git -C "$REPO" status --short \
 
 ## Changelog
 
+- **2026-11-08** — `build-plan`: [dual-mcp-operator-checklist.md](./dual-mcp-operator-checklist.md); [build-plan-dual-mcp-checklist-handoff.md](./evidence/build-plan-dual-mcp-checklist-handoff.md).
+- **2026-11-08** — Sponsor: **REA install / stdd CI** removed from initiative scope (separate effort); plans/handoffs/matrix row 19 sponsor_notes updated.
+- **2026-11-08** — `build-plan` phase 2: matrix §2 row 19; [build-plan-matrix-row-handoff.md](./evidence/build-plan-matrix-row-handoff.md).
 - **2026-11-08** — `build-plan` wave 3: client-development-index, HTOL, phased table, CITDP persist; see [build-plan-wave3-handoff.md](./evidence/build-plan-wave3-handoff.md).
 - **2026-11-08** — `add-feature` wave 3: PLAN.md, test-strategy, tracker, CITDP draft, session-handoff steps; phase 1 promoted from defer to planned.
 - **2026-11-08** — Waves 1–2; allowlist; this handoff tracker (markdown).

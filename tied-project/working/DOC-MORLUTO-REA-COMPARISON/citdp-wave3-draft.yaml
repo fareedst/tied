@@ -25,5 +25,5 @@ test_strategy_ref: test-strategy.md
 out_of_scope:
   - methodology-composition-matrix.md row
   - tied-project/vocab RECORD for REA Evidence
-  - rea-agents CI bundle
+  - REA install or CI bundling (separate effort)
   - project REQ/ARCH/IMPL YAML

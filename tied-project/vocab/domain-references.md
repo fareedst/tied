@@ -27,6 +27,7 @@
 | 0 | [`domain-references.md`](domain-references.md) | This full catalog (on-demand) |
 | 1 | [`tied-methodology.md`](tied-methodology.md) | TIED layout, semantic tokens, registry atoms and distributed facets, traceability graph, module validation, bootstrap, methodology vs project YAML, PROC-* process names |
 | 2 | [`tied-yaml-mcp.md`](tied-yaml-mcp.md) | TIED YAML MCP server, `tied-cli`, bundled skill, validation/verify/cycles/backlog/scoped analysis |
+| 2j | [`external-investigation-mcp.md`](external-investigation-mcp.md) | Dual MCP seam, external investigation MCP, REA Evidence, investigation-to-add-feature handoff (vendor-neutral + morluto/rea compose) |
 | 2a | [`tied-product-configuration.md`](tied-product-configuration.md) | First-party TIED product configuration: env allowlist, env classes, spawn-injected vs shell export, `[REQ-TIED_ENVIRONMENT_VARIABLE_POLICY]` |
 | 2c | [`project-operations-mcp.md`](project-operations-mcp.md) | Project lint, git hygiene, sponsor questions MCP tools; `/xlate` and `/unblock` skills |
 | 2e | [`operating-environment-externalities.md`](operating-environment-externalities.md) | OEE: external workflows, compatibility ledger, operating-environment dependency management |
@@ -87,6 +88,8 @@
 - **Context-adaptive practice layer vs TIED checklist authority** — CASE/EDSE **practice contracts** and **deterministic practice selection** emit advisory receipts in v1; they do not auto-activate checklist steps or replace assurance profiles. **Method-effectiveness readout** stays separate from product-quality scores. Canonical terms: [`context-adaptive-engineering.md`](context-adaptive-engineering.md); first dogfood ties to [`easar-recovery.md`](easar-recovery.md).
 - **EDPC vs EASAR recovery baseline** — EDPC workflow **B** delegates Mode C inventory/graph receipts to `[PROC-EASAR_RECOVERY]`; `easar_full` is a **deprecated alias** for `edpc_full`. EDPC **claims-ledger** is investigation claims, not adversarial **finding-ledger**. Canonical terms: [`edpc-comprehension.md`](edpc-comprehension.md), [`easar-recovery.md`](easar-recovery.md).
 - **Certifiability readiness vs certification claims** — readiness artifacts support **external appraisal** without asserting ISO/CMMI compliance or automated `certified` status. Canonical terms: [`process-certification-readiness.md`](process-certification-readiness.md); methodology: [certification-of-workflows.md](../../docs/methodologies/certification-of-workflows.md).
+- **External investigation evidence vs TIED gate receipts** — **REA Evidence** and **external investigation evidence record** describe optional vendor investigation outputs; **evidence manifest**, **gate receipt**, and **`tied_verify`** describe platform-adjacent proof for **shipped** TIED work. Define once in [`external-investigation-mcp.md`](external-investigation-mcp.md) and [`quality-assurance.md`](quality-assurance.md); compose in [morluto/rea × TIED](../../docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md).
+- **Dual MCP seam vs harness/platform seam** — **dual MCP seam** splits **TIED YAML MCP** write authority from an optional **external investigation MCP** in one client ([`external-investigation-mcp.md`](external-investigation-mcp.md)). **Harness/platform seam** (Traefik comparison, matrix §2 row 13) splits harness tuning from TIED governance for the implementation repo — different boundary, often co-trained in operator docs.
 
 ---
 
@@ -128,9 +131,14 @@
 | origin layer | `fidelity-research.md` |
 | process-certification-readiness.md | Canonical glossaries |
 | proof boundary | `fidelity-research.md` |
+| REA Evidence | Cross-topic notes; `quality-assurance.md` |
 | specification state | `fidelity-research.md` |
 | theorem statement | Cross-topic notes; `quality-assurance.md` |
 | divergent edge | `fidelity-research.md` |
+| dual MCP seam | Cross-topic notes; `external-investigation-mcp.md` |
+| external investigation evidence record | Cross-topic notes; `quality-assurance.md` |
+| external-investigation-mcp.md | Canonical glossaries |
+| external investigation MCP | `external-investigation-mcp.md` |
 | fidelity finding | `fidelity-research.md` |
 | finding lifecycle | `fidelity-research.md` |
 | read-only research profile | `fidelity-research.md` |

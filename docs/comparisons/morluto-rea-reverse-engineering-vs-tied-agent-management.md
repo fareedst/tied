@@ -134,7 +134,7 @@ Cross-link Open Ontologies when comparing **large third-party MCP catalogs**; cr
 | Session trace / tool errors | Harness trace observation loop | **Composable** | Qualitative analog to context rot |
 | Formal REQ from REA conclusions | Checklist + sponsor | **Tension** | Evidence ≠ intent authority |
 | RL environments from REA | — | **OutOfScope** | Wave 3 **Defer** |
-| Bundled REA in stdd CI | — | **Defer** | Costly sponsor choice |
+| Bundled REA in stdd CI | — | **OutOfScope** | Separate effort — not in `DOC-MORLUTO-REA-COMPARISON` |
 
 ---
 
@@ -208,9 +208,9 @@ REA’s **disassemblers, retained Evidence, and provider bridges** sit **outside
 
 ## Bounded operator recommendations (Recommendation-only)
 
-1. **Dual MCP checklist** — **Recommendation-only:** document in client README which MCP may mutate `tied-project/` (TIED only) vs read external targets (REA).
-2. **Install order** — **Recommendation-only:** run `tied-install.sh` before or after REA setup with explicit backup review; never assume commutative merges.
-3. **Investigation → REQ handoff** — **TIED-existing:** use `add-feature` / CITDP when REA findings motivate **new** behavior in the implementation repo; do not paste Evidence ids as requirements.
+1. **Dual MCP checklist** — **Done (2026-11-08):** [dual-mcp-operator-checklist.md](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/dual-mcp-operator-checklist.md) — which MCP may mutate `tied-project/` (TIED only) vs read external targets (REA).
+2. **Install order** — **Recommendation-only:** run `tied-install.sh` before or after REA setup with explicit backup review; never assume commutative merges (see checklist **Before session**).
+3. **REA → TIED add-feature handoff** — **TIED-existing:** present REA findings as an **`@add-feature` event to the TIED system** — goal either **R+A+I of the existing implementation** or **feature capture → new transform R+A+I for a different platform**; do not paste Evidence ids as requirements ([checklist § REA → TIED add-feature](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/dual-mcp-operator-checklist.md#rea--tied-add-feature-required-handoff)).
 4. **Schema profiles** — **Composable:** if TIED MCP context is tight, mirror REA’s compact/full profile **pattern** in operator docs only—not product change.
 5. **Source vs shipped boundary** — **Align:** follow REA skill: source-available stdd work uses git/TIED tools; REA for third-party binaries only when sponsor scopes.
 6. **Observations from RE sessions** — **TIED-existing:** `tied_feedback_capture_observation` for qualitative harness notes; not gate substitutes.
@@ -224,10 +224,10 @@ REA’s **disassemblers, retained Evidence, and provider bridges** sit **outside
 | --- | --- | --- |
 | **0** | Repository capture + this analysis + `.gitignore` allowlist | **Done** (2026-11-08) |
 | **1** | Client-development-index + HTOL dual-MCP compose | **Done** (2026-11-08) — [client-development-index](../../tied-bundle/docs/client-development-index.md), [harness-trace-observation-loop](../../tied-bundle/docs/harness-trace-observation-loop.md) |
-| **2** | Project vocab RECORD (`REA Evidence`, `dual MCP seam`) | **Defer** (costly) |
-| **3** | `methodology-composition-matrix.md` §2 row | **Defer** |
-| **3** | Bundle REA or Ghidra into stdd CI | **Defer** — sponsor infra |
-| **3** | REQ for dual-MCP operator checklist in bundle docs | **Defer** — **add-feature** if promoted |
+| **2** | Project vocab RECORD (`REA Evidence`, `dual MCP seam`) | **Done** (2026-11-08) — [`external-investigation-mcp.md`](../../tied-project/vocab/external-investigation-mcp.md) |
+| **3** | `methodology-composition-matrix.md` §2 row **19** | **Done** (2026-11-08) — [matrix §2 row 19](methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks) |
+| **3** | Install REA / bundle in stdd CI / native engines | **OutOfScope** — separate sponsor effort (not this TIED methodology update) |
+| **3** | Dual-MCP operator checklist (working doc; no REQ mint) | **Done** (2026-11-08) — [dual-mcp-operator-checklist.md](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/dual-mcp-operator-checklist.md) |
 
 ---
 

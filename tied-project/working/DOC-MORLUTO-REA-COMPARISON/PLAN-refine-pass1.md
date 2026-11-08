@@ -58,4 +58,4 @@ See [evidence/build-plan-handoff.md](./evidence/build-plan-handoff.md).
 
 ## Wave 3 handoff
 
-Default **Defer** for matrix §2 row, vocab RECORD, bundling REA in stdd. See [multi-step-phase-wave-handoff.md](./multi-step-phase-wave-handoff.md).
+Default **Defer** for matrix §2 row and vocab RECORD; **REA install / stdd CI** is **OutOfScope** (separate effort). See [multi-step-phase-wave-handoff.md](./multi-step-phase-wave-handoff.md).

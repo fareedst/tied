@@ -22,6 +22,7 @@
 | Test strategy | [../test-strategy.md](../test-strategy.md) |
 | CITDP | [../../../citdp/CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3.yaml](../../../citdp/CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3.yaml) |
 | Build verification (W3) | [build-plan-wave3-handoff.md](./build-plan-wave3-handoff.md) |
+| Dual-MCP checklist | [../dual-mcp-operator-checklist.md](../dual-mcp-operator-checklist.md) · [build-plan-dual-mcp-checklist-handoff.md](./build-plan-dual-mcp-checklist-handoff.md) |
 | Build verification (W1–2) | [build-plan-handoff.md](./build-plan-handoff.md) |
 
 ## Plan execution steps
@@ -38,20 +39,25 @@
 
 ### Optional
 
-- [ ] `wave3-matrix-row` — `methodology-composition-matrix.md` §2 (sponsor review)
-- [ ] `wave3-vocab-record` — `tied-project/vocab` RECORD for REA Evidence / dual MCP seam
-- [ ] `wave3-rea-ci-bundle` — Scoped new REQ + `rea-agents` in stdd CI
+- [x] `wave3-matrix-row` — §2 row **19** ([build-plan-matrix-row-handoff.md](./build-plan-matrix-row-handoff.md); sponsor review per matrix §0)
+- [x] `wave3-vocab-record` — [`external-investigation-mcp.md`](../../../vocab/external-investigation-mcp.md) + bridges in `tied-yaml-mcp.md`, `quality-assurance.md`
+- [x] `wave3-dual-mcp-checklist` — [dual-mcp-operator-checklist.md](../dual-mcp-operator-checklist.md) (`@add-feature` handoff; no R/A/I mint)
 
 ### Recommendations
 
-- Batch traceable commit with `tied-bundle/docs/` + `tied-project/citdp/` + comparisons + working folder.
-- Matrix row and CI bundle remain **costly choices** — default defer.
+- Batch traceable commit with `tied-bundle/docs/` + `tied-project/citdp/` + comparisons + working folder + vocab.
+- **REA install / CI** — **OutOfScope** for `DOC-MORLUTO-REA-COMPARISON`; track under a future effort if reopened.
 
 ### Changelog (this REQ)
 
+- 2026-11-08 scope: REA install / stdd CI OutOfScope — separate effort (removed from initiative plans)
+- 2026-11-08 vocab RECORD: external-investigation-mcp.md (REA Evidence, dual MCP seam)
+- 2026-11-08 build-plan: methodology composition matrix §2 row 19 (dual MCP compose)
 - 2026-11-08 traceable-commit: `4257f91b` docs(comparisons) morluto/rea bundle + Wave 3 compose
 - 2026-11-08 build-plan: Wave 3 doc compose implemented; CITDP persisted; plan_phase post-build
 - 2026-11-08 add-feature: Wave 3 PLAN, tracker, test-strategy, CITDP draft, session-handoff Plan execution steps
+- 2026-11-08 build-plan: dual-mcp-operator-checklist — REA → `@add-feature` to TIED (existing-implementation R+A+I or transform R+A+I)
+- 2026-11-08 refine: REA+TIED handoff — add-feature **to the TIED system**; goals **existing implementation R+A+I** vs **transform R+A+I** (other platform)
 
 ## Environment
 
@@ -65,11 +71,12 @@
 - Harness compose edits (client-development-index, HTOL)
 - Wave 2 phased table phase 1 marked Done
 - CITDP `CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3.yaml` persisted
+- Dual-MCP operator checklist + cross-links; vocab **investigation-to-add-feature handoff**
 
 ## Do next
 
-1. **`@non-tied-close`** or sponsor **traceable commit** — `wave3-phase0-traceable-commit`
-2. Optional scope promotions via optional slugs above
+1. **`@non-tied-close`** or sponsor **traceable commit** — batch checklist + compose paths
+2. Optional: **`@add-feature`** only if sponsor wants REQ-backed enforcement checklist (separate token)
 
 ## Constraints
 
