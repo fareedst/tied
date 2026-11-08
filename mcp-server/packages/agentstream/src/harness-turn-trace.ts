@@ -18,6 +18,8 @@ export type HarnessTurnTraceRecord = {
   session_id: string;
   exit_code: number;
   request_token: string;
+  session_captured?: boolean;
+  writable_iterable_seen?: boolean;
 };
 
 export function harnessTraceEnabled(): boolean {
@@ -71,8 +73,10 @@ export function buildHarnessTurnTraceRecord(input: {
   exitCode: number;
   requestToken: string;
   timestamp?: string;
+  sessionCaptured?: boolean;
+  writableIterableSeen?: boolean;
 }): HarnessTurnTraceRecord {
-  return {
+  const record: HarnessTurnTraceRecord = {
     schema_version: HARNESS_TURN_TRACE_SCHEMA,
     timestamp: input.timestamp ?? new Date().toISOString(),
     harness: input.harness,
@@ -84,4 +88,11 @@ export function buildHarnessTurnTraceRecord(input: {
     exit_code: input.exitCode,
     request_token: input.requestToken,
   };
+  if (input.sessionCaptured !== undefined) {
+    record.session_captured = input.sessionCaptured;
+  }
+  if (input.writableIterableSeen !== undefined) {
+    record.writable_iterable_seen = input.writableIterableSeen;
+  }
+  return record;
 }

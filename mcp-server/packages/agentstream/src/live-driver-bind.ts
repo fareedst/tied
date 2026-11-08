@@ -11,6 +11,7 @@ import {
 } from "./claude-driver.js";
 import type { AgentHarnessProfile } from "./harness-select.js";
 import { runAgent, type RunResult } from "./executor-run.js";
+import { runCursorTurnWithRetry } from "./cursor-turn-retry.js";
 import type { ContextLogPruneHook } from "./jev-context-log-pruning-stream.js";
 import type { JevLiveToolGate } from "./jev-harness-live-tool-gate.js";
 import { selectLiveDriver } from "./live-driver-select.js";
@@ -21,6 +22,8 @@ export type LiveAgentTurnOutcome = {
   driverError?: string;
   stderrTail?: string;
   jevGateStderr?: string;
+  attemptCount?: number;
+  retriableStderrSeen?: boolean;
 };
 
 export type LiveDriverBinding = {
@@ -126,11 +129,24 @@ export function bindLiveExecutorDriver(
     runTurn: async (argv, extraEnv) => {
       const effectiveArgv =
         agentPathOverride !== "" ? [agentPathOverride, ...argv.slice(1)] : argv;
-      const { result, exitCode, gateStderr } = await runAgent(effectiveArgv, extraEnv, {
-        jevToolGate: input.jevToolGate ?? null,
-        contextLogPrune: input.contextLogPrune ?? null,
-      });
-      return { result, exitCode, jevGateStderr: gateStderr };
+      const retryOut = await runCursorTurnWithRetry(
+        async (a, e) => {
+          const { result, exitCode, gateStderr, agentStderr } = await runAgent(a, e, {
+            jevToolGate: input.jevToolGate ?? null,
+            contextLogPrune: input.contextLogPrune ?? null,
+          });
+          return { result, exitCode, gateStderr, agentStderr };
+        },
+        effectiveArgv,
+        extraEnv,
+      );
+      return {
+        result: retryOut.result,
+        exitCode: retryOut.exitCode,
+        jevGateStderr: retryOut.gateStderr,
+        attemptCount: retryOut.attemptCount,
+        retriableStderrSeen: retryOut.retriableStderrSeen,
+      };
     },
   };
 }

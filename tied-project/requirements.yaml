@@ -4395,6 +4395,18 @@ REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
       - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
     implementation:
       - "IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
+  category: "Tooling"
+  description: "Harden agentstream Cursor live executor session oracle so four-phase workflow trials survive RetriableError WritableIterable stream closure when session_id is recoverable; emit diagnostics before fail-closed when resume oracle is missing."
+  detail_file: "requirements/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
+  name: "WF trial Cursor live session oracle and turn resilience"
+  priority: "P1"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+    implementation:
+      - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
 REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
   category: "Tooling"
   detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"

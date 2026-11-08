@@ -49,6 +49,7 @@ import {
   harnessTraceEnabled,
   resolveHarnessTracePath,
 } from "./harness-turn-trace.js";
+import { formatCursorLiveSessionOracleDiagnostic } from "./cursor-stream.js";
 import {
   parseTrackerCompletionReceipt,
   receiptForEvidenceResolve,
@@ -426,10 +427,26 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       if (turnOutcome.stderrTail) {
         stderrAcc += `DIAGNOSTIC: claude stderr: ${turnOutcome.stderrTail.slice(0, 500)}\n`;
       }
+      if (liveBinding.driverKind === "cursor" && result.sessionId === "") {
+        stderrAcc += formatCursorLiveSessionOracleDiagnostic({
+          exit_code: exitCode,
+          session_captured: false,
+          retriable_stderr_seen: turnOutcome.retriableStderrSeen === true,
+          attempt_count: turnOutcome.attemptCount ?? 1,
+        });
+      }
       clearMarker();
       return { stdout: "", stderr: stderrAcc, exitCode };
     }
     if (result.sessionId === "") {
+      if (liveBinding.driverKind === "cursor") {
+        stderrAcc += formatCursorLiveSessionOracleDiagnostic({
+          exit_code: exitCode,
+          session_captured: false,
+          retriable_stderr_seen: turnOutcome.retriableStderrSeen === true,
+          attempt_count: turnOutcome.attemptCount ?? 1,
+        });
+      }
       stderrAcc += "No session_id in stream; cannot continue with --resume\n";
       clearMarker();
       return { stdout: "", stderr: stderrAcc, exitCode: 1 };
@@ -453,6 +470,8 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
             sessionId: result.sessionId,
             exitCode: 0,
             requestToken,
+            sessionCaptured: true,
+            writableIterableSeen: turnOutcome.retriableStderrSeen === true,
           }),
         );
         stderrAcc += `DIAGNOSTIC: harness trace appended ${tracePath}\n`;

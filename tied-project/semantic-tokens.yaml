@@ -1548,6 +1548,13 @@ ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial disposable tag architecture"
   status: "Active"
+ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
+  cross_references:
+    - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+    - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+  description: "cursor-stream session extractor and live-executor retry boundary"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
+  type: "architecture"
 ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
   cross_references:
     - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
@@ -3449,6 +3456,13 @@ IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial disposable tag implementation"
   status: "Active"
+IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
+  cross_references:
+    - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+    - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+  description: "executor-run wiring and T-LIVE-SESSION tests"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
+  type: "implementation"
 IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
   cross_references:
     - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
@@ -5573,6 +5587,14 @@ REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "requirements/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial agentstream disposable tag"
   status: "Active"
+REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+    - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+  description: "Cursor live session oracle and bounded turn retry for WF four-phase trials"
+  detail_file: "requirements/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
+  type: "requirement"
 REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
   category: "Tooling"
   cross_references:

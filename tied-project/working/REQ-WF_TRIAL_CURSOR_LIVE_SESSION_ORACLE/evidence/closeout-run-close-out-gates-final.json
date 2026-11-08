@@ -1,0 +1,28 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "close-out-cursor-session-oracle-2026-11-08"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0
+  },
+  "gate_receipt_persist": {
+    "ok": true,
+    "path": "tied-bundle/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/gates/close_out-2026-11-08T23-36-03-351Z.json"
+  }
+}

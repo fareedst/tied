@@ -1,0 +1,31 @@
+copy_hygiene: "Fresh tracker for REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE refine-plan"
+description: "Tracker — WF trial Cursor live session oracle"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth; fake-spawn harness tests only."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/sub-adversarial-inquiry-pass-na.md"
+      policy: "minimal-depth-no-inquiry"
+      status: "not_applicable"

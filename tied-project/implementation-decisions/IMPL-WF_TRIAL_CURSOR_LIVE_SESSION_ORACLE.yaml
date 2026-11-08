@@ -1,0 +1,4 @@
+IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
+  IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
+    decision: "cursor-stream.ts, cursor-turn-retry.ts, executor-run session oracle, live-driver-bind bounded retry, live-executor DIAGNOSTIC, harness-turn-trace optional fields; 114 agentstream tests green."
+    status: "Active"

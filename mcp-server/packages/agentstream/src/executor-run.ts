@@ -15,6 +15,7 @@ import {
   createToolGateStreamState,
   enqueueToolGateLineCheck,
 } from "./jev-harness-live-tool-gate.js";
+import { extractCursorSessionFromLine } from "./cursor-stream.js";
 
 export type RunAgentOptions = {
   jevToolGate?: JevLiveToolGate | null;
@@ -60,7 +61,13 @@ export async function runAgent(
   argv: string[],
   extraEnv: string[] = [],
   options: RunAgentOptions = {},
-): Promise<{ result: RunResult; exitCode: number; error?: Error; gateStderr?: string }> {
+): Promise<{
+  result: RunResult;
+  exitCode: number;
+  error?: Error;
+  gateStderr?: string;
+  agentStderr?: string;
+}> {
   return new Promise((resolve) => {
     const env = { ...process.env } as Record<string, string | undefined>;
     for (const entry of extraEnv) {
@@ -106,8 +113,9 @@ export async function runAgent(
       if (contextLogPrune) {
         enqueueContextLogPruneLineCheck(pruneState, contextLogPrune, trimmed);
       }
-      if (typeof obj.session_id === "string" && obj.session_id !== "") {
-        captured = obj.session_id;
+      const sid = extractCursorSessionFromLine(obj);
+      if (sid !== "") {
+        captured = sid;
       }
       for (const f of extractTextFragments(obj)) {
         const typ = String(obj.type ?? "");
@@ -146,6 +154,7 @@ export async function runAgent(
         };
         const gateStderr =
           gateState.gateStderrLines.join("") + pruneState.stderrLines.join("");
+        const agentStderr = errLines.join("");
         if (exitCode !== 0) {
           errLines.push(`agent exited with status ${exitCode}\n`);
           resolve({
@@ -153,15 +162,21 @@ export async function runAgent(
             exitCode,
             error: new Error(`agent exit ${exitCode}`),
             gateStderr,
+            agentStderr,
           });
           return;
         }
-        resolve({ result, exitCode: 0, gateStderr });
+        resolve({ result, exitCode: 0, gateStderr, agentStderr });
       });
     });
 
     cmd.on("error", (err) => {
-      resolve({ result: emptyResult(), exitCode: 1, error: err });
+      resolve({
+        result: emptyResult(),
+        exitCode: 1,
+        error: err,
+        agentStderr: errLines.join(""),
+      });
     });
   });
 }

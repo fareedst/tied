@@ -1,0 +1,11 @@
+feat(agentstream): Cursor live session oracle and turn retry
+
+Harden four-phase Cursor trials when WritableIterable stderr co-occurs with
+missing session_id: shared NDJSON oracle, bounded retry, DIAGNOSTIC before
+fail-closed. Field case 1794179357-wf-agentstream-wf-01-cursor-grok47med.
+
+REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE
+ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE
+IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE
+
+Tests: 114/114 @tied/agentstream

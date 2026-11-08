@@ -2977,6 +2977,15 @@ ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
     - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
   status: "Active"
   summary: "Tag built in scripts/lib/wf-trial-disposable-tag.inc.sh before new-tied-client.mjs; validateDisposableTag unchanged."
+ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
+  name: "WF trial Cursor live session oracle architecture"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+    requirements:
+      - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
 ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
   status: "Accepted"

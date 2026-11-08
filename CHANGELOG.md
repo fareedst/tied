@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Cursor live session oracle ([REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE])** — `@tied/agentstream` bounded turn retry, shared NDJSON session extraction, and `DIAGNOSTIC: cursor_live_session_oracle` before fail-closed when four-phase trials lose `session_id` after `WritableIterable` stderr (field case `1794179357-wf-agentstream-wf-01-cursor-grok47med`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/PLAN.md).
+
 ### Fixed
 
 - **Agent loader semver sync ([REQ-TIED_AGENT_LOADER_REFRESH])** — Default `tied-install` / `--refresh` updates install-managed **`AGENTS.md`** when client loader semver lags the store; **`--preserve-agent-loader`** retains create-if-absent. Bootstrap warns when `AGENTS.md` disagrees with `install.json` `store_methodology_version`. Plan: [PLAN.md](tied-project/working/REQ-TIED_AGENT_LOADER_REFRESH/PLAN.md).

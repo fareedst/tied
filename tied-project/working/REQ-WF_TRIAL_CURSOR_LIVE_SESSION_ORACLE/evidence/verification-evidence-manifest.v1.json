@@ -1,0 +1,30 @@
+{
+  "command_results": [
+    {
+      "artifacts": [],
+      "command": [
+        "bash",
+        "-lc",
+        "cd mcp-server/packages/agentstream && npm run build && npx tsx --test $(find src -name '*.test.ts' | tr '\\n' ' ')"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 8645,
+      "exit_code": 0,
+      "id": "agentstream-full-suite",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE",
+    "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE",
+    "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "proof_boundaries": [
+    "Live grok47 WF-01 matrix replay not run; fake-spawn tests only"
+  ],
+  "run_id": "close-out-cursor-session-oracle-2026-11-08",
+  "schema": "verification-evidence-manifest.v1"
+}
