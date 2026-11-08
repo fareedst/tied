@@ -100,6 +100,7 @@ Promotion requires **`build-plan`** for disk edits — not comparison prose alon
 ### Phase 3 — Behavior (optional)
 
 - [x] Vocab RECORD — [`external-investigation-mcp.md`](../../../vocab/external-investigation-mcp.md) (2026-11-08)
+- [x] REA × TIED operator guide — [rea-with-tied-operator-guide.md](./rea-with-tied-operator-guide.md) (2026-11-08)
 - [x] Dual-MCP operator checklist — [dual-mcp-operator-checklist.md](./dual-mcp-operator-checklist.md) (2026-11-08); REA → **`@add-feature` to TIED** (existing-implementation or transform R+A+I); no R/A/I mint from investigation
 - [—] **REA install / stdd CI bundle** — **OutOfScope** for this initiative; separate sponsor effort
 

@@ -1,6 +1,7 @@
 # Dual-MCP operator checklist — TIED writes vs external investigation
 
 **Initiative:** [DOC-MORLUTO-REA-COMPARISON](./PLAN.md) (doc-only compose — **no REQ mint** from this checklist)  
+**Full guide:** [rea-with-tied-operator-guide.md](./rea-with-tied-operator-guide.md) (bootstrap, automation, handoff)  
 **Skim time:** under two minutes before turns that enable **TIED YAML MCP** and an **external investigation MCP** (e.g. morluto/rea) together.
 
 **Vocabulary:** [external-investigation-mcp.md](../../vocab/external-investigation-mcp.md) · **Distinct seam:** [authority-boundary operator checklist](../REQ-TIED_HARNESS_PLATFORM_SEAM/authority-boundary-operator-checklist.md) (harness vs platform-adjacent TIED).

@@ -27,7 +27,7 @@
 | 0 | [`domain-references.md`](domain-references.md) | This full catalog (on-demand) |
 | 1 | [`tied-methodology.md`](tied-methodology.md) | TIED layout, semantic tokens, registry atoms and distributed facets, traceability graph, module validation, bootstrap, methodology vs project YAML, PROC-* process names |
 | 2 | [`tied-yaml-mcp.md`](tied-yaml-mcp.md) | TIED YAML MCP server, `tied-cli`, bundled skill, validation/verify/cycles/backlog/scoped analysis |
-| 2j | [`external-investigation-mcp.md`](external-investigation-mcp.md) | Dual MCP seam, external investigation MCP, REA Evidence, investigation-to-add-feature handoff (vendor-neutral + morluto/rea compose) |
+| 2j | [`external-investigation-mcp.md`](external-investigation-mcp.md) | Dual MCP seam, REA Evidence, investigation-to-add-feature handoff; operator guide [`rea-with-tied-operator-guide.md`](../working/DOC-MORLUTO-REA-COMPARISON/rea-with-tied-operator-guide.md) |
 | 2a | [`tied-product-configuration.md`](tied-product-configuration.md) | First-party TIED product configuration: env allowlist, env classes, spawn-injected vs shell export, `[REQ-TIED_ENVIRONMENT_VARIABLE_POLICY]` |
 | 2c | [`project-operations-mcp.md`](project-operations-mcp.md) | Project lint, git hygiene, sponsor questions MCP tools; `/xlate` and `/unblock` skills |
 | 2e | [`operating-environment-externalities.md`](operating-environment-externalities.md) | OEE: external workflows, compatibility ledger, operating-environment dependency management |

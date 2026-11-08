@@ -22,6 +22,7 @@
 | Test strategy | [../test-strategy.md](../test-strategy.md) |
 | CITDP | [../../../citdp/CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3.yaml](../../../citdp/CITDP-DOC-MORLUTO-REA-COMPARISON-WAVE3.yaml) |
 | Build verification (W3) | [build-plan-wave3-handoff.md](./build-plan-wave3-handoff.md) |
+| REA × TIED operator guide | [../rea-with-tied-operator-guide.md](../rea-with-tied-operator-guide.md) |
 | Dual-MCP checklist | [../dual-mcp-operator-checklist.md](../dual-mcp-operator-checklist.md) · [build-plan-dual-mcp-checklist-handoff.md](./build-plan-dual-mcp-checklist-handoff.md) |
 | Build verification (W1–2) | [build-plan-handoff.md](./build-plan-handoff.md) |
 
@@ -59,6 +60,7 @@
 - 2026-11-08 build-plan: dual-mcp-operator-checklist — REA → `@add-feature` to TIED (existing-implementation R+A+I or transform R+A+I)
 - 2026-11-08 refine: REA+TIED handoff — add-feature **to the TIED system**; goals **existing implementation R+A+I** vs **transform R+A+I** (other platform)
 - 2026-11-08 traceable-commit: `eb2c9dd1` dual-MCP checklist + vocab/matrix/handoff sync
+- 2026-11-08 operator guide: `rea-with-tied-operator-guide.md` (single tracked REA×TIED doc)
 
 ## Environment
 

@@ -41,6 +41,7 @@ Label vendor metrics and badges **REA-reported** / **`not_measured`** for stdd m
 | --- | --- |
 | [client-development-index.md](../../tied-bundle/docs/client-development-index.md) | Quick-read dual-MCP literacy |
 | [harness-trace-observation-loop.md](../../tied-bundle/docs/harness-trace-observation-loop.md) | **Dual MCP authority** failure-mode class |
+| [rea-with-tied-operator-guide.md](../working/DOC-MORLUTO-REA-COMPARISON/rea-with-tied-operator-guide.md) | **Canonical** bootstrap, handoff, automation |
 | [dual-mcp-operator-checklist.md](../working/DOC-MORLUTO-REA-COMPARISON/dual-mcp-operator-checklist.md) | Paste-friendly skim; **add-feature** handoff shapes |
 | `@external-service-comparison` | Three-wave capture → analysis → improve TIED |
 

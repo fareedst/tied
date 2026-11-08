@@ -12,6 +12,7 @@
 | W3-GIT-01 | Allowlist | `git check-ignore -v docs/comparisons/morluto-rea-reverse-engineering.md` | Not ignored (allowlist active) |
 | W3-HANDOFF-01 | Plan execution steps | Read `evidence/session-handoff.md` | Required slugs align with `PLAN.md` |
 | W3-CHECKLIST-01 | Dual-MCP checklist | Read `dual-mcp-operator-checklist.md` | TIED-write authority; **REA → TIED add-feature** (existing-implementation R+A+I vs transform R+A+I); links resolve |
+| W3-GUIDE-01 | Operator guide | Read `rea-with-tied-operator-guide.md` | Minimum steps, tools map, automation limits, bounded-rec status; links resolve |
 
 **Security / ops:** Dual-MCP install-order literacy lives in bundle/vocab docs only — no REA install or vendor CI in this initiative.
 

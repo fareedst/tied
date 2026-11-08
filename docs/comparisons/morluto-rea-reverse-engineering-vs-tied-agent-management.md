@@ -7,7 +7,8 @@
 | **Source URL** | [morluto/rea](https://github.com/morluto/rea) · [rea.tools](https://rea.tools/) (morluto, **2026-11-08** capture) |
 | **Repository capture (sibling)** | [morluto-rea-reverse-engineering.md](morluto-rea-reverse-engineering.md) — read-only; **reference only** |
 | **Status / date** | Outreach / analysis snapshot, **2026-11-08** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
-| **Executable follow-up** | Wave 3 candidates in § Phased recommendations (**Defer** until scoped **add-feature** / **build-plan**) |
+| **Operator guide (tracked)** | [rea-with-tied-operator-guide.md](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/rea-with-tied-operator-guide.md) — bootstrap, dual MCP, add-feature handoff, automation limits |
+| **Executable follow-up** | Shipped behavior via scoped **`@add-feature`** — not comparison prose alone |
 | **Distinct from** | [Open Ontologies × TIED](open-ontologies-repository-vs-tied-agent-management.md) (RDF plan/apply, Lean certs); [Traefik × TIED](traefik-harness-platform-vs-tied-agent-management.md) (harness/platform **seam** vocabulary); [Google agent skills × TIED](google-agent-skills-vs-tied-agent-management.md) (productized skill shipping); [Trail-Code × TIED](tied-vs-trail-code.md) (pre-engagement graft pre-read); [agent-browser skill](../../.agents/skills/agent-browser/SKILL.md) (stdd web UI automation) |
 | **TIED anchors (reference only)** | [AGENTS.md](../../AGENTS.md), [agent-req-implementation-checklist.md](../../tied-bundle/docs/agent-req-implementation-checklist.md), [external-service-three-wave-comparison-template.md](../../tied-bundle/docs/external-service-three-wave-comparison-template.md), [sponsor-agent-relationship.md](../../tied-project/vocab/sponsor-agent-relationship.md), [tied-yaml-mcp.md](../../tied-project/vocab/tied-yaml-mcp.md), [harness-trace-observation-loop.md](../../tied-bundle/docs/harness-trace-observation-loop.md) |
 
@@ -208,6 +209,8 @@ REA’s **disassemblers, retained Evidence, and provider bridges** sit **outside
 
 ## Bounded operator recommendations (Recommendation-only)
 
+**Canonical single file:** [rea-with-tied-operator-guide.md](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/rea-with-tied-operator-guide.md) (minimum steps, tools, automation, status table).
+
 1. **Dual MCP checklist** — **Done (2026-11-08):** [dual-mcp-operator-checklist.md](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/dual-mcp-operator-checklist.md) — which MCP may mutate `tied-project/` (TIED only) vs read external targets (REA).
 2. **Install order** — **Recommendation-only:** run `tied-install.sh` before or after REA setup with explicit backup review; never assume commutative merges (see checklist **Before session**).
 3. **REA → TIED add-feature handoff** — **TIED-existing:** present REA findings as an **`@add-feature` event to the TIED system** — goal either **R+A+I of the existing implementation** or **feature capture → new transform R+A+I for a different platform**; do not paste Evidence ids as requirements ([checklist § REA → TIED add-feature](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/dual-mcp-operator-checklist.md#rea--tied-add-feature-required-handoff)).
@@ -261,5 +264,6 @@ REA’s **disassemblers, retained Evidence, and provider bridges** sit **outside
 - [Traefik harness × TIED (sibling)](traefik-harness-platform-vs-tied-agent-management.md)
 - [Google agent skills × TIED (sibling)](google-agent-skills-vs-tied-agent-management.md)
 - [Trail-Code × TIED (sibling)](tied-vs-trail-code.md)
+- [REA with TIED — operator guide](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/rea-with-tied-operator-guide.md)
 - [Working plan](../../tied-project/working/DOC-MORLUTO-REA-COMPARISON/PLAN-refine-pass1.md)
 - [Agent req implementation checklist](../../tied-bundle/docs/agent-req-implementation-checklist.md)
