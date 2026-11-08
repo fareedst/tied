@@ -490,6 +490,26 @@ workflow_trial_agentstream() {
 }
 alias workflow-trial-agentstream=workflow_trial_agentstream
 
+workflow_trial_range ()
+{
+    local harness="${1:-cursor}";
+    local model_slug="${2:-composer-2.5-fast}";
+    local model_config="${3:-$model_slug}";
+    local end="${4:-1}";
+    local start="${5:-1}";
+    local monit_to_stderr="${6:-echo_exec}"
+    local num NUM;
+    for ((num=start; num<=end; num++))
+    do
+        printf -v NUM '%02d' "$num";
+        if [[ "$harness" == "claude" ]]; then
+            AGENTSTREAM_CLAUDE_LIVE_OK=1 HARNESS="$harness" MODEL_CONFIG="$model_config" MODEL_SLUG="$model_slug" $monit_to_stderr workflow_trial_agentstream "wf-${NUM}" || return $?;
+        else
+            HARNESS="$harness" MODEL_CONFIG="$model_config" MODEL_SLUG="$model_slug" $monit_to_stderr workflow_trial_agentstream "wf-${NUM}" || return $?;
+        fi;
+    done
+}
+
 new_claude_tied_client() {
   local client_dir="${1:?usage: new-claude-tied-client CLIENT_DIR [SOURCE_ROOT]}"
   local source_root

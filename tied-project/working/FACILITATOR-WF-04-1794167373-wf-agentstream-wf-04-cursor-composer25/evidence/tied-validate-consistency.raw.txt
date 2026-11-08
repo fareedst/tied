@@ -1,0 +1,2263 @@
+DIAGNOSTIC: TIED_RUNTIME_IGNORED_SHELL_ENV: global path env ignored; use .cursor/mcp.json and ./tied-install.sh --refresh
+{
+  "detail_files": {
+    "ARCH-AGENTSTREAM_CLAUDE_WF_PARITY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-AGENTSTREAM_CLAUDE_WF_PARITY",
+      "top_level_key_ok": true
+    },
+    "ARCH-ASYNC_ANALYSIS_PASS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-ASYNC_ANALYSIS_PASS",
+      "top_level_key_ok": true
+    },
+    "ARCH-ASYNC_CHECKLIST_INTEGRATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-ASYNC_CHECKLIST_INTEGRATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-ASYNC_CITDP_EVIDENCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-ASYNC_CITDP_EVIDENCE",
+      "top_level_key_ok": true
+    },
+    "ARCH-ASYNC_COMPOSITION_BINDING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-ASYNC_COMPOSITION_BINDING",
+      "top_level_key_ok": true
+    },
+    "ARCH-ASYNC_CONTRACT_GRAMMAR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-ASYNC_CONTRACT_GRAMMAR",
+      "top_level_key_ok": true
+    },
+    "ARCH-ASYNC_REQ_ARCH_CONTRACT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-ASYNC_REQ_ARCH_CONTRACT",
+      "top_level_key_ok": true
+    },
+    "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-ATDD-COMPOS-DELEGATE_TO_TDD_LOOP_PROMPTS",
+      "top_level_key_ok": true
+    },
+    "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON",
+      "top_level_key_ok": true
+    },
+    "ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET",
+      "top_level_key_ok": true
+    },
+    "ARCH-BOUNDED_WORKER_POOL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-BOUNDED_WORKER_POOL",
+      "top_level_key_ok": true
+    },
+    "ARCH-CHECKLIST-PROCESS-REVIEW": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-CHECKLIST-PROCESS-REVIEW",
+      "top_level_key_ok": true
+    },
+    "ARCH-CITDP_ORDERED_LIST_KEYS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-CITDP_ORDERED_LIST_KEYS",
+      "top_level_key_ok": true
+    },
+    "ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS",
+      "top_level_key_ok": true
+    },
+    "ARCH-CONFIG_DISCOVERY_LAYERING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-CONFIG_DISCOVERY_LAYERING",
+      "top_level_key_ok": true
+    },
+    "ARCH-EVIDENCE_CHAIN_PROFILE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-EVIDENCE_CHAIN_PROFILE",
+      "top_level_key_ok": true
+    },
+    "ARCH-EVIDENCE_CHAIN_REPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-EVIDENCE_CHAIN_REPORT",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_AGENTSTREAM_ADAPTER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_AGENTSTREAM_ADAPTER",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_CANONICAL_LINK_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_CANONICAL_LINK_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_CLARIFICATION_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_CLARIFICATION_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_CONSTITUTION_ANALYZER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_CONSTITUTION_ANALYZER",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_CONSTITUTION_STORAGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_CONSTITUTION_STORAGE",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_FIXTURE_CORPUS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_FIXTURE_CORPUS",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_IDEMPOTENT_CREATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_IDEMPOTENT_CREATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_IDENTIFIER_ALLOCATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_IDENTIFIER_ALLOCATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_LIFECYCLE_STATE_MACHINE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_LIFECYCLE_STATE_MACHINE",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_MANIFEST_CONTRACT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_MANIFEST_CONTRACT",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_MIGRATION_PREVIEW": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_MIGRATION_PREVIEW",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_OFFLINE_COMPATIBILITY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_OFFLINE_COMPATIBILITY",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_ONBOARDING_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_ONBOARDING_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_ORCHESTRATION_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_ORCHESTRATION_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_ORCHESTRATION_COMMANDS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_ORCHESTRATION_COMMANDS",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_READINESS_DIAGNOSTICS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_READINESS_DIAGNOSTICS",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_READINESS_PROJECTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_READINESS_PROJECTION",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_REVISION_SAFE_MUTATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_REVISION_SAFE_MUTATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_STORE_PERSISTENCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_STORE_PERSISTENCE",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_TASK_DERIVATION_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_TASK_DERIVATION_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_TASK_EXECUTION_STATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_TASK_EXECUTION_STATE",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_TASK_GRAPH_SCHEDULER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_TASK_GRAPH_SCHEDULER",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_VIEW_PROJECTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_VIEW_PROJECTION",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_VIEW_RENDERING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_VIEW_RENDERING",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEAT_VIEW_STALENESS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEAT_VIEW_STALENESS",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEEDBACK_STORAGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEEDBACK_STORAGE",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-CHECKLIST-CONTROL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-CHECKLIST-CONTROL",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-CLI": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-CLI",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-EXECUTOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-EXECUTOR",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-LIB-LAYERING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-LIB-LAYERING",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-PIPELINE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-PIPELINE",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-TEXT-SOURCES": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-TEXT-SOURCES",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-YAML-FEATURESPEC": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-YAML-FEATURESPEC",
+      "top_level_key_ok": true
+    },
+    "ARCH-GOAGENT-YAML-STEPS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GOAGENT-YAML-STEPS",
+      "top_level_key_ok": true
+    },
+    "ARCH-KAIZEN-FEEDBACK-MCP-WIRING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-KAIZEN-FEEDBACK-MCP-WIRING",
+      "top_level_key_ok": true
+    },
+    "ARCH-KAIZEN-FEEDBACK-PILOT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-KAIZEN-FEEDBACK-PILOT",
+      "top_level_key_ok": true
+    },
+    "ARCH-KAIZEN-OUTCOME-LOOP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-KAIZEN-OUTCOME-LOOP",
+      "top_level_key_ok": true
+    },
+    "ARCH-KAIZEN-REVIEW-BRIDGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-KAIZEN-REVIEW-BRIDGE",
+      "top_level_key_ok": true
+    },
+    "ARCH-KAIZEN_FEEDBACK_ANALYSIS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-KAIZEN_FEEDBACK_ANALYSIS",
+      "top_level_key_ok": true
+    },
+    "ARCH-KAIZEN_OBSERVATION_CAPTURE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-KAIZEN_OBSERVATION_CAPTURE",
+      "top_level_key_ok": true
+    },
+    "ARCH-KAIZEN_SOURCE_NORMALIZATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-KAIZEN_SOURCE_NORMALIZATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-LEAP_PROPOSAL_QUEUE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-LEAP_PROPOSAL_QUEUE",
+      "top_level_key_ok": true
+    },
+    "ARCH-MCP_HTTPS_REMOTE_TRANSPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-MCP_HTTPS_REMOTE_TRANSPORT",
+      "top_level_key_ok": true
+    },
+    "ARCH-MCP_SERVER_INFO": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-MCP_SERVER_INFO",
+      "top_level_key_ok": true
+    },
+    "ARCH-MCP_STDIO_CONSOLE_GUARD": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-MCP_STDIO_CONSOLE_GUARD",
+      "top_level_key_ok": true
+    },
+    "ARCH-MCP_USAGE_METRICS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-MCP_USAGE_METRICS",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-LEARNING-EXPERIMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "top_level_key_ok": true
+    },
+    "ARCH-MODULE_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-MODULE_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE",
+      "top_level_key_ok": true
+    },
+    "ARCH-PROMPT_TYPE_GLOBAL_SKILLS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+      "top_level_key_ok": true
+    },
+    "ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD",
+      "top_level_key_ok": true
+    },
+    "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE",
+      "top_level_key_ok": true
+    },
+    "ARCH-PROMPT_TYPE_SUBAGENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PROMPT_TYPE_SUBAGENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_CONSTRAINT_LANGUAGE_PASS",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_CONSTRAINT_SOLVER",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_FLEET_G4_MAINTENANCE",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_GRAMMAR_V2": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_GRAMMAR_V2",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_INPUT_RESOLUTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_INPUT_RESOLUTION",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_PARSER_UNIFICATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_PARSER_UNIFICATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP",
+      "top_level_key_ok": true
+    },
+    "ARCH-PSEUDOCODE_TYPED_FLOW_PASS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PSEUDOCODE_TYPED_FLOW_PASS",
+      "top_level_key_ok": true
+    },
+    "ARCH-QUALITY_ASSURANCE_PROFILES": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-QUALITY_ASSURANCE_PROFILES",
+      "top_level_key_ok": true
+    },
+    "ARCH-REQUEST_EVIDENCE_ENVELOPE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-REQUEST_EVIDENCE_ENVELOPE",
+      "top_level_key_ok": true
+    },
+    "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_ADVERSARIAL_INQUIRY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_ADVERSARIAL_INQUIRY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_BOUNDED_COMPOSITION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_BUNDLED_SKILL_PRODUCT_RELEASE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CHANGE_IMPACT_PROFILE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CHANGE_IMPACT_PROFILE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLAIMS_EVIDENCE_REVIEW",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLAUDE_ADHERENCE_HOOKS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLAUDE_ADHERENCE_HOOKS",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLAUDE_BOOTSTRAP_OPS",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLAUDE_HARNESS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLAUDE_HARNESS",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLAUDE_LIVE_DRIVER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLAUDE_LIVE_DRIVER",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLAUDE_SKILLS_REROOT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLAUDE_SKILLS_REROOT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLI_MCP_JSON_BASE_PATH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLI_MCP_JSON_BASE_PATH",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLIENT_DEVOPS_APPENDIX": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLIENT_DEVOPS_APPENDIX",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLIENT_FEEDBACK_CAPTURE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLIENT_FEEDBACK_CAPTURE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLIENT_OPERATOR_TOOLING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLIENT_OPERATOR_TOOLING",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLIENT_REFRESH_PARITY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLIENT_REFRESH_PARITY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CONFIG_REPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CONFIG_REPORT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_DAE_INCORPORATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_DAE_INCORPORATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_DAE_VERIFICATION_CHARTER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_DAE_VERIFICATION_CHARTER",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_EASAR_ARTIFACT_MODEL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_EDPC_ARTIFACT_MODEL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_EDPC_ARTIFACT_MODEL",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_EDPC_META_HUB_ENGAGEMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_EDPC_META_HUB_ENGAGEMENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_FIDELITY_RESEARCH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_FIDELITY_RESEARCH",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_GIT_HYGIENE_SAFETY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_GIT_HYGIENE_SAFETY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_HARNESS_LANGSMITH_COMPOSE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_HARNESS_LANGSMITH_COMPOSE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_HARNESS_PLATFORM_SEAM": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_HARNESS_PLATFORM_SEAM",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_HARNESS_TRACE_OBSERVATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_HARNESS_TRACE_OBSERVATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_INTENT_CONTROL_PLANE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_INTENT_CONTROL_PLANE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_ISOLATED_VERIFICATION_RUNNER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_ISOLATED_VERIFICATION_RUNNER",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_JEV_DECISION_COPROCESSOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_JEV_DECISION_COPROCESSOR",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_JEV_TOOL_SAFETY_GATING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_LAYERED_CLIENT_INSTALL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_LAYERED_CLIENT_INSTALL",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_NEW_CLIENT_ADHERENCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_NEW_CLIENT_ADHERENCE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PROCESS_CERTIFICATION_READINESS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PROCESS_CERTIFICATION_READINESS",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PROJECT_CONFIG_OWNERSHIP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PROJECT_CONFIG_OWNERSHIP",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PROJECT_IDENTITY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PROJECT_IDENTITY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PROJECT_LINT_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PROJECT_LINT_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_RESEARCH_RECORD_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_RESEARCH_RECORD_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_REVIEW_CONVERGENCE_POLICY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_REVIEW_CONVERGENCE_POLICY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_RUNTIME_DISK_CONFIG": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_RUNTIME_DISK_CONFIG",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_STORE_BUNDLE_GIT_POLICY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_STORE_BUNDLE_GIT_POLICY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_STORE_README_MCP_ONBOARDING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_STORE_README_MCP_ONBOARDING",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_STRUCTURE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_STRUCTURE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_TOOL_INPUT_NORMALIZATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_TOOL_INPUT_NORMALIZATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_TWO_FOLDER_LAYOUT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_TWO_FOLDER_LAYOUT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_UNIFIED_TOOLCHAIN": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_UNIFIED_TOOLCHAIN",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_VOCABULARY_LAYERS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_VOCABULARY_LAYERS",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_WORKING_ARTIFACT_PLACEMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_WORKING_ARTIFACT_PLACEMENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_XLATE_SKILL_BOUNDARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_XLATE_SKILL_BOUNDARY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_YAML_CANONICAL_PROFILE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_YAML_CANONICAL_PROFILE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_YAML_STYLE_RESOLUTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_YAML_STYLE_RESOLUTION",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH",
+      "top_level_key_ok": true
+    },
+    "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT",
+      "top_level_key_ok": true
+    },
+    "ARCH-VOCABULARY_DATA_CONTRACT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-VOCABULARY_DATA_CONTRACT",
+      "top_level_key_ok": true
+    },
+    "ARCH-VOCABULARY_EXPLORER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-VOCABULARY_EXPLORER",
+      "top_level_key_ok": true
+    },
+    "ARCH-VOCABULARY_OFFLINE_VIEW": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-VOCABULARY_OFFLINE_VIEW",
+      "top_level_key_ok": true
+    },
+    "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG",
+      "top_level_key_ok": true
+    },
+    "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING",
+      "top_level_key_ok": true
+    },
+    "ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT",
+      "top_level_key_ok": true
+    },
+    "ARCH-WF_TRIAL_IMPLEMENTATION_STACK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-WF_TRIAL_IMPLEMENTATION_STACK",
+      "top_level_key_ok": true
+    },
+    "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG",
+      "top_level_key_ok": true
+    },
+    "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY",
+      "top_level_key_ok": true
+    },
+    "IMPL-ASYNC_BINDING_VALIDATOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ASYNC_BINDING_VALIDATOR",
+      "top_level_key_ok": true
+    },
+    "IMPL-ASYNC_BOUNDARY_ANALYZER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ASYNC_BOUNDARY_ANALYZER",
+      "top_level_key_ok": true
+    },
+    "IMPL-ASYNC_CHECKLIST_DISPOSITIONS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ASYNC_CHECKLIST_DISPOSITIONS",
+      "top_level_key_ok": true
+    },
+    "IMPL-ASYNC_CITDP_PROFILE_WIRING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ASYNC_CITDP_PROFILE_WIRING",
+      "top_level_key_ok": true
+    },
+    "IMPL-ASYNC_PSEUDOCODE_GRAMMAR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ASYNC_PSEUDOCODE_GRAMMAR",
+      "top_level_key_ok": true
+    },
+    "IMPL-ASYNC_REQ_ARCH_GUIDANCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ASYNC_REQ_ARCH_GUIDANCE",
+      "top_level_key_ok": true
+    },
+    "IMPL-ASYNC_VOCABULARY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ASYNC_VOCABULARY",
+      "top_level_key_ok": true
+    },
+    "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV",
+      "top_level_key_ok": true
+    },
+    "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS",
+      "top_level_key_ok": true
+    },
+    "IMPL-ATDD-E2E-AGENT_STREAM": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-ATDD-E2E-AGENT_STREAM",
+      "top_level_key_ok": true
+    },
+    "IMPL-BOUNDED_WORKER_POOL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-BOUNDED_WORKER_POOL",
+      "top_level_key_ok": true
+    },
+    "IMPL-CHECKLIST-PROCESS-REVIEW": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-CHECKLIST-PROCESS-REVIEW",
+      "top_level_key_ok": true
+    },
+    "IMPL-CITDP_ORDERED_KEY_VALIDATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-CITDP_ORDERED_KEY_VALIDATE",
+      "top_level_key_ok": true
+    },
+    "IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS",
+      "top_level_key_ok": true
+    },
+    "IMPL-EVIDENCE_CHAIN_PROFILE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-EVIDENCE_CHAIN_PROFILE",
+      "top_level_key_ok": true
+    },
+    "IMPL-EVIDENCE_CHAIN_REPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-EVIDENCE_CHAIN_REPORT",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_AGENTSTREAM_ADAPTER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_AGENTSTREAM_ADAPTER",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_ATOMIC_MUTATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_ATOMIC_MUTATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_CLARIFICATION_GATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_CLARIFICATION_GATE",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_CLARIFICATION_LIFECYCLE_ADAPTER",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_CLARIFICATION_STORE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_CLARIFICATION_STORE",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_CONSTITUTION_ANALYZER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_CONSTITUTION_ANALYZER",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_CONSTITUTION_DIAGNOSTICS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_CONSTITUTION_DIAGNOSTICS",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_CONSTITUTION_STORE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_CONSTITUTION_STORE",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_CONSTITUTION_VALIDATOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_CONSTITUTION_VALIDATOR",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_FIXTURE_VALIDATORS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_FIXTURE_VALIDATORS",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_IDEMPOTENT_CREATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_IDEMPOTENT_CREATE",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_IDENTIFIER_ALLOCATOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_IDENTIFIER_ALLOCATOR",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_LIFECYCLE_ENGINE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_LIFECYCLE_ENGINE",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_LOCAL_DEFAULTS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_LOCAL_DEFAULTS",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_MANIFEST_VALIDATOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_MANIFEST_VALIDATOR",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_MIGRATION_APPLY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_MIGRATION_APPLY",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_MIGRATION_PREVIEW": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_MIGRATION_PREVIEW",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_OFFLINE_FALLBACK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_OFFLINE_FALLBACK",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_ONBOARDING_COMMANDS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_ONBOARDING_COMMANDS",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_ORCHESTRATION_CLI": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_ORCHESTRATION_CLI",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_ORCHESTRATION_COMMANDS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_ORCHESTRATION_COMMANDS",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_ORCHESTRATION_MCP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_ORCHESTRATION_MCP",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_READINESS_DIAGNOSTICS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_READINESS_DIAGNOSTICS",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_REFERENCE_LINKER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_REFERENCE_LINKER",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_STORE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_STORE",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_TASK_DERIVATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_TASK_DERIVATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_TASK_EXECUTION_STATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_TASK_EXECUTION_STATE",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_TASK_GRAPH_SCHEDULER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_TASK_GRAPH_SCHEDULER",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_VIEW_PROJECTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_VIEW_PROJECTION",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_VIEW_RENDERER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_VIEW_RENDERER",
+      "top_level_key_ok": true
+    },
+    "IMPL-FEAT_VIEW_STALE_DETECTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FEAT_VIEW_STALE_DETECTION",
+      "top_level_key_ok": true
+    },
+    "IMPL-FLEET_G4_MAINTENANCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-FLEET_G4_MAINTENANCE",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-CHECKLIST": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-CHECKLIST",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-CHECKLIST-CONTROL": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-CHECKLIST-CONTROL",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-CLI-CMD": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-CLI-CMD",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-EXECUTOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-EXECUTOR",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-FEATURESPEC": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-FEATURESPEC",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-LIB-TYPES": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-LIB-TYPES",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-PIPELINE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-PIPELINE",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-TDDLOOP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-TDDLOOP",
+      "top_level_key_ok": true
+    },
+    "IMPL-GOAGENT-TEXT-SOURCES": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GOAGENT-TEXT-SOURCES",
+      "top_level_key_ok": true
+    },
+    "IMPL-KAIZEN-FEEDBACK-MCP-WIRING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+      "top_level_key_ok": true
+    },
+    "IMPL-KAIZEN-FEEDBACK-PILOT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-KAIZEN-FEEDBACK-PILOT",
+      "top_level_key_ok": true
+    },
+    "IMPL-KAIZEN-OUTCOME-LOOP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-KAIZEN-OUTCOME-LOOP",
+      "top_level_key_ok": true
+    },
+    "IMPL-KAIZEN-REVIEW-BRIDGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-KAIZEN-REVIEW-BRIDGE",
+      "top_level_key_ok": true
+    },
+    "IMPL-KAIZEN_FEEDBACK_ANALYSIS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-KAIZEN_FEEDBACK_ANALYSIS",
+      "top_level_key_ok": true
+    },
+    "IMPL-KAIZEN_OBSERVATION_CAPTURE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-KAIZEN_OBSERVATION_CAPTURE",
+      "top_level_key_ok": true
+    },
+    "IMPL-KAIZEN_SOURCE_NORMALIZATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-KAIZEN_SOURCE_NORMALIZATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-MCP_FEEDBACK_TOOLS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MCP_FEEDBACK_TOOLS",
+      "top_level_key_ok": true
+    },
+    "IMPL-MCP_HTTP_SERVER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MCP_HTTP_SERVER",
+      "top_level_key_ok": true
+    },
+    "IMPL-MCP_LEAP_PROPOSAL_QUEUE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MCP_LEAP_PROPOSAL_QUEUE",
+      "top_level_key_ok": true
+    },
+    "IMPL-MCP_SERVER_INFO": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MCP_SERVER_INFO",
+      "top_level_key_ok": true
+    },
+    "IMPL-MCP_STDIO_CONSOLE_GUARD": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MCP_STDIO_CONSOLE_GUARD",
+      "top_level_key_ok": true
+    },
+    "IMPL-MCP_USAGE_METRICS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MCP_USAGE_METRICS",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "top_level_key_ok": true
+    },
+    "IMPL-MODULE_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MODULE_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE",
+      "top_level_key_ok": true
+    },
+    "IMPL-PROMPT_TYPE_GLOBAL_SKILLS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+      "top_level_key_ok": true
+    },
+    "IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD",
+      "top_level_key_ok": true
+    },
+    "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE",
+      "top_level_key_ok": true
+    },
+    "IMPL-PROMPT_TYPE_SUBAGENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_SUBAGENT",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_ANALYSIS_ENGINE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_CONSTRAINT_SOLVER",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_GRAMMAR_V2": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_GRAMMAR_V2",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_MIGRATION_TOOLING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_SHARED_PRIMITIVES": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_TYPED_FLOW": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_TYPED_FLOW",
+      "top_level_key_ok": true
+    },
+    "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_BINDING_INVENTORY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_BINDING_INVENTORY",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_EVIDENCE_COLLECTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_COLLECTION",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_EVIDENCE_MANIFEST": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_MANIFEST",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_PSEUDOCODE_VALIDATOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_TEST_ADEQUACY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_TEST_ADEQUACY",
+      "top_level_key_ok": true
+    },
+    "IMPL-REQUEST_EVIDENCE_ENVELOPE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-REQUEST_EVIDENCE_ENVELOPE",
+      "top_level_key_ok": true
+    },
+    "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH",
+      "top_level_key_ok": true
+    },
+    "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_ADVERSARIAL_INQUIRY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_ADVERSARIAL_INQUIRY",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_LESSON_DISTILLATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_PILOT_BUDGET": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_SHADOW_COMPARISON": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+      "top_level_
