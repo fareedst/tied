@@ -20,7 +20,10 @@ PROCEDURE INSTALL_TIED_LAYERS(projectRoot, options)
     TERMINATE
   ENDIF
 
-  IF layers contains db THEN INSTALL_DB_LAYER END
+  IF layers contains db THEN
+    INSTALL_DB_LAYER
+    // [REQ-TIED_AGENT_LOADER_REFRESH] SYNC_AGENTS_MD during db layer (see IMPL-TIED_AGENT_LOADER_REFRESH-pseudocode.md)
+  END
   IF layers contains mcp THEN INSTALL_MCP_LAYER END
   IF layers contains skills THEN
     IF mode linked THEN INSTALL_SKILLS_LINKED ELSE INSTALL_SKILLS_FULL END

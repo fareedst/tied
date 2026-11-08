@@ -1,0 +1,8 @@
+ARCH-TIED_AGENT_LOADER_REFRESH:
+  ARCH-TIED_AGENT_LOADER_REFRESH:
+    cross_references:
+      implementation:
+        - "IMPL-TIED_AGENT_LOADER_REFRESH"
+      requirements:
+        - "REQ-TIED_AGENT_LOADER_REFRESH"
+    decision: "Install-managed client AGENTS.md syncs from store template when client semver < store semver; .cursorrules and config.yaml remain create-if-absent."

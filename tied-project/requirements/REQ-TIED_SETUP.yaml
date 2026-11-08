@@ -72,6 +72,8 @@ REQ-TIED_SETUP:
       metric: "client-tool-use-bootstrap tests lock create-only and force-merge semantics; existing unrelated YAML keys preserved on force merge"
     - criterion: "Refreshing inherited methodology preserves project YAML and installs promoted quality detail files and pseudo-code sidecars"
       metric: "tied-bundle/ matches the current template snapshot and stale inherited files are pruned"
+    - criterion: "Brownfield refresh syncs install-managed AGENTS.md when client loader semver lags store unless --preserve-agent-loader"
+      metric: "agent-loader-sync.test.mjs; REQ-TIED_AGENT_LOADER_REFRESH"
     - criterion: "The vocabulary layer is an agent-control layer that applies RESOLVE, PRELOAD, RECORD, and VALIDATE across TIED work"
       metric: "Canonical vocabulary rows and checklist/process references use the same terms"
     - criterion: "tied-install.sh seeds repo-root tied-project/config.yaml when absent at the client project root"

@@ -2211,6 +2211,14 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   name: "Adversarial inquiry for obligation and fidelity evidence"
   priority: "P0"
   status: "Implemented"
+REQ-TIED_AGENT_LOADER_REFRESH:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_AGENT_LOADER_REFRESH"
+    implementation:
+      - "IMPL-TIED_AGENT_LOADER_REFRESH"
+  description: "Bootstrap syncs client AGENTS.md from store when client loader semver lags store; --preserve-agent-loader retains create-if-absent."
+  detail_file: null
 REQ-TIED_ASYNC_METHODOLOGY:
   category: "Non-Functional"
   detail_file: "requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml"

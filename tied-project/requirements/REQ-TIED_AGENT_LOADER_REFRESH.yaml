@@ -1,0 +1,31 @@
+REQ-TIED_AGENT_LOADER_REFRESH:
+  category: "Functional"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_AGENT_LOADER_REFRESH"
+    implementation:
+      - "IMPL-TIED_AGENT_LOADER_REFRESH"
+  description: "Default tied-install db layer overwrites install-managed AGENTS.md when parsed client TIED Methodology Version is less than store semver."
+  name: "Agent loader semver sync on install"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_INSTALL_JSON_REFRESH_SEMVER"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+  satisfaction_criteria:
+    - criterion: "Stale client AGENTS.md semver is refreshed from store on install/refresh"
+      metric: "agent-loader-sync.test.mjs and install-layers.integration.test.mjs"
+    - criterion: "--preserve-agent-loader skips semver sync"
+      metric: "integration test preserve case"
+    - criterion: "Bootstrap warns when AGENTS semver differs from install.json pin"
+      metric: "warnAgentsLoaderDrift unit test"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_AGENT_LOADER_REFRESH"
+    implementation:
+      - "IMPL-TIED_AGENT_LOADER_REFRESH"
+    tests:
+      - "tools/bootstrap/lib/agent-loader-sync.test.mjs"
+      - "tools/bootstrap/install-layers.integration.test.mjs"

@@ -1,0 +1,15 @@
+fix(bootstrap): sync client AGENTS.md on refresh [REQ-TIED_AGENT_LOADER_REFRESH]
+
+Default tied-install overwrites install-managed AGENTS.md when client loader
+semver lags the store; --preserve-agent-loader restores create-if-absent.
+
+Tokens: REQ/ARCH/IMPL-TIED_AGENT_LOADER_REFRESH; LEAP REQ-TIED_SETUP criterion.
+
+Gate: close-out-req-tied-agent-loader-refresh-20261108-r1 allowed=true;
+envelope blocking_gap_count=0.
+
+Verification:
+  node --test tools/bootstrap/lib/agent-loader-sync.test.mjs
+  node --test tools/bootstrap/install-layers.integration.test.mjs
+
+Upstream feedback: N/A (store bootstrap slice).

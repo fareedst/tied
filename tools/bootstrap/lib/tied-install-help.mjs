@@ -43,6 +43,8 @@ export function printTiedInstallHelp() {
   writeDim("  --store PATH                         TIED store root");
   writeDim("  --methodology-bundle live|pinned     Default: live");
   writeDim("  --refresh                            Re-run from tied-bundle/install.json");
+  writeDim("  --preserve-agent-loader              Keep client AGENTS.md create-if-absent (skip semver sync)");
+  writeDim("  TIED_BOOTSTRAP_PRESERVE_AGENT_LOADER=1  Env mirror for --preserve-agent-loader");
   writeDim("  --allow-self-install                 Allow install when project root equals store root");
   writeDim("  --doctor                             No-MCP self-test on installed client");
   writeDim("  --migrate-layout                     Brownfield layout migration (idempotent)");

@@ -10,6 +10,24 @@ const SEMVER_RE = /^\d+\.\d+\.\d+$/;
 const AGENTS_VERSION_LINE = /^\*\*TIED Methodology Version\*\*:\s*(.+)\s*$/m;
 
 /**
+ * @param {string} agentsPath
+ * @returns {string | null}
+ */
+export function readAgentsSemverFromFile(agentsPath) {
+  try {
+    if (!fs.existsSync(agentsPath)) return null;
+    const match = fs.readFileSync(agentsPath, "utf8").match(AGENTS_VERSION_LINE);
+    const version = match?.[1]?.trim();
+    if (version && SEMVER_RE.test(version)) {
+      return version;
+    }
+  } catch {
+    /* fall through */
+  }
+  return null;
+}
+
+/**
  * PRE: storeRoot is absolute path to TIED store checkout.
  * POST: semver string or "unknown" when no valid source on store.
  * EFFECTS: read-only
@@ -29,17 +47,9 @@ export function readStoreMethodologySemver(storeRoot) {
   } catch {
     /* fall through */
   }
-  const agentsPath = path.join(root, "AGENTS.md");
-  try {
-    if (fs.existsSync(agentsPath)) {
-      const match = fs.readFileSync(agentsPath, "utf8").match(AGENTS_VERSION_LINE);
-      const version = match?.[1]?.trim();
-      if (version && SEMVER_RE.test(version)) {
-        return version;
-      }
-    }
-  } catch {
-    /* fall through */
+  const fromAgents = readAgentsSemverFromFile(path.join(root, "AGENTS.md"));
+  if (fromAgents) {
+    return fromAgents;
   }
   return "unknown";
 }

@@ -107,6 +107,9 @@ export function parseInstallLayersArgs(argv, env = process.env) {
   let targetsOnlyInstalled = false;
   let targetsPlan = false;
   let targetsContinueOnError = false;
+  let preserveAgentLoader =
+    env.TIED_BOOTSTRAP_PRESERVE_AGENT_LOADER === "1"
+    || String(env.TIED_BOOTSTRAP_PRESERVE_AGENT_LOADER ?? "").trim().toLowerCase() === "true";
 
   while (args.length > 0 && args[0].startsWith("-")) {
     const flag = args[0];
@@ -132,6 +135,9 @@ export function parseInstallLayersArgs(argv, env = process.env) {
       args.splice(0, 2);
     } else if (flag === "--refresh") {
       refresh = true;
+      args.shift();
+    } else if (flag === "--preserve-agent-loader") {
+      preserveAgentLoader = true;
       args.shift();
     } else if (flag === "--allow-self-install") {
       allowSelfInstall = true;
@@ -236,6 +242,7 @@ export function parseInstallLayersArgs(argv, env = process.env) {
     installMethodologyHook,
     claudeHarnessLabel,
     toolUseProfile,
+    preserveAgentLoader,
     ...parity,
   };
 
@@ -280,6 +287,7 @@ export async function runInstallForTarget(parsed) {
     semanticYamlCompare: parsed.semanticYamlCompare,
     parityReport: parsed.parityReport,
     allowSelfInstall: parsed.allowSelfInstall,
+    preserveAgentLoader: parsed.preserveAgentLoader,
     env: process.env,
   };
 

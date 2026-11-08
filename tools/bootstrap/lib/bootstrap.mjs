@@ -11,6 +11,7 @@ import {
   copyTreeWithAttributes,
   warnModifiedCopyTarget,
 } from "./copy-managed.mjs";
+import { syncAgentsMd } from "./agent-loader-sync.mjs";
 import { assertMcpPrerequisite, initializeTiedMcpConfig, initializeClaudeMcpConfig } from "./mcp-config.mjs";
 import {
   copyHooks,
@@ -144,8 +145,19 @@ export function bootstrapTied(projectRoot, options = {}) {
   // [IMPL-TIED_FILES] [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] — BASE_FILES: templates-first via resolveTemplateFile.
   const tiedYamlDest = path.join(projectRoot, "tied-project/config.yaml");
   const tiedYamlPreExisting = fs.existsSync(tiedYamlDest);
+  const preserveAgentLoader =
+    options.preserveAgentLoader === true
+    || env.TIED_BOOTSTRAP_PRESERVE_AGENT_LOADER === "1"
+    || String(env.TIED_BOOTSTRAP_PRESERVE_AGENT_LOADER ?? "").trim().toLowerCase() === "true";
   let baseCopied = 0;
   for (const template of paths.BASE_FILES) {
+    if (template === "AGENTS.md") {
+      const agentsResult = syncAgentsMd(projectRoot, TIED_REPO_ROOT, { preserveAgentLoader });
+      if (agentsResult.action === "created") {
+        baseCopied += 1;
+      }
+      continue;
+    }
     const src = resolveTemplateFile(templatesDir, TIED_REPO_ROOT, template);
     const dest = path.join(projectRoot, template);
     if (!fs.existsSync(src)) {

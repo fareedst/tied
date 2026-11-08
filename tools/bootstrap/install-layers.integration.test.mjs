@@ -11,7 +11,7 @@ import { readInstallManifest } from "./lib/layers/install-manifest.mjs";
 import { TIED_REPO_ROOT, manifestPaths } from "./lib/constants.mjs";
 import { resolveTiedLayout } from "./lib/layout.mjs";
 import { refreshInstallFromManifest } from "./lib/install-layers-core.mjs";
-import { readStoreMethodologySemver } from "./lib/store-methodology-version.mjs";
+import { readAgentsSemverFromFile, readStoreMethodologySemver } from "./lib/store-methodology-version.mjs";
 import { migrateLayout } from "./lib/migrate-layout.mjs";
 import { detectLegacyLayout } from "./lib/layout.mjs";
 import {
@@ -117,5 +117,40 @@ describe("install-layers integration [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
     assert.equal(detectLegacyLayout(tmp).detected, false);
     const second = migrateLayout(tmp, { storeRoot: TIED_REPO_ROOT, skipInstall: true });
     assert.equal(second.action, "noop");
+  });
+
+  it("db layer refreshes stale AGENTS.md semver [REQ-TIED_AGENT_LOADER_REFRESH]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tied-alr-sync-"));
+    const storeSemver = readStoreMethodologySemver(TIED_REPO_ROOT);
+    assert.notEqual(storeSemver, "unknown");
+    fs.mkdirSync(path.join(tmp, "tied-project"), { recursive: true });
+    fs.writeFileSync(
+      path.join(tmp, "AGENTS.md"),
+      `# loader\n\n**TIED Methodology Version**: 4.0.0\n`,
+    );
+    installTiedLayers(tmp, {
+      storeRoot: TIED_REPO_ROOT,
+      mode: "linked",
+      layers: ["db"],
+      harness: "cursor",
+      skipVerify: true,
+    });
+    assert.equal(readAgentsSemverFromFile(path.join(tmp, "AGENTS.md")), storeSemver);
+  });
+
+  it("preserve-agent-loader keeps stale AGENTS.md bytes [REQ-TIED_AGENT_LOADER_REFRESH]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tied-alr-preserve-"));
+    const stale = `# loader\n\n**TIED Methodology Version**: 4.0.0\n`;
+    fs.mkdirSync(path.join(tmp, "tied-project"), { recursive: true });
+    fs.writeFileSync(path.join(tmp, "AGENTS.md"), stale);
+    installTiedLayers(tmp, {
+      storeRoot: TIED_REPO_ROOT,
+      mode: "linked",
+      layers: ["db"],
+      harness: "cursor",
+      skipVerify: true,
+      preserveAgentLoader: true,
+    });
+    assert.equal(fs.readFileSync(path.join(tmp, "AGENTS.md"), "utf8"), stale);
   });
 });

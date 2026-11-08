@@ -1,0 +1,9 @@
+IMPL-TIED_AGENT_LOADER_REFRESH:
+  IMPL-TIED_AGENT_LOADER_REFRESH:
+    cross_references:
+      architecture:
+        - "ARCH-TIED_AGENT_LOADER_REFRESH"
+      requirements:
+        - "REQ-TIED_AGENT_LOADER_REFRESH"
+    decision: "tools/bootstrap/lib/agent-loader-sync.mjs SYNC_AGENTS_MD and warnAgentsLoaderDrift; install-layers --preserve-agent-loader."
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_AGENT_LOADER_REFRESH-pseudocode.md"

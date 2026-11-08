@@ -772,6 +772,13 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_AGENT_LOADER_REFRESH:
+  cross_references:
+    - "IMPL-TIED_AGENT_LOADER_REFRESH"
+    - "REQ-TIED_AGENT_LOADER_REFRESH"
+  description: "Store template authority with semver gate and preserve flag"
+  detail_file: "architecture-decisions/ARCH-TIED_AGENT_LOADER_REFRESH.yaml"
+  name: "Agent loader sync architecture"
 ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   cross_references:
     - "ARCH-TIED_STRUCTURE"
@@ -2537,6 +2544,13 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_AGENT_LOADER_REFRESH:
+  cross_references:
+    - "ARCH-TIED_AGENT_LOADER_REFRESH"
+    - "REQ-TIED_AGENT_LOADER_REFRESH"
+  description: "agent-loader-sync.mjs wired from db layer and legacy bootstrap"
+  detail_file: "implementation-decisions/IMPL-TIED_AGENT_LOADER_REFRESH.yaml"
+  name: "Agent loader sync implementation"
 IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM:
   cross_references:
     - "ARCH-TIED_BOUNDED_COMPOSITION"
@@ -4696,6 +4710,13 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"
+REQ-TIED_AGENT_LOADER_REFRESH:
+  cross_references:
+    - "ARCH-TIED_AGENT_LOADER_REFRESH"
+    - "IMPL-TIED_AGENT_LOADER_REFRESH"
+  description: "Bootstrap syncs client AGENTS.md when loader semver lags store"
+  detail_file: "requirements/REQ-TIED_AGENT_LOADER_REFRESH.yaml"
+  name: "Agent loader semver sync on install"
 REQ-TIED_ASYNC_METHODOLOGY:
   cross_references:
     - "ARCH-ASYNC_CHECKLIST_INTEGRATION"

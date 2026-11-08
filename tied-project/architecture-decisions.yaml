@@ -1757,6 +1757,14 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
   detail_file: "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml"
   name: "Read-only obligation graph and evidence gate boundary"
   status: "Active"
+ARCH-TIED_AGENT_LOADER_REFRESH:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_AGENT_LOADER_REFRESH"
+    requirements:
+      - "REQ-TIED_AGENT_LOADER_REFRESH"
+  decision: "Store AGENTS.md template is loader authority; semver compare gates overwrite; preserve flag is explicit brownfield contract."
+  detail_file: "architecture-decisions/ARCH-TIED_AGENT_LOADER_REFRESH.yaml"
 ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   cross_references:
     - "ARCH-TIED_STRUCTURE"

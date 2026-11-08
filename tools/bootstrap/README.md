@@ -230,10 +230,11 @@ Methodology boundary (Phase A, [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]): `--metho
 
 | Artifact | Policy | Source |
 | --- | --- | --- |
-| `.cursorrules`, `AGENTS.md` | Create-if-absent | Repo root |
+| `.cursorrules` | Create-if-absent | Repo root |
+| `AGENTS.md` | Semver sync when client **TIED Methodology Version** &lt; store; create-if-absent when missing; `--preserve-agent-loader` skips sync | Store `AGENTS.md` / template ([REQ-TIED_AGENT_LOADER_REFRESH](../../tied-project/requirements/REQ-TIED_AGENT_LOADER_REFRESH.yaml)) |
 | `tied-project/config.yaml` | Create-if-absent | `tied-bundle/templates/config.yaml` starter when present |
 
-Existing client copies are never overwritten on refresh. Brownfield clients without the file get it on the next bootstrap while the destination path is still absent; see [methodology-migration.md](../tied-bundle/docs/methodology-migration.md).
+`.cursorrules` and `config.yaml` are not overwritten when present. `AGENTS.md` refreshes from the store when the client loader semver lags unless **`--preserve-agent-loader`** (env: `TIED_BOOTSTRAP_PRESERVE_AGENT_LOADER=1`). See [methodology-migration.md](../tied-bundle/docs/methodology-migration.md).
 
 ### Optional tool-use flags (`--full-tools`)
 

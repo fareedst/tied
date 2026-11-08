@@ -11,6 +11,7 @@ import { writeClientVocabHandoffs } from "../vocab.mjs";
 import { copyConstitutionExample } from "../docs.mjs";
 import { writeGitignoreBlock } from "./gitignore-block.mjs";
 import { resolveTiedLayout } from "../layout.mjs";
+import { syncAgentsMd } from "../agent-loader-sync.mjs";
 
 function resolveTemplateFile(templatesDir, scriptDir, filename) {
   const fromTemplates = path.join(templatesDir, filename);
@@ -20,7 +21,7 @@ function resolveTemplateFile(templatesDir, scriptDir, filename) {
 
 /**
  * @param {string} projectRoot
- * @param {{ storeRoot: string }} ctx
+ * @param {{ storeRoot: string, preserveAgentLoader?: boolean }} ctx
  */
 export function installDbLayer(projectRoot, ctx) {
   const paths = manifestPaths();
@@ -40,6 +41,15 @@ export function installDbLayer(projectRoot, ctx) {
 
   let baseCopied = 0;
   for (const template of paths.BASE_FILES) {
+    if (template === "AGENTS.md") {
+      const agentsResult = syncAgentsMd(projectRoot, ctx.storeRoot, {
+        preserveAgentLoader: ctx.preserveAgentLoader === true,
+      });
+      if (agentsResult.action === "created") {
+        baseCopied += 1;
+      }
+      continue;
+    }
     const src = resolveTemplateFile(templatesDir, ctx.storeRoot, template);
     const dest = path.join(projectRoot, template);
     if (!fs.existsSync(src)) {

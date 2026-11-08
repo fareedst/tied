@@ -2050,6 +2050,15 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
   name: "Adversarial inquiry checklist integration and evidence artifacts"
   status: "Active"
+IMPL-TIED_AGENT_LOADER_REFRESH:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_AGENT_LOADER_REFRESH"
+    requirements:
+      - "REQ-TIED_AGENT_LOADER_REFRESH"
+  decision: "tools/bootstrap/lib/agent-loader-sync.mjs; wired from layers/db.mjs, bootstrap.mjs, install-layers CLI."
+  detail_file: "implementation-decisions/IMPL-TIED_AGENT_LOADER_REFRESH.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_AGENT_LOADER_REFRESH-pseudocode.md"
 IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM:
   detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM.yaml"
   name: "Bounded agentstream driver seam"

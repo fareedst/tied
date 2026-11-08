@@ -1,0 +1,45 @@
+CITDP-REQ-TIED_AGENT_LOADER_REFRESH:
+  change_definition:
+    current_behavior: "tied-install and --refresh copy AGENTS.md from the store only when the client file is absent (create-if-absent). Existing loaders never update when store methodology advances; install.json may pin current store semver while AGENTS.md still mandates obsolete session rules (e.g. TIEDv4.0.0 stamp)."
+    desired_behavior: "Default install/refresh syncs client AGENTS.md from the store when parsed client TIED Methodology Version semver is less than store semver. Equal or newer client semver skips overwrite. --preserve-agent-loader and TIED_BOOTSTRAP_PRESERVE_AGENT_LOADER restore create-if-absent. Bootstrap warns when AGENTS semver disagrees with install.json store_methodology_version after install."
+    non_goals:
+      - "tied-project/agent-inject composition"
+      - "Overwrite .cursorrules or tied-project/config.yaml"
+      - "Overwrite client root VERSION on refresh"
+      - "Rewrite copied checklist-tracker session-bootstrap lines"
+    success_criteria:
+      - "SC-ALR-SYNC through SC-ALR-WARN per working test-strategy.md"
+    unchanged_behavior: "MCP semver resolution order (install.json pin first) unchanged. tied-bundle methodology overwrite unchanged. MCP JSON foreign server preservation unchanged."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/agent-loader-sync.mjs; tools/bootstrap/lib/layers/db.mjs; tools/bootstrap/lib/bootstrap.mjs; tools/bootstrap/install-layers.mjs; tools/bootstrap/lib/install-layers-core.mjs; tools/bootstrap/lib/tied-install-help.mjs"
+    tied_tokens_affected:
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_CLIENT_REFRESH_PARITY"
+      - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+    tied_tokens_new:
+      - "REQ-TIED_AGENT_LOADER_REFRESH"
+      - "ARCH-TIED_AGENT_LOADER_REFRESH"
+      - "IMPL-TIED_AGENT_LOADER_REFRESH"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Sponsor customized AGENTS.md lost on store minor bump"
+        - "preserve flag left loader stale while install.json pin current — agents obey wrong rules"
+        - "Client semver unparsable — aggressive overwrite surprises brownfield"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Bootstrap file copy only; install-managed gitignored loader."
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition: []
+    integration:
+      - "tools/bootstrap/install-layers.integration.test.mjs AGENTS refresh cases"
+    unit:
+      - "tools/bootstrap/lib/agent-loader-sync.test.mjs"

@@ -17,6 +17,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { guardSelfInstall } from "./layout.mjs";
 import { resolveProjectConfigPath } from "./project-config.mjs";
+import { warnAgentsLoaderDrift } from "./agent-loader-sync.mjs";
 
 const ALL_LAYERS = ["db", "mcp", "skills", "methodology"];
 
@@ -57,7 +58,10 @@ export function installTiedLayers(projectRoot, options = {}) {
   const projectConfigPreExisting = resolveProjectConfigPath(projectRoot) !== null;
 
   if (layers.includes("db")) {
-    installDbLayer(projectRoot, { storeRoot });
+    installDbLayer(projectRoot, {
+      storeRoot,
+      preserveAgentLoader: options.preserveAgentLoader === true,
+    });
   }
   if (layers.includes("mcp")) {
     installMcpLayer(projectRoot, {
@@ -120,6 +124,10 @@ export function installTiedLayers(projectRoot, options = {}) {
     tied_version: storeMethodologyVersion,
     installer_version: storeMethodologyVersion,
   });
+
+  if (layers.includes("db")) {
+    warnAgentsLoaderDrift(projectRoot);
+  }
 
   sayOk(`Layered TIED install complete (${mode}, layers=${layers.join(",")}).`);
   return { projectRoot, storeRoot, manifest };

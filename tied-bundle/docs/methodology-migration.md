@@ -89,6 +89,7 @@ Verify after refresh:
 | `.cursor/skills/tied-yaml/` | Refreshed from the bundled skill |
 | `.cursor/skills/tied-yaml/scripts/tied.sh` and `feature-orchestrator.sh` | Refreshed from the bundled skill and baked to the TIED source root |
 | `.cursor/mcp.json` | Created with the selected TIED source and client base path only when absent; an existing file is preserved byte-for-byte |
+| `AGENTS.md` (repo root) | Synced from store when client **TIED Methodology Version** semver is less than store semver on each db-layer install/refresh; create-if-absent when missing; use `--preserve-agent-loader` to keep brownfield loaders unchanged |
 | `tied-project/config.yaml` (project root) | Created only when absent from `templates/tied-project/config.yaml` in the TIED source; existing client policy files are preserved byte-for-byte |
 
 **Retrofit when absent:** If an older client never received `tied-project/config.yaml`, re-run `tied-install.sh` against the client project root while that file is still missing. Bootstrap installs the starter template once; customize `scalar_style` and optional hooks afterward. If you already created a local file, bootstrap will not replace it.
