@@ -1,0 +1,29 @@
+evidence:
+  primary: "https://github.com/google/elephant-goldfish-model"
+  secondary: "https://github.com/google/elephant-goldfish-model/blob/main/docs/designs/architecture.md"
+risks:
+  - description: "Build accidentally edits TIED project YAML or adds matrix row without REQ amend."
+    id: "scope_creep_tied_yaml"
+    mitigation: "Follow PLAN Forbidden; matrix row 19 Defer unless sponsor opt-in."
+  - description: "EGM skills or architecture doc change on GitHub without refresh."
+    id: "upstream_drift"
+    mitigation: "Pin upstream date in metadata; proof boundary in executive summary."
+  - description: "Readers infer Goldfish review pass equals tied_verify or Q1 defect rate."
+    id: "false_equivalence"
+    mitigation: "Q1–Q6 table and RESOLVE rows; evaluation framework literacy cross-link."
+  - description: "Teams run EGM designs and TIED YAML in parallel without SoT."
+    id: "dual_spec_authority"
+    mitigation: "Sponsor costly choice subsection; default TIED authoritative in TIED clients."
+schema: "citdp-plan-draft.v1"
+scope:
+  in_scope:
+    - "docs/comparisons/google-egm-elephant-goldfish-vs-tied-agent-management.md"
+    - "tied-project/non-tied-plans/google-egm-elephant-goldfish-vs-tied/"
+  out_of_scope:
+    - "EGM plugin install in this repository"
+    - "methodology-composition-matrix row 19 unless sponsor opt-in"
+    - "Product application code or tests"
+    - "Project TIED indexes and detail YAML"
+  summary: "Author harness × TIED comparison for Google's Elephant–Goldfish Model (EGM) OSS plugin.\nDocs-only non-tied track; no project REQ/ARCH/IMPL minting.\n"
+slug: "google-egm-elephant-goldfish-vs-tied"
+tied_tokens_new: []

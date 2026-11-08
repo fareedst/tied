@@ -1,0 +1,122 @@
+{
+  "schema_version": "p7-paired-readout-metrics.v1",
+  "program_request": "PLAN-TIED-LANGGRAPH-ORCHESTRATION",
+  "recorded_at": "2026-11-07T19:20:00-08:00",
+  "fixture_client": "/Users/fareed/Documents/dev/test/1791767366",
+  "implement_req": "REQ-BOUNDED_WORKER_POOL",
+  "scope_parity_note": "Agentstream arm uses PROMPT-WF-07 four-phase analogue (REQ-CONFIG_DEFAULTS_OVERRIDE); not same REQ as charter fixture. LangGraph arm is hermetic pilot P1-P6 program evidence, not live fixture implement smoke.",
+  "arms": {
+    "langgraph_pilot": {
+      "wave_exit_commits": {
+        "P2": "1bbd9245",
+        "P3": "ebda93d5",
+        "P4": "58c1fa9b",
+        "P5": "a997b6d6",
+        "P6": "f0cea237"
+      },
+      "pytest_last": {
+        "command": "cd tools/langgraph-pilot && .venv/bin/pytest -q",
+        "passed": 61,
+        "skipped": 1,
+        "total": 62,
+        "recorded_at": "2026-11-07T19:17:00-08:00"
+      },
+      "close_out_evidence_refs": [
+        "tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/closeout-run-close-out-gates.json",
+        "tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/closeout-run-close-out-gates.json",
+        "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/closeout-run-close-out-gates.json",
+        "tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/closeout-run-close-out-gates.json",
+        "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK/evidence/closeout-run-close-out-gates.json"
+      ]
+    },
+    "agentstream_baseline": {
+      "run_refs": [
+        {
+          "client_root": "/Users/fareed/Documents/dev/test/1794057839-wf-agentstream-wf-07-cursor-composer25",
+          "orchestrator": "workflow-trial-agentstream wf-07",
+          "product_req": "REQ-CONFIG_DEFAULTS_OVERRIDE"
+        }
+      ],
+      "trial_readout_refs": [
+        "docs/demos/trial-readout-PROMPT-WF-07-composer25-1794057839-wf-agentstream-wf-07-cursor-composer25.md",
+        "docs/demos/trial-readout-PROMPT-WF-05-claudesonnet55-1794055754-wf-agentstream-wf-05-claude-claudesonnet55.md",
+        "docs/demos/trial-readout-PROMPT-WF-06-claudehaiku55-1794062924-wf-agentstream-wf-06-claude-claudehaiku55.md"
+      ]
+    }
+  },
+  "metrics": {
+    "first_pass_gate_accept": {
+      "langgraph_pilot": {
+        "pre_implementation_first_attempt_allowed_by_wave": {
+          "P2-EVIDENCE": true,
+          "P3-TDD": false,
+          "P4-ACCEPTANCE": false,
+          "P5-CHECKLIST": "not_observed_no_persisted_pre_impl_receipts",
+          "P6-MULTI-TASK": "not_observed_no_persisted_pre_impl_receipts"
+        },
+        "close_out_gate_allowed_p2_p6": true,
+        "notes": "P3/P4 required multiple pre_implementation attempts before implement; close-out gates all allowed=true."
+      },
+      "agentstream_baseline": {
+        "pre_implementation_turn2_refine": true,
+        "close_out_gate_allowed": true,
+        "notes": "WF-07 turn 2 refine-plan advisory pre_implementation pass; turn 4 close-out 0 blocking gaps."
+      }
+    },
+    "stale_evidence_incidence": {
+      "langgraph_pilot": {
+        "automated_test_cases_covering_staleness": 4,
+        "production_run_invalidate_events": "not_observed",
+        "refs": [
+          "tools/langgraph-pilot/tests/test_staleness_policy.py",
+          "tools/langgraph-pilot/tests/test_envelope_composition.py",
+          "tools/langgraph-pilot/tied_langgraph/graphs/project_multi.py"
+        ]
+      },
+      "agentstream_baseline": {
+        "envelope_staleness_at_close_out": "not_quantified_in_readout",
+        "notes": "WF-07 envelope_revision_conflict diagnostic non-blocking at close-out."
+      }
+    },
+    "rework_loops_per_slug": {
+      "langgraph_pilot": {
+        "pre_implementation_gate_attempts_before_allow": {
+          "P2-EVIDENCE": 3,
+          "P3-TDD": 5,
+          "P4-ACCEPTANCE": 6
+        },
+        "tracker_slug_reopen_count": "not_observed_program_trackers"
+      },
+      "agentstream_baseline": {
+        "four_phase_turns": 4,
+        "build_red_before_green": "5/6 fail then GREEN 6/6 per WF-07 readout"
+      }
+    },
+    "envelope_gap_count": {
+      "langgraph_pilot": {
+        "P2": 0,
+        "P3": 0,
+        "P4": 0,
+        "P5": 0,
+        "P6": 0
+      },
+      "agentstream_baseline": {
+        "WF-07_close_out": 0
+      }
+    },
+    "operator_wall_minutes": {
+      "langgraph_pilot": {
+        "value": "not_observed_single_timed_run",
+        "notes": "Program spans multi-week waves; pytest collection ~0.3s at build time."
+      },
+      "agentstream_baseline": {
+        "WF-07_orchestrator_wall_minutes": 12.0,
+        "source": "docs/demos/trial-readout-PROMPT-WF-07-composer25-1794057839-wf-agentstream-wf-07-cursor-composer25.md"
+      }
+    }
+  },
+  "agent_recommendation": {
+    "disposition": "Compose",
+    "rationale": "Pilot proves gate/evidence/checklist/parallelism mechanics with 61 pytest; agentstream remains mature default; no symmetric REQ-BOUNDED_WORKER_POOL agentstream run on charter fixture; costly Extend/Stop deferred to sponsor."
+  }
+}

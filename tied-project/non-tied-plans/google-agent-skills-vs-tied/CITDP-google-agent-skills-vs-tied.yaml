@@ -1,0 +1,27 @@
+evidence:
+  primary: "https://cloud.google.com/blog/topics/developers-practitioners/behind-the-scenes-two-months-later-how-we-ship-google-agent-skills-like-products"
+risks:
+  - description: "Build adds per-skill semver REQ without sponsor add-feature."
+    id: "scope_creep_wave3"
+    mitigation: "Wave 3 Defer in phased recommendations; PLAN Forbidden."
+  - description: "Readers treat skill eval suite pass as low ship defect rate."
+    id: "skill_eval_equals_q1"
+    mitigation: "Charter Q1 narrative row; Wave 2 separate arms; proof boundary section."
+  - description: "Teams replace tied_checklist_gate_validate with skill linter green."
+    id: "false_equivalence_gates"
+    mitigation: "Authority boundary mermaid; anti-pattern table."
+schema: "citdp-plan-draft.v1"
+scope:
+  in_scope:
+    - "docs/comparisons/google-agent-skills-ship-like-products.md"
+    - "docs/comparisons/google-agent-skills-vs-tied-agent-management.md"
+    - "docs/tied-methodology-evaluation-framework.md"
+    - "tied-project/non-tied-plans/google-agent-skills-vs-tied/"
+  out_of_scope:
+    - "Git allowlist for docs/comparisons"
+    - "methodology-composition-matrix row unless sponsor opt-in"
+    - "Product code, bundled skill behavior changes, or new e2e gates"
+    - "Project TIED indexes and detail YAML"
+  summary: "Wave 1 capture and Wave 2 harness comparison for Google's Agent Skills\n\"ship like products\" blog. Docs-only non-tied track; no project REQ/ARCH/IMPL minting.\n"
+slug: "google-agent-skills-vs-tied"
+tied_tokens_new: []

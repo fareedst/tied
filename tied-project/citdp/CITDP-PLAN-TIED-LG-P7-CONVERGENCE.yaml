@@ -1,0 +1,104 @@
+CITDP-PLAN-TIED-LG-P7-CONVERGENCE:
+  change_definition:
+    current_behavior: "LangGraph program P0–P6 delivered pilot subgraphs, gates, checklist slice, and multi-task merge evidence; no formal paired readout vs agentstream or sponsor disposition."
+    desired_behavior: "Documented paired metrics, agentstream baseline packet, LangGraph arm packet, metrics JSON, and phase-7-convergence.md with Extend | Compose | Stop disposition (sponsor-signed or explicit pending)."
+    non_goals:
+      - "Agentstream default replacement"
+      - "Automatic tied-bundle methodology promotion"
+      - "LLM-driven A/B implementer nodes"
+      - "Phase 8+ full checklist graph"
+    success_criteria:
+      - "p7-paired-readout-metrics.v1.json present"
+      - "phase-7-convergence.md complete with metric families sourced"
+      - "Program checklist P7 readout exit recorded"
+      - "Sponsor disposition artifact or dated pending follow-up"
+    unchanged_behavior: "tools/langgraph-pilot implementation from P1–P6 remains unless disposition Extend authorizes new scope."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: "pre_implementation"
+      project_id: "stdd-project"
+      request_token: "PLAN-TIED-LG-P7-CONVERGENCE"
+      run_id: "p7-refine-plan-20261107"
+      scope: []
+      scope_hash: "~"
+    checklist_gate:
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    command_seq:
+      - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
+    manifest_reference: null
+    proof_boundaries:
+      - "agentstream_baseline_citation_or_single_run"
+      - "fixture_client_optional_smoke"
+      - "readout_and_documentation_primary"
+  impact_analysis:
+    impl_inventory_notes: "Mostly working-folder evidence; optional single JSON schema unit test in pilot."
+    modules_or_boundaries:
+      - "docs/langgraph/plan-tied-lg-p7-evaluation-convergence.md"
+      - "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/"
+      - "tied-project/working/PLAN-TIED-LG-P7-CONVERGENCE/evidence/"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "readout_complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-LG-P7-CONVERGENCE"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    prior_depth_tier: null
+    profile_depth: "minimal"
+    recorded_at: "2026-11-07"
+    title: "LangGraph program P7 evaluation and convergence readout"
+  risk_analysis:
+    abuse_cases:
+      - "disposition-chosen-without-agentstream-arm"
+      - "metrics-invented-without-gate-receipts"
+      - "pilot-weakens-gates-to-favor-langgraph"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Convergence claims first-pass gate acceptance without linking gate JSON paths."
+        - "Extend disposition opened without proof boundary and separate charter."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Operator wall time compared across unlike scopes (different REQ or checklist depth)."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/langgraph/plan-tied-lg-p7-evaluation-convergence.md"
+        - "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK/evidence/closeout-run-close-out-gates.json"
+        - "tied-project/working/PLAN-TIED-LG-P7-CONVERGENCE/evidence/risk-assessment-evidence.md"
+      falsification_questions:
+        - "What evidence would force Compose instead of Extend?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "P7 readout compares executors using gate receipts and trial evidence; no integrated adversarial activation."
+      research_profile: "evaluation-readout"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable_minimal"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-05-31"
+      owner: "Program sponsor"
+      summary: "Disposition may be taken without symmetric agentstream arm if baseline packet incomplete."
+    risks:
+      - "Asymmetric A/B scopes between pilot and agentstream runs"
+      - "Program evidence registry stale vs wave exits"
+    scenarios:
+      - "Sponsor chooses Extend without proof boundary charter"
+  test_strategy:
+    composition_tests: []
+    integration_tests:
+      - "Optional sponsor agentstream smoke on fixture client"
+    unit_tests:
+      - "Optional metrics JSON schema test in pilot"
