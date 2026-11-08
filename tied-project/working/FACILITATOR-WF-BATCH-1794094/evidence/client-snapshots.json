@@ -1,0 +1,1499 @@
+[
+  {
+    "client_id": "1794093680",
+    "dir": "1794093680-wf-agentstream-wf-03-cursor-lunahigh",
+    "root": "/Users/fareed/Documents/dev/test/1794093680-wf-agentstream-wf-03-cursor-lunahigh",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-03",
+      "workspace": "/Users/fareed/Documents/dev/test/1794093680-wf-agentstream-wf-03-cursor-lunahigh",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-high-fast",
+      "model_config": "luna-high",
+      "disposable_tag": "wf-agentstream-wf-03-cursor-lunahigh",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-07T23:21:21.000Z",
+      "finished_at": "2026-11-07T23:27:58.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "luna-high",
+      "model_slug": "gpt-5.6-luna-high-fast",
+      "trial": "WF-03",
+      "request_token": "REQ-WF_TRIAL_PRODUCER_CONSUMER_WIRING",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "phase": "add-feature",
+      "product_paths": [
+        "src/"
+      ],
+      "planned_modules": [
+        "producer",
+        "consumer",
+        "wiring"
+      ],
+      "planned_test_boundary": "Non-UI Node test of the wiring module; no graphical UI startup.",
+      "status": "close-out-incomplete",
+      "sponsor_turns": [
+        {
+          "skill": "add-feature",
+          "ordinal": 1,
+          "notes": "REQ, CITDP draft, locked-stack PLAN, tracker, methodology evidence, and phase handoff scaffolded."
+        },
+        {
+          "skill": "refine-plan",
+          "ordinal": 2,
+          "notes": "Blocked: no refined plan was produced; producer payload, consumer behavior, and module contracts remain unresolved."
+        },
+        {
+          "skill": "build-plan",
+          "ordinal": 3,
+          "notes": "Blocked by the pre-implementation sequence guard; no ARCH/IMPL records, product modules, or RED tests are present."
+        },
+        {
+          "skill": "close-out",
+          "ordinal": 4,
+          "notes": "Attempted: envelope validated with zero blocking gaps, but tied_gate_check returned allowed=false; tests found zero test files and typecheck could not run because tsc is not installed. close_out_gate_receipt is not set."
+        }
+      ],
+      "close_out_gate_receipt": null
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-07T23:21:54.585Z",
+      "capture_path": "tied_cli_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "05ba1f39860ad7208dd4f73777092871d61c98f3|05ba1f3|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 0\n\u2139 suites 0\n\u2139 pass 0\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 3.533417",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 0,
+    "test_pass": 0
+  },
+  {
+    "client_id": "1794094975",
+    "dir": "1794094975-wf-agentstream-wf-01-cursor-lunalow",
+    "root": "/Users/fareed/Documents/dev/test/1794094975-wf-agentstream-wf-01-cursor-lunalow",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-01",
+      "workspace": "/Users/fareed/Documents/dev/test/1794094975-wf-agentstream-wf-01-cursor-lunalow",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "model_config": "luna-low",
+      "disposable_tag": "wf-agentstream-wf-01-cursor-lunalow",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-07T23:42:55.000Z",
+      "finished_at": "2026-11-07T23:50:09.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "luna-low",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature",
+          "status": "recorded",
+          "gate_receipt": null
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan",
+          "status": "recorded",
+          "gate_receipt": null
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan",
+          "status": "pending",
+          "gate_receipt": null
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "status": "incomplete",
+          "close_out_gate_receipt": null
+        }
+      ],
+      "interactions": []
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-07T23:43:20.772Z",
+      "capture_path": "tied_cli_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "f667a1ec5dbd354de142c7cbc31bccd75cedc98e|f667a1e|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 0\n\u2139 suites 0\n\u2139 pass 0\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 3.241209",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 0,
+    "test_pass": 0
+  },
+  {
+    "client_id": "1794095569",
+    "dir": "1794095569-wf-agentstream-wf-02-cursor-lunalow",
+    "root": "/Users/fareed/Documents/dev/test/1794095569-wf-agentstream-wf-02-cursor-lunalow",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-02",
+      "workspace": "/Users/fareed/Documents/dev/test/1794095569-wf-agentstream-wf-02-cursor-lunalow",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "model_config": "luna-low",
+      "disposable_tag": "wf-agentstream-wf-02-cursor-lunalow",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-07T23:52:50.000Z",
+      "finished_at": "2026-11-07T23:57:54.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "luna-low",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature",
+          "status": "completed",
+          "evidence_refs": [
+            "evidence/phase-handoff-add-feature.md"
+          ]
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan",
+          "status": "completed",
+          "evidence_refs": [
+            "PLAN.md",
+            "evidence/phase-handoff-refine-plan.md"
+          ]
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan",
+          "status": "not_run",
+          "evidence_refs": []
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "status": "blocked",
+          "close_out_gate_receipt": null,
+          "evidence_refs": [
+            "evidence/phase-handoff-close-out.md"
+          ]
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-07T23:53:22.599Z",
+      "capture_path": "tied_cli_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "c1de4a1dd3e968ef33fde777d41cc1eb93deb907|c1de4a1|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 0\n\u2139 suites 0\n\u2139 pass 0\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 3.310083",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 0,
+    "test_pass": 0
+  },
+  {
+    "client_id": "1794095886",
+    "dir": "1794095886-wf-agentstream-wf-03-cursor-lunalow",
+    "root": "/Users/fareed/Documents/dev/test/1794095886-wf-agentstream-wf-03-cursor-lunalow",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-03",
+      "workspace": "/Users/fareed/Documents/dev/test/1794095886-wf-agentstream-wf-03-cursor-lunalow",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "model_config": "luna-low",
+      "disposable_tag": "wf-agentstream-wf-03-cursor-lunalow",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-07T23:58:06.000Z",
+      "finished_at": "2026-11-08T00:04:54.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "cursor-agentstream-four-phase wrapper; sponsor turns are recorded below; not manual IDE @skills invocation",
+      "model_config": "luna-low",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "trial": "WF-03",
+      "request_token": "REQ-WF_TRIAL_TRADITIONAL_FOUR_PHASE",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature",
+          "status": "completed"
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan",
+          "status": "completed"
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan",
+          "status": "not_completed",
+          "note": "No product implementation or RED tests are present in the working tree."
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "status": "completed",
+          "close_out_gate_receipt": "tied-bundle/working/REQ-WF_TRIAL_TRADITIONAL_FOUR_PHASE/gates/close_out-2026-11-08T00-04-20-204Z.json",
+          "close_out_allowed": false
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-07T23:58:46.700Z",
+      "capture_path": "tied_cli_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "adbed6e27b1be3821e2062fcef1e0db1b62486ea|adbed6e|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 0\n\u2139 suites 0\n\u2139 pass 0\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 3.453083",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 0,
+    "test_pass": 0
+  },
+  {
+    "client_id": "1794096361",
+    "dir": "1794096361-wf-agentstream-wf-04-cursor-lunalow",
+    "root": "/Users/fareed/Documents/dev/test/1794096361-wf-agentstream-wf-04-cursor-lunalow",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-04",
+      "workspace": "/Users/fareed/Documents/dev/test/1794096361-wf-agentstream-wf-04-cursor-lunalow",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "model_config": "luna-low",
+      "disposable_tag": "wf-agentstream-wf-04-cursor-lunalow",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T00:06:02.000Z",
+      "finished_at": "2026-11-08T00:12:23.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn); close-out wrapper executed with the cursor-agentstream-four-phase harness",
+      "model_config": "luna-low",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature",
+          "status": "completed",
+          "evidence": "evidence/phase-handoff-add-feature.md"
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan",
+          "status": "completed",
+          "evidence": "evidence/phase-handoff-refine-plan.md"
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan",
+          "status": "completed",
+          "evidence": "evidence/phase-handoff-build-plan.md"
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "status": "blocked",
+          "close_out_gate_receipt": "tied-bundle/working/REQ-FIXTURE_REQUIREMENT_MARKER_SCAN/gates/close_out-2026-11-08T00-11-57-579Z.json",
+          "evidence": "evidence/phase-handoff-close-out.md"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T00:06:27.690Z",
+      "capture_path": "tied_cli_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "228ab91fd76cc4512754598ce2fbf698a55b785c|228ab91|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 7\n\u2139 suites 0\n\u2139 pass 7\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 91.891917",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 7,
+    "test_pass": 7
+  },
+  {
+    "client_id": "1794096774",
+    "dir": "1794096774-wf-agentstream-wf-05-cursor-lunalow",
+    "root": "/Users/fareed/Documents/dev/test/1794096774-wf-agentstream-wf-05-cursor-lunalow",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-05",
+      "workspace": "/Users/fareed/Documents/dev/test/1794096774-wf-agentstream-wf-05-cursor-lunalow",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "model_config": "luna-low",
+      "disposable_tag": "wf-agentstream-wf-05-cursor-lunalow",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T00:12:55.000Z",
+      "finished_at": "2026-11-08T00:20:46.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn); close-out wrapper recorded gate tooling as unavailable",
+      "model_config": "luna-low",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature",
+          "status": "completed"
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan",
+          "status": "completed"
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan",
+          "status": "completed"
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "status": "incomplete",
+          "close_out_gate_receipt": null
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T00:13:19.852Z",
+      "capture_path": "tied_cli_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "e920a0684576f356c1f97b10dda9fdc84a428a8d|e920a06|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 5\n\u2139 suites 0\n\u2139 pass 5\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 79.948334",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-CSV_ROW_OBJECT_MAPPING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-CSV_ROW_OBJECT_MAPPING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n",
+    "test_count": 5,
+    "test_pass": 5
+  },
+  {
+    "client_id": "1794097458",
+    "dir": "1794097458-wf-agentstream-wf-06-cursor-lunalow",
+    "root": "/Users/fareed/Documents/dev/test/1794097458-wf-agentstream-wf-06-cursor-lunalow",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-06",
+      "workspace": "/Users/fareed/Documents/dev/test/1794097458-wf-agentstream-wf-06-cursor-lunalow",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "model_config": "luna-low",
+      "disposable_tag": "wf-agentstream-wf-06-cursor-lunalow",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T00:24:19.000Z",
+      "finished_at": "2026-11-08T00:31:08.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "luna-low",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "turn": "add-feature"
+        },
+        {
+          "ordinal": 2,
+          "turn": "refine-plan"
+        },
+        {
+          "ordinal": 3,
+          "turn": "build-plan"
+        },
+        {
+          "ordinal": 4,
+          "turn": "close-out",
+          "close_out_gate_receipt": null,
+          "status": "blocked",
+          "reason": "verification-gate remains pending in checklist tracker"
+        }
+      ],
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "turn": "add-feature"
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T00:24:43.892Z",
+      "capture_path": "tied_cli_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "4af5050c368dc3aa08f4f88d7ae6e636f3d87b2e|4af5050|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 5\n\u2139 suites 0\n\u2139 pass 5\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 79.186166",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 5,
+    "test_pass": 5
+  },
+  {
+    "client_id": "1794099967",
+    "dir": "1794099967-wf-agentstream-wf-07-cursor-lunalow",
+    "root": "/Users/fareed/Documents/dev/test/1794099967-wf-agentstream-wf-07-cursor-lunalow",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-07",
+      "workspace": "/Users/fareed/Documents/dev/test/1794099967-wf-agentstream-wf-07-cursor-lunalow",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "model_config": "luna-low",
+      "disposable_tag": "wf-agentstream-wf-07-cursor-lunalow",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T01:06:08.000Z",
+      "finished_at": "2026-11-08T01:13:09.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn); close-out executed through the close-out skill, not manual IDE @skills",
+      "model_config": "luna-low",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature",
+          "status": "recorded"
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan",
+          "status": "recorded"
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan",
+          "status": "recorded"
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "status": "recorded",
+          "close_out_gate_receipt": "tied-bundle/working/REQ-WF_TRIAL_CONFIG_LOADER/gates/close_out-2026-11-08T01-11-03-658Z.json"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T01:06:43.499Z",
+      "capture_path": "tied_cli_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "e46a7fa18ab07ae4bf3f375afec6897ba03b52b2|e46a7fa|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 3\n\u2139 suites 1\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 79.524",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 3,
+    "test_pass": 3
+  },
+  {
+    "client_id": "1794100604",
+    "dir": "1794100604-wf-agentstream-wf-08-cursor-lunalow",
+    "root": "/Users/fareed/Documents/dev/test/1794100604-wf-agentstream-wf-08-cursor-lunalow",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-08",
+      "workspace": "/Users/fareed/Documents/dev/test/1794100604-wf-agentstream-wf-08-cursor-lunalow",
+      "harness": "cursor",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "model_config": "luna-low",
+      "disposable_tag": "wf-agentstream-wf-08-cursor-lunalow",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T01:16:45.000Z",
+      "finished_at": "2026-11-08T01:22:19.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "cursor-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn); close-out gate receipt persisted, but unified close-out blocked by malformed adversarial-inquiry CITDP and missing evidence envelope",
+      "model_config": "luna-low",
+      "model_slug": "gpt-5.6-luna-low-fast",
+      "request_token": "REQ-WF_TRIAL_STATE_MACHINE",
+      "workflow": [
+        "add-feature",
+        "refine-plan",
+        "build-plan",
+        "close-out"
+      ],
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature"
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan"
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan"
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "close_out_gate_receipt": "tied-bundle/working/REQ-WF_TRIAL_STATE_MACHINE/gates/close_out-2026-11-08T01-21-46-939Z.json"
+        }
+      ],
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json"
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "capture_path": "tied_cli_server_info",
+      "captured_at": "2026-11-08T01:17:06.723Z",
+      "turn": "add-feature",
+      "version": "4.2.1",
+      "source": "install_json"
+    },
+    "git_head": "c182461f90810e265c3fe12aa4890da9b6044d65|c182461|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 2\n\u2139 suites 0\n\u2139 pass 2\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 80.735834",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 2,
+    "test_pass": 2
+  },
+  {
+    "client_id": "1794101529",
+    "dir": "1794101529-wf-agentstream-wf-01-claude-sonnet55",
+    "root": "/Users/fareed/Documents/dev/test/1794101529-wf-agentstream-wf-01-claude-sonnet55",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-01",
+      "workspace": "/Users/fareed/Documents/dev/test/1794101529-wf-agentstream-wf-01-claude-sonnet55",
+      "harness": "claude",
+      "model_slug": "claude-sonnet-5-5",
+      "model_config": "sonnet55",
+      "disposable_tag": "wf-agentstream-wf-01-claude-sonnet55",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T01:32:10.000Z",
+      "finished_at": "2026-11-08T01:38:01.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "claude-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "sonnet55",
+      "model_slug": "claude-sonnet-5-5",
+      "request_token": "REQ-SEMVER_COMPARATOR_SATISFIES",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "turns": [
+        {
+          "turn": 1,
+          "prompt_type": "add-feature",
+          "completed_at": "2026-11-08T01:33:26Z",
+          "artifacts": [
+            "PLAN.md",
+            "agent-req-implementation-checklist.yaml",
+            "citdp-draft.yaml",
+            "test-strategy.md",
+            "evidence/phase-handoff-add-feature.md"
+          ]
+        },
+        {
+          "turn": 2,
+          "prompt_type": "refine-plan",
+          "completed_at": "2026-11-08T01:34:13Z",
+          "artifacts": [
+            "evidence/phase-handoff-refine-plan.md"
+          ]
+        },
+        {
+          "turn": 3,
+          "prompt_type": "build-plan",
+          "completed_at": "2026-11-08T01:35:24Z",
+          "artifacts": [
+            "src/semver.ts",
+            "src/index.ts",
+            "src/semver.test.ts",
+            "README.md",
+            "evidence/phase-handoff-build-plan.md"
+          ]
+        },
+        {
+          "turn": 4,
+          "prompt_type": "close-out",
+          "completed_at": "2026-11-08T01:38:00Z",
+          "close_out_gate_receipt": "tied-project/working/REQ-SEMVER_COMPARATOR_SATISFIES/gates/close_out-2026-11-08T01-36-53-238Z.json",
+          "artifacts": [
+            "tied-project/citdp/CITDP-REQ-SEMVER_COMPARATOR_SATISFIES.yaml",
+            "evidence/request-evidence-envelope.v1.json",
+            "evidence/not-applicable-receipt.v1.json",
+            "evidence/git-hygiene-receipt-2026-11-07.md",
+            "evidence/proposed-commit-message.txt",
+            "evidence/traceable-commit-evidence.md",
+            "evidence/phase-handoff-close-out.md",
+            "CHANGELOG.md"
+          ]
+        }
+      ],
+      "sponsor_turns": [
+        {
+          "skill": "add-feature",
+          "ordinal": 1,
+          "notes": "REQ/PLAN/Tracker/draft CITDP scaffolded"
+        },
+        {
+          "skill": "refine-plan",
+          "ordinal": 2,
+          "notes": "ARCH/IMPL tokens + pseudo-code; BigInt decided; advisory pre_implementation diagnostic malformed_citdp:adversarial_inquiry"
+        },
+        {
+          "skill": "build-plan",
+          "ordinal": 3,
+          "notes": "RED then GREEN; npm test 11/11, typecheck clean"
+        },
+        {
+          "skill": "close-out",
+          "ordinal": 4,
+          "notes": "close_out gate allowed=true, envelope zero blocking gaps; reconcile process_grade B (thin_ledger); gate receipt: tied-project/working/REQ-SEMVER_COMPARATOR_SATISFIES/gates/close_out-2026-11-08T01-36-53-238Z.json"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T01:33:26Z",
+      "capture_path": "mcp_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "3f8de04404207126a2f97076020494b9155df225|3f8de04|feat(semver): add satisfies() single comparator",
+    "npm_test_tail": "\u2139 tests 11\n\u2139 suites 0\n\u2139 pass 11\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 82.164958",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 11,
+    "test_pass": 11
+  },
+  {
+    "client_id": "1794101881",
+    "dir": "1794101881-wf-agentstream-wf-02-claude-sonnet55",
+    "root": "/Users/fareed/Documents/dev/test/1794101881-wf-agentstream-wf-02-claude-sonnet55",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-02",
+      "workspace": "/Users/fareed/Documents/dev/test/1794101881-wf-agentstream-wf-02-claude-sonnet55",
+      "harness": "claude",
+      "model_slug": "claude-sonnet-5-5",
+      "model_config": "sonnet55",
+      "disposable_tag": "wf-agentstream-wf-02-claude-sonnet55",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T01:38:02.000Z",
+      "finished_at": "2026-11-08T01:42:11.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "claude-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "sonnet55",
+      "model_slug": "claude-sonnet-5-5",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "request_token": "REQ-DEDUP_LINES_CLI",
+      "workflow": [
+        "add-feature",
+        "refine-plan",
+        "build-plan",
+        "close-out"
+      ],
+      "turns": [
+        {
+          "turn": "add-feature",
+          "status": "complete",
+          "artifacts": [
+            "PLAN.md",
+            "tracker.yaml",
+            "evidence/citdp-draft.yaml",
+            "evidence/tied-methodology-version.session.v1.json",
+            "evidence/phase-handoff-add-feature.md",
+            "evidence/session-handoff.md"
+          ]
+        },
+        {
+          "turn": "refine-plan",
+          "status": "complete"
+        },
+        {
+          "turn": "build-plan",
+          "status": "complete"
+        },
+        {
+          "turn": "close-out",
+          "status": "incomplete",
+          "artifacts": [
+            "evidence/phase-handoff-close-out.md",
+            "evidence/request-evidence-envelope.v1.json",
+            "evidence/not-applicable-receipt.v1.json"
+          ]
+        }
+      ],
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "turn": "add-feature"
+        },
+        {
+          "ordinal": 2,
+          "turn": "refine-plan"
+        },
+        {
+          "ordinal": 3,
+          "turn": "build-plan"
+        },
+        {
+          "ordinal": 4,
+          "turn": "close-out",
+          "status": "incomplete",
+          "close_out_gate_receipt": null,
+          "gate_allowed": false,
+          "envelope_valid": true,
+          "commit": "skipped",
+          "blocker": "pending_required_step:sub-adversarial-inquiry-pass",
+          "gate_run_receipt_ignored": "tied-bundle/working/REQ-DEDUP_LINES_CLI/gates/close_out-2026-11-08T01-41-49-830Z.json",
+          "handoff": "evidence/phase-handoff-close-out.md"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T01:38:24.208Z",
+      "capture_path": "mcp_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "5a0ffef1aeb1fff02167998f6b252fc24218913c|5a0ffef|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 18\n\u2139 suites 0\n\u2139 pass 18\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 814.30225",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-DEDUP_LINES_CLI\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-DEDUP_LINES_CLI\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\":",
+    "test_count": 18,
+    "test_pass": 18
+  },
+  {
+    "client_id": "1794102131",
+    "dir": "1794102131-wf-agentstream-wf-03-claude-sonnet55",
+    "root": "/Users/fareed/Documents/dev/test/1794102131-wf-agentstream-wf-03-claude-sonnet55",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-03",
+      "workspace": "/Users/fareed/Documents/dev/test/1794102131-wf-agentstream-wf-03-claude-sonnet55",
+      "harness": "claude",
+      "model_slug": "claude-sonnet-5-5",
+      "model_config": "sonnet55",
+      "disposable_tag": "wf-agentstream-wf-03-claude-sonnet55",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T01:42:11.000Z",
+      "finished_at": "2026-11-08T01:46:39.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "claude-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "sonnet55",
+      "model_slug": "claude-sonnet-5-5",
+      "request_token": "REQ-PRODUCER_CONSUMER_WIRING",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature",
+          "handoff": "tied-project/working/REQ-PRODUCER_CONSUMER_WIRING/evidence/phase-handoff-add-feature.md"
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan",
+          "handoff": "tied-project/working/REQ-PRODUCER_CONSUMER_WIRING/evidence/phase-handoff-refine-plan.md"
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan",
+          "handoff": "tied-project/working/REQ-PRODUCER_CONSUMER_WIRING/evidence/phase-handoff-build-plan.md"
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "handoff": "tied-project/working/REQ-PRODUCER_CONSUMER_WIRING/evidence/phase-handoff-close-out.md",
+          "close_out_gate_receipt": "tied-project/working/REQ-PRODUCER_CONSUMER_WIRING/gates/close_out-2026-11-08T01-46-01-709Z.json"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T01:42:31.714Z",
+      "capture_path": "mcp_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "bc722e89e1b02354eb658a353d68d51f90be980e|bc722e8|feat(wiring): add producer/consumer log summary",
+    "npm_test_tail": "\u2139 tests 9\n\u2139 suites 0\n\u2139 pass 9\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 84.515",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 9,
+    "test_pass": 9
+  },
+  {
+    "client_id": "1794102400",
+    "dir": "1794102400-wf-agentstream-wf-04-claude-sonnet55",
+    "root": "/Users/fareed/Documents/dev/test/1794102400-wf-agentstream-wf-04-claude-sonnet55",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-04",
+      "workspace": "/Users/fareed/Documents/dev/test/1794102400-wf-agentstream-wf-04-claude-sonnet55",
+      "harness": "claude",
+      "model_slug": "claude-sonnet-5-5",
+      "model_config": "sonnet55",
+      "disposable_tag": "wf-agentstream-wf-04-claude-sonnet55",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T01:46:40.000Z",
+      "finished_at": "2026-11-08T01:51:48.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "claude-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "sonnet55",
+      "model_slug": "claude-sonnet-5-5",
+      "request_token": "REQ-REQID_MARKER_SCAN_CLI",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "phase": "add-feature",
+          "skill": "add-feature",
+          "completed": true
+        },
+        {
+          "ordinal": 2,
+          "phase": "refine-plan",
+          "skill": "refine-plan",
+          "completed": true
+        },
+        {
+          "ordinal": 3,
+          "phase": "build-plan",
+          "skill": "build-plan",
+          "completed": true
+        },
+        {
+          "ordinal": 4,
+          "phase": "close-out",
+          "skill": "close-out",
+          "completed": true,
+          "close_out_gate_receipt": "tied-project/working/REQ-REQID_MARKER_SCAN_CLI/gates/close_out-2026-11-08T01-50-50-084Z.json"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T01:50:00Z",
+      "capture_path": "mcp_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "4b09c910581fae4d633b609f5e34f15f99a3530c|4b09c91|feat(reqid-scan): add REQ marker scan CLI",
+    "npm_test_tail": "\u2139 tests 7\n\u2139 suites 0\n\u2139 pass 7\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 83.703917",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 7,
+    "test_pass": 7
+  },
+  {
+    "client_id": "1794102708",
+    "dir": "1794102708-wf-agentstream-wf-05-claude-sonnet55",
+    "root": "/Users/fareed/Documents/dev/test/1794102708-wf-agentstream-wf-05-claude-sonnet55",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-05",
+      "workspace": "/Users/fareed/Documents/dev/test/1794102708-wf-agentstream-wf-05-claude-sonnet55",
+      "harness": "claude",
+      "model_slug": "claude-sonnet-5-5",
+      "model_config": "sonnet55",
+      "disposable_tag": "wf-agentstream-wf-05-claude-sonnet55",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T01:51:48.000Z",
+      "finished_at": "2026-11-08T01:56:02.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "claude-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "sonnet55",
+      "model_slug": "claude-sonnet-5-5",
+      "request_token": "REQ-CSV_ROW_MAPPER",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "turns": [
+        {
+          "turn": 1,
+          "skill": "add-feature",
+          "outcome": "plan scaffolded",
+          "captured_at": "2026-11-08T01:52:45Z"
+        },
+        {
+          "turn": 2,
+          "skill": "refine-plan",
+          "outcome": "stack locked; refinements R-1..R-8 recorded"
+        },
+        {
+          "turn": 3,
+          "skill": "build-plan",
+          "outcome": "RED archived; GREEN npm test 22/22"
+        },
+        {
+          "turn": 4,
+          "skill": "close-out",
+          "outcome": "incomplete: close_out gate allowed=false; commit skipped",
+          "close_out_gate_receipt": "tied-bundle/working/REQ-CSV_ROW_MAPPER/gates/close_out-2026-11-08T01-55-31-500Z.json"
+        }
+      ],
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "skill": "add-feature"
+        },
+        {
+          "ordinal": 2,
+          "skill": "refine-plan"
+        },
+        {
+          "ordinal": 3,
+          "skill": "build-plan"
+        },
+        {
+          "ordinal": 4,
+          "skill": "close-out"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T01:52:45Z",
+      "capture_path": "mcp_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "6a562860f93b5ec317438853862694b8a57c139c|6a56286|TIED 4.2.1",
+    "npm_test_tail": "\u2139 tests 22\n\u2139 suites 6\n\u2139 pass 22\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 82.131917",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-CSV_ROW_MAPPER\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-CSV_ROW_MAPPER\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"",
+    "test_count": 22,
+    "test_pass": 22
+  },
+  {
+    "client_id": "1794102962",
+    "dir": "1794102962-wf-agentstream-wf-06-claude-sonnet55",
+    "root": "/Users/fareed/Documents/dev/test/1794102962-wf-agentstream-wf-06-claude-sonnet55",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-06",
+      "workspace": "/Users/fareed/Documents/dev/test/1794102962-wf-agentstream-wf-06-claude-sonnet55",
+      "harness": "claude",
+      "model_slug": "claude-sonnet-5-5",
+      "model_config": "sonnet55",
+      "disposable_tag": "wf-agentstream-wf-06-claude-sonnet55",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T01:56:02.000Z",
+      "finished_at": "2026-11-08T02:00:22.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "claude-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "sonnet55",
+      "model_slug": "claude-sonnet-5-5",
+      "req_token": "REQ-TOKEN_BUCKET_RATE_LIMITER",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "prompt_type": "add-feature",
+          "handoff": "evidence/phase-handoff-add-feature.md"
+        },
+        {
+          "ordinal": 2,
+          "prompt_type": "refine-plan",
+          "handoff": "evidence/phase-handoff-refine-plan.md"
+        },
+        {
+          "ordinal": 3,
+          "prompt_type": "build-plan",
+          "handoff": "evidence/phase-handoff-build-plan.md"
+        },
+        {
+          "ordinal": 4,
+          "prompt_type": "close-out",
+          "handoff": "evidence/phase-handoff-close-out.md",
+          "close_out_gate_receipt": "tied-project/working/REQ-TOKEN_BUCKET_RATE_LIMITER/gates/close_out-2026-11-08T01-59-42-245Z.json"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T01:56:44Z",
+      "capture_path": "mcp_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "b7c0e1da43db6b7fb45f63245e7c9a520220d726|b7c0e1d|feat(rate-limit): add token bucket rate limiter",
+    "npm_test_tail": "\u2139 tests 10\n\u2139 suites 0\n\u2139 pass 10\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 81.186416",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE\": {\n      \"format\": \"yaml\",\n      \"has_file\":",
+    "test_count": 10,
+    "test_pass": 10
+  },
+  {
+    "client_id": "1794103222",
+    "dir": "1794103222-wf-agentstream-wf-07-claude-sonnet55",
+    "root": "/Users/fareed/Documents/dev/test/1794103222-wf-agentstream-wf-07-claude-sonnet55",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-07",
+      "workspace": "/Users/fareed/Documents/dev/test/1794103222-wf-agentstream-wf-07-claude-sonnet55",
+      "harness": "claude",
+      "model_slug": "claude-sonnet-5-5",
+      "model_config": "sonnet55",
+      "disposable_tag": "wf-agentstream-wf-07-claude-sonnet55",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T02:00:22.000Z",
+      "finished_at": "2026-11-08T02:07:25.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "schema": "trial-workflow-interaction-inventory.v1",
+      "analysis_label": "traditional-workflow-trial.v1",
+      "trial": "PROMPT-WF-07",
+      "request_token": "REQ-LAYERED_CONFIG_LOADER",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "claude-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "sonnet55",
+      "model_slug": "claude-sonnet-5-5",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "turns": [
+        {
+          "turn": 1,
+          "ordinal": 1,
+          "skill": "add-feature",
+          "status": "completed"
+        },
+        {
+          "turn": 2,
+          "ordinal": 2,
+          "skill": "refine-plan",
+          "status": "completed"
+        },
+        {
+          "turn": 3,
+          "ordinal": 3,
+          "skill": "build-plan",
+          "status": "completed"
+        },
+        {
+          "turn": 4,
+          "ordinal": 4,
+          "skill": "close-out",
+          "status": "completed",
+          "close_out_gate_receipt": "tied-project/working/REQ-LAYERED_CONFIG_LOADER/gates/close_out-2026-11-08T02-06-20-083Z.json"
+        }
+      ],
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "skill": "add-feature",
+          "status": "completed"
+        },
+        {
+          "ordinal": 2,
+          "skill": "refine-plan",
+          "status": "completed"
+        },
+        {
+          "ordinal": 3,
+          "skill": "build-plan",
+          "status": "completed"
+        },
+        {
+          "ordinal": 4,
+          "skill": "close-out",
+          "status": "completed",
+          "close_out_gate_receipt": "tied-project/working/REQ-LAYERED_CONFIG_LOADER/gates/close_out-2026-11-08T02-06-20-083Z.json"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T02:00:41.717Z",
+      "capture_path": "mcp_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "23a655e60c4bd1b4530a7abd7b34b69652528132|23a655e|feat(config): add layered loadConfig library",
+    "npm_test_tail": "\u2139 tests 23\n\u2139 suites 9\n\u2139 pass 23\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 84.690625",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-LAYERED_CONFIG_LOADER\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-LAYERED_CONFIG_LOADER\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n  ",
+    "test_count": 23,
+    "test_pass": 23
+  },
+  {
+    "client_id": "1794103645",
+    "dir": "1794103645-wf-agentstream-wf-08-claude-sonnet55",
+    "root": "/Users/fareed/Documents/dev/test/1794103645-wf-agentstream-wf-08-claude-sonnet55",
+    "manifest": {
+      "schema": "wf-trial-orchestrator-run.v1",
+      "orchestrator_script": "workflow-trial-agentstream.sh",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "wf_id": "WF-08",
+      "workspace": "/Users/fareed/Documents/dev/test/1794103645-wf-agentstream-wf-08-claude-sonnet55",
+      "harness": "claude",
+      "model_slug": "claude-sonnet-5-5",
+      "model_config": "sonnet55",
+      "disposable_tag": "wf-agentstream-wf-08-claude-sonnet55",
+      "dry_run": false,
+      "log_capture_default": true,
+      "evidence_rel_dir": "tied-project/working/wf-trial-orchestrator-run/evidence",
+      "files": {
+        "stdout_log": "process.stdout.log",
+        "stderr_log": "process.stderr.log",
+        "manifest": "wf-trial-orchestrator-run.v1.json"
+      },
+      "bootstrap_stderr_prepended": true,
+      "started_at": "2026-11-08T02:07:26.000Z",
+      "finished_at": "2026-11-08T02:12:16.000Z",
+      "exit_code": 0
+    },
+    "inventory": {
+      "analysis_label": "traditional-workflow-trial.v1",
+      "implementation_stack_id": "wf-trial-ts-node-test-v1",
+      "harness": "claude-agentstream-four-phase",
+      "harness_notes": "run-traditional-four-phase-agentstream.sh (four feature-spec batch turns; new agent session per turn)",
+      "model_config": "sonnet55",
+      "model_slug": "claude-sonnet-5-5",
+      "request_token": "REQ-JOB_STATE_MACHINE",
+      "tied_methodology_version": "4.2.1",
+      "tied_methodology_version_source": "install_json",
+      "turns": [
+        {
+          "turn": 1,
+          "skill": "add-feature",
+          "outcome": "completed",
+          "plan_path": "tied-project/working/REQ-JOB_STATE_MACHINE/PLAN.md"
+        },
+        {
+          "turn": 2,
+          "skill": "refine-plan",
+          "outcome": "completed",
+          "handoff_path": "tied-project/working/REQ-JOB_STATE_MACHINE/evidence/phase-handoff-refine-plan.md"
+        },
+        {
+          "turn": 3,
+          "skill": "build-plan",
+          "outcome": "completed",
+          "handoff_path": "tied-project/working/REQ-JOB_STATE_MACHINE/evidence/phase-handoff-build-plan.md"
+        },
+        {
+          "turn": 4,
+          "skill": "close-out",
+          "outcome": "completed",
+          "close_out_gate_receipt": "tied-project/working/REQ-JOB_STATE_MACHINE/gates/close_out-2026-11-08T02-11-16-035Z.json",
+          "handoff_path": "tied-project/working/REQ-JOB_STATE_MACHINE/evidence/phase-handoff-close-out.md"
+        }
+      ],
+      "sponsor_turns": [
+        {
+          "ordinal": 1,
+          "skill": "add-feature",
+          "outcome": "completed"
+        },
+        {
+          "ordinal": 2,
+          "skill": "refine-plan",
+          "outcome": "completed"
+        },
+        {
+          "ordinal": 3,
+          "skill": "build-plan",
+          "outcome": "completed"
+        },
+        {
+          "ordinal": 4,
+          "skill": "close-out",
+          "outcome": "completed"
+        }
+      ]
+    },
+    "semver_session": {
+      "schema": "tied-methodology-version.session.v1",
+      "version": "4.2.1",
+      "source": "install_json",
+      "captured_at": "2026-11-08T02:07:43.284Z",
+      "capture_path": "mcp_server_info",
+      "turn": "add-feature"
+    },
+    "git_head": "bec900094f438ab76d19b988c7b35824c1bbc0a5|bec9000|feat(job-state): explicit job state machine",
+    "npm_test_tail": "\u2139 tests 5\n\u2139 suites 0\n\u2139 pass 5\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 79.3945",
+    "npm_test_exit": 0,
+    "consistency_raw": "{\n  \"detail_files\": {\n    \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_PROFILE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_PROFILE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-EVIDENCE_CHAIN_REPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-EVIDENCE_CHAIN_REPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-FEEDBACK_STORAGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-FEEDBACK_STORAGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-JOB_STATE_MACHINE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-JOB_STATE_MACHINE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"token\": \"ARCH-METHODOLOGY-LEARNING-EXPERIMENT\",\n      \"top_level_key_ok\": true\n    },\n    \"ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT\": {\n      \"format\": \"yaml\",\n      \"has_file\": true,\n      \"ref_issues\": [],\n      \"tok",
+    "test_count": 5,
+    "test_pass": 5
+  }
+]

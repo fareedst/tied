@@ -1,0 +1,1 @@
+bc722e89e1b02354eb658a353d68d51f90be980e feat(wiring): add producer/consumer log summary

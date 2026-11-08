@@ -1,0 +1,8 @@
+docs(demos): WF-06/07 Haiku facilitator readouts
+
+Record Claude Haiku 5.5 agentstream trials for PROMPT-WF-06
+(REQ-TOKEN_BUCKET_RATE_LIMITER) and PROMPT-WF-07 (REQ-CONFIG_LAYERED_LOADER);
+update demos index, WF catalog, Composer WF-06 pair link, and Unreleased CHANGELOG.
+
+Completion signals: process pass (facilitator minimal depth); machine close_out N/A;
+adherence N/A. Evidence: tied-project/working/FACILITATOR-WF-0{6,7}-*/evidence/.

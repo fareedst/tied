@@ -1,0 +1,19 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ guard: fixtures root is not tied-project (0.649125ms)
+✔ scanner finds exact markers, sorted (1.333458ms)
+✔ index loader skips comments and blanks (0.267667ms)
+✔ compare partitions (0.22775ms)
+✔ report json and text (0.245292ms)
+✔ cli exit codes (0.352292ms)
+✔ cli: unreferenced-only run exits 0 (0.337792ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 103.514084

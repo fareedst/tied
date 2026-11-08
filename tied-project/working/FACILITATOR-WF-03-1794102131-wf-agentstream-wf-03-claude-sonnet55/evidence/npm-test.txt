@@ -1,0 +1,21 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ empty summary has all levels at zero (1.302833ms)
+✔ counts per level and total (0.114166ms)
+✔ summary is an isolated snapshot (0.076083ms)
+✔ skips blank lines but keeps 1-based lineNo gaps (1.203083ms)
+✔ level is case-insensitive with optional spaces around colon (0.063333ms)
+✔ unknown prefix becomes INFO with whole trimmed line (0.047917ms)
+✔ message is trimmed (0.053417ms)
+✔ mixed input flows end to end (headless) (1.42725ms)
+✔ empty input yields zero summary (0.0905ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.215459

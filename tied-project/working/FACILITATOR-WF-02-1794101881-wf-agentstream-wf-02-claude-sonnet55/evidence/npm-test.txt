@@ -1,0 +1,30 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ default keeps first (92.760208ms)
+✔ reordered input default (92.665125ms)
+✔ --keep=last (172.156583ms)
+✔ --keep=first explicit (82.278916ms)
+✔ empty stdin (77.520917ms)
+✔ CRLF and missing final newline (83.444625ms)
+✔ --help documents policy and non-guarantees (80.295834ms)
+✔ unknown flag and bad --keep exit 2 (153.226792ms)
+✔ large input smoke (79.727417ms)
+✔ ordering A a,b,a,c (1.596709ms)
+✔ ordering B c,a,b,a differs per policy (0.154875ms)
+✔ ordering C reversed (0.12775ms)
+✔ a,b,a policies differ (0.077292ms)
+✔ empty and all-same (0.082709ms)
+✔ empty lines are lines (0.050292ms)
+✔ no case folding or trimming (0.045084ms)
+✔ keep-first is lazy/streaming (0.062875ms)
+✔ splitLines: CRLF, partial final, chunk joins (0.228709ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1025.515208

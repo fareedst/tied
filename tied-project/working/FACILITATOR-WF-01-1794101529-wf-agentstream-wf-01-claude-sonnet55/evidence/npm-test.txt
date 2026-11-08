@@ -1,0 +1,23 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ operators (0.963875ms)
+✔ whitespace tolerated (0.057875ms)
+✔ core precedence is numeric (0.042834ms)
+✔ prerelease ordering chain (SemVer 2.0.0 §11) (0.108833ms)
+✔ prerelease numeric vs alphanumeric (0.056583ms)
+✔ build metadata ignored (0.03625ms)
+✔ leading v accepted (0.035709ms)
+✔ big numbers use BigInt (0.048166ms)
+✔ parseComparator defaults to = (0.056292ms)
+✔ malformed input throws TypeError (0.299375ms)
+✔ index exports satisfies (0.040916ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.936167
