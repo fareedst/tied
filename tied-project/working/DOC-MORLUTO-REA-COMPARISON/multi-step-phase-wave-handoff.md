@@ -126,6 +126,7 @@ git -C "$REPO" status --short \
 
 ## Changelog
 
+- **2026-11-08** — traceable-commit `2f544eb0` — [rea-with-tied-operator-guide.md](./rea-with-tied-operator-guide.md).
 - **2026-11-08** — traceable-commit `eb2c9dd1` — dual-MCP checklist, vocab, matrix, handoffs.
 - **2026-11-08** — `build-plan`: [dual-mcp-operator-checklist.md](./dual-mcp-operator-checklist.md); [build-plan-dual-mcp-checklist-handoff.md](./evidence/build-plan-dual-mcp-checklist-handoff.md).
 - **2026-11-08** — Sponsor: **REA install / stdd CI** removed from initiative scope (separate effort); plans/handoffs/matrix row 19 sponsor_notes updated.

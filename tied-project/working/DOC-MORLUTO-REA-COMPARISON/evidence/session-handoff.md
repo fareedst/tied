@@ -61,6 +61,7 @@
 - 2026-11-08 refine: REA+TIED handoff — add-feature **to the TIED system**; goals **existing implementation R+A+I** vs **transform R+A+I** (other platform)
 - 2026-11-08 traceable-commit: `eb2c9dd1` dual-MCP checklist + vocab/matrix/handoff sync
 - 2026-11-08 operator guide: `rea-with-tied-operator-guide.md` (single tracked REA×TIED doc)
+- 2026-11-08 traceable-commit: `2f544eb0` operator guide + cross-links
 
 ## Environment
 
