@@ -6,7 +6,7 @@
 | **date** | 2026-11-08 |
 | **request_token** | `REQ-TIED_INSTALL_JSON_REFRESH_SEMVER` |
 | **prompt_type** | `build-plan` |
-| **plan_phase** | `post-build` |
+| **plan_phase** | `close-out-ready` |
 | **execution_site** | TIED store (`/Users/fareed/Documents/dev/chatgpt/stdd`) |
 
 ---
@@ -32,7 +32,7 @@
 - [x] `build-plan-s1-bootstrap` — `readStoreMethodologySemver` + manifest fields (T1–T3)
 - [x] `build-plan-s2-mcp` — resolver order + CLI parity (T4)
 - [x] `build-plan-s3-close` — parent LEAP semver criterion, CHANGELOG, semantic-tokens, `tied_validate_consistency` ok
-- [ ] `close-out` — envelope, gates, traceable commit (after verification GREEN)
+- [x] `close-out` — envelope, gates, traceable commit
 
 ### Optional
 
@@ -51,6 +51,7 @@
 | 2026-11-08 | add-feature | Initial Cursor plan: refresh install.json + resolver order |
 | 2026-11-08 | refine-plan | Locked decisions, SC-* criteria, phased build, disk artifacts |
 | 2026-11-08 | build-plan | GREEN tests; REQ/ARCH/IMPL; manifest + resolver implementation |
+| 2026-11-08 | close-out | Gate r2 allowed; traceable commit |
 
 ---
 
@@ -79,7 +80,7 @@
 
 ## Do next
 
-**`@close-out`** when ready — run verification gate and traceable commit. Optional: `./tied-install.sh --refresh` on clients.
+Close-out complete — see [traceable-commit-evidence.md](./traceable-commit-evidence.md) for commit SHA.
 
 ---
 
