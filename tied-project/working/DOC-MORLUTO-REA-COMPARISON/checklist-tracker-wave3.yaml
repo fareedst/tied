@@ -1,0 +1,41 @@
+change_class: harness_compose_doc_only
+execution_evidence:
+  request: DOC-MORLUTO-REA-COMPARISON
+  completed: []
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+depth_tier: minimal
+gate_policy: outreach_doc_only
+no_req_mint: true
+profile_depth: minimal
+request_token: DOC-MORLUTO-REA-COMPARISON
+steps:
+  change-definition:
+    notes: Wave 3 harness compose from morluto/rea Wave 2; phases 0-1 in scope; matrix/CI/vocab defer.
+    status: done
+  impact-discovery:
+    notes: tied-bundle/docs/client-development-index.md; harness-trace-observation-loop.md; comparison phased table; handoff.
+    status: done
+  pre_implementation:
+    notes: Outreach DOC token — advisory gate only; no project YAML.
+    status: blocked
+  risk-assessment:
+    notes: Dual MCP config merge order; conflating REA Evidence with tied_validate_consistency — mitigated in bundle prose.
+    status: done
+  session-bootstrap:
+    status: done
+  test-strategy:
+    notes: test-strategy.md link/doc checks; no unit RED.
+    status: done
+  implement-doc-deliverables:
+    notes: Wave 3 bundle compose; build-plan-wave3-handoff.md.
+    status: done
+  traceable-commit:
+    notes: Phase 0; sponsor or non-tied-close — build-plan did not auto-commit.
+    status: pending
+  translate-sponsor-intent:
+    notes: add-feature wave 3 — default reversible doc compose.
+    status: done

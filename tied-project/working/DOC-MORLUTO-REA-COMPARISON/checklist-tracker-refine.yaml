@@ -1,0 +1,32 @@
+change_class: "comparisons_doc_only"
+gate_policy: "outreach_doc_only"
+no_req_mint: true
+profile_depth: "minimal"
+request_token: "DOC-MORLUTO-REA-COMPARISON"
+steps:
+  change-definition:
+    notes: "Wave 1 capture + Wave 2 analysis + git allowlist; no YAML mint."
+    status: "done"
+  impact-discovery:
+    notes: "Files listed in PLAN-refine-pass1.md Implement section."
+    status: "done"
+  implement-doc-deliverables:
+    notes: "Wave 1 + Wave 2 + .gitignore; verification in evidence/build-plan-handoff.md."
+    status: "done"
+  pre_implementation:
+    notes: "tied_checklist_gate_validate allowed:false (outreach DOC token) — doc-only build per sibling outreach pattern."
+    status: "blocked"
+  risk-assessment:
+    notes: "Dual MCP config writes; conflating RE evidence with tied_validate_consistency — documented."
+    status: "done"
+  session-bootstrap:
+    status: "done"
+  test-strategy:
+    notes: "Section parity, claim labels, link check, token grep, sibling cross-links."
+    status: "done"
+  traceable-commit:
+    notes: "Sponsor-owned commit after review."
+    status: "pending"
+  translate-sponsor-intent:
+    notes: "morluto/rea × TIED agent-management lens; GitHub read-only."
+    status: "done"

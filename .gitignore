@@ -52,6 +52,8 @@ docs/comparisons/*
 !docs/comparisons/google-agent-skills-ship-like-products.md
 !docs/comparisons/google-agent-skills-vs-tied-agent-management.md
 !docs/comparisons/google-egm-elephant-goldfish-vs-tied-agent-management.md
+!docs/comparisons/morluto-rea-reverse-engineering.md
+!docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md
