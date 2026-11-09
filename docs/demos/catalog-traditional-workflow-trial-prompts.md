@@ -114,6 +114,7 @@ Document in the client **`PLAN.md`** header and in `trial-workflow-interaction-i
 | `luna-low` | GPT-5.6 Luna low tier |
 | `luna-med` | GPT-5.6 Luna med tier |
 | `luna-high` | GPT-5.6 Luna high tier |
+| `grok47-med` | e.g. `grok-4.7-medium-fast` |
 
 **Required PLAN header lines:**
 
@@ -183,6 +184,17 @@ After the trial, score **separate dimensions**; do not collapse to one number. W
 | Close-out honesty | Three completion signals table; incomplete labeled incomplete |
 
 **Forbidden:** `maturity_score`, universal scores, CMMI levels, leaderboard ranking as maturity proxy.
+
+### Rationale column (facilitator)
+
+[REQ-WF_TRIAL_READOUT_GRADING_RATIONALE] One sentence per dimension (~12–30 words); two only if necessary.
+
+- **A** — Cite one concrete fact from the same readout (test count, `exit_code`, commit, disposition).
+- **Below A** (including **A−**, **B+**, **B−**, …) — State the single main reason it is not the next higher band.
+- Prefer plain language over TIED internals in the cell; keep factual anchors already in Outcome record / What was built.
+- Do not use `—` placeholders in published readouts.
+
+Normative detail: [record-wf-trial reference § Session grading rationale](../../tools/bundled-record-wf-trial-skill/reference.md#session-grading-rationale).
 
 ---
 
@@ -317,6 +329,23 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 | PROMPT-WF-06 | Claude agentstream / Claude Sonnet 5.5 | `1794102962-wf-agentstream-wf-06-claude-sonnet55` (`HARNESS=claude`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**) | [Claude Sonnet readout](trial-readout-PROMPT-WF-06-claudesonnet55-1794102962-wf-agentstream-wf-06-claude-sonnet55.md) (**workflow complete** — **`b7c0e1d`**; **10/10** tests; REQ index **Planned**; orchestrator `exit_code: 0`) |
 | PROMPT-WF-07 | Claude agentstream / Claude Sonnet 5.5 | `1794103222-wf-agentstream-wf-07-claude-sonnet55` (`HARNESS=claude`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**) | [Claude Sonnet readout](trial-readout-PROMPT-WF-07-claudesonnet55-1794103222-wf-agentstream-wf-07-claude-sonnet55.md) (**workflow complete** — **`23a655e`**; **23/23** tests; REQ **Implemented**; orchestrator `exit_code: 0`) |
 | PROMPT-WF-08 | Claude agentstream / Claude Sonnet 5.5 | `1794103645-wf-agentstream-wf-08-claude-sonnet55` (`HARNESS=claude`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**) | [Claude Sonnet readout](trial-readout-PROMPT-WF-08-claudesonnet55-1794103645-wf-agentstream-wf-08-claude-sonnet55.md) (**workflow complete** — **`bec9000`**; **5/5** tests; REQ **Implemented**; pairs [1794069919](trial-readout-PROMPT-WF-08-claudesonnet55-1794069919-wf-agentstream-wf-08-claude-sonnet55.md)) |
+| PROMPT-WF-01 | Cursor agentstream / Grok 4.7 medium | `1794181275-wf-agentstream-wf-01-cursor-grok47med` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**; first **grok47-med** WF-01) | [Cursor readout](trial-readout-PROMPT-WF-01-grok47-med-1794181275-wf-agentstream-wf-01-cursor-grok47med.md) (**workflow complete** — orchestrator **`exit_code: 0`**; **`6c0ab53`**; **7/7** tests) |
+| PROMPT-WF-02 | Cursor agentstream / Grok 4.7 medium | `1794183415-wf-agentstream-wf-02-cursor-grok47med` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**) | [Cursor readout](trial-readout-PROMPT-WF-02-grok47-med-1794183415-wf-agentstream-wf-02-cursor-grok47med.md) (**workflow complete** — **`e94d560`**; **8/8** tests) |
+| PROMPT-WF-03 | Cursor agentstream / Grok 4.7 medium | `1794188384-wf-agentstream-wf-03-cursor-grok47med` (`HARNESS=cursor`; **isolated re-run** after batch abort `1794185608`; session methodology **4.2.1**) | [Cursor readout](trial-readout-PROMPT-WF-03-grok47-med-1794188384-wf-agentstream-wf-03-cursor-grok47med.md) (**workflow complete** — **`b758ff0`**; **9/9** tests) |
+| PROMPT-WF-04 | Cursor agentstream / Grok 4.7 medium | `1794191005-wf-agentstream-wf-04-cursor-grok47med` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**) | [Cursor readout](trial-readout-PROMPT-WF-04-grok47-med-1794191005-wf-agentstream-wf-04-cursor-grok47med.md) (**workflow complete** — **`de385e7`**; **11/11** tests) |
+| PROMPT-WF-05 | Cursor agentstream / Grok 4.7 medium | `1794195336-wf-agentstream-wf-05-cursor-grok47med` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**) | [Cursor readout](trial-readout-PROMPT-WF-05-grok47-med-1794195336-wf-agentstream-wf-05-cursor-grok47med.md) (**workflow complete** — **`5a18760`**; **13/13** tests) |
+| PROMPT-WF-06 | Cursor agentstream / Grok 4.7 medium | `1794197658-wf-agentstream-wf-06-cursor-grok47med` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**) | [Cursor readout](trial-readout-PROMPT-WF-06-grok47-med-1794197658-wf-agentstream-wf-06-cursor-grok47med.md) (**workflow complete** — **`230d655`**; **5/5** tests) |
+| PROMPT-WF-07 | Cursor agentstream / Grok 4.7 medium | `1794200222-wf-agentstream-wf-07-cursor-grok47med` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**) | [Cursor readout](trial-readout-PROMPT-WF-07-grok47-med-1794200222-wf-agentstream-wf-07-cursor-grok47med.md) (**workflow complete** — **`0b6a3c2`**; **8/8** tests) |
+| PROMPT-WF-08 | Cursor agentstream / Grok 4.7 medium | `1794202372-wf-agentstream-wf-08-cursor-grok47med` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; session methodology **4.2.1**; first **grok47-med** WF-08) | [Cursor readout](trial-readout-PROMPT-WF-08-grok47-med-1794202372-wf-agentstream-wf-08-cursor-grok47med.md) (**workflow complete** — **`c46b459`**; **5/5** tests) |
+| PROMPT-WF-01 | Cursor agentstream / Composer 2.5 | `1794205559-wf-agentstream-wf-01-cursor-composer25` (`HARNESS=cursor`; **wf-trial-ts-node-test-v1**; session **4.2.1**; batch **1794205***) | [Cursor readout](trial-readout-PROMPT-WF-01-composer25-1794205559-wf-agentstream-wf-01-cursor-composer25.md) (**workflow complete** — **`85e8127`**; **12/12** tests) |
+| PROMPT-WF-02 | Cursor agentstream / Composer 2.5 | `1794206410-wf-agentstream-wf-02-cursor-composer25` (`HARNESS=cursor`; session **4.2.1**; batch **1794205***) | [Cursor readout](trial-readout-PROMPT-WF-02-composer25-1794206410-wf-agentstream-wf-02-cursor-composer25.md) (**workflow complete** — **`1678751`**; **10/10** tests) |
+| PROMPT-WF-03 | Cursor agentstream / Composer 2.5 | `1794207497-wf-agentstream-wf-03-cursor-composer25` (`HARNESS=cursor`; session **4.2.1**; batch **1794205***) | [Cursor readout](trial-readout-PROMPT-WF-03-composer25-1794207497-wf-agentstream-wf-03-cursor-composer25.md) (**workflow complete** — feature **`cd1e24c`**; HEAD **`fd88ea0`**; **8/8** tests) |
+| PROMPT-WF-04 | Cursor agentstream / Composer 2.5 | `1794208361-wf-agentstream-wf-04-cursor-composer25` (`HARNESS=cursor`; session **4.2.1**; batch **1794205***) | [Cursor readout](trial-readout-PROMPT-WF-04-composer25-1794208361-wf-agentstream-wf-04-cursor-composer25.md) (**workflow complete** — **`856dab8`**; **10/10** tests) |
+| PROMPT-WF-05 | Cursor agentstream / Composer 2.5 | `1794209213-wf-agentstream-wf-05-cursor-composer25` (`HARNESS=cursor`; session **4.2.1**; batch **1794205***) | [Cursor readout](trial-readout-PROMPT-WF-05-composer25-1794209213-wf-agentstream-wf-05-cursor-composer25.md) (**workflow complete** — **`7db4818`**; **9/9** tests) |
+| PROMPT-WF-06 | Cursor agentstream / Composer 2.5 | `1794210060-wf-agentstream-wf-06-cursor-composer25` (`HARNESS=cursor`; session **4.2.1**; batch **1794205***) | [Cursor readout](trial-readout-PROMPT-WF-06-composer25-1794210060-wf-agentstream-wf-06-cursor-composer25.md) (**workflow complete** — **`a4f1cbc`**; **11/11** tests) |
+| PROMPT-WF-07 | Cursor agentstream / Composer 2.5 | `1794210943-wf-agentstream-wf-07-cursor-composer25` (`HARNESS=cursor`; session **4.2.1**; batch **1794205***) | [Cursor readout](trial-readout-PROMPT-WF-07-composer25-1794210943-wf-agentstream-wf-07-cursor-composer25.md) (**workflow complete** — **`e4a0b09`**; **8/8** tests) |
+| PROMPT-WF-08 | Cursor agentstream / Composer 2.5 | `1794211741-wf-agentstream-wf-08-cursor-composer25` (`HARNESS=cursor`; session **4.2.1**; batch **1794205***) | [Cursor readout](trial-readout-PROMPT-WF-08-composer25-1794211741-wf-agentstream-wf-08-cursor-composer25.md) (**split signal** — **`44569db`**; **4/4** tests; close_out **allowed** but process/adherence **partial**; dirty evidence tree) |
+
 Maintained by **`@record-wf-trial`**.
 
 ---

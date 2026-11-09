@@ -26,14 +26,14 @@ Node **`bin/dedup.js`** + pure **`src/dedup.js`**. README documents **first-occu
 
 ## Session grading
 
-| Dimension | Band |
-| --- | --- |
-| Requirement interpretation | **A** |
-| Traceability closure | **A** |
-| Test strategy | **A−** |
-| Algorithm / implementation | **A** |
-| Process adherence | **A−** |
-| Workflow choreography | **B+** — no inventory |
-| Methodology learning readout | **N/A** |
+| Dimension | Band | Rationale |
+| --- | --- | --- |
+| Requirement interpretation | **A** | Comparator scope and invalid-input rule were locked in PLAN before implementation. |
+| Traceability closure | **A** | Project REQ, architecture, and implementation records match green tests and facilitator checks. |
+| Test strategy | **A−** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (tests on disk). |
+| Algorithm / implementation | **A** | Implementation matches locked PLAN behavior with honest scope limits documented. |
+| Process adherence | **A−** | Tracker and handoffs present; adherence ledger or envelope thinner than strict depth. |
+| Workflow choreography | **B+** | Four turns ran with orchestrator exit ?; minor inventory or phase-boundary fuzz. |
+| Methodology learning readout | **N/A** | Future-test rule stated; session evidence supports operator reproducibility only. |
 
 **Feedback ingest:** N/A. **Future-test rule:** applies.

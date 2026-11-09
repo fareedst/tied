@@ -1,0 +1,45 @@
+CITDP-REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
+  change_definition:
+    current_behavior: "@record-wf-trial requires Session grading table but not rationale prose rules; many readouts use em dash placeholders or verbose jargon."
+    desired_behavior: "Reference, SKILL, and catalog document concise grade-aware rationales; bootstrap contract test guards 84 PROMPT-WF readouts; bands frozen on backfill."
+    non_goals:
+      - "GF readout backfill"
+      - "Registry band machine lock"
+    success_criteria:
+      - "node --test tools/bootstrap/lib/trial-readout-grading-rationale-contract.test.mjs passes"
+    unchanged_behavior: "Subject product tokens on disposable clients remain facilitator read-only."
+  impact_analysis:
+    modules_or_boundaries: "tools/bundled-record-wf-trial-skill; docs/demos; tools/bootstrap/lib"
+    tied_tokens_new:
+      - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+      - "ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE"
+      - "IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+    citdp_id: "CITDP-REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+    status: "implemented"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Backfill rationale claims test counts not present in the same readout"
+        - "Contract accepts one-word sub-A rationale that does not explain gap"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Placeholder dash rationales ship after GREEN contract test"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does reference subsection exist without readout glob test?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/lib/trial-readout-grading-rationale-contract.test.mjs"
+    unit: []

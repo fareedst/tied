@@ -1,0 +1,21 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "close-out-wf-grading-rationale-2026-11-09-final"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  }
+}

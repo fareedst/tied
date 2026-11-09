@@ -26,14 +26,14 @@ Minimal Python **`src/dedup.py`**; policy in **`docs/dedup-policy.md`** (not roo
 
 ## Session grading
 
-| Dimension | Band |
-| --- | --- |
-| Requirement interpretation | **B+** — policy doc present; minimal dual-policy deferral |
-| Traceability closure | **B−** |
-| Test strategy | **B+** |
-| Algorithm / implementation | **B+** |
-| Process adherence | **B−** |
-| Workflow choreography | **C** — WT product |
-| Methodology learning readout | **N/A** |
+| Dimension | Band | Rationale |
+| --- | --- | --- |
+| Requirement interpretation | **B+** | policy doc present; minimal dual-policy deferral |
+| Traceability closure | **B−** | Decision records and code mostly align; traceability gaps remain vs full stack promotion. |
+| Test strategy | **B+** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (tests on disk). |
+| Algorithm / implementation | **B+** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
+| Process adherence | **B−** | Tracker and handoffs present; adherence ledger or envelope thinner than strict depth. |
+| Workflow choreography | **C** | Four turns ran with orchestrator exit ?; minor inventory or phase-boundary fuzz. |
+| Methodology learning readout | **N/A** | Future-test rule stated; session evidence supports operator reproducibility only. |
 
 **Feedback ingest:** N/A. **Future-test rule:** applies.

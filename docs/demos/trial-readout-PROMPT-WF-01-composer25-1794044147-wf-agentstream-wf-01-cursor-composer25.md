@@ -156,7 +156,7 @@ Build a small TypeScript library with one exported function that checks whether 
 | --- | --- | --- |
 | Requirement interpretation | **A** | Comparator grammar + invalid-input rule locked before code |
 | Traceability closure | **B−** | REQ **Draft**; MCP token create; no ARCH/IMPL |
-| Test strategy | **F** | No RED/GREEN |
+| Test strategy | **F** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (tests on disk). |
 | Algorithm / implementation | **F** | No `satisfies()` |
 | Process adherence | **B** | Machine pre_implementation gate + ledger; no envelope/verification |
 | Workflow choreography | **F** | **`exit_code: 1`**; stale inventory; pilot cell incomplete |

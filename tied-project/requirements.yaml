@@ -4503,3 +4503,12 @@ REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
       - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
     implementation:
       - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
+  category: "Documentation"
+  description: "Require concise grade-aware Rationale cells in PROMPT-WF facilitator readouts; contract test over docs/demos corpus."
+  detail_file: "requirements/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
+  name: "WF trial readout Session grading rationale standard"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"

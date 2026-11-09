@@ -162,7 +162,7 @@ Build two small library modules (producer and consumer) and a separate wiring mo
 | --- | --- | --- |
 | Requirement interpretation | **B** | add-feature RESOLVE names three modules; refine did not lock contracts |
 | Traceability closure | **C+** | REQ + PLAN + inventory; no ARCH/IMPL |
-| Test strategy | **F** | No wiring test |
+| Test strategy | **F** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (tests on disk). |
 | Algorithm / implementation | **N/A** | No code |
 | Process adherence | **D+** | Four sessions run; phases 2–3 blocked; close-out gate fail |
 | Workflow choreography | **C** | Harness **`0`** masks incomplete workflow |

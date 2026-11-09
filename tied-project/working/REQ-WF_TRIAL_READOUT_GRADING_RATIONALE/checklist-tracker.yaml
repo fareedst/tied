@@ -1,0 +1,37 @@
+copy_hygiene: "Fresh tracker for REQ-WF_TRIAL_READOUT_GRADING_RATIONALE refine-plan"
+description: "Tracker — WF trial readout grading rationale standard"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed:
+    - slug: verification-gate
+      disposition: completed
+    - slug: traceable-commit
+      disposition: pending
+  envelope_path: "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/not-applicable-receipt.v1.json"
+      - "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth; counterexamples recorded in CITDP draft."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/sub-adversarial-inquiry-pass-na.md"
+      policy: "minimal-depth-no-inquiry"
+      status: "not_applicable"

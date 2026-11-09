@@ -1,0 +1,8 @@
+IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE"
+    requirements:
+      - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+  decision: "read-trial-readout-session-grading.mjs parser; trial-readout-grading-rationale-contract.test.mjs; optional backfill-wf-grading-rationales.mjs maintainer script."
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE-pseudocode.md"

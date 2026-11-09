@@ -36,14 +36,14 @@ Native TypeScript **`line-dedupe`** with **first-seen default** and **`--keep la
 
 ## Session grading
 
-| Dimension | Band |
-| --- | --- |
-| Requirement interpretation | **A** |
-| Traceability closure | **B+** — YAML/plan strong; git gap |
-| Test strategy | **A** — depth + both policies |
-| Algorithm / implementation | **A** |
-| Process adherence | **B+** |
-| Workflow choreography | **C+** — inventory yes; commit no |
-| Methodology learning readout | **N/A** |
+| Dimension | Band | Rationale |
+| --- | --- | --- |
+| Requirement interpretation | **A** | Comparator scope and invalid-input rule were locked in PLAN before implementation. |
+| Traceability closure | **B+** | YAML/plan strong; git gap |
+| Test strategy | **A** | depth + both policies |
+| Algorithm / implementation | **A** | Implementation matches locked PLAN behavior with honest scope limits documented. |
+| Process adherence | **B+** | Tracker and handoffs present; adherence ledger or envelope thinner than strict depth. |
+| Workflow choreography | **C+** | inventory yes; commit no |
+| Methodology learning readout | **N/A** | Future-test rule stated; session evidence supports operator reproducibility only. |
 
 **Feedback ingest:** N/A. **Future-test rule:** applies.

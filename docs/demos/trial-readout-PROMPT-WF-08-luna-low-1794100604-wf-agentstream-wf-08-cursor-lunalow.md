@@ -156,13 +156,13 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 
 | Dimension | Band | Rationale |
 | --- | --- | --- |
-| Requirement interpretation | **B+** | Three states/two events in PLAN; minimal illegal-transition coverage |
-| Traceability closure | **B−** | ARCH/IMPL fragments; CITDP policy mismatch (`standard` vs minimal advisory) |
-| Test strategy | **C+** | Two tests — sponsor minimum only |
-| Algorithm / implementation | **B** | Table-driven FSM skeleton |
-| Process adherence | **B−** | Honest gate failure; thin ledger grade **B** |
-| Workflow choreography | **A−** | Four sessions; harness **`0`**; ~5.6 min |
-| Methodology learning readout | **B** | **luna-low** WF-08 **4.2.1** pairs Sonnet depth on same prompt class |
+| Requirement interpretation | **B+** | Written scope met the prompt but PLAN acceptance did not spell out every edge case before RED. |
+| Traceability closure | **B−** | Decision records and code mostly align; traceability gaps remain vs full stack promotion. |
+| Test strategy | **C+** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (2 green tests). |
+| Algorithm / implementation | **B** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
+| Process adherence | **B−** | Tracker and handoffs present; close-out gate failed. |
+| Workflow choreography | **A−** | Four turns ran with orchestrator exit 0; minor inventory or phase-boundary fuzz. |
+| Methodology learning readout | **B** | Readout documents cohort friction (harness vs close-out) without turning into a model leaderboard. |
 
 **Feedback ingest:** N/A (`--skip-feedback-ingest`; no store `tied_feedback_add` this pass).
 

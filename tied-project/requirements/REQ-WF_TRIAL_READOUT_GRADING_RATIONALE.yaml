@@ -1,0 +1,17 @@
+REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
+  satisfaction_criteria:
+    - criterion: "All PROMPT-WF readouts pass rationale contract"
+      id: "SC-GR-04"
+      metric: "trial-readout-grading-rationale-contract.test.mjs"
+    - criterion: "Bands unchanged vs registry (manual close-out spot-check)"
+      id: "SC-GR-05"
+      metric: "facilitator"
+    - criterion: "Catalog facilitator grading Rationale column bullets"
+      id: "SC-GR-03"
+      metric: "contract test"
+    - criterion: "record-wf-trial reference Session grading rationale rules and examples"
+      id: "SC-GR-01"
+      metric: "contract test"
+    - criterion: "SKILL Grade step references rationale subsection"
+      id: "SC-GR-02"
+      metric: "contract test"

@@ -121,8 +121,8 @@ Bootstrap-only git; inventory matches empty `src/`.
 | --- | --- | --- |
 | Requirement interpretation | **B** | Refine completes module story |
 | Traceability closure | **C** | REQ + PLAN; no ARCH/IMPL |
-| Test strategy | **F** | No wiring test |
-| Algorithm / implementation | **N/A** | |
+| Test strategy | **F** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (tests on disk). |
+| Algorithm / implementation | **N/A** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
 | Process adherence | **D+** | Close-out without build; CITDP shape error |
 | Workflow choreography | **C** | Four sessions; shell **`0`** |
 | Methodology learning readout | **B−** | Gate tooling exercised without product |

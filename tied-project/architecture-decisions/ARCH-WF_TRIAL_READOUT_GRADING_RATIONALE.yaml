@@ -1,0 +1,13 @@
+ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE:
+  consequences:
+    negative:
+      - "Large one-time markdown backfill diff"
+    positive:
+      - "Cohort readouts comparable on rationale quality"
+      - "Regression caught in CI contract test"
+  cross_references:
+    implementation:
+      - "IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE"
+    requirements:
+      - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+  decision: "Normative rules live in record-wf-trial reference + catalog; enforcement via bootstrap parser and glob contract test; backfill store-only."

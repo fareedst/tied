@@ -26,14 +26,14 @@ Python **`dedup_stream.py`** — **first-occurrence** policy in README with LF-n
 
 ## Session grading
 
-| Dimension | Band |
-| --- | --- |
-| Requirement interpretation | **A−** — clear README; first-only only |
-| Traceability closure | **B** — REQ Planned; WT product |
-| Test strategy | **B+** — meets two-ordering minimum |
-| Algorithm / implementation | **A−** |
-| Process adherence | **C+** — no gates on disk |
-| Workflow choreography | **C** — WT-only product |
-| Methodology learning readout | **N/A** |
+| Dimension | Band | Rationale |
+| --- | --- | --- |
+| Requirement interpretation | **A−** | clear README; first-only only |
+| Traceability closure | **B** | REQ Planned; WT product |
+| Test strategy | **B+** | meets two-ordering minimum |
+| Algorithm / implementation | **A−** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
+| Process adherence | **C+** | no gates on disk |
+| Workflow choreography | **C** | WT-only product |
+| Methodology learning readout | **N/A** | Future-test rule stated; session evidence supports operator reproducibility only. |
 
 **Feedback ingest:** N/A. **Future-test rule:** applies.

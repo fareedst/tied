@@ -33,6 +33,7 @@
 | **record-gf-trial skill** | Bundled skill at `tools/bundled-record-gf-trial-skill/SKILL.md`; manifest **`STORE_FACILITATOR_SKILLS`** (store self-install only, not disposable clients). |
 | `/record-wf-trial` | Explicit skill for **store** facilitators: inspect disposable four-phase workflow client, publish workflow trial readout, optional Kaizen ingest. |
 | **record-wf-trial skill** | Bundled skill at `tools/bundled-record-wf-trial-skill/SKILL.md`; manifest **`STORE_FACILITATOR_SKILLS`**. Resolves **TIED methodology version (session)** per reference § Methodology version (session) ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT](../requirements/REQ-TRIAL_METHODOLOGY_VERSION_READOUT.yaml)). |
+| **session grading rationale** | One-sentence **Rationale** cell per dimension in WF trial readout **Session grading** table; concise, grade-aware, low jargon; bands frozen on backfill ([REQ-WF_TRIAL_READOUT_GRADING_RATIONALE](../requirements/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml)). |
 | **tied-methodology-version.session.v1** | trial semver artifact | Facilitator + disposable-client session evidence; not a store REQ for subject product. |
 | `/readme-information-architecture` | Explicit skill for **store** maintainers: improve README/docs Markdown presentation (navigation, hierarchy, transitions) without semantic loss. |
 | **readme-information-architecture skill** | Bundled skill at `tools/bundled-readme-information-architecture-skill/SKILL.md`; procedure in `reference.md`; **not** methodology inheritance. |

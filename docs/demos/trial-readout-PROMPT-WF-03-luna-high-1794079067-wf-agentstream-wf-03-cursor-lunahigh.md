@@ -156,8 +156,8 @@ Build two small library modules (producer and consumer) and a separate wiring mo
 | --- | --- | --- |
 | Requirement interpretation | **F** | No REQ/PLAN created |
 | Traceability closure | **F** | No CITDP or handoffs |
-| Test strategy | **F** | No tests |
-| Algorithm / implementation | **F** | No modules |
+| Test strategy | **F** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (0 green tests). |
+| Algorithm / implementation | **F** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
 | Process adherence | **D+** | Close-out documents failure; orchestrator still **`0`** |
 | Workflow choreography | **D** | Four sessions ran without request anchor |
 | Methodology learning readout | **B−** | Documents **harness-0 / identity-missing** failure mode for matrix |

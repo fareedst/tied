@@ -159,8 +159,8 @@ Build a CLI that scans a tiny committed fixture directory of source files for co
 | --- | --- | --- |
 | Requirement interpretation | **B−** | add-feature captures fixture-only intent; refine never ran |
 | Traceability closure | **C+** | Scaffold only; no ARCH/IMPL |
-| Test strategy | **F** | No tests |
-| Algorithm / implementation | **F** | No scanner |
+| Test strategy | **F** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (0 green tests). |
+| Algorithm / implementation | **F** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
 | Process adherence | **C+** | Blocked close-out documented |
 | Workflow choreography | **B−** | Four sessions + **`0`**; missing mid-phase artifacts |
 | Methodology learning readout | **B** | **luna-high** WF-04 **scaffold-only** row @ **4.2.1** |

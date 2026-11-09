@@ -26,14 +26,14 @@ Python **`dedup.py`** with **opaque-byte** duplicate keys, **first-seen** order,
 
 ## Session grading
 
-| Dimension | Band |
-| --- | --- |
-| Requirement interpretation | **A** — policy + non-goals in README |
-| Traceability closure | **B+** |
-| Test strategy | **A−** |
-| Algorithm / implementation | **A** — honest byte contract |
-| Process adherence | **B+** |
-| Workflow choreography | **B+** |
-| Methodology learning readout | **N/A** |
+| Dimension | Band | Rationale |
+| --- | --- | --- |
+| Requirement interpretation | **A** | policy + non-goals in README |
+| Traceability closure | **B+** | Decision records and code mostly align; traceability gaps remain vs full stack promotion. |
+| Test strategy | **A−** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (tests on disk). |
+| Algorithm / implementation | **A** | honest byte contract |
+| Process adherence | **B+** | Tracker and handoffs present; adherence ledger or envelope thinner than strict depth. |
+| Workflow choreography | **B+** | Four turns ran with orchestrator exit ?; minor inventory or phase-boundary fuzz. |
+| Methodology learning readout | **N/A** | Future-test rule stated; session evidence supports operator reproducibility only. |
 
 **Feedback ingest:** N/A. **Future-test rule:** applies.

@@ -93,12 +93,34 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 9. **Orchestrator process log** (when manifest or `--orchestrator-log-dir`; else **N/A**).
 10. **Phase boundary audit** (heuristic; document uncertainty).
 11. **Stack compliance** (orchestrated cells): `implementation_stack_id` in inventory; TypeScript under `src/`; facilitator `npm test`; note waivers when `WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1` or Python/alternate runner on disk.
-12. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)).
+12. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)). **Rationale** column rules: [Session grading rationale](#session-grading-rationale) below.
 13. **Cross-model notes** (same PROMPT-WF, other readouts if any — prose, no ranking).
 14. Cohort comparisons vs peer WF readouts.
 15. TIED version / dogfood paragraph — session resolution per **Methodology version (session)**; when only (4)/(5) apply, say **bootstrap-inferred only** (not effectiveness claim).
 16. Facilitator follow-ups.
 17. Future-test rule.
+
+## Session grading rationale
+
+[REQ-WF_TRIAL_READOUT_GRADING_RATIONALE] Facilitator prose for the **Rationale** column (item 12).
+
+| Band | Write |
+| --- | --- |
+| **A** | One sentence (~12–30 words): cite **one concrete fact** from this readout (tests, `exit_code`, commit SHA, disposition). |
+| **A−** … **F** | One sentence: state the **single main reason** it is not the next higher band for this dimension. |
+
+**Style:** Plain language; prefer “req/architecture docs match tests” over raw **R+A+I** jargon; cite `exit_code` and test counts when present.
+
+**Forbidden in rationale cells:** `maturity_score`, leaderboard language, multi-paragraph essays, unexplained acronyms.
+
+**Examples (same trial):**
+
+- **A** — Requirement interpretation: `Comparator scope and invalid-input rule locked in PLAN before RED tests.`
+- **A−** — Test strategy: `RED/GREEN archived with nine cases, leaner than the seventeen-case peer readout on the same prompt.`
+
+**Allowed:** one markdown link to a peer readout when comparing test depth.
+
+**Regression:** `node --test tools/bootstrap/lib/trial-readout-grading-rationale-contract.test.mjs`
 
 **Filename pattern:** `docs/demos/trial-readout-PROMPT-WF-{NN}-{modelConfigSlug}-{clientId}.md`
 

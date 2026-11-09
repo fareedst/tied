@@ -26,14 +26,14 @@ Python **`src/dedup.py`** with **`--keep first|last`**, plus **`--ignore-case`**
 
 ## Session grading
 
-| Dimension | Band |
-| --- | --- |
-| Requirement interpretation | **A** — resolves ambiguity with dual policy + labeled extras |
-| Traceability closure | **B+** |
-| Test strategy | **A** |
-| Algorithm / implementation | **A−** |
-| Process adherence | **B+** |
-| Workflow choreography | **B+** — committed feature |
-| Methodology learning readout | **N/A** |
+| Dimension | Band | Rationale |
+| --- | --- | --- |
+| Requirement interpretation | **A** | resolves ambiguity with dual policy + labeled extras |
+| Traceability closure | **B+** | Decision records and code mostly align; traceability gaps remain vs full stack promotion. |
+| Test strategy | **A** | Tests on disk cover core behavior with archived RED/GREEN evidence. |
+| Algorithm / implementation | **A−** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
+| Process adherence | **B+** | Tracker and handoffs present; adherence ledger or envelope thinner than strict depth. |
+| Workflow choreography | **B+** | committed feature |
+| Methodology learning readout | **N/A** | Future-test rule stated; session evidence supports operator reproducibility only. |
 
 **Feedback ingest:** N/A. **Future-test rule:** applies.

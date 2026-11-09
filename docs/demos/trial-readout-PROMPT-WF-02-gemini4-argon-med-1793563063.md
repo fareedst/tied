@@ -32,14 +32,14 @@ Feature commit `8a91204`; interaction inventory on disk; two gate JSON files (li
 
 ## Session grading
 
-| Dimension | Band |
-| --- | --- |
-| Requirement interpretation | **A** — explicit dual-policy resolution |
-| Traceability closure | **A** — REQ Implemented |
-| Test strategy | **A−** — orderings for both keep modes |
-| Algorithm / implementation | **A** |
-| Process adherence | **B+** |
-| Workflow choreography | **A−** — inventory + commit |
-| Methodology learning readout | **N/A** |
+| Dimension | Band | Rationale |
+| --- | --- | --- |
+| Requirement interpretation | **A** | explicit dual-policy resolution |
+| Traceability closure | **A** | REQ Implemented |
+| Test strategy | **A−** | orderings for both keep modes |
+| Algorithm / implementation | **A** | Implementation matches locked PLAN behavior with honest scope limits documented. |
+| Process adherence | **B+** | Tracker and handoffs present; adherence ledger or envelope thinner than strict depth. |
+| Workflow choreography | **A−** | inventory + commit |
+| Methodology learning readout | **N/A** | Future-test rule stated; session evidence supports operator reproducibility only. |
 
 **Feedback ingest:** N/A. **Future-test rule:** applies; not a leaderboard score.

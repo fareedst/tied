@@ -3021,3 +3021,11 @@ ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
       - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
     requirements:
       - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
+  name: "WF grading rationale surfaces"
+  related_architecture: []
+  related_implementation:
+    - "IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE"
+  related_requirements:
+    - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"

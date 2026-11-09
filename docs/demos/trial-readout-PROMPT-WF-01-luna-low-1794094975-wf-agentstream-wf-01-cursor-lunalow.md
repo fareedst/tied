@@ -142,8 +142,8 @@ Build a small TypeScript library with one exported function that checks whether 
 | --- | --- | --- |
 | Requirement interpretation | **B+** | Refine locks comparator subset |
 | Traceability closure | **C** | REQ + PLAN only |
-| Test strategy | **F** | No tests |
-| Algorithm / implementation | **N/A** | |
+| Test strategy | **F** | RED/GREEN path exists but case count stays lean versus richer peer WF cells (tests on disk). |
+| Algorithm / implementation | **N/A** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
 | Process adherence | **C** | Clean phase-1/2; build skipped |
 | Workflow choreography | **C+** | Four sessions; shell **`0`** |
 | Methodology learning readout | **B** | Baseline luna-low vs luna-high premature build |

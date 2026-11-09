@@ -119,11 +119,11 @@ No product commits; refine artifacts precede absent implementation — **pass** 
 | Dimension | Band | Rationale |
 | --- | --- | --- |
 | Requirement interpretation | **A−** | Vague dedup resolved to first-occurrence |
-| Traceability closure | **C+** | REQ + PLAN |
+| Traceability closure | **C+** | Decision records and code mostly align; traceability gaps remain vs full stack promotion. |
 | Test strategy | **F** | No orderings tested |
-| Algorithm / implementation | **N/A** | |
+| Algorithm / implementation | **N/A** | Shipped behavior matches PROMPT shape; gaps leave some fault paths lightly exercised. |
 | Process adherence | **C+** | Correct refine; build omitted |
-| Workflow choreography | **C** | Shell **`0`** |
+| Workflow choreography | **C** | Four turns ran with orchestrator exit ?; harness ok while facilitator work incomplete. |
 | Methodology learning readout | **B** | WF-02 ambiguity stress partially satisfied |
 
 **Feedback ingest:** N/A.

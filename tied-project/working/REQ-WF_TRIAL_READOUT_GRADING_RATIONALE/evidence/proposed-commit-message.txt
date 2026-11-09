@@ -1,0 +1,9 @@
+feat(wf-trial): Session grading rationale standard and readout backfill
+
+Normative rules in record-wf-trial + catalog; bootstrap contract test
+guards 84 PROMPT-WF readouts (rationale only; bands unchanged).
+
+REQ-WF_TRIAL_READOUT_GRADING_RATIONALE ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE
+IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE
+
+Close-out: allowed=true, envelope blocking_gap_count=0, thin_ledger advisory.

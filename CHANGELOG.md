@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial readout grading rationale ([REQ-WF_TRIAL_READOUT_GRADING_RATIONALE], [ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE], [IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE])** — `@record-wf-trial` reference § Session grading rationale; catalog Rationale column rules; `trial-readout-grading-rationale-contract.test.mjs` over 84 `trial-readout-PROMPT-WF-*.md` (bands frozen, rationale backfill). Close-out `close-out-wf-grading-rationale-2026-11-09-final` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/PLAN.md).
+
 - **Cursor live session oracle ([REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE])** — `@tied/agentstream` bounded turn retry, shared NDJSON session extraction, and `DIAGNOSTIC: cursor_live_session_oracle` before fail-closed when four-phase trials lose `session_id` after `WritableIterable` stderr (field case `1794179357-wf-agentstream-wf-01-cursor-grok47med`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/PLAN.md).
 
 ### Fixed
