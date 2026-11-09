@@ -12,6 +12,21 @@ export const MODEL_EFFORT_LEVELS = [
 
 export type ModelEffortLevel = (typeof MODEL_EFFORT_LEVELS)[number];
 
+const EFFORT_TIER_TOKENS = new Set([
+  "none",
+  "minimal",
+  "low",
+  "medium",
+  "high",
+  "xhigh",
+  "max",
+  "extra-high",
+]);
+
+const MIDDLE_MODIFIER_TOKENS = new Set(["thinking"]);
+
+const LEGACY_BRACKET_TAIL = /^(.+?)\[([^\]]+)\]$/;
+
 export function normalizeModelEffort(raw: string): string {
   const t = raw.trim().toLowerCase();
   if (t === "" || t === "-") {
@@ -32,65 +47,80 @@ export function resolveModelEffort(cliValue: string, envValue: string): string {
   return normalizeModelEffort(envValue);
 }
 
-/** Opt-out restores phase-1 plain --model behavior. */
+/** Opt-out: plain --model slug (no tier rewrite). Env name retained from phase 2. */
 export function cursorModelBracketEffortDisabled(): boolean {
   const v = process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT?.trim();
   return v === "0" || v === "false";
 }
 
-const BRACKET_TAIL = /^(.+?)\[([^\]]+)\]$/;
-
-function parseBracketPairs(inner: string): Map<string, string> {
-  const pairs = new Map<string, string>();
-  for (const part of inner.split(",")) {
-    const trimmed = part.trim();
-    if (trimmed === "") {
-      continue;
-    }
-    const eq = trimmed.indexOf("=");
-    if (eq <= 0) {
-      continue;
-    }
-    const key = trimmed.slice(0, eq).trim();
-    const val = trimmed.slice(eq + 1).trim();
-    if (key !== "") {
-      pairs.set(key, val);
-    }
-  }
-  return pairs;
+/** Cursor catalog has no effort tiers for Composer 2.5 family. */
+export function cursorSlugEffortRewriteBlocked(modelSlug: string): boolean {
+  const slug = stripLegacyBracketModel(modelSlug).trim().toLowerCase();
+  return slug === "composer-2.5" || slug.startsWith("composer-2.5-");
 }
 
-function formatBracketPairs(pairs: Map<string, string>): string {
-  const parts: string[] = [];
-  for (const [k, v] of pairs) {
-    parts.push(`${k}=${v}`);
-  }
-  return parts.join(",");
+function stripLegacyBracketModel(slug: string): string {
+  const m = slug.trim().match(LEGACY_BRACKET_TAIL);
+  return m ? m[1]!.trim() : slug.trim();
 }
 
-export function mergeCursorModelOverrideEnv(pairs: Map<string, string>): void {
-  const raw = process.env.AGENTSTREAM_CURSOR_MODEL_OVERRIDES?.trim() ?? "";
-  if (raw === "") {
-    return;
+function effortTierForCatalog(base: string, effort: string): string {
+  const b = base.toLowerCase();
+  if (effort === "xhigh" && (b.startsWith("gpt-5.5") || b.includes("gpt-5.5"))) {
+    return "extra-high";
   }
-  for (const part of raw.split(",")) {
-    const trimmed = part.trim();
-    if (trimmed === "") {
-      continue;
-    }
-    const eq = trimmed.indexOf("=");
-    if (eq <= 0) {
-      continue;
-    }
-    const key = trimmed.slice(0, eq).trim();
-    const val = trimmed.slice(eq + 1).trim();
-    if (key !== "") {
-      pairs.set(key, val);
-    }
-  }
+  return effort;
 }
 
-/** Format --model for Cursor agent including bracket effort and optional overrides. */
+type ParsedCursorSlug = {
+  base: string;
+  middleMods: string[];
+  priorEffort: string;
+  hasFast: boolean;
+};
+
+function parseCursorCatalogSlug(slug: string): ParsedCursorSlug {
+  const bare = stripLegacyBracketModel(slug);
+  const parts = bare.split("-").filter((p) => p !== "");
+  let hasFast = false;
+  if (parts.length > 0 && parts[parts.length - 1] === "fast") {
+    hasFast = true;
+    parts.pop();
+  }
+  const middleMods: string[] = [];
+  let priorEffort = "";
+  while (parts.length > 0) {
+    const last = parts[parts.length - 1]!;
+    if (EFFORT_TIER_TOKENS.has(last)) {
+      priorEffort = last;
+      parts.pop();
+      continue;
+    }
+    if (MIDDLE_MODIFIER_TOKENS.has(last)) {
+      middleMods.unshift(last);
+      parts.pop();
+      continue;
+    }
+    break;
+  }
+  const base = parts.join("-");
+  return { base, middleMods, priorEffort, hasFast };
+}
+
+function buildCursorCatalogSlug(
+  base: string,
+  middleMods: string[],
+  effortTier: string,
+  hasFast: boolean,
+): string {
+  const segs = [base, ...middleMods, effortTier].filter((s) => s !== "");
+  if (hasFast) {
+    segs.push("fast");
+  }
+  return segs.join("-");
+}
+
+/** Format --model for Cursor agent: hyphen catalog tier (not bracket effort). */
 export function applyCursorModelForAgent(
   baseModel: string,
   modelEffort: string,
@@ -105,21 +135,28 @@ export function applyCursorModelForAgent(
   }
   const effort = normalizeModelEffort(modelEffort);
   if (effort === "" || cursorModelBracketEffortDisabled()) {
-    return trimmed;
+    return stripLegacyBracketModel(trimmed);
+  }
+  const normalizedBase = stripLegacyBracketModel(trimmed);
+  if (cursorSlugEffortRewriteBlocked(normalizedBase)) {
+    return normalizedBase;
   }
 
-  let name = trimmed;
-  const pairs = new Map<string, string>();
-  const m = trimmed.match(BRACKET_TAIL);
-  if (m) {
-    name = m[1]!.trim();
-    for (const [k, v] of parseBracketPairs(m[2]!)) {
-      pairs.set(k, v);
-    }
+  const parsed = parseCursorCatalogSlug(normalizedBase);
+  if (parsed.base === "") {
+    return normalizedBase;
   }
-  pairs.set("effort", effort);
-  mergeCursorModelOverrideEnv(pairs);
-  return `${name}[${formatBracketPairs(pairs)}]`;
+  const tier = effortTierForCatalog(parsed.base, effort);
+  const rebuilt = buildCursorCatalogSlug(
+    parsed.base,
+    parsed.middleMods,
+    tier,
+    parsed.hasFast,
+  );
+  if (rebuilt === normalizedBase) {
+    return normalizedBase;
+  }
+  return rebuilt;
 }
 
 /** Cursor encodes depth in slug; emit diagnostic when effort is set but slug lacks a tier hint. */
@@ -131,9 +168,17 @@ export function cursorSlugMayMismatchEffort(
   if (e === "") {
     return false;
   }
-  const slug = modelSlug.trim().toLowerCase();
+  const slug = stripLegacyBracketModel(modelSlug).toLowerCase();
   if (slug === "" || slug === "auto") {
     return true;
+  }
+  if (cursorSlugEffortRewriteBlocked(modelSlug)) {
+    return true;
+  }
+  const parsed = parseCursorCatalogSlug(slug);
+  if (parsed.priorEffort !== "") {
+    const tier = effortTierForCatalog(parsed.base, e);
+    return parsed.priorEffort !== tier;
   }
   const tokens = [
     "low",

@@ -1,6 +1,6 @@
 # Close-out handoff — REQ-WF_TRIAL_MODEL_EFFORT
 
-**Date:** 2026-11-09 · **Plan:** [../PLAN.md](../PLAN.md)
+**Date:** 2026-11-09 · **Plan:** [../PLAN.md](../PLAN.md) · **Full handoff:** [handoff.md](./handoff.md)
 
 ## Completion signals
 
@@ -21,4 +21,4 @@ cd mcp-server/packages/agentstream && npm run build && find src -name '*.test.ts
 
 ## Traceable commit
 
-**SHA:** _(pending commit)_
+**SHA:** `4724dd47`

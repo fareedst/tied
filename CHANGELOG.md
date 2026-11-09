@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **WF trial model effort ([REQ-WF_TRIAL_MODEL_EFFORT], [ARCH-WF_TRIAL_MODEL_EFFORT], [IMPL-WF_TRIAL_MODEL_EFFORT])** — Breaking `workflow_trial_range` 4th positional for `MODEL_EFFORT`; shell tag/manifest/four-phase propagation; Claude `--effort` + `CLAUDE_CODE_EFFORT_LEVEL`; Cursor `--model` bracket `effort=`, default `--approve-mcps` and store `--add-dir`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_EFFORT/PLAN.md).
+- **WF trial model effort ([REQ-WF_TRIAL_MODEL_EFFORT], [ARCH-WF_TRIAL_MODEL_EFFORT], [IMPL-WF_TRIAL_MODEL_EFFORT])** — `workflow_trial_range` 4th positional for `MODEL_EFFORT`; Claude `--effort` + `CLAUDE_CODE_EFFORT_LEVEL`; Cursor `--model` **catalog slug tier rewrite** (not `[effort=]` brackets); `composer-2.5*` blocklist; range usage + composer DIAGNOSTIC; default `--approve-mcps` and store `--add-dir`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_EFFORT/PLAN.md).
 
 - **PROMPT-WF-08 facilitator readout (GPT-5.6 Luna low / Cursor agentstream @ 1794231848)** — [trial-readout-PROMPT-WF-08-luna-low-1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.md](docs/demos/trial-readout-PROMPT-WF-08-luna-low-1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.md) (**split signal** — orchestrator `exit_code: 0`; **2/2** tests uncommitted; machine close-out **not_run**; pairs [1794100604](docs/demos/trial-readout-PROMPT-WF-08-luna-low-1794100604-wf-agentstream-wf-08-cursor-lunalow.md)). Catalog + demos index + runs registry updated via `@record-wf-trial`.
 

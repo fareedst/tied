@@ -50,13 +50,13 @@ PROCEDURE CLAUDE_APPLY_EFFORT
   POST: argv contains --effort; spawn env CLAUDE_CODE_EFFORT_LEVEL
   EFFECTS: agentArgv; liveBinding.runTurn extraEnv
 
-PROCEDURE CURSOR_APPLY_MODEL_BRACKET_EFFORT
+PROCEDURE CURSOR_APPLY_MODEL_SLUG_EFFORT
   # [REQ-WF_TRIAL_MODEL_EFFORT] [ARCH-WF_TRIAL_MODEL_EFFORT]
   PRE: harness cursor; modelEffort non-empty; AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT not 0
-  POST: --model token includes [effort=level] merged with existing bracket keys and MODEL_OVERRIDES env
+  POST: --model token is catalog slug with hyphen effort tier; preserve thinking modifier and -fast suffix
   INPUT: base model slug, modelEffort
-  CONTROL: skip when Auto or effort empty
-  FAILURE_MODES: opt-out env → plain slug (legacy diagnostic path)
+  CONTROL: skip when Auto, effort empty, or composer-2.5 blocklist
+  FAILURE_MODES: opt-out env → plain slug; composer → unchanged + DIAGNOSTIC
   EFFECTS: applyCursorModelForAgent; agentArgv --model
 
 PROCEDURE CURSOR_LIVE_ARGV_EXTRAS

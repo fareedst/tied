@@ -72,7 +72,54 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     const r = runScript(["--help"]);
     assert.equal(r.status, 0, r.stderr);
     assert.match(r.stderr, /workflow-trial-agentstream/);
+    assert.match(r.stderr, /Batch helper/);
+    assert.match(r.stderr, /workflow_trial_range/);
     assert.equal(r.stdout, "");
+  });
+
+  it("empty argv prints styled help and exits 0 [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP]", () => {
+    const r = runScript([]);
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /WF trial orchestrator/);
+    assert.match(r.stderr, /MODEL_EFFORT/);
+    assert.equal(r.stdout, "");
+  });
+
+  it("help does not require gawk [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP]", () => {
+    const r = runScript(["--help"], { PATH: "/usr/bin:/bin" });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /Examples/);
+  });
+
+  it("help works without store root marker [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP]", () => {
+    const r = spawnSync("bash", [SCRIPT, "--help"], {
+      cwd: os.tmpdir(),
+      encoding: "utf8",
+      env: { ...process.env, NO_COLOR: "1" },
+    });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /workflow-trial-agentstream/);
+  });
+
+  it("TIED_CLI_HELP_STDOUT=1 routes help to stdout [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP]", () => {
+    const r = runScript(["--help"], { TIED_CLI_HELP_STDOUT: "1" });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stdout, /Usage/);
+    assert.equal(r.stderr, "");
+  });
+
+  it("--stdout routes help to stdout [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP]", () => {
+    const r = runScript(["--stdout", "--help"]);
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stdout, /Environment/);
+    assert.equal(r.stderr, "");
+  });
+
+  it("NO_COLOR uses plain hr without Unicode [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP]", () => {
+    const r = runScript(["--help"], { NO_COLOR: "1" });
+    assert.equal(r.status, 0);
+    assert.match(r.stderr, /-{10,}/);
+    assert.doesNotMatch(r.stderr, /\x1b\[/);
   });
 
   it("rejects invalid WF id", () => {
@@ -336,6 +383,35 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.equal(manifest.exit_code, 0);
     assert.match(r.stderr, /DIAGNOSTIC: wf-trial process log manifest=/);
     assert.match(r.stderr, /wf-trial-orchestrator-run\.v1\.json/);
+  });
+
+  it("workflow_trial_range usage mentions Cursor slug effort [SC-RANGE-USAGE]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range 2>&1
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    const out = `${r.stderr}\n${r.stdout}`;
+    assert.match(out, /Cursor: MODEL_EFFORT/);
+    assert.match(out, /gpt-5\.6-luna-low-fast/);
+  });
+
+  it("workflow_trial_range warns on cursor composer plus effort [SC-RANGE-WARN]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range cursor composer-2.5-fast composer.2.5 medium 1 1 : 2>&1
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    const out = `${r.stderr}\n${r.stdout}`;
+    const matches = out.match(/DIAGNOSTIC: workflow_trial_range: MODEL_EFFORT=medium ignored/g);
+    assert.ok(matches);
+    assert.equal(matches.length, 1);
   });
 
   it("workflow_trial_range exports MODEL_EFFORT in shell [REQ-WF_TRIAL_MODEL_EFFORT]", () => {

@@ -1,5 +1,5 @@
 /**
- * [REQ-WF_TRIAL_MODEL_EFFORT] model effort resolution and Cursor slug diagnostic.
+ * [REQ-WF_TRIAL_MODEL_EFFORT] model effort resolution and Cursor slug rewrite.
  */
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
@@ -7,6 +7,7 @@ import { describe, it } from "node:test";
 import {
   applyCursorModelForAgent,
   cursorModelBracketEffortDisabled,
+  cursorSlugEffortRewriteBlocked,
   cursorSlugMayMismatchEffort,
   isAllowedModelEffort,
   resolveModelEffort,
@@ -24,29 +25,38 @@ describe("model-effort [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
     assert.equal(isAllowedModelEffort("bogus"), false);
   });
 
-  it("applyCursorModelForAgent appends effort bracket", () => {
+  it("applyCursorModelForAgent rewrites hyphen effort tier [SC-CURSOR-SLUG]", () => {
     const prev = process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT;
-    const prevOv = process.env.AGENTSTREAM_CURSOR_MODEL_OVERRIDES;
     delete process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT;
-    delete process.env.AGENTSTREAM_CURSOR_MODEL_OVERRIDES;
     assert.equal(
-      applyCursorModelForAgent("composer-2.5-fast", "medium"),
-      "composer-2.5-fast[effort=medium]",
+      applyCursorModelForAgent("grok-4.7-low-fast", "medium"),
+      "grok-4.7-medium-fast",
+    );
+    assert.equal(
+      applyCursorModelForAgent("claude-opus-5-thinking-high", "max"),
+      "claude-opus-5-thinking-max",
+    );
+    assert.equal(
+      applyCursorModelForAgent("gpt-5.6-luna-low-fast", "low"),
+      "gpt-5.6-luna-low-fast",
+    );
+    assert.equal(
+      applyCursorModelForAgent("gpt-5.5-high-fast", "xhigh"),
+      "gpt-5.5-extra-high-fast",
     );
     assert.equal(applyCursorModelForAgent("Auto", "high"), "Auto");
     assert.equal(
-      applyCursorModelForAgent("gpt-5[context=1m]", "high"),
-      "gpt-5[context=1m,effort=high]",
+      applyCursorModelForAgent("composer-2.5-fast[effort=medium]", "medium"),
+      "composer-2.5-fast",
     );
-    process.env.AGENTSTREAM_CURSOR_MODEL_OVERRIDES = "fast=false";
-    assert.equal(
-      applyCursorModelForAgent("slug", "low"),
-      "slug[effort=low,fast=false]",
-    );
-    process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT = "0";
     assert.equal(
       applyCursorModelForAgent("composer-2.5-fast", "medium"),
       "composer-2.5-fast",
+    );
+    process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT = "0";
+    assert.equal(
+      applyCursorModelForAgent("grok-4.7-low-fast", "medium"),
+      "grok-4.7-low-fast",
     );
     assert.equal(cursorModelBracketEffortDisabled(), true);
     if (prev === undefined) {
@@ -54,11 +64,11 @@ describe("model-effort [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
     } else {
       process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT = prev;
     }
-    if (prevOv === undefined) {
-      delete process.env.AGENTSTREAM_CURSOR_MODEL_OVERRIDES;
-    } else {
-      process.env.AGENTSTREAM_CURSOR_MODEL_OVERRIDES = prevOv;
-    }
+  });
+
+  it("cursorSlugEffortRewriteBlocked detects composer", () => {
+    assert.equal(cursorSlugEffortRewriteBlocked("composer-2.5-fast"), true);
+    assert.equal(cursorSlugEffortRewriteBlocked("grok-4.7-low-fast"), false);
   });
 
   it("cursorSlugMayMismatchEffort detects missing tier in slug", () => {

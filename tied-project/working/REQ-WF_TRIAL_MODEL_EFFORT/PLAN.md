@@ -4,14 +4,16 @@
 
 **Phase 1:** build-plan complete (shell + Claude effort + Cursor diagnostic) — see [build-plan-verification-evidence.md](./evidence/build-plan-verification-evidence.md).
 
-**Phase 2:** refine-plan reopen — Cursor `agent` CLI bracket effort + live-batch argv parity.
+**Phase 2:** build-plan complete — Cursor bracket effort + argv parity (superseded by phase 3 root-cause fix).
 
-**plan_phase:** `post-build` (phase 1 + phase 2 complete)
+**Phase 3:** refine-plan reopen — Cursor `agent` CLI **slug-tier** effort (not `[effort=…]` brackets) + **`workflow_trial_range`** operator docs/warnings in [`scripts/build-commands.sh`](../../../scripts/build-commands.sh).
+
+**plan_phase:** `post-build` (phase 3)
 
 **Request token:** `REQ-WF_TRIAL_MODEL_EFFORT`  
-**Workflow:** add-feature → refine-plan → **@build-plan (phase 2)** → @close-out
+**Workflow:** refine-plan (phase 3) → **@build-plan** → @close-out
 
-**Linked Cursor plan:** `cursor_cli_argv_parity_32942403`
+**Linked Cursor plan:** `cursor_agent_effort_slugs_b40812e4`
 
 **profile_depth:** `minimal` · **gate_policy:** `advisory`
 
@@ -23,153 +25,153 @@
 
 ---
 
-## 1. Refine (Touchpoint 1 — RESOLVE) — phase 2 closed
+## 1. Refine (Touchpoint 1 — RESOLVE) — phase 3
 
 | Sponsor term | Resolved concept | Disposition |
 | --- | --- | --- |
-| Effort in API | **`output_config.effort`** on Anthropic Messages (`low` … `max`) | **Locked** (phase 1) — operator-facing **model effort** |
-| Entry shell | **`workflow_trial_range`** 4th positional; **`-`** = unset | **Locked** (phase 1) |
+| Effort in API | **`output_config.effort`** on Anthropic Messages (`low` … `max`) | **Locked** (phase 1) |
+| Entry shell | **`workflow_trial_range`** 4th positional; **`-`** = unset | **Locked** — signature unchanged; **phase 3** improves usage text + operator warnings |
 | Claude harness | `--effort` + **`CLAUDE_CODE_EFFORT_LEVEL`** | **Locked** (phase 1) |
-| Cursor effort on CLI | Native **`agent --model`** bracket overrides (`…[effort=high,…]`) per shipped CLI help | **Locked** (phase 2) — always append `effort=` when `MODEL_EFFORT` set |
-| Bracket opt-out | **`AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0`** restores evidence-only `--model` | **Locked** |
-| Extra bracket keys | **`AGENTSTREAM_CURSOR_MODEL_OVERRIDES`** (e.g. `context=1m,fast=false`) merged into same bracket | **Locked** (operator env; not new agentstream flags) |
-| Cursor live batch | **`--approve-mcps`** default on; **`--add-dir`** for **`TIED_STORE_ROOT`** when linked client resolves store | **Locked** — mirror [REQ-AGENTSTREAM_CLAUDE_WF_PARITY](../../../requirements/REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml) posture |
-| Cursor performance toggles | **`--auto-review`**, **`--stream-partial-output`** opt-in via env only | **Locked** — off by default |
-| Cursor slug tier | **`MODEL_SLUG`** may still encode depth; bracket is additive argv, not slug rewrite | **Locked** |
+| Cursor effort on CLI | **`agent --model`** accepts **catalog slug** with hyphen tiers (`…-medium-fast`, `…-thinking-high`); rejects `slug[effort=…]` | **Locked (phase 3)** — agentstream rewrites slug; no bracket syntax |
+| Bracket opt-out env | **`AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0`** | **Locked** — keep name; doc = disable Cursor slug rewrite |
+| Cursor slug tier | **`MODEL_SLUG`** provides base + optional existing tier/modifiers; **`MODEL_EFFORT`** replaces/inserts tier at argv build | **Locked (phase 3)** — supersedes “bracket additive” |
+| Composer default | **`composer-2.5` / `composer-2.5-fast`** have **no** effort tiers in catalog | **Locked** — effort ignored + DIAGNOSTIC (agentstream + optional shell warn) |
+| Middle modifiers | e.g. **`thinking`**, **`max`** between base id and effort tier in slug | **Locked** — preserve on rewrite |
+| Cursor live batch | **`--approve-mcps`**, **`--add-dir`** | **Locked** (phase 2) — unchanged |
 
-**Supersedes (phase 1 only):** **D-CURSOR-DIAG** evidence-only Cursor effort; **SC-CURSOR-NOOP**; PLAN out-of-scope “bracket syntax unstable.”
+**Supersedes (phase 2):** **D-CURSOR-BRACKET**, **SC-CURSOR-BRACKET**, **SC-CURSOR-BRACKET-MERGE**, `AGENTSTREAM_CURSOR_MODEL_OVERRIDES` bracket merge for Cursor.
 
-**Origin (phase 2):** Sponsor `agent --help` shows parameterized `--model` bracket overrides; matrix cells with `MODEL_EFFORT` must affect Cursor subprocess, not only manifest/DIAGNOSTIC.
+**Origin (phase 3):** Live `agent` error `Cannot use this model: composer-2.5[effort=medium]` — bracket form is Claude/API-style, not Cursor catalog ids.
 
-**Ambiguity accepted:** Non-parameterized slugs may ignore bracket keys at runtime; operator verifies live behavior; opt-out env remains.
+**Ambiguity accepted:** Shell does not auto-pick tier-capable `MODEL_SLUG`; operators pass a slug family that supports tiers or accept DIAGNOSTIC for Composer.
 
 ---
 
-## 2. Problem (evidence) — phase 2 delta
+## 2. Problem (evidence) — phase 3 delta
 
-| Gap | After phase 1 | After phase 2 |
+| Gap | After phase 2 | After phase 3 |
 | --- | --- | --- |
-| Cursor live argv | Plain `--model` slug; DIAGNOSTIC when tier mismatch | `--model` includes `[effort=…]` (+ optional overrides); DEBUG when bracket applied |
-| Cursor MCP stalls | `--trust`/`--force` only | **`--approve-mcps`** on non-interactive batch |
-| Linked disposable store | Claude gets **`--add-dir`**; Cursor does not | Cursor **`--add-dir`** for store root |
-| Facilitator readout | Effort in manifest; Cursor depth may not match subprocess | Subprocess model token matches recorded **`model_effort`** |
+| Cursor `--model` | `composer-2.5[effort=medium]` → **agent rejects** | `grok-4.7-medium-fast` style catalog slug |
+| Operator entrypoint | `workflow_trial_range` usage silent on Cursor slug vs effort | Usage + CLI guide explain harness split; warn on composer + effort |
+| Facilitator manifest | `model_effort` set but subprocess model invalid | Subprocess `--model` matches rewritten slug when tiers exist |
 
 ---
 
-## 3. Reference baseline (unchanged shell; phase 2 code)
+## 3. Reference baseline
 
 | Field | Value |
 | --- | --- |
 | Range helper | [`workflow_trial_range`](../../../scripts/build-commands.sh) |
+| CLI guide | [`scripts/_build_commands_cli_guide.inc.sh`](../../../scripts/_build_commands_cli_guide.inc.sh) `_how_smoke` |
 | Four-phase | [`run-traditional-four-phase-agentstream.sh`](../../../scripts/run-traditional-four-phase-agentstream.sh) → `tied agentstream --model-effort` |
-| Agent argv | [`agentArgv`](../../../mcp-server/packages/agentstream/src/executor-dry-run.ts) + **new** [`cursor-agent-argv.ts`](../../../mcp-server/packages/agentstream/src/cursor-agent-argv.ts) |
-| Bracket helper | [`model-effort.ts`](../../../mcp-server/packages/agentstream/src/model-effort.ts) `applyCursorModelEffortBracket` |
-| Claude parity | [`claude-agent-argv.ts`](../../../mcp-server/packages/agentstream/src/claude-agent-argv.ts) — share add-dir resolver |
+| Slug helper | [`model-effort.ts`](../../../mcp-server/packages/agentstream/src/model-effort.ts) `applyCursorModelForAgent` |
+| Agent argv | [`executor-dry-run.ts`](../../../mcp-server/packages/agentstream/src/executor-dry-run.ts) `agentArgv` |
 
 ---
 
-## 4. Scope — phase 2
+## 4. Scope — phase 3
 
 ### In scope
 
-- LEAP **[ARCH-WF_TRIAL_MODEL_EFFORT](../../../architecture-decisions/ARCH-WF_TRIAL_MODEL_EFFORT.yaml)**, **[REQ-WF_TRIAL_MODEL_EFFORT](../../../requirements/REQ-WF_TRIAL_MODEL_EFFORT.yaml)** SC updates, **[IMPL-WF_TRIAL_MODEL_EFFORT](../../../implementation-decisions/IMPL-WF_TRIAL_MODEL_EFFORT-pseudocode.md)** replace `CURSOR_EFFORT_EVIDENCE_ONLY`
-- `model-effort.ts`, `cursor-agent-argv.ts`, `executor-dry-run.ts`, `live-executor.ts`
-- Unit tests: `model-effort.test.ts`, `cursor-agent-argv.test.ts`; oracle updates if default cursor argv expands
-- [`mcp-server/packages/agentstream/README.md`](../../../mcp-server/packages/agentstream/README.md) Cursor env table
-- [`tied-project/vocab/agentstream.md`](../../vocab/agentstream.md) model-effort row
+- **Agentstream:** slug rewrite in `model-effort.ts`; DEBUG string in `live-executor.ts`; unit tests (`model-effort.test.ts`, `cursor-agent-argv.test.ts`); oracles if argv changes
+- **LEAP:** IMPL pseudo-code `CURSOR_APPLY_MODEL_SLUG_EFFORT`; ARCH/REQ **SC-CURSOR-SLUG**; vocab + agentstream README
+- **`workflow_trial_range` in [`scripts/build-commands.sh`](../../../scripts/build-commands.sh):**
+  - **Usage block** (zero-arg path): harness-specific effort note — Claude → `MODEL_EFFORT` → `--effort`; Cursor → `MODEL_EFFORT` → agentstream **slug tier rewrite** on `MODEL_SLUG` (not a 5th positional)
+  - **Examples** in usage echo, e.g. `workflow_trial_range cursor gpt-5.6-luna-low-fast luna-low medium 1 1` and `workflow_trial_range claude … medium …`
+  - **One-shot stderr `DIAGNOSTIC`** when `harness=cursor`, `effort≠-`, and `model_slug` matches `composer-2.5` prefix (effort will not change `--model`; pick a tier-capable slug)
+  - Positional signature **unchanged** (breaking change already shipped in phase 1)
+- **`_build_commands_cli_guide.inc.sh`:** extend smoke section line for `workflow_trial_range` with Cursor slug + effort example (closes optional how-topic from session handoff)
+- **`wf-trial-agentstream-help.inc.sh`:** align batch-helper note with slug effort (cross-ref vocab)
+- **Bootstrap tests:** extend `workflow-trial-agentstream-sh.test.mjs` only if new usage/diagnostic strings are stable contracts
 
 ### Out of scope
 
-- Shell signature / `workflow_trial_range` changes (phase 1 locked)
-- Full `agent` surface (`worktree`, `plugin-dir`, `bedrock`, default `--sandbox disabled`)
-- Matrix rerun, close-out commit, `@record-wf-trial` schema bump
-- Renaming historical disposable clients
+- Changing `workflow_trial_range` positional arity or default `model_slug`
+- Auto-rewriting default `composer-2.5-fast` to a different catalog id when effort set
+- Matrix rerun, `record-wf-trial` schema bump
+- Full `agent` CLI surface
 
 ---
 
-## 5. Locked decisions — phase 2
+## 5. Locked decisions — phase 3
 
 | ID | Decision | Rationale |
 | --- | --- | --- |
-| **D-CURSOR-BRACKET** | When `modelEffort` non-empty and opt-out unset: format `--model` with merged `[effort=level]`; merge existing `[…]` keys | Sponsor: always append; CLI-documented |
-| **D-CURSOR-APPROVE-MCPS** | Cursor harness batch argv includes `--approve-mcps` unless `AGENTSTREAM_CURSOR_KEEP_MCPS=1` | Non-interactive MCP with `--trust`/`--force` |
-| **D-CURSOR-ADD-DIR** | Include `--add-dir` store root when resolver finds **`TIED_STORE_ROOT`** (shared with Claude) | Linked disposable skill paths |
-| **D-CURSOR-AUTO-OPT** | `--auto-review` / `--stream-partial-output` only when respective env `=1` | Behavior change; reversible |
-| **D-ORACLE-DELTA** | Refresh frozen dry-run oracles when default cursor argv changes | `parity.test.ts` contract |
+| **D-CURSOR-SLUG** | Rewrite `MODEL_SLUG` tier when `modelEffort` set; preserve `thinking` / `-fast`; blocklist `composer-2.5*` | Matches live `agent` catalog |
+| **D-CURSOR-SHELL-WARN** | `workflow_trial_range` emits one DIAGNOSTIC for cursor+composer+effort before loop | Fail-early operator clarity at matrix entry |
+| **D-CURSOR-SHELL-USAGE** | Zero-arg usage documents harness split + tier-capable slug examples | Same helper operators already run with no args |
+| **D-CURSOR-OPT-OUT** | `AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0` → no slug rewrite | Reversible |
+| **D-ORACLE-DELTA** | Refresh dry-run oracles if default cursor `command:` changes | Parity contract |
 
-**Retained from phase 1:** **D-EFFORT-ENUM**, **D-TAG-SUFFIX**, **D-CLAUDE-DUAL**, **D-MIGRATION**
+**Retained:** **D-EFFORT-ENUM**, **D-TAG-SUFFIX**, **D-CLAUDE-DUAL**, **D-CURSOR-APPROVE-MCPS**, **D-CURSOR-ADD-DIR**
 
 ---
 
-## 6. Implementation sequence (build-plan phase 2)
+## 6. Implementation sequence (build-plan phase 3)
 
 ```mermaid
 flowchart TD
-  leap[LEAP TIED stack phase 2]
-  red[RED cursor argv + bracket tests]
-  green[GREEN model-effort cursor-agent-argv agentArgv]
-  oracle[Update dry-run oracles if needed]
+  leap[LEAP TIED stack phase 3]
+  red[RED slug tests + shell usage tests]
+  green[GREEN model-effort + build-commands usage warn]
+  docs[CLI guide + vocab + help inc]
   validate[lint_yaml tied_validate_consistency]
-  leap --> red --> green --> oracle --> validate
+  leap --> red --> green --> docs --> validate
 ```
 
 | Step | Deliverable |
 | --- | --- |
-| 1 | LEAP REQ/ARCH/IMPL pseudo-code blocks `CURSOR_APPLY_MODEL_BRACKET_EFFORT`, `CURSOR_LIVE_ARGV_EXTRAS` |
-| 2 | RED: bracket merge, approve-mcps, add-dir, `agentArgv` cursor effort on `--model` |
-| 3 | GREEN: implement modules + wire `agentArgv` + live DEBUG diagnostic |
-| 4 | Oracle / parity snapshot if argv default expanded |
-| 5 | README + vocab |
-| 6 | Verification evidence append + `tied_validate_consistency` |
-
-**Phase 1 steps** (complete): shell chain, Claude effort, tag LEAP, bootstrap tests — do not redo unless regression.
+| 1 | LEAP REQ/ARCH/IMPL — slug effort; SC-CURSOR-SLUG |
+| 2 | RED: `model-effort.test.ts`, `cursor-agent-argv.test.ts`; optional bootstrap usage/diagnostic case |
+| 3 | GREEN: `applyCursorModelForAgent` slug algorithm; live DEBUG text |
+| 4 | GREEN: `workflow_trial_range` usage + composer DIAGNOSTIC; `_build_commands_cli_guide.inc.sh` |
+| 5 | Oracle refresh if needed; README + vocab + help inc |
+| 6 | Verification evidence + `tied_validate_consistency` |
 
 ---
 
-## 7. Acceptance criteria — phase 2
+## 7. Acceptance criteria — phase 3
 
 | ID | Verification |
 | --- | --- |
-| SC-CURSOR-BRACKET | `agentArgv` cursor + `modelEffort=medium` → `--model` contains `effort=medium` |
-| SC-CURSOR-BRACKET-MERGE | Existing `slug[context=1m]` + effort → single bracket with both keys |
-| SC-CURSOR-APPROVE-MCPS | Default cursor argv includes `--approve-mcps`; opt-out env removes |
-| SC-CURSOR-ADD-DIR | Temp client with store root → argv includes `--add-dir` |
-| SC-CURSOR-OPT-OUT | `AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0` → plain slug (phase 1 diagnostic path) |
-| SC-PHASE1-REGRESS | Shell/bootstrap tests + Claude `--effort` cases remain green |
-
-**Phase 1 criteria** (SC-RANGE-SIG, SC-TAG-EFFORT, SC-MANIFEST, SC-CLAUDE-*, SC-INVALID) remain satisfied; phase 2 must not regress.
+| **SC-CURSOR-SLUG** | `agentArgv` cursor + `grok-4.7-low-fast` + `medium` → `--model` `grok-4.7-medium-fast` (no `[effort=`) |
+| **SC-CURSOR-SLUG-MOD** | `claude-opus-5-thinking-high` + `max` → `claude-opus-5-thinking-max` |
+| **SC-CURSOR-COMPOSER** | `composer-2.5-fast` + `medium` → slug unchanged; DIAGNOSTIC path |
+| **SC-RANGE-USAGE** | `workflow_trial_range` (no args) stderr mentions Cursor slug effort + example tier-capable slug |
+| **SC-RANGE-WARN** | `workflow_trial_range cursor composer-2.5-fast … medium …` prints composer DIAGNOSTIC once |
+| **SC-PHASE1-2-REGRESS** | Claude `--effort`, approve-mcps, add-dir, bootstrap green |
 
 ---
 
-## 8. Files touched (phase 2)
+## 8. Files touched (phase 3)
 
 | File | Change |
 | --- | --- |
-| `mcp-server/packages/agentstream/src/model-effort.ts` | bracket helpers |
-| **new** `cursor-agent-argv.ts` | approve-mcps, add-dir, optional flags |
-| `executor-dry-run.ts` | cursor branch |
-| `live-executor.ts` | DEBUG/DIAGNOSTIC text |
-| `claude-agent-argv.ts` | optional shared add-dir extraction |
-| `model-effort.test.ts`, **new** `cursor-agent-argv.test.ts` | unit coverage |
-| `testdata/oracle/*.txt` | if default argv changes |
-| TIED REQ/ARCH/IMPL + vocab + README | LEAP + operator docs |
+| `mcp-server/packages/agentstream/src/model-effort.ts` | slug rewrite replaces bracket |
+| `live-executor.ts`, `executor-dry-run.ts` | DEBUG / wire unchanged |
+| `model-effort.test.ts`, `cursor-agent-argv.test.ts` | slug cases |
+| **`scripts/build-commands.sh`** | **`workflow_trial_range` usage + diagnostic** |
+| `scripts/_build_commands_cli_guide.inc.sh` | smoke examples |
+| `scripts/lib/wf-trial-agentstream-help.inc.sh` | batch note |
+| `tools/bootstrap/workflow-trial-agentstream-sh.test.mjs` | optional usage/diagnostic assertions |
+| TIED REQ/ARCH/IMPL + vocab + README | LEAP |
 
 ---
 
-## 9. Risk / consequence ladder — phase 2
+## 9. Risk / consequence ladder — phase 3
 
 | Choice | Ladder | Notes |
 | --- | --- | --- |
-| Always append bracket | **Reversible** (`AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0`) | Some slugs may ignore overrides |
-| Default `--approve-mcps` | **Reversible** | Aligns with trusted batch trials |
-| Oracle refresh | **Costly** review | Confined to cursor `command:` lines |
-| Reopen after phase 1 close | **Reversible** | Same REQ token; LEAP not new REQ |
+| Slug rewrite vs bracket | **Reversible** | Wrong tier mapping fixed in unit tests |
+| Shell composer WARN | **Reversible** | stderr only; does not block run |
+| Usage text expansion | **Reversible** | May require bootstrap oracle substring update |
+| LEAP SC rename | **Costly** review | Same REQ token |
 
 ---
 
 ## 10. Handoff
 
-**Do next:** **`@close-out`** — CITDP persist, CHANGELOG, verification manifest (optional live matrix smoke).
+**Do next:** **`@close-out`** — CITDP persist, CHANGELOG, optional live matrix smoke.
 
 **Changelog**
 
@@ -178,4 +180,6 @@ flowchart TD
 | 2026-11-09 | add-feature | Phase 1 PLAN |
 | 2026-11-09 | refine-plan | Phase 1 locked decisions |
 | 2026-11-09 | build-plan | Phase 1 implementation |
-| 2026-11-09 | refine-plan | Phase 2: Cursor CLI bracket effort + argv parity; `plan_phase` → pre-implementation |
+| 2026-11-09 | refine-plan | Phase 2: Cursor CLI bracket effort + argv parity |
+| 2026-11-09 | build-plan | Phase 2 implementation |
+| 2026-11-09 | refine-plan | Phase 3: Cursor slug effort + `workflow_trial_range` operator surface |

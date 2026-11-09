@@ -53,13 +53,13 @@ describe("cursor-agent-argv [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
     }
   });
 
-  it("agentArgv cursor includes approve-mcps and effort bracket [SC-CURSOR-BRACKET]", () => {
+  it("agentArgv cursor includes approve-mcps and slug effort tier [SC-CURSOR-SLUG]", () => {
     const prevBracket = process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT;
     delete process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT;
     const argv = agentArgv(
       "",
       "/tmp/ws",
-      "composer-2.5-fast",
+      "grok-4.7-low-fast",
       "",
       ["hi"],
       "cursor",
@@ -68,7 +68,8 @@ describe("cursor-agent-argv [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
     assert.ok(argv.includes("--approve-mcps"));
     const modelIdx = argv.indexOf("--model");
     assert.ok(modelIdx >= 0);
-    assert.match(argv[modelIdx + 1] ?? "", /\[effort=medium\]/);
+    assert.equal(argv[modelIdx + 1], "grok-4.7-medium-fast");
+    assert.doesNotMatch(argv[modelIdx + 1] ?? "", /\[effort=/);
     assert.equal(argv.includes("--effort"), false);
     if (prevBracket === undefined) {
       delete process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT;

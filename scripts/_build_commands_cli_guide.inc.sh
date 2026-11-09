@@ -272,6 +272,8 @@ _how_smoke() {
                                  disposable dir: {epoch}-wf-agentstream-{wf}-{harness}-{model}[effort]
                                  model from MODEL_CONFIG (else MODEL_SLUG), optional MODEL_EFFORT suffix on tag
                                  workflow_trial_range HARNESS SLUG CONFIG EFFORT END START  (EFFORT: low|medium|high|xhigh|max or -)
+                                 Cursor: tier-capable MODEL_SLUG + effort -> agent --model slug rewrite
+                                 example: workflow_trial_range cursor gpt-5.6-luna-low-fast luna-low medium 1 1
                                  HARNESS=cursor|claude
                                  tied-install linked + lint + G4 onboarding audit
                                  (tied-new-client-audit.v1.json) + mcp + git

@@ -492,6 +492,18 @@ alias workflow-trial-agentstream=workflow_trial_agentstream
 
 workflow_trial_range ()
 {
+    if [[ $# -eq 0 ]]; then
+        cat >&2 <<'EOF'
+usage: workflow_trial_range HARNESS SLUG CONFIG EFFORT END START [MONIT]
+  HARNESS: cursor|claude (default cursor)
+  EFFORT: low|medium|high|xhigh|max or - (unset MODEL_EFFORT)
+  Claude: MODEL_EFFORT -> agent --effort and CLAUDE_CODE_EFFORT_LEVEL
+  Cursor: MODEL_EFFORT -> agentstream catalog slug tier rewrite on MODEL_SLUG (not bracket effort=)
+  example: workflow_trial_range cursor gpt-5.6-luna-low-fast luna-low medium 1 1
+  example: workflow_trial_range claude sonnet cfg medium 1 1
+EOF
+        return 0
+    fi
     local harness="${1:-cursor}";
     local model_slug="${2:-composer-2.5-fast}";
     local model_config="${3:-$model_slug}";
@@ -504,6 +516,13 @@ workflow_trial_range ()
         unset MODEL_EFFORT
     else
         export MODEL_EFFORT="$effort"
+    fi
+    if [[ "$harness" == "cursor" && "$effort" != "-" ]]; then
+        case "$model_slug" in
+            composer-2.5|composer-2.5-*)
+                echo "DIAGNOSTIC: workflow_trial_range: MODEL_EFFORT=${effort} ignored for composer-2.5* (pick tier-capable MODEL_SLUG)" >&2
+                ;;
+        esac
     fi
     for ((num=start; num<=end; num++))
     do

@@ -1,18 +1,18 @@
 CITDP-REQ-WF_TRIAL_MODEL_EFFORT:
   change_definition:
-    current_behavior: "Phase 1 complete: MODEL_EFFORT through shell and Claude --effort; Cursor harness records effort in manifest but agentArgv passes plain --model slug with optional slug-tier DIAGNOSTIC only."
-    desired_behavior: "Phase 2: Cursor harness agentArgv applies CLI-documented --model bracket effort= when modelEffort set (opt-out env); adds --approve-mcps and --add-dir (store root) by default; optional --auto-review and --stream-partial-output via env. Claude and shell plumbing unchanged."
+    current_behavior: "Phase 2: Cursor agentArgv used bracket effort= on --model (rejected by live agent CLI); workflow_trial_range usage silent on slug vs effort."
+    desired_behavior: "Phase 3: Cursor rewrites MODEL_SLUG hyphen effort tiers (thinking/-fast preserved; composer blocklist); workflow_trial_range documents harness split and composer DIAGNOSTIC; Claude --effort and phase-2 approve-mcps/add-dir unchanged."
     non_goals:
       - "Rename historical disposable client directories"
       - "record-wf-trial schema version bump"
       - "Mirror full agent CLI (worktree, plugin-dir, bedrock)"
     success_criteria:
       - "workflow-trial-agentstream-sh.test.mjs remains green"
-      - "cursor-agent-argv.test.ts and model-effort bracket tests cover SC-CURSOR-BRACKET and SC-CURSOR-APPROVE-MCPS"
+      - "model-effort slug tests and cursor-agent-argv cover SC-CURSOR-SLUG; bootstrap covers SC-RANGE-USAGE/WARN"
       - "claude-agent-argv.test.ts --effort regression unchanged"
-    unchanged_behavior: "When effort is - or unset, disposable tag and cursor --model shape match phase 1 (no bracket). AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0 restores phase 1 cursor argv effort behavior."
+    unchanged_behavior: "workflow_trial_range signature unchanged; effort=- unsets MODEL_EFFORT. AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0 disables slug rewrite."
   impact_analysis:
-    modules_or_boundaries: "mcp-server/packages/agentstream model-effort, cursor-agent-argv, executor-dry-run, live-executor; optional testdata/oracle; TIED LEAP REQ/ARCH/IMPL; vocab agentstream.md; agentstream README"
+    modules_or_boundaries: "mcp-server/packages/agentstream model-effort; scripts/build-commands.sh workflow_trial_range; bootstrap tests; TIED LEAP; vocab; README"
     tied_tokens_new: []
     tied_tokens_touched:
       - "REQ-WF_TRIAL_MODEL_EFFORT"

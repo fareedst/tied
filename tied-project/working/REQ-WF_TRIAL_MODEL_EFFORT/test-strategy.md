@@ -1,62 +1,56 @@
 # Test strategy — REQ-WF_TRIAL_MODEL_EFFORT
 
-**Phase:** refine-plan phase 2 (design only). Phase 1 tests remain green baseline.
+**Phase:** refine-plan **phase 3** (design only). Phases 1–2 tests remain green baseline until RED lands.
 
-## TDD order (build-plan phase 2)
+## TDD order (build-plan phase 3)
 
-1. LEAP IMPL pseudo-code + REQ/ARCH satisfaction criteria  
-2. **RED** cursor bracket + `cursor-agent-argv` tests  
-3. **GREEN** implementation  
+1. LEAP IMPL pseudo-code + REQ/ARCH **SC-CURSOR-SLUG**  
+2. **RED** slug rewrite tests + optional `workflow_trial_range` usage/diagnostic tests  
+3. **GREEN** `model-effort.ts` + `build-commands.sh`  
 4. Oracle update if default cursor dry-run argv changes  
 5. `tied_validate_consistency` + verification manifest append  
 
-## Unit (CI — required, phase 2)
+## Unit (CI — required, phase 3)
 
 | Case | Location | Pass threshold |
 | --- | --- | --- |
-| Bracket append | `model-effort.test.ts` | `composer-2.5-fast` + `medium` → `…[effort=medium]` |
-| Bracket merge | Same | `gpt-5[context=1m]` + `high` → `effort=high` preserved with `context=1m` |
-| Bracket opt-out | Same | `AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0` → unchanged base slug |
+| Slug tier replace | `model-effort.test.ts` | `grok-4.7-low-fast` + `medium` → `grok-4.7-medium-fast` |
+| Modifier preserve | Same | `claude-opus-5-thinking-high` + `max` → `claude-opus-5-thinking-max` |
+| Idempotent tier | Same | `gpt-5.6-luna-low-fast` + `low` → unchanged |
+| Composer blocklist | Same | `composer-2.5-fast` + `medium` → unchanged |
+| xhigh alias | Same | `gpt-5.5-high-fast` + `xhigh` → `gpt-5.5-extra-high-fast` |
+| Opt-out | Same | `AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0` → unchanged base slug |
 | Auto unchanged | Same | `Auto` + effort → still `Auto` |
-| Overrides env | Same | `AGENTSTREAM_CURSOR_MODEL_OVERRIDES=fast=false` merges into bracket |
-| Cursor argv effort | `cursor-agent-argv.test.ts` or executor test | `agentArgv` cursor harness: `--model` contains `effort=`; no `--effort` flag |
-| approve-mcps default | `cursor-agent-argv.test.ts` | argv contains `--approve-mcps`; absent when `AGENTSTREAM_CURSOR_KEEP_MCPS=1` |
-| add-dir store | `cursor-agent-argv.test.ts` | temp client layout → `--add-dir` store root |
-| auto-review off | Same | no `--auto-review` unless env `=1` |
+| Cursor argv effort | `cursor-agent-argv.test.ts` | `--model` is catalog slug; no `[effort=`; no `--effort` |
+| approve-mcps / add-dir | `cursor-agent-argv.test.ts` | phase 2 cases unchanged |
 | Claude regression | `claude-agent-argv.test.ts` | `--effort` unchanged |
 
 ## Composition (CI)
 
 | Case | Pass threshold |
 | --- | --- |
-| Shell bootstrap | `workflow-trial-agentstream-sh.test.mjs` unchanged green |
+| Shell bootstrap | `workflow-trial-agentstream-sh.test.mjs` green (extend if usage/diagnostic contracted) |
+| **Range usage** | Sourced `workflow_trial_range` no-args → stderr mentions Cursor slug + example (optional explicit test in bootstrap) |
+| **Range warn** | `workflow_trial_range cursor composer-2.5-fast cfg medium 1 1 true` (or echo_exec) → one composer DIAGNOSTIC (optional) |
 | Four-phase shell | `run-traditional-four-phase-agentstream-sh.test.mjs` green |
 | Agentstream package | `npm test -w @tied/agentstream` green |
-| Parity oracles | `parity.test.ts` — update frozen oracle text if default cursor `command:` lines change |
+| Parity oracles | Update if cursor `command:` lines change |
 
 ## Manual (deferred)
 
 | Case | Notes |
 | --- | --- |
-| Dry-run spot-check | `workflow_trial_range cursor … medium … --dry-run` — command line shows bracket model + `--approve-mcps` |
-| Live cursor cell | Optional: single wf-NN with `MODEL_EFFORT=medium`; confirm DEBUG bracket + live behavior |
+| Dry-run spot-check | `workflow_trial_range cursor gpt-5.6-luna-low-fast luna-low medium 1 1 echo_exec --dry-run` — `--model` shows `…-medium-fast` |
+| Live cursor cell | Non-composer slug + `MODEL_EFFORT`; confirm DEBUG slug applied |
 
-## Out of scope (phase 2)
+## Out of scope (phase 3)
 
 - Full WF-01…08 matrix rerun  
-- Live `--auto-review` A/B performance study  
-- Gold client path renames  
+- Changing range positional signature  
 
 ## Verification manifest
 
-**Phase 1 (complete):**
-
-```text
-node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
-cd mcp-server/packages/agentstream && npx tsc && npm test
-```
-
-**Phase 2 (build-plan close-out):**
+**Phase 3 (build-plan close-out):**
 
 ```text
 cd mcp-server/packages/agentstream && npx tsc && npm test

@@ -288,15 +288,15 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
   });
 
   if (cfg.agentHarness === "cursor" && cfg.modelEffort.trim() !== "") {
-    const bracketModel = applyCursorModelForAgent(cfg.model, cfg.modelEffort);
-    if (bracketModel !== cfg.model.trim()) {
+    const slugModel = applyCursorModelForAgent(cfg.model, cfg.modelEffort);
+    if (slugModel !== cfg.model.trim()) {
       stderrAcc +=
-        `DEBUG: cursor --model effort bracket applied: ${JSON.stringify(bracketModel)}\n`;
+        `DEBUG: cursor --model effort slug applied: ${JSON.stringify(slugModel)}\n`;
     } else if (cursorSlugMayMismatchEffort(cfg.model, cfg.modelEffort)) {
       stderrAcc +=
         `DIAGNOSTIC: MODEL_EFFORT=${cfg.modelEffort} set but model slug ` +
         `${JSON.stringify(cfg.model)} may not encode effort ` +
-        `(bracket disabled or Auto model)\n`;
+        `(rewrite disabled, composer blocklist, or Auto model)\n`;
     }
   }
 

@@ -1,5 +1,5 @@
 ARCH-WF_TRIAL_MODEL_EFFORT:
-  decision: "Propagate MODEL_EFFORT through shell and agentstream DryRunConfig; Claude applies --effort and CLAUDE_CODE_EFFORT_LEVEL; Cursor applies --model bracket effort= when set (opt-out env) plus default --approve-mcps and --add-dir store root on live batch argv."
+  decision: "Propagate MODEL_EFFORT through shell and agentstream DryRunConfig; Claude applies --effort and CLAUDE_CODE_EFFORT_LEVEL; Cursor rewrites --model catalog slug hyphen effort tier when set (composer blocklist; opt-out env) plus default --approve-mcps and --add-dir on live batch argv; workflow_trial_range documents harness split and composer warning."
   status: "Draft"
   traceability:
     implementation:
