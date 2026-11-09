@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Cursor live session oracle ([REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE])** — `@tied/agentstream` bounded turn retry, shared NDJSON session extraction, and `DIAGNOSTIC: cursor_live_session_oracle` before fail-closed when four-phase trials lose `session_id` after `WritableIterable` stderr (field case `1794179357-wf-agentstream-wf-01-cursor-grok47med`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/PLAN.md).
 
+### Changed
+
+- **Traditional workflow trial runs registry** — [traditional-workflow-trial-runs-registry.md](docs/demos/traditional-workflow-trial-runs-registry.md) Master table slimmed to WF index, harness, model slug, exit, orchestrator **Run time** (wall seconds), and **Grades** with sortable `mean · Req/Tr/Ts/Al/Pr/Ch/Ml` via `meanCompactGrades` / `bandToScore` in [read-trial-readout-session-grading.mjs](tools/bootstrap/lib/read-trial-readout-session-grading.mjs). Demos index links grok47-med and 1794205* composer batch readouts. Plan: [PLAN-WF-TRIAL-RUNS-REGISTRY](tied-project/working/PLAN-WF-TRIAL-RUNS-REGISTRY/PLAN.md).
+
 ### Fixed
 
 - **Cursor session oracle exit normalization ([REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE])** — Treat Cursor turns with captured `session_id` plus deliverable transcript or retriable `WritableIterable` stderr as harness success when the agent process exits non-zero (field case `1794185608-wf-agentstream-wf-03-cursor-grok47med`, T-LIVE-SESSION-03/04).
