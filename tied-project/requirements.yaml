@@ -4485,6 +4485,19 @@ REQ-WF_TRIAL_MODEL_EFFORT:
       - "ARCH-WF_TRIAL_MODEL_EFFORT"
     implementation:
       - "IMPL-WF_TRIAL_MODEL_EFFORT"
+REQ-WF_TRIAL_MODEL_SPEC_CLI:
+  category: "Tooling"
+  detail_file: "requirements/REQ-WF_TRIAL_MODEL_SPEC_CLI.yaml"
+  name: "WF trial model spec CLI"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+      - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
+    related_to: []
+  status: "Implemented"
 REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   category: "Tooling"
   description: "Default-on tee capture of workflow_trial_agentstream stdout/stderr on disposable clients with wf-trial-orchestrator-run.v1.json manifest; @record-wf-trial consumes logs for process friction grading."

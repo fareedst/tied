@@ -3,21 +3,21 @@ CITDP-REQ-WF_TRIAL_MODEL_EFFORT:
     current_behavior: "Phase 2: Cursor agentArgv used bracket effort= on --model (rejected by live agent CLI); workflow_trial_range usage silent on slug vs effort."
     desired_behavior: "Phase 3: Cursor rewrites MODEL_SLUG hyphen effort tiers (thinking/-fast preserved; composer blocklist); workflow_trial_range documents harness split and composer DIAGNOSTIC; Claude --effort and phase-2 approve-mcps/add-dir unchanged."
     non_goals:
-      - "Rename historical disposable client directories"
-      - "record-wf-trial schema version bump"
       - "Mirror full agent CLI (worktree, plugin-dir, bedrock)"
+      - "record-wf-trial schema version bump"
+      - "Rename historical disposable client directories"
     success_criteria:
-      - "workflow-trial-agentstream-sh.test.mjs remains green"
-      - "model-effort slug tests and cursor-agent-argv cover SC-CURSOR-SLUG; bootstrap covers SC-RANGE-USAGE/WARN"
       - "claude-agent-argv.test.ts --effort regression unchanged"
+      - "model-effort slug tests and cursor-agent-argv cover SC-CURSOR-SLUG; bootstrap covers SC-RANGE-USAGE/WARN"
+      - "workflow-trial-agentstream-sh.test.mjs remains green"
     unchanged_behavior: "workflow_trial_range signature unchanged; effort=- unsets MODEL_EFFORT. AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0 disables slug rewrite."
   impact_analysis:
     modules_or_boundaries: "mcp-server/packages/agentstream model-effort; scripts/build-commands.sh workflow_trial_range; bootstrap tests; TIED LEAP; vocab; README"
     tied_tokens_new: []
     tied_tokens_touched:
-      - "REQ-WF_TRIAL_MODEL_EFFORT"
       - "ARCH-WF_TRIAL_MODEL_EFFORT"
       - "IMPL-WF_TRIAL_MODEL_EFFORT"
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
   record_identity:
     change_request_id: "REQ-WF_TRIAL_MODEL_EFFORT"
     citdp_id: "CITDP-REQ-WF_TRIAL_MODEL_EFFORT"
@@ -45,11 +45,11 @@ CITDP-REQ-WF_TRIAL_MODEL_EFFORT:
     depth_tier: "minimal"
     gate_policy: "advisory"
   test_strategy:
-    unit:
-      - "model-effort.test.ts bracket cases"
-      - "cursor-agent-argv.test.ts"
-      - "claude-agent-argv regression"
     composition:
       - "agentstream parity.test.ts oracle line review"
     deferred:
       - "Live cursor wf-NN with MODEL_EFFORT=medium subprocess spot-check"
+    unit:
+      - "claude-agent-argv regression"
+      - "cursor-agent-argv.test.ts"
+      - "model-effort.test.ts bracket cases"

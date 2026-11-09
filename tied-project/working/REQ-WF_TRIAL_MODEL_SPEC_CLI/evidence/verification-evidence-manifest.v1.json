@@ -1,0 +1,68 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 403,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 4127,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    }
+  ],
+  "commit": "bcfb78c710f3c2a6a01f3125104935d1d05c7470",
+  "covered_tokens": [
+    "REQ-TIED_SETUP",
+    "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP",
+    "REQ-WF_TRIAL_MODEL_EFFORT"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "Breaking change: 6-arg workflow_trial_range removed; migrate operator scripts"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-wf-model-spec-cli-2026-11-09",
+  "schema_version": "verification-evidence-manifest.v1"
+}

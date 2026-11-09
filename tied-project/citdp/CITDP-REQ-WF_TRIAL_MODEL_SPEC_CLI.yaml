@@ -1,0 +1,95 @@
+change_definition:
+  current_behavior: "workflow_trial_range expects HARNESS SLUG CONFIG EFFORT END START.\nOperators repeat catalog model twice (e.g. gpt-5.6-luna-low-fast + luna-low).\nMismatched pairs produce wrong disposable tags and readout correlation.\n"
+  desired_behavior: "workflow_trial_range uses HARNESS CONFIG_ID EFFORT END START.\ndocs/demos/wf-trial-model-specs.yaml maps each config id to model_config and harness-specific MODEL_SLUG.\n"
+  non_goals:
+    - "Auto-sync registry from runs table"
+    - "Flag-based CLI (--config, --from/--to)"
+  success_criteria:
+    - "SC-SPEC-HARNESS"
+    - "SC-SPEC-REGISTRY"
+    - "SC-SPEC-RESOLVE"
+    - "SC-SPEC-UNKNOWN"
+    - "SC-SPEC-USAGE"
+  unchanged_behavior: "Disposable tag modelBucket rule unchanged (MODEL_CONFIG first).\nMODEL_EFFORT tier rewrite stays in agentstream.\nExplicit MODEL_SLUG env still overrides resolver on orchestrator.\n"
+completion_criteria:
+  activation:
+    phase: "close_out"
+    request_token: "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+    run_id: "close-out-wf-model-spec-cli-2026-11-09"
+  checklist_gate:
+    dispositions:
+      - "completed"
+      - "not_applicable"
+      - "pending"
+      - "waived"
+    fail_closed: true
+    phases:
+      - "close_out"
+      - "pre_implementation"
+      - "verification"
+  verification_gate_notes: "Bootstrap unit tests only; no live matrix run."
+evidence:
+  command_seq:
+    - "node --test tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+    - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  manifest_reference: "tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/"
+  proof_boundaries:
+    - "Breaking change: 6-arg workflow_trial_range removed; migrate operator scripts"
+impact_analysis:
+  impl_inventory_notes: "Shell + bootstrap Node resolver; no agentstream behavior change."
+  modules_or_boundaries: "docs/demos/wf-trial-model-specs.yaml\ntools/bootstrap/lib/wf-trial-model-spec.mjs\nscripts/lib/wf-trial-model-spec.inc.sh\nscripts/build-commands.sh workflow_trial_range\nscripts/workflow-trial-agentstream.sh\nscripts/lib/wf-trial-agentstream-help.inc.sh\nscripts/_build_commands_cli_guide.inc.sh\ntools/bootstrap/workflow-trial-agentstream-sh.test.mjs\ndocs/demos/catalog-traditional-workflow-trial-prompts.md\ntied-project/vocab/agentstream.md\n"
+  tied_tokens_affected:
+    - "REQ-TIED_SETUP"
+    - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    - "REQ-WF_TRIAL_MODEL_EFFORT"
+  tied_tokens_new:
+    - "ARCH-WF_TRIAL_MODEL_SPEC_CLI"
+    - "IMPL-WF_TRIAL_MODEL_SPEC_CLI"
+    - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+leap_feedback:
+  divergences_from_analysis: "none"
+  record_status: "implemented"
+  tied_stack_updates_required:
+    - "REQ-WF_TRIAL_MODEL_EFFORT SC-RANGE-SIG wording (5-arg CONFIG_ID)"
+record_identity:
+  change_request_id: "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+  citdp_id: "CITDP-REQ-WF_TRIAL_MODEL_SPEC_CLI"
+  status: "implemented"
+risk_analysis:
+  abuse_cases: []
+  adversarial_inquiry:
+    assurance_profile: "baseline-functional"
+    close_out_inquiry_waiver: null
+    counterexamples:
+      - "Claude harness on cursor-only Luna id silent wrong cell"
+      - "Registry drift vs catalog table mis-resolves slug"
+      - "Unknown config id falls through to default composer slug"
+    depth_tier: "minimal"
+    disconfirming_observations:
+      - "wf-trial-model-spec.test.mjs and SC-SPEC-UNKNOWN shell test fail closed before WF loop"
+    eligibility_triggers_matched: []
+    evidence_references:
+      - "tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/not-applicable-receipt.v1.json"
+      - "tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/sub-adversarial-inquiry-pass-na.md"
+      - "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+    falsification_questions:
+      - "Does resolver error before loop on claude+luna-low?"
+    gate_policy: "advisory"
+    prior_depth_tier: null
+    rationale: "Operator CLI + YAML registry only; no new auth/network/persistence."
+    research_profile: "integrated-agent"
+risk_assessment:
+  costly_choices:
+    - "Removing 6-arg workflow_trial_range (breaking)"
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  reversible_choices:
+    - "Registry entries are documentation-first until sponsor adds ids"
+test_strategy:
+  composition: []
+  end_to_end_ui: []
+  summary: "Unit tests on resolver mjs and workflow_trial_range shell contracts.\n"
+  unit:
+    - "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+    - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+title: "WF trial model spec CLI (single config id)"

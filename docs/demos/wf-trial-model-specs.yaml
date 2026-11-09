@@ -1,0 +1,21 @@
+schema: "wf-trial-model-spec.v1"
+specs:
+  claude-sonnet-5-5:
+    claude_slug: "claude-sonnet-5-5"
+    model_config: "claude-sonnet-5-5"
+  composer-2.5:
+    claude_slug: "claude-haiku-5-5"
+    cursor_slug: "composer-2.5-fast"
+    model_config: "composer-2.5"
+  grok47-med:
+    cursor_slug: "grok-4.7-medium-fast"
+    model_config: "grok47-med"
+  luna-high:
+    cursor_slug: "gpt-5.6-luna-high-fast"
+    model_config: "luna-high"
+  luna-low:
+    cursor_slug: "gpt-5.6-luna-low-fast"
+    model_config: "luna-low"
+  luna-med:
+    cursor_slug: "gpt-5.6-luna-med-fast"
+    model_config: "luna-med"

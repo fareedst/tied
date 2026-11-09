@@ -106,15 +106,16 @@ MODEL_SLUG=composer-2.5-fast \
 
 ## Model configurations
 
-Document in the client **`PLAN.md`** header and in `trial-workflow-interaction-inventory.v1.json`. Tooling does not enforce model choice.
+Document in the client **`PLAN.md`** header and in `trial-workflow-interaction-inventory.v1.json`. **Orchestrated matrix runs** resolve slugs from [wf-trial-model-specs.yaml](wf-trial-model-specs.yaml) via `workflow_trial_range HARNESS CONFIG_ID …` ([REQ-WF_TRIAL_MODEL_SPEC_CLI](../../tied-project/requirements/REQ-WF_TRIAL_MODEL_SPEC_CLI.yaml)).
 
 | Config ID | Operator records exact slug in readout |
 | --- | --- |
-| `composer-2.5` | e.g. `composer-2.5-fast` |
+| `composer-2.5` | e.g. `composer-2.5-fast` (Cursor); `claude-haiku-5-5` on Claude harness |
 | `luna-low` | GPT-5.6 Luna low tier |
 | `luna-med` | GPT-5.6 Luna med tier |
 | `luna-high` | GPT-5.6 Luna high tier |
 | `grok47-med` | e.g. `grok-4.7-medium-fast` |
+| `claude-sonnet-5-5` | Claude Sonnet 5.5 (Claude harness only) |
 
 **Required PLAN header lines:**
 

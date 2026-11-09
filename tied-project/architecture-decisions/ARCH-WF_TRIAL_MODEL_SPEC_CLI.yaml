@@ -1,0 +1,15 @@
+ARCH-WF_TRIAL_MODEL_SPEC_CLI:
+  alternatives_considered:
+    - description: "Parse registry in shell"
+      name: "Bash-only YAML parse"
+      rejected_because: "Harder to unit test; duplicate logic"
+  consequences:
+    negative:
+      - "Breaking change for 6-arg scripts"
+      - "Registry must stay synced with catalog"
+    positive:
+      - "Disposable tag rule unchanged"
+      - "One operator token per cell"
+      - "Testable resolver"
+  context: "WF matrix operators run workflow_trial_range from build-commands; catalog already names model config ids separately from agent catalog slugs."
+  decision: "docs/demos/wf-trial-model-specs.yaml is the normative registry. Node wf-trial-model-spec.mjs loads and validates specs; bash wf-trial-model-spec.inc.sh exports MODEL_* for workflow_trial_range and optional orchestrator hook. workflow_trial_range arity is HARNESS CONFIG_ID EFFORT END START; 6-arg SLUG CONFIG form removed."

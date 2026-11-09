@@ -1,0 +1,40 @@
+CITDP-REQ-WF_TRIAL_MODEL_SPEC_CLI:
+  title: "WF trial model spec CLI (single config id)"
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-09"
+  current_behavior: |
+    workflow_trial_range expects HARNESS SLUG CONFIG EFFORT END START.
+    Operators repeat catalog model twice (e.g. gpt-5.6-luna-low-fast + luna-low).
+    Mismatched pairs produce wrong disposable tags and readout correlation.
+  desired_behavior: |
+    workflow_trial_range uses HARNESS CONFIG_ID EFFORT END START.
+    docs/demos/wf-trial-model-specs.yaml maps each config id to model_config and harness-specific MODEL_SLUG.
+  related_tokens:
+    - "REQ-WF_TRIAL_MODEL_EFFORT"
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+    - "REQ-TIED_SETUP"
+  satisfaction_criteria:
+    - "SC-SPEC-RESOLVE"
+    - "SC-SPEC-USAGE"
+    - "SC-SPEC-UNKNOWN"
+    - "SC-SPEC-HARNESS"
+    - "SC-SPEC-REGISTRY"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  change_definition:
+    success_criteria:
+      - "SC-SPEC-RESOLVE"
+      - "SC-SPEC-USAGE"
+  risk_assessment:
+    - risk: "Breaking 6-arg workflow_trial_range breaks operator scripts"
+      reversibility: "reversible"
+      mitigation: "Document migration in PLAN §9; grep at build-plan"
+    - risk: "Registry drift from catalog table"
+      reversibility: "reversible"
+      mitigation: "Catalog links registry YAML; single file owner"

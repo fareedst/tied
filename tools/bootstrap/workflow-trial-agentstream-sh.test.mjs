@@ -385,7 +385,7 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.match(r.stderr, /wf-trial-orchestrator-run\.v1\.json/);
   });
 
-  it("workflow_trial_range usage mentions Cursor slug effort [SC-RANGE-USAGE]", () => {
+  it("workflow_trial_range usage mentions CONFIG_ID and effort [SC-SPEC-USAGE]", () => {
     const bash = `
       export ECHO_EXEC=:
       # shellcheck source=scripts/build-commands.sh
@@ -395,16 +395,49 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
     assert.equal(r.status, 0, r.stderr);
     const out = `${r.stderr}\n${r.stdout}`;
+    assert.match(out, /CONFIG_ID/);
     assert.match(out, /Cursor: MODEL_EFFORT/);
-    assert.match(out, /gpt-5\.6-luna-low-fast/);
+    assert.match(out, /luna-low medium 2 2/);
+  });
+
+  it("workflow_trial_range resolves luna-low for cursor [SC-SPEC-RESOLVE]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      workflow_trial_agentstream() { :; }
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range cursor luna-low - 1 1 : 2>/dev/null
+      [[ "\${MODEL_CONFIG:-}" == "luna-low" ]] || exit 3
+      [[ "\${MODEL_SLUG:-}" == "gpt-5.6-luna-low-fast" ]] || exit 4
+      printf ok-spec-resolve\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-spec-resolve/);
+  });
+
+  it("workflow_trial_range unknown config id fails before loop [SC-SPEC-UNKNOWN]", () => {
+    const bash = `
+      _wf_calls=0
+      workflow_trial_agentstream() { _wf_calls=$((_wf_calls + 1)); }
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range cursor not-a-real-id - 1 1 : 2>/dev/null || true
+      [[ "\${_wf_calls}" -eq 0 ]] || exit 2
+      printf ok-unknown\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-unknown/);
   });
 
   it("workflow_trial_range warns on cursor composer plus effort [SC-RANGE-WARN]", () => {
     const bash = `
       export ECHO_EXEC=:
+      workflow_trial_agentstream() { :; }
       # shellcheck source=scripts/build-commands.sh
       source "${BUILD_COMMANDS}"
-      workflow_trial_range cursor composer-2.5-fast composer.2.5 medium 1 1 : 2>&1
+      workflow_trial_range cursor composer-2.5 medium 1 1 : 2>&1
     `;
     const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
     assert.equal(r.status, 0, r.stderr);
@@ -416,14 +449,12 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
 
   it("workflow_trial_range exports MODEL_EFFORT in shell [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
     const bash = `
+      workflow_trial_agentstream() { :; }
       # shellcheck source=scripts/build-commands.sh
       source "${BUILD_COMMANDS}"
-      workflow_trial_range() { :; }
-      # shellcheck source=scripts/build-commands.sh
-      source "${BUILD_COMMANDS}"
-      workflow_trial_range cursor slug cfg medium 1 1 echo_exec 2>/dev/null || true
+      workflow_trial_range cursor luna-low medium 1 1 : 2>/dev/null || true
       [[ "\${MODEL_EFFORT:-}" == "medium" ]] || exit 1
-      workflow_trial_range cursor slug cfg - 1 1 echo_exec 2>/dev/null || true
+      workflow_trial_range cursor luna-low - 1 1 : 2>/dev/null || true
       [[ -z "\${MODEL_EFFORT+x}" ]] || [[ -z "\${MODEL_EFFORT:-}" ]] || exit 2
       printf ok-range-effort\\n
     `;

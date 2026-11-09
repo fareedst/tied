@@ -3020,6 +3020,15 @@ ARCH-WF_TRIAL_MODEL_EFFORT:
       - "IMPL-WF_TRIAL_MODEL_EFFORT"
     requirements:
       - "REQ-WF_TRIAL_MODEL_EFFORT"
+ARCH-WF_TRIAL_MODEL_SPEC_CLI:
+  cross_references:
+    implementation_decisions:
+      - "IMPL-WF_TRIAL_MODEL_SPEC_CLI"
+    requirements:
+      - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_MODEL_SPEC_CLI.yaml"
+  name: "WF trial model spec registry"
+  status: "Implemented"
 ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
   name: "WF trial orchestrator process log boundaries"

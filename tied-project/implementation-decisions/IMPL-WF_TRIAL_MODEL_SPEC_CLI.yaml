@@ -1,0 +1,7 @@
+IMPL-WF_TRIAL_MODEL_SPEC_CLI:
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_MODEL_SPEC_CLI-pseudocode.md"
+  implementation_approach: "Add wf-trial-model-specs.yaml, wf-trial-model-spec.mjs (resolve CLI emitting JSON), wf-trial-model-spec.inc.sh sourcing resolver before workflow_trial_range loop; update build-commands.sh arity; optional workflow-trial-agentstream.sh hook when MODEL_CONFIG is registry id."
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-09"

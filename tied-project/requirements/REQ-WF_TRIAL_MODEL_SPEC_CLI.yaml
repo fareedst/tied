@@ -1,0 +1,25 @@
+REQ-WF_TRIAL_MODEL_SPEC_CLI:
+  rationale:
+    benefits:
+      - "Aligned with catalog Model configurations"
+      - "Registry-backed harness slugs"
+      - "Single config id per matrix cell"
+    problems_solved:
+      - "Duplicate SLUG+CONFIG positionals cause input errors"
+      - "Slug/config drift breaks disposable tags and readouts"
+    why: "Operators should name each matrix cell once; tooling composes MODEL_SLUG, MODEL_CONFIG, and tag buckets."
+  satisfaction_criteria:
+    - criterion: "claude claude-sonnet-5-5 resolves claude-sonnet-5-5 slug."
+      id: "SC-SPEC-CLAUDE-SONNET"
+    - criterion: "Cursor-only specs error on claude harness."
+      id: "SC-SPEC-HARNESS"
+    - criterion: "Unknown config id fails before WF loop."
+      id: "SC-SPEC-UNKNOWN"
+    - criterion: "wf-trial-model-spec unit tests green."
+      id: "SC-SPEC-REGISTRY"
+      metric: "node --test tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+    - criterion: "workflow_trial_range cursor luna-low with dry-run exports MODEL_CONFIG=luna-low and MODEL_SLUG=gpt-5.6-luna-low-fast."
+      id: "SC-SPEC-RESOLVE"
+    - criterion: "Zero-arg usage documents 5-arg form and luna-low example."
+      id: "SC-SPEC-USAGE"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

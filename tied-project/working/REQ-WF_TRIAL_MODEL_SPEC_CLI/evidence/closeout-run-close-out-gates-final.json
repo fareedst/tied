@@ -1,0 +1,99 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "close-out-wf-model-spec-cli-2026-11-09"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "findings": [
+        {
+          "code": "legacy_no_adherence_chain",
+          "detail": {
+            "ledger_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/gates/ledger.jsonl"
+          }
+        }
+      ],
+      "ledger_rows": 0,
+      "read_only": true,
+      "process_grade": {
+        "score": 88,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 100,
+            "weight": 0.2,
+            "gap_codes": []
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 20,
+            "weight": 0.15,
+            "gap_codes": [
+              "thin_ledger"
+            ]
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "thin_ledger"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/verification-evidence-manifest.v1.json",
+    "schema_version": "verification-evidence-manifest.v1"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "gate_receipt_persist": {
+    "ok": true,
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/gates/close_out-2026-11-09T22-19-08-425Z.json",
+    "hash": "sha256:8c19f98a049b68c3d117020277fc2994409b6e3b9de474ed3d3d29c18823c71e"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}

@@ -1,0 +1,10 @@
+feat(wf-trial): single CONFIG_ID for workflow_trial_range
+
+Operators name each matrix cell once via docs/demos/wf-trial-model-specs.yaml;
+workflow_trial_range resolves MODEL_SLUG and MODEL_CONFIG (breaking: 6-arg removed).
+
+[REQ-WF_TRIAL_MODEL_SPEC_CLI] [ARCH-WF_TRIAL_MODEL_SPEC_CLI] [IMPL-WF_TRIAL_MODEL_SPEC_CLI]
+LEAP: [REQ-WF_TRIAL_MODEL_EFFORT] SC-RANGE-SIG usage criteria (5-arg).
+
+Close-out: merged_decision.allowed=true; envelope blocking_gap_count=0.
+Tests: wf-trial-model-spec.test.mjs + workflow-trial-agentstream-sh.test.mjs.

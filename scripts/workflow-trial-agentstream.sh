@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
+# shellcheck source=lib/wf-trial-agentstream-help.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-agentstream-help.inc.sh"
+if wf_trial_help_argv_is_help_only "$@"; then
+  wf_trial_help_stream_init "${WF_TRIAL_HELP_STDOUT_CLI:-0}"
+  wf_trial_help_plain_init "${WF_TRIAL_HELP_PLAIN_CLI:-0}"
+  wf_trial_agentstream_print_help
+  exit 0
+fi
+
 REPO_ROOT_DEFAULT="$(cd "${SCRIPT_DIR}/.." && pwd -P)"
 MARKER_REL="tied-install.sh"
 CATALOG_REL="docs/demos/catalog-traditional-workflow-trial-prompts.md"
@@ -14,34 +24,6 @@ PROMPT_PREFACE_DEFAULT="Without pausing for user approval, select and execute th
 fail() {
   printf 'ERROR: %s\n' "$1" >&2
   exit "${2:-2}"
-}
-
-usage() {
-  cat >&2 <<EOF
-workflow-trial-agentstream — WF trial orchestrator (bootstrap + catalog extract + four-phase agentstream)
-
-Usage:
-  workflow-trial-agentstream.sh WF_ID [--dry-run] [--workspace ABS_PATH]
-  workflow-trial-agentstream.sh --help
-
-  WF_ID examples: wf-02, WF-02, PROMPT-WF-02 (catalog PROMPT-WF-01 … PROMPT-WF-08)
-
-Defaults (override via env): MODEL_SLUG=composer-2.5-fast MODEL_CONFIG=composer-2.5 HARNESS=cursor MODEL_EFFORT unset (workflow_trial_range 4th arg: low|medium|high|xhigh|max or -)
-  WF_TRIAL_STRICT_PREFLIGHT=1 fails closed when HARNESS=claude and Claude client validation returns non-zero (default: DIAGNOSTIC and continue).
-  WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1 skips store mcp-server/dist check before live four-phase.
-  WF_TRIAL_STRICT_RECONCILE=1 fails closed when mcp-server/dist/index.js is missing (default: DIAGNOSTIC and continue).
-  Process log capture is on by default; WF_TRIAL_SKIP_PROCESS_LOG=1 disables stdout/stderr files under
-  tied-project/working/wf-trial-orchestrator-run/evidence/ on the client.
-  WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1 skips TypeScript fixture seed and WF-specific preload (matrix comparability waived).
-
-Disposable bootstrap (no --workspace): client dir under TIED_TEST_ROOT is
-  {epoch}-wf-agentstream-{wf-id}-{harness}-{modelBucket}
-  modelBucket from MODEL_CONFIG (else MODEL_SLUG), lowercase, dots and hyphens removed.
-
-Run mode: live four-phase agentstream by default (four agent sessions). Use --dry-run first to verify --model wiring.
-
-Requires: GNU awk (gawk), built store CLI (./build-workspace.sh), gawk on PATH.
-EOF
 }
 
 normalize_wf_id() {
@@ -89,10 +71,6 @@ WF_ID=""
 
 while (($# > 0)); do
   case "$1" in
-    -h | --help)
-      usage
-      exit 0
-      ;;
     --dry-run)
       DRY_RUN=1
       shift
@@ -119,10 +97,7 @@ while (($# > 0)); do
   esac
 done
 
-if [[ -z "$WF_ID" ]]; then
-  usage
-  fail "WF_ID is required"
-fi
+[[ -n "$WF_ID" ]] || fail "WF_ID is required (workflow-trial-agentstream --help)"
 
 command -v gawk >/dev/null 2>&1 || fail "gawk not found (install GNU awk, e.g. brew install gawk)"
 
@@ -130,9 +105,21 @@ WF_NORM="$(normalize_wf_id "$WF_ID")"
 CATALOG="${REPO_ROOT}/${CATALOG_REL}"
 [[ -f "$CATALOG" && -r "$CATALOG" ]] || fail "catalog missing: $CATALOG"
 
+export HARNESS="${HARNESS:-cursor}"
+
+# [REQ-WF_TRIAL_MODEL_SPEC_CLI] Resolve catalog config id when MODEL_SLUG unset.
+# shellcheck source=lib/wf-trial-model-spec.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-model-spec.inc.sh"
+if [[ -z "${MODEL_SLUG:-}" ]]; then
+  _wf_trial_resolve_id="${WF_TRIAL_CONFIG_ID:-${MODEL_CONFIG:-}}"
+  if [[ -n "$_wf_trial_resolve_id" ]] && wf_trial_registry_has_config_id "$_wf_trial_resolve_id"; then
+    wf_trial_resolve_model_spec "$HARNESS" "$_wf_trial_resolve_id" || fail "model spec resolve failed for ${_wf_trial_resolve_id}"
+  fi
+  unset _wf_trial_resolve_id
+fi
+
 export MODEL_SLUG="${MODEL_SLUG:-composer-2.5-fast}"
 export MODEL_CONFIG="${MODEL_CONFIG:-composer-2.5}"
-export HARNESS="${HARNESS:-cursor}"
 
 # shellcheck source=lib/wf-trial-model-effort.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-model-effort.inc.sh"

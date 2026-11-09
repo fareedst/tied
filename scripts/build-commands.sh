@@ -490,28 +490,35 @@ workflow_trial_agentstream() {
 }
 alias workflow-trial-agentstream=workflow_trial_agentstream
 
+# [REQ-WF_TRIAL_MODEL_SPEC_CLI] [IMPL-WF_TRIAL_MODEL_SPEC_CLI]
+# shellcheck source=lib/wf-trial-model-spec.inc.sh
+source "${_BUILD_COMMANDS_DIR}/lib/wf-trial-model-spec.inc.sh"
+
 workflow_trial_range ()
 {
     if [[ $# -eq 0 ]]; then
         cat >&2 <<'EOF'
-usage: workflow_trial_range HARNESS SLUG CONFIG EFFORT END START [MONIT]
+usage: workflow_trial_range HARNESS CONFIG_ID EFFORT END START [MONIT]
   HARNESS: cursor|claude (default cursor)
+  CONFIG_ID: catalog id (see docs/demos/wf-trial-model-specs.yaml), e.g. luna-low, composer-2.5
   EFFORT: low|medium|high|xhigh|max or - (unset MODEL_EFFORT)
   Claude: MODEL_EFFORT -> agent --effort and CLAUDE_CODE_EFFORT_LEVEL
   Cursor: MODEL_EFFORT -> agentstream catalog slug tier rewrite on MODEL_SLUG (not bracket effort=)
-  example: workflow_trial_range cursor gpt-5.6-luna-low-fast luna-low medium 1 1
-  example: workflow_trial_range claude sonnet cfg medium 1 1
+  example: workflow_trial_range cursor luna-low medium 2 2
+  example: workflow_trial_range claude composer-2.5 medium 1 1
 EOF
         return 0
     fi
     local harness="${1:-cursor}";
-    local model_slug="${2:-composer-2.5-fast}";
-    local model_config="${3:-$model_slug}";
-    local effort="${4:--}";
-    local end="${5:-1}";
-    local start="${6:-1}";
-    local monit_to_stderr="${7:-echo_exec}";
-    local num NUM;
+    local config_id="${2:?CONFIG_ID required}";
+    local effort="${3:--}";
+    local end="${4:-1}";
+    local start="${5:-1}";
+    local monit_to_stderr="${6:-echo_exec}";
+    local num NUM model_slug model_config;
+    wf_trial_resolve_model_spec "$harness" "$config_id" || return $?;
+    model_slug="$MODEL_SLUG"
+    model_config="$MODEL_CONFIG"
     if [[ "$effort" == "-" ]]; then
         unset MODEL_EFFORT
     else
@@ -520,7 +527,7 @@ EOF
     if [[ "$harness" == "cursor" && "$effort" != "-" ]]; then
         case "$model_slug" in
             composer-2.5|composer-2.5-*)
-                echo "DIAGNOSTIC: workflow_trial_range: MODEL_EFFORT=${effort} ignored for composer-2.5* (pick tier-capable MODEL_SLUG)" >&2
+                echo "DIAGNOSTIC: workflow_trial_range: MODEL_EFFORT=${effort} ignored for composer-2.5* (pick tier-capable config id)" >&2
                 ;;
         esac
     fi
