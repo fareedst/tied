@@ -1,7 +1,7 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
   "run_id": "close-out-wf-model-effort-2026-11-09",
-  "commit": "4724dd47",
+  "commit": "f1fce4f0",
   "environment": {
     "node": "test"
   },
