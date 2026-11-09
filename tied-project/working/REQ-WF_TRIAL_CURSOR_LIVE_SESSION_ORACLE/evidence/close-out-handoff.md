@@ -32,7 +32,7 @@
 | SHA | Role |
 | --- | --- |
 | `c5a428850dddfd0d4a368ada424d8a656111381a` | Initial traceable commit (session oracle + retry) |
-| *(this close-out)* | LEAP: exit normalization T-LIVE-SESSION-03/04 |
+| `c7617ebb` | LEAP: exit normalization T-LIVE-SESSION-03/04 |
 
 ## Follow-ups
 
