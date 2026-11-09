@@ -5,8 +5,8 @@
 | **handoff_kind** | `session` |
 | **date** | 2026-11-09 |
 | **request_token** | `REQ-WF_TRIAL_READOUT_GRADING_RATIONALE` |
-| **prompt_type** | `build-plan` |
-| **plan_phase** | `post-build` |
+| **prompt_type** | `close-out` |
+| **plan_phase** | `close-out-ready` |
 | **execution_site** | TIED store (`/Users/fareed/Documents/dev/chatgpt/stdd`) |
 
 ---
@@ -46,11 +46,12 @@
 | --- | --- | --- |
 | 2026-11-09 | refine-plan | Locked D-* decisions; disk PLAN/CITDP/tracker |
 | 2026-11-09 | build-plan | TIED stack; normative docs; 84-file backfill; contract test 6/6 |
+| 2026-11-09 | close-out | Gates green; traceable commit `3f8d2aae`; CHANGELOG row |
 
 ---
 
 ## Do next
 
-**`@close-out`** — envelope, traceable commit, CHANGELOG row.
+REQ closed — see `close-out-handoff.md`. Uncommitted repo drift (FACILITATOR-*, agent loader REQ) is out of scope.
 
-Paths: `tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/build-plan-verification-evidence.md`
+Paths: `tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/close-out-handoff.md`

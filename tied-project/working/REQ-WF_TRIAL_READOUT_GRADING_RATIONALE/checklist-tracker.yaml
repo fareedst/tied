@@ -10,7 +10,7 @@ execution_evidence:
     - slug: verification-gate
       disposition: completed
     - slug: traceable-commit
-      disposition: pending
+      disposition: completed
   envelope_path: "tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     command_seq: []

@@ -2,7 +2,7 @@
 
 **Trial context:** TIED methodology **store** repo (facilitator skills, `docs/demos/` WF readout corpus, bootstrap contract tests).
 
-**`plan_phase`:** `post-build`
+**`plan_phase`:** `close-out-ready`
 
 **Request token:** `REQ-WF_TRIAL_READOUT_GRADING_RATIONALE`  
 **Workflow:** `@add-feature` (deferred — tokens mint at `@build-plan`) → `@refine-plan` → `@build-plan` → `@close-out`
