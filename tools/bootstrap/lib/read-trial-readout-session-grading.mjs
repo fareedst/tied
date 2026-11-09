@@ -30,6 +30,59 @@ export function isSubABand(bandNorm) {
   return bandNorm !== "A";
 }
 
+/** Facilitator band ladder (registry sort key); not catalog rubric weights. */
+const BAND_SCORE = new Map([
+  ["A", 4.0],
+  ["A-", 3.7],
+  ["B+", 3.3],
+  ["B", 3.0],
+  ["B-", 2.7],
+  ["C+", 2.3],
+  ["C", 2.0],
+  ["C-", 1.7],
+  ["D+", 1.3],
+  ["D", 1.0],
+  ["F", 0.0],
+]);
+
+/**
+ * Map normalized band to 0.0–4.0 score; null for N/A or unknown.
+ * @param {string} bandNorm normalized via normalizeBand
+ * @returns {number | null}
+ */
+export function bandToScore(bandNorm) {
+  const key = bandNorm.trim();
+  if (!key || /^N\/A$/i.test(key)) return null;
+  if (BAND_SCORE.has(key)) return BAND_SCORE.get(key);
+  return null;
+}
+
+/**
+ * Arithmetic mean of compact registry grades (Req/Tr/Ts/Al/Pr/Ch/Ml); skips N/A.
+ * @param {string} compactSlash e.g. `A/A−/A/A/B+/A/A−`
+ * @returns {{ mean: number | null, display: string }}
+ */
+export function meanCompactGrades(compactSlash) {
+  const raw = compactSlash.trim();
+  if (!raw || PLACEHOLDER_RE.test(raw)) {
+    return { mean: null, display: "—" };
+  }
+  const parts = raw.split("/").map((p) => p.trim()).filter(Boolean);
+  let sum = 0;
+  let count = 0;
+  for (const part of parts) {
+    const score = bandToScore(normalizeBand(part));
+    if (score == null) continue;
+    sum += score;
+    count += 1;
+  }
+  if (count === 0) {
+    return { mean: null, display: "—" };
+  }
+  const mean = sum / count;
+  return { mean, display: `${mean.toFixed(2)} · ${raw}` };
+}
+
 /**
  * @param {string} rationale
  */

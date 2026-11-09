@@ -7,7 +7,9 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { TIED_REPO_ROOT } from "./constants.mjs";
 import {
+  bandToScore,
   isSubABand,
+  meanCompactGrades,
   normalizeBand,
   parseSessionGradingTable,
   validateSessionGradingRationales,
@@ -48,6 +50,23 @@ describe("trial readout grading rationale [REQ-WF_TRIAL_READOUT_GRADING_RATIONAL
     assert.ok(isSubABand("A-"));
     assert.ok(isSubABand("B+"));
     assert.equal(isSubABand("A"), false);
+  });
+
+  it("T-GR-SCORE-01 band ladder orders B+ above B above B-", () => {
+    assert.ok(bandToScore("B+") > bandToScore("B"));
+    assert.ok(bandToScore("B") > bandToScore("B-"));
+    assert.equal(bandToScore("A"), 4.0);
+    assert.equal(bandToScore("F"), 0.0);
+    assert.equal(bandToScore("N/A"), null);
+  });
+
+  it("T-GR-SCORE-02 meanCompactGrades skips N/A and prefixes sortable mean", () => {
+    const { mean, display } = meanCompactGrades("A/A−/B+/A/A−/A/N/A");
+    assert.ok(mean > 3.7 && mean <= 4.0);
+    assert.match(display, /^\d+\.\d{2} · A\/A−\/B\+\/A\/A−\/A\/N\/A$/);
+    const u = meanCompactGrades("A/A−/B+/A/A−/A−/N/A");
+    assert.match(u.display, / · A\/A−\/B\+\/A\/A−\/A−\/N\/A$/);
+    assert.equal(meanCompactGrades("—").display, "—");
   });
 
   it("T-GR-READOUTS-01 all PROMPT-WF readouts pass rationale contract", () => {
