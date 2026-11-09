@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -26,7 +26,7 @@ Usage:
 
   WF_ID examples: wf-02, WF-02, PROMPT-WF-02 (catalog PROMPT-WF-01 … PROMPT-WF-08)
 
-Defaults (override via env): MODEL_SLUG=composer-2.5-fast MODEL_CONFIG=composer-2.5 HARNESS=cursor
+Defaults (override via env): MODEL_SLUG=composer-2.5-fast MODEL_CONFIG=composer-2.5 HARNESS=cursor MODEL_EFFORT unset (workflow_trial_range 4th arg: low|medium|high|xhigh|max or -)
   WF_TRIAL_STRICT_PREFLIGHT=1 fails closed when HARNESS=claude and Claude client validation returns non-zero (default: DIAGNOSTIC and continue).
   WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1 skips store mcp-server/dist check before live four-phase.
   WF_TRIAL_STRICT_RECONCILE=1 fails closed when mcp-server/dist/index.js is missing (default: DIAGNOSTIC and continue).
@@ -134,6 +134,10 @@ export MODEL_SLUG="${MODEL_SLUG:-composer-2.5-fast}"
 export MODEL_CONFIG="${MODEL_CONFIG:-composer-2.5}"
 export HARNESS="${HARNESS:-cursor}"
 
+# shellcheck source=lib/wf-trial-model-effort.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-model-effort.inc.sh"
+wf_trial_validate_model_effort "${MODEL_EFFORT:--}" || fail "invalid MODEL_EFFORT"
+
 BOOTSTRAP_PREPENDED=0
 TAG=""
 
@@ -177,7 +181,7 @@ fi
 
 wf_trial_process_log_bind_workspace \
   "$WORKSPACE" "$WF_NORM" "$REPO_ROOT" "${HARNESS}" "${MODEL_SLUG}" "${MODEL_CONFIG}" \
-  "${TAG}" "$DRY_RUN" "$BOOTSTRAP_PREPENDED"
+  "${TAG}" "$DRY_RUN" "$BOOTSTRAP_PREPENDED" "${MODEL_EFFORT:-}"
 
 BODY="$(extract_feature_remainder "$WF_NORM" "$CATALOG")"
 [[ -n "$BODY" ]] || fail "empty catalog extract for PROMPT-${WF_NORM} (check ${CATALOG})"
@@ -185,8 +189,8 @@ BODY="$(extract_feature_remainder "$WF_NORM" "$CATALOG")"
 PROMPT_PREFACE="${PROMPT_PREFACE:-$PROMPT_PREFACE_DEFAULT}"
 export FEATURE_REMAINDER="${PROMPT_PREFACE}${BODY}"
 
-printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s harness=%s disposable_tag=%s\n' \
-  "$WF_NORM" "$WORKSPACE" "$DRY_RUN" "${HARNESS:-cursor}" "${TAG:-—}" >&2
+printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s harness=%s disposable_tag=%s model_effort=%s\n' \
+  "$WF_NORM" "$WORKSPACE" "$DRY_RUN" "${HARNESS:-cursor}" "${TAG:-—}" "${MODEL_EFFORT:-—}" >&2
 
 # shellcheck source=lib/wf-trial-four-phase-hardening.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-four-phase-hardening.inc.sh"

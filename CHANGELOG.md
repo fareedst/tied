@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial model effort ([REQ-WF_TRIAL_MODEL_EFFORT], [ARCH-WF_TRIAL_MODEL_EFFORT], [IMPL-WF_TRIAL_MODEL_EFFORT])** — Breaking `workflow_trial_range` 4th positional for `MODEL_EFFORT`; shell tag/manifest/four-phase propagation; Claude `--effort` + `CLAUDE_CODE_EFFORT_LEVEL`; Cursor `--model` bracket `effort=`, default `--approve-mcps` and store `--add-dir`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_EFFORT/PLAN.md).
+
+- **PROMPT-WF-08 facilitator readout (GPT-5.6 Luna low / Cursor agentstream @ 1794231848)** — [trial-readout-PROMPT-WF-08-luna-low-1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.md](docs/demos/trial-readout-PROMPT-WF-08-luna-low-1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.md) (**split signal** — orchestrator `exit_code: 0`; **2/2** tests uncommitted; machine close-out **not_run**; pairs [1794100604](docs/demos/trial-readout-PROMPT-WF-08-luna-low-1794100604-wf-agentstream-wf-08-cursor-lunalow.md)). Catalog + demos index + runs registry updated via `@record-wf-trial`.
+
 - **WF trial readout grading rationale ([REQ-WF_TRIAL_READOUT_GRADING_RATIONALE], [ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE], [IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE])** — `@record-wf-trial` reference § Session grading rationale; catalog Rationale column rules; `trial-readout-grading-rationale-contract.test.mjs` over 84 `trial-readout-PROMPT-WF-*.md` (bands frozen, rationale backfill). Close-out `close-out-wf-grading-rationale-2026-11-09-final` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/PLAN.md).
 
 - **Cursor live session oracle ([REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE])** — `@tied/agentstream` bounded turn retry, shared NDJSON session extraction, and `DIAGNOSTIC: cursor_live_session_oracle` before fail-closed when four-phase trials lose `session_id` after `WritableIterable` stderr (field case `1794179357-wf-agentstream-wf-01-cursor-grok47med`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/PLAN.md).

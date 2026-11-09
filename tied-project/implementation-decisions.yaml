@@ -3607,6 +3607,14 @@ IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
       - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
     requirements:
       - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+IMPL-WF_TRIAL_MODEL_EFFORT:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_MODEL_EFFORT.yaml"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_MODEL_EFFORT"
+    requirements:
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
 IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
   name: "WF trial orchestrator process log implementation"

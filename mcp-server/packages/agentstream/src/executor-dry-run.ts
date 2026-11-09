@@ -24,6 +24,8 @@ import {
   claudeMcpConfigArgs,
   claudeSkipPermissionsArgs,
 } from "./claude-agent-argv.js";
+import { cursorLiveArgvExtras } from "./cursor-agent-argv.js";
+import { applyCursorModelForAgent } from "./model-effort.js";
 
 export type DryRunStreams = {
   stdout: string;
@@ -38,6 +40,7 @@ export function agentArgv(
   resumeId: string,
   parts: string[],
   harness: AgentHarnessProfile = "cursor",
+  modelEffort = "",
 ): string[] {
   const bin =
     agentPath.trim() !== "" ? agentPath : defaultAgentBinForHarness(harness);
@@ -60,6 +63,10 @@ export function agentArgv(
     if (m !== "" && m !== "Auto") {
       cmd.push("--model", m);
     }
+    const effort = modelEffort.trim().toLowerCase();
+    if (effort !== "" && effort !== "-") {
+      cmd.push("--effort", effort);
+    }
     if (resumeId !== "") {
       cmd.push("--resume", resumeId);
     }
@@ -73,13 +80,15 @@ export function agentArgv(
     }
     return cmd;
   }
+  const modelForAgent = applyCursorModelForAgent(m, modelEffort);
   const cmd: string[] = [
     bin,
     "--print",
     "--output-format",
     "stream-json",
+    ...cursorLiveArgvExtras(workspace),
     "--model",
-    m,
+    modelForAgent,
     "--trust",
     "--force",
   ];
@@ -141,6 +150,7 @@ export function renderDryRun(
       sess,
       t.parts,
       cfg.agentHarness,
+      cfg.modelEffort,
     );
     out.push(`command: ${formatShellArgv(argv)}\n`);
     if (i === 0 && turns.length > 1) {

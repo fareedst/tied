@@ -11,12 +11,17 @@ import {
   selectAgentHarness,
   type AgentHarnessProfile,
 } from "./harness-select.js";
+import {
+  isAllowedModelEffort,
+  resolveModelEffort,
+} from "./model-effort.js";
 
 export type DryRunConfig = {
   dryRun: boolean;
   sessionId: string;
   workspace: string;
   model: string;
+  modelEffort: string;
   agentPath: string;
   agentHarness: AgentHarnessProfile;
   leadChecklistYaml: string;
@@ -103,6 +108,7 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
     sessionId: "",
     workspace: cwd,
     model: "Auto",
+    modelEffort: "",
     agentPath: "",
     agentHarness: "cursor",
     leadChecklistYaml: "",
@@ -201,6 +207,12 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
       case "-m":
       case "--model":
         c.model = needVal(k, v, ok, flagPart, i);
+        if (!ok) {
+          i += 1;
+        }
+        break;
+      case "--model-effort":
+        c.modelEffort = needVal(k, v, ok, flagPart, i);
         if (!ok) {
           i += 1;
         }
@@ -375,6 +387,16 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
   }
 
   c.agentHarness = selectAgentHarness(flagPart, { dryRun: c.dryRun });
+
+  c.modelEffort = resolveModelEffort(
+    c.modelEffort,
+    String(process.env.MODEL_EFFORT ?? ""),
+  );
+  if (c.modelEffort !== "" && !isAllowedModelEffort(c.modelEffort)) {
+    throw new Error(
+      `--model-effort must be one of low|medium|high|xhigh|max (got ${JSON.stringify(c.modelEffort)})`,
+    );
+  }
 
   validateDryRunConfig(c);
   return c;

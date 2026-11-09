@@ -237,7 +237,7 @@ print_launch_banner() {
   printf '\n%s\n' "${_B}Traditional four-phase agentstream${_R}" >&2
   _hr_err
   printf '%s\n' "${_B}${_CY}${_SECTION_PREFIX}${_R}${_B}Launch${_R}" >&2
-  _diag "harness=${harness} model=${model_slug} workspace=${workspace} dry_run=${dry_run}"
+  _diag "harness=${harness} model=${model_slug} model_effort=${MODEL_EFFORT:-—} workspace=${workspace} dry_run=${dry_run}"
   _diag "batch=${batch_path}"
   _hr_err
 }
@@ -323,10 +323,14 @@ main() {
   local -a cmd=(node "$tied_cli" agentstream -w "$workspace" --harness "$harness" --model "$MODEL_SLUG")
   ((dry_run)) && cmd+=(-d)
   cmd+=(-y --skip-tied-mcp-preflight)
+  if [[ -n "${MODEL_EFFORT:-}" ]]; then
+    cmd+=(--model-effort "$MODEL_EFFORT")
+  fi
   cmd+=(-b "$expanded_batch")
   cmd+=(
     --checklist-var "MODEL_CONFIG=${MODEL_CONFIG:-}"
     --checklist-var "MODEL_SLUG=${MODEL_SLUG}"
+    --checklist-var "MODEL_EFFORT=${MODEL_EFFORT:-}"
     --checklist-var "FEATURE_REMAINDER=${FEATURE_REMAINDER:-}"
   )
 

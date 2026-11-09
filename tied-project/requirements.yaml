@@ -4474,6 +4474,17 @@ REQ-WF_TRIAL_IMPLEMENTATION_STACK:
       - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
     implementation:
       - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
+REQ-WF_TRIAL_MODEL_EFFORT:
+  category: "Tooling"
+  detail_file: "requirements/REQ-WF_TRIAL_MODEL_EFFORT.yaml"
+  name: "WF trial model effort plumbing"
+  priority: "P2"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_MODEL_EFFORT"
+    implementation:
+      - "IMPL-WF_TRIAL_MODEL_EFFORT"
 REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   category: "Tooling"
   description: "Default-on tee capture of workflow_trial_agentstream stdout/stderr on disposable clients with wf-trial-orchestrator-run.v1.json manifest; @record-wf-trial consumes logs for process friction grading."

@@ -19,6 +19,7 @@ function baseCfg(trackerPath: string): DryRunConfig {
     sessionId: "",
     workspace: os.tmpdir(),
     model: "Auto",
+    modelEffort: "",
     agentPath: "",
     agentHarness: "cursor",
     leadChecklistYaml: "/def.yaml",

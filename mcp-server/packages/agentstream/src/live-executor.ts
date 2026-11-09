@@ -10,6 +10,10 @@ import type { DryRunConfig } from "./dry-run-config.js";
 import { trackerRequestTokenFromVars } from "./dry-run-config.js";
 import { ACTION_GOTO, parseControl, validateControl } from "./control.js";
 import { agentArgv } from "./executor-run.js";
+import {
+  applyCursorModelForAgent,
+  cursorSlugMayMismatchEffort,
+} from "./model-effort.js";
 import { bindLiveExecutorDriver } from "./live-driver-bind.js";
 import { runTiedPreflight, type DryRunStreams } from "./executor-dry-run.js";
 import { runDaeGatePreflight } from "./dae-gate-preflight.js";
@@ -283,6 +287,19 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     contextLogPrune,
   });
 
+  if (cfg.agentHarness === "cursor" && cfg.modelEffort.trim() !== "") {
+    const bracketModel = applyCursorModelForAgent(cfg.model, cfg.modelEffort);
+    if (bracketModel !== cfg.model.trim()) {
+      stderrAcc +=
+        `DEBUG: cursor --model effort bracket applied: ${JSON.stringify(bracketModel)}\n`;
+    } else if (cursorSlugMayMismatchEffort(cfg.model, cfg.modelEffort)) {
+      stderrAcc +=
+        `DIAGNOSTIC: MODEL_EFFORT=${cfg.modelEffort} set but model slug ` +
+        `${JSON.stringify(cfg.model)} may not encode effort ` +
+        `(bracket disabled or Auto model)\n`;
+    }
+  }
+
   let running = "";
 
   for (let i = 0; i < turns.length; i++) {
@@ -414,8 +431,20 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       sess,
       t.parts,
       cfg.agentHarness,
+      cfg.modelEffort,
     );
-    const turnOutcome = await liveBinding.runTurn(argv, extraEnv);
+    const effortEnv: string[] = [];
+    if (
+      cfg.agentHarness === "claude" &&
+      cfg.modelEffort.trim() !== "" &&
+      cfg.modelEffort.trim() !== "-"
+    ) {
+      effortEnv.push(`CLAUDE_CODE_EFFORT_LEVEL=${cfg.modelEffort.trim()}`);
+    }
+    const turnOutcome = await liveBinding.runTurn(argv, [
+      ...extraEnv,
+      ...effortEnv,
+    ]);
     const { result, exitCode } = turnOutcome;
     if (turnOutcome.jevGateStderr) {
       stderrAcc += turnOutcome.jevGateStderr;

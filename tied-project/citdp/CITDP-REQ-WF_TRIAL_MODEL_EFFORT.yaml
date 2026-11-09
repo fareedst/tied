@@ -1,0 +1,55 @@
+CITDP-REQ-WF_TRIAL_MODEL_EFFORT:
+  change_definition:
+    current_behavior: "Phase 1 complete: MODEL_EFFORT through shell and Claude --effort; Cursor harness records effort in manifest but agentArgv passes plain --model slug with optional slug-tier DIAGNOSTIC only."
+    desired_behavior: "Phase 2: Cursor harness agentArgv applies CLI-documented --model bracket effort= when modelEffort set (opt-out env); adds --approve-mcps and --add-dir (store root) by default; optional --auto-review and --stream-partial-output via env. Claude and shell plumbing unchanged."
+    non_goals:
+      - "Rename historical disposable client directories"
+      - "record-wf-trial schema version bump"
+      - "Mirror full agent CLI (worktree, plugin-dir, bedrock)"
+    success_criteria:
+      - "workflow-trial-agentstream-sh.test.mjs remains green"
+      - "cursor-agent-argv.test.ts and model-effort bracket tests cover SC-CURSOR-BRACKET and SC-CURSOR-APPROVE-MCPS"
+      - "claude-agent-argv.test.ts --effort regression unchanged"
+    unchanged_behavior: "When effort is - or unset, disposable tag and cursor --model shape match phase 1 (no bracket). AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0 restores phase 1 cursor argv effort behavior."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/packages/agentstream model-effort, cursor-agent-argv, executor-dry-run, live-executor; optional testdata/oracle; TIED LEAP REQ/ARCH/IMPL; vocab agentstream.md; agentstream README"
+    tied_tokens_new: []
+    tied_tokens_touched:
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
+      - "ARCH-WF_TRIAL_MODEL_EFFORT"
+      - "IMPL-WF_TRIAL_MODEL_EFFORT"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_MODEL_EFFORT"
+    citdp_id: "CITDP-REQ-WF_TRIAL_MODEL_EFFORT"
+    status: "draft"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Bracket effort on slug that ignores overrides; facilitator assumes API effort applied"
+        - "Default --approve-mcps broadens MCP trust in batch without operator awareness"
+        - "Oracle drift hides unintended argv expansion"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Unit tests pass but live agent ignores bracket on composer slug"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_MODEL_EFFORT/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does opt-out env restore phase 1 DIAGNOSTIC-only path?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Agentstream argv composition only; no new network surface."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    unit:
+      - "model-effort.test.ts bracket cases"
+      - "cursor-agent-argv.test.ts"
+      - "claude-agent-argv regression"
+    composition:
+      - "agentstream parity.test.ts oracle line review"
+    deferred:
+      - "Live cursor wf-NN with MODEL_EFFORT=medium subprocess spot-check"

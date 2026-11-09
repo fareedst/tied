@@ -1,0 +1,8 @@
+ARCH-WF_TRIAL_MODEL_EFFORT:
+  decision: "Propagate MODEL_EFFORT through shell and agentstream DryRunConfig; Claude applies --effort and CLAUDE_CODE_EFFORT_LEVEL; Cursor applies --model bracket effort= when set (opt-out env) plus default --approve-mcps and --add-dir store root on live batch argv."
+  status: "Draft"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_MODEL_EFFORT"
+    requirements:
+      - "REQ-WF_TRIAL_MODEL_EFFORT"

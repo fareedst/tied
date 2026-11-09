@@ -16,9 +16,12 @@ REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
       - "REQ-TIED_SETUP"
     related_to:
       - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
   satisfaction_criteria:
     - criterion: "Default bootstrap --tag is wf-agentstream-{wf-id}-{harness}-{modelBucket} with modelBucket from MODEL_CONFIG first else MODEL_SLUG (lowercase, no dots or hyphens)."
       id: "SC-WF-TAG-SHAPE"
+    - criterion: "When MODEL_EFFORT is set, modelBucket appends normalized effort before the harness segment (same lowercase and strip rules)."
+      id: "SC-WF-TAG-EFFORT-SUFFIX"
     - criterion: "workflow-trial-agentstream-sh.test.mjs covers tag helper cases."
       id: "SC-WF-TAG-TEST"
       metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

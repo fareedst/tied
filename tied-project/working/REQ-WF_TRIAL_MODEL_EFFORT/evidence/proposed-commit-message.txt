@@ -1,0 +1,9 @@
+feat(agentstream): WF trial MODEL_EFFORT across harnesses
+
+Plumb model effort through workflow_trial_range, disposable tags, and
+agentstream: Claude --effort; Cursor --model bracket effort= plus
+--approve-mcps and linked-client --add-dir.
+
+REQ-WF_TRIAL_MODEL_EFFORT ARCH-WF_TRIAL_MODEL_EFFORT IMPL-WF_TRIAL_MODEL_EFFORT
+
+Completion: close_out allowed; envelope blocking_gap_count=0; thin_ledger advisory.

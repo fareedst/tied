@@ -1,0 +1,43 @@
+REQ-WF_TRIAL_MODEL_EFFORT:
+  category: "Tooling"
+  name: "WF trial model effort plumbing"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Claude Code --effort + env workaround"
+      - "Manifest and inventory record effort"
+      - "Single workflow_trial_range effort arg"
+    problems_solved:
+      - "Claude live agentstream omits effort"
+      - "Disposable tag collisions for same slug different effort"
+      - "Effort only encoded in MODEL_SLUG"
+    why: "Operators need Anthropic-style output_config.effort on matrix batches across harnesses."
+  related_requirements:
+    depends_on:
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-GOAGENT-CLI-CONFIG"
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    related_to:
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+  satisfaction_criteria:
+    - criterion: "Bootstrap and agentstream unit tests green."
+      id: "SC-WF-TEST"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    - criterion: "Claude harness agentArgv includes --effort when model effort configured."
+      id: "SC-CLAUDE-ARGV"
+    - criterion: "Disposable modelBucket appends normalized effort when MODEL_EFFORT set."
+      id: "SC-TAG-EFFORT"
+    - criterion: "Live Claude turns pass CLAUDE_CODE_EFFORT_LEVEL in spawn env."
+      id: "SC-CLAUDE-ENV"
+    - criterion: "wf-trial-orchestrator-run.v1.json includes model_effort when set."
+      id: "SC-MANIFEST"
+    - criterion: "workflow_trial_range 4th positional effort or -; MODEL_EFFORT exported to workflow_trial_agentstream."
+      id: "SC-RANGE-SIG"
+    - criterion: "Cursor harness agentArgv --model includes effort= bracket when model effort configured."
+      id: "SC-CURSOR-BRACKET"
+    - criterion: "Cursor harness batch argv includes --approve-mcps by default."
+      id: "SC-CURSOR-APPROVE-MCPS"
+    - criterion: "Cursor harness adds --add-dir for TIED store root when linked client resolves store."
+      id: "SC-CURSOR-ADD-DIR"
+  status: "Draft"

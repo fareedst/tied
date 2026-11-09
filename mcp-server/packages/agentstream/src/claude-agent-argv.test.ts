@@ -84,6 +84,21 @@ describe("claude-agent-argv [REQ-TIED_CLAUDE_LIVE_DRIVER]", () => {
     }
   });
 
+  it("agentArgv includes --effort for claude when model effort set [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
+    const client = fs.mkdtempSync(path.join(os.tmpdir(), "claude-effort-"));
+    const argv = agentArgv(
+      "",
+      client,
+      "claude-opus-5-5",
+      "",
+      ["hi"],
+      "claude",
+      "medium",
+    );
+    assert.ok(argv.includes("--effort"));
+    assert.ok(argv.includes("medium"));
+  });
+
   it("agentArgv includes MCP flags for claude harness [REQ-AGENTSTREAM_CLAUDE_WF_PARITY]", () => {
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "claude-argv-mcp-"));
     const store = fs.mkdtempSync(path.join(os.tmpdir(), "claude-argv-mcp-store-"));

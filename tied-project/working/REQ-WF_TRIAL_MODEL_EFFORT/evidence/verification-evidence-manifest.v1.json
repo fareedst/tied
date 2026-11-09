@@ -1,0 +1,51 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-wf-model-effort-2026-11-09",
+  "commit": "pending",
+  "environment": {
+    "node": "test"
+  },
+  "command_results": [
+    {
+      "id": "workflow-trial-sh",
+      "command": ["node", "--test", "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 15918
+    },
+    {
+      "id": "agentstream-tests",
+      "command": [
+        "bash",
+        "-lc",
+        "cd mcp-server/packages/agentstream && npm run build && find src -name '*.test.ts' -print0 | xargs -0 npx tsx --test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 10729
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "SC-WF-TEST",
+      "attribute": "bootstrap+agentstream",
+      "applicability": "applicable",
+      "rationale": "REQ-WF_TRIAL_MODEL_EFFORT verification",
+      "evidence_method": "automated",
+      "result": "passed",
+      "command_or_test": "workflow-trial-sh + agentstream-tests"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-WF_TRIAL_MODEL_EFFORT",
+    "ARCH-WF_TRIAL_MODEL_EFFORT",
+    "IMPL-WF_TRIAL_MODEL_EFFORT"
+  ],
+  "proof_boundaries": ["unit_tests", "shell_composition"],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

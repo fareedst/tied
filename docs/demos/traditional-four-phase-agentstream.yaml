@@ -1,5 +1,5 @@
 # Traditional four-phase workflow trial — feature-spec batch for `tied agentstream -b`.
-# Placeholders {{FEATURE_REMAINDER}}, {{MODEL_CONFIG}}, {{MODEL_SLUG}} are expanded by
+# Placeholders {{FEATURE_REMAINDER}}, {{MODEL_CONFIG}}, {{MODEL_SLUG}}, {{MODEL_EFFORT}} are expanded by
 # scripts/run-traditional-four-phase-agentstream.sh (not by --checklist-var on batch text).
 features:
   - order: 1
@@ -10,6 +10,7 @@ features:
       **Trial:** (from product remainder or PROMPT-WF id),
       **Model config:** {{MODEL_CONFIG}},
       **Model slug:** {{MODEL_SLUG}},
+      **Model effort:** {{MODEL_EFFORT}} (empty when unset),
       **Workflow:** add-feature → refine-plan → build-plan → close-out.
       Scaffold REQ/CITDP/PLAN/tracker only — no production code or RED tests this turn.
       Seed `evidence/trial-workflow-interaction-inventory.v1.json` with
@@ -17,7 +18,7 @@ features:
       `implementation_stack_id`: `wf-trial-ts-node-test-v1` when orchestrator seeded stack,
       `harness`: `{{HARNESS}}-agentstream-four-phase`,
       `harness_notes`: `run-traditional-four-phase-agentstream.sh` (four feature-spec batch turns; new agent session per turn),
-      `model_config`: {{MODEL_CONFIG}}, `model_slug`: {{MODEL_SLUG}}.
+      `model_config`: {{MODEL_CONFIG}}, `model_slug`: {{MODEL_SLUG}}, `model_effort`: {{MODEL_EFFORT}} when non-empty.
       After `tied_config_get_base_path`, call MCP `server_info` (or `tied-cli.sh server_info '{}'` when IDE MCP unavailable).
       Read `extensions.tied.methodology.version` and `source`; write
       `evidence/tied-methodology-version.session.v1.json` (`schema`: `tied-methodology-version.session.v1`;

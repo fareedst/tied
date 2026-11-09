@@ -1,0 +1,14 @@
+IMPL-WF_TRIAL_MODEL_EFFORT:
+  implementation_approach:
+    details:
+      - description: "mcp-server/packages/agentstream/src/model-effort.ts"
+        path: "mcp-server/packages/agentstream/src/model-effort.ts"
+      - description: "scripts/lib/wf-trial-model-effort.inc.sh"
+        path: "scripts/lib/wf-trial-model-effort.inc.sh"
+    summary: "Shell inc wf-trial-model-effort; tag suffix; process log field; agentstream model-effort.ts and agentArgv/live executor wiring."
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_MODEL_EFFORT"
+    requirements:
+      - "REQ-WF_TRIAL_MODEL_EFFORT"

@@ -269,8 +269,10 @@ _how_smoke() {
   test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp> or <timestamp>-<tag>
   test-new-tied-client --out-path --tag X   stdout: absolute client path (disposable only)
   workflow-trial-agentstream wf-02 [--dry-run]   bootstrap + PROMPT-WF extract + four-phase agentstream
-                                 disposable dir: {epoch}-wf-agentstream-{wf}-{harness}-{model}
-                                 model from MODEL_CONFIG (else MODEL_SLUG), HARNESS=cursor|claude
+                                 disposable dir: {epoch}-wf-agentstream-{wf}-{harness}-{model}[effort]
+                                 model from MODEL_CONFIG (else MODEL_SLUG), optional MODEL_EFFORT suffix on tag
+                                 workflow_trial_range HARNESS SLUG CONFIG EFFORT END START  (EFFORT: low|medium|high|xhigh|max or -)
+                                 HARNESS=cursor|claude
                                  tied-install linked + lint + G4 onboarding audit
                                  (tied-new-client-audit.v1.json) + mcp + git
                                  install flags: how install-matrix

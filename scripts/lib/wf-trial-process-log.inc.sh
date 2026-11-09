@@ -57,6 +57,7 @@ wf_trial_process_log_bind_workspace() {
   local disposable_tag="${7:-}"
   local dry_run="${8:-0}"
   local bootstrap_prepended="${9:-0}"
+  local model_effort="${10:-}"
 
   if ! wf_trial_process_log_enabled; then
     return 0
@@ -103,13 +104,18 @@ try {
     tag_json="\"${disposable_tag//\"/\\\"}\""
   fi
 
+  local model_effort_json="null"
+  if [[ -n "$model_effort" ]]; then
+    model_effort_json="\"${model_effort//\"/\\\"}\""
+  fi
+
   local started_at
   started_at="$(_wf_trial_process_log_iso_utc)"
 
   local payload
   payload="$(
     cat <<EOF
-{"schema":"${WF_TRIAL_PROCESS_LOG_SCHEMA}","orchestrator_script":"workflow-trial-agentstream.sh","repo_root":"${repo_root//\"/\\\"}","wf_id":"${wf_id}","workspace":"${workspace//\"/\\\"}","harness":"${harness}","model_slug":"${model_slug//\"/\\\"}","model_config":"${model_config//\"/\\\"}","disposable_tag":${tag_json},"dry_run":$([[ "$dry_run" == "1" ]] && echo true || echo false),"log_capture_default":true,"evidence_rel_dir":"${WF_TRIAL_PROCESS_LOG_EVIDENCE_REL}","files":{"stdout_log":"process.stdout.log","stderr_log":"process.stderr.log","manifest":"wf-trial-orchestrator-run.v1.json"},"bootstrap_stderr_prepended":$([[ "$bootstrap_prepended" == "1" ]] && echo true || echo false),"started_at":"${started_at}","finished_at":null,"exit_code":null}
+{"schema":"${WF_TRIAL_PROCESS_LOG_SCHEMA}","orchestrator_script":"workflow-trial-agentstream.sh","repo_root":"${repo_root//\"/\\\"}","wf_id":"${wf_id}","workspace":"${workspace//\"/\\\"}","harness":"${harness}","model_slug":"${model_slug//\"/\\\"}","model_config":"${model_config//\"/\\\"}","model_effort":${model_effort_json},"disposable_tag":${tag_json},"dry_run":$([[ "$dry_run" == "1" ]] && echo true || echo false),"log_capture_default":true,"evidence_rel_dir":"${WF_TRIAL_PROCESS_LOG_EVIDENCE_REL}","files":{"stdout_log":"process.stdout.log","stderr_log":"process.stderr.log","manifest":"wf-trial-orchestrator-run.v1.json"},"bootstrap_stderr_prepended":$([[ "$bootstrap_prepended" == "1" ]] && echo true || echo false),"started_at":"${started_at}","finished_at":null,"exit_code":null}
 EOF
   )"
   _wf_trial_process_log_write_json "$manifest" "$payload"

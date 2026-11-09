@@ -81,6 +81,8 @@ TIED_AGENTSTREAM_IMPL=ts node mcp-server/packages/agentstream/dist/index.js \
 
 3. **One-turn live** (human operator only; requires `claude` on PATH; Claude Code 2.x uses `--verbose` for stream-json — wired automatically when `--harness claude`). With `AGENTSTREAM_CLAUDE_LIVE_OK=1`, agentstream adds **`--dangerously-skip-permissions`** (Cursor `--trust`/`--force` parity for non-interactive `--print`), **`--add-dir`** for **`TIED_STORE_ROOT`**, and **`--strict-mcp-config` / `--mcp-config`** for the client `.cursor/mcp.json` or `.mcp.json` (aligned with `runClaudeCodeInteractiveSmoke`). Set **`AGENTSTREAM_CLAUDE_STRICT_MCP=0`** to omit strict-only; **`AGENTSTREAM_CLAUDE_KEEP_PERMISSIONS=1`** to omit skip-permissions.
 
+**Cursor harness batch argv** ([REQ-WF_TRIAL_MODEL_EFFORT](../../../tied-project/requirements/REQ-WF_TRIAL_MODEL_EFFORT.yaml)): default **`--approve-mcps`** (opt-out **`AGENTSTREAM_CURSOR_KEEP_MCPS=1`**), **`--add-dir`** for linked store root, **`--model`** bracket **`effort=`** when **`--model-effort`** / **`MODEL_EFFORT`** set (opt-out **`AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0`**), optional **`AGENTSTREAM_CURSOR_MODEL_OVERRIDES`** (e.g. `context=1m,fast=false`), optional **`AGENTSTREAM_CURSOR_AUTO_REVIEW=1`** and **`AGENTSTREAM_CURSOR_STREAM_PARTIAL=1`**.
+
 **Dual-harness WF-03 parity (CI dry):** `scripts/dual-harness-wf03-parity-smoke.sh --dry-run-only` asserts Claude argv MCP flags on the four-phase batch. Manual live wf-03: `HARNESS=claude AGENTSTREAM_CLAUDE_LIVE_OK=1` via `scripts/workflow-trial-agentstream.sh wf-03` at the same `MODEL_SLUG` as the Cursor gold cell; optional **`AGENTSTREAM_HARNESS_TRACE=1`** writes `tied-project/working/{REQ}/evidence/harness-turn-trace.jsonl`.
 
 ```bash

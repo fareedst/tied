@@ -9,6 +9,8 @@ import { fileURLToPath } from "node:url";
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const SCRIPT = path.join(REPO_ROOT, "scripts/workflow-trial-agentstream.sh");
 const TAG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-disposable-tag.inc.sh");
+const EFFORT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-model-effort.inc.sh");
+const BUILD_COMMANDS = path.join(REPO_ROOT, "scripts/build-commands.sh");
 const PREFLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-claude-preflight.inc.sh");
 const HARDENING_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-four-phase-hardening.inc.sh");
 const STACK_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-implementation-stack.inc.sh");
@@ -24,6 +26,7 @@ const MANIFEST_REQUIRED_KEYS = [
   "harness",
   "model_slug",
   "model_config",
+  "model_effort",
   "disposable_tag",
   "dry_run",
   "log_capture_default",
@@ -44,6 +47,8 @@ function buildDisposableTag(wfId, envOverrides = {}) {
       raw="\$(printf '%s' "\$raw" | tr '[:upper:]' '[:lower:]')"
       printf '%s' "\$raw"
     }
+    # shellcheck source=scripts/lib/wf-trial-model-effort.inc.sh
+    source "${EFFORT_INC}"
     # shellcheck source=scripts/lib/wf-trial-disposable-tag.inc.sh
     source "${TAG_INC}"
     build_wf_trial_disposable_tag "${wfId}"
@@ -101,6 +106,23 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
       buildDisposableTag("wf-03", { HARNESS: "claude", MODEL_CONFIG: "composer-2.5" }),
       "wf-agentstream-wf-03-claude-composer25",
     );
+  });
+
+  it("build_wf_trial_disposable_tag appends effort suffix [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
+    assert.equal(
+      buildDisposableTag("wf-03", {
+        HARNESS: "cursor",
+        MODEL_CONFIG: "composer-2.5",
+        MODEL_EFFORT: "medium",
+      }),
+      "wf-agentstream-wf-03-cursor-composer25medium",
+    );
+  });
+
+  it("rejects invalid MODEL_EFFORT before bootstrap [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
+    const r = runScript(["wf-02", "--dry-run"], { MODEL_EFFORT: "bogus" });
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /invalid MODEL_EFFORT/i);
   });
 
   it("build_wf_trial_disposable_tag MODEL_SLUG fallback when MODEL_CONFIG empty", () => {
@@ -260,7 +282,7 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
       export WF_TRIAL_BOOTSTRAP_STDERR="${bootstrapErr}"
       # shellcheck source=scripts/lib/wf-trial-process-log.inc.sh
       source "${PROCESS_LOG_INC}"
-      wf_trial_process_log_bind_workspace "${ws}" "WF-02" "${REPO_ROOT}" cursor composer-2.5-fast composer-2.5 "" 1 1
+      wf_trial_process_log_bind_workspace "${ws}" "WF-02" "${REPO_ROOT}" cursor composer-2.5-fast composer-2.5 "" 1 1 medium
       printf 'after_bind\\n'
     `;
     const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
@@ -284,6 +306,7 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
       ),
     );
     assert.equal(manifest.schema, "wf-trial-orchestrator-run.v1");
+    assert.equal(manifest.model_effort, "medium");
     assert.equal(manifest.exit_code, 0);
     assert.ok(manifest.finished_at);
   });
@@ -313,6 +336,24 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.equal(manifest.exit_code, 0);
     assert.match(r.stderr, /DIAGNOSTIC: wf-trial process log manifest=/);
     assert.match(r.stderr, /wf-trial-orchestrator-run\.v1\.json/);
+  });
+
+  it("workflow_trial_range exports MODEL_EFFORT in shell [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
+    const bash = `
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range() { :; }
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range cursor slug cfg medium 1 1 echo_exec 2>/dev/null || true
+      [[ "\${MODEL_EFFORT:-}" == "medium" ]] || exit 1
+      workflow_trial_range cursor slug cfg - 1 1 echo_exec 2>/dev/null || true
+      [[ -z "\${MODEL_EFFORT+x}" ]] || [[ -z "\${MODEL_EFFORT:-}" ]] || exit 2
+      printf ok-range-effort\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-range-effort/);
   });
 
   it("WF_TRIAL_SKIP_PROCESS_LOG=1 skips evidence dir [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]", () => {

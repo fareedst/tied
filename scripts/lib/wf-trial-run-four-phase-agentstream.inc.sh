@@ -7,6 +7,7 @@ wf_trial_four_phase_expand_batch_placeholders() {
   local harness="${HARNESS:-cursor}"
   export MODEL_SLUG="${MODEL_SLUG:-}"
   export MODEL_CONFIG="${MODEL_CONFIG:-}"
+  export MODEL_EFFORT="${MODEL_EFFORT:-}"
   export FEATURE_REMAINDER="${FEATURE_REMAINDER:-}"
   case "$harness" in
     claude) export SKILL_ROOT=".claude/skills" ;;
@@ -16,6 +17,7 @@ wf_trial_four_phase_expand_batch_placeholders() {
   perl -pe '
     s/\{\{MODEL_SLUG\}\}/$ENV{MODEL_SLUG}/g;
     s/\{\{MODEL_CONFIG\}\}/$ENV{MODEL_CONFIG}/g;
+    s/\{\{MODEL_EFFORT\}\}/$ENV{MODEL_EFFORT}/g;
     s/\{\{FEATURE_REMAINDER\}\}/$ENV{FEATURE_REMAINDER}/g;
     s/\{\{SKILL_ROOT\}\}/$ENV{SKILL_ROOT}/g;
     s/\{\{HARNESS\}\}/$ENV{HARNESS}/g;

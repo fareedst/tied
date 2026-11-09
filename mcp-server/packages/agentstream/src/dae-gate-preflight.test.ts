@@ -21,6 +21,7 @@ function minimalCfg(overrides: Partial<DryRunConfig> = {}): DryRunConfig {
     sessionId: "",
     workspace: process.cwd(),
     model: "Auto",
+    modelEffort: "",
     agentPath: "",
     agentHarness: "cursor",
     leadChecklistYaml: "",
