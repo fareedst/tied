@@ -1,11 +1,29 @@
-feat(agentstream): Cursor live session oracle and turn retry
+fix(agentstream): normalize Cursor turn when session and transcript present
 
-Harden four-phase Cursor trials when WritableIterable stderr co-occurs with
-missing session_id: shared NDJSON oracle, bounded retry, DIAGNOSTIC before
-fail-closed. Field case 1794179357-wf-agentstream-wf-01-cursor-grok47med.
+LEAP on REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE after field case
+1794185608 (WF-03 grok47-med): bounded retry fixed empty session only;
+new T-LIVE-SESSION-03/04 normalize exit when session_id is captured with
+deliverable assistant text or retriable WritableIterable stderr despite
+agent exit 1. live-executor always emits cursor_live_session_oracle
+diagnostic on Cursor turn failure.
 
-REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE
-ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE
-IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE
+Tokens: REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE, ARCH-*, IMPL-*
+Machine close-out: pass (close_out + envelope blocking_gaps=0)
 
-Tests: 114/114 @tied/agentstream
+Staging map:
+- mcp-server/packages/agentstream/src/cursor-turn-retry.ts
+- mcp-server/packages/agentstream/src/cursor-turn-retry.test.ts
+- mcp-server/packages/agentstream/src/live-driver-bind.ts
+- mcp-server/packages/agentstream/src/live-executor.ts
+- tied-project/implementation-decisions/IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE-pseudocode.md
+- tied-project/citdp/CITDP-REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/field-case-1794185608.md
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/test-strategy.md
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/close-out-handoff.md
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/traceable-commit-evidence.md
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/git-hygiene-receipt-2026-11-09.md
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/closeout-run-close-out-gates-final.json
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/request-evidence-envelope.v1.json
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/verification-evidence-manifest.v1.json
+- tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/CITDP-REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.draft.yaml
+- CHANGELOG.md

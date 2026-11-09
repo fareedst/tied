@@ -1,11 +1,11 @@
 CITDP-REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   change_definition:
     current_behavior: "Cursor live four-phase agentstream batches fail closed after a turn when NDJSON omits session_id; RetriableError WritableIterable is closed often precedes abort; orchestrator exit_code 1 despite valid add-feature disk artifacts."
-    desired_behavior: "Shared Cursor session oracle on stdout; bounded turn retry when retriable stderr and empty session; DIAGNOSTIC cursor_live_session_oracle before batch stop; unit/composition tests T-LIVE-SESSION-01/02 green."
+    desired_behavior: "Shared Cursor session oracle on stdout; bounded turn retry when retriable stderr and empty session; normalize exit when session plus transcript or retriable stderr; DIAGNOSTIC cursor_live_session_oracle on Cursor turn failure; T-LIVE-SESSION-01 through 04 green."
     non_goals:
-      - "Fix Cursor CLI WritableIterable root cause inside Cursor product"
-      - "Continue batch without session_id"
       - "Change PROMPT-WF-01 product prompts or add-feature skill"
+      - "Continue batch without session_id"
+      - "Fix Cursor CLI WritableIterable root cause inside Cursor product"
       - "Mandatory grok47 live matrix in CI"
     success_criteria:
       - "SC-CURSOR-SESSION-01 through SC-CURSOR-SESSION-04 satisfied"
@@ -14,9 +14,9 @@ CITDP-REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   impact_analysis:
     modules_or_boundaries: "mcp-server/packages/agentstream/src/{cursor-stream,executor-run,live-executor,harness-turn-trace}.ts"
     tied_tokens_affected:
-      - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
       - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
       - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+      - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
   profile:
     depth_tier: "minimal"
     gate_policy: "advisory"
@@ -27,21 +27,21 @@ CITDP-REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
-      depth_tier: "minimal"
-      gate_policy: "advisory"
-      research_profile: "integrated-agent"
-      rationale: "Harness reliability; fake-spawn tests only."
       counterexamples:
-        - "Retry masks permanent Cursor auth failures"
         - "Parser accepts wrong session_id shape"
-      falsification_questions:
-        - "Does retry ever continue without session_id?"
+        - "Retry masks permanent Cursor auth failures"
+      depth_tier: "minimal"
       disconfirming_observations:
         - "T-LIVE-SESSION-02 passes while live grok matrix still aborts turn 1"
       evidence_references:
+        - "mcp-server/packages/agentstream/src/live-executor.ts"
         - "tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/field-case-1794179357.md"
         - "tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/evidence/sub-adversarial-inquiry-pass-na.md"
-        - "mcp-server/packages/agentstream/src/live-executor.ts"
+      falsification_questions:
+        - "Does retry ever continue without session_id?"
+      gate_policy: "advisory"
+      rationale: "Harness reliability; fake-spawn tests only."
+      research_profile: "integrated-agent"
     depth_tier: "minimal"
     gate_policy: "advisory"
     rationale: "Agentstream harness only; no auth or persistence."
@@ -49,8 +49,8 @@ CITDP-REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
     depth_tier: "minimal"
     gate_policy: "advisory"
   test_strategy:
-    unit:
-      - "cursor-stream.test.ts"
     composition:
       - "T-LIVE-SESSION-01"
       - "T-LIVE-SESSION-02"
+    unit:
+      - "cursor-stream.test.ts"

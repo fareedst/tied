@@ -425,12 +425,16 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
         stderrAcc += `agentstream: claude driver error: ${turnOutcome.driverError}\n`;
       }
       if (turnOutcome.stderrTail) {
-        stderrAcc += `DIAGNOSTIC: claude stderr: ${turnOutcome.stderrTail.slice(0, 500)}\n`;
+        if (turnOutcome.stderrTail.startsWith("DIAGNOSTIC: cursor_live_session_oracle")) {
+          stderrAcc += turnOutcome.stderrTail;
+        } else {
+          stderrAcc += `DIAGNOSTIC: claude stderr: ${turnOutcome.stderrTail.slice(0, 500)}\n`;
+        }
       }
-      if (liveBinding.driverKind === "cursor" && result.sessionId === "") {
+      if (liveBinding.driverKind === "cursor") {
         stderrAcc += formatCursorLiveSessionOracleDiagnostic({
           exit_code: exitCode,
-          session_captured: false,
+          session_captured: result.sessionId.trim() !== "",
           retriable_stderr_seen: turnOutcome.retriableStderrSeen === true,
           attempt_count: turnOutcome.attemptCount ?? 1,
         });

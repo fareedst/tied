@@ -24,8 +24,14 @@ export type CursorTurnWithRetryOutcome = {
   exitCode: number;
   attemptCount: number;
   retriableStderrSeen: boolean;
+  exitNormalized?: boolean;
   gateStderr?: string;
 };
+
+/** Agent exited non-zero but stream-json carried a completed assistant payload. */
+export function cursorTurnHasDeliverable(result: RunResult): boolean {
+  return result.finalText.trim() !== "" || result.transcript.trim() !== "";
+}
 
 export async function runCursorTurnWithRetry(
   runOnce: RunCursorAgentOnce,
@@ -63,6 +69,13 @@ export async function runCursorTurnWithRetry(
     const hasSession = once.result.sessionId.trim() !== "";
     if (hasSession && once.exitCode === 0) {
       return last;
+    }
+    if (
+      hasSession &&
+      once.exitCode !== 0 &&
+      (retriable || cursorTurnHasDeliverable(once.result))
+    ) {
+      return { ...last, exitCode: 0, exitNormalized: true };
     }
     const shouldRetry =
       attempt < maxRetries &&

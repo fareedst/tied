@@ -140,10 +140,15 @@ export function bindLiveExecutorDriver(
         effectiveArgv,
         extraEnv,
       );
+      const stderrNote =
+        retryOut.exitNormalized === true
+          ? "DIAGNOSTIC: cursor_live_session_oracle exit_normalized=true\n"
+          : undefined;
       return {
         result: retryOut.result,
         exitCode: retryOut.exitCode,
         jevGateStderr: retryOut.gateStderr,
+        stderrTail: stderrNote,
         attemptCount: retryOut.attemptCount,
         retriableStderrSeen: retryOut.retriableStderrSeen,
       };

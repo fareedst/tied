@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Cursor session oracle exit normalization ([REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE])** — Treat Cursor turns with captured `session_id` plus deliverable transcript or retriable `WritableIterable` stderr as harness success when the agent process exits non-zero (field case `1794185608-wf-agentstream-wf-03-cursor-grok47med`, T-LIVE-SESSION-03/04).
+
+### Fixed
+
 - **Agent loader semver sync ([REQ-TIED_AGENT_LOADER_REFRESH])** — Default `tied-install` / `--refresh` updates install-managed **`AGENTS.md`** when client loader semver lags the store; **`--preserve-agent-loader`** retains create-if-absent. Bootstrap warns when `AGENTS.md` disagrees with `install.json` `store_methodology_version`. Plan: [PLAN.md](tied-project/working/REQ-TIED_AGENT_LOADER_REFRESH/PLAN.md).
 - **Install manifest semver on refresh ([REQ-TIED_INSTALL_JSON_REFRESH_SEMVER])** — `tied-install` / `--refresh` writes `store_methodology_version`, `tied_version`, and `installer_version` from store `VERSION`; MCP `server_info` / `resolveTiedMethodologyVersion` prefer `tied-bundle/install.json` over frozen client root `VERSION`. Plan: [PLAN.md](tied-project/working/REQ-TIED_INSTALL_JSON_REFRESH_SEMVER/PLAN.md).
 

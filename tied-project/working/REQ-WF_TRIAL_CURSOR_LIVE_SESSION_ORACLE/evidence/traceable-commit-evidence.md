@@ -1,21 +1,29 @@
-# Traceable commit evidence — REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE
+# Traceable commit evidence — REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE (LEAP slice 2026-11-09)
 
-**date:** 2026-11-08
+## Vocab VALIDATE
+
+N/A immature delta — harness terms unchanged in `tied-project/vocab/`.
 
 ## Gates
 
-- `closeout-run-close-out-gates-final.json` — `merged_decision.allowed: true`
-- Gate receipt: `tied-bundle/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/gates/close_out-2026-11-08T23-36-03-351Z.json`
+| Check | Result |
+| --- | --- |
+| `run-close-out-gates.mjs` `close_out` | `allowed: true` |
+| Envelope `fail_on_error_gaps` | `blocking_gap_count: 0` |
+| Gate receipt | `tied-bundle/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/gates/close_out-2026-11-09T01-36-36-750Z.json` |
 
 ## Verification
 
-- `verification-evidence-manifest.v1.json` — agentstream 114/114 pass
-- `git-hygiene-receipt-2026-11-08.md`
+`mcp-server/packages/agentstream` — `npm test` / `npx tsx --test src/cursor-turn-retry.test.ts` green (T-LIVE-SESSION-01..04).
+
+## Hygiene
+
+`tied_git_hygiene` preview: [git-hygiene-receipt-2026-11-09.md](./git-hygiene-receipt-2026-11-09.md)
 
 ## Excluded drift
 
-- `tied-project/working/REQ-TIED_AGENT_LOADER_REFRESH/evidence/*` — other REQ
+`REQ-TIED_AGENT_LOADER_REFRESH`, `scripts/build-commands.sh`, `REQ-TIED_SETUP.yaml` — other open work; not in staging map.
 
-## Upstream feedback
+## Upstream feedback capture
 
-N/A
+N/A — no `tied_feedback_*` promotion in this slice.

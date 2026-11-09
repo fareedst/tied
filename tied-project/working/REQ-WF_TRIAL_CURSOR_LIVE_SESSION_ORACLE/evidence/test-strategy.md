@@ -25,7 +25,8 @@
 | --- | --- | --- |
 | **T-LIVE-SESSION-01** | `src/cursor-live-session-oracle.test.ts` or extend existing live driver tests | Stub stdout: text without `session_id` → `sessionId === ""`; live-executor path emits `DIAGNOSTIC: cursor_live_session_oracle` on fail-closed |
 | **T-LIVE-SESSION-02** | same | Stub: stderr contains `WritableIterable is closed`, stdout delivers `session_id` on attempt 2 → batch turn succeeds with `sessionId` set |
-| **T-LIVE-SESSION-03** | optional bootstrap | Document-only crosswalk helper for facilitator stderr linter (non-blocking; defer unless build-plan needs it) |
+| **T-LIVE-SESSION-03** | `src/cursor-turn-retry.test.ts` | Session + deliverable transcript + agent exit 1 → normalized exit 0 (`exit_normalized`) |
+| **T-LIVE-SESSION-04** | same | Session + retriable WritableIterable stderr + exit 1 → normalized exit 0 without retry |
 
 **Fake spawn pattern:** Follow `live-driver-bind.test.ts` and `jev-harness-live-tool-gate.test.ts` (subprocess echo NDJSON).
 

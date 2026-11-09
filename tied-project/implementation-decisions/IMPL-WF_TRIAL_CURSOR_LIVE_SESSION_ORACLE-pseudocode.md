@@ -32,8 +32,8 @@ Grammar-Version: v2
   - OUTPUT: RunResult + exitCode + attempt_count
   - POST: at most CURSOR_TURN_RETRY_MAX + 1 attempts
   - EFFECTS: invokes runAgent spawn loop
-  - TERMINATION: stop on session_id + exit 0, or attempts exhausted
-  - CONTROL: retry when session empty AND (exit non-zero OR writable_iterable_seen)
+  - TERMINATION: stop on session_id + exit 0, session_id + deliverable/retriable with exit normalized to 0, or attempts exhausted
+  - CONTROL: retry when session empty AND (exit non-zero OR writable_iterable_seen); when session captured but agent exit non-zero, normalize to exit 0 when retriable stderr OR non-empty assistant transcript (field 1794185608 turn 2)
 
 ## LIVE_EXECUTOR_FINISH_TURN
 

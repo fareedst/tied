@@ -25,6 +25,6 @@
   "proof_boundaries": [
     "Live grok47 WF-01 matrix replay not run; fake-spawn tests only"
   ],
-  "run_id": "close-out-cursor-session-oracle-2026-11-08",
+  "run_id": "close-out-cursor-session-oracle-leap-2026-11-09",
   "schema": "verification-evidence-manifest.v1"
 }

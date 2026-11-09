@@ -67,4 +67,34 @@ describe("RUN_CURSOR_TURN_WITH_RETRY [REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE]",
     assert.equal(out.retriableStderrSeen, true);
     assert.equal(out.attemptCount, 2);
   });
+
+  it("T-LIVE-SESSION-03 normalizes exit 0 when session and deliverable but agent exit 1", async () => {
+    const runOnce: RunCursorAgentOnce = async () => ({
+      result: {
+        ...emptyResult(),
+        sessionId: "field-206e418f",
+        finalText: "**[REQ-PRODUCER_CONSUMER_WIRING]** refine-plan complete.",
+        transcript: "handoff complete",
+      },
+      exitCode: 1,
+      agentStderr: "",
+    });
+    const out = await runCursorTurnWithRetry(runOnce, ["agent"], [], 0);
+    assert.equal(out.exitCode, 0);
+    assert.equal(out.result.sessionId, "field-206e418f");
+    assert.equal(out.exitNormalized, true);
+    assert.equal(out.attemptCount, 1);
+  });
+
+  it("T-LIVE-SESSION-04 normalizes exit 0 when session, retriable stderr, and exit 1", async () => {
+    const runOnce: RunCursorAgentOnce = async () => ({
+      result: { ...emptyResult(), sessionId: "sess-writable" },
+      exitCode: 1,
+      agentStderr: "RetriableError: WritableIterable is closed\n",
+    });
+    const out = await runCursorTurnWithRetry(runOnce, ["agent"], [], 0);
+    assert.equal(out.exitCode, 0);
+    assert.equal(out.exitNormalized, true);
+    assert.equal(out.retriableStderrSeen, true);
+  });
 });
