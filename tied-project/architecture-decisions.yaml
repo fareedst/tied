@@ -2557,6 +2557,20 @@ ARCH-TIED_PROJECT_LINT_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_LINT_BOUNDARY.yaml"
   name: "Project lint boundary"
   status: "Planned"
+ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
+  cross_references:
+    - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
+    - "REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+  description: "UTF-8 byte mass uses same template line set and trim rules as line counts."
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS.yaml"
+  status: "Implemented"
+ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES:
+  cross_references:
+    - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
+    - "REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
+  description: "Heuristic node:test case counter; same receipt keys; validator_version marks semantics."
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES.yaml"
+  status: "Implemented"
 ARCH-TIED_PROJECT_SIZE_SNAPSHOT:
   description: "Evidence-only snapshot composing corpus graph, pseudocode analyze, and proof facet counts."
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_SIZE_SNAPSHOT.yaml"

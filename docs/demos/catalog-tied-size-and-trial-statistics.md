@@ -11,14 +11,16 @@
 | Layer | Meaning | Not |
 | --- | --- | --- |
 | **Atoms** | Vocab preferred terms + REQ/ARCH/IMPL index atoms (+ optional corpus graph totals) | LOC as sole definition |
-| **Operational intent** | `essence_pseudocode` applied mass and analyzer logic nodes | Stale size when pseudo-code changes without hash update |
-| **Proof facets** | Unit, composition, E2E tests; binding-inventory-related tests; verify evidence files | Product definition or maturity score |
+| **Operational intent** | `essence_pseudocode` applied mass (`applied_lines` and `applied_utf8_bytes`) and analyzer logic nodes | Stale size when pseudo-code changes without hash update |
+| **Proof facets** | Unit, composition, E2E **test cases** (`node:test` `it`/`test` per file when `validator_version` ≥ 1.1.0); binding-inventory-related cases; verify evidence **files** | Product definition or maturity score |
+
+**Validator note:** `layers.proof_facets` tier integers counted **files** when `validator_version` &lt; 1.1.0; **test cases** from 1.1.0 onward.
 
 **Co-update rule:** `operational_intent_hash` is derived from merged IMPL `*-pseudocode.md` bodies and recomputed on every snapshot.
 
 ## Cross-layer ratios
 
-Receipt `cross_layer` holds simple ratios (e.g. operational intent per atom). Ratios are descriptive for cohort science only — **no leaderboard**, **no universal maturity score**.
+Receipt `cross_layer` holds simple ratios (e.g. `operational_intent_per_atom`, `operational_intent_utf8_per_atom`). Ratios are descriptive for cohort science only — **no leaderboard**, **no universal maturity score**.
 
 ## Facilitator capture
 

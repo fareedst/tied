@@ -1,0 +1,50 @@
+CITDP-REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES:
+  change_definition:
+    current_behavior: "Proof facet tiers increment by one per matching test file under src/. A single file with many node:test cases contributes the same count as a file with one case."
+    desired_behavior: "Proof facet tiers sum node:test it/test invocations per classified file. Receipt validator_version 1.1.0 marks case semantics; registry and facilitator docs say test cases; parent REQ LEAP clarifies proof facet definition."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/project-size/test-case-count.ts (new); mcp-server/src/project-size/snapshot-builder.ts; mcp-server/src/project-size/types.ts; mcp-server/src/project-size/project-size.test.ts; mcp-server/test/fixtures/project-size/mini-client/; tied-project/config/project-size-metrics.registry.yaml; docs/demos/catalog-tied-size-and-trial-statistics.md; tools/bootstrap/lib/project-size-comparison-render.mjs; tied-project/vocab/tied-methodology.md; IMPL-TIED_PROJECT_SIZE_SNAPSHOT pseudocode sidecar"
+    tied_tokens_new:
+      - "ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
+      - "IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
+      - "REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
+  non_goals:
+    - "Historical JSONL or archived receipt backfill"
+    - "Leaderboard or maturity scoring"
+    - "schema_version bump"
+    - "Vitest/Jest runner support"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Facilitator compares validator 1.0.0 file counts to 1.1.0 case counts without filtering"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Heuristic counter matches ESLint/AST test count on a dense WF client fixture"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does string-heavy test source over-count cases despite strip pass?"
+      gate_policy: "advisory"
+      rationale: "Semantic refinement only; validator_version marks discontinuity."
+      research_profile: "integrated-agent"
+    counterexamples:
+      - "Facilitator compares validator 1.0.0 file counts to 1.1.0 case counts without filtering"
+    depth_tier: "minimal"
+    falsification_questions:
+      - "Does string-heavy test source over-count cases despite strip pass?"
+    gate_policy: "advisory"
+    rationale: "Semantic refinement of existing integers; validator_version discontinuity marker."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-PFC-01 through SC-PFC-06 in PLAN.md"
+    - "tied_validate_consistency ok"
+  test_strategy:
+    composition:
+      - "mcp-server/src/project-size/project-size-mcp.composition.test.ts"
+    unit:
+      - "mcp-server/src/project-size/project-size.test.ts"
+      - "mcp-server/src/project-size/test-case-count.ts (new dedicated test file or describe block)"
+  unchanged_behavior: "Test file glob and classifyTestFile rules; verify_evidence_files file count; operational_intent and atoms layers; proof_boundary string."

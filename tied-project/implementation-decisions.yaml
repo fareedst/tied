@@ -3177,6 +3177,21 @@ IMPL-TIED_PROJECT_SIZE_COHORT_JSONL:
       - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
     requirements:
       - "REQ-TIED_PROJECT_SIZE_LAYERS"
+IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
+  cross_references:
+    - "ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+    - "IMPL-TIED_PROJECT_SIZE_SNAPSHOT"
+    - "REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+  description: "scanPseudocodeLines and UTF-8 fields in snapshot-builder."
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS.yaml"
+  status: "Implemented"
+IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES:
+  cross_references:
+    - "IMPL-TIED_PROJECT_SIZE_SNAPSHOT"
+    - "REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
+  description: "Proof facet test-case counting in project-size snapshot."
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES.yaml"
+  status: "Implemented"
 IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL:
   description: "Facilitator record-wf-trial captures snapshot receipt and readout appendix."
   detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL.yaml"

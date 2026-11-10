@@ -1,0 +1,55 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-project-size-proof-cases-2026-11-10",
+  "environment": {
+    "node": "mcp-server npm test"
+  },
+  "command_results": [
+    {
+      "id": "project-size-mcp",
+      "command": [
+        "npm",
+        "test",
+        "--",
+        "--test-name-pattern",
+        "project-size|countTestCases"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "tied-validate-consistency",
+      "command": ["tied_validate_consistency"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "batch-compare-evidence",
+      "command": ["project-size-batch-compare.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "note": "50 snapshots; table/receipt parity validated 2026-11-10"
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "SC-PFC-06",
+      "attribute": "project-size proof facet test cases",
+      "applicability": "applicable",
+      "rationale": "REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES",
+      "evidence_method": "automated",
+      "result": "passed",
+      "command_or_test": "project-size-mcp + tied-validate-consistency"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES",
+    "REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS",
+    "ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES",
+    "IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES",
+    "IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+  ]
+}

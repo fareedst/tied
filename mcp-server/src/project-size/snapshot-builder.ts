@@ -1,5 +1,7 @@
 /**
- * [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [ARCH-TIED_PROJECT_SIZE_SNAPSHOT] [REQ-TIED_PROJECT_SIZE_LAYERS]
+ * [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
+ * [ARCH-TIED_PROJECT_SIZE_SNAPSHOT] [ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
+ * [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
  */
 
 import { createHash } from "node:crypto";
@@ -11,6 +13,7 @@ import yaml from "js-yaml";
 
 import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
 import { refreshCorpusGraphIndex } from "../corpus-graph/index-builder.js";
+import { countTestCasesInSource } from "./test-case-count.js";
 import {
   PROOF_BOUNDARY,
   RECEIPT_SCHEMA_VERSION,
@@ -33,8 +36,36 @@ function hashNormalized(text: string): string {
   return createHash("sha256").update(normalized, "utf8").digest("hex");
 }
 
-function countNonEmptyLines(text: string): number {
-  return text.split(/\r?\n/).filter((line) => line.trim().length > 0).length;
+export type PseudocodeLineScan = {
+  grossLines: number;
+  templateOverlapLines: number;
+  grossUtf8Bytes: number;
+  templateOverlapUtf8Bytes: number;
+};
+
+/** [IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] Single pass for line and UTF-8 mass. */
+export function scanPseudocodeLines(text: string, templateLines: Set<string>): PseudocodeLineScan {
+  let grossLines = 0;
+  let templateOverlapLines = 0;
+  let grossUtf8Bytes = 0;
+  let templateOverlapUtf8Bytes = 0;
+  for (const line of text.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (trimmed.length === 0) continue;
+    grossLines += 1;
+    const bytes = Buffer.byteLength(trimmed, "utf8");
+    grossUtf8Bytes += bytes;
+    if (templateLines.has(trimmed)) {
+      templateOverlapLines += 1;
+      templateOverlapUtf8Bytes += bytes;
+    }
+  }
+  return {
+    grossLines,
+    templateOverlapLines,
+    grossUtf8Bytes,
+    templateOverlapUtf8Bytes,
+  };
 }
 
 function templateBodyLines(templateFull: string): Set<string> {
@@ -46,15 +77,6 @@ function templateBodyLines(templateFull: string): Set<string> {
     if (trimmed.length > 0) lines.add(trimmed);
   }
   return lines;
-}
-
-function countTemplateOverlap(sidecarText: string, templateLines: Set<string>): number {
-  let overlap = 0;
-  for (const line of sidecarText.split(/\r?\n/)) {
-    const trimmed = line.trim();
-    if (trimmed.length > 0 && templateLines.has(trimmed)) overlap += 1;
-  }
-  return overlap;
 }
 
 function countVocabPreferredTerms(vocabText: string): number {
@@ -172,6 +194,9 @@ export async function buildProjectSizeSnapshot(input: {
           gross_lines: 0,
           template_overlap_lines: 0,
           applied_lines: 0,
+          gross_utf8_bytes: 0,
+          template_overlap_utf8_bytes: 0,
+          applied_utf8_bytes: 0,
           procedure_count: 0,
           parse_node_count: 0,
         },
@@ -185,6 +210,7 @@ export async function buildProjectSizeSnapshot(input: {
       },
       cross_layer: {
         operational_intent_per_atom: null,
+        operational_intent_utf8_per_atom: null,
         proof_facets_per_atom: null,
         tests_per_procedure: null,
       },
@@ -227,14 +253,19 @@ export async function buildProjectSizeSnapshot(input: {
   const mergedBodies: string[] = [];
   let grossLines = 0;
   let templateOverlap = 0;
+  let grossUtf8Bytes = 0;
+  let templateOverlapUtf8Bytes = 0;
   let procedureCount = 0;
   let parseNodeCount = 0;
 
   for (const rel of sidecars.sort()) {
     const text = await readFile(path.join(repoRoot, rel), "utf8");
     mergedBodies.push(text.replace(/\r\n/g, "\n"));
-    grossLines += countNonEmptyLines(text);
-    templateOverlap += countTemplateOverlap(text, templateLines);
+    const scan = scanPseudocodeLines(text, templateLines);
+    grossLines += scan.grossLines;
+    templateOverlap += scan.templateOverlapLines;
+    grossUtf8Bytes += scan.grossUtf8Bytes;
+    templateOverlapUtf8Bytes += scan.templateOverlapUtf8Bytes;
     const analyze = analyzeEssencePseudocode({
       token: "IMPL-AGGREGATE",
       pseudocode: text,
@@ -248,6 +279,7 @@ export async function buildProjectSizeSnapshot(input: {
 
   const operationalIntentHash = hashNormalized(mergedBodies.join("\n---\n"));
   const appliedLines = Math.max(0, grossLines - templateOverlap);
+  const appliedUtf8Bytes = Math.max(0, grossUtf8Bytes - templateOverlapUtf8Bytes);
 
   const testFiles = await fg(
     ["src/**/*.test.ts", "src/**/*.test.mjs"].map((p) => p.replace(/\\/g, "/")),
@@ -260,11 +292,13 @@ export async function buildProjectSizeSnapshot(input: {
     binding_inventory_tests: 0,
   };
   for (const rel of testFiles) {
+    const text = await readFile(path.join(repoRoot, rel), "utf8");
+    const cases = countTestCasesInSource(text);
     const kind = classifyTestFile(rel);
-    if (kind === "binding") proofCounts.binding_inventory_tests += 1;
-    else if (kind === "e2e") proofCounts.e2e_tests += 1;
-    else if (kind === "composition") proofCounts.composition_tests += 1;
-    else proofCounts.unit_tests += 1;
+    if (kind === "binding") proofCounts.binding_inventory_tests += cases;
+    else if (kind === "e2e") proofCounts.e2e_tests += cases;
+    else if (kind === "composition") proofCounts.composition_tests += cases;
+    else proofCounts.unit_tests += cases;
   }
 
   const verifyEvidence = await fg(
@@ -282,6 +316,7 @@ export async function buildProjectSizeSnapshot(input: {
 
   const crossLayer = {
     operational_intent_per_atom: atomTotal > 0 ? appliedLines / atomTotal : null,
+    operational_intent_utf8_per_atom: atomTotal > 0 ? appliedUtf8Bytes / atomTotal : null,
     proof_facets_per_atom: atomTotal > 0 ? proofTotal / atomTotal : null,
     tests_per_procedure: procedureCount > 0 ? proofTotal / procedureCount : null,
   };
@@ -311,6 +346,9 @@ export async function buildProjectSizeSnapshot(input: {
         gross_lines: grossLines,
         template_overlap_lines: templateOverlap,
         applied_lines: appliedLines,
+        gross_utf8_bytes: grossUtf8Bytes,
+        template_overlap_utf8_bytes: templateOverlapUtf8Bytes,
+        applied_utf8_bytes: appliedUtf8Bytes,
         procedure_count: procedureCount,
         parse_node_count: parseNodeCount,
       },

@@ -1,0 +1,5 @@
+ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
+  constraints:
+    - "Additive receipt fields only"
+    - "No LLM token estimation"
+  description: "Single-pass scanPseudocodeLines derives line and UTF-8 metrics; no hash input change."

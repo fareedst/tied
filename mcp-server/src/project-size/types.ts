@@ -1,9 +1,11 @@
 /**
- * [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [ARCH-TIED_PROJECT_SIZE_SNAPSHOT] [REQ-TIED_PROJECT_SIZE_LAYERS]
+ * [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
+ * [ARCH-TIED_PROJECT_SIZE_SNAPSHOT] [ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
+ * [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
  */
 
 export const RECEIPT_SCHEMA_VERSION = "project-size-snapshot-receipt.v1";
-export const VALIDATOR_VERSION = "1.0.0";
+export const VALIDATOR_VERSION = "1.1.0";
 export const COHORT_ROW_SCHEMA_VERSION = "wf-trial-cohort-run.v1";
 
 export const PROOF_BOUNDARY =
@@ -23,6 +25,9 @@ export type ProjectSizeOperationalIntentLayer = {
   gross_lines: number;
   template_overlap_lines: number;
   applied_lines: number;
+  gross_utf8_bytes: number;
+  template_overlap_utf8_bytes: number;
+  applied_utf8_bytes: number;
   procedure_count: number;
   parse_node_count: number;
 };
@@ -37,6 +42,7 @@ export type ProjectSizeProofFacetsLayer = {
 
 export type ProjectSizeCrossLayer = {
   operational_intent_per_atom: number | null;
+  operational_intent_utf8_per_atom: number | null;
   proof_facets_per_atom: number | null;
   tests_per_procedure: number | null;
 };

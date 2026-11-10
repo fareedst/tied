@@ -22,7 +22,7 @@ const fixtureRoot = path.join(
   "../../test/fixtures/project-size/mini-client",
 );
 
-describe("tied_project_size_snapshot MCP [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [REQ-TIED_PROJECT_SIZE_LAYERS]", () => {
+describe("tied_project_size_snapshot MCP [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS]", () => {
   it("registers and returns project-size-snapshot-receipt.v1", async () => {
     const result = await handler("tied_project_size_snapshot")({ repo_root: fixtureRoot });
     const value = body(result);
@@ -32,5 +32,8 @@ describe("tied_project_size_snapshot MCP [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [REQ-
     assert.ok(layers.atoms);
     assert.ok(layers.operational_intent);
     assert.ok(layers.proof_facets);
+    const oi = layers.operational_intent as Record<string, unknown>;
+    assert.equal(typeof oi.applied_utf8_bytes, "number");
+    assert.ok("operational_intent_utf8_per_atom" in (value.cross_layer as object));
   });
 });

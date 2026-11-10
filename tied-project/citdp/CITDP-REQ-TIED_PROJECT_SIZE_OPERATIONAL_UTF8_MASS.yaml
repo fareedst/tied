@@ -1,0 +1,35 @@
+CITDP-REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
+  change_definition:
+    current_behavior: "Operational intent layer reports line counts only (gross_lines, template_overlap_lines, applied_lines). Facilitators cannot distinguish dense pseudo-code from many short lines at equal line counts."
+    desired_behavior: "Same snapshot pass reports parallel UTF-8 byte mass (gross, template overlap, applied) and cross_layer operational_intent_utf8_per_atom; registry documents metrics; facilitator comparison table can show applied_utf8."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/project-size/snapshot-builder.ts; mcp-server/src/project-size/types.ts; tied-project/config/project-size-metrics.registry.yaml; tools/bootstrap/lib/project-size-comparison-render.mjs; docs/demos/catalog-tied-size-and-trial-statistics.md"
+    tied_tokens_new:
+      - "ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+      - "IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+      - "REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+  non_goals:
+    - "Cohort JSONL historical backfill"
+    - "Leaderboard or complexity score"
+    - "LLM token estimation"
+    - "operational_intent_hash algorithm change"
+  risk_analysis:
+    counterexamples:
+      - "Sponsor treats utf8/atom ratio as maturity rank"
+    depth_tier: "minimal"
+    falsification_questions:
+      - "Do byte metrics diverge from line scan because of duplicate traversal?"
+    gate_policy: "advisory"
+    rationale: "Additive receipt fields; evidence-only path."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-UTF8-01 through SC-UTF8-05 in PLAN.md"
+    - "tied_validate_consistency ok"
+  test_strategy:
+    composition:
+      - "mcp-server/src/project-size/project-size-mcp.composition.test.ts"
+    unit:
+      - "mcp-server/src/project-size/project-size.test.ts"
+  unchanged_behavior: "WF grading, tied_verify semantics, JSONL append schema (layers pass-through unchanged)."

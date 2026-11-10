@@ -1548,6 +1548,15 @@ ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial disposable tag architecture"
   status: "Active"
+ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  cross_references:
+    - "IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+  description: "Early help dispatch and stderr-first texture for workflow-trial-agentstream"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP.yaml"
+  name: "WF trial orchestrator operator help architecture"
+  status: "Active"
+  type: "ARCH"
 ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   cross_references:
     - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
@@ -3456,6 +3465,15 @@ IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial disposable tag implementation"
   status: "Active"
+IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  cross_references:
+    - "ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+  description: "wf-trial-agentstream-help.inc.sh and early dispatch in orchestrator script"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP.yaml"
+  name: "WF trial orchestrator operator help implementation"
+  status: "Active"
+  type: "IMPL"
 IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   cross_references:
     - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
@@ -5587,6 +5605,17 @@ REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "requirements/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial agentstream disposable tag"
   status: "Active"
+REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    - "IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+  description: "Styled no-args and --help for workflow-trial-agentstream.sh"
+  detail_file: "requirements/REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP.yaml"
+  name: "WF trial agentstream operator help"
+  status: "Active"
+  type: "REQ"
 REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   category: "Tooling"
   cross_references:

@@ -1,0 +1,46 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "validator_version": "1.1.0",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794249821-wf-agentstream-wf-01-cursor-composer25medium",
+  "layers": {
+    "atoms": {
+      "vocab_preferred_terms": 0,
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 1,
+      "corpus_graph_nodes": 3,
+      "corpus_graph_edges": 10
+    },
+    "operational_intent": {
+      "sidecar_count": 1,
+      "gross_lines": 65,
+      "template_overlap_lines": 11,
+      "applied_lines": 54,
+      "gross_utf8_bytes": 2864,
+      "template_overlap_utf8_bytes": 125,
+      "applied_utf8_bytes": 2739,
+      "procedure_count": 4,
+      "parse_node_count": 21
+    },
+    "proof_facets": {
+      "unit_tests": 10,
+      "composition_tests": 0,
+      "e2e_tests": 0,
+      "binding_inventory_tests": 0,
+      "verify_evidence_files": 0
+    }
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 9,
+    "operational_intent_utf8_per_atom": 456.5,
+    "proof_facets_per_atom": 1.6666666666666667,
+    "tests_per_procedure": 2.5
+  },
+  "hashes": {
+    "operational_intent_hash": "b9fc19e066f16e3547e14d3bde475a57371ebb399450a3f53cb05d464f57cf02",
+    "corpus_graph_content_hash": "83dd9923a960eff69dd7f2e49c9642c75195295c4f65d907f95cb85122996f70"
+  },
+  "diagnostics": []
+}

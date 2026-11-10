@@ -1,0 +1,15 @@
+REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
+  acceptance_criteria:
+    - "SC-UTF8-01 through SC-UTF8-05 in working PLAN"
+  description: "Parallel UTF-8 byte mass (gross, template overlap, applied) beside applied_lines; cross_layer operational_intent_utf8_per_atom."
+  satisfaction_criteria:
+    - criterion: "cross_layer.operational_intent_utf8_per_atom present with same null rules as line ratio."
+      id: "SC-UTF8-02"
+    - criterion: "project-size tests green and tied_validate_consistency ok."
+      id: "SC-UTF8-05"
+    - criterion: "project-size-metrics.registry.yaml lists UTF-8 metric ids."
+      id: "SC-UTF8-03"
+    - criterion: "Receipt operational_intent includes gross_utf8_bytes, template_overlap_utf8_bytes, applied_utf8_bytes."
+      id: "SC-UTF8-01"
+    - criterion: "Unit test: equal applied_lines, unequal applied_utf8_bytes on controlled fixture."
+      id: "SC-UTF8-04"

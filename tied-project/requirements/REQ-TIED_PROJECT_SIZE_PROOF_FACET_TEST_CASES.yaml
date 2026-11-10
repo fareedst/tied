@@ -1,0 +1,17 @@
+REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES:
+  acceptance_criteria:
+    - "SC-PFC-01 through SC-PFC-06 in working PLAN"
+  description: "Sum it/test cases per classified test file in project-size snapshot proof_facets layer."
+  satisfaction_criteria:
+    - criterion: "Fixture: unit_tests greater than unit-classified file count."
+      id: "SC-PFC-02"
+    - criterion: "project-size tests green and tied_validate_consistency ok."
+      id: "SC-PFC-06"
+    - criterion: "Registry and facilitator glossary say test cases."
+      id: "SC-PFC-04"
+    - criterion: "Tier fields sum test cases per classified file, not file count."
+      id: "SC-PFC-01"
+    - criterion: "validator_version 1.1.0; catalog documents pre-1.1.0 file semantics."
+      id: "SC-PFC-03"
+    - criterion: "verify_evidence_files remains file count; cross_layer uses case total."
+      id: "SC-PFC-05"

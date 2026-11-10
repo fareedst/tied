@@ -1,0 +1,9 @@
+IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES:
+  code_locations:
+    - "mcp-server/src/project-size/snapshot-builder.ts"
+    - "mcp-server/src/project-size/test-case-count.ts"
+    - "mcp-server/src/project-size/types.ts"
+    - "tools/bootstrap/lib/project-size-comparison-render.mjs"
+  description: "Wire countTestCasesInSource into COLLECT_PROOF_FACETS; bump VALIDATOR_VERSION."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES-pseudocode.md"
+  implementation_approach: "Per-file read and sum; registry and catalog label update."

@@ -31,5 +31,23 @@ procedure COLLECT_OPERATIONAL_INTENT_LAYER:
     EFFECTS: pure (after read)
   MERGE sidecar bodies in sorted path order
   SET operational_intent_hash FROM sha256(merged)
-  SUM gross_lines, template_overlap_lines, procedure_count, parse_node_count
+  CALL SCAN_PSEUDOCODE_LINES per sidecar via [IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS]
+  SUM gross_lines, template_overlap_lines, gross_utf8_bytes, template_overlap_utf8_bytes, procedure_count, parse_node_count
   SET applied_lines TO gross_lines minus template_overlap_lines
+  SET applied_utf8_bytes TO gross_utf8_bytes minus template_overlap_utf8_bytes
+  CALL DERIVE_UTF8_CROSS_LAYER for operational_intent_utf8_per_atom
+
+procedure COLLECT_PROOF_FACETS_LAYER:
+  # [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES] Sum test cases per tier.
+  Contract:
+    INPUT: src/**/*.test.ts and src/**/*.test.mjs under repo_root
+    OUTPUT: proof_facets tier integers and verify_evidence_files file count
+    POST: tier fields count node:test it/test cases per classified file
+    EFFECTS: IO read-only
+  GLOB test files
+  FOR each file
+    CLASSIFY tier via path rules
+  CALL COUNT_TEST_CASES_IN_SOURCE via [IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
+  ADD case count to tier bucket
+  COUNT verify consistency evidence files separately as file cardinality
+  SET receipt validator_version TO 1.1.0 on success

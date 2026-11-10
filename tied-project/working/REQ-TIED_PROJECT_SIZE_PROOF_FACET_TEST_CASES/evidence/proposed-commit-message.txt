@@ -1,0 +1,12 @@
+feat(mcp): project size UTF-8 mass and proof test cases
+
+Operational intent UTF-8 bytes and cross_layer utf8/atom; proof facets
+count node:test cases (validator_version 1.1.0); batch compare facilitator
+CLI and refreshed WF cohort evidence table (50 snapshots).
+
+REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES
+ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES
+IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES
+
+Completion: close_out allowed; envelope blocking_gap_count=0; thin_ledger advisory.
+Upstream feedback: N/A.

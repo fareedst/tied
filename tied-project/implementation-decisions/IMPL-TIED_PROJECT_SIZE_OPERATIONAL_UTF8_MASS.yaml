@@ -1,0 +1,8 @@
+IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
+  code_locations:
+    - "mcp-server/src/project-size/snapshot-builder.ts"
+    - "mcp-server/src/project-size/types.ts"
+    - "tools/bootstrap/lib/project-size-comparison-render.mjs"
+  description: "UTF-8 operational intent mass in project-size snapshot."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS-pseudocode.md"
+  implementation_approach: "scanPseudocodeLines single pass; registry and facilitator column."

@@ -3638,18 +3638,43 @@ REQ-TIED_PROJECT_SIZE_LAYERS:
       - "REQ-TIED_CORPUS_COMPREHENSION"
       - "REQ-TIED_SETUP"
     related_to:
+      - "REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+      - "REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
       - "REQ-WF_TRIAL_MODEL_EFFORT"
       - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
   status: "Implemented"
   traceability:
     architecture:
+      - "ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+      - "ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
       - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
     implementation:
       - "IMPL-TIED_PROJECT_SIZE_COHORT_JSONL"
+      - "IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
+      - "IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
       - "IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL"
       - "IMPL-TIED_PROJECT_SIZE_SNAPSHOT"
     tests:
       - "mcp-server/src/project-size/project-size-mcp.composition.test.ts"
+REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
+  cross_references:
+    - "REQ-TIED_PROJECT_SIZE_LAYERS"
+  description: "Add UTF-8 byte mass to operational_intent in project-size snapshot receipts."
+  detail_file: "requirements/REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS.yaml"
+  status: "Implemented"
+REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES:
+  cross_references:
+    - "REQ-TIED_PROJECT_SIZE_LAYERS"
+  description: "Proof facet tiers count node:test cases per file; validator_version 1.1.0."
+  detail_file: "requirements/REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES.yaml"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
+      - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
+    implementation:
+      - "IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
+      - "IMPL-TIED_PROJECT_SIZE_SNAPSHOT"
 REQ-TIED_PROMPT_SKILL_DISK_HANDOFF:
   category: "Tooling"
   description: "Plan execution steps in evidence/session-handoff.md are the primary durable step ledger; plan and build leaves enforce disk before stop."

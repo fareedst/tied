@@ -3669,7 +3669,7 @@ export const allTools = [
     name: "tied_project_size_snapshot",
     config: {
       description:
-        "Build project-size-snapshot-receipt.v1: atoms, operational_intent, proof_facets layers with hashes and proof_boundary. Read-only; does not mutate subject tied-project YAML.",
+        "Build project-size-snapshot-receipt.v1: atoms, operational_intent (lines + UTF-8 byte mass), proof_facets (node:test case counts per tier at validator_version 1.1.0+), hashes and proof_boundary. Read-only; does not mutate subject tied-project YAML.",
       inputSchema: z.object({
         repo_root: z.string(),
         tied_project_rel: z.string().optional(),

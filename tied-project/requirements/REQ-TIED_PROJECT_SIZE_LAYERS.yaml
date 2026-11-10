@@ -17,7 +17,7 @@ REQ-TIED_PROJECT_SIZE_LAYERS:
       id: "SC-PSL-RECORD-WF"
     - criterion: "tied-project/config/project-size-metrics.registry.yaml exists and passes lint_yaml."
       id: "SC-PSL-REGISTRY"
-    - criterion: "tied_project_size_snapshot returns project-size-snapshot-receipt.v1 with atoms, operational_intent, proof_facets layers and proof_boundary."
+    - criterion: "tied_project_size_snapshot returns project-size-snapshot-receipt.v1 with atoms, operational_intent, proof_facets layer (test cases per tier when validator_version >= 1.1.0), and proof_boundary."
       id: "SC-PSL-MCP"
     - criterion: "Unit and composition tests for project-size module pass."
       id: "SC-PSL-TEST"

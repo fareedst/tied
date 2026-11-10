@@ -1,0 +1,6 @@
+ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES:
+  constraints:
+    - "Heuristic bounds documented in IMPL"
+    - "No full TypeScript AST in v1"
+    - "wf-trial-ts-node-test-v1 primary stack"
+  description: "countTestCasesInSource with comment/string strip; proof facet tiers sum cases per classified file."
