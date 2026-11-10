@@ -1,0 +1,51 @@
+CITDP-REQ-TIED_PROJECT_SIZE_LAYERS:
+  change_definition:
+    current_behavior: "WF trial registry and readouts capture grades and run_time but not atoms, operational intent, or proof facet counts. No MCP snapshot; no YAML metric registry; no cohort JSONL; size vocabulary scattered across chat/TODO."
+    desired_behavior: "Evidence-only MCP tied_project_size_snapshot returns three-layer counts and hashes; human registry in tied-project/config/*.yaml; catalog in docs/demos; record-wf-trial appends JSONL and readout appendix; operational_intent recomputed when pseudo-code hash changes."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/project-size/; mcp-server/src/tools/index.ts; tools/bundled-record-wf-trial-skill/; docs/demos/; tied-project/config/; tied-bundle/reports/wf-trial-cohort/"
+    tied_tokens_new:
+      - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
+      - "IMPL-TIED_PROJECT_SIZE_COHORT_JSONL"
+      - "IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL"
+      - "IMPL-TIED_PROJECT_SIZE_SNAPSHOT"
+      - "REQ-TIED_PROJECT_SIZE_LAYERS"
+  non_goals:
+    - "Checklist gate authority from snapshot output"
+    - "Hand-editing JSONL for policy changes"
+    - "Mandatory backfill of 102 historical WF registry rows"
+    - "Single maturity score or model leaderboard"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Snapshot promoted to REQ Implemented status without tied_verify"
+        - "Sponsor edits runs.jsonl by hand and drifts from registry YAML"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "MCP snapshot returns counts after hand-edited JSONL policy change without registry YAML update"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_PROJECT_SIZE_LAYERS/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does tied_project_size_snapshot omit proof_boundary on receipt?"
+      gate_policy: "advisory"
+      rationale: "Evidence-only MCP; no project YAML mutation from snapshot path."
+      research_profile: "integrated-agent"
+    counterexamples:
+      - "Snapshot promoted to REQ Implemented status without tied_verify"
+      - "Sponsor edits runs.jsonl by hand and drifts from registry YAML"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Evidence-only MCP; no project YAML mutation from snapshot path."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-PSL-* acceptance criteria in REQ detail pass with tests"
+    - "tied_validate_consistency ok after enrollment"
+  test_strategy:
+    composition:
+      - "mcp-server/src/project-size/project-size-mcp.composition.test.ts"
+    unit:
+      - "mcp-server/src/project-size/*.test.ts"
+  unchanged_behavior: "tied_verify and WF grading rubric weights unchanged."

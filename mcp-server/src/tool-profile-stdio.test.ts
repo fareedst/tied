@@ -66,9 +66,9 @@ function listToolCount(profile: string | undefined): Promise<number> {
 
 describe("tool profile stdio [REQ-MCP_USAGE_METRICS]", () => {
   it("tools/list counts for core, optin, full, unset", async () => {
-    assert.equal(await listToolCount("core"), 101);
+    assert.equal(await listToolCount("core"), 102);
     assert.equal(await listToolCount("optin"), 37);
-    assert.equal(await listToolCount("full"), 138);
-    assert.equal(await listToolCount(undefined), 138);
+    assert.equal(await listToolCount("full"), 139);
+    assert.equal(await listToolCount(undefined), 139);
   });
 });

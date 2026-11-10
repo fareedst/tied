@@ -2557,6 +2557,19 @@ ARCH-TIED_PROJECT_LINT_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_LINT_BOUNDARY.yaml"
   name: "Project lint boundary"
   status: "Planned"
+ARCH-TIED_PROJECT_SIZE_SNAPSHOT:
+  description: "Evidence-only snapshot composing corpus graph, pseudocode analyze, and proof facet counts."
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_SIZE_SNAPSHOT.yaml"
+  name: "Project size snapshot evidence model"
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+  status: "Draft"
+  traceability:
+    implementation:
+      - "IMPL-TIED_PROJECT_SIZE_SNAPSHOT"
+    requirements:
+      - "REQ-TIED_PROJECT_SIZE_LAYERS"
 ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF:
   cross_references:
     - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
@@ -2977,6 +2990,15 @@ ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
     - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
   status: "Active"
   summary: "Tag built in scripts/lib/wf-trial-disposable-tag.inc.sh before new-tied-client.mjs; validateDisposableTag unchanged."
+ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP.yaml"
+  name: "WF trial orchestrator operator help architecture"
+  status: "Implemented"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    requirements:
+      - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
 ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   name: "WF trial Cursor live session oracle architecture"

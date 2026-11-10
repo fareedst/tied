@@ -1,0 +1,24 @@
+REQ-TIED_PROJECT_SIZE_LAYERS:
+  acceptance_criteria:
+    - "SC-PSL-01 through SC-PSL-05 met with tests green"
+  description: "Measure TIED projects by atoms, operational intent, and proof facets; MCP-first snapshot; YAML human registry; JSONL cohort output."
+  rationale:
+    benefits:
+      - "Cross-harness cohort ratios"
+      - "Facilitator readout appendix"
+    problems_solved:
+      - "No structured size on disposable trial clients"
+      - "Operational intent size not co-versioned with pseudo-code"
+    why: "WF repetition studies need size layers aligned to TIED ontology, not LOC alone."
+  satisfaction_criteria:
+    - criterion: "operational_intent_hash changes when fixture IMPL sidecar content changes."
+      id: "SC-PSL-HASH"
+    - criterion: "record-wf-trial reference documents size layers appendix and JSONL append path."
+      id: "SC-PSL-RECORD-WF"
+    - criterion: "tied-project/config/project-size-metrics.registry.yaml exists and passes lint_yaml."
+      id: "SC-PSL-REGISTRY"
+    - criterion: "tied_project_size_snapshot returns project-size-snapshot-receipt.v1 with atoms, operational_intent, proof_facets layers and proof_boundary."
+      id: "SC-PSL-MCP"
+    - criterion: "Unit and composition tests for project-size module pass."
+      id: "SC-PSL-TEST"
+      metric: "npm test in mcp-server scoped to project-size"

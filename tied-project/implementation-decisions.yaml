@@ -3167,6 +3167,36 @@ IMPL-TIED_PROJECT_LINT:
   detail_file: "implementation-decisions/IMPL-TIED_PROJECT_LINT.yaml"
   name: "Project lint implementation"
   status: "Active"
+IMPL-TIED_PROJECT_SIZE_COHORT_JSONL:
+  description: "Append runs.jsonl under tied-bundle/reports/wf-trial-cohort/ from facilitator tooling."
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_COHORT_JSONL.yaml"
+  name: "WF trial cohort JSONL append"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
+    requirements:
+      - "REQ-TIED_PROJECT_SIZE_LAYERS"
+IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL:
+  description: "Facilitator record-wf-trial captures snapshot receipt and readout appendix."
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL.yaml"
+  name: "Record WF trial size appendix"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
+    requirements:
+      - "REQ-TIED_PROJECT_SIZE_LAYERS"
+IMPL-TIED_PROJECT_SIZE_SNAPSHOT:
+  description: "Build project-size-snapshot-receipt.v1 via tied_project_size_snapshot."
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_SNAPSHOT.yaml"
+  name: "Project size snapshot MCP"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
+    requirements:
+      - "REQ-TIED_PROJECT_SIZE_LAYERS"
 IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF:
   cross_references:
     - "ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF"
@@ -3570,6 +3600,15 @@ IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   related_requirements:
     - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
   status: "Active"
+IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP.yaml"
+  name: "WF trial orchestrator operator help implementation"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    requirements:
+      - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
 IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   name: "WF trial Cursor live session oracle implementation"

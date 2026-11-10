@@ -1,0 +1,5 @@
+IMPL-TIED_PROJECT_SIZE_COHORT_JSONL:
+  code_locations:
+    - "tied-bundle/reports/wf-trial-cohort/"
+    - "tools/bundled-record-wf-trial-skill/"
+  description: "Read-only subject snapshot merged with trial factors; append one JSONL line."

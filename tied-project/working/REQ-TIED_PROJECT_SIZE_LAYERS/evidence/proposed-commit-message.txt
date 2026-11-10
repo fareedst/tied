@@ -1,0 +1,12 @@
+feat(mcp): three-layer TIED project size snapshot
+
+Evidence-only tied_project_size_snapshot (atoms, operational intent,
+proof facets); YAML metric registry; WF trial catalog and record-wf-trial
+size appendix; cohort JSONL append helper.
+
+REQ-TIED_PROJECT_SIZE_LAYERS ARCH-TIED_PROJECT_SIZE_SNAPSHOT
+IMPL-TIED_PROJECT_SIZE_SNAPSHOT IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL
+IMPL-TIED_PROJECT_SIZE_COHORT_JSONL
+
+Completion: close_out allowed; envelope blocking_gap_count=0; thin_ledger advisory.
+Upstream feedback: N/A.

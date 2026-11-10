@@ -1,0 +1,41 @@
+cohort:
+  forbidden: "Hand-editing JSONL for policy; update this registry instead."
+  jsonl_rel: "tied-bundle/reports/wf-trial-cohort/runs.jsonl"
+layers:
+  atoms:
+    description: "Agreement footprint — vocab preferred terms plus REQ/ARCH/IMPL index atoms."
+    metrics:
+      - id: "corpus_graph_nodes"
+        label: "Corpus graph nodes (optional)"
+      - id: "index_arch"
+        label: "ARCH index atoms"
+      - id: "index_impl"
+        label: "IMPL index atoms"
+      - id: "index_req"
+        label: "REQ index atoms"
+      - id: "vocab_preferred_terms"
+        label: "Vocab preferred-term table rows"
+  operational_intent:
+    description: "Pseudo-code applied mass and analyzer logic nodes; co-updates with operational_intent_hash."
+    metrics:
+      - id: "applied_lines"
+        label: "Applied pseudo-code lines (gross minus template overlap)"
+      - id: "gross_lines"
+        label: "Gross pseudo-code lines"
+      - id: "parse_node_count"
+        label: "Analyzer parse nodes"
+      - id: "procedure_count"
+        label: "Analyzer procedure count"
+  proof_facets:
+    description: "Executable facets — tests and evidence receipts, not product definition."
+    metrics:
+      - id: "binding_inventory_tests"
+        label: "Binding-inventory-related test files"
+      - id: "composition_tests"
+        label: "Composition test files"
+      - id: "e2e_tests"
+        label: "E2E test files"
+      - id: "unit_tests"
+        label: "Unit test files under src/"
+proof_boundary: "Registry labels cohort statistics; does not prove REQ satisfaction or grade trials."
+schema_version: "project-size-metrics.registry.v1"

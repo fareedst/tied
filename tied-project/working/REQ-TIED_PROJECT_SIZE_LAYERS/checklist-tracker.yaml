@@ -1,0 +1,26 @@
+copy_hygiene: "Fresh tracker for REQ-TIED_PROJECT_SIZE_LAYERS refine-plan"
+description: "Tracker — TIED project size layers (atoms, operational intent, proof facets)"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-TIED_PROJECT_SIZE_LAYERS/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TIED_PROJECT_SIZE_LAYERS"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PROJECT_SIZE_LAYERS/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Evidence-only MCP; advisory gates."
+    slug: "sub-adversarial-inquiry-pass"

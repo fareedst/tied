@@ -1,0 +1,42 @@
+{
+  "cross_layer": {
+    "operational_intent_per_atom": 6.781934306569343,
+    "proof_facets_per_atom": 0,
+    "tests_per_procedure": 0
+  },
+  "diagnostics": [],
+  "hashes": {
+    "corpus_graph_content_hash": "b0ec4e84a384ba0f24e3e445b4cb8ecec8f93e161eb4b7755a3fc1bfa6d1e565",
+    "operational_intent_hash": "8a57f60e9ab79dc079cae70a23b4f2de25ed953f7b7c20bc96c92f45dbd8dbbe"
+  },
+  "layers": {
+    "atoms": {
+      "corpus_graph_edges": 3275,
+      "corpus_graph_nodes": 646,
+      "index_arch": 189,
+      "index_impl": 230,
+      "index_req": 194,
+      "vocab_preferred_terms": 933
+    },
+    "operational_intent": {
+      "applied_lines": 14866,
+      "gross_lines": 17094,
+      "parse_node_count": 4064,
+      "procedure_count": 754,
+      "sidecar_count": 250,
+      "template_overlap_lines": 2228
+    },
+    "proof_facets": {
+      "binding_inventory_tests": 0,
+      "composition_tests": 0,
+      "e2e_tests": 0,
+      "unit_tests": 0,
+      "verify_evidence_files": 109
+    }
+  },
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "validator_version": "1.0.0"
+}

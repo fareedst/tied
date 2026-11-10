@@ -1,0 +1,5 @@
+IMPL-TIED_PROJECT_SIZE_SNAPSHOT:
+  code_locations:
+    - "mcp-server/src/project-size/"
+  description: "MCP tool and mcp-server/src/project-size/ module."
+  implementation_approach: "Compose corpus-graph refresh/map, pseudocode_analyze aggregates, test tier globbing."

@@ -108,6 +108,7 @@ import {
   tiedCorpusGraphRefresh,
   tiedCorpusGraphTrace,
 } from "../corpus-graph/mcp-handlers.js";
+import { tiedProjectSizeSnapshot } from "../project-size/mcp-handler.js";
 import {
   tiedSourceGraphFreshness,
   tiedSourceGraphMap,
@@ -3662,6 +3663,25 @@ export const allTools = [
       tied_project_rel?: string;
     }) => {
       return textContent(prettyCanonicalJson(await tiedCorpusGraphFreshness(args)));
+    },
+  },
+  {
+    name: "tied_project_size_snapshot",
+    config: {
+      description:
+        "Build project-size-snapshot-receipt.v1: atoms, operational_intent, proof_facets layers with hashes and proof_boundary. Read-only; does not mutate subject tied-project YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        tied_project_rel: z.string().optional(),
+        include_trial_factors: z.boolean().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      tied_project_rel?: string;
+      include_trial_factors?: boolean;
+    }) => {
+      return textContent(prettyCanonicalJson(await tiedProjectSizeSnapshot(args)));
     },
   },
   {

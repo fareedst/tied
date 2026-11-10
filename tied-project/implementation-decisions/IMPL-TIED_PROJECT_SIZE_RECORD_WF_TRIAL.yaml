@@ -1,0 +1,4 @@
+IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL:
+  code_locations:
+    - "tools/bundled-record-wf-trial-skill/"
+  description: "tools/bundled-record-wf-trial-skill reference and SKILL procedure step."

@@ -1,0 +1,6 @@
+ARCH-TIED_PROJECT_SIZE_SNAPSHOT:
+  constraints:
+    - "JSON receipt; human policy in YAML registry only"
+    - "No mutation of subject tied-project YAML from snapshot path"
+    - "Proof boundary: counts do not prove satisfaction or test passage"
+  description: "Architecture for three-layer size snapshot MCP evidence model."

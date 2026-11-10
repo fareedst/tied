@@ -133,6 +133,10 @@
 | **declared facet** | paper traceability (alone) | Planned alignment in YAML (`traceability`, `code_locations`, `code_annotations`, `token_coverage`) |
 | **materialized facet** | grep target (alone) | On-disk alignment in managed code, tests, and literal pseudo-code block leads |
 | **three-way alignment** | two-way sync (alone) | IMPL pseudo-code block ↔ test ↔ production code share the same block lead and token set per `[PROC-IMPL_CODE_TEST_SYNC]` |
+| **atoms** (size layer) | static size (alone), LOC as definition (alone) | Agreement footprint: vocab preferred terms + `REQ`/`ARCH`/`IMPL` index atoms (+ optional corpus graph counts); see [REQ-TIED_PROJECT_SIZE_LAYERS](../requirements/REQ-TIED_PROJECT_SIZE_LAYERS.yaml) |
+| **operational intent** (size layer) | dynamic size (alone) | `essence_pseudocode` applied mass and analyzer logic nodes; **co-updates** with `operational_intent_hash` when pseudo-code changes |
+| **proof facets** (size layer) | validating size (alone) | Unit, composition, E2E tests and verify/consistency receipts — executable facets, not product definition |
+| **project size snapshot** | size receipt (alone) | Evidence-only MCP `tied_project_size_snapshot`; human policy in `tied-project/config/project-size-metrics.registry.yaml` (YAML); cohort stream `tied-bundle/reports/wf-trial-cohort/runs.jsonl` (JSONL append-only) |
 
 ---
 

@@ -3626,6 +3626,30 @@ REQ-TIED_PROJECT_LINT:
   name: "Project lint MCP"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_PROJECT_SIZE_LAYERS:
+  category: "Tooling"
+  description: "Evidence-only three-layer project size (atoms, operational intent, proof facets) with MCP snapshot and WF trial cohort JSONL."
+  detail_file: "requirements/REQ-TIED_PROJECT_SIZE_LAYERS.yaml"
+  name: "TIED project size layers"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-TIED_CORPUS_COMPREHENSION"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
+    implementation:
+      - "IMPL-TIED_PROJECT_SIZE_COHORT_JSONL"
+      - "IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL"
+      - "IMPL-TIED_PROJECT_SIZE_SNAPSHOT"
+    tests:
+      - "mcp-server/src/project-size/project-size-mcp.composition.test.ts"
 REQ-TIED_PROMPT_SKILL_DISK_HANDOFF:
   category: "Tooling"
   description: "Plan execution steps in evidence/session-handoff.md are the primary durable step ledger; plan and build leaves enforce disk before stop."
@@ -4395,6 +4419,17 @@ REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
       - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
     implementation:
       - "IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  category: "Tooling"
+  detail_file: "requirements/REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP.yaml"
+  name: "WF trial agentstream operator help"
+  priority: "P3"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    implementation:
+      - "IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
 REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   category: "Tooling"
   description: "Harden agentstream Cursor live executor session oracle so four-phase workflow trials survive RetriableError WritableIterable stream closure when session_id is recoverable; emit diagnostics before fail-closed when resume oracle is missing."

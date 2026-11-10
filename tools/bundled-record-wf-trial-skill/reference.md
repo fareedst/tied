@@ -122,6 +122,19 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 
 **Regression:** `node --test tools/bootstrap/lib/trial-readout-grading-rationale-contract.test.mjs`
 
+## Project size layers
+
+[REQ-TIED_PROJECT_SIZE_LAYERS] Evidence-only appendix — **not** a grade dimension and **not** a maturity score.
+
+| Step | Action |
+| --- | --- |
+| Snapshot | MCP `tied_project_size_snapshot` with `repo_root` = subject client root (read-only). |
+| Evidence | Optional archive: `tied-project/working/{REQ}/evidence/project-size-snapshot.v1.json` on subject or store facilitator folder. |
+| Readout | Add **Project size layers** subsection under **What was built** or **Cohort comparisons**: cite `layers.atoms`, `layers.operational_intent`, `layers.proof_facets`, `hashes.operational_intent_hash`, and receipt `proof_boundary`. |
+| Cohort JSONL | Append via tooling only: [`tied-bundle/reports/wf-trial-cohort/runs.jsonl`](../../tied-bundle/reports/wf-trial-cohort/runs.jsonl) — human metric policy: [`tied-project/config/project-size-metrics.registry.yaml`](../../tied-project/config/project-size-metrics.registry.yaml). Catalog: [catalog-tied-size-and-trial-statistics.md](../../docs/demos/catalog-tied-size-and-trial-statistics.md). |
+
+**Forbidden in size appendix:** leaderboard language, ranking models, implying snapshot proves REQ **Implemented** status.
+
 **Filename pattern:** `docs/demos/trial-readout-PROMPT-WF-{NN}-{modelConfigSlug}-{clientId}.md`
 
 Example: `trial-readout-PROMPT-WF-03-luna-med-1793000001.md`
