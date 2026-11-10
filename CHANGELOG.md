@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **WF trial composition prompts ([REQ-WF_TRIAL_COMPOSITION_PROMPTS], [ARCH-WF_TRIAL_COMPOSITION_PROMPTS], [IMPL-WF_TRIAL_COMPOSITION_PROMPTS])** — **PROMPT-WF-09…12** in [catalog-traditional-workflow-trial-prompts.md](docs/demos/catalog-traditional-workflow-trial-prompts.md) (unit + module binding tests); `workflow_trial_agentstream wf-09`…`wf-12`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_COMPOSITION_PROMPTS/PLAN.md).
 
+- **WF trial model compose ([REQ-WF_TRIAL_MODEL_COMPOSE], [ARCH-WF_TRIAL_MODEL_COMPOSE], [IMPL-WF_TRIAL_MODEL_COMPOSE])** — Compose families (`luna`, `grok47`, `sol`, `composer-2.5`) build Cursor catalog slugs from `MODEL_REF` + `EFFORT` (e.g. `workflow_trial_range cursor luna medium 2 2` → `gpt-5.6-luna-medium-fast`); tiered matrix ids + conflicting effort fail closed. Specs schema `wf-trial-model-spec.v2`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_COMPOSE/PLAN.md).
 
 - **WF trial model catalog resolve ([REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE], [ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE], [IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE])** — `workflow_trial_range HARNESS MODEL_REF …` resolves matrix ids, `agent models` slugs, and Claude aliases via [wf-trial-model-catalog.yaml](docs/demos/wf-trial-model-catalog.yaml); `composer-2.5` is cursor-only; use `haiku-5-5` on Claude. Regen: `node tools/bootstrap/sync-wf-trial-model-catalog.mjs`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE/PLAN.md).
 

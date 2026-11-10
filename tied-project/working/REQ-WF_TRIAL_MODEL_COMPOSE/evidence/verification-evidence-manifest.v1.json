@@ -1,0 +1,38 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-model-compose-2026-11-10",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "covered_tokens": [
+    "REQ-WF_TRIAL_MODEL_COMPOSE",
+    "ARCH-WF_TRIAL_MODEL_COMPOSE",
+    "IMPL-WF_TRIAL_MODEL_COMPOSE"
+  ],
+  "proof_boundaries": [
+    "Shell resolve-ref and workflow_trial_range; no live agent matrix in build"
+  ],
+  "command_results": [
+    {
+      "id": "sc-compose-unit",
+      "command": ["node", "--test", "tools/bootstrap/lib/wf-trial-model-compose.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "sc-compose-spec",
+      "command": ["node", "--test", "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "sc-compose-shell",
+      "command": ["node", "--test", "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ]
+}

@@ -1,4 +1,23 @@
-schema: "wf-trial-model-spec.v1"
+schema: "wf-trial-model-spec.v2"
+compose:
+  luna:
+    catalog_base: gpt-5.6-luna
+    model_config_prefix: luna
+    speed_suffix: fast
+  grok47:
+    catalog_base: grok-4.7
+    model_config_prefix: grok47
+    speed_suffix: fast
+  sol:
+    catalog_base: gpt-5.6-sol
+    model_config_prefix: sol
+    speed_suffix: fast
+  composer-2.5:
+    catalog_base: composer-2.5
+    model_config_prefix: composer-2.5
+    speed_suffix: fast
+    effort_in_slug: false
+
 specs:
   claude-sonnet-5-5:
     claude_slug: "claude-sonnet-5-5"

@@ -3075,7 +3075,16 @@ ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE.yaml"
   name: "WF trial model catalog resolve"
   status: "Accepted"
-
+ARCH-WF_TRIAL_MODEL_COMPOSE:
+  cross_references:
+    architecture_decisions: []
+    implementation_decisions:
+      - "IMPL-WF_TRIAL_MODEL_COMPOSE"
+    requirements:
+      - "REQ-WF_TRIAL_MODEL_COMPOSE"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_MODEL_COMPOSE.yaml"
+  name: "WF trial model compose family + effort"
+  status: "Accepted"
 ARCH-WF_TRIAL_MODEL_EFFORT:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_MODEL_EFFORT.yaml"
   status: "Draft"

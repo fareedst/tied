@@ -86,4 +86,38 @@ describe("wf-trial-model-spec.mjs", () => {
     assert.notEqual(r.status, 0);
     assert.match(r.stderr, /does not support claude harness/);
   });
+
+  it("composes luna with effort [SC-COMPOSE-LUNA]", () => {
+    const r = resolveWfTrialModelRef("cursor", "luna", REGISTRY, undefined, "medium");
+    assert.equal(r.resolution, "compose");
+    assert.equal(r.model_slug, "gpt-5.6-luna-medium-fast");
+    assert.equal(r.model_config, "luna-med");
+  });
+
+  it("requires effort for compose family [SC-COMPOSE-EFFORT]", () => {
+    assert.throws(
+      () => resolveWfTrialModelRef("cursor", "luna", REGISTRY, undefined, "-"),
+      /effort required for compose family/,
+    );
+  });
+
+  it("rejects tier mismatch on legacy id [SC-COMPOSE-TIER]", () => {
+    assert.throws(
+      () => resolveWfTrialModelRef("cursor", "luna-low", REGISTRY, undefined, "medium"),
+      /tier mismatch/,
+    );
+    const legacy = resolveWfTrialModelRef("cursor", "luna-low", REGISTRY, undefined, "-");
+    assert.equal(legacy.model_config, "luna-low");
+  });
+
+  it("CLI resolve-ref with effort", () => {
+    const r = spawnSync(process.execPath, [CLI, "resolve-ref", "cursor", "luna", "medium"], {
+      cwd: REPO_ROOT,
+      encoding: "utf8",
+    });
+    assert.equal(r.status, 0, r.stderr);
+    const parsed = JSON.parse(r.stdout.trim());
+    assert.equal(parsed.resolution, "compose");
+    assert.equal(parsed.model_slug, "gpt-5.6-luna-medium-fast");
+  });
 });

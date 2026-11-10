@@ -69,6 +69,17 @@ describe("cursor-agent-argv [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
     const modelIdx = argv.indexOf("--model");
     assert.ok(modelIdx >= 0);
     assert.equal(argv[modelIdx + 1], "grok-4.7-medium-fast");
+    const argv46 = agentArgv(
+      "",
+      "/tmp/ws",
+      "grok-4.6-low-fast",
+      "",
+      ["hi"],
+      "cursor",
+      "medium",
+    );
+    const idx46 = argv46.indexOf("--model");
+    assert.equal(argv46[idx46 + 1], "cursor-grok-4.6-medium-fast");
     assert.doesNotMatch(argv[modelIdx + 1] ?? "", /\[effort=/);
     assert.equal(argv.includes("--effort"), false);
     if (prevBracket === undefined) {

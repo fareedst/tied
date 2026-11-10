@@ -1,0 +1,9 @@
+ARCH-WF_TRIAL_MODEL_COMPOSE:
+  consequences:
+    negative:
+      - "Scripts with luna-low + mismatched effort fail"
+    positive:
+      - "Canonical luna medium operator form"
+      - "Catalog membership gate"
+  context: "Cursor WF families share speed suffix -fast; tier belongs in EFFORT positional."
+  decision: "wf-trial-model-spec.v2 compose registry; resolve-ref takes effort; compose before matrix; tier conflict check after matrix/catalog."

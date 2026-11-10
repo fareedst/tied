@@ -501,11 +501,11 @@ workflow_trial_range ()
 usage: workflow_trial_range HARNESS MODEL_REF EFFORT END START [MONIT]
   HARNESS: cursor|claude (default cursor)
   MODEL_REF: matrix id, agent catalog slug, or alias (docs/demos/wf-trial-model-specs.yaml + wf-trial-model-catalog.yaml)
-  EFFORT: low|medium|high|xhigh|max or - (unset MODEL_EFFORT)
+  EFFORT: low|medium|high|xhigh|max or - (unset MODEL_EFFORT); compose families (luna, grok47, sol, composer-2.5) require a tier
   Claude: MODEL_EFFORT -> agent --effort and CLAUDE_CODE_EFFORT_LEVEL
-  Cursor: MODEL_EFFORT -> agentstream catalog slug tier rewrite on MODEL_SLUG (not bracket effort=)
+  Cursor compose: EFFORT builds MODEL_SLUG (e.g. luna + medium -> gpt-5.6-luna-medium-fast); legacy tiered slug + mismatched EFFORT fails
+  example: workflow_trial_range cursor luna medium 2 2
   example: workflow_trial_range cursor luna-low medium 2 2
-  example: workflow_trial_range cursor gpt-5.6-luna-low-fast medium 1 1
   example: workflow_trial_range claude haiku-5-5 medium 1 1
 EOF
         return 0
@@ -517,7 +517,7 @@ EOF
     local start="${5:-1}";
     local monit_to_stderr="${6:-echo_exec}";
     local num NUM model_slug model_config;
-    wf_trial_resolve_model_ref "$harness" "$model_ref" || return $?;
+    wf_trial_resolve_model_ref "$harness" "$model_ref" "$effort" || return $?;
     export HARNESS="$harness"
     wf_trial_canonicalize_cursor_model_slug "$harness" || return $?
     model_slug="$MODEL_SLUG"

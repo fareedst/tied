@@ -1,0 +1,4 @@
+feat(wf-trial): compose MODEL_REF families for workflow_trial_range
+
+[REQ-WF_TRIAL_MODEL_COMPOSE] cursor luna medium → gpt-5.6-luna-medium-fast;
+specs v2 compose registry; tier mismatch fail closed.

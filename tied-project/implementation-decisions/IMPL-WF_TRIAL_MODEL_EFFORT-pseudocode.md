@@ -53,7 +53,7 @@ PROCEDURE CLAUDE_APPLY_EFFORT
 PROCEDURE CURSOR_APPLY_MODEL_SLUG_EFFORT
   # [REQ-WF_TRIAL_MODEL_EFFORT] [ARCH-WF_TRIAL_MODEL_EFFORT]
   PRE: harness cursor; modelEffort non-empty; AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT not 0
-  POST: --model token is catalog slug with hyphen effort tier; preserve thinking modifier and -fast suffix
+  POST: --model token is catalog slug with hyphen effort tier; preserve thinking modifier and -fast suffix; canonicalize Grok vendor prefix (4.5/4.6 cursor-grok-*, 4.7+ grok-*)
   INPUT: base model slug, modelEffort
   CONTROL: skip when Auto, effort empty, or composer-2.5 blocklist
   FAILURE_MODES: opt-out env → plain slug; composer → unchanged + DIAGNOSTIC

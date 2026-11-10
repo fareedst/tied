@@ -1,0 +1,6 @@
+IMPL-WF_TRIAL_MODEL_COMPOSE:
+  implementation_approach: "wf-trial-model-compose.mjs; specs v2 compose block; resolveWfTrialModelRef effort arg; wf_trial_resolve_model_ref passes EFFORT; workflow_trial_range usage examples."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-10"

@@ -1,0 +1,22 @@
+REQ-WF_TRIAL_MODEL_COMPOSE:
+  rationale:
+    benefits:
+      - "Fail closed on tier mismatch"
+      - "Single effort source for slug and MODEL_EFFORT"
+    problems_solved:
+      - "Slug low + effort medium ambiguity"
+      - "Verbose gpt-5.6-luna-low-fast MODEL_REF"
+    why: "Operators want family + effort (luna medium) without contradictory slug tiers."
+  satisfaction_criteria:
+    - criterion: "compose family requires effort; tier mismatch errors"
+      id: "SC-COMPOSE-CONFLICT"
+      metric: "node --test tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+    - criterion: "cursor luna + medium composes gpt-5.6-luna-medium-fast and luna-med"
+      id: "SC-COMPOSE-LUNA"
+      metric: "node --test tools/bootstrap/lib/wf-trial-model-compose.test.mjs"
+    - criterion: "luna-low with EFFORT=- still resolves"
+      id: "SC-COMPOSE-LEGACY"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    - criterion: "workflow_trial_range usage documents compose families"
+      id: "SC-COMPOSE-USAGE"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

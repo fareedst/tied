@@ -72,6 +72,68 @@ function effortTierForCatalog(base: string, effort: string): string {
   return effort;
 }
 
+function compareDottedVersion(a: string, b: string): number {
+  const pa = a.split(".").map((x) => Number.parseInt(x, 10) || 0);
+  const pb = b.split(".").map((x) => Number.parseInt(x, 10) || 0);
+  const n = Math.max(pa.length, pb.length);
+  for (let i = 0; i < n; i++) {
+    const da = pa[i] ?? 0;
+    const db = pb[i] ?? 0;
+    if (da !== db) {
+      return da < db ? -1 : 1;
+    }
+  }
+  return 0;
+}
+
+/** Grok 4.5/4.6 → cursor-grok-* ; Grok 4.7+ → grok-* (Cursor agent catalog). */
+export function canonicalizeGrokCatalogBase(base: string): string {
+  const trimmed = base.trim();
+  if (trimmed === "") {
+    return base;
+  }
+  let rest = trimmed.toLowerCase();
+  if (rest.startsWith("cursor-")) {
+    rest = rest.slice("cursor-".length);
+  }
+  const m = rest.match(/^grok-(4\.\d+)$/);
+  if (!m) {
+    return trimmed;
+  }
+  const version = m[1]!;
+  if (compareDottedVersion(version, "4.7") < 0) {
+    return `cursor-grok-${version}`;
+  }
+  return `grok-${version}`;
+}
+
+/** Normalize vendor prefix on full catalog slug (tier / fast preserved). */
+export function canonicalizeCursorAgentModelSlug(modelSlug: string): string {
+  const trimmed = modelSlug.trim();
+  if (trimmed === "") {
+    return trimmed;
+  }
+  const lower = trimmed.toLowerCase();
+  if (lower === "auto") {
+    return trimmed;
+  }
+  const bare = stripLegacyBracketModel(trimmed);
+  const parsed = parseCursorCatalogSlug(bare);
+  if (parsed.base === "") {
+    return bare;
+  }
+  const canonBase = canonicalizeGrokCatalogBase(parsed.base);
+  if (canonBase === parsed.base) {
+    return bare;
+  }
+  return buildCursorCatalogSlug(
+    canonBase,
+    parsed.middleMods,
+    parsed.priorEffort,
+    parsed.hasFast,
+  );
+}
+
 type ParsedCursorSlug = {
   base: string;
   middleMods: string[];
@@ -135,7 +197,7 @@ export function applyCursorModelForAgent(
   }
   const effort = normalizeModelEffort(modelEffort);
   if (effort === "" || cursorModelBracketEffortDisabled()) {
-    return stripLegacyBracketModel(trimmed);
+    return canonicalizeCursorAgentModelSlug(stripLegacyBracketModel(trimmed));
   }
   const normalizedBase = stripLegacyBracketModel(trimmed);
   if (cursorSlugEffortRewriteBlocked(normalizedBase)) {
@@ -144,17 +206,18 @@ export function applyCursorModelForAgent(
 
   const parsed = parseCursorCatalogSlug(normalizedBase);
   if (parsed.base === "") {
-    return normalizedBase;
+    return canonicalizeCursorAgentModelSlug(normalizedBase);
   }
   const tier = effortTierForCatalog(parsed.base, effort);
+  const canonBase = canonicalizeGrokCatalogBase(parsed.base);
   const rebuilt = buildCursorCatalogSlug(
-    parsed.base,
+    canonBase,
     parsed.middleMods,
     tier,
     parsed.hasFast,
   );
   if (rebuilt === normalizedBase) {
-    return normalizedBase;
+    return canonicalizeCursorAgentModelSlug(normalizedBase);
   }
   return rebuilt;
 }

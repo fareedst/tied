@@ -4572,7 +4572,23 @@ REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE:
       - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
     related_to: []
   status: "Implemented"
-
+REQ-WF_TRIAL_MODEL_COMPOSE:
+  category: "Tooling"
+  detail_file: "requirements/REQ-WF_TRIAL_MODEL_COMPOSE.yaml"
+  name: "WF trial model compose family + effort"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE"
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
+      - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+    related_to: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_MODEL_COMPOSE"
+    implementation:
+      - "IMPL-WF_TRIAL_MODEL_COMPOSE"
 REQ-WF_TRIAL_MODEL_EFFORT:
   category: "Tooling"
   detail_file: "requirements/REQ-WF_TRIAL_MODEL_EFFORT.yaml"

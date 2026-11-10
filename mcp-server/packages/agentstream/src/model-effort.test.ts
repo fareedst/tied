@@ -6,6 +6,7 @@ import { describe, it } from "node:test";
 
 import {
   applyCursorModelForAgent,
+  canonicalizeCursorAgentModelSlug,
   cursorModelBracketEffortDisabled,
   cursorSlugEffortRewriteBlocked,
   cursorSlugMayMismatchEffort,
@@ -25,11 +26,30 @@ describe("model-effort [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
     assert.equal(isAllowedModelEffort("bogus"), false);
   });
 
+  it("canonicalizeCursorAgentModelSlug Grok prefix families [SC-CURSOR-SLUG]", () => {
+    assert.equal(
+      canonicalizeCursorAgentModelSlug("grok-4.6-low-fast"),
+      "cursor-grok-4.6-low-fast",
+    );
+    assert.equal(
+      canonicalizeCursorAgentModelSlug("cursor-grok-4.7-medium-fast"),
+      "grok-4.7-medium-fast",
+    );
+  });
+
   it("applyCursorModelForAgent rewrites hyphen effort tier [SC-CURSOR-SLUG]", () => {
     const prev = process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT;
     delete process.env.AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT;
     assert.equal(
       applyCursorModelForAgent("grok-4.7-low-fast", "medium"),
+      "grok-4.7-medium-fast",
+    );
+    assert.equal(
+      applyCursorModelForAgent("grok-4.6-low-fast", "medium"),
+      "cursor-grok-4.6-medium-fast",
+    );
+    assert.equal(
+      applyCursorModelForAgent("cursor-grok-4.7-low-fast", "medium"),
       "grok-4.7-medium-fast",
     );
     assert.equal(

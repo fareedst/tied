@@ -425,8 +425,8 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.equal(r.status, 0, r.stderr);
     const out = `${r.stderr}\n${r.stdout}`;
     assert.match(out, /MODEL_REF/);
-    assert.match(out, /Cursor: MODEL_EFFORT/);
-    assert.match(out, /luna-low medium 2 2/);
+    assert.match(out, /Cursor compose:/);
+    assert.match(out, /luna medium 2 2/);
   });
 
   it("wf_trial_canonicalize_cursor_model_slug Grok prefixes [SC-CURSOR-SLUG]", () => {
@@ -532,8 +532,9 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
       workflow_trial_agentstream() { :; }
       # shellcheck source=scripts/build-commands.sh
       source "${BUILD_COMMANDS}"
-      workflow_trial_range cursor luna-low medium 1 1 : 2>/dev/null || true
+      workflow_trial_range cursor luna medium 1 1 : 2>/dev/null || true
       [[ "\${MODEL_EFFORT:-}" == "medium" ]] || exit 1
+      [[ "\${MODEL_SLUG:-}" == "gpt-5.6-luna-medium-fast" ]] || exit 3
       workflow_trial_range cursor luna-low - 1 1 : 2>/dev/null || true
       [[ -z "\${MODEL_EFFORT+x}" ]] || [[ -z "\${MODEL_EFFORT:-}" ]] || exit 2
       printf ok-range-effort\\n

@@ -1,6 +1,6 @@
 # wf-trial-model-spec.inc.sh — resolve model ref to MODEL_SLUG / MODEL_CONFIG.
-# [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE]
-# [IMPL-WF_TRIAL_MODEL_SPEC_CLI] [IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE]
+# [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE] [REQ-WF_TRIAL_MODEL_COMPOSE]
+# [IMPL-WF_TRIAL_MODEL_SPEC_CLI] [IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE] [IMPL-WF_TRIAL_MODEL_COMPOSE]
 
 _wf_trial_model_spec_repo_root() {
   if [[ -n "${WF_TRIAL_MODEL_SPEC_REPO_ROOT:-}" ]]; then
@@ -55,9 +55,10 @@ wf_trial_registry_has_config_id() {
 wf_trial_registry_has_model_ref() {
   local harness="${1:?}"
   local model_ref="${2:?}"
+  local effort="${3:--}"
   local cli
   cli="$(_wf_trial_model_spec_cli)"
-  node "$cli" has-ref "$harness" "$model_ref" 2>/dev/null
+  node "$cli" has-ref "$harness" "$model_ref" "$effort" 2>/dev/null
 }
 
 # PRE: harness cursor|claude; model_ref known or error
@@ -66,6 +67,7 @@ wf_trial_registry_has_model_ref() {
 wf_trial_resolve_model_ref() {
   local harness="${1:?harness}"
   local model_ref="${2:?model_ref}"
+  local effort="${3:--}"
   local cli json rc resolution
   cli="$(_wf_trial_model_spec_cli)"
   [[ -f "$cli" ]] || {
@@ -74,7 +76,7 @@ wf_trial_resolve_model_ref() {
   }
   local err_file
   err_file="$(mktemp "${TMPDIR:-/tmp}/wf-trial-spec.XXXXXX")"
-  json="$(node "$cli" resolve-ref "$harness" "$model_ref" 2>"$err_file")" || {
+  json="$(node "$cli" resolve-ref "$harness" "$model_ref" "$effort" 2>"$err_file")" || {
     rc=$?
     [[ -s "$err_file" ]] && cat "$err_file" >&2
     rm -f "$err_file"

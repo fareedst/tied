@@ -3690,7 +3690,17 @@ IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE:
   essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE-pseudocode.md"
   name: "WF trial model catalog resolve"
   status: "Implemented"
-
+IMPL-WF_TRIAL_MODEL_COMPOSE:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_MODEL_COMPOSE"
+    implementation_decisions: []
+    requirements:
+      - "REQ-WF_TRIAL_MODEL_COMPOSE"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_MODEL_COMPOSE.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_MODEL_COMPOSE-pseudocode.md"
+  name: "WF trial model compose family + effort"
+  status: "Implemented"
 IMPL-WF_TRIAL_MODEL_EFFORT:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_MODEL_EFFORT.yaml"
   status: "Draft"
