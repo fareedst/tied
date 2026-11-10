@@ -1,0 +1,45 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-wf-model-catalog-resolve-2026-11-10",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "covered_tokens": [
+    "REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE",
+    "ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE",
+    "IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE"
+  ],
+  "proof_boundaries": [
+    "Breaking: workflow_trial_range claude composer-2.5 no longer supported; use haiku-5-5"
+  ],
+  "command_results": [
+    {
+      "id": "sc-cat-unit",
+      "command": ["node", "--test", "tools/bootstrap/lib/wf-trial-model-catalog.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "sc-cat-spec",
+      "command": ["node", "--test", "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "sc-cat-shell",
+      "command": ["node", "--test", "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "sc-cat-sync-check",
+      "command": ["node", "tools/bootstrap/sync-wf-trial-model-catalog.mjs", "--check"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ]
+}

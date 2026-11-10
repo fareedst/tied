@@ -271,8 +271,8 @@ _how_smoke() {
   workflow-trial-agentstream wf-02 [--dry-run]   bootstrap + PROMPT-WF extract + four-phase agentstream
                                  disposable dir: {epoch}-wf-agentstream-{wf}-{harness}-{model}[effort]
                                  model from MODEL_CONFIG (else MODEL_SLUG), optional MODEL_EFFORT suffix on tag
-                                 workflow_trial_range HARNESS CONFIG_ID EFFORT END START  (EFFORT: low|medium|high|xhigh|max or -)
-                                 CONFIG_ID: docs/demos/wf-trial-model-specs.yaml
+                                 workflow_trial_range HARNESS MODEL_REF EFFORT END START  (EFFORT: low|medium|high|xhigh|max or -)
+                                 MODEL_REF: matrix id, agent slug, or alias (wf-trial-model-specs.yaml + wf-trial-model-catalog.yaml)
                                  example: workflow_trial_range cursor luna-low medium 2 2
                                  HARNESS=cursor|claude
                                  tied-install linked + lint + G4 onboarding audit

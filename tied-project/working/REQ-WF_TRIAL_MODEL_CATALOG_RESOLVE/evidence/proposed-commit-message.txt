@@ -1,0 +1,4 @@
+feat(wf-trial): MODEL_REF catalog resolve for workflow_trial_range
+
+[REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE] Two-tier resolve (matrix + catalog snapshot);
+Claude aliases (haiku-5-5); composer-2.5 cursor-only. Tests + sync --check green.

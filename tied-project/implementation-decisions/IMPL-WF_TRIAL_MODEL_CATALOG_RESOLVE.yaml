@@ -1,0 +1,2 @@
+IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE:
+  implementation_approach: "wf-trial-model-catalog.mjs + sync script; resolveWfTrialModelRef in wf-trial-model-spec.mjs; wf_trial_resolve_model_ref in inc.sh; matrix LEAP for claude-haiku-5-5."

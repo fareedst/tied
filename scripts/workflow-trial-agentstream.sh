@@ -112,14 +112,15 @@ export HARNESS="${HARNESS:-cursor}"
 source "${SCRIPT_DIR}/lib/wf-trial-model-spec.inc.sh"
 if [[ -z "${MODEL_SLUG:-}" ]]; then
   _wf_trial_resolve_id="${WF_TRIAL_CONFIG_ID:-${MODEL_CONFIG:-}}"
-  if [[ -n "$_wf_trial_resolve_id" ]] && wf_trial_registry_has_config_id "$_wf_trial_resolve_id"; then
-    wf_trial_resolve_model_spec "$HARNESS" "$_wf_trial_resolve_id" || fail "model spec resolve failed for ${_wf_trial_resolve_id}"
+  if [[ -n "$_wf_trial_resolve_id" ]] && wf_trial_registry_has_model_ref "$HARNESS" "$_wf_trial_resolve_id"; then
+    wf_trial_resolve_model_ref "$HARNESS" "$_wf_trial_resolve_id" || fail "model ref resolve failed for ${_wf_trial_resolve_id}"
   fi
   unset _wf_trial_resolve_id
 fi
 
 export MODEL_SLUG="${MODEL_SLUG:-composer-2.5-fast}"
 export MODEL_CONFIG="${MODEL_CONFIG:-composer-2.5}"
+wf_trial_canonicalize_cursor_model_slug "$HARNESS" || fail "MODEL_SLUG canonicalize failed"
 
 # shellcheck source=lib/wf-trial-model-effort.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-model-effort.inc.sh"

@@ -3626,6 +3626,12 @@ REQ-TIED_PROJECT_LINT:
   name: "Project lint MCP"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
+  cross_references:
+    - "REQ-TIED_PROJECT_SIZE_LAYERS"
+  description: "Compact facilitator comparison Summary: trimmed wf labels, no ok column, one-decimal cross-layer ratios."
+  detail_file: "requirements/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml"
+  status: "Implemented"
 REQ-TIED_PROJECT_SIZE_LAYERS:
   category: "Tooling"
   description: "Evidence-only three-layer project size (atoms, operational intent, proof facets) with MCP snapshot and WF trial cohort JSONL."
@@ -3638,6 +3644,7 @@ REQ-TIED_PROJECT_SIZE_LAYERS:
       - "REQ-TIED_CORPUS_COMPREHENSION"
       - "REQ-TIED_SETUP"
     related_to:
+      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
       - "REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
       - "REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
       - "REQ-WF_TRIAL_MODEL_EFFORT"
@@ -3645,11 +3652,13 @@ REQ-TIED_PROJECT_SIZE_LAYERS:
   status: "Implemented"
   traceability:
     architecture:
+      - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
       - "ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
       - "ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
       - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
     implementation:
       - "IMPL-TIED_PROJECT_SIZE_COHORT_JSONL"
+      - "IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
       - "IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
       - "IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES"
       - "IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL"
@@ -4534,6 +4543,17 @@ REQ-WF_TRIAL_IMPLEMENTATION_STACK:
       - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
     implementation:
       - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
+REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE:
+  category: "Tooling"
+  detail_file: "requirements/REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE.yaml"
+  name: "WF trial model catalog resolve"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
+      - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+    related_to: []
+  status: "Implemented"
 REQ-WF_TRIAL_MODEL_EFFORT:
   category: "Tooling"
   detail_file: "requirements/REQ-WF_TRIAL_MODEL_EFFORT.yaml"

@@ -385,6 +385,21 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.match(r.stderr, /wf-trial-orchestrator-run\.v1\.json/);
   });
 
+  it("workflow_trial_range usage mentions MODEL_REF and catalog [SC-CAT-USAGE]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range 2>&1
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    const out = `${r.stderr}\n${r.stdout}`;
+    assert.match(out, /MODEL_REF/);
+    assert.match(out, /wf-trial-model-catalog/);
+    assert.match(out, /haiku-5-5 medium/);
+  });
+
   it("workflow_trial_range usage mentions CONFIG_ID and effort [SC-SPEC-USAGE]", () => {
     const bash = `
       export ECHO_EXEC=:
@@ -395,9 +410,43 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
     assert.equal(r.status, 0, r.stderr);
     const out = `${r.stderr}\n${r.stdout}`;
-    assert.match(out, /CONFIG_ID/);
+    assert.match(out, /MODEL_REF/);
     assert.match(out, /Cursor: MODEL_EFFORT/);
     assert.match(out, /luna-low medium 2 2/);
+  });
+
+  it("wf_trial_canonicalize_cursor_model_slug Grok prefixes [SC-CURSOR-SLUG]", () => {
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-model-spec.inc.sh
+      source "${REPO_ROOT}/scripts/lib/wf-trial-model-spec.inc.sh"
+      export HARNESS=cursor
+      export MODEL_SLUG=grok-4.6-medium-fast
+      wf_trial_canonicalize_cursor_model_slug cursor || exit 1
+      [[ "\${MODEL_SLUG}" == "cursor-grok-4.6-medium-fast" ]] || exit 2
+      export MODEL_SLUG=cursor-grok-4.7-low-fast
+      wf_trial_canonicalize_cursor_model_slug cursor || exit 3
+      [[ "\${MODEL_SLUG}" == "grok-4.7-low-fast" ]] || exit 4
+      printf ok-cursor-slug\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-cursor-slug/);
+  });
+
+  it("workflow_trial_range resolves grok47-med for cursor [SC-SPEC-RESOLVE]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      workflow_trial_agentstream() { :; }
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range cursor grok47-med - 1 1 : 2>/dev/null
+      [[ "\${MODEL_CONFIG:-}" == "grok47-med" ]] || exit 3
+      [[ "\${MODEL_SLUG:-}" == "grok-4.7-medium-fast" ]] || exit 4
+      printf ok-grok47\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-grok47/);
   });
 
   it("workflow_trial_range resolves luna-low for cursor [SC-SPEC-RESOLVE]", () => {
@@ -414,6 +463,23 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
     assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
     assert.match(r.stdout, /ok-spec-resolve/);
+  });
+
+  it("workflow_trial_range claude haiku-5-5 resolves [SC-CAT-ALIAS]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      workflow_trial_agentstream() { :; }
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range claude haiku-5-5 medium 1 1 : 2>/dev/null
+      [[ "\${MODEL_SLUG:-}" == "claude-haiku-5-5" ]] || exit 3
+      [[ "\${MODEL_CONFIG:-}" == "claude-haiku-5-5" ]] || exit 4
+      [[ "\${MODEL_EFFORT:-}" == "medium" ]] || exit 5
+      printf ok-haiku-alias\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-haiku-alias/);
   });
 
   it("workflow_trial_range unknown config id fails before loop [SC-SPEC-UNKNOWN]", () => {

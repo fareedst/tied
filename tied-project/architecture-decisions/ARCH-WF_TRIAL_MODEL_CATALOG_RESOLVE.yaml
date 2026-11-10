@@ -1,0 +1,10 @@
+ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE:
+  consequences:
+    negative:
+      - "Breaking claude composer-2.5 scripts"
+      - "Catalog regen when agent models changes"
+    positive:
+      - "CI drift check"
+      - "Operator-friendly names"
+  context: "Matrix specs cover comparison cells; full agent and Claude catalogs are larger."
+  decision: "Committed wf-trial-model-catalog.yaml snapshot; resolve-ref walks matrix then aliases then catalog; composer-2.5 is cursor-only."

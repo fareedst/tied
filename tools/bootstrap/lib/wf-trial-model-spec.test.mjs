@@ -8,7 +8,9 @@ import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   defaultWfTrialModelSpecRegistryPath,
+  hasWfTrialModelRef,
   hasWfTrialModelSpecId,
+  resolveWfTrialModelRef,
   resolveWfTrialModelSpec,
 } from "./wf-trial-model-spec.mjs";
 
@@ -23,10 +25,28 @@ describe("wf-trial-model-spec.mjs", () => {
     assert.equal(r.model_slug, "gpt-5.6-luna-low-fast");
   });
 
-  it("resolves composer-2.5 for claude parity", () => {
-    const r = resolveWfTrialModelSpec("claude", "composer-2.5", REGISTRY);
-    assert.equal(r.model_config, "composer-2.5");
+  it("rejects composer-2.5 on claude harness [SC-CAT-COMPOSER-CLAUDE-FAIL]", () => {
+    assert.throws(
+      () => resolveWfTrialModelSpec("claude", "composer-2.5", REGISTRY),
+      /does not support claude harness/,
+    );
+    assert.throws(
+      () => resolveWfTrialModelRef("claude", "composer-2.5", REGISTRY),
+      /does not support claude harness/,
+    );
+  });
+
+  it("resolves haiku-5-5 alias on claude [SC-CAT-ALIAS]", () => {
+    const r = resolveWfTrialModelRef("claude", "haiku-5-5", REGISTRY);
     assert.equal(r.model_slug, "claude-haiku-5-5");
+    assert.equal(r.model_config, "claude-haiku-5-5");
+    assert.equal(r.resolution, "alias");
+  });
+
+  it("resolves cursor catalog slug luna-low-fast [SC-CAT-SLUG]", () => {
+    const r = resolveWfTrialModelRef("cursor", "gpt-5.6-luna-low-fast", REGISTRY);
+    assert.equal(r.model_config, "luna-low");
+    assert.equal(r.model_slug, "gpt-5.6-luna-low-fast");
   });
 
   it("rejects luna-low on claude [SC-SPEC-HARNESS]", () => {
@@ -38,6 +58,8 @@ describe("wf-trial-model-spec.mjs", () => {
 
   it("rejects unknown config id [SC-SPEC-UNKNOWN]", () => {
     assert.throws(() => resolveWfTrialModelSpec("cursor", "no-such-id", REGISTRY), /unknown WF trial config id/);
+    assert.throws(() => resolveWfTrialModelRef("cursor", "no-such-id-xyz", REGISTRY), /unknown model ref/);
+    assert.equal(hasWfTrialModelRef("cursor", "no-such-id-xyz", REGISTRY), false);
   });
 
   it("has registry ids", () => {

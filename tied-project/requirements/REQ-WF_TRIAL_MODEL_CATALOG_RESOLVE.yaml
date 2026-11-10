@@ -1,0 +1,26 @@
+REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE:
+  rationale:
+    benefits:
+      - "Any catalog slug resolves"
+      - "Committed snapshot + --check"
+      - "Haiku aliases work"
+    problems_solved:
+      - "Duplicate naming confusion for composer vs Haiku"
+      - "unknown config id on haiku-5-5"
+    why: "Operators use agent models slugs and Claude API ids; matrix-only config ids fail."
+  satisfaction_criteria:
+    - criterion: "claude composer-2.5 errors"
+      id: "SC-CAT-COMPOSER-CLAUDE-FAIL"
+      metric: "node --test tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+    - criterion: "claude haiku-5-5 resolves MODEL_SLUG claude-haiku-5-5"
+      id: "SC-CAT-ALIAS"
+      metric: "node --test tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+    - criterion: "cursor gpt-5.6-luna-low-fast resolves same as luna-low"
+      id: "SC-CAT-SLUG"
+      metric: "node --test tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+    - criterion: "sync-wf-trial-model-catalog.mjs --check passes"
+      id: "SC-CAT-SYNC-CHECK"
+      metric: "node tools/bootstrap/sync-wf-trial-model-catalog.mjs --check"
+    - criterion: "workflow_trial_range usage documents MODEL_REF and catalog"
+      id: "SC-CAT-USAGE"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

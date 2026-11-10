@@ -3177,6 +3177,13 @@ IMPL-TIED_PROJECT_SIZE_COHORT_JSONL:
       - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
     requirements:
       - "REQ-TIED_PROJECT_SIZE_LAYERS"
+IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
+  cross_references:
+    - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+    - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+  description: "trimComparisonDisplayLabel and Summary row formatting in comparison render."
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml"
+  status: "Implemented"
 IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
   cross_references:
     - "ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"
@@ -3661,6 +3668,17 @@ IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
       - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
     requirements:
       - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE"
+    implementation_decisions: []
+    requirements:
+      - "REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE-pseudocode.md"
+  name: "WF trial model catalog resolve"
+  status: "Implemented"
 IMPL-WF_TRIAL_MODEL_EFFORT:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_MODEL_EFFORT.yaml"
   status: "Draft"

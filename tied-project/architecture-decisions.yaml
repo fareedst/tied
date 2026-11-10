@@ -2557,6 +2557,13 @@ ARCH-TIED_PROJECT_LINT_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_LINT_BOUNDARY.yaml"
   name: "Project lint boundary"
   status: "Planned"
+ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
+  cross_references:
+    - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+    - "REQ-TIED_PROJECT_SIZE_LAYERS"
+  description: "Display-only trim and format rules for project-size comparison markdown."
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml"
+  status: "Accepted"
 ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
   cross_references:
     - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"
@@ -3048,6 +3055,16 @@ ARCH-WF_TRIAL_IMPLEMENTATION_STACK:
       - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
     requirements:
       - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE:
+  cross_references:
+    architecture_decisions: []
+    implementation_decisions:
+      - "IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE"
+    requirements:
+      - "REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE.yaml"
+  name: "WF trial model catalog resolve"
+  status: "Accepted"
 ARCH-WF_TRIAL_MODEL_EFFORT:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_MODEL_EFFORT.yaml"
   status: "Draft"

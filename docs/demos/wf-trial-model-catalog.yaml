@@ -1,0 +1,598 @@
+schema: wf-trial-model-catalog.v1
+generated_at: '2026-11-10T19:22:44.357Z'
+cursor_source: agent models
+claude_source: GET /v1/models
+aliases:
+  claude:
+    haiku-5-5: claude-haiku-5-5
+    haiku55: claude-haiku-5-5
+    sonnet-5-5: claude-sonnet-5-5
+    sonnet55: claude-sonnet-5-5
+    opus-5-5: claude-opus-5-5
+    fable-5-2: claude-fable-5-2
+    fable-5-1: claude-fable-5-1
+    fable-5: claude-fable-5
+cursor:
+  - slug: auto
+    model_config: auto
+  - slug: gpt-5.3-codex-low
+    model_config: gpt-5.3-codex
+  - slug: gpt-5.3-codex-low-fast
+    model_config: gpt-5.3-codex
+  - slug: gpt-5.3-codex
+    model_config: gpt-5.3-codex
+  - slug: gpt-5.3-codex-fast
+    model_config: gpt-5.3-codex
+  - slug: gpt-5.3-codex-high
+    model_config: gpt-5.3-codex
+  - slug: gpt-5.3-codex-high-fast
+    model_config: gpt-5.3-codex
+  - slug: gpt-5.3-codex-xhigh
+    model_config: gpt-5.3-codex
+  - slug: gpt-5.3-codex-xhigh-fast
+    model_config: gpt-5.3-codex
+  - slug: gpt-5.2
+    model_config: gpt-5.2
+  - slug: composer-2.5
+    model_config: composer-2.5
+  - slug: claude-opus-5-thinking-high
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-high-fast
+    model_config: claude-opus-5
+  - slug: gpt-5.6-sol-high
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-high-fast
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-xhigh
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-xhigh-fast
+    model_config: gpt-5.6-sol
+  - slug: claude-fable-5-thinking-high
+    model_config: claude-fable-5
+  - slug: claude-fable-5-thinking-xhigh
+    model_config: claude-fable-5
+  - slug: cursor-grok-4.5-high
+    model_config: cursor-grok-4.5
+  - slug: cursor-grok-4.5-high-fast
+    model_config: cursor-grok-4.5
+  - slug: claude-sonnet-5-thinking-high
+    model_config: claude-sonnet-5
+  - slug: claude-sonnet-5-thinking-xhigh
+    model_config: claude-sonnet-5
+  - slug: gpt-5.6-luna-high
+    model_config: gpt-5.6-luna
+  - slug: grok-4.7-low
+    model_config: grok-4.7
+  - slug: grok-4.7-low-fast
+    model_config: grok-4.7
+  - slug: grok-4.7-medium
+    model_config: grok-4.7
+  - slug: grok-4.7-medium-fast
+    model_config: grok47-med
+  - slug: grok-4.7-high
+    model_config: grok-4.7
+  - slug: grok-4.7-high-fast
+    model_config: grok-4.7
+  - slug: grok-4.7-xhigh
+    model_config: grok-4.7
+  - slug: grok-4.7-xhigh-fast
+    model_config: grok-4.7
+  - slug: cursor-grok-4.6-low
+    model_config: cursor-grok-4.6
+  - slug: cursor-grok-4.6-low-fast
+    model_config: cursor-grok-4.6
+  - slug: cursor-grok-4.6-medium
+    model_config: cursor-grok-4.6
+  - slug: cursor-grok-4.6-medium-fast
+    model_config: cursor-grok-4.6
+  - slug: cursor-grok-4.6-high
+    model_config: cursor-grok-4.6
+  - slug: cursor-grok-4.6-high-fast
+    model_config: cursor-grok-4.6
+  - slug: cursor-grok-4.6-xhigh
+    model_config: cursor-grok-4.6
+  - slug: cursor-grok-4.6-xhigh-fast
+    model_config: cursor-grok-4.6
+  - slug: composer-2.5-fast
+    model_config: composer-2.5
+  - slug: claude-opus-5-5-low
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-low-fast
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-medium
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-medium-fast
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-high
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-high-fast
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-xhigh
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-xhigh-fast
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-max
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-5-max-fast
+    model_config: claude-opus-5-5
+  - slug: claude-opus-5-low
+    model_config: claude-opus-5
+  - slug: claude-opus-5-low-fast
+    model_config: claude-opus-5
+  - slug: claude-opus-5-medium
+    model_config: claude-opus-5
+  - slug: claude-opus-5-medium-fast
+    model_config: claude-opus-5
+  - slug: claude-opus-5-high
+    model_config: claude-opus-5
+  - slug: claude-opus-5-high-fast
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-low
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-low-fast
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-medium
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-medium-fast
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-xhigh
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-xhigh-fast
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-max
+    model_config: claude-opus-5
+  - slug: claude-opus-5-thinking-max-fast
+    model_config: claude-opus-5
+  - slug: claude-opus-4-8-low
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-low-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-medium
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-medium-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-high
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-high-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-xhigh
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-xhigh-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-max
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-max-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-low
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-low-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-medium
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-medium-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-high
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-high-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-xhigh
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-xhigh-fast
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-max
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-8-thinking-max-fast
+    model_config: claude-opus-4-8
+  - slug: gemini-4-carbon-low
+    model_config: gemini-4-carbon
+  - slug: gemini-4-carbon-medium
+    model_config: gemini-4-carbon
+  - slug: gemini-4-carbon-high
+    model_config: gemini-4-carbon
+  - slug: gemini-4-argon-low
+    model_config: gemini-4-argon
+  - slug: gemini-4-argon-medium
+    model_config: gemini-4-argon
+  - slug: gemini-4-argon-high
+    model_config: gemini-4-argon
+  - slug: muse-wonder-1.0-minimal
+    model_config: muse-wonder-1.0
+  - slug: muse-wonder-1.0-low
+    model_config: muse-wonder-1.0
+  - slug: muse-wonder-1.0-medium
+    model_config: muse-wonder-1.0
+  - slug: muse-wonder-1.0-high
+    model_config: muse-wonder-1.0
+  - slug: muse-wonder-1.0-xhigh
+    model_config: muse-wonder-1.0
+  - slug: muse-wonder-1.0-max
+    model_config: muse-wonder-1.0
+  - slug: gpt-5.6-sol-none
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-none-fast
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-low
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-low-fast
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-medium
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-medium-fast
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-max
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.6-sol-max-fast
+    model_config: gpt-5.6-sol
+  - slug: gpt-5.5-none
+    model_config: gpt-5.5
+  - slug: gpt-5.5-none-fast
+    model_config: gpt-5.5
+  - slug: gpt-5.5-low
+    model_config: gpt-5.5
+  - slug: gpt-5.5-low-fast
+    model_config: gpt-5.5
+  - slug: gpt-5.5-medium
+    model_config: gpt-5.5
+  - slug: gpt-5.5-medium-fast
+    model_config: gpt-5.5
+  - slug: gpt-5.5-high
+    model_config: gpt-5.5
+  - slug: gpt-5.5-high-fast
+    model_config: gpt-5.5
+  - slug: gpt-5.5-extra-high
+    model_config: gpt-5.5-extra
+  - slug: gpt-5.5-extra-high-fast
+    model_config: gpt-5.5-extra
+  - slug: claude-fable-5-2-low
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-low-fast
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-medium
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-medium-fast
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-high
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-high-fast
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-xhigh
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-xhigh-fast
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-max
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-2-max-fast
+    model_config: claude-fable-5-2
+  - slug: claude-fable-5-1-low
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-medium
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-high
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-xhigh
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-max
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-thinking-low
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-thinking-medium
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-thinking-high
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-thinking-xhigh
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-1-thinking-max
+    model_config: claude-fable-5-1
+  - slug: claude-fable-5-low
+    model_config: claude-fable-5
+  - slug: claude-fable-5-medium
+    model_config: claude-fable-5
+  - slug: claude-fable-5-high
+    model_config: claude-fable-5
+  - slug: claude-fable-5-xhigh
+    model_config: claude-fable-5
+  - slug: claude-fable-5-max
+    model_config: claude-fable-5
+  - slug: claude-fable-5-thinking-low
+    model_config: claude-fable-5
+  - slug: claude-fable-5-thinking-medium
+    model_config: claude-fable-5
+  - slug: claude-fable-5-thinking-max
+    model_config: claude-fable-5
+  - slug: cursor-grok-4.5-low
+    model_config: cursor-grok-4.5
+  - slug: cursor-grok-4.5-low-fast
+    model_config: cursor-grok-4.5
+  - slug: cursor-grok-4.5-medium
+    model_config: cursor-grok-4.5
+  - slug: cursor-grok-4.5-medium-fast
+    model_config: cursor-grok-4.5
+  - slug: gemini-3.8-flash-low
+    model_config: gemini-3.8-flash
+  - slug: gemini-3.8-flash-medium
+    model_config: gemini-3.8-flash
+  - slug: gemini-3.8-flash-high
+    model_config: gemini-3.8-flash
+  - slug: muse-spark-1.3-minimal
+    model_config: muse-spark-1.3
+  - slug: muse-spark-1.3-low
+    model_config: muse-spark-1.3
+  - slug: muse-spark-1.3-medium
+    model_config: muse-spark-1.3
+  - slug: muse-spark-1.3-high
+    model_config: muse-spark-1.3
+  - slug: muse-spark-1.3-xhigh
+    model_config: muse-spark-1.3
+  - slug: muse-spark-1.3-max
+    model_config: muse-spark-1.3
+  - slug: gpt-5.6-terra-none
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-none-fast
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-low
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-low-fast
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-medium
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-medium-fast
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-high
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-high-fast
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-xhigh
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-xhigh-fast
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-max
+    model_config: gpt-5.6-terra
+  - slug: gpt-5.6-terra-max-fast
+    model_config: gpt-5.6-terra
+  - slug: claude-sonnet-5-5-low
+    model_config: claude-sonnet-5-5
+  - slug: claude-sonnet-5-5-medium
+    model_config: claude-sonnet-5-5
+  - slug: claude-sonnet-5-5-high
+    model_config: claude-sonnet-5-5
+  - slug: claude-sonnet-5-5-xhigh
+    model_config: claude-sonnet-5-5
+  - slug: claude-sonnet-5-5-max
+    model_config: claude-sonnet-5-5
+  - slug: claude-sonnet-5-low
+    model_config: claude-sonnet-5
+  - slug: claude-sonnet-5-medium
+    model_config: claude-sonnet-5
+  - slug: claude-sonnet-5-high
+    model_config: claude-sonnet-5
+  - slug: claude-sonnet-5-xhigh
+    model_config: claude-sonnet-5
+  - slug: claude-sonnet-5-max
+    model_config: claude-sonnet-5
+  - slug: claude-sonnet-5-thinking-low
+    model_config: claude-sonnet-5
+  - slug: claude-sonnet-5-thinking-medium
+    model_config: claude-sonnet-5
+  - slug: claude-sonnet-5-thinking-max
+    model_config: claude-sonnet-5
+  - slug: claude-4.6-sonnet-medium
+    model_config: claude-4.6-sonnet
+  - slug: claude-4.6-sonnet-medium-thinking
+    model_config: claude-4.6-sonnet
+  - slug: claude-opus-4-7-low
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-low-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-medium
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-medium-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-high
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-high-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-xhigh
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-xhigh-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-max
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-max-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-low
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-low-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-medium
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-medium-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-high
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-high-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-xhigh
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-xhigh-fast
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-max
+    model_config: claude-opus-4-7
+  - slug: claude-opus-4-7-thinking-max-fast
+    model_config: claude-opus-4-7
+  - slug: gpt-5.4-low
+    model_config: gpt-5.4
+  - slug: gpt-5.4-medium
+    model_config: gpt-5.4
+  - slug: gpt-5.4-medium-fast
+    model_config: gpt-5.4
+  - slug: gpt-5.4-high
+    model_config: gpt-5.4
+  - slug: gpt-5.4-high-fast
+    model_config: gpt-5.4
+  - slug: gpt-5.4-xhigh
+    model_config: gpt-5.4
+  - slug: gpt-5.4-xhigh-fast
+    model_config: gpt-5.4
+  - slug: claude-4.6-opus-high
+    model_config: claude-4.6-opus
+  - slug: claude-4.6-opus-max
+    model_config: claude-4.6-opus
+  - slug: claude-4.6-opus-high-thinking
+    model_config: claude-4.6-opus
+  - slug: claude-4.6-opus-max-thinking
+    model_config: claude-4.6-opus
+  - slug: claude-4.5-opus-high
+    model_config: claude-4.5-opus
+  - slug: claude-4.5-opus-high-thinking
+    model_config: claude-4.5-opus
+  - slug: gpt-5.2-low
+    model_config: gpt-5.2
+  - slug: gpt-5.2-low-fast
+    model_config: gpt-5.2
+  - slug: gpt-5.2-fast
+    model_config: gpt-5.2
+  - slug: gpt-5.2-high
+    model_config: gpt-5.2
+  - slug: gpt-5.2-high-fast
+    model_config: gpt-5.2
+  - slug: gpt-5.2-xhigh
+    model_config: gpt-5.2
+  - slug: gpt-5.2-xhigh-fast
+    model_config: gpt-5.2
+  - slug: gpt-5.6-luna-none
+    model_config: gpt-5.6-luna
+  - slug: gpt-5.6-luna-none-fast
+    model_config: gpt-5.6-luna
+  - slug: gpt-5.6-luna-low
+    model_config: gpt-5.6-luna
+  - slug: gpt-5.6-luna-low-fast
+    model_config: luna-low
+  - slug: gpt-5.6-luna-medium
+    model_config: gpt-5.6-luna
+  - slug: gpt-5.6-luna-medium-fast
+    model_config: gpt-5.6-luna
+  - slug: gpt-5.6-luna-high-fast
+    model_config: luna-high
+  - slug: gpt-5.6-luna-xhigh
+    model_config: gpt-5.6-luna
+  - slug: gpt-5.6-luna-xhigh-fast
+    model_config: gpt-5.6-luna
+  - slug: gpt-5.6-luna-max
+    model_config: gpt-5.6-luna
+  - slug: gpt-5.6-luna-max-fast
+    model_config: gpt-5.6-luna
+  - slug: gemini-3.1-pro
+    model_config: gemini-3.1-pro
+  - slug: gpt-5.4-mini-none
+    model_config: gpt-5.4-mini
+  - slug: gpt-5.4-mini-low
+    model_config: gpt-5.4-mini
+  - slug: gpt-5.4-mini-medium
+    model_config: gpt-5.4-mini
+  - slug: gpt-5.4-mini-high
+    model_config: gpt-5.4-mini
+  - slug: gpt-5.4-mini-xhigh
+    model_config: gpt-5.4-mini
+  - slug: gpt-5.4-nano-none
+    model_config: gpt-5.4-nano
+  - slug: gpt-5.4-nano-low
+    model_config: gpt-5.4-nano
+  - slug: gpt-5.4-nano-medium
+    model_config: gpt-5.4-nano
+  - slug: gpt-5.4-nano-high
+    model_config: gpt-5.4-nano
+  - slug: gpt-5.4-nano-xhigh
+    model_config: gpt-5.4-nano
+  - slug: claude-haiku-5-5-low
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-medium
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-high
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-xhigh
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-max
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-thinking-low
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-thinking-medium
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-thinking-high
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-thinking-xhigh
+    model_config: claude-haiku-5-5
+  - slug: claude-haiku-5-5-thinking-max
+    model_config: claude-haiku-5-5
+  - slug: claude-4.5-sonnet
+    model_config: claude-4.5-sonnet
+  - slug: claude-4.5-sonnet-thinking
+    model_config: claude-4.5-sonnet
+  - slug: gpt-5.1-low
+    model_config: gpt-5.1
+  - slug: gpt-5.1
+    model_config: gpt-5.1
+  - slug: gpt-5.1-high
+    model_config: gpt-5.1
+  - slug: gemini-3-flash
+    model_config: gemini-3-flash
+  - slug: gemini-3.5-flash
+    model_config: gemini-3.5-flash
+  - slug: claude-4-sonnet
+    model_config: claude-4-sonnet
+  - slug: claude-4-sonnet-thinking
+    model_config: claude-4-sonnet
+  - slug: gpt-5-mini
+    model_config: gpt-5-mini
+  - slug: kimi-k3-low
+    model_config: kimi-k3
+  - slug: kimi-k3-high
+    model_config: kimi-k3
+  - slug: kimi-k3-max
+    model_config: kimi-k3
+  - slug: kimi-k2.7-code
+    model_config: kimi-k2.7-code
+  - slug: glm-5.2-high
+    model_config: glm-5.2
+  - slug: glm-5.2-max
+    model_config: glm-5.2
+  - slug: deepseek-v41-flash-1017-none
+    model_config: deepseek-v41-flash-1017
+  - slug: deepseek-v41-flash-1017-low
+    model_config: deepseek-v41-flash-1017
+  - slug: deepseek-v41-flash-1017-medium
+    model_config: deepseek-v41-flash-1017
+  - slug: deepseek-v41-flash-1017-high
+    model_config: deepseek-v41-flash-1017
+  - slug: deepseek-v41-flash-1017-max
+    model_config: deepseek-v41-flash-1017
+claude:
+  - slug: claude-fable-5-2
+    model_config: claude-fable-5-2
+  - slug: claude-haiku-5-5
+    model_config: claude-haiku-5-5
+  - slug: claude-sonnet-5-5
+    model_config: claude-sonnet-5-5
+  - slug: claude-opus-5-5
+    model_config: claude-opus-5-5
+  - slug: claude-fable-5-1
+    model_config: claude-fable-5-1
+  - slug: claude-opus-5
+    model_config: claude-opus-5
+  - slug: claude-sonnet-5
+    model_config: claude-sonnet-5
+  - slug: claude-fable-5
+    model_config: claude-fable-5
+  - slug: claude-opus-4-8
+    model_config: claude-opus-4-8
+  - slug: claude-opus-4-7
+    model_config: claude-opus-4-7
+  - slug: claude-sonnet-4-6
+    model_config: claude-sonnet-4-6
+  - slug: claude-opus-4-6
+    model_config: claude-opus-4-6
+  - slug: claude-opus-4-5-20251101
+    model_config: claude-opus-4-5-20251101
+  - slug: claude-haiku-4-5-20251001
+    model_config: claude-haiku-4-5-20251001
+  - slug: claude-sonnet-4-5-20250929
+    model_config: claude-sonnet-4-5-20250929
