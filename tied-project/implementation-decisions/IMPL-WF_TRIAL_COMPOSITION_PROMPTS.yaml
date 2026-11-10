@@ -1,0 +1,6 @@
+IMPL-WF_TRIAL_COMPOSITION_PROMPTS:
+  implementation_approach: "Catalog sections + composition contract; workflow-trial-agentstream WF-01…12 regex; help strings; wf-trial-composition-prompts-contract.test.mjs; registry/README headers."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-10"

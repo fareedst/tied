@@ -1,0 +1,22 @@
+REQ-WF_TRIAL_COMPOSITION_PROMPTS:
+  rationale:
+    benefits:
+      - "Facilitator composition rubric"
+      - "Four new trial scopes"
+    problems_solved:
+      - "No gradable composition cohort"
+      - "Orchestrator capped at wf-08"
+    why: "WF-01…08 skew unit-only; matrix needs prompts that require module binding tests."
+  satisfaction_criteria:
+    - criterion: "catalog has prompts 09-12"
+      id: "SC-CATALOG-09-12"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "wf-09 accepted by orchestrator"
+      id: "SC-WF-ID-12"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    - criterion: "WF-09 catalog extract non-empty"
+      id: "SC-WF-EXTRACT-09"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "wf-13 rejected"
+      id: "SC-WF-REJECT-13"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

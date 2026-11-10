@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial composition prompts ([REQ-WF_TRIAL_COMPOSITION_PROMPTS], [ARCH-WF_TRIAL_COMPOSITION_PROMPTS], [IMPL-WF_TRIAL_COMPOSITION_PROMPTS])** — **PROMPT-WF-09…12** in [catalog-traditional-workflow-trial-prompts.md](docs/demos/catalog-traditional-workflow-trial-prompts.md) (unit + module binding tests); `workflow_trial_agentstream wf-09`…`wf-12`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_COMPOSITION_PROMPTS/PLAN.md).
+
+
 - **WF trial model catalog resolve ([REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE], [ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE], [IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE])** — `workflow_trial_range HARNESS MODEL_REF …` resolves matrix ids, `agent models` slugs, and Claude aliases via [wf-trial-model-catalog.yaml](docs/demos/wf-trial-model-catalog.yaml); `composer-2.5` is cursor-only; use `haiku-5-5` on Claude. Regen: `node tools/bootstrap/sync-wf-trial-model-catalog.mjs`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE/PLAN.md).
 
 - **Project size follow-ons ([REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS], [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES])** — UTF-8 operational intent mass (`applied_utf8_bytes`, `operational_intent_utf8_per_atom`); proof facets count `node:test` **cases** at `validator_version` **1.1.0**; [`project-size-batch-compare.mjs`](tools/bootstrap/lib/project-size-batch-compare.mjs) facilitator + regenerated comparison evidence. Plans: [UTF8](tied-project/working/REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS/PLAN.md), [proof cases](tied-project/working/REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES/PLAN.md).

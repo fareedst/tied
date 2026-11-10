@@ -1,0 +1,31 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-composition-prompts-2026-11-10",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "covered_tokens": [
+    "REQ-WF_TRIAL_COMPOSITION_PROMPTS",
+    "ARCH-WF_TRIAL_COMPOSITION_PROMPTS",
+    "IMPL-WF_TRIAL_COMPOSITION_PROMPTS"
+  ],
+  "proof_boundaries": [
+    "Catalog + orchestrator docs/tests only; no live WF-09..12 disposable pilots in build"
+  ],
+  "command_results": [
+    {
+      "id": "sc-comp-contract",
+      "command": ["node", "--test", "tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "sc-comp-shell",
+      "command": ["node", "--test", "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ]
+}

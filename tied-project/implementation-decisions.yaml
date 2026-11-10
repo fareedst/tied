@@ -3631,6 +3631,17 @@ IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
       - "ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
     requirements:
       - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+IMPL-WF_TRIAL_COMPOSITION_PROMPTS:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_COMPOSITION_PROMPTS"
+    implementation_decisions: []
+    requirements:
+      - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_PROMPTS.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_PROMPTS-pseudocode.md"
+  name: "WF trial composition prompts WF-09–12"
+  status: "Implemented"
 IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   name: "WF trial Cursor live session oracle implementation"
@@ -3679,6 +3690,7 @@ IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE:
   essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE-pseudocode.md"
   name: "WF trial model catalog resolve"
   status: "Implemented"
+
 IMPL-WF_TRIAL_MODEL_EFFORT:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_MODEL_EFFORT.yaml"
   status: "Draft"

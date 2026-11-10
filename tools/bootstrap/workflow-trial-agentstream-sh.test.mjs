@@ -128,6 +128,20 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.match(r.stderr, /WF-/);
   });
 
+  it("rejects wf-13 above catalog range [SC-WF-REJECT-13]", () => {
+    const r = runScript(["wf-13"]);
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /WF-01 .* WF-12|invalid WF id/i);
+  });
+
+  it("wf-09 dry-run accepts extended catalog id [SC-WF-ID-12]", () => {
+    const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "wf09-"));
+    const r = runScript(["wf-09", "--dry-run", "--workspace", workspace]);
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    const combined = `${r.stderr}\n${r.stdout}`;
+    assert.match(combined, /concurrent workers/i);
+  });
+
   it("requires gawk on PATH", () => {
     const r = runScript(["wf-02"], { PATH: "/usr/bin:/bin" });
     if (spawnSync("bash", ["-c", "command -v gawk"], { encoding: "utf8" }).status === 0) {

@@ -9,7 +9,7 @@ Human-readable catalogs for picking small programs and TIED-shaped build exercis
 | [Agent resilience exercise catalog](catalog-compact-programming-exercises.md) | Algorithmic resilience (ENV/DATA/CON/STATE/ALG/ADV); may be built without full TIED stack |
 | [TIED compact demo tool catalog](catalog-tied-compact-tools.md) | TIED traceability, TDD, composition, **Kaizen loop**, **methodology learning experiment**, explicit **proof boundaries** |
 | [Greenfield plan-new-feature prompt catalog](catalog-greenfield-plan-new-feature-prompts.md) | Plain-language `@add-feature` trial prompts for `test-new-tied-client` clients (facilitator grading maps to `TIED-DEMO-*`) |
-| [Traditional four-phase workflow trial catalog](catalog-traditional-workflow-trial-prompts.md) | Compact **PROMPT-WF-*** remainders for `add-feature` → `refine-plan` → `build-plan` → `close-out`; LLM comparison (Composer 2.5, Luna low/med/high) |
+| [Traditional four-phase workflow trial catalog](catalog-traditional-workflow-trial-prompts.md) | Compact **PROMPT-WF-01…12** remainders (09–12 require module binding tests); four-phase skills; LLM comparison (Composer 2.5, Luna, Grok, Claude) |
 | [Traditional workflow trial runs registry](traditional-workflow-trial-runs-registry.md) | Facilitator matrix of **Recorded trials** rows (harness, model, grades, disposable dirname era, latest-for-cell) |
 
 ## Trial readouts (facilitator — greenfield)
@@ -109,41 +109,3 @@ Documented disposable-client runs graded with **workflow choreography**. Not REQ
 | [PROMPT-WF-07 Cursor agentstream @ 1794210943](trial-readout-PROMPT-WF-07-composer25-1794210943-wf-agentstream-wf-07-cursor-composer25.md) | [PROMPT-WF-07](catalog-traditional-workflow-trial-prompts.md#prompt-wf-07) | `composer-2.5` / `composer-2.5-fast` | `/Users/fareed/Documents/dev/test/1794210943-wf-agentstream-wf-07-cursor-composer25` |
 | [PROMPT-WF-08 Cursor agentstream @ 1794211741](trial-readout-PROMPT-WF-08-composer25-1794211741-wf-agentstream-wf-08-cursor-composer25.md) | [PROMPT-WF-08](catalog-traditional-workflow-trial-prompts.md#prompt-wf-08) | `composer-2.5` / `composer-2.5-fast` | `/Users/fareed/Documents/dev/test/1794211741-wf-agentstream-wf-08-cursor-composer25` |
 | [PROMPT-WF-08 Luna low agentstream @ 1794231848](trial-readout-PROMPT-WF-08-luna-low-1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.md) | [PROMPT-WF-08](catalog-traditional-workflow-trial-prompts.md#prompt-wf-08) | `luna-low` / `gpt-5.6-luna-low-fast` | `/Users/fareed/Documents/dev/test/1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow` |
-| [PROMPT-WF-01 Claude Sonnet agentstream @ 1794101529](trial-readout-PROMPT-WF-01-claudesonnet55-1794101529-wf-agentstream-wf-01-claude-sonnet55.md) | [PROMPT-WF-01](catalog-traditional-workflow-trial-prompts.md#prompt-wf-01) | `claude-sonnet-5-5` / `claude-sonnet-5-5` | `/Users/fareed/Documents/dev/test/1794101529-wf-agentstream-wf-01-claude-sonnet55` |
-| [PROMPT-WF-02 Claude Sonnet agentstream @ 1794101881](trial-readout-PROMPT-WF-02-claudesonnet55-1794101881-wf-agentstream-wf-02-claude-sonnet55.md) | [PROMPT-WF-02](catalog-traditional-workflow-trial-prompts.md#prompt-wf-02) | `claude-sonnet-5-5` / `claude-sonnet-5-5` | `/Users/fareed/Documents/dev/test/1794101881-wf-agentstream-wf-02-claude-sonnet55` |
-| [PROMPT-WF-03 Claude Sonnet agentstream @ 1794102131](trial-readout-PROMPT-WF-03-claudesonnet55-1794102131-wf-agentstream-wf-03-claude-sonnet55.md) | [PROMPT-WF-03](catalog-traditional-workflow-trial-prompts.md#prompt-wf-03) | `claude-sonnet-5-5` / `claude-sonnet-5-5` | `/Users/fareed/Documents/dev/test/1794102131-wf-agentstream-wf-03-claude-sonnet55` |
-| [PROMPT-WF-04 Claude Sonnet agentstream @ 1794102400](trial-readout-PROMPT-WF-04-claudesonnet55-1794102400-wf-agentstream-wf-04-claude-sonnet55.md) | [PROMPT-WF-04](catalog-traditional-workflow-trial-prompts.md#prompt-wf-04) | `claude-sonnet-5-5` / `claude-sonnet-5-5` | `/Users/fareed/Documents/dev/test/1794102400-wf-agentstream-wf-04-claude-sonnet55` |
-| [PROMPT-WF-05 Claude Sonnet agentstream @ 1794102708](trial-readout-PROMPT-WF-05-claudesonnet55-1794102708-wf-agentstream-wf-05-claude-sonnet55.md) | [PROMPT-WF-05](catalog-traditional-workflow-trial-prompts.md#prompt-wf-05) | `claude-sonnet-5-5` / `claude-sonnet-5-5` | `/Users/fareed/Documents/dev/test/1794102708-wf-agentstream-wf-05-claude-sonnet55` |
-| [PROMPT-WF-06 Claude Sonnet agentstream @ 1794102962](trial-readout-PROMPT-WF-06-claudesonnet55-1794102962-wf-agentstream-wf-06-claude-sonnet55.md) | [PROMPT-WF-06](catalog-traditional-workflow-trial-prompts.md#prompt-wf-06) | `claude-sonnet-5-5` / `claude-sonnet-5-5` | `/Users/fareed/Documents/dev/test/1794102962-wf-agentstream-wf-06-claude-sonnet55` |
-| [PROMPT-WF-07 Claude Sonnet agentstream @ 1794103222](trial-readout-PROMPT-WF-07-claudesonnet55-1794103222-wf-agentstream-wf-07-claude-sonnet55.md) | [PROMPT-WF-07](catalog-traditional-workflow-trial-prompts.md#prompt-wf-07) | `claude-sonnet-5-5` / `claude-sonnet-5-5` | `/Users/fareed/Documents/dev/test/1794103222-wf-agentstream-wf-07-claude-sonnet55` |
-| [PROMPT-WF-08 Claude Sonnet agentstream @ 1794103645](trial-readout-PROMPT-WF-08-claudesonnet55-1794103645-wf-agentstream-wf-08-claude-sonnet55.md) | [PROMPT-WF-08](catalog-traditional-workflow-trial-prompts.md#prompt-wf-08) | `claude-sonnet-5-5` / `claude-sonnet-5-5` | `/Users/fareed/Documents/dev/test/1794103645-wf-agentstream-wf-08-claude-sonnet55` |
-Maintained by **`@record-wf-trial`**. Catalog: [traditional workflow trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator).
-
-## Disposition legend (TIED catalog)
-
-| Tag | Meaning |
-| --- | --- |
-| `idea` | Not implemented |
-| `exercise-bridge` | Same problem as an exercise-catalog ID plus TIED deliverables |
-| `runbook` | Link to existing runnable documentation |
-| `meta-tool` | Exercises TIED MCP, gates, or bootstrap |
-
-## Facilitator skills (store only)
-
-Install stubs: `./tied-install.sh --allow-self-install --layers skills .` from the store root.
-
-| Skill | When |
-| --- | --- |
-| [**`@record-gf-trial`**](catalog-greenfield-plan-new-feature-prompts.md) | After greenfield / single-session client build — [SKILL.md](../../tools/bundled-record-gf-trial-skill/SKILL.md) |
-| [**`@record-wf-trial`**](catalog-traditional-workflow-trial-prompts.md) | After four-phase workflow trial — [SKILL.md](../../tools/bundled-record-wf-trial-skill/SKILL.md) |
-
-## Runnable entry points
-
-- [TIED Experience Hub](../tied-experience/index.md) — visual methodology and audience lenses (store dogfood)
-- [TIED feature demo](../tied-feature-demo.md) — staged feature orchestration walkthrough
-- [Client development index](../../tied-bundle/docs/client-development-index.md) — `tied gate check`, MCP, checklist tooling
-- [New-client adherence runbook](../pseudocode-new-client-tied-adherence-runbook.md) — disposable client smoke (`test-new-tied-client`)
-
-## Vocabulary
-
-Preferred terms for Loop 2–3 grading: [feedback-to-tied](../../tied-project/vocab/feedback-to-tied.md) · [quality-assurance](../../tied-project/vocab/quality-assurance.md).

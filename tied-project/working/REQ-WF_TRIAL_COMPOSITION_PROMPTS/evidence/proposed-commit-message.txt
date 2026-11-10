@@ -1,0 +1,4 @@
+feat(wf-trial): PROMPT-WF-09..12 composition prompts catalog
+
+[REQ-WF_TRIAL_COMPOSITION_PROMPTS] Unit + module binding paste blocks; orchestrator
+wf-01..12; catalog contract tests green.

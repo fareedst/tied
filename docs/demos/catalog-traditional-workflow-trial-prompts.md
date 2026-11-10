@@ -5,7 +5,7 @@
 | **Purpose** | Short **invocation remainders** for **`@add-feature`** in a **disposable client**, then **`@refine-plan`**, **`@build-plan`**, and **`@close-out`** as **separate sponsor turns**. Stresses **workflow choreography** and **LLM differences** (Composer 2.5, GPT-5.6 Luna low/med/high) while reusing compact product scopes. |
 | **Audience** | Trial sponsors (paste text) · facilitators (grading + `@record-wf-trial`) |
 | **Status** | Draft catalog |
-| **Last updated** | 2026-11-04 |
+| **Last updated** | 2026-11-10 |
 | **Contrast** | [Greenfield catalog](catalog-greenfield-plan-new-feature-prompts.md) — typically one long planning session; this catalog **requires four explicit skills**. |
 | **Facilitator maps** | [TIED compact demo tool catalog](catalog-tied-compact-tools.md) · [Agent resilience exercise catalog](catalog-compact-programming-exercises.md) |
 
@@ -158,6 +158,12 @@ After **each** turn, append or update:
 | PROMPT-WF-06 | gate honesty | — | traceability_structure | Close-out vs missing gate/envelope receipts |
 | PROMPT-WF-07 | open question closure | TIED-DEMO-02 | executable_behavior | null vs missing resolved in refine before build |
 | PROMPT-WF-08 | state machine TDD | STATE-05-ish | executable_behavior | Illegal-event tests after IMPL plan in build-plan |
+| PROMPT-WF-09 | ordered parallel map | TIED-DEMO-10 | executable_behavior | Module binding before glue; order under async finish |
+| PROMPT-WF-10 | thin CLI wiring | TIED-DEMO-13 | executable_behavior | Argv wiring into core without subprocess |
+| PROMPT-WF-11 | pipeline runner | TIED-DEMO-08 | executable_behavior | Multi-stage runner binding test |
+| PROMPT-WF-12 | handler registry | TIED-DEMO-12 | executable_behavior | Cross-module dispatch registration |
+
+**Composition cohort (09–12):** Each prompt requires unit tests **and** at least one automated test of module binding (no graphical UI). See [Composition contract](#composition-contract-normative-for-prompts-09-12).
 
 ---
 
@@ -169,7 +175,7 @@ After the trial, score **separate dimensions**; do not collapse to one number. W
 | --- | --- | --- |
 | Requirement interpretation | 13% | Ambiguity resolved in writing; assumptions labeled |
 | Traceability closure | 17% | Project decision records align with code and tests |
-| Test strategy | 17% | RED in build-plan turn; disturbances where prompt implies |
+| Test strategy | 17% | RED in build-plan turn; disturbances where prompt implies; for **WF-09…12**, composition/binding test evidence (see below) |
 | Algorithm / implementation | 17% | Behavior under faults; honest limits |
 | Process adherence | 12% | Tracker, gate receipts, envelope |
 | **Workflow choreography** | **15%** | Phase boundaries, four turns, plan carry-forward, close-out honesty |
@@ -197,6 +203,24 @@ After the trial, score **separate dimensions**; do not collapse to one number. W
 - Do not use `—` placeholders in published readouts.
 
 Normative detail: [record-wf-trial reference § Session grading rationale](../../tools/bundled-record-wf-trial-skill/reference.md#session-grading-rationale).
+
+### Test strategy sub-check — Composition evidence (WF-09…12)
+
+| Sub-check | Fail signal |
+| --- | --- |
+| Composition evidence | Only unit tests on isolated modules; no automated test exercising module binding/wiring named in PLAN or test files |
+
+---
+
+## Composition contract (normative for prompts 09–12)
+
+For disposable trials using **PROMPT-WF-09** through **PROMPT-WF-12**:
+
+1. **Unit tests** for each library module (`npm test` / `node --test`).
+2. **At least one binding test** that exercises how modules are wired together (runner, argv layer, dispatcher, worker+order glue) **without** graphical UI, browser, or manual steps.
+3. Binding tests may run in-process; satisfying the prompt with unit-only coverage of a single “god” module is insufficient.
+
+Facilitators apply the **Composition evidence** sub-check above when grading Test strategy for these prompts. Store-side traceability: [REQ-WF_TRIAL_COMPOSITION_PROMPTS](../../tied-project/requirements/REQ-WF_TRIAL_COMPOSITION_PROMPTS.yaml).
 
 ---
 
@@ -252,6 +276,30 @@ Build a library that loads configuration from a defaults object and an override 
 Build a tiny explicit state machine with three states and two events. Reject illegal transitions with a documented error. Include tests for at least one legal sequence and one illegal transition.
 ```
 
+### PROMPT-WF-09
+
+```text
+Build a TypeScript library that maps over an array of items using concurrent workers but returns results in the same order as the input. Split the work across at least two modules (one that runs workers and one that collects results in order). Use deterministic fake delays in tests so completion order differs from input order. Include unit tests for each module. Include at least one automated test that exercises the module binding (how workers and ordering are wired together) without starting a graphical UI.
+```
+
+### PROMPT-WF-10
+
+```text
+Build a small CLI that reads CSV text and prints summary statistics (row count and column count). Keep the CSV parsing and stats logic in a library module separate from argument parsing and from the entry module that wires them. Include unit tests for the library and for argument parsing. Include at least one automated test that calls the wiring layer with a fake argv list and checks the printed result shape, without spawning a subprocess or graphical UI.
+```
+
+### PROMPT-WF-11
+
+```text
+Build a line-oriented text pipeline: tokenize lines, filter tokens, then aggregate counts. Implement tokenizer, filter, and aggregator as separate modules and a fourth module that runs the pipeline end to end. Include unit tests for each stage. Include at least one automated test that feeds text through the runner module and asserts the final aggregate, without graphical UI.
+```
+
+### PROMPT-WF-12
+
+```text
+Build a command dispatcher that routes string commands to handlers registered from at least two small handler modules. Reject unknown commands with a documented error. Include unit tests per handler module and for dispatch logic. Include at least one automated test that registers both handlers and verifies routing across modules, without graphical UI.
+```
+
 ---
 
 ## Recommended trial sequences (facilitator)
@@ -261,12 +309,13 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 | Pilot LLM matrix (12 runs) | PROMPT-WF-01, WF-03, WF-05 × `composer-2.5`, `luna-low`, `luna-med`, `luna-high` |
 | Ambiguity + refine stress | PROMPT-WF-02 → PROMPT-WF-07 (separate clients) |
 | Composition + gates | PROMPT-WF-03 then PROMPT-WF-06 |
+| Composition cohort pilot | PROMPT-WF-09, WF-10 × `composer-2.5`, `luna medium`, `grok47-med` (one client each) |
 
 ---
 
 ## Recorded trials (facilitator)
 
-**Registry:** [traditional-workflow-trial-runs-registry.md](traditional-workflow-trial-runs-registry.md) — harness, model, tag era, session grades, and **latest for cell** per row below; [Latest-run comparison matrix](traditional-workflow-trial-runs-registry.md#latest-run-comparison-matrix) (newest run per toolset × PROMPT-WF-01…08).
+**Registry:** [traditional-workflow-trial-runs-registry.md](traditional-workflow-trial-runs-registry.md) — harness, model, tag era, session grades, and **latest for cell** per row below; [Latest-run comparison matrix](traditional-workflow-trial-runs-registry.md#latest-run-comparison-matrix) (newest run per toolset × PROMPT-WF-01…12; rows for **09–12** appear when facilitators record trials).
 
 | Prompt | Model config | Client | Readout |
 | --- | --- | --- | --- |

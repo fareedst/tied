@@ -119,7 +119,7 @@ wf_trial_agentstream_print_help() {
   _wf_help_header "Usage"
   _wf_help_cmd "workflow-trial-agentstream" "WF_ID [--dry-run] [--workspace ABS_PATH]"
   _wf_help_cmd "workflow_trial_agentstream" "same via source scripts/build-commands.sh"
-  _wf_help_note "WF_ID: wf-01 … wf-08 (or PROMPT-WF-NN)"
+  _wf_help_note "WF_ID: wf-01 … wf-12 (or PROMPT-WF-NN)"
   _wf_help_out ""
   _wf_help_header "Examples"
   _wf_help_cmd "workflow-trial-agentstream" "wf-03 --dry-run"

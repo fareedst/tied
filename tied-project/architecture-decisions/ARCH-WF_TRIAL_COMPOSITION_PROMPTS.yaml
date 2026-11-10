@@ -1,0 +1,9 @@
+ARCH-WF_TRIAL_COMPOSITION_PROMPTS:
+  consequences:
+    negative:
+      - "Matrix widens; facilitators must apply new rubric for 09–12"
+    positive:
+      - "Clear composition cohort"
+      - "Same four-phase stack"
+  context: "Traditional WF catalog and orchestrator shared WF-01…08; composition was optional except WF-03."
+  decision: "Add PROMPT-WF-09…12 with binding-test contract; extend normalize_wf_id to WF-12; facilitator grading sub-check."

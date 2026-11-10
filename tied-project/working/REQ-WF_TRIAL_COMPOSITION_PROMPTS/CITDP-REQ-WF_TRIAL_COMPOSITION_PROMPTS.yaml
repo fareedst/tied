@@ -1,0 +1,42 @@
+CITDP-REQ-WF_TRIAL_COMPOSITION_PROMPTS:
+  title: "WF trial composition prompts WF-09–12"
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-10"
+  related_tokens:
+    - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+    - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+    - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+  current_behavior: |
+    Traditional workflow trial catalog has PROMPT-WF-01 through WF-08 only.
+    workflow_trial_agentstream rejects WF-09+.
+    Facilitator grading does not require composition-test evidence for the WF matrix cohort.
+  desired_behavior: |
+    Catalog adds four prompts (09–12) each requiring unit tests plus at least one module-binding automated test (no UI/E2E).
+    Orchestrator and help accept wf-01 through wf-12.
+    Registry and demos docs reference prompt range 01–12.
+  change_definition:
+    success_criteria:
+      - "SC-WF-ID-12"
+      - "SC-WF-EXTRACT-09"
+      - "SC-WF-REJECT-13"
+      - "SC-CATALOG-09-12"
+  satisfaction_criteria:
+    - "SC-WF-ID-12"
+    - "SC-WF-EXTRACT-09"
+    - "SC-WF-REJECT-13"
+    - "SC-CATALOG-09-12"
+  risk_assessment:
+    - risk: "Longer paste blocks confuse turn-1 add-feature"
+      reversibility: "reversible"
+      mitigation: "Plain product language only; examples in facilitator sections"
+    - risk: "Agents label unit tests as composition"
+      reversibility: "reversible"
+      mitigation: "Facilitator rubric sub-check; PLAN must name binding test file"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    unit:
+      - "tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
