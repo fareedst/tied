@@ -6,7 +6,7 @@ REQ-WF_TRIAL_COMPOSITION_PROMPTS:
     problems_solved:
       - "No gradable composition cohort"
       - "Orchestrator capped at wf-08"
-    why: "WF-01…08 skew unit-only; matrix needs prompts that require module binding tests."
+    why: "WF-01…08 skew unit-only; matrix needs composition cohort wf-09..12 (facilitator rubric). Goal-first paste superseded architect-in-paste via REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS."
   satisfaction_criteria:
     - criterion: "catalog has prompts 09-12"
       id: "SC-CATALOG-09-12"
@@ -14,7 +14,7 @@ REQ-WF_TRIAL_COMPOSITION_PROMPTS:
     - criterion: "wf-09 accepted by orchestrator"
       id: "SC-WF-ID-12"
       metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
-    - criterion: "WF-09 catalog extract non-empty"
+    - criterion: "WF-09 catalog extract stresses concurrent order (goal-first paste)"
       id: "SC-WF-EXTRACT-09"
       metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
     - criterion: "wf-13 rejected"

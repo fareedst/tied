@@ -3020,6 +3020,14 @@ ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
       - "IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
     requirements:
       - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+ARCH-WF_TRIAL_COMPOSITION_GOAL_PROMPTS:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_COMPOSITION_GOAL_PROMPTS.yaml"
+  related_requirements:
+    - "REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+    - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
 ARCH-WF_TRIAL_COMPOSITION_PROMPTS:
   cross_references:
     architecture_decisions: []

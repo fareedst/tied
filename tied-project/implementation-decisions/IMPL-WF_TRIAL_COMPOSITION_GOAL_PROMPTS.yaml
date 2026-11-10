@@ -1,0 +1,6 @@
+IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS:
+  implementation_approach: "Replace catalog paste blocks; extend wf-trial-composition-prompts-contract.test.mjs; catalog paste policy section; registry note; LEAP parent REQ/pseudo-code."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-10"

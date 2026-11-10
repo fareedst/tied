@@ -1,0 +1,63 @@
+CITDP-REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS:
+  title: "WF trial composition prompts goal-first paste"
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-10"
+  related_tokens:
+    - "REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+    - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+    - "REQ-MODULE_VALIDATION"
+  current_behavior: |
+    PROMPT-WF-09 through WF-12 paste blocks (REQ-WF_TRIAL_COMPOSITION_PROMPTS) prescribe module counts, wiring layers, and binding-test language.
+    Contract test asserts module binding wording in paste.
+  desired_behavior: |
+    PROMPT-WF-09 through WF-12 paste blocks state TypeScript goals, automated tests, and no graphical UI only.
+    Paste must not mandate module counts, wiring layers, or binding-test wording.
+    Contract test enforces forbid-list and goal phrases; facilitator composition rubric unchanged.
+    Parent REQ-WF_TRIAL_COMPOSITION_PROMPTS LEAP-updated to reference goal-first generation.
+  change_definition:
+    success_criteria:
+      - "SC-GOAL-NO-ARCH"
+      - "SC-GOAL-BEHAVIOR-09"
+      - "SC-GOAL-TYPESCRIPT"
+      - "SC-GOAL-NO-UI"
+      - "SC-CATALOG-09-12"
+  satisfaction_criteria:
+    - "SC-GOAL-NO-ARCH"
+    - "SC-GOAL-BEHAVIOR-09"
+    - "SC-GOAL-TYPESCRIPT"
+    - "SC-GOAL-NO-UI"
+    - "SC-CATALOG-09-12"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Forbid-regex rejects benign product copy containing substring module"
+        - "Goal-first paste yields zero binding tests while facilitator still passes"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Contract test passes but catalog still contains wiring-layer mandate"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS/evidence/not-applicable-receipt.v1.json"
+      falsification_questions:
+        - "Does SC-GOAL-NO-ARCH still fail if a forbidden phrase appears only in facilitator rubric?"
+      gate_policy: "advisory"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Catalog paste and store contract tests only; no live agentstream pilots."
+  risk_assessment:
+    - risk: "Agents ship monoliths without binding tests"
+      reversibility: "reversible"
+      mitigation: "Facilitator composition evidence sub-check unchanged; TIED four-phase still drives PLAN"
+    - risk: "Cross-model compare mixes paste generations"
+      reversibility: "reversible"
+      mitigation: "Facilitator labels paste generation on new registry rows"
+    - risk: "Forbid-regex false positive on innocent wording"
+      reversibility: "reversible"
+      mitigation: "Architectural phrase list only; refine locked table in PLAN §3"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    regression:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

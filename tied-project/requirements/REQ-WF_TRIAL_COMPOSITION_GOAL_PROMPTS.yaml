@@ -1,0 +1,25 @@
+REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS:
+  rationale:
+    benefits:
+      - "Facilitator rubric unchanged"
+      - "Fair model comparison on methodology outcomes"
+    problems_solved:
+      - "Contract test required binding language in paste"
+      - "Paste prescribed module counts and wiring layers"
+    why: "Architect-in-paste WF-09..12 short-circuits cross-model comparison of TIED layering."
+  satisfaction_criteria:
+    - criterion: "no graphical UI in paste 09-12"
+      id: "SC-GOAL-NO-UI"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "paste 09-12 omit architectural mandates"
+      id: "SC-GOAL-NO-ARCH"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "twelve prompt headers"
+      id: "SC-CATALOG-09-12"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "TypeScript hint in paste 09-12"
+      id: "SC-GOAL-TYPESCRIPT"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "WF-09 concurrent order preservation"
+      id: "SC-GOAL-BEHAVIOR-09"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"

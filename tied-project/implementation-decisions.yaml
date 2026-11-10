@@ -3631,6 +3631,13 @@ IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
       - "ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
     requirements:
       - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS-pseudocode.md"
+  related_architecture:
+    - "ARCH-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+  related_requirements:
+    - "REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
 IMPL-WF_TRIAL_COMPOSITION_PROMPTS:
   cross_references:
     architecture_decisions:

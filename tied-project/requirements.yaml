@@ -4464,6 +4464,22 @@ REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
       - "ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
     implementation:
       - "IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS:
+  category: "Tooling"
+  detail_file: "requirements/REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS.yaml"
+  name: "WF trial composition goal-first paste"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+    related_to: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+    implementation:
+      - "IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
 REQ-WF_TRIAL_COMPOSITION_PROMPTS:
   category: "Tooling"
   detail_file: "requirements/REQ-WF_TRIAL_COMPOSITION_PROMPTS.yaml"

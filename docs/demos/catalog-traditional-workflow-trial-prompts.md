@@ -212,9 +212,15 @@ Normative detail: [record-wf-trial reference § Session grading rationale](../..
 
 ---
 
+## Paste policy (WF-09…12 — facilitator)
+
+**Goal-first paste** (2026-11-10+): turn-1 remainders state **TypeScript**, product **goals**, **automated tests**, and **no graphical UI** only — no module counts, wiring layers, or binding-test wording in paste. Facilitators grade composition from disposable **PLAN** and **test files**, not paste compliance. Historical runs before this rewrite used **architect-in-paste** remainders; label **paste generation** when comparing cross-model structure. Traceability: [REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS](../../tied-project/requirements/REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS.yaml).
+
+---
+
 ## Composition contract (normative for prompts 09–12)
 
-For disposable trials using **PROMPT-WF-09** through **PROMPT-WF-12**:
+For disposable trials using **PROMPT-WF-09** through **PROMPT-WF-12** (grading only — not repeated in paste):
 
 1. **Unit tests** for each library module (`npm test` / `node --test`).
 2. **At least one binding test** that exercises how modules are wired together (runner, argv layer, dispatcher, worker+order glue) **without** graphical UI, browser, or manual steps.
@@ -279,25 +285,25 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 ### PROMPT-WF-09
 
 ```text
-Build a TypeScript library that maps over an array of items using concurrent workers but returns results in the same order as the input. Split the work across at least two modules (one that runs workers and one that collects results in order). Use deterministic fake delays in tests so completion order differs from input order. Include unit tests for each module. Include at least one automated test that exercises the module binding (how workers and ordering are wired together) without starting a graphical UI.
+Build a TypeScript library that maps work over an array with concurrent execution but returns results in the same order as the input, even when individual items finish out of order. Tests must use deterministic delays so completion order differs from input order. Include automated tests. No graphical UI.
 ```
 
 ### PROMPT-WF-10
 
 ```text
-Build a small CLI that reads CSV text and prints summary statistics (row count and column count). Keep the CSV parsing and stats logic in a library module separate from argument parsing and from the entry module that wires them. Include unit tests for the library and for argument parsing. Include at least one automated test that calls the wiring layer with a fake argv list and checks the printed result shape, without spawning a subprocess or graphical UI.
+Build a TypeScript CLI that reads CSV text (from a file path or stdin) and prints summary statistics: row count and column count. Include automated tests. No graphical UI.
 ```
 
 ### PROMPT-WF-11
 
 ```text
-Build a line-oriented text pipeline: tokenize lines, filter tokens, then aggregate counts. Implement tokenizer, filter, and aggregator as separate modules and a fourth module that runs the pipeline end to end. Include unit tests for each stage. Include at least one automated test that feeds text through the runner module and asserts the final aggregate, without graphical UI.
+Build a TypeScript library for line-oriented text processing: tokenize lines, filter tokens, and aggregate counts. It must process sample text end to end and produce the final aggregate. Include automated tests. No graphical UI.
 ```
 
 ### PROMPT-WF-12
 
 ```text
-Build a command dispatcher that routes string commands to handlers registered from at least two small handler modules. Reject unknown commands with a documented error. Include unit tests per handler module and for dispatch logic. Include at least one automated test that registers both handlers and verifies routing across modules, without graphical UI.
+Build a TypeScript command dispatcher that routes string commands to handlers and rejects unknown commands with a clear, documented error. Include automated tests. No graphical UI.
 ```
 
 ---

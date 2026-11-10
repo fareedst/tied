@@ -1,0 +1,5 @@
+feat(wf-trial): goal-first PROMPT-WF-09..12 paste
+
+[REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS] Rewrite composition paste to goals + TypeScript +
+automated tests; SC-GOAL-* contract tests. Parent LEAP on REQ-WF_TRIAL_COMPOSITION_PROMPTS.
+Completion: machine close_out allowed; envelope zero blocking gaps; adherence not_run (minimal).

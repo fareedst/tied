@@ -4,7 +4,7 @@ Grammar-Version: v2
 
 ## Catalog and orchestrator
 
-- [IMPL-WF_TRIAL_COMPOSITION_PROMPTS] [ARCH-WF_TRIAL_COMPOSITION_PROMPTS] [REQ-WF_TRIAL_COMPOSITION_PROMPTS] Extend WF catalog with binding-test prompts 09–12 and orchestrator id range 01–12.
+- [IMPL-WF_TRIAL_COMPOSITION_PROMPTS] [ARCH-WF_TRIAL_COMPOSITION_PROMPTS] [REQ-WF_TRIAL_COMPOSITION_PROMPTS] Extend WF catalog with composition cohort prompts 09–12 and orchestrator id range 01–12. Paste goal-first per [REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS] [IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS].
 
 procedure NORMALIZE_WF_TRIAL_ID:
   # [IMPL-WF_TRIAL_COMPOSITION_PROMPTS] Accept WF-01..WF-12; reject wf-13+.
@@ -34,12 +34,12 @@ procedure EXTRACT_PROMPT_WF_REMAINDER:
   RETURN remainder
 
 procedure VALIDATE_COMPOSITION_CATALOG_CONTRACT:
-  # [IMPL-WF_TRIAL_COMPOSITION_PROMPTS] Node test: 12 headers; 09–12 binding language.
+  # [IMPL-WF_TRIAL_COMPOSITION_PROMPTS] [IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS] Node test: 12 headers; goal-first paste SC-GOAL-*.
   Contract:
     INPUT: catalog markdown path
     OUTPUT: test pass/fail
     PRE: build-plan added sections
-    POST: SC-CATALOG-09-12 satisfied
+    POST: SC-CATALOG-09-12 and SC-GOAL-* satisfied; facilitator composition rubric unchanged
     EFFECTS: none
     FAILURE_MODES: assertion_fail
     TERMINATION: total on fail

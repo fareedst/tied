@@ -1,0 +1,9 @@
+ARCH-WF_TRIAL_COMPOSITION_GOAL_PROMPTS:
+  consequences:
+    negative:
+      - "Historical architect-in-paste trials not comparable on paste compliance"
+    positive:
+      - "Aligns with WF-01..08 paste tone"
+      - "Cross-model structure comparison"
+  context: "WF-09..12 cohort; composition graded from artifacts not paste."
+  decision: "Split paste (goals) from facilitator composition contract; forbid-list enforced in contract test."

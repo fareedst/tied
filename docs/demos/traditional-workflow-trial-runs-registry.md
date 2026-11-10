@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| **Purpose** | Facilitator index of **PROMPT-WF-01…12** recorded trials — harness, model slug, session grades, orchestrator **Run time**, and **latest for cell** (composition prompts **09–12** added in catalog; registry rows appear as trials are recorded) |
+| **Purpose** | Facilitator index of **PROMPT-WF-01…12** recorded trials — harness, model slug, session grades, orchestrator **Run time**, and **latest for cell** (composition prompts **09–12**; note **paste generation** `goal-first` vs `architect-in-paste` when comparing structure across models) |
 | **Rows** | **102** (matches [Recorded trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
 | **Status** | Maintainer snapshot |
 | **Last updated** | 2026-11-09 |
