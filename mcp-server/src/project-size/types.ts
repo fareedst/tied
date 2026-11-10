@@ -55,6 +55,8 @@ export type ProjectSizeHashes = {
 export type TrialFactorsAnnex = {
   implementation_stack_id?: string;
   orchestrator_exit_code?: number;
+  /** [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT] Wall seconds from orchestrator manifest when --include-trial-factors. */
+  orchestrator_wall_time_seconds?: number;
 };
 
 export type ProjectSizeSnapshotReceipt = {

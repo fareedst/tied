@@ -1,0 +1,8 @@
+IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
+  IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
+    code_locations:
+      - "tools/bootstrap/lib/project-size-comparison-render.mjs"
+      - "tools/bootstrap/lib/project-size-comparison-render.test.mjs"
+    description: "Facilitator comparison summary compact rendering."
+    essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT-pseudocode.md"
+    implementation_approach: "Pure label trim helper; apply in Summary and verbose tables; drop ok column from glossary and Summary."

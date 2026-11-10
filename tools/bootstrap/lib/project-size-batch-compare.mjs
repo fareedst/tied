@@ -13,7 +13,10 @@ import {
   discoverClients,
   sanitizeLabelForFilename,
 } from "./project-size-discover-clients.mjs";
-import { renderComparisonMarkdown } from "./project-size-comparison-render.mjs";
+import {
+  DEFAULT_SUMMARY_EPOCH_MIN,
+  renderComparisonMarkdown,
+} from "./project-size-comparison-render.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_OUT = path.resolve(
@@ -35,6 +38,7 @@ Options:
   --include LABEL=PATH    Force include (repeatable)
   --include-store         Add store-root row labeled stdd-store
   --include-trial-factors Pass trial_factors annex to snapshot builder
+  --summary-epoch-min N   Summary epoch floor (strict >); default ${DEFAULT_SUMMARY_EPOCH_MIN}
   --verbose-table         Second expanded metrics table
   --dry-run               List targets only
   --out-dir PATH          Output directory
@@ -55,6 +59,7 @@ function parseArgs(argv) {
     verboseTable: false,
     dryRun: false,
     outDir: DEFAULT_OUT,
+    summaryEpochMin: DEFAULT_SUMMARY_EPOCH_MIN,
   };
 
   for (let i = 2; i < argv.length; i++) {
@@ -103,6 +108,9 @@ function parseArgs(argv) {
         break;
       case "--include-trial-factors":
         opts.includeTrialFactors = true;
+        break;
+      case "--summary-epoch-min":
+        opts.summaryEpochMin = Number(argv[++i]);
         break;
       case "--verbose-table":
         opts.verboseTable = true;
@@ -196,6 +204,7 @@ export async function runProjectSizeBatchCompare(argv = process.argv, env = proc
     patternRegex: discovered.patternRegex,
     discoverDiagnostics: discovered.diagnostics,
     verboseTable: opts.verboseTable,
+    summaryEpochMin: opts.summaryEpochMin,
   });
 
   const manifest = {
@@ -209,6 +218,7 @@ export async function runProjectSizeBatchCompare(argv = process.argv, env = proc
       limit: opts.limit,
       newest_first: opts.newestFirst,
       include_trial_factors: opts.includeTrialFactors,
+      summary_epoch_min: opts.summaryEpochMin,
       verbose_table: opts.verboseTable,
     },
     discover_diagnostics: discovered.diagnostics,

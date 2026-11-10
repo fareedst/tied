@@ -1,0 +1,51 @@
+CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
+  change_definition:
+    current_behavior: "Facilitator comparison Summary lists every ok receipt with trimmed labels; duplicate display labels and pre-cutoff epochs appear together; no orchestrator wall-time column."
+    desired_behavior: "Summary (and verbose first column set) applies optional epoch floor, dedupes by display label keeping latest discover epoch, sorts by display label; appends integer wall_time from trial_factors (snapshot with include-trial-factors). CLI --summary-epoch-min default 1794259000. Full basename remains in manifest and receipts."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/project-size-comparison-render.mjs; tools/bootstrap/lib/project-size-comparison-render.test.mjs; tools/bootstrap/lib/project-size-batch-compare.mjs; mcp-server/src/project-size/snapshot-builder.ts; mcp-server/src/project-size/types.ts; tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md (regenerated)"
+    tied_tokens_new:
+      - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+      - "IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+  non_goals:
+    - "Cohort JSONL automation"
+    - "Registry metric semantics"
+    - "validator_version bumps"
+    - "Trimming Failed/skipped section labels"
+    - "Discover limit/pattern changes for this slice"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Operator assumes trimmed label is unique key across cohort after dedupe"
+        - "Operator compares wall_time across runs with different orchestrator evidence gaps"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Dedupe hides only older epoch; manifest still lists every discovered target"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does epoch filter use strict greater-than rather than greater-or-equal?"
+      gate_policy: "advisory"
+      rationale: "Display-only facilitator UX; optional snapshot annex."
+      research_profile: "integrated-agent"
+    counterexamples:
+      - "Operator assumes trimmed label is unique key across cohort"
+    depth_tier: "minimal"
+    falsification_questions:
+      - "Does dedupe keep max epoch not min?"
+    gate_policy: "advisory"
+    rationale: "Markdown presentation; receipts retain full basename."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-CSC-01 through SC-CSC-10 in PLAN.md"
+    - "tied_validate_consistency ok"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/project-size-comparison-render.test.mjs"
+    integration:
+      - "mcp-server project-size snapshot trial_factors wall time (when test exists)"
+  unchanged_behavior: "Discover labels in manifest; Failed/skipped full basename; proof_boundary footer; size layer counts unchanged."

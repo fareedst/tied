@@ -125,6 +125,17 @@ async function countIndexAtoms(repoRoot: string, tiedRel: string): Promise<{
   return counts;
 }
 
+function orchestratorWallSecondsFromManifest(parsed: Record<string, unknown>): number | undefined {
+  const started = parsed.started_at;
+  const finished = parsed.finished_at;
+  if (typeof started !== "string" || typeof finished !== "string") return undefined;
+  const s = Date.parse(started);
+  const f = Date.parse(finished);
+  if (!Number.isFinite(s) || !Number.isFinite(f)) return undefined;
+  const seconds = (f - s) / 1000;
+  return Number.isFinite(seconds) ? seconds : undefined;
+}
+
 async function readTrialFactors(repoRoot: string, tiedRel: string): Promise<TrialFactorsAnnex | undefined> {
   const inventoryGlob = path.posix.join(tiedRel, "working/**/trial-workflow-interaction-inventory.v1.json");
   const matches = await fg(inventoryGlob, { cwd: repoRoot, onlyFiles: true });
@@ -152,6 +163,10 @@ async function readTrialFactors(repoRoot: string, tiedRel: string): Promise<Tria
       const parsed = JSON.parse(raw) as Record<string, unknown>;
       if (typeof parsed.exit_code === "number") {
         annex.orchestrator_exit_code = parsed.exit_code;
+      }
+      const wallSeconds = orchestratorWallSecondsFromManifest(parsed);
+      if (wallSeconds !== undefined) {
+        annex.orchestrator_wall_time_seconds = wallSeconds;
       }
     } catch {
       // ignore

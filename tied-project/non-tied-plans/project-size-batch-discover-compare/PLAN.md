@@ -112,6 +112,7 @@ node tools/bootstrap/lib/project-size-batch-compare.mjs \
 | `--include` | repeatable | Force-include `repo_root` with optional label |
 | `--include-store` | off | Add store methodology row |
 | `--include-trial-factors` | off | Pass-through to snapshot builder |
+| `--summary-epoch-min` | `1794259000` | Summary epoch floor (strict `>`); persisted as `options.summary_epoch_min` |
 | `--verbose-table` | off | Second table with all registry metric ids |
 | `--dry-run` | off | List discovered paths only |
 | `--out-dir` | plan `evidence/` | Writes `comparison-table.md`, `manifest.v1.json`, `receipts/*.json` |

@@ -1,6 +1,6 @@
 {
   "schema_version": "project-size-batch-manifest.v1",
-  "generated_at": "2026-11-10T17:00:25.579Z",
+  "generated_at": "2026-11-10T23:54:23.079Z",
   "options": {
     "store_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
     "parent": "/Users/fareed/Documents/dev/test",
@@ -8,16 +8,101 @@
     "pattern_regex": false,
     "limit": 50,
     "newest_first": true,
-    "include_trial_factors": false,
+    "include_trial_factors": true,
+    "summary_epoch_min": 1794259000,
     "verbose_table": false
   },
   "discover_diagnostics": [
     {
       "code": "SKIP_INELIGIBLE",
       "message": "1794050603-wf-agentstream-wf-01-cursor-gpt56lunamedmediumfast: missing tied-project/requirements.yaml"
+    },
+    {
+      "code": "SKIP_INELIGIBLE",
+      "message": "1794343547-wf-agentstream-wf-07-claude-claudehaiku55medium: missing tied-project/requirements.yaml"
     }
   ],
   "targets": [
+    {
+      "label": "1794353174-wf-agentstream-wf-09-claude-claudesonnet55high",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794353174-wf-agentstream-wf-09-claude-claudesonnet55high"
+    },
+    {
+      "label": "1794352986-wf-agentstream-wf-06-cursor-grok47medmedium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794352986-wf-agentstream-wf-06-cursor-grok47medmedium"
+    },
+    {
+      "label": "1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium"
+    },
+    {
+      "label": "1794352390-wf-agentstream-wf-09-claude-claudesonnet55low",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794352390-wf-agentstream-wf-09-claude-claudesonnet55low"
+    },
+    {
+      "label": "1794351557-wf-agentstream-wf-09-claude-claudehaiku55low",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794351557-wf-agentstream-wf-09-claude-claudehaiku55low"
+    },
+    {
+      "label": "1794350765-wf-agentstream-wf-05-cursor-grok47medmedium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794350765-wf-agentstream-wf-05-cursor-grok47medmedium"
+    },
+    {
+      "label": "1794350685-wf-agentstream-wf-09-claude-claudehaiku55high",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794350685-wf-agentstream-wf-09-claude-claudehaiku55high"
+    },
+    {
+      "label": "1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium"
+    },
+    {
+      "label": "1794348823-wf-agentstream-wf-04-cursor-grok47medmedium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794348823-wf-agentstream-wf-04-cursor-grok47medmedium"
+    },
+    {
+      "label": "1794346866-wf-agentstream-wf-07-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794346866-wf-agentstream-wf-07-claude-claudehaiku55medium"
+    },
+    {
+      "label": "1794346748-wf-agentstream-wf-03-cursor-grok47medmedium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794346748-wf-agentstream-wf-03-cursor-grok47medmedium"
+    },
+    {
+      "label": "1794345076-wf-agentstream-wf-08-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794345076-wf-agentstream-wf-08-claude-claudehaiku55medium"
+    },
+    {
+      "label": "1794345007-wf-agentstream-wf-02-cursor-grok47medmedium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794345007-wf-agentstream-wf-02-cursor-grok47medmedium"
+    },
+    {
+      "label": "1794343231-wf-agentstream-wf-06-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794343231-wf-agentstream-wf-06-claude-claudehaiku55medium"
+    },
+    {
+      "label": "1794342866-wf-agentstream-wf-05-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794342866-wf-agentstream-wf-05-claude-claudehaiku55medium"
+    },
+    {
+      "label": "1794342338-wf-agentstream-wf-04-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794342338-wf-agentstream-wf-04-claude-claudehaiku55medium"
+    },
+    {
+      "label": "1794342231-wf-agentstream-wf-01-cursor-grok47medmedium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794342231-wf-agentstream-wf-01-cursor-grok47medmedium"
+    },
+    {
+      "label": "1794342105-wf-agentstream-wf-03-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794342105-wf-agentstream-wf-03-claude-claudehaiku55medium"
+    },
+    {
+      "label": "1794341748-wf-agentstream-wf-02-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794341748-wf-agentstream-wf-02-claude-claudehaiku55medium"
+    },
+    {
+      "label": "1794341404-wf-agentstream-wf-01-claude-claudehaiku55medium",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794341404-wf-agentstream-wf-01-claude-claudehaiku55medium"
+    },
     {
       "label": "1794289703-wf-agentstream-wf-06-cursor-composer25high",
       "repo_root": "/Users/fareed/Documents/dev/test/1794289703-wf-agentstream-wf-06-cursor-composer25high"
@@ -139,87 +224,31 @@
       "repo_root": "/Users/fareed/Documents/dev/test/1794249984-wf-agentstream-wf-01-cursor-composer25medium"
     },
     {
-      "label": "1794249821-wf-agentstream-wf-01-cursor-composer25medium",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794249821-wf-agentstream-wf-01-cursor-composer25medium"
-    },
-    {
-      "label": "1794249088-wf-agentstream-wf-01-claude-haiku55medium",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794249088-wf-agentstream-wf-01-claude-haiku55medium"
-    },
-    {
-      "label": "1794246289-wf-agentstream-wf-01-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794246289-wf-agentstream-wf-01-cursor-composer25"
-    },
-    {
-      "label": "1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow"
-    },
-    {
-      "label": "1794211741-wf-agentstream-wf-08-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794211741-wf-agentstream-wf-08-cursor-composer25"
-    },
-    {
-      "label": "1794210943-wf-agentstream-wf-07-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794210943-wf-agentstream-wf-07-cursor-composer25"
-    },
-    {
-      "label": "1794210060-wf-agentstream-wf-06-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794210060-wf-agentstream-wf-06-cursor-composer25"
-    },
-    {
-      "label": "1794209213-wf-agentstream-wf-05-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794209213-wf-agentstream-wf-05-cursor-composer25"
-    },
-    {
-      "label": "1794208361-wf-agentstream-wf-04-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794208361-wf-agentstream-wf-04-cursor-composer25"
-    },
-    {
-      "label": "1794207497-wf-agentstream-wf-03-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794207497-wf-agentstream-wf-03-cursor-composer25"
-    },
-    {
-      "label": "1794206410-wf-agentstream-wf-02-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794206410-wf-agentstream-wf-02-cursor-composer25"
-    },
-    {
-      "label": "1794205559-wf-agentstream-wf-01-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794205559-wf-agentstream-wf-01-cursor-composer25"
-    },
-    {
-      "label": "1794202372-wf-agentstream-wf-08-cursor-grok47med",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794202372-wf-agentstream-wf-08-cursor-grok47med"
-    },
-    {
-      "label": "1794200222-wf-agentstream-wf-07-cursor-grok47med",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794200222-wf-agentstream-wf-07-cursor-grok47med"
-    },
-    {
-      "label": "1794197658-wf-agentstream-wf-06-cursor-grok47med",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794197658-wf-agentstream-wf-06-cursor-grok47med"
-    },
-    {
-      "label": "1794195336-wf-agentstream-wf-05-cursor-grok47med",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794195336-wf-agentstream-wf-05-cursor-grok47med"
-    },
-    {
-      "label": "1794191005-wf-agentstream-wf-04-cursor-grok47med",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794191005-wf-agentstream-wf-04-cursor-grok47med"
-    },
-    {
-      "label": "1794188384-wf-agentstream-wf-03-cursor-grok47med",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794188384-wf-agentstream-wf-03-cursor-grok47med"
-    },
-    {
-      "label": "1794185608-wf-agentstream-wf-03-cursor-grok47med",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794185608-wf-agentstream-wf-03-cursor-grok47med"
-    },
-    {
-      "label": "1794183415-wf-agentstream-wf-02-cursor-grok47med",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794183415-wf-agentstream-wf-02-cursor-grok47med"
+      "label": "stdd-store",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
     }
   ],
   "receipt_paths": [
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794353174-wf-agentstream-wf-09-claude-claudesonnet55high.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794352986-wf-agentstream-wf-06-cursor-grok47medmedium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794352390-wf-agentstream-wf-09-claude-claudesonnet55low.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794351557-wf-agentstream-wf-09-claude-claudehaiku55low.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794350765-wf-agentstream-wf-05-cursor-grok47medmedium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794350685-wf-agentstream-wf-09-claude-claudehaiku55high.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794348823-wf-agentstream-wf-04-cursor-grok47medmedium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794346866-wf-agentstream-wf-07-claude-claudehaiku55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794346748-wf-agentstream-wf-03-cursor-grok47medmedium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794345076-wf-agentstream-wf-08-claude-claudehaiku55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794345007-wf-agentstream-wf-02-cursor-grok47medmedium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794343231-wf-agentstream-wf-06-claude-claudehaiku55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794342866-wf-agentstream-wf-05-claude-claudehaiku55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794342338-wf-agentstream-wf-04-claude-claudehaiku55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794342231-wf-agentstream-wf-01-cursor-grok47medmedium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794342105-wf-agentstream-wf-03-claude-claudehaiku55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794341748-wf-agentstream-wf-02-claude-claudehaiku55medium.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794341404-wf-agentstream-wf-01-claude-claudehaiku55medium.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794289703-wf-agentstream-wf-06-cursor-composer25high.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794289303-wf-agentstream-wf-02-cursor-grok47medmedium.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794288846-wf-agentstream-wf-05-cursor-composer25high.json",
@@ -250,26 +279,7 @@
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794250240-wf-agentstream-wf-01-cursor-composer25medium.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794250166-wf-agentstream-wf-01-cursor-composer25medium.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794249984-wf-agentstream-wf-01-cursor-composer25medium.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794249821-wf-agentstream-wf-01-cursor-composer25medium.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794249088-wf-agentstream-wf-01-claude-haiku55medium.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794246289-wf-agentstream-wf-01-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794211741-wf-agentstream-wf-08-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794210943-wf-agentstream-wf-07-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794210060-wf-agentstream-wf-06-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794209213-wf-agentstream-wf-05-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794208361-wf-agentstream-wf-04-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794207497-wf-agentstream-wf-03-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794206410-wf-agentstream-wf-02-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794205559-wf-agentstream-wf-01-cursor-composer25.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794202372-wf-agentstream-wf-08-cursor-grok47med.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794200222-wf-agentstream-wf-07-cursor-grok47med.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794197658-wf-agentstream-wf-06-cursor-grok47med.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794195336-wf-agentstream-wf-05-cursor-grok47med.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794191005-wf-agentstream-wf-04-cursor-grok47med.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794188384-wf-agentstream-wf-03-cursor-grok47med.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794185608-wf-agentstream-wf-03-cursor-grok47med.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794183415-wf-agentstream-wf-02-cursor-grok47med.json"
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/stdd-store.json"
   ],
-  "snapshot_count": 50
+  "snapshot_count": 51
 }

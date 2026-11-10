@@ -1,11 +1,114 @@
 /**
- * [REQ-TIED_PROJECT_SIZE_LAYERS] Markdown comparison table from snapshot receipts.
+ * [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT]
+ * Markdown comparison table from snapshot receipts.
  */
+
+import fs from "node:fs";
+import path from "node:path";
+
+import { parseEpochFromBasename } from "./project-size-discover-clients.mjs";
 
 const FORBIDDEN_PHRASES = ["leaderboard", "maturity_score", "maturity score"];
 
+/** [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT] Batch CLI default epoch floor for WF cohort. */
+export const DEFAULT_SUMMARY_EPOCH_MIN = 1794259000;
+
 const PROOF_BOUNDARY_FALLBACK =
   "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.";
+
+/** [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT] wf-NN-… suffix at end of discover basename. */
+export const SUMMARY_LABEL_SUFFIX_RE = /(wf-\d{2}-.+)$/i;
+
+/** [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT] Display precision for cross-layer ratio columns. */
+export const CROSS_LAYER_DECIMALS = 0;
+
+/**
+ * @param {string} label Discover basename from manifest
+ * @returns {string} Table display label
+ */
+export function trimComparisonDisplayLabel(label) {
+  const text = String(label);
+  const match = text.match(SUMMARY_LABEL_SUFFIX_RE);
+  return match ? match[1] : text;
+}
+
+/** @param {{ label: string }} a @param {{ label: string }} b */
+function compareRowsByDisplayLabel(a, b) {
+  const byDisplay = trimComparisonDisplayLabel(a.label).localeCompare(
+    trimComparisonDisplayLabel(b.label),
+    "en",
+    { sensitivity: "base" },
+  );
+  if (byDisplay !== 0) return byDisplay;
+  return a.label.localeCompare(b.label, "en", { sensitivity: "base" });
+}
+
+/**
+ * @param {Array<{ label: string; receipt: Record<string, unknown> }>} rows
+ */
+export function sortSummaryRowsByDisplayLabel(rows) {
+  return [...rows].sort(compareRowsByDisplayLabel);
+}
+
+/**
+ * @param {Array<{ label: string; receipt: Record<string, unknown> }>} rows ok rows only
+ * @param {{ summaryEpochMin?: number }} opts
+ */
+export function prepareComparisonSummaryRows(rows, { summaryEpochMin = 0 } = {}) {
+  let filtered = rows;
+  if (summaryEpochMin > 0) {
+    filtered = rows.filter((row) => {
+      const epoch = parseEpochFromBasename(row.label);
+      if (epoch === null) return false;
+      return epoch > summaryEpochMin;
+    });
+  }
+  const byDisplay = new Map();
+  for (const row of filtered) {
+    const display = trimComparisonDisplayLabel(row.label);
+    const epoch = parseEpochFromBasename(row.label) ?? -Infinity;
+    const prev = byDisplay.get(display);
+    if (!prev) {
+      byDisplay.set(display, row);
+      continue;
+    }
+    const prevEpoch = parseEpochFromBasename(prev.label) ?? -Infinity;
+    if (epoch > prevEpoch) byDisplay.set(display, row);
+  }
+  return sortSummaryRowsByDisplayLabel([...byDisplay.values()]);
+}
+
+/**
+ * @param {Record<string, unknown>} receipt
+ * @returns {number | null}
+ */
+export function orchestratorWallTimeSeconds(receipt) {
+  const tf = receipt.trial_factors;
+  if (tf && typeof tf === "object") {
+    const stored = /** @type {Record<string, unknown>} */ (tf).orchestrator_wall_time_seconds;
+    if (typeof stored === "number" && Number.isFinite(stored)) return stored;
+  }
+  const repoRoot = receipt.repo_root;
+  if (typeof repoRoot !== "string") return null;
+  const manifestPath = path.join(
+    repoRoot,
+    "tied-project/working/wf-trial-orchestrator-run/evidence/wf-trial-orchestrator-run.v1.json",
+  );
+  try {
+    if (!fs.existsSync(manifestPath)) return null;
+    const parsed = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    const started = parsed.started_at;
+    const finished = parsed.finished_at;
+    if (typeof started !== "string" || typeof finished !== "string") return null;
+    const s = Date.parse(started);
+    const f = Date.parse(finished);
+    if (!Number.isFinite(s) || !Number.isFinite(f)) return null;
+    const seconds = (f - s) / 1000;
+    return Number.isFinite(seconds) ? seconds : null;
+  } catch {
+    return null;
+  }
+}
 
 function tailPath(repoRoot, parts = 3) {
   const segs = String(repoRoot).split(/[/\\]/).filter(Boolean);
@@ -36,29 +139,22 @@ function renderColumnDefinitionsSection() {
   lines.push("| Column | Layer | Definition |");
   lines.push("| --- | --- | --- |");
   lines.push(
-    "| **label** | — | Discover basename (disposable client dirname, often `{epoch}-wf-agentstream-…`). |",
+    "| **label** | — | Display label: `wf-NN-…` suffix when basename matches `/(wf-\\d{2}-.+)$/i`; else full basename. Full discover name remains in `manifest.v1.json` and `receipts/*.json`. Summary applies an epoch floor (`summary_epoch_min` in manifest), then dedupes by display label (max discover epoch wins), then sorts. |",
   );
-  lines.push(
-    "| **ok** | — | Receipt `ok`: snapshot builder finished without fatal error (not workflow pass/fail). |",
-  );
-  lines.push("| **repo (tail)** | — | Last three path segments of absolute `repo_root`. |");
   lines.push("| **REQ** | atoms | Count of REQ tokens in `tied-project/requirements.yaml` index. |");
   lines.push("| **ARCH** | atoms | Count of ARCH tokens in `tied-project/architecture-decisions.yaml` index. |");
   lines.push("| **IMPL** | atoms | Count of IMPL tokens in `tied-project/implementation-decisions.yaml` index. |");
   lines.push(
-    "| **vocab** | atoms | Rows in client vocab preferred-term tables under `tied-project/vocab/`. |",
-  );
-  lines.push(
-    "| **applied_lines** | operational intent | Non-template pseudo-code lines across merged `IMPL-*-pseudocode.md` sidecars (gross minus template overlap). |",
+    "| **Vocab** | atoms | Rows in client vocab preferred-term tables under `tied-project/vocab/`. |",
   );
   lines.push(
     "| **applied_utf8** | operational intent | `applied_utf8_bytes`: UTF-8 byte length of trimmed non-empty lines minus template overlap bytes. |",
   );
   lines.push(
-    "| **procedures** | operational intent | Analyzer procedure count in pseudo-code (`procedure_count`). |",
+    "| **applied_lines** | operational intent | Non-template pseudo-code lines across merged `IMPL-*-pseudocode.md` sidecars (gross minus template overlap). |",
   );
   lines.push(
-    "| **oi_hash** | operational intent | First 8 hex chars of `hashes.operational_intent_hash` (full pseudo-code body hash; changes when sidecars change). |",
+    "| **procedures** | operational intent | Analyzer procedure count in pseudo-code (`procedure_count`). |",
   );
   lines.push(
     "| **unit** | proof facets | Unit test **cases** (`node:test` `it`/`test` per file) under subject `src/`. Receipt `validator_version` ≥ 1.1.0. |",
@@ -68,20 +164,20 @@ function renderColumnDefinitionsSection() {
   );
   lines.push("| **e2e** | proof facets | E2E test **cases** per classified file (same counting rule). |");
   lines.push(
-    "| **verify_ev** | proof facets | Count of `*consistency*.json` evidence files under `tied-project/working/**/evidence/`. |",
+    "| **oi/atom** | cross-layer | `operational_intent_per_atom`: applied_lines ÷ (Vocab + REQ + ARCH + IMPL + optional corpus nodes). Rounded to nearest integer in table; receipt JSON keeps full precision. |",
   );
   lines.push(
-    "| **oi/atom** | cross-layer | `operational_intent_per_atom`: applied_lines ÷ (vocab + REQ + ARCH + IMPL + optional corpus nodes). Descriptive ratio only. |",
+    "| **utf8/atom** | cross-layer | `operational_intent_utf8_per_atom`: applied_utf8_bytes ÷ same atom denominator. Rounded to nearest integer in table. |",
   );
   lines.push(
-    "| **utf8/atom** | cross-layer | `operational_intent_utf8_per_atom`: applied_utf8_bytes ÷ same atom denominator. |",
+    "| **pf/atom** | cross-layer | `proof_facets_per_atom`: (unit + comp + e2e + binding-inventory **cases**) ÷ same atom denominator. Pre-1.1.0 receipts counted **files**. Rounded to nearest integer in table. |",
   );
   lines.push(
-    "| **pf/atom** | cross-layer | `proof_facets_per_atom`: (unit + comp + e2e + binding-inventory **cases**) ÷ same atom denominator. Pre-1.1.0 receipts counted **files**. |",
+    "| **wall_time** | — | Orchestrator wall seconds from `trial_factors.orchestrator_wall_time_seconds` (snapshot with `--include-trial-factors`) or render-time hydration from `wf-trial-orchestrator-run.v1.json`. Rounded integer; `—` when missing. |",
   );
   lines.push("");
   lines.push(
-    "Expanded table (`--verbose-table`): **corpus_nodes** / **corpus_edges** (corpus graph), **gross_lines** / **parse_nodes** / **sidecars** (operational intent), **binding_inv** (binding-inventory-related tests).",
+    "Expanded table (`--verbose-table`): **repo (tail)**, **oi_hash**, **verify_ev** (`*consistency*.json` under `tied-project/working/**/evidence/`), **corpus_nodes** / **corpus_edges**, **gross_lines** / **parse_nodes** / **sidecars**, **binding_inv**. Row set matches Summary (`prepareComparisonSummaryRows`); display **label** uses the same trim rule.",
   );
   lines.push("");
   return lines;
@@ -95,9 +191,11 @@ function renderColumnDefinitionsSection() {
  *   pattern?: string;
  *   patternRegex?: boolean;
  *   verboseTable?: boolean;
+ *   summaryEpochMin?: number;
  * }} meta
  */
 export function renderComparisonMarkdown(rows, meta = {}) {
+  const summaryEpochMin = meta.summaryEpochMin ?? 0;
   const generatedAt = meta.generatedAt ?? new Date().toISOString();
   const proof =
     (rows.find((r) => typeof r.receipt?.proof_boundary === "string")?.receipt
@@ -117,16 +215,23 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   lines.push("");
   lines.push(...renderColumnDefinitionsSection());
 
-  const okRows = rows.filter((r) => r.receipt?.ok === true);
+  const okRows = prepareComparisonSummaryRows(
+    rows.filter((r) => r.receipt?.ok === true),
+    { summaryEpochMin },
+  );
   const failRows = rows.filter((r) => r.receipt?.ok !== true);
 
   lines.push("## Summary");
   lines.push("");
   lines.push(
-    "| label | ok | repo (tail) | REQ | ARCH | IMPL | vocab | applied_lines | applied_utf8 | procedures | oi_hash | unit | comp | e2e | verify_ev | oi/atom | utf8/atom | pf/atom |",
+    "Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label** (latest discover epoch), sorted by display label then full basename.",
+  );
+  lines.push("");
+  lines.push(
+    "| label | REQ | ARCH | IMPL | Vocab | applied_utf8 | applied_lines | procedures | unit | comp | e2e | oi/atom | utf8/atom | pf/atom | wall_time |",
   );
   lines.push(
-    "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
   );
 
   for (const { label, receipt } of okRows) {
@@ -134,27 +239,26 @@ export function renderComparisonMarkdown(rows, meta = {}) {
     const oi = receipt.layers?.operational_intent ?? {};
     const pf = receipt.layers?.proof_facets ?? {};
     const cross = receipt.cross_layer ?? {};
-    const hashes = receipt.hashes ?? {};
+    const displayLabel = trimComparisonDisplayLabel(label);
+    const wallRaw = orchestratorWallTimeSeconds(receipt);
+    const wallCell = wallRaw === null ? "—" : String(Math.round(wallRaw));
     lines.push(
       [
-        label,
-        "yes",
-        tailPath(receipt.repo_root),
+        displayLabel,
         fmtNum(atoms.index_req),
         fmtNum(atoms.index_arch),
         fmtNum(atoms.index_impl),
         fmtNum(atoms.vocab_preferred_terms),
-        fmtNum(oi.applied_lines),
         fmtNum(oi.applied_utf8_bytes),
+        fmtNum(oi.applied_lines),
         fmtNum(oi.procedure_count),
-        hashPrefix(hashes.operational_intent_hash),
         fmtNum(pf.unit_tests),
         fmtNum(pf.composition_tests),
         fmtNum(pf.e2e_tests),
-        fmtNum(pf.verify_evidence_files),
-        fmtNum(cross.operational_intent_per_atom, 3),
-        fmtNum(cross.operational_intent_utf8_per_atom, 3),
-        fmtNum(cross.proof_facets_per_atom, 3),
+        fmtNum(cross.operational_intent_per_atom, CROSS_LAYER_DECIMALS),
+        fmtNum(cross.operational_intent_utf8_per_atom, CROSS_LAYER_DECIMALS),
+        fmtNum(cross.proof_facets_per_atom, CROSS_LAYER_DECIMALS),
+        wallCell,
       ]
         .map((c) => String(c).replace(/\|/g, "\\|"))
         .join(" | ")
@@ -164,7 +268,7 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   }
 
   if (okRows.length === 0) {
-    lines.push("| — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |");
+    lines.push("| — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |");
   }
 
   lines.push("");
@@ -186,14 +290,18 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   if (meta.verboseTable === true && okRows.length > 0) {
     lines.push("## Expanded metrics");
     lines.push("");
-    lines.push("| label | corpus_nodes | corpus_edges | gross_lines | parse_nodes | binding_inv | sidecars |");
-    lines.push("| --- | --- | --- | --- | --- | --- | --- |");
+    lines.push(
+      "| label | repo (tail) | oi_hash | verify_ev | corpus_nodes | corpus_edges | gross_lines | parse_nodes | binding_inv | sidecars |",
+    );
+    lines.push("| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |");
     for (const { label, receipt } of okRows) {
       const atoms = receipt.layers?.atoms ?? {};
       const oi = receipt.layers?.operational_intent ?? {};
       const pf = receipt.layers?.proof_facets ?? {};
+      const hashes = receipt.hashes ?? {};
+      const displayLabel = trimComparisonDisplayLabel(label);
       lines.push(
-        `| ${label} | ${fmtNum(atoms.corpus_graph_nodes)} | ${fmtNum(atoms.corpus_graph_edges)} | ${fmtNum(oi.gross_lines)} | ${fmtNum(oi.parse_node_count)} | ${fmtNum(pf.binding_inventory_tests)} | ${fmtNum(oi.sidecar_count)} |`,
+        `| ${displayLabel} | ${tailPath(receipt.repo_root)} | ${hashPrefix(hashes.operational_intent_hash)} | ${fmtNum(pf.verify_evidence_files)} | ${fmtNum(atoms.corpus_graph_nodes)} | ${fmtNum(atoms.corpus_graph_edges)} | ${fmtNum(oi.gross_lines)} | ${fmtNum(oi.parse_node_count)} | ${fmtNum(pf.binding_inventory_tests)} | ${fmtNum(oi.sidecar_count)} |`,
       );
     }
     lines.push("");

@@ -1,0 +1,6 @@
+ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
+  ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
+    constraints:
+      - "Failed/skipped section keeps full basename"
+      - "No snapshot receipt schema change"
+    description: "SUMMARY_LABEL_SUFFIX_RE and CROSS_LAYER_DECIMALS in facilitator render; manifest keeps full labels."

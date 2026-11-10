@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
@@ -73,6 +73,35 @@ describe("project-size snapshot [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [IMPL-TIED_PRO
       typeof receipt.cross_layer.operational_intent_utf8_per_atom === "number" ||
         receipt.cross_layer.operational_intent_utf8_per_atom === null,
     );
+  });
+
+  it("trial_factors orchestrator_wall_time_seconds from manifest [SC-CSC-09] [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT]", async () => {
+    const work = await mkdtemp(path.join(tmpdir(), "psl-wall-"));
+    try {
+      const { cp } = await import("node:fs/promises");
+      await cp(fixtureRoot, work, { recursive: true });
+      const orchestratorDir = path.join(
+        work,
+        "tied-project/working/wf-trial-orchestrator-run/evidence",
+      );
+      await mkdir(orchestratorDir, { recursive: true });
+      await writeFile(
+        path.join(orchestratorDir, "wf-trial-orchestrator-run.v1.json"),
+        `${JSON.stringify({
+          started_at: "2026-11-10T12:00:00.000Z",
+          finished_at: "2026-11-10T12:16:34.000Z",
+          exit_code: 0,
+        })}\n`,
+        "utf8",
+      );
+      const receipt = await buildProjectSizeSnapshot({
+        repo_root: work,
+        include_trial_factors: true,
+      });
+      assert.equal(receipt.trial_factors?.orchestrator_wall_time_seconds, 994);
+    } finally {
+      await rm(work, { recursive: true, force: true });
+    }
   });
 
   it("equal applied_lines can differ in applied_utf8_bytes [SC-UTF8-04]", () => {

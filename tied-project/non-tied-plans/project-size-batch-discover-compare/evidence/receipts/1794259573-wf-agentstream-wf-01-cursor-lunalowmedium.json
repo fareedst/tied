@@ -42,5 +42,9 @@
     "operational_intent_hash": "ae1f835c3737f31a0d61fa2ff84980c8d1b0559843b24cc086ad88ab5d2079ee",
     "corpus_graph_content_hash": "fe3a5c0e80034d7d1262610b124f5b90bd153c61bdda9c80464618d655276685"
   },
+  "trial_factors": {
+    "orchestrator_exit_code": 2,
+    "orchestrator_wall_time_seconds": 1796
+  },
   "diagnostics": []
 }
