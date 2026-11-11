@@ -3184,6 +3184,13 @@ IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
   description: "trimComparisonDisplayLabel and Summary row formatting in comparison render."
   detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml"
   status: "Implemented"
+IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+  cross_references:
+    - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
+    - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
+  description: "formatWallClockMinutes and Summary column wall_clock."
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK.yaml"
+  implementation_approach: "Pure minutes formatter; reuse orchestratorWallTimeSeconds then divide by 60."
 IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
   cross_references:
     - "ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS"

@@ -1,0 +1,10 @@
+REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+  REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+    acceptance_criteria:
+      - "SC-CWC-01 through SC-CWC-06 in working PLAN"
+    description: "Display wall_clock as rounded minutes in comparison Summary."
+    satisfaction_criteria:
+      - criterion: "Render tests green."
+        id: "SC-CWC-04"
+      - criterion: "Summary column header wall_clock."
+        id: "SC-CWC-01"

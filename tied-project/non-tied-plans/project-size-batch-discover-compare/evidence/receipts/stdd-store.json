@@ -7,22 +7,22 @@
   "layers": {
     "atoms": {
       "vocab_preferred_terms": 935,
-      "index_req": 201,
-      "index_arch": 196,
-      "index_impl": 237,
-      "corpus_graph_nodes": 667,
-      "corpus_graph_edges": 3327
+      "index_req": 202,
+      "index_arch": 197,
+      "index_impl": 238,
+      "corpus_graph_nodes": 670,
+      "corpus_graph_edges": 3333
     },
     "operational_intent": {
-      "sidecar_count": 257,
-      "gross_lines": 17376,
-      "template_overlap_lines": 2264,
-      "applied_lines": 15112,
-      "gross_utf8_bytes": 1103617,
-      "template_overlap_utf8_bytes": 29707,
-      "applied_utf8_bytes": 1073910,
-      "procedure_count": 776,
-      "parse_node_count": 4142
+      "sidecar_count": 258,
+      "gross_lines": 17397,
+      "template_overlap_lines": 2268,
+      "applied_lines": 15129,
+      "gross_utf8_bytes": 1104512,
+      "template_overlap_utf8_bytes": 29757,
+      "applied_utf8_bytes": 1074755,
+      "procedure_count": 778,
+      "parse_node_count": 4148
     },
     "proof_facets": {
       "unit_tests": 0,
@@ -33,14 +33,14 @@
     }
   },
   "cross_layer": {
-    "operational_intent_per_atom": 6.758497316636851,
-    "operational_intent_utf8_per_atom": 480.28175313059035,
+    "operational_intent_per_atom": 6.747992863514719,
+    "operational_intent_utf8_per_atom": 479.37332738626225,
     "proof_facets_per_atom": 0,
     "tests_per_procedure": 0
   },
   "hashes": {
-    "operational_intent_hash": "461357b9662c238bd3c0fcbb3cb36cb3bbd9f74800242d1994cb44bf8f3d5364",
-    "corpus_graph_content_hash": "5935d425afce06829074754079aafcc37df5cd64aabd6481e714eda1471cae27"
+    "operational_intent_hash": "0f07be166cfb05a47de7d5759fa16101ef27662be09e5fd5ec77c49e9fd862c9",
+    "corpus_graph_content_hash": "f1339588eee1e8ce0fe7652d754afad0dae4ff811dd453d1ad5c5bb8ec43a3ce"
   },
   "diagnostics": []
 }

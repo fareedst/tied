@@ -1,0 +1,22 @@
+CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+  change_definition:
+    current_behavior: "Summary last column wall_time shows rounded integer seconds from orchestrator_wall_time_seconds."
+    desired_behavior: "Summary last column wall_clock shows nearest integer minutes (seconds divided by 60, rounded); receipts unchanged."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/project-size-comparison-render.mjs; project-size-comparison-render.test.mjs; comparison-table.md (regenerated)"
+    tied_tokens_new:
+      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
+      - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
+      - "IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
+  non_goals:
+    - "orchestrator_wall_minutes on receipt"
+    - "CLI unit selection"
+  risk_analysis:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Markdown display only."
+  success_criteria:
+    - "SC-CWC-01 through SC-CWC-06 in PLAN.md"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/project-size-comparison-render.test.mjs"

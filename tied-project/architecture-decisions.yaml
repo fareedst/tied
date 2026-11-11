@@ -2564,6 +2564,12 @@ ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
   description: "Display-only trim and format rules for project-size comparison markdown."
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml"
   status: "Accepted"
+ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+  cross_references:
+    - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+    - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
+  description: "wall_clock minutes display; receipt seconds unchanged."
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK.yaml"
 ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS:
   cross_references:
     - "ARCH-TIED_PROJECT_SIZE_SNAPSHOT"

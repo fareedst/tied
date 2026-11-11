@@ -3632,6 +3632,13 @@ REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
   description: "Compact facilitator comparison Summary: trimmed wf labels, no ok column, one-decimal cross-layer ratios."
   detail_file: "requirements/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml"
   status: "Implemented"
+REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+  cross_references:
+    - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+    - "REQ-TIED_PROJECT_SIZE_LAYERS"
+  description: "Facilitator comparison Summary wall_clock column in integer minutes."
+  detail_file: "requirements/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK.yaml"
+  status: "Implemented"
 REQ-TIED_PROJECT_SIZE_LAYERS:
   category: "Tooling"
   description: "Evidence-only three-layer project size (atoms, operational intent, proof facets) with MCP snapshot and WF trial cohort JSONL."

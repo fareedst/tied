@@ -1,0 +1,8 @@
+IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+  IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+    code_locations:
+      - "tools/bootstrap/lib/project-size-comparison-render.mjs"
+      - "tools/bootstrap/lib/project-size-comparison-render.test.mjs"
+    description: "Wall clock minutes in comparison render."
+    essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK-pseudocode.md"
+    implementation_approach: "Export formatWallClockMinutes; rename glossary and header from wall_time to wall_clock."

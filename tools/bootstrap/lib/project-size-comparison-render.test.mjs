@@ -6,9 +6,11 @@ import { test } from "node:test";
 
 import {
   assertRenderableMarkdown,
+  formatWallClockMinutes,
   orchestratorWallTimeSeconds,
   prepareComparisonSummaryRows,
   renderComparisonMarkdown,
+  renderWallClockCell,
   sortSummaryRowsByDisplayLabel,
   trimComparisonDisplayLabel,
 } from "./project-size-comparison-render.mjs";
@@ -19,7 +21,7 @@ const DOGFOOD = path.resolve(
 );
 
 const SUMMARY_HEADER =
-  /\| label \| REQ \| ARCH \| IMPL \| Vocab \| applied_utf8 \| applied_lines \| procedures \| unit \| comp \| e2e \| oi\/atom \| utf8\/atom \| pf\/atom \| wall_time \|/;
+  /\| label \| REQ \| ARCH \| IMPL \| Vocab \| applied_utf8 \| applied_lines \| procedures \| unit \| comp \| e2e \| oi\/atom \| utf8\/atom \| pf\/atom \| wall_clock \|/;
 
 const minimalOkReceipt = {
   ok: true,
@@ -169,7 +171,22 @@ test("cross-layer integer rounding", () => {
   assert.match(md, /\| stdd-store \|.*\| 3 \| 33 \| 1 \| — \|/);
 });
 
-test("renderComparisonMarkdown wall_time last column SC-CSC-09", () => {
+test("formatWallClockMinutes SC-CWC-02 SC-CWC-04", () => {
+  assert.equal(formatWallClockMinutes(null), null);
+  assert.equal(formatWallClockMinutes(993.6), 17);
+  assert.equal(formatWallClockMinutes(29), 0);
+  assert.equal(formatWallClockMinutes(30), 1);
+});
+
+test("renderWallClockCell", () => {
+  assert.equal(
+    renderWallClockCell({ trial_factors: { orchestrator_wall_time_seconds: 993.6 } }),
+    "17",
+  );
+  assert.equal(renderWallClockCell({}), "—");
+});
+
+test("renderComparisonMarkdown wall_clock last column SC-CWC-01 SC-CWC-04", () => {
   const receipt = {
     ...minimalOkReceipt,
     trial_factors: { orchestrator_wall_time_seconds: 993.6 },
@@ -178,5 +195,7 @@ test("renderComparisonMarkdown wall_time last column SC-CSC-09", () => {
     [{ label: "1794289703-wf-agentstream-wf-06-cursor-composer25high", receipt }],
     { summaryEpochMin: 0 },
   );
-  assert.match(md, /\| wf-06-cursor-composer25high \|.*\| 994 \|/);
+  assert.doesNotMatch(md, /\| wall_time \|/);
+  assert.match(md, /\*\*wall_clock\*\*/);
+  assert.match(md, /\| wf-06-cursor-composer25high \|.*\| 17 \|/);
 });

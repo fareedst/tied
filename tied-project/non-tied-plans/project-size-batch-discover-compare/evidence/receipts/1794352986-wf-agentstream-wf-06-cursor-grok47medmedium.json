@@ -43,7 +43,9 @@
     "corpus_graph_content_hash": "0a024b424163f8dbd5d54d4b18244bc682f8ea36a48d005ee38d6152d0a379ca"
   },
   "trial_factors": {
-    "implementation_stack_id": "wf-trial-ts-node-test-v1"
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 1914
   },
   "diagnostics": []
 }

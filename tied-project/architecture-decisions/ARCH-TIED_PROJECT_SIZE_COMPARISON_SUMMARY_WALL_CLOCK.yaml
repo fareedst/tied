@@ -1,0 +1,6 @@
+ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+  ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
+    constraints:
+      - "No leaderboard language"
+      - "No receipt schema change"
+    description: "Summary wall_clock column shows Math.round(seconds/60); formatWallClockMinutes in render."

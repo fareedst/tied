@@ -1,5 +1,6 @@
 /**
  * [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT]
+ * [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK]
  * Markdown comparison table from snapshot receipts.
  */
 
@@ -110,6 +111,27 @@ export function orchestratorWallTimeSeconds(receipt) {
   }
 }
 
+/**
+ * [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK] Nearest integer minutes from wall seconds.
+ * @param {number | null} seconds
+ * @returns {number | null}
+ */
+export function formatWallClockMinutes(seconds) {
+  if (seconds === null || typeof seconds !== "number" || !Number.isFinite(seconds)) {
+    return null;
+  }
+  return Math.round(seconds / 60);
+}
+
+/**
+ * @param {Record<string, unknown>} receipt
+ * @returns {string}
+ */
+export function renderWallClockCell(receipt) {
+  const minutes = formatWallClockMinutes(orchestratorWallTimeSeconds(receipt));
+  return minutes === null ? "—" : String(minutes);
+}
+
 function tailPath(repoRoot, parts = 3) {
   const segs = String(repoRoot).split(/[/\\]/).filter(Boolean);
   return segs.slice(-parts).join("/");
@@ -173,7 +195,7 @@ function renderColumnDefinitionsSection() {
     "| **pf/atom** | cross-layer | `proof_facets_per_atom`: (unit + comp + e2e + binding-inventory **cases**) ÷ same atom denominator. Pre-1.1.0 receipts counted **files**. Rounded to nearest integer in table. |",
   );
   lines.push(
-    "| **wall_time** | — | Orchestrator wall seconds from `trial_factors.orchestrator_wall_time_seconds` (snapshot with `--include-trial-factors`) or render-time hydration from `wf-trial-orchestrator-run.v1.json`. Rounded integer; `—` when missing. |",
+    "| **wall_clock** | — | Orchestrator wall duration in **minutes** (nearest integer from `trial_factors.orchestrator_wall_time_seconds` or render-time hydration). Receipt JSON keeps full-second precision; `—` when missing. |",
   );
   lines.push("");
   lines.push(
@@ -228,7 +250,7 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   );
   lines.push("");
   lines.push(
-    "| label | REQ | ARCH | IMPL | Vocab | applied_utf8 | applied_lines | procedures | unit | comp | e2e | oi/atom | utf8/atom | pf/atom | wall_time |",
+    "| label | REQ | ARCH | IMPL | Vocab | applied_utf8 | applied_lines | procedures | unit | comp | e2e | oi/atom | utf8/atom | pf/atom | wall_clock |",
   );
   lines.push(
     "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
@@ -240,8 +262,7 @@ export function renderComparisonMarkdown(rows, meta = {}) {
     const pf = receipt.layers?.proof_facets ?? {};
     const cross = receipt.cross_layer ?? {};
     const displayLabel = trimComparisonDisplayLabel(label);
-    const wallRaw = orchestratorWallTimeSeconds(receipt);
-    const wallCell = wallRaw === null ? "—" : String(Math.round(wallRaw));
+    const wallCell = renderWallClockCell(receipt);
     lines.push(
       [
         displayLabel,
