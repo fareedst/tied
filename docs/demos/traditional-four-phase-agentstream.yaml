@@ -25,7 +25,8 @@ features:
       `capture_path`: `mcp_server_info` or `tied_cli_server_info`; ISO `captured_at`; optional `turn`: `add-feature`).
       Mirror `tied_methodology_version` and `tied_methodology_version_source` on the interaction inventory when present.
       Read prompt-shared trial-session-methodology-version-capture.md for capture procedure.
-      Write `evidence/phase-handoff-add-feature.md` (RESOLVE, REQ token, session semver path, next `@refine-plan`).
+      Write `evidence/phase-handoff-add-feature.md` under `tied-project/working/{product_REQ}/` (RESOLVE, session semver path, next `@refine-plan`).
+      Machine-readable product token required: `request_token: REQ-…` line **or** markdown table row `| REQ token |` / `| REQ |` with backticked token (folder basename `REQ-*` is fallback).
     behavior: |
       Product requirement (invocation remainder):
       {{FEATURE_REMAINDER}}
@@ -38,6 +39,7 @@ features:
       Refine PLAN, CITDP notes, and tracker; still no product implementation commits.
       Read prompt-shared wf-trial-refine-plan-stack.md: stack pre-locked from preload + package.json;
       add PLAN **Locked stack** table; do not re-debate language or test runner.
+      Read prompt-shared wf-trial-checklist-gates-adjunct.md (numbered gate script; slim tracker under working/{product_REQ}/checklist-tracker.yaml).
       Write `evidence/phase-handoff-refine-plan.md` (locked decisions, gate receipts, next `@build-plan`).
     behavior: |
       Optional sponsor refine notes may appear in the phase-1 PLAN or working folder.
@@ -51,7 +53,11 @@ features:
       Greenfield minimal path when depth_tier is minimal: create REQ/ARCH/IMPL + IMPL pseudo-code before RED;
       set sub-adversarial-inquiry-pass to not_applicable before RED; no sponsor questions in batch mode.
       RED → GREEN product code/tests under `src/`; verification via `npm test` when stack seeded.
-      Follow prompt-shared wf-trial-build-plan-handoff.md (RED archive, tracker sync).
+      When composition-integration applies, read prompt-shared tied-composition-test-naming-adjunct.md before RED composition tests.
+      Follow prompt-shared wf-trial-build-plan-handoff.md and wf-trial-checklist-gates-adjunct.md (RED archive, tracker slugs, verification receipt).
+      Read prompt-shared wf-trial-proof-manifest-adjunct.md: complete
+      `tied-project/working/proof-facet-manifest/evidence/proof-facet-manifest.v1.json`
+      (one `files[]` row per test file) before `evidence/phase-handoff-build-plan.md`.
       Write `evidence/phase-handoff-build-plan.md` before deferring `@close-out`.
     behavior: |
       Linked plan is the authoritative input; do not re-run add-feature or refine-plan scope.
@@ -60,7 +66,7 @@ features:
     feature_name: "Phase 4 — close-out"
     goal: |
       Explicitly follow `{{SKILL_ROOT}}/close-out/SKILL.md` (/close-out).
-      Read prompt-shared wf-trial-four-phase-close-out-playbook.md (single commit, optional sync-dispositions).
+      Read prompt-shared wf-trial-four-phase-close-out-playbook.md and wf-trial-checklist-gates-adjunct.md step 4 (persist CITDP YAML, sync when verification receipt exists; traceable-commit only when close_out allowed).
       Write `evidence/phase-handoff-close-out.md` with three completion signals.
       Git context (paste-in only; do not run git unless the skill allows at close-out):
       When no staged or unstaged product changes exist, do not assert that staged changes are ready—run close-out gates and handoff only.

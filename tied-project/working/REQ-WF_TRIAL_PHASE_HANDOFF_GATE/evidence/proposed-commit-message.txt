@@ -1,0 +1,12 @@
+feat(wf-trial): close-out phase handoff gate wave 2
+
+Tiered product REQ resolver for table-style turn-1 handoffs; SC-WF-PHG-06
+bootstrap tests (53/53). TIED LEAP for REQ/ARCH/IMPL-WF_TRIAL_PHASE_HANDOFF_GATE.
+
+[REQ-WF_TRIAL_PHASE_HANDOFF_GATE] [ARCH-WF_TRIAL_PHASE_HANDOFF_GATE]
+[IMPL-WF_TRIAL_PHASE_HANDOFF_GATE]
+
+Close-out: close-out-phg-wave2-20261111-r2; merged_decision.allowed=true;
+envelope blocking_gap_count=0; tied_validate_consistency ok=true.
+
+Upstream feedback: N/A (no capture this pass).

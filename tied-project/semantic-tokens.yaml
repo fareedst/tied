@@ -1592,6 +1592,11 @@ ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   name: "WF trial orchestrator process log architecture"
   status: "Active"
   type: "ARCH"
+ARCH-WF_TRIAL_PHASE_HANDOFF_GATE:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
+  name: "WF phase handoff gate architecture"
+  status: "Active"
+  type: "ARCH"
 IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Implementation"
   cross_references:
@@ -3508,6 +3513,11 @@ IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   description: "wf-trial-process-log.inc.sh and orchestrator wiring"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
   name: "WF trial orchestrator process log implementation"
+  status: "Active"
+  type: "IMPL"
+IMPL-WF_TRIAL_PHASE_HANDOFF_GATE:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
+  name: "WF phase handoff gate implementation"
   status: "Active"
   type: "IMPL"
 PROC-AGENT_REQ_CHECKLIST:
@@ -5655,5 +5665,11 @@ REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   description: "Default-on orchestrator stdout/stderr capture for @record-wf-trial"
   detail_file: "requirements/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
   name: "WF trial orchestrator process log"
+  status: "Active"
+  type: "REQ"
+REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
+  description: "Inter-turn phase-handoff fail-closed gate for workflow-trial-agentstream"
+  detail_file: "requirements/REQ-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
+  name: "WF trial phase handoff gate"
   status: "Active"
   type: "REQ"

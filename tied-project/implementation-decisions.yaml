@@ -3749,6 +3749,16 @@ IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
       - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
     requirements:
       - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+IMPL-WF_TRIAL_PHASE_HANDOFF_GATE:
+  decision: "Implement resolve product REQ helper shared with tracker seed; hook run-traditional-four-phase-agentstream.sh post-turn callback."
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
+  name: "WF phase handoff gate implementation"
+  status: "Proposed"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_PHASE_HANDOFF_GATE"
+    requirements:
+      - "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
 IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
   name: "WF grading rationale parser and contract test"

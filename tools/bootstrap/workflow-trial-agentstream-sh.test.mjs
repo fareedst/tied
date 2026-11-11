@@ -15,6 +15,10 @@ const PREFLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-claude-prefligh
 const HARDENING_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-four-phase-hardening.inc.sh");
 const STACK_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-implementation-stack.inc.sh");
 const PROCESS_LOG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-process-log.inc.sh");
+const PROOF_MANIFEST_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-proof-manifest-gate.inc.sh");
+const PHASE_HANDOFF_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-phase-handoff-gate.inc.sh");
+const PRODUCT_REQ_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-product-req.inc.sh");
+const PROOF_MANIFEST_GATE_MJS = path.join(REPO_ROOT, "tools/bootstrap/lib/wf-trial-proof-manifest-gate.mjs");
 const TIED_CLI = path.join(REPO_ROOT, "mcp-server/packages/cli/dist/index.js");
 
 const MANIFEST_REQUIRED_KEYS = [
@@ -525,6 +529,253 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     const matches = out.match(/DIAGNOSTIC: workflow_trial_range: MODEL_EFFORT=medium ignored/g);
     assert.ok(matches);
     assert.equal(matches.length, 1);
+  });
+
+  it("orchestrator sources proof manifest gate inc [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE]", () => {
+    const src = fs.readFileSync(SCRIPT, "utf8");
+    assert.ok(src.includes("wf-trial-proof-manifest-gate.inc.sh"));
+    assert.ok(fs.existsSync(PROOF_MANIFEST_GATE_INC));
+    assert.ok(fs.existsSync(PROOF_MANIFEST_GATE_MJS));
+  });
+
+  it("help documents default proof manifest gate and SKIP [SC-RPM-06]", () => {
+    const r = runScript(["--help"]);
+    assert.match(r.stderr, /Proof manifest gate default on/);
+    assert.match(r.stderr, /WF_TRIAL_SKIP_PROOF_MANIFEST/);
+    assert.doesNotMatch(r.stderr, /WF_TRIAL_REQUIRE_PROOF_MANIFEST/);
+  });
+
+  it("help documents phase handoff gate and SKIP [SC-WF-PHG-03]", () => {
+    const r = runScript(["--help"]);
+    assert.match(r.stderr, /Phase handoff gate default on/);
+    assert.match(r.stderr, /WF_TRIAL_SKIP_PHASE_HANDOFF_GATE/);
+  });
+
+  it("orchestrator sources phase handoff gate inc [REQ-WF_TRIAL_PHASE_HANDOFF_GATE]", () => {
+    const src = fs.readFileSync(SCRIPT, "utf8");
+    assert.ok(src.includes("wf-trial-phase-handoff-gate.inc.sh"));
+    assert.ok(fs.existsSync(PHASE_HANDOFF_GATE_INC));
+    assert.ok(fs.existsSync(PRODUCT_REQ_INC));
+  });
+
+  it("wf_trial_phase_handoff_gate_check fails when handoffs missing [SC-WF-PHG-01]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-phg-"));
+    try {
+      const token = "REQ-PHG-FIXTURE";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        "- **request_token:** `REQ-PHG-FIXTURE`\n",
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-phase-handoff-gate.inc.sh
+        source "${PHASE_HANDOFF_GATE_INC}"
+        unset WF_TRIAL_SKIP_PHASE_HANDOFF_GATE
+        wf_trial_phase_handoff_gate_check "${tmp}" "${REPO_ROOT}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.notEqual(r.status, 0);
+      assert.match(r.stderr, /phase handoff gate: missing/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_resolve_product_req_token table REQ token row [SC-WF-PHG-06]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-phg-table-"));
+    try {
+      const token = "REQ-PHG-TABLE-TOKEN";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        `| Field | Value |\n| --- | --- |\n| REQ token | \`${token}\` |\n`,
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
+        source "${PRODUCT_REQ_INC}"
+        wf_trial_resolve_product_req_token "${tmp}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.equal(r.stdout.trim(), token);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_resolve_product_req_token table REQ row only [SC-WF-PHG-06]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-phg-req-col-"));
+    try {
+      const token = "REQ-PHG-TABLE-REQ-COL";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        `| REQ | \`${token}\` |\n`,
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
+        source "${PRODUCT_REQ_INC}"
+        wf_trial_resolve_product_req_token "${tmp}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.equal(r.stdout.trim(), token);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_resolve_product_req_token dirname fallback [SC-WF-PHG-06]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-phg-dirfb-"));
+    try {
+      const token = "REQ-PHG-DIR-FALLBACK";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(path.join(ev, "phase-handoff-add-feature.md"), "# empty handoff body\n");
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
+        source "${PRODUCT_REQ_INC}"
+        wf_trial_resolve_product_req_token "${tmp}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.equal(r.stdout.trim(), token);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_phase_handoff_gate_check happy without package.json [SC-WF-PHG-06]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-phg-happy-"));
+    try {
+      const token = "REQ-PHG-GATE-HAPPY";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        `| REQ token | \`${token}\` |\n`,
+      );
+      fs.writeFileSync(path.join(ev, "phase-handoff-refine-plan.md"), "ok\n");
+      fs.writeFileSync(path.join(ev, "phase-handoff-build-plan.md"), "ok\n");
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-phase-handoff-gate.inc.sh
+        source "${PHASE_HANDOFF_GATE_INC}"
+        unset WF_TRIAL_SKIP_PHASE_HANDOFF_GATE
+        wf_trial_phase_handoff_gate_check "${tmp}" "${REPO_ROOT}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_phase_handoff_gate_check resolve diagnostics [SC-WF-PHG-06]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-phg-diag-"));
+    try {
+      const orch = path.join(tmp, "tied-project/working/wf-trial-orchestrator-run");
+      fs.mkdirSync(orch, { recursive: true });
+      const unparsed = path.join(tmp, "tied-project/working/NOT-A-REQ-FOLDER", "evidence");
+      fs.mkdirSync(unparsed, { recursive: true });
+      fs.writeFileSync(path.join(unparsed, "phase-handoff-add-feature.md"), "no parseable token here\n");
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-phase-handoff-gate.inc.sh
+        source "${PHASE_HANDOFF_GATE_INC}"
+        unset WF_TRIAL_SKIP_PHASE_HANDOFF_GATE
+        wf_trial_phase_handoff_gate_check "${tmp}" "${REPO_ROOT}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.notEqual(r.status, 0, "expected resolve failure");
+      assert.match(r.stderr, /could not resolve product REQ/);
+      assert.match(r.stderr, /wf-trial-orchestrator-run/);
+      assert.match(r.stderr, /found-unparsed:/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1 skips phase handoff gate [SC-WF-PHG-04]", () => {
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-phase-handoff-gate.inc.sh
+      source "${PHASE_HANDOFF_GATE_INC}"
+      export WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1
+      wf_trial_phase_handoff_gate_check /nonexistent "${REPO_ROOT}"
+      printf ok-skip\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stdout, /ok-skip/);
+  });
+
+  it("materialize_wf_trial_minimal_checklist_tracker copy-if-absent [SC-WF-CLP-05]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-tracker-seed-"));
+    try {
+      const token = "REQ-TRACKER-SEED";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        "request_token: REQ-TRACKER-SEED\n",
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
+        source "${PRODUCT_REQ_INC}"
+        materialize_wf_trial_minimal_checklist_tracker "${tmp}" "${REPO_ROOT}"
+        test -f "${tmp}/tied-project/working/${token}/checklist-tracker.yaml"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      const tracker = fs.readFileSync(
+        path.join(tmp, "tied-project/working", token, "checklist-tracker.yaml"),
+        "utf8",
+      );
+      assert.match(tracker, /REQ-TRACKER-SEED/);
+      assert.match(tracker, /verification-gate/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("gate enabled without env vars [SC-RPM-01]", () => {
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-proof-manifest-gate.inc.sh
+      source "${PROOF_MANIFEST_GATE_INC}"
+      unset WF_TRIAL_SKIP_PROOF_MANIFEST
+      wf_trial_proof_manifest_gate_enabled || exit 1
+      printf ok-gate-enabled\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-gate-enabled/);
+  });
+
+  it("shell sources omit WF_TRIAL_REQUIRE_PROOF_MANIFEST [SC-RPM-01]", () => {
+    const buildCommands = fs.readFileSync(BUILD_COMMANDS, "utf8");
+    const gateInc = fs.readFileSync(PROOF_MANIFEST_GATE_INC, "utf8");
+    assert.doesNotMatch(buildCommands, /WF_TRIAL_REQUIRE_PROOF_MANIFEST/);
+    assert.doesNotMatch(gateInc, /WF_TRIAL_REQUIRE_PROOF_MANIFEST/);
+  });
+
+  it("gate applies to WF-03 (G5 all PROMPT-WF)", () => {
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-proof-manifest-gate.inc.sh
+      source "${PROOF_MANIFEST_GATE_INC}"
+      wf_trial_proof_manifest_gate_applies WF-03 || exit 1
+      wf_trial_proof_manifest_gate_applies WF-13 && exit 2
+      printf ok-gate-applies\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stdout, /ok-gate-applies/);
+  });
+
+  it("dry-run skips proof manifest gate [SC-RPM-02]", () => {
+    const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "wf-trial-gate-dry-"));
+    const r = runScript(["wf-09", "--dry-run", "--workspace", workspace]);
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
   });
 
   it("workflow_trial_range exports MODEL_EFFORT in shell [REQ-WF_TRIAL_MODEL_EFFORT]", () => {

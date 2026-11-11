@@ -1,0 +1,9 @@
+IMPL-WF_TRIAL_PHASE_HANDOFF_GATE:
+  metadata:
+    last_updated:
+      date: "2026-11-11"
+      reason: "wave 2 product REQ resolver tiers A-D"
+  related_files:
+    - "scripts/lib/wf-trial-agentstream-help.inc.sh"
+    - "scripts/lib/wf-trial-phase-handoff-gate.inc.sh"
+    - "scripts/run-traditional-four-phase-agentstream.sh"

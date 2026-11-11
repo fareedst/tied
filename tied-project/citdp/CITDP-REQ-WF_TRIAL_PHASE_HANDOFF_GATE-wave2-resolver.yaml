@@ -1,0 +1,43 @@
+CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver:
+  change_definition:
+    current_behavior: "wf_trial_resolve_product_req_token ignores markdown table handoffs (| REQ token |, | REQ |); orchestrator run 1794406459 fails with could not resolve product REQ before SC-WF-PHG-01 file checks."
+    desired_behavior: "Tiered resolver A–D (E optional) plus orchestrator-dir excludes; gate stderr lists working basenames and found-unparsed handoff paths; SC-WF-PHG-06 LEAP."
+    non_goals:
+      - "Infer product REQ from PROMPT-WF id or FEATURE_REMAINDER"
+      - "Integrated adversarial inquiry"
+      - "Per-turn agentstream hooks"
+    success_criteria:
+      - "Bootstrap tests in test-strategy.md pass"
+      - "WF-10 Haiku medium cell resolves product REQ when turn-1 table handoff present"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+      - "IMPL-WF_TRIAL_PHASE_HANDOFF_GATE"
+    modules_or_boundaries: "scripts/lib/wf-trial-product-req.inc.sh; scripts/lib/wf-trial-phase-handoff-gate.inc.sh; tools/bootstrap/workflow-trial-agentstream-sh.test.mjs; docs/demos/traditional-four-phase-agentstream.yaml; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-checklist-gates-adjunct.md"
+    tied_tokens_affected:
+      - "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+  record_status: "implemented"
+  request_token: "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Multiple product REQ folders — wrong token when dirname fallback picks non-newest dir"
+        - "Orchestrator-only working tree — false positive resolve from stale PLAN.md"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Bootstrap heredoc fixtures show expected token and diagnostic stderr"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/evidence/CITDP-wave2-resolver-draft.md"
+      falsification_questions:
+        - "Does tier C basename fallback mask agents that never wrote request_token?"
+      gate_policy: "advisory"
+      rationale: "Shell parser hardening; minimal depth; sub-adversarial-inquiry-pass N/A."
+      research_profile: "integrated-agent"
+    costly_choices:
+      - "Cells with table-only handoffs start failing manifest/tracker paths that previously skipped at resolve"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    reversible_choices:
+      - "Defer tier E inventory scrape to follow-on if not trivial in build"
+      - "WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1 for matrix debug"

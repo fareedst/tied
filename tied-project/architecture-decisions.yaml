@@ -3132,6 +3132,16 @@ ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
       - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
     requirements:
       - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+ARCH-WF_TRIAL_PHASE_HANDOFF_GATE:
+  decision: "wf-trial-phase-handoff-gate.inc.sh composed after each four-phase turn; exit composition matches proof manifest gate; turn 4 handoff advisory only for orchestrator exit."
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
+  name: "WF phase handoff gate architecture"
+  status: "Proposed"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_PHASE_HANDOFF_GATE"
+    requirements:
+      - "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
 ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
   name: "WF grading rationale surfaces"

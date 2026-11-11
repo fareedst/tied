@@ -4681,6 +4681,18 @@ REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
       - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
     implementation:
       - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
+  category: "Tooling"
+  description: "Fail-closed inter-turn phase-handoff checks after traditional four-phase agentstream batch turns; optional strict closeout preflight; escape WF_TRIAL_SKIP_PHASE_HANDOFF_GATE."
+  detail_file: "requirements/REQ-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
+  name: "WF trial phase handoff gate"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_PHASE_HANDOFF_GATE"
+    implementation:
+      - "IMPL-WF_TRIAL_PHASE_HANDOFF_GATE"
 REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
   category: "Documentation"
   description: "Require concise grade-aware Rationale cells in PROMPT-WF facilitator readouts; contract test over docs/demos corpus."

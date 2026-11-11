@@ -1,0 +1,66 @@
+schema_version: "checklist-tracker.v1"
+description: "Authoritative tracker — wave 2 product REQ resolver (phase handoff gate)"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "risk-assessment"
+    - "test-strategy"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "composition-integration"
+    - "verification-gate"
+    - "sub-close-out-evidence-sync"
+  request: "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Shell resolver + bootstrap tests; integrated inquiry not required."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - path: "tied-project/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/evidence/verification-evidence-manifest.v1.json"
+          type: "verification_manifest"
+        - path: "tied-bundle/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/gates/close_out-2026-11-11T15-24-11-678Z.json"
+          type: "gate_receipt"
+      status: "completed"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

@@ -1,0 +1,2 @@
+ARCH-WF_TRIAL_PHASE_HANDOFF_GATE:
+  rationale: "Aligns orchestrator exit_code with facilitator Process adherence without blocking close_out machine pass on turn 4."

@@ -1,0 +1,21 @@
+REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+      - "REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+    related_to:
+      - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+      - "REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE"
+  satisfaction_criteria:
+    - criterion: "After turn 3, requires npm test pass count >= 1 and at least one src/**/*.test.ts when stack seeded."
+      id: "SC-WF-PHG-02"
+    - criterion: "After turns 1-3, orchestrator requires evidence/phase-handoff-{skill}.md under resolved product REQ folder."
+      id: "SC-WF-PHG-01"
+    - criterion: "Optional WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT=1 checks persisted CITDP YAML and verification gate receipt when build handoff claims verification."
+      id: "SC-WF-PHG-05"
+    - criterion: "wf_trial_resolve_product_req_token accepts table turn-1 handoffs and dirname fallback under working/REQ-*/; resolve failure emits working basenames and found-unparsed handoff DIAGNOSTICs."
+      id: "SC-WF-PHG-06"
+    - criterion: "WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1 documented beside WF_TRIAL_SKIP_PROOF_MANIFEST in wf-trial agentstream help."
+      id: "SC-WF-PHG-03"
+    - criterion: "workflow-trial-agentstream-sh.test.mjs covers gate failure and skip env."
+      id: "SC-WF-PHG-04"
