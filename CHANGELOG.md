@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-WF-10 facilitator readout (Claude Sonnet 5.5 high @ 1794411691)** — **4.2.2** via `workflow_trial_agentstream wf-10`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md) updated via `@record-wf-trial`. **Workflow complete** — orchestrator `exit_code: 0`; **`1610292`**; **58/58** tests; **`composition_tests: 9`**; partial adherence ledger.
+
 - **Reddit outreach (non-tied cohort methodology)** — Publish-ready post under [`tied-project/non-tied-plans/reddit-tied-cohort-methodology/`](tied-project/non-tied-plans/reddit-tied-cohort-methodology/PLAN.md): TIED as per-change resolver, V+R+A+I vs waterfall phase-gate decisions, disposable trial size layers; `REDDIT-POST.md`, title/comment variants, CITDP draft (`tied_tokens_new: []`).
 
 - **WF trial phase handoff gate wave 2 ([REQ-WF_TRIAL_PHASE_HANDOFF_GATE], [ARCH-WF_TRIAL_PHASE_HANDOFF_GATE], [IMPL-WF_TRIAL_PHASE_HANDOFF_GATE])** — Tiered `wf_trial_resolve_product_req_token` (table handoffs + dirname fallback); actionable resolve DIAGNOSTICs; **SC-WF-PHG-06** bootstrap coverage (53/53). Close-out `close-out-phg-wave2-20261111-r2` (`merged_decision.allowed=true`, `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/PLAN.md). CITDP: [CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml](tied-project/citdp/CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml).
