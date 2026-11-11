@@ -13,7 +13,7 @@
 
 ## Commit
 
-**SHA:** _(recorded after traceable commit)_ — [proposed-commit-message.txt](./proposed-commit-message.txt)
+**SHA:** `5ba2a1b0` — [proposed-commit-message.txt](./proposed-commit-message.txt)
 
 ## Operator
 

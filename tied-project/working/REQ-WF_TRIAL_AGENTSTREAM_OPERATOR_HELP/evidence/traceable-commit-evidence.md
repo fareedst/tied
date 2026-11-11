@@ -10,4 +10,4 @@
 
 **upstream feedback:** N/A
 
-**commit:** _(feature close-out commit SHA — see close-out-handoff.md)_
+**commit:** `5ba2a1b0`
