@@ -1,0 +1,29 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "request_token": "REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS",
+  "generated_at": "2026-11-11T00:00:00.000Z",
+  "commands": [
+    {
+      "label": "wf-trial-composition-prompts-contract",
+      "command": "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs",
+      "exit_code": 0,
+      "notes": "9 tests incl SC-GOAL-BEHAVIOR-10/11/12"
+    },
+    {
+      "label": "workflow-trial-agentstream-sh",
+      "command": "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs",
+      "exit_code": 0,
+      "notes": "wf-09 dry-run matches concurrent execution in catalog paste"
+    },
+    {
+      "label": "pseudocode_validate",
+      "command": "MCP pseudocode_validate IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS",
+      "exit_code": 0
+    },
+    {
+      "label": "tied_validate_consistency",
+      "command": "MCP tied_validate_consistency",
+      "exit_code": 0
+    }
+  ]
+}

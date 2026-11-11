@@ -6,7 +6,13 @@ REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS:
     problems_solved:
       - "Contract test required binding language in paste"
       - "Paste prescribed module counts and wiring layers"
-    why: "Architect-in-paste WF-09..12 short-circuits cross-model comparison of TIED layering."
+    why: "Architect-in-paste WF-09..12 short-circuits cross-model comparison of TIED layering. Follow-on REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS strengthens WF-10..12 behavioral SoC without paste module mandates."
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+    related_to:
+      - "REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS"
   satisfaction_criteria:
     - criterion: "no graphical UI in paste 09-12"
       id: "SC-GOAL-NO-UI"

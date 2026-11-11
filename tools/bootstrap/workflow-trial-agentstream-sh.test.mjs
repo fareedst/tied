@@ -139,7 +139,7 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     const r = runScript(["wf-09", "--dry-run", "--workspace", workspace]);
     assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
     const combined = `${r.stderr}\n${r.stdout}`;
-    assert.match(combined, /concurrent workers/i);
+    assert.match(combined, /concurrent execution/i);
   });
 
   it("requires gawk on PATH", () => {

@@ -4505,6 +4505,22 @@ REQ-WF_TRIAL_COMPOSITION_PROMPTS:
       - "ARCH-WF_TRIAL_COMPOSITION_PROMPTS"
     implementation:
       - "IMPL-WF_TRIAL_COMPOSITION_PROMPTS"
+REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS:
+  category: "Tooling"
+  detail_file: "requirements/REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS.yaml"
+  name: "WF trial composition goal-first-soc paste 10-12"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+      - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+    related_to: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_COMPOSITION_SOC_PROMPTS"
+    implementation:
+      - "IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS"
 REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   category: "Tooling"
   description: "Harden agentstream Cursor live executor session oracle so four-phase workflow trials survive RetriableError WritableIterable stream closure when session_id is recoverable; emit diagnostics before fail-closed when resume oracle is missing."

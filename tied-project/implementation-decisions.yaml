@@ -3656,6 +3656,14 @@ IMPL-WF_TRIAL_COMPOSITION_PROMPTS:
   essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_PROMPTS-pseudocode.md"
   name: "WF trial composition prompts WF-09–12"
   status: "Implemented"
+IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS:
+  cross_references:
+    - "ARCH-WF_TRIAL_COMPOSITION_SOC_PROMPTS"
+    - "REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS-pseudocode.md"
+  name: "WF composition goal-first-soc implementation"
+  status: "Active"
 IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   name: "WF trial Cursor live session oracle implementation"

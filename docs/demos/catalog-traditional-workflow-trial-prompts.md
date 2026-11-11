@@ -216,6 +216,8 @@ Normative detail: [record-wf-trial reference § Session grading rationale](../..
 
 **Goal-first paste** (2026-11-10+): turn-1 remainders state **TypeScript**, product **goals**, **automated tests**, and **no graphical UI** only — no module counts, wiring layers, or binding-test wording in paste. Facilitators grade composition from disposable **PLAN** and **test files**, not paste compliance. Historical runs before this rewrite used **architect-in-paste** remainders; label **paste generation** when comparing cross-model structure. Traceability: [REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS](../../tied-project/requirements/REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS.yaml).
 
+**Goal-first-soc** (2026-11-11+, **PROMPT-WF-10…12 only**): paste adds **distinct resource / I/O contracts** (e.g. mutually exclusive file vs stdin, optional JSON rules file, two command families) without architectural mandate wording. **PROMPT-WF-09** remains the 2026-11-10 goal-first block. Label `goal-first-soc` on new disposable runs for WF-10…12. Traceability: [REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS](../../tied-project/requirements/REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS.yaml).
+
 ---
 
 ## Composition contract (normative for prompts 09–12)
@@ -291,19 +293,19 @@ Build a TypeScript library that maps work over an array with concurrent executio
 ### PROMPT-WF-10
 
 ```text
-Build a TypeScript CLI that reads CSV text (from a file path or stdin) and prints summary statistics: row count and column count. Include automated tests. No graphical UI.
+Build a TypeScript CLI that summarizes CSV text with row count and column count. The user must choose exactly one input: a --file <path> option or an explicit stdin mode (document the flag or convention you use). Using both or neither is an error with a documented message. File mode must read via the filesystem; stdin mode must read until EOF without a path. Include automated tests. No graphical UI.
 ```
 
 ### PROMPT-WF-11
 
 ```text
-Build a TypeScript library for line-oriented text processing: tokenize lines, filter tokens, and aggregate counts. It must process sample text end to end and produce the final aggregate. Include automated tests. No graphical UI.
+Build a TypeScript library that processes line-oriented text end to end and prints one aggregate: the count of tokens remaining after filtering. The text to process comes from a file path or stdin (document how the caller selects the mode). Token ignore rules come from an optional JSON file path; when that path is omitted, use a documented default ignore list. Empty input must yield a documented count. Include automated tests. No graphical UI.
 ```
 
 ### PROMPT-WF-12
 
 ```text
-Build a TypeScript command dispatcher that routes string commands to handlers and rejects unknown commands with a clear, documented error. Include automated tests. No graphical UI.
+Build a TypeScript command tool that reads a command name from arguments and optional payload text from stdin. Support at least two documented command families with different behavior (for example one family only inspects or validates payload text and another transforms or summarizes it). Unknown command names must fail with a documented error. Include automated tests. No graphical UI.
 ```
 
 ---
@@ -427,6 +429,12 @@ Build a TypeScript command dispatcher that routes string commands to handlers an
 | PROMPT-WF-01 | Cursor agentstream / GPT-5.6 Luna low | `1794261284-wf-agentstream-wf-01-cursor-lunalow` (`HARNESS=cursor`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Cursor readout](trial-readout-PROMPT-WF-01-luna-low-1794261284-wf-agentstream-wf-01-cursor-lunalow.md) (**workflow complete** — orchestrator **`exit_code: 0`**; **`415e670`**; **5/5** tests) |
 | PROMPT-WF-01 | Cursor agentstream / GPT-5.6 Luna low | `1794261316-wf-agentstream-wf-01-cursor-lunalow` (`HARNESS=cursor`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Cursor readout](trial-readout-PROMPT-WF-01-luna-low-1794261316-wf-agentstream-wf-01-cursor-lunalow.md) (**workflow complete** — orchestrator **`exit_code: 0`**; **`1e0d117`**; **3/3** tests) |
 | PROMPT-WF-01 | Cursor agentstream / GPT-5.6 Luna low | `1794261371-wf-agentstream-wf-01-cursor-lunalow` (`HARNESS=cursor`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Cursor readout](trial-readout-PROMPT-WF-01-luna-low-1794261371-wf-agentstream-wf-01-cursor-lunalow.md) (**workflow complete** — orchestrator **`exit_code: 0`**; **`55b7112`**; **4/4** tests) |
+| PROMPT-WF-09 | Claude agentstream / Claude Haiku 5.5 (`medium`) | `1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium` (`HARNESS=claude`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Claude readout](trial-readout-PROMPT-WF-09-claudehaiku55medium-1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium.md) (**split signal** — orchestrator `exit_code: 0`; facilitator **16/16** green tests **uncommitted**; close-out turn **incomplete**; bootstrap-only git **`f57a4f6`**) |
+| PROMPT-WF-09 | Claude agentstream / Claude Haiku 5.5 (`high`) | `1794350685-wf-agentstream-wf-09-claude-claudehaiku55high` (`HARNESS=claude`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Claude readout](trial-readout-PROMPT-WF-09-claudehaiku55high-1794350685-wf-agentstream-wf-09-claude-claudehaiku55high.md) (**workflow complete** — orchestrator `exit_code: 0`; **`1f311d9`**; **20/20** tests; close_out gate **allowed**; **composition_tests: 0**) |
+| PROMPT-WF-09 | Claude agentstream / Claude Haiku 5.5 (`low`) | `1794351557-wf-agentstream-wf-09-claude-claudehaiku55low` (`HARNESS=claude`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Claude readout](trial-readout-PROMPT-WF-09-claudehaiku55low-1794351557-wf-agentstream-wf-09-claude-claudehaiku55low.md) (**split signal** — orchestrator `exit_code: 0`; **10/10** tests uncommitted; empty REQ index; close-out **incomplete**) |
+| PROMPT-WF-09 | Claude agentstream / Claude Sonnet 5.5 (`low`) | `1794352390-wf-agentstream-wf-09-claude-claudesonnet55low` (`HARNESS=claude`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Claude readout](trial-readout-PROMPT-WF-09-claudesonnet55low-1794352390-wf-agentstream-wf-09-claude-claudesonnet55low.md) (**split signal** — orchestrator `exit_code: 0`; **9/9** tests; R+A+I YAML dirty uncommitted; bootstrap-only **`0063db8`**) |
+| PROMPT-WF-09 | Claude agentstream / Claude Sonnet 5.5 (`medium`) | `1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium` (`HARNESS=claude`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Claude readout](trial-readout-PROMPT-WF-09-claudesonnet55medium-1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium.md) (**workflow complete** — orchestrator `exit_code: 0`; **`fbfaeda`**; **11/11** tests; **composition_tests: 0**) |
+| PROMPT-WF-09 | Claude agentstream / Claude Sonnet 5.5 (`high`) | `1794353174-wf-agentstream-wf-09-claude-claudesonnet55high` (`HARNESS=claude`; **wf-trial-ts-node-test-v1**; session **4.2.1**; **REQ-WF_TRIAL_MODEL_EFFORT**) | [Claude readout](trial-readout-PROMPT-WF-09-claudesonnet55high-1794353174-wf-agentstream-wf-09-claude-claudesonnet55high.md) (**workflow complete** — orchestrator `exit_code: 0`; **`6204a18`**; **26/26** tests; **3** IMPL sidecars; still **composition_tests: 0**) |
 Maintained by **`@record-wf-trial`**.
 
 ---

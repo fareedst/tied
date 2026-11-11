@@ -1,0 +1,12 @@
+ARCH-WF_TRIAL_COMPOSITION_SOC_PROMPTS:
+  consequences:
+    negative:
+      - "Cross-trial compare must tag paste generation"
+    positive:
+      - "Behavioral SoC nudge without paste module counts"
+      - "paste generation label goal-first-soc for 10-12"
+  context: "Follow-on from REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS; composition graded from PLAN/tests."
+  cross_references:
+    - "REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+    - "REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS"
+  decision: "Strengthen WF-10..12 paste with distinct resource contracts while preserving goal-first forbid-list; WF-09 frozen; facilitator composition rubric unchanged."

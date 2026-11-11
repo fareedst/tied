@@ -1,0 +1,62 @@
+CITDP-REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS:
+  title: "WF trial composition prompts goal-first-soc paste (10–12)"
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-11"
+  related_tokens:
+    - "REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS"
+    - "REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+    - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+    - "REQ-MODULE_VALIDATION"
+  current_behavior: |
+    PROMPT-WF-10 through WF-12 use goal-first paste (2026-11-10) with weak SoC stress.
+    Agents often ship monolithic src/ with unit tests only; facilitator composition sub-check fails.
+  desired_behavior: |
+    PROMPT-WF-10 through WF-12 paste blocks stress distinct resources and I/O contracts without forbid-list jargon.
+    WF-09 paste unchanged. Contract tests add SC-GOAL-BEHAVIOR-10/11/12.
+    Facilitator labels paste generation goal-first-soc for new 10–12 trials.
+    Composition evidence rubric unchanged.
+  change_definition:
+    success_criteria:
+      - "SC-GOAL-BEHAVIOR-10"
+      - "SC-GOAL-BEHAVIOR-11"
+      - "SC-GOAL-BEHAVIOR-12"
+      - "SC-GOAL-NO-ARCH"
+      - "SC-GOAL-BEHAVIOR-09"
+      - "SC-GOAL-TYPESCRIPT"
+      - "SC-GOAL-NO-UI"
+      - "SC-CATALOG-09-12"
+  satisfaction_criteria:
+    - "SC-GOAL-BEHAVIOR-10"
+    - "SC-GOAL-BEHAVIOR-11"
+    - "SC-GOAL-BEHAVIOR-12"
+    - "SC-GOAL-NO-ARCH"
+    - "SC-GOAL-BEHAVIOR-09"
+    - "SC-GOAL-TYPESCRIPT"
+    - "SC-GOAL-NO-UI"
+    - "SC-CATALOG-09-12"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "SoC paste still yields monolith with zero binding tests"
+        - "SC regex passes on wording but agents ignore JSON/rules file"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "First soc trial shows composition_tests > 0 on size receipt"
+      evidence_references:
+        - "tied-project/working/FACILITATOR-WF-09-COMPOSITION-GRADING/evidence/composition-subcheck-grading.md"
+      falsification_questions:
+        - "Does stronger paste materially raise binding test rate vs goal-first WF-09?"
+      gate_policy: "advisory"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Store catalog and contract tests only."
+  risk_assessment:
+    - risk: "Cross-model compare mixes paste generations"
+      reversibility: "reversible"
+      mitigation: "Facilitator paste generation tag goal-first-soc on new rows"
+    - risk: "Regex SC too brittle on editorial tweaks"
+      reversibility: "reversible"
+      mitigation: "Anchors tied to locked PLAN §5 phrases"

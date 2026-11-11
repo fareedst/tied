@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial composition goal-first-soc paste ([REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS], [ARCH-WF_TRIAL_COMPOSITION_SOC_PROMPTS], [IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS])** — **PROMPT-WF-10…12** paste stresses distinct resource/I/O contracts; **WF-09** unchanged; contract tests **SC-GOAL-BEHAVIOR-10/11/12**. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS/PLAN.md).
+
+- **PROMPT-WF-09 facilitator readouts (Claude Haiku/Sonnet × low/medium/high @ 1794350349…1794353174)** — Six **ordered concurrent map** cells via `workflow_trial_agentstream wf-09` on **4.2.1**; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md) updated via `@record-wf-trial`. All cells **`composition_tests: 0`** on size receipts (unit-only proof).
+
 - **WF trial composition goal-first paste ([REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS], [ARCH-WF_TRIAL_COMPOSITION_GOAL_PROMPTS], [IMPL-WF_TRIAL_COMPOSITION_GOAL_PROMPTS])** — **PROMPT-WF-09…12** remainders are goals + TypeScript + automated tests only; facilitator composition rubric unchanged. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS/PLAN.md).
 
 - **WF trial composition prompts ([REQ-WF_TRIAL_COMPOSITION_PROMPTS], [ARCH-WF_TRIAL_COMPOSITION_PROMPTS], [IMPL-WF_TRIAL_COMPOSITION_PROMPTS])** — **PROMPT-WF-09…12** in [catalog-traditional-workflow-trial-prompts.md](docs/demos/catalog-traditional-workflow-trial-prompts.md); `workflow_trial_agentstream wf-09`…`wf-12`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_COMPOSITION_PROMPTS/PLAN.md).

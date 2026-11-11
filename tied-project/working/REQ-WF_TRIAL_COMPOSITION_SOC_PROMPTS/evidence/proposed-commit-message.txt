@@ -1,0 +1,27 @@
+feat(wf-trial): goal-first-soc paste for PROMPT-WF-10..12
+
+Strengthen WF-10..12 catalog paste with distinct resource/I/O contracts;
+WF-09 unchanged. Contract tests SC-GOAL-BEHAVIOR-10/11/12.
+
+[REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS] [ARCH-WF_TRIAL_COMPOSITION_SOC_PROMPTS]
+[IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS]
+
+Close-out: merged_decision.allowed=true; envelope blocking_gap_count=0.
+Tests: wf-trial-composition-prompts-contract + workflow-trial-agentstream-sh.
+
+Staging map:
+CHANGELOG.md
+docs/demos/catalog-traditional-workflow-trial-prompts.md
+tied-project/architecture-decisions.yaml
+tied-project/architecture-decisions/ARCH-WF_TRIAL_COMPOSITION_SOC_PROMPTS.yaml
+tied-project/citdp/CITDP-REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS.yaml
+tied-project/implementation-decisions.yaml
+tied-project/implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS.yaml
+tied-project/implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_SOC_PROMPTS-pseudocode.md
+tied-project/requirements.yaml
+tied-project/requirements/REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS.yaml
+tied-project/requirements/REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS.yaml
+tied-project/vocab/agentstream.md
+tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs
+tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
+tied-project/working/REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS/

@@ -3044,6 +3044,13 @@ ARCH-WF_TRIAL_COMPOSITION_PROMPTS:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_COMPOSITION_PROMPTS.yaml"
   name: "WF trial composition prompts WF-09–12"
   status: "Accepted"
+ARCH-WF_TRIAL_COMPOSITION_SOC_PROMPTS:
+  cross_references:
+    - "REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+    - "REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_COMPOSITION_SOC_PROMPTS.yaml"
+  name: "WF composition goal-first-soc paste architecture"
+  status: "Active"
 ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   name: "WF trial Cursor live session oracle architecture"

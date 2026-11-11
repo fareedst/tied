@@ -1,0 +1,40 @@
+REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS:
+  rationale:
+    benefits:
+      - "Facilitator rubric unchanged"
+      - "Stronger SoC nudge in paste"
+      - "WF-09 paste frozen"
+    problems_solved:
+      - "Monolith plus unit-only under composition cohort"
+      - "Weak cross-resource stress in WF-10..12"
+    why: "Goal-first WF-10..12 paste was too weak to elicit separation of concerns; strengthen behavioral resource seams without forbid-list architecture mandates."
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS"
+    related_to:
+      - "REQ-WF_TRIAL_COMPOSITION_PROMPTS"
+  satisfaction_criteria:
+    - criterion: "no graphical UI in paste 09-12"
+      id: "SC-GOAL-NO-UI"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "paste 09-12 omit architectural mandates"
+      id: "SC-GOAL-NO-ARCH"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "twelve prompt headers"
+      id: "SC-CATALOG-09-12"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "TypeScript hint in paste 09-12"
+      id: "SC-GOAL-TYPESCRIPT"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "WF-09 concurrent order preservation"
+      id: "SC-GOAL-BEHAVIOR-09"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "WF-10 mutually exclusive file vs stdin paste stress"
+      id: "SC-GOAL-BEHAVIOR-10"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "WF-11 text plus JSON ignore rules paste stress"
+      id: "SC-GOAL-BEHAVIOR-11"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"
+    - criterion: "WF-12 two command families paste stress"
+      id: "SC-GOAL-BEHAVIOR-12"
+      metric: "node --test tools/bootstrap/lib/wf-trial-composition-prompts-contract.test.mjs"

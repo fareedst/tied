@@ -1,6 +1,6 @@
 /**
- * [REQ-WF_TRIAL_COMPOSITION_PROMPTS] [REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS]
- * [SC-CATALOG-09-12] [SC-GOAL-NO-ARCH] [SC-GOAL-BEHAVIOR-09] [SC-GOAL-TYPESCRIPT] [SC-GOAL-NO-UI]
+ * [REQ-WF_TRIAL_COMPOSITION_PROMPTS] [REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS] [REQ-WF_TRIAL_COMPOSITION_SOC_PROMPTS]
+ * [SC-CATALOG-09-12] [SC-GOAL-NO-ARCH] [SC-GOAL-BEHAVIOR-09] [SC-GOAL-BEHAVIOR-10] [SC-GOAL-BEHAVIOR-11] [SC-GOAL-BEHAVIOR-12] [SC-GOAL-TYPESCRIPT] [SC-GOAL-NO-UI]
  */
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -81,6 +81,30 @@ describe("wf-trial-composition-prompts-contract", () => {
     assert.match(block, /concurrent/i);
     assert.match(block, /same order as the input/i);
     assert.match(block, /deterministic delays/i);
+  });
+
+  it("WF-10 stresses mutually exclusive file vs stdin I/O [SC-GOAL-BEHAVIOR-10]", () => {
+    const block = extractPromptBlock(md, "10");
+    assert.ok(block.length > 40, "WF-10 block missing");
+    assert.match(block, /exactly one input/i);
+    assert.match(block, /--file/i);
+    assert.match(block, /stdin/i);
+    assert.match(block, /filesystem/i);
+  });
+
+  it("WF-11 stresses text source and JSON ignore rules [SC-GOAL-BEHAVIOR-11]", () => {
+    const block = extractPromptBlock(md, "11");
+    assert.ok(block.length > 40, "WF-11 block missing");
+    assert.match(block, /JSON/i);
+    assert.match(block, /ignore/i);
+    assert.match(block, /remaining after filtering/i);
+  });
+
+  it("WF-12 stresses two command families and unknown command error [SC-GOAL-BEHAVIOR-12]", () => {
+    const block = extractPromptBlock(md, "12");
+    assert.ok(block.length > 40, "WF-12 block missing");
+    assert.match(block, /two documented command families/i);
+    assert.match(block, /unknown command/i);
   });
 
   it("prompts 09-12 are goal-first TypeScript with no UI [SC-GOAL-TYPESCRIPT] [SC-GOAL-NO-UI]", () => {
