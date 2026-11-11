@@ -3,7 +3,7 @@
 **handoff_kind:** prompt-skill-disk  
 **request_token:** REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE  
 **date:** 2026-11-10  
-**plan_phase:** build-complete  
+**plan_phase:** complete  
 
 ---
 
@@ -34,7 +34,7 @@ node tools/bootstrap/sync-wf-trial-model-catalog.mjs --check
 
 ## Do next
 
-Optional **`@close-out`** for traceable commit.
+Close-out complete — commit `5eac406c`. Refresh catalog: `node tools/bootstrap/sync-wf-trial-model-catalog.mjs`.
 
 ---
 

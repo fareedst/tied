@@ -109,6 +109,8 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 | **A** | One sentence (~12–30 words): cite **one concrete fact** from this readout (tests, `exit_code`, commit SHA, disposition). |
 | **A−** … **F** | One sentence: state the **single main reason** it is not the next higher band for this dimension. |
 
+**Process adherence preview:** Before publishing, flag **Process adherence** below **B** when the subject client lacks `tied-project/working/{REQ}/gates/close_out-*.json` while the readout claims machine close-out passed, or when `execution_evidence.completed` lists prompt-type slugs (`build-plan`, …) instead of checklist slugs.
+
 **Style:** Plain language; prefer “req/architecture docs match tests” over raw **R+A+I** jargon; cite `exit_code` and test counts when present.
 
 **Forbidden in rationale cells:** `maturity_score`, leaderboard language, multi-paragraph essays, unexplained acronyms.
@@ -132,6 +134,20 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 | Evidence | Optional archive: `tied-project/working/{REQ}/evidence/project-size-snapshot.v1.json` on subject or store facilitator folder. |
 | Readout | Add **Project size layers** subsection under **What was built** or **Cohort comparisons**: cite `layers.atoms`, `layers.operational_intent`, `layers.proof_facets`, `hashes.operational_intent_hash`, and receipt `proof_boundary`. |
 | Cohort JSONL | Append via tooling only: [`tied-bundle/reports/wf-trial-cohort/runs.jsonl`](../../tied-bundle/reports/wf-trial-cohort/runs.jsonl) — human metric policy: [`tied-project/config/project-size-metrics.registry.yaml`](../../tied-project/config/project-size-metrics.registry.yaml). Catalog: [catalog-tied-size-and-trial-statistics.md](../../docs/demos/catalog-tied-size-and-trial-statistics.md). |
+
+### Proof labels (dissection)
+
+[REQ-WF_TRIAL_COMPOSITION_EVIDENCE_SUBCHECK] For **PROMPT-WF-09..12**, run MCP `tied_trial_composition_evidence_subcheck` on the subject client (`repo_root`, optional `prompt_id`, optional `manifest_path`). Place the subsection **beside** the size receipt `comp` column prose — not instead of it.
+
+| Step | Action |
+| --- | --- |
+| Subcheck | MCP `tied_trial_composition_evidence_subcheck` → `wf-composition-evidence-subcheck.v2` payload |
+| Readout | Paste `label_histogram_markdown` table; cite `composition_evidence_subcheck`, `binding_test_present`, `receipt_composition_declared`, `receipt_composition_inferred`, manifest flags when present |
+| Test strategy rationale | May cite label vs facilitator judgment mismatch; **evidence append only** — no auto band rewrite (v1) |
+
+Template: [`tied-bundle/templates/wf-composition-evidence-subcheck.v2.template.json`](../../tied-bundle/templates/wf-composition-evidence-subcheck.v2.template.json).
+
+**Forbidden in proof labels subsection:** auto-rewriting Session grading bands from subcheck alone; treating histogram as maturity score.
 
 **Forbidden in size appendix:** leaderboard language, ranking models, implying snapshot proves REQ **Implemented** status.
 

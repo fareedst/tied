@@ -1,7 +1,7 @@
 # Close-out handoff — REQ-TIED_AGENT_LOADER_REFRESH
 
 **Date:** 2026-11-08  
-**Product commit:** `3ef03b3e` (`fix(bootstrap): sync client AGENTS.md on refresh`)
+**Product commit:** `7e26e62f` (`fix(bootstrap): sync client AGENTS.md on refresh`)
 
 ## Completion signals
 

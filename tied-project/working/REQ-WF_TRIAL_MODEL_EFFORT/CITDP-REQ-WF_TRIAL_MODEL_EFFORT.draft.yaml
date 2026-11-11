@@ -3,21 +3,21 @@ CITDP-REQ-WF_TRIAL_MODEL_EFFORT:
     current_behavior: "Phase 2 complete: Cursor agentArgv applies --model bracket effort= (rejected by live agent CLI on composer-2.5); workflow_trial_range usage does not explain Cursor slug vs MODEL_EFFORT."
     desired_behavior: "Phase 3: Cursor harness rewrites MODEL_SLUG with hyphen effort tiers (thinking/max/-fast preserved); composer blocklist + DIAGNOSTIC; workflow_trial_range zero-arg usage and CLI guide document harness split and tier-capable examples; optional stderr warn for cursor+composer+effort. Claude --effort unchanged."
     non_goals:
-      - "Rename historical disposable client directories"
-      - "record-wf-trial schema version bump"
       - "Mirror full agent CLI (worktree, plugin-dir, bedrock)"
+      - "record-wf-trial schema version bump"
+      - "Rename historical disposable client directories"
     success_criteria:
-      - "workflow-trial-agentstream-sh.test.mjs remains green"
-      - "model-effort slug tests and cursor-agent-argv cover SC-CURSOR-SLUG; workflow_trial_range usage/warn covers SC-RANGE-USAGE/WARN"
       - "claude-agent-argv.test.ts --effort regression unchanged"
+      - "model-effort slug tests and cursor-agent-argv cover SC-CURSOR-SLUG; workflow_trial_range usage/warn covers SC-RANGE-USAGE/WARN"
+      - "workflow-trial-agentstream-sh.test.mjs remains green"
     unchanged_behavior: "workflow_trial_range positional signature unchanged; effort=- unsets MODEL_EFFORT. AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0 disables slug rewrite. Phase 2 approve-mcps/add-dir unchanged."
   impact_analysis:
     modules_or_boundaries: "mcp-server/packages/agentstream model-effort, cursor-agent-argv, executor-dry-run, live-executor; scripts/build-commands.sh workflow_trial_range; _build_commands_cli_guide.inc.sh; wf-trial-agentstream-help.inc.sh; optional testdata/oracle; TIED LEAP REQ/ARCH/IMPL; vocab"
     tied_tokens_new: []
     tied_tokens_touched:
-      - "REQ-WF_TRIAL_MODEL_EFFORT"
       - "ARCH-WF_TRIAL_MODEL_EFFORT"
       - "IMPL-WF_TRIAL_MODEL_EFFORT"
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
   record_identity:
     change_request_id: "REQ-WF_TRIAL_MODEL_EFFORT"
     citdp_id: "CITDP-REQ-WF_TRIAL_MODEL_EFFORT"
@@ -45,11 +45,11 @@ CITDP-REQ-WF_TRIAL_MODEL_EFFORT:
     depth_tier: "minimal"
     gate_policy: "advisory"
   test_strategy:
-    unit:
-      - "model-effort.test.ts bracket cases"
-      - "cursor-agent-argv.test.ts"
-      - "claude-agent-argv regression"
     composition:
       - "agentstream parity.test.ts oracle line review"
     deferred:
       - "Live cursor wf-NN with MODEL_EFFORT=medium subprocess spot-check"
+    unit:
+      - "claude-agent-argv regression"
+      - "cursor-agent-argv.test.ts"
+      - "model-effort.test.ts bracket cases"

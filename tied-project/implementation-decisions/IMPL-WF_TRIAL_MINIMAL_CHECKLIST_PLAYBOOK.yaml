@@ -1,0 +1,5 @@
+IMPL-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK:
+  related_files:
+    - "scripts/lib/wf-trial-implementation-stack.inc.sh"
+    - "tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml"
+    - "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-checklist-gates-adjunct.md"

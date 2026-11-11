@@ -1,7 +1,7 @@
 # Traceable commit evidence
 
 **REQ:** REQ-TIED_AGENT_LOADER_REFRESH  
-**Commit:** `3ef03b3e0dc84466a99016b14fbec534cd8b7ddb`  
+**Commit:** `7e26e62f9ae3bedabce64d8e170c4abd5e28394b`  
 **Gate:** close_out `allowed=true` run `close-out-req-tied-agent-loader-refresh-20261108-r1`  
 **Envelope:** `blocking_gap_count=0`  
 **Hygiene:** [git-hygiene-receipt-2026-11-08.md](git-hygiene-receipt-2026-11-08.md)

@@ -1,0 +1,5 @@
+ARCH-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS:
+  constraints:
+    - "Header overrides deferred to L2"
+    - "No label_case_counts on receipt until L2"
+  description: "Separate proof-test-classify module; coarse facet sums unchanged at 1.1.0; fine subtypes path-derived."

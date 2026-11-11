@@ -1,0 +1,4 @@
+REQ-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE:
+  acceptance_criteria:
+    - "SC-INF-01 through SC-INF-06 in working PLAN"
+  description: "validator_version 1.2.0 with label_case_counts, composition_inferred_cases, PROOF_LABEL resolution, static import inference."

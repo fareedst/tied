@@ -1,6 +1,6 @@
 # WF trial build-plan handoff
 
-**Tokens:** [REQ-WF_TRIAL_FOUR_PHASE_HARDENING](../../../tied-project/requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml) · Close-out: [wf-trial-four-phase-close-out-playbook.md](./wf-trial-four-phase-close-out-playbook.md)
+**Tokens:** [REQ-WF_TRIAL_FOUR_PHASE_HARDENING](../../../tied-project/requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml) · [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../../../tied-project/requirements/REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK.yaml) · Gates: [wf-trial-checklist-gates-adjunct.md](./wf-trial-checklist-gates-adjunct.md) · Close-out: [wf-trial-four-phase-close-out-playbook.md](./wf-trial-four-phase-close-out-playbook.md)
 
 ## End of turn 3 (build-plan)
 
@@ -9,10 +9,14 @@ Write **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.md`*
 | Field | Content |
 | --- | --- |
 | REQ token | Product request token |
-| Verification gate | Path to `gates/verification-*.json` |
+| Verification gate | Path to `gates/verification-*.json` (required when verification ran; orchestrator may fail under `WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT=1`) |
+| sub-adversarial-inquiry-pass | Tracker disposition **`not_applicable`** before RED (not the slug name in `completed` alone) |
+| Tracker slugs updated | List registry slugs only: `persist-implementation-records`, `red-tests`, `implement-code`, `verification-gate`, … — **not** `build-plan` |
 | Manifest | `verification-evidence-manifest.v1.json` |
 | RED evidence | Paths to `quality-manifest/*-red.*` if captured; else explicit “RED not archived” |
 | Tracker | Checklist slugs **completed** vs **pending** |
+| **composition_path_declared** | List of path-suffixed composition test files (`src/**/*.binding.test.ts`, etc.) and case counts when **composition-integration** applied |
+| **Proof facet manifest** | `tied-project/working/proof-facet-manifest/evidence/proof-facet-manifest.v1.json` — `files[]` row count vs test files; gate note if validated |
 | Next | `@close-out` + link to wf-trial close-out playbook |
 
 ## RED capture (when product tests exist)

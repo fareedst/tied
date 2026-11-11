@@ -1,0 +1,7 @@
+IMPL-TIED_PATH_DECLARED_COMPOSITION_VALIDATE:
+  code_locations:
+    - "mcp-server/src/project-size/path-declared-composition-validate.ts"
+    - "mcp-server/src/tools/index.ts"
+  description: "validatePathDeclaredComposition + tied_path_declared_composition_validate MCP tool."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_PATH_DECLARED_COMPOSITION_VALIDATE-pseudocode.md"
+  implementation_approach: "Read-only scan; enforcement mode from input."

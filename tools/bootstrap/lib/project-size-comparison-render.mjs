@@ -182,7 +182,13 @@ function renderColumnDefinitionsSection() {
     "| **unit** | proof facets | Unit test **cases** (`node:test` `it`/`test` per file) under subject `src/`. Receipt `validator_version` ≥ 1.1.0. |",
   );
   lines.push(
-    "| **comp** | proof facets | Composition test **cases** per classified file (same counting rule). |",
+    "| **comp** | proof facets | Path-declared composition test **cases** (suffixes per [proof path semantics](../../tied-project/requirements/REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS.yaml)). |",
+  );
+  lines.push(
+    "| **comp_inferred** | proof facets | `composition_inferred_cases` (validator_version ≥ 1.2.0): binding heuristic on path-unit files; does not change **comp**. |",
+  );
+  lines.push(
+    "| **lbl:*** | proof facets | `label_case_counts` subtypes (`composition.wiring`, etc.) when `--fine-labels` (1.2.0 receipts). |",
   );
   lines.push("| **e2e** | proof facets | E2E test **cases** per classified file (same counting rule). |");
   lines.push(
@@ -214,6 +220,7 @@ function renderColumnDefinitionsSection() {
  *   patternRegex?: boolean;
  *   verboseTable?: boolean;
  *   summaryEpochMin?: number;
+ *   fineLabels?: boolean;
  * }} meta
  */
 export function renderComparisonMarkdown(rows, meta = {}) {
@@ -304,6 +311,24 @@ export function renderComparisonMarkdown(rows, meta = {}) {
     }
     for (const d of meta.discoverDiagnostics ?? []) {
       lines.push(`- **discover:** ${d.code}: ${d.message}`);
+    }
+    lines.push("");
+  }
+
+  if (meta.fineLabels === true && okRows.length > 0) {
+    lines.push("## Fine label counts (1.2.0)");
+    lines.push("");
+    lines.push(
+      "| label | lbl:wiring | lbl:integration | lbl:contract | comp_inferred |",
+    );
+    lines.push("| --- | --- | --- | --- | --- |");
+    for (const { label, receipt } of okRows) {
+      const pf = receipt.layers?.proof_facets ?? {};
+      const lc = pf.label_case_counts ?? {};
+      const displayLabel = trimComparisonDisplayLabel(label);
+      lines.push(
+        `| ${displayLabel} | ${fmtNum(lc["composition.wiring"])} | ${fmtNum(lc["composition.integration"])} | ${fmtNum(lc["composition.contract"])} | ${fmtNum(pf.composition_inferred_cases)} |`,
+      );
     }
     lines.push("");
   }

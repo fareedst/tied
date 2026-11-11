@@ -126,6 +126,7 @@ available_models:
    - claude-sonnet-5-xhigh
    - composer-2.5
    - composer-2.5-fast
+   # Grok: 4.5/4.6 use cursor-grok-{version}-* ; 4.7+ use grok-{version}-* (no cursor- prefix).
    - cursor-grok-4.5-high
    - cursor-grok-4.5-high-fast
    - cursor-grok-4.5-low

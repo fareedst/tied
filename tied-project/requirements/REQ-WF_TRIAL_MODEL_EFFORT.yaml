@@ -29,7 +29,7 @@ REQ-WF_TRIAL_MODEL_EFFORT:
       id: "SC-CLAUDE-ARGV"
     - criterion: "Cursor harness adds --add-dir for TIED store root when linked client resolves store."
       id: "SC-CURSOR-ADD-DIR"
-    - criterion: "Cursor harness agentArgv --model uses hyphen catalog effort tier when model effort configured (no bracket effort=)."
+    - criterion: "Cursor harness agentArgv --model uses hyphen catalog effort tier when model effort configured (no bracket effort=); Grok 4.5/4.6 slugs keep cursor-grok- prefix, Grok 4.7+ omit it."
       id: "SC-CURSOR-SLUG"
     - criterion: "Cursor harness batch argv includes --approve-mcps by default."
       id: "SC-CURSOR-APPROVE-MCPS"

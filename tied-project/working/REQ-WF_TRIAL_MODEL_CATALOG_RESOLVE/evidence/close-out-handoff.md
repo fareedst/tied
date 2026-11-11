@@ -13,7 +13,7 @@
 
 ## Commit
 
-See [proposed-commit-message.txt](./proposed-commit-message.txt) and git log after traceable commit.
+**SHA:** `5eac406c` — [proposed-commit-message.txt](./proposed-commit-message.txt)
 
 ## Operator
 

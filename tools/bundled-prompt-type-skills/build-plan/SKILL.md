@@ -42,6 +42,8 @@ Execute the linked plan in this order:
 4. **Plan** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md) (enrollment advisory: [methodology-surface-enrollment-advisory.md](../prompt-shared/methodology-surface-enrollment-advisory.md))
 5. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
+**Composition path naming:** When **`composition-integration`** is in tracker scope, read [tied-composition-test-naming-adjunct.md](../prompt-shared/tied-composition-test-naming-adjunct.md) before RED composition tests; list path-declared files in handoff **`composition_path_declared`**.
+
 **WF trial four-phase batch:** at handoff, follow [wf-trial-build-plan-handoff.md](../prompt-shared/wf-trial-build-plan-handoff.md) ([REQ-WF_TRIAL_FOUR_PHASE_HARDENING]).
 
 ### W6d build-plan triage hook (optional)

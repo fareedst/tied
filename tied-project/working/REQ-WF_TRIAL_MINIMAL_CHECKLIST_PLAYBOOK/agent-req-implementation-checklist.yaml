@@ -1,0 +1,51 @@
+description: "Build tracker — REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK + REQ-WF_TRIAL_PHASE_HANDOFF_GATE + manifest LEAP"
+execution_evidence:
+  completed: []
+  request: "REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+steps:
+  - disposition: "pending"
+    slug: "change-definition"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "test-strategy"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "risk-assessment"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    policy: "minimal-depth-no-inquiry"
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "unit-test-red"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "unit-test-green"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "composition-integration"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "verification-gate"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

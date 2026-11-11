@@ -4,7 +4,7 @@
 **request_token:** REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT  
 **date:** 2026-11-10  
 **prompt_type:** handoff (end of chat)  
-**plan_phase:** implementation-complete (v2 build done; close-out pending)
+**plan_phase:** closed (v2 @ `652c81a2`)
 
 ---
 
@@ -43,7 +43,7 @@
 - [x] sponsor UX tweaks — drop `ok`, drop Summary `verify_ev`, integer cross-layer, label trim
 - [x] refine-plan v2 — epoch floor, dedupe, wall_time, `--summary-epoch-min` (PLAN locked)
 - [x] build-plan v2 — render + snapshot trial_factors + regen table
-- [ ] close-out — **scoped** traceable commit after v2 build
+- [x] close-out — scoped traceable commit `652c81a2`
 
 ### Optional
 
@@ -75,7 +75,7 @@
 | **execution_site** | TIED methodology **store** |
 | **workspace_root** | `/Users/fareed/Documents/dev/chatgpt/stdd` |
 | **TIED_BASE_PATH** | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
-| **git** | `main` **ahead 22** · HEAD **`17a87250`** (GOAL_PROMPTS close-out); COMPACT v1+v2 docs **uncommitted** |
+| **git** | `main` **ahead 23** · HEAD **`652c81a2`** (COMPACT v2 close-out) |
 
 ---
 
@@ -122,8 +122,8 @@
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | **not run** — defer until `@close-out` |
-| Process contract | **partial** — v2 impl on disk; close-out commit pending |
+| Machine close-out | **run** — close_out gate allowed; envelope 0 blocking gaps |
+| Process contract | **complete** — `652c81a2` |
 | Adherence ledger | **thin_ledger** advisory |
 
 ---

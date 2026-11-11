@@ -4,15 +4,15 @@
 **request_token:** REQ-WF_TRIAL_PHASE_HANDOFF_GATE  
 **date:** 2026-11-11  
 **prompt_type:** handoff  
-**plan_phase:** post-build
+**plan_phase:** close-out complete (store)
 
 ---
 
 ## Plan spine
 
-- **Linked plan:** [PLAN.md](../PLAN.md) — wave 2 product REQ resolver · **`plan_phase: post-build`**
-- **Parent:** [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK/PLAN.md) (optional one-line LEAP on resolver wording at close-out)
-- **Do next skill:** **`@close-out`** (immediate)
+- **Linked plan:** [PLAN.md](../PLAN.md) — wave 2 product REQ resolver · **shipped** (`80b62f97`, readouts `1f7f4157`)
+- **Parent:** [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK/PLAN.md) (optional LEAP resolver bullet — deferred)
+- **REQ status:** **complete** on store (minimal/advisory close-out)
 
 ---
 
@@ -21,27 +21,25 @@
 | Artifact | Path |
 | --- | --- |
 | Tracker | [checklist-tracker.yaml](../checklist-tracker.yaml) |
-| CITDP (implemented) | [tied-project/citdp/CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml](../../../citdp/CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml) |
-| Verification receipt | [gates/verification-2026-11-11T14-35-39-668Z.json](../gates/verification-2026-11-11T14-35-39-668Z.json) |
-| Build handoff | [evidence/phase-handoff-build-plan.md](./phase-handoff-build-plan.md) |
-| Test command | `node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs` (53 pass at build) |
+| CITDP | [tied-project/citdp/CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml](../../../citdp/CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml) |
+| Close-out evidence | [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
+| Test command | `node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs` (53 pass) |
+| WF-10 cohort size summary | [comparison-table.md](../../../non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) (`wf-10-claude-claudehaiku55*` rows, `wall_clock` minutes) |
 
 ---
 
 ## Environment
 
 - **execution_site:** TIED store — `/Users/fareed/Documents/dev/chatgpt/stdd`
-- **TIED_BASE_PATH:** `tied-project/` (store MCP binding OK this session)
-- **depth_tier / gate_policy:** minimal / advisory
-- **git:** branch `main`, **ahead of origin** (large dirty tree — close-out should scope **REQ-WF_TRIAL_PHASE_HANDOFF_GATE** + related wave-2 paths; readouts are separate facilitator docs unless sponsor bundles)
+- **git:** `main`; HEAD **`1f7f4157`** (PHG + readouts committed); **dirty** — batch regen evidence + facilitator doc cross-links uncommitted
+- **TIED index note:** PHG close-out committed **scoped** index keys only; parallel REQ detail YAML may exist without index rows (see traceable-commit-evidence)
 
 ---
 
 ## Requirements and dependencies
 
-- **Primary:** `REQ-WF_TRIAL_PHASE_HANDOFF_GATE` (SC-WF-PHG-06 LEAP shipped in build)
-- **depends_on:** `REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK`, `REQ-WF_TRIAL_FOUR_PHASE_HARDENING`
-- **Validation cohort (read-only, not this REQ):** WF-10 Haiku runs `1794407806` (medium), `1794408633` (low), `1794409094` (high) — orchestrator phase-handoff gate **observed passing** on post-fix store scripts; close-out on **clients** still mixed
+- **Primary:** `REQ-WF_TRIAL_PHASE_HANDOFF_GATE` — **closed** (`80b62f97`)
+- **Validation cohort (facilitator):** WF-10 Haiku `1794407806` / `1794408633` / `1794409094` — readouts committed; batch **Summary** regen `2026-11-11T15:30:40Z`
 
 ---
 
@@ -49,17 +47,17 @@
 
 | id | kind | status | blocks_current | evidence_link |
 | --- | --- | --- | --- | --- |
-| REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK | REQ | parent shipped | no | parent PLAN |
-| WF-10 facilitator readouts | docs | uncommitted | no | `docs/demos/trial-readout-PROMPT-WF-10-*-179440*.md` |
-| Process log `exit_code` = four-phase only | follow-on | optional | no | chat 2026-11-11 — manifest stamped before shell gates |
+| REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK | REQ | parent | no | optional PLAN LEAP |
+| project-size-batch-discover-compare | non-tied | evidence dirty | no | [comparison-table.md](../../../non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) |
+| Other store WIP (project-size, composition, MCP) | REQ mix | uncommitted | no | large `git status` |
 
 ---
 
 ## Finished this session
 
-- **build-plan** — resolver A–D, gate DIAGNOSTICs, bootstrap tests, SC-WF-PHG-06, agent docs (see build handoff)
-- **Facilitator readouts** — PROMPT-WF-10 post-resolver cells: `1794407806`, `1794408633`, `1794409094` (+ catalog/README rows)
-- **Evidence analysis** — confirmed phase-handoff + proof manifest gates run (stderr, replay); contrast pre-fix `1794406459` resolve ERROR vs post-fix slim-tracker **exists**
+- **@close-out** — gates `close-out-phg-wave2-20261111-r2` green; commits **`80b62f97`**, **`1f7f4157`**
+- **Batch regen (manual)** — `comparison-table.md` includes **WF-10 Haiku** summary rows (`wall_clock` 5 / 7 / 14 min)
+- **Doc cross-links** — size catalog, demos README, registry, catalog Recorded trials, three **179440\*** readouts, `docs/workflow-trials.md` comment
 
 ---
 
@@ -70,73 +68,60 @@
 - [x] add-feature
 - [x] refine-plan
 - [x] build-plan
-- [ ] **close-out** ← **immediate**
+- [x] close-out
 
 ### Changelog (this REQ)
 
 | Date | prompt_type | Summary |
 | --- | --- | --- |
-| 2026-11-11 | add-feature | Wave 2 product REQ resolver |
-| 2026-11-11 | refine-plan | Tiers, tracker YAML, CITDP adversarial block |
-| 2026-11-11 | build-plan | Shipped + verification receipt |
-| 2026-11-11 | handoff | Close-out ready; facilitator readouts + gate observability notes |
+| 2026-11-11 | close-out | `80b62f97` + readouts `1f7f4157` |
+| 2026-11-11 | handoff | Post-close-out; batch summary + doc links (uncommitted) |
 
 ---
 
-## Completion signals (last session — not close-out)
+## Completion signals (REQ-WF_TRIAL_PHASE_HANDOFF_GATE)
 
 | Signal | Status |
 | --- | --- |
-| **Machine close-out** | not_run |
-| **Process contract** | not_run |
-| **Adherence ledger** | not_run |
+| **Machine close-out** | **pass** |
+| **Process contract** | **pass** |
+| **Adherence ledger** | **pass** (advisory `evidence_stale`) |
+| **Workspace cleanliness (scoped REQ)** | **pass** |
 
-Build verification gate **allowed: true** ([receipt](../gates/verification-2026-11-11T14-35-39-668Z.json)) — not a substitute for close_out + envelope.
+Batch evidence + facilitator docs: **not committed** — see Do next.
 
 ---
 
 ## Do next
 
-1. **`@close-out`** linked to [PLAN.md](../PLAN.md) and [checklist-tracker.yaml](../checklist-tracker.yaml)
-2. Run **`sub-close-out-evidence-sync`** / `run-close-out-gates.mjs` per close-out skill (`--envelope-blocking --sync-dispositions --reconcile`)
-3. **`tied_validate_consistency`** after TIED YAML + CHANGELOG
-4. **Optional same commit or separate:** facilitator trial readouts under `docs/demos/` (sponsor choice)
-5. **Optional LEAP:** parent playbook PLAN § resolver bullet (table + line)
+1. **Traceable commit (facilitator batch)** — stage `tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/` (`comparison-table.md`, `manifest.v1.json`, touched `receipts/`) + doc updates under `docs/demos/` (+ `docs/workflow-trials.md` if modified)
+2. **Optional:** parent [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK/PLAN.md) LEAP — resolver table bullet
+3. **Optional:** re-insert parallel REQ **index** rows lost during scoped PHG index merge (see traceable-commit-evidence)
+4. **No push** unless sponsor asks
 
 ---
 
 ## Constraints
 
-- Do not treat orchestrator manifest `exit_code` as composite gate result (four-phase only today)
-- Tier E inventory scrape **deferred**
-- No commit in handoff skill — **`@close-out`** owns traceable commit when gates allow
+- Comparison **Summary** dedupes by label — not full run history ([registry](../../../../docs/demos/traditional-workflow-trial-runs-registry.md) keeps seconds + grades)
+- Tier E inventory scrape still **deferred**
+- Upstream feedback capture: **N/A** on PHG close-out
 
 ---
 
 ## Resume prompt (paste into new chat)
 
 ```markdown
-Continue TIED work from handoff — immediate close-out.
+Continue from handoff — facilitator batch commit.
 
-**Request:** REQ-WF_TRIAL_PHASE_HANDOFF_GATE
-**Linked plan:** @tied-project/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/PLAN.md
-**Tracker:** @tied-project/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/checklist-tracker.yaml
+**Closed:** REQ-WF_TRIAL_PHASE_HANDOFF_GATE (`80b62f97`, `1f7f4157`)
 
-## Plan spine
-- Wave 2 product REQ resolver — build complete, `plan_phase: post-build`
-- Verification: `node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs` (53 pass at build)
+**Uncommitted:**
+- `tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/` (regen 2026-11-11T15:30:40Z; WF-10 Haiku rows)
+- `docs/demos/` cross-links to comparison-table Summary (`wall_clock` minutes)
+- Large unrelated store WIP — exclude unless sponsor widens scope
 
-## Done last session
-- Shipped `wf-trial-product-req.inc.sh` + gate DIAGNOSTICs + SC-WF-PHG-06
-- Recorded WF-10 readouts 1794407806 / 1794408633 / 1794409094 (uncommitted docs)
+**Do next:** scoped git commit for batch evidence + doc links only.
 
-## Do next
-**@close-out** for REQ-WF_TRIAL_PHASE_HANDOFF_GATE first.
-Optional: commit facilitator readouts separately; parent playbook LEAP line.
-
-## Completion signals
-Machine / process / ledger: all **not_run** until close-out completes.
-
-## Constraints
-Scope store close-out to phase-handoff gate REQ; minimal/advisory depth.
+**Summary anchor:** comparison-table.md — `wf-10-claude-claudehaiku55low|medium|high` (wall_clock 5/7/14).
 ```

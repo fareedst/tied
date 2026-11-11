@@ -1,0 +1,17 @@
+CITDP-REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE:
+  change_definition:
+    current_behavior: "Wave 1 shipped range-only L3 gate: wf_trial_proof_manifest_gate_enabled returns true only when WF_TRIAL_REQUIRE_PROOF_MANIFEST is set (workflow_trial_range exports it). Single-cell workflow_trial_agentstream runs exit 0 without manifest; preload tells agents manifest is optional when env unset (WF-10 Haiku 1794369836)."
+    desired_behavior: "workflow-trial-agentstream default-on L3 gate for all PROMPT-WF-01..12; remove WF_TRIAL_REQUIRE_PROOF_MANIFEST; gate disabled only via WF_TRIAL_SKIP_PROOF_MANIFEST or dry-run; unconditional agent preload + four-phase build-plan manifest obligation."
+  impact_discovery:
+    modules_or_boundaries: "scripts/build-commands.sh; scripts/workflow-trial-agentstream.sh; scripts/lib/wf-trial-proof-manifest-gate.inc.sh; scripts/lib/wf-trial-agentstream-help.inc.sh; tools/bootstrap/lib/wf-trial-proof-manifest-gate.mjs; tools/bootstrap/workflow-trial-agentstream-sh.test.mjs; tied-bundle/docs/wf-trial-agent-preload-contract.yaml; docs/demos/traditional-four-phase-agentstream.yaml; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-proof-manifest-adjunct.md; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-build-plan-handoff.md; tied-project/vocab/agentstream.md; REQ/ARCH/IMPL-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE"
+  risk_assessment:
+    costly_choices:
+      - "Does not change G3 MCP blocking default"
+      - "Every historical single-cell orchestrator success without manifest becomes exit 1 on re-run until agent fills files[]"
+      - "Remove WF_TRIAL_REQUIRE_PROOF_MANIFEST entirely (no compatibility shim)"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    reversible_choices:
+      - "wf-trial-build-plan-handoff manifest row (recommended adjunct only)"
+  success_criteria:
+    - "SC-RPM-01 through SC-RPM-08 (wave 2 definitions in PLAN §7)"

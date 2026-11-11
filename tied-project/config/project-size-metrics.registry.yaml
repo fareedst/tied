@@ -33,12 +33,12 @@ layers:
       - id: "template_overlap_utf8_bytes"
         label: "Template-overlap UTF-8 bytes (subset of gross)"
   proof_facets:
-    description: "Executable facets — tests and evidence receipts, not product definition."
+    description: "Executable facets — tests and evidence receipts, not product definition. Coarse receipt keys at validator_version 1.1.0; fine proof_subtype dissection via label_case_counts from 1.2.0 (stack PLAN)."
     metrics:
       - id: "binding_inventory_tests"
         label: "Binding-inventory-related test cases (node:test it/test per file)"
       - id: "composition_tests"
-        label: "Composition test cases (node:test it/test per file)"
+        label: "Path-declared composition test cases (suffixes .composition/.integration/.binding/.contract.test.ts; node:test it/test per file)"
       - id: "e2e_tests"
         label: "E2E test cases (node:test it/test per file)"
       - id: "unit_tests"

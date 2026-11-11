@@ -1,0 +1,8 @@
+CITDP-REQ-WF_TRIAL_COMPOSITION_EVIDENCE_SUBCHECK:
+  change_definition:
+    desired_behavior: "MCP tied_trial_composition_evidence_subcheck + record-wf-trial histogram appendix for PROMPT-WF-09..12"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-SUB-01 through SC-SUB-04"

@@ -1,0 +1,8 @@
+CITDP-REQ-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE:
+  change_definition:
+    desired_behavior: "label_case_counts at 1.2.0; composition_inferred_cases; batch compare --fine-labels"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-INF-01 through SC-INF-06"

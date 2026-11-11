@@ -1,6 +1,6 @@
 # PLAN — [REQ-WF_TRIAL_COMPOSITION_PROMPTS] (refine-plan)
 
-**Status:** build-plan complete (awaiting close-out)  
+**Status:** close-out complete (`0a3f50da`)  
 **Workflow:** add-feature → **refine-plan** → `@build-plan` → close-out  
 **Request token:** `REQ-WF_TRIAL_COMPOSITION_PROMPTS`  
 **plan_phase:** `post-build`  

@@ -617,6 +617,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 3. Write a **failing composition test** for each binding (before composition code):
    - Carries the IMPL block's token comments.
    - Verifies: trigger fires → correct unit called → correct arguments → correct effect.
+   - Uses **path-declared** suffixes per [proof-test-label taxonomy](../../tied-project/working/REQ-TIED_TRIAL_PROOF_INTENT_STACK/evidence/proof-test-label-taxonomy.md) (`*.binding.test.ts`, `*.integration.test.ts`, `*.contract.test.ts`, …) — not inference-only colocated unit names for composition evidence.
+   - Before **verification-gate**, run **`tied_path_declared_composition_validate`** ([REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE](../../tied-project/working/REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE/PLAN.md)); respect tracker `enforcement` (`advisory` vs `blocking`).
    - Does **not** invoke the UI. IF it would require UI invocation THEN it belongs in end-to-end-ui (E2E), not here.
 4. Write **composition code** to pass the test. No composition code without a preceding failing test.
 5. Apply three-way alignment (same rules as three-way-alignment-unit).

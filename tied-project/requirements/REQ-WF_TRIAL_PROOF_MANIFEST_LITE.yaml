@@ -1,0 +1,4 @@
+REQ-WF_TRIAL_PROOF_MANIFEST_LITE:
+  acceptance_criteria:
+    - "SC-MAN-01 through SC-MAN-05"
+  description: "proof-facet-manifest.v1 on subject clients; tied_wf_proof_manifest_validate; snapshot label overrides."

@@ -11,9 +11,9 @@ CITDP-REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
   impact_analysis:
     modules_or_boundaries: "tools/bundled-record-wf-trial-skill; docs/demos; tools/bootstrap/lib"
     tied_tokens_new:
-      - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
       - "ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE"
       - "IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE"
+      - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
   record_identity:
     change_request_id: "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
     citdp_id: "CITDP-REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"

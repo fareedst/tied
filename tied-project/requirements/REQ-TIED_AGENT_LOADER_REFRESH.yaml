@@ -14,12 +14,12 @@ REQ-TIED_AGENT_LOADER_REFRESH:
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
       - "REQ-TIED_SETUP"
   satisfaction_criteria:
-    - criterion: "Stale client AGENTS.md semver is refreshed from store on install/refresh"
-      metric: "agent-loader-sync.test.mjs and install-layers.integration.test.mjs"
     - criterion: "--preserve-agent-loader skips semver sync"
       metric: "integration test preserve case"
     - criterion: "Bootstrap warns when AGENTS semver differs from install.json pin"
       metric: "warnAgentsLoaderDrift unit test"
+    - criterion: "Stale client AGENTS.md semver is refreshed from store on install/refresh"
+      metric: "agent-loader-sync.test.mjs and install-layers.integration.test.mjs"
   status: "Implemented"
   traceability:
     architecture:
@@ -27,5 +27,5 @@ REQ-TIED_AGENT_LOADER_REFRESH:
     implementation:
       - "IMPL-TIED_AGENT_LOADER_REFRESH"
     tests:
-      - "tools/bootstrap/lib/agent-loader-sync.test.mjs"
       - "tools/bootstrap/install-layers.integration.test.mjs"
+      - "tools/bootstrap/lib/agent-loader-sync.test.mjs"

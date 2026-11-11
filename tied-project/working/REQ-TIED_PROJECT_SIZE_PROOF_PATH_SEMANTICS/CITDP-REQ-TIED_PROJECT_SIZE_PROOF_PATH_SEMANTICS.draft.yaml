@@ -1,0 +1,35 @@
+CITDP-REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS:
+  change_definition:
+    current_behavior: "classifyTestFile marks composition only via composition substring or .composition.test.ts. Colocated tests and new naming patterns (integration/binding suffixes) are ambiguous in catalog copy. WF trials may show comp:0 while composition wiring exists."
+    desired_behavior: "Explicit path-declared composition rules including .integration, .binding, and .contract test suffixes; classifyTestFileFine derives proof_subtype per taxonomy; catalog documents coarse vs fine labels; PROOF_LABEL header and WF naming adjunct; receipt facets stay validator_version 1.1.0; label_case_counts deferred to L2."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/project-size/proof-test-classify.ts (new); mcp-server/src/project-size/snapshot-builder.ts; mcp-server/src/project-size/project-size.test.ts; mcp-server/test/fixtures/project-size/mini-client/; tied-project/config/project-size-metrics.registry.yaml; docs/demos/catalog-tied-size-and-trial-statistics.md; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-proof-naming-adjunct.md; tied-project/vocab/tied-methodology.md; tied-project/working/REQ-TIED_TRIAL_PROOF_INTENT_STACK/evidence/proof-test-label-taxonomy.md"
+    tied_tokens_new:
+      - "ARCH-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS"
+      - "IMPL-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS"
+      - "REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS"
+  non_goals:
+    - "Manifest or subcheck (L3/L4)"
+    - "PROOF_KIND affecting classifier in L1"
+    - "validator_version 1.2.0 inferred fields (L2)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Path rules only; inference deferred."
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Additive classifier suffixes; explicit catalog wording; G1 sponsor gate before L2."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-PPS-01 through SC-PPS-06 in PLAN.md"
+  test_strategy:
+    composition:
+      - "mcp-server/src/project-size/project-size-mcp.composition.test.ts"
+    unit:
+      - "mcp-server/src/project-size/project-size.test.ts"
+  unchanged_behavior: "Case counting per PROOF_FACET_TEST_CASES; binding-inventory and e2e rules; proof_boundary; verify_evidence_files."

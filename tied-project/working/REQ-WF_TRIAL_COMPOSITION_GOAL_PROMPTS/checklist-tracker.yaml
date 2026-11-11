@@ -20,7 +20,6 @@ execution_evidence:
     gates: {}
     master_checklist: ""
   completed: []
-  # refine-plan 2026-11-10: tracker initialized
   envelope_path: "working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json"
   evidence_refs_format: "Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):\n  - kind: manifest_ref\n    path: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n  - kind: gate_receipt\n    path: working/{REQ-TOKEN}/gates/verification-2026-08-24T16-46-08-642Z.json\n  - kind: envelope_ref\n    path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json\n  - kind: file_path\n    path: working/{REQ-TOKEN}/evidence/step-artifact.md\n  - kind: command_evidence\n    claimed_success: true\n    manifest_ref: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n    stdout_ref: working/{REQ-TOKEN}/evidence/stdout.txt\n    exit_code: 0\nLegacy string paths remain accepted; generic prose (e.g. \"tests passed\") is rejected as unresolved_evidence_ref.\n"
   operator_evidence:

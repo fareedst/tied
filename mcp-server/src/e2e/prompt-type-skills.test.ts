@@ -364,6 +364,17 @@ describe("prompt-type skill bundle", () => {
     }
   });
 
+  it("build-plan references path-declared composition naming adjunct [REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE] [SC-PDC-04]", () => {
+    const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
+    const build = fs.readFileSync(path.join(bundleRoot, "build-plan", "SKILL.md"), "utf8");
+    assert.match(build, /tied-composition-test-naming-adjunct\.md/);
+    const adjunct = fs.readFileSync(
+      path.join(bundleRoot, "prompt-shared", "tied-composition-test-naming-adjunct.md"),
+      "utf8",
+    );
+    assert.match(adjunct, /\.binding\.test\.ts/);
+  });
+
   it("splits use-skill Plan across prepare and RED build docs [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE]", () => {
     const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
     const useSkill = fs.readFileSync(path.join(bundleRoot, "use-skill", "SKILL.md"), "utf8");

@@ -1,0 +1,29 @@
+CITDP-REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK:
+  change_definition:
+    current_behavior: "Disposable WF four-phase agents copy full checklist template or invent execution_evidence.completed slugs (including prompt-type names), skip verification gate receipts, and pass orchestrator exit 0 with min-shape-only proof manifests (WF-10 Haiku readouts)."
+    desired_behavior: "Agents receive slim tracker + numbered gate adjunct; product working folder seeds checklist-tracker.yaml; phase-handoff and manifest gates fail closed on turn 3; turn 4 close-out playbook mandates evidence sync before machine close_out when verification ran."
+    non_goals:
+      - "Auto-rewrite tracker slugs"
+      - "Blocking gate_policy for all WF trials"
+      - "Integrated adversarial inquiry at minimal depth"
+    success_criteria:
+      - "Bootstrap tests cover new gate error codes"
+      - "Next WF-10 cell lists registry slugs in handoff and gates/verification-*.json on disk"
+      - "Process adherence grade moves toward B band on @record-wf-trial"
+  gate_policy: "advisory"
+  impact_discovery:
+    modules_or_boundaries: "tied-bundle/templates; scripts/lib/wf-trial-*.inc.sh; scripts/run-traditional-four-phase-agentstream.sh; tools/bootstrap/lib/wf-trial-proof-manifest-gate.mjs; tools/bundled-prompt-type-skills/prompt-shared; docs/demos/traditional-four-phase-agentstream.yaml; tied-bundle/docs/wf-trial-agent-preload-contract.yaml; REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK; REQ-WF_TRIAL_PHASE_HANDOFF_GATE; LEAP REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE"
+  profile_depth: "minimal"
+  record_identity: null
+  related_work:
+    checklist_alignment: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    manifest_leap_req: "REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE"
+    phase_handoff_req: "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+  risk_assessment:
+    costly_choices:
+      - "Default-on phase-handoff + manifest coverage fails previously passing scaffold-only cells"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    reversible_choices:
+      - "WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1 operator escape"
+      - "WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT default off"

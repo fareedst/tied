@@ -1,31 +1,35 @@
 CITDP-REQ-TIED_AGENT_LOADER_REFRESH:
-  request_token: "REQ-TIED_AGENT_LOADER_REFRESH"
-  record_status: "implemented"
   change_definition:
     current_behavior: "tied-install and --refresh copy AGENTS.md from the store only when the client file is absent (create-if-absent). Existing loaders never update when store methodology advances; install.json may pin current store semver while AGENTS.md still mandates obsolete session rules (e.g. TIEDv4.0.0 stamp)."
     desired_behavior: "Default install/refresh syncs client AGENTS.md from the store when parsed client TIED Methodology Version semver is less than store semver. Equal or newer client semver skips overwrite. --preserve-agent-loader and TIED_BOOTSTRAP_PRESERVE_AGENT_LOADER restore create-if-absent. Bootstrap warns when AGENTS semver disagrees with install.json store_methodology_version after install."
     non_goals:
-      - "tied-project/agent-inject composition"
       - "Overwrite .cursorrules or tied-project/config.yaml"
       - "Overwrite client root VERSION on refresh"
+      - "tied-project/agent-inject composition"
     success_criteria:
       - "SC-ALR-SYNC through SC-ALR-WARN per working test-strategy.md"
     unchanged_behavior: "MCP semver resolution order (install.json pin first) unchanged. tied-bundle methodology overwrite unchanged."
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/agent-loader-sync.test.mjs"
+      - "node --test tools/bootstrap/install-layers.integration.test.mjs"
   impact_analysis:
     modules_or_boundaries: "tools/bootstrap/lib/agent-loader-sync.mjs; tools/bootstrap/lib/layers/db.mjs; tools/bootstrap/lib/bootstrap.mjs; tools/bootstrap/install-layers.mjs"
+    tied_tokens_affected:
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
     tied_tokens_new:
-      - "REQ-TIED_AGENT_LOADER_REFRESH"
       - "ARCH-TIED_AGENT_LOADER_REFRESH"
       - "IMPL-TIED_AGENT_LOADER_REFRESH"
-    tied_tokens_affected:
-      - "REQ-TIED_SETUP"
-      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_AGENT_LOADER_REFRESH"
+  record_status: "implemented"
+  request_token: "REQ-TIED_AGENT_LOADER_REFRESH"
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Sponsor customized AGENTS.md lost on store minor bump"
         - "preserve flag left loader stale while install.json pin current"
+        - "Sponsor customized AGENTS.md lost on store minor bump"
       depth_tier: "minimal"
       disconfirming_observations:
         - "Refresh on disposable client updates AGENTS semver line to match store"
@@ -38,7 +42,3 @@ CITDP-REQ-TIED_AGENT_LOADER_REFRESH:
       research_profile: "integrated-agent"
     depth_tier: "minimal"
     gate_policy: "advisory"
-  evidence:
-    command_seq:
-      - "node --test tools/bootstrap/lib/agent-loader-sync.test.mjs"
-      - "node --test tools/bootstrap/install-layers.integration.test.mjs"

@@ -1,0 +1,9 @@
+CITDP-REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS:
+  change_definition:
+    current_behavior: "classifyTestFile marks composition only via composition substring or .composition.test.ts."
+    desired_behavior: "Fine path classify module; composition suffixes; catalog/registry coarse vs fine; receipt 1.1.0."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-PPS-01 through SC-PPS-07"

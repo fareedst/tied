@@ -1,0 +1,2392 @@
+# TIED Methodology Changelog
+
+All notable changes to the TIED (Token-Integrated Engineering & Development) methodology will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- **PROMPT-WF-09 facilitator readouts (Claude Haiku/Sonnet × low/medium/high @ 1794350349…1794353174)** — Six **ordered concurrent map** cells via `workflow_trial_agentstream wf-09` on **4.2.1**; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md) updated via `@record-wf-trial`. All cells **`composition_tests: 0`** on size receipts (unit-only proof).
+
+- **WF trial composition prompts ([REQ-WF_TRIAL_COMPOSITION_PROMPTS], [ARCH-WF_TRIAL_COMPOSITION_PROMPTS], [IMPL-WF_TRIAL_COMPOSITION_PROMPTS])** — **PROMPT-WF-09…12** in [catalog-traditional-workflow-trial-prompts.md](docs/demos/catalog-traditional-workflow-trial-prompts.md) (unit + module binding tests); `workflow_trial_agentstream wf-09`…`wf-12`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_COMPOSITION_PROMPTS/PLAN.md).
+
+- **WF trial model compose ([REQ-WF_TRIAL_MODEL_COMPOSE], [ARCH-WF_TRIAL_MODEL_COMPOSE], [IMPL-WF_TRIAL_MODEL_COMPOSE])** — Compose families (`luna`, `grok47`, `sol`, `composer-2.5`) build Cursor catalog slugs from `MODEL_REF` + `EFFORT` (e.g. `workflow_trial_range cursor luna medium 2 2` → `gpt-5.6-luna-medium-fast`); tiered matrix ids + conflicting effort fail closed. Specs schema `wf-trial-model-spec.v2`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_COMPOSE/PLAN.md).
+
+- **WF trial model catalog resolve ([REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE], [ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE], [IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE])** — `workflow_trial_range HARNESS MODEL_REF …` resolves matrix ids, `agent models` slugs, and Claude aliases via [wf-trial-model-catalog.yaml](docs/demos/wf-trial-model-catalog.yaml); `composer-2.5` is cursor-only; use `haiku-5-5` on Claude. Regen: `node tools/bootstrap/sync-wf-trial-model-catalog.mjs`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE/PLAN.md).
+
+- **Project size follow-ons ([REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS], [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES])** — UTF-8 operational intent mass (`applied_utf8_bytes`, `operational_intent_utf8_per_atom`); proof facets count `node:test` **cases** at `validator_version` **1.1.0**; [`project-size-batch-compare.mjs`](tools/bootstrap/lib/project-size-batch-compare.mjs) facilitator + regenerated comparison evidence. Plans: [UTF8](tied-project/working/REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS/PLAN.md), [proof cases](tied-project/working/REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES/PLAN.md).
+
+- **TIED project size layers ([REQ-TIED_PROJECT_SIZE_LAYERS], [ARCH-TIED_PROJECT_SIZE_SNAPSHOT], [IMPL-TIED_PROJECT_SIZE_SNAPSHOT], [IMPL-TIED_PROJECT_SIZE_RECORD_WF_TRIAL], [IMPL-TIED_PROJECT_SIZE_COHORT_JSONL])** — MCP `tied_project_size_snapshot` (atoms, operational intent, proof facets); human metrics [`project-size-metrics.registry.yaml`](tied-project/config/project-size-metrics.registry.yaml); catalog [`catalog-tied-size-and-trial-statistics.md`](docs/demos/catalog-tied-size-and-trial-statistics.md); `@record-wf-trial` size appendix. Close-out `close-out-project-size-layers-2026-11-09-final`. Plan: [PLAN.md](tied-project/working/REQ-TIED_PROJECT_SIZE_LAYERS/PLAN.md).
+
+- **WF trial model spec CLI ([REQ-WF_TRIAL_MODEL_SPEC_CLI], [ARCH-WF_TRIAL_MODEL_SPEC_CLI], [IMPL-WF_TRIAL_MODEL_SPEC_CLI])** — `workflow_trial_range HARNESS CONFIG_ID EFFORT END START` resolves [wf-trial-model-specs.yaml](docs/demos/wf-trial-model-specs.yaml) (replaces duplicate SLUG+CONFIG); e.g. `workflow_trial_range cursor luna-low medium 2 2`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/PLAN.md).
+
+- **WF trial model effort ([REQ-WF_TRIAL_MODEL_EFFORT], [ARCH-WF_TRIAL_MODEL_EFFORT], [IMPL-WF_TRIAL_MODEL_EFFORT])** — `workflow_trial_range` 4th positional for `MODEL_EFFORT`; Claude `--effort` + `CLAUDE_CODE_EFFORT_LEVEL`; Cursor `--model` **catalog slug tier rewrite** (not `[effort=]` brackets); `composer-2.5*` blocklist; range usage + composer DIAGNOSTIC; default `--approve-mcps` and store `--add-dir`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MODEL_EFFORT/PLAN.md).
+
+- **REQ-WF_TRIAL_MODEL_EFFORT facilitator batch (@ 1794246\*)** — Twenty-five readouts from disposable matrix (`composer.2.5` effort medium/high, `luna-low` + effort, plain `lunalow`/`composer25` baselines; WF-02/WF-03 cells). Nineteen aborted clients removed (`cfg` placeholder, invalid `composer-2.5-fast[effort=medium]` bracket, killed run). Catalog, [README](docs/demos/README.md), and [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) (**102** rows). Evidence: [deleted-clients.md](tied-project/working/FACILITATOR-WF-MODEL-EFFORT-BATCH-1794246/evidence/deleted-clients.md).
+
+- **PROMPT-WF-08 facilitator readout (GPT-5.6 Luna low / Cursor agentstream @ 1794231848)** — [trial-readout-PROMPT-WF-08-luna-low-1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.md](docs/demos/trial-readout-PROMPT-WF-08-luna-low-1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.md) (**split signal** — orchestrator `exit_code: 0`; **2/2** tests uncommitted; machine close-out **not_run**; pairs [1794100604](docs/demos/trial-readout-PROMPT-WF-08-luna-low-1794100604-wf-agentstream-wf-08-cursor-lunalow.md)). Catalog + demos index + runs registry updated via `@record-wf-trial`.
+
+- **WF trial readout grading rationale ([REQ-WF_TRIAL_READOUT_GRADING_RATIONALE], [ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE], [IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE])** — `@record-wf-trial` reference § Session grading rationale; catalog Rationale column rules; `trial-readout-grading-rationale-contract.test.mjs` over 84 `trial-readout-PROMPT-WF-*.md` (bands frozen, rationale backfill). Close-out `close-out-wf-grading-rationale-2026-11-09-final` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_READOUT_GRADING_RATIONALE/PLAN.md).
+
+- **Cursor live session oracle ([REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE])** — `@tied/agentstream` bounded turn retry, shared NDJSON session extraction, and `DIAGNOSTIC: cursor_live_session_oracle` before fail-closed when four-phase trials lose `session_id` after `WritableIterable` stderr (field case `1794179357-wf-agentstream-wf-01-cursor-grok47med`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE/PLAN.md).
+
+### Changed
+
+- **Traditional workflow trial runs registry** — [traditional-workflow-trial-runs-registry.md](docs/demos/traditional-workflow-trial-runs-registry.md) Master table slimmed to WF index, harness, model slug, exit, orchestrator **Run time** (wall seconds), and **Grades** with sortable `mean · Req/Tr/Ts/Al/Pr/Ch/Ml` via `meanCompactGrades` / `bandToScore` in [read-trial-readout-session-grading.mjs](tools/bootstrap/lib/read-trial-readout-session-grading.mjs). Demos index links grok47-med and 1794205* composer batch readouts. Plan: [PLAN-WF-TRIAL-RUNS-REGISTRY](tied-project/working/PLAN-WF-TRIAL-RUNS-REGISTRY/PLAN.md).
+
+### Fixed
+
+- **Cursor session oracle exit normalization ([REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE])** — Treat Cursor turns with captured `session_id` plus deliverable transcript or retriable `WritableIterable` stderr as harness success when the agent process exits non-zero (field case `1794185608-wf-agentstream-wf-03-cursor-grok47med`, T-LIVE-SESSION-03/04).
+
+### Fixed
+
+- **Agent loader semver sync ([REQ-TIED_AGENT_LOADER_REFRESH])** — Default `tied-install` / `--refresh` updates install-managed **`AGENTS.md`** when client loader semver lags the store; **`--preserve-agent-loader`** retains create-if-absent. Bootstrap warns when `AGENTS.md` disagrees with `install.json` `store_methodology_version`. Plan: [PLAN.md](tied-project/working/REQ-TIED_AGENT_LOADER_REFRESH/PLAN.md).
+- **Install manifest semver on refresh ([REQ-TIED_INSTALL_JSON_REFRESH_SEMVER])** — `tied-install` / `--refresh` writes `store_methodology_version`, `tied_version`, and `installer_version` from store `VERSION`; MCP `server_info` / `resolveTiedMethodologyVersion` prefer `tied-bundle/install.json` over frozen client root `VERSION`. Plan: [PLAN.md](tied-project/working/REQ-TIED_INSTALL_JSON_REFRESH_SEMVER/PLAN.md).
+
+### Added
+
+- **PROMPT-WF-05 facilitator readout (Composer 2.5 / Cursor agentstream @ 1794175632)** — [trial-readout-PROMPT-WF-05-composer25-1794175632-wf-agentstream-wf-05-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794175632-wf-agentstream-wf-05-cursor-composer25.md) (**workflow complete** — isolated re-run after batch [1794167900](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794167900-wf-agentstream-wf-05-cursor-composer25.md); orchestrator **`exit_code: 0`**; **`b16a77f`**; **7/7** tests). Catalog + demos index + runs registry updated via `@record-wf-trial`.
+- **PROMPT-WF-04 facilitator readout (Composer 2.5 / Cursor agentstream @ 1794170303)** — [trial-readout-PROMPT-WF-04-composer25-1794170303-wf-agentstream-wf-04-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-04-composer25-1794170303-wf-agentstream-wf-04-cursor-composer25.md) (**workflow complete** — isolated re-run after batch split [1794167373](docs/demos/trial-readout-PROMPT-WF-04-composer25-1794167373-wf-agentstream-wf-04-cursor-composer25.md); orchestrator **`exit_code: 0`**; **`b437ba0`**; **16/16** tests). Catalog + demos index + runs registry updated via `@record-wf-trial`.
+- **PROMPT-WF-05 facilitator readout (Composer 2.5 / Cursor agentstream @ 1794167900)** — [trial-readout-PROMPT-WF-05-composer25-1794167900-wf-agentstream-wf-05-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794167900-wf-agentstream-wf-05-cursor-composer25.md) (**workflow incomplete** — chained batch **1794165***; refine only with ARCH/IMPL on disk; orchestrator `exit_code: 1`; `WritableIterable`; **0** tests; pairs [1794042383](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794042383-wf-agentstream-wf-05-cursor-composer25.md) / [1794049382](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794049382-wf-agentstream-wf-05-cursor-composer25.md)). Catalog + demos index + runs registry updated via `@record-wf-trial`.
+- **PROMPT-WF-04 facilitator readout (Composer 2.5 / Cursor agentstream @ 1794167373)** — [trial-readout-PROMPT-WF-04-composer25-1794167373-wf-agentstream-wf-04-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-04-composer25-1794167373-wf-agentstream-wf-04-cursor-composer25.md) (**split signal** — chained batch **1794165***; **11/11** green tests uncommitted; orchestrator `exit_code: 1`; `WritableIterable` at turn 3 boundary; close-out not run; pairs [gold @ 1793851888](docs/demos/trial-readout-PROMPT-WF-04-composer25-1793851888-wf-agentstream-wf-04-cursor-composer25.md)). Catalog + demos index + runs registry updated via `@record-wf-trial`.
+- **PROMPT-WF-01…08 facilitator readouts (GPT-5.6 Luna low / Cursor agentstream @ 1794094)** — Eight **luna-low** cells on **TIED 4.2.1**: [WF-01](docs/demos/trial-readout-PROMPT-WF-01-luna-low-1794094975-wf-agentstream-wf-01-cursor-lunalow.md) through [WF-08](docs/demos/trial-readout-PROMPT-WF-08-luna-low-1794100604-wf-agentstream-wf-08-cursor-lunalow.md). Cohort snapshot: WF-04–08 mostly **split signal** (green tests on disk, close-out blocked, orchestrator **`0`**); WF-01–03 **incomplete** with **0** tests. Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-03 facilitator readout (GPT-5.6 Luna high repeat @ 1794093680)** — [trial-readout-PROMPT-WF-03-luna-high-1794093680-wf-agentstream-wf-03-cursor-lunahigh.md](docs/demos/trial-readout-PROMPT-WF-03-luna-high-1794093680-wf-agentstream-wf-03-cursor-lunahigh.md) (**workflow incomplete** — refine/build blocked; **0** tests; orchestrator `exit_code: 0`). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-01…08 facilitator readouts (Claude Sonnet 5.5 / Claude agentstream @ 1794101)** — Eight **sonnet55** cells on **TIED 4.2.1**: [WF-01](docs/demos/trial-readout-PROMPT-WF-01-claudesonnet55-1794101529-wf-agentstream-wf-01-claude-sonnet55.md) … [WF-08](docs/demos/trial-readout-PROMPT-WF-08-claudesonnet55-1794103645-wf-agentstream-wf-08-claude-sonnet55.md). Cohort snapshot: **WF-01/03/04/06/07/08** workflow **complete** with traceable commits; **WF-02** and **WF-05** **split/incomplete** (tests uncommitted, close-out blocked) despite orchestrator **`0`**. Catalog + demos index updated via `@record-wf-trial`.
+
+- **PROMPT-WF-01 facilitator readout (GPT-5.6 Luna high / Cursor agentstream, repeat @ 1794091020)** — [trial-readout-PROMPT-WF-01-luna-high-1794091020-wf-agentstream-wf-01-cursor-lunahigh.md](docs/demos/trial-readout-PROMPT-WF-01-luna-high-1794091020-wf-agentstream-wf-01-cursor-lunahigh.md) for client `1794091020-wf-agentstream-wf-01-cursor-lunahigh` (`REQ-SEMVER_COMPARATOR`; orchestrator `exit_code: 1`; **5** green tests uncommitted; refine+build merged in turn 2; close-out not run; pairs [luna-high pilot @ 1794075385](docs/demos/trial-readout-PROMPT-WF-01-luna-high-1794075385-wf-agentstream-wf-01-cursor-lunahigh.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-01…08 facilitator readouts (GPT-5.6 Luna high / Cursor agentstream pilot batch)** — Eight **luna-high** cells on **TIED 4.2.1** via `workflow_trial_agentstream wf-01`…`wf-08`: [WF-01](docs/demos/trial-readout-PROMPT-WF-01-luna-high-1794075385-wf-agentstream-wf-01-cursor-lunahigh.md), [WF-02](docs/demos/trial-readout-PROMPT-WF-02-luna-high-1794075940-wf-agentstream-wf-02-cursor-lunahigh.md), [WF-03](docs/demos/trial-readout-PROMPT-WF-03-luna-high-1794079067-wf-agentstream-wf-03-cursor-lunahigh.md), [WF-04](docs/demos/trial-readout-PROMPT-WF-04-luna-high-1794079332-wf-agentstream-wf-04-cursor-lunahigh.md), [WF-05](docs/demos/trial-readout-PROMPT-WF-05-luna-high-1794079974-wf-agentstream-wf-05-cursor-lunahigh.md), [WF-06](docs/demos/trial-readout-PROMPT-WF-06-luna-high-1794081715-wf-agentstream-wf-06-cursor-lunahigh.md), [WF-07](docs/demos/trial-readout-PROMPT-WF-07-luna-high-1794086713-wf-agentstream-wf-07-cursor-lunahigh.md), [WF-08](docs/demos/trial-readout-PROMPT-WF-08-luna-high-1794088871-wf-agentstream-wf-08-cursor-lunahigh.md). Catalog + demos index updated via `@record-wf-trial`. Cohort snapshot: **WF-07** workflow complete (`exit_code: 0`, **`8e1d9e9`**); **WF-06** harness **`exit_code: 1`**; **WF-03** phase-1 identity failure; remaining cells mostly **split signal** (orchestrator **0** vs blocked close-out or uncommitted product).
+
+- **LangGraph program P6 multi-task (PLAN-TIED-LG-P6-MULTI-TASK)** — `task_dag`, `worktree_pool`, `project_multi`, Send fan-out graph, two-task merge regression + fault injection; CLI `multi-task`; 61 pytest, 1 skipped. Integrated machine close-out `run_id=p6-closeout-closeout-20261107`. Evidence: [session-handoff.md](tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK/evidence/closeout-run-close-out-gates.json).
+
+- **LangGraph program P5 checklist slice (PLAN-TIED-LG-P5-CHECKLIST)** — `tools/langgraph-pilot/` `checklist_segment`, `tracker_writer`, project graph slug dispatch, CLI; default `tdd-unit-slice` composition (52 pytest, 1 skipped). Integrated machine close-out `run_id=p5-closeout-closeout-20261107`. Evidence: [session-handoff.md](tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/closeout-run-close-out-gates.json).
+
+- **LangWatch agent refactor Wave 3 bounded operator compose ([REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3], [ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3], [IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3])** — Methodology composition matrix §2 row **18** (LangWatch-reported); LEAP SC-MCM-DOC **18** on [REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX](tied-project/requirements/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml); evaluation-framework Q5/Q1 narrative-control literacy; HTOL LangWatch source study; incident-revert **merge_miss** case kind; session-handoff **Port backlog** norm; bootstrap doc tests (**11** green). Close-out `close-out-langwatch-wave3-2026-11-07` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/PLAN.md). LangWatch comparison markdown remains operator-local (no `.gitignore` allowlist).
+
+- **PROMPT-WF-08 facilitator readout (Claude Sonnet 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-08-claudesonnet55-1794069919-wf-agentstream-wf-08-claude-sonnet55.md](docs/demos/trial-readout-PROMPT-WF-08-claudesonnet55-1794069919-wf-agentstream-wf-08-claude-sonnet55.md) for client `1794069919-wf-agentstream-wf-08-claude-sonnet55` (`REQ-TINY_STATE_MACHINE`; orchestrator `exit_code: 0`; four turns; **`9efa0f9`**; **11** green tests; ARCH/IMPL + CITDP persist; close-out gate pass; REQ index **Planned**; pairs [Haiku WF-08 @ 1794064806](docs/demos/trial-readout-PROMPT-WF-08-claudehaiku55-1794064806-wf-agentstream-wf-08-claude-claudehaiku55.md) and [Composer WF-08 @ 1794058677](docs/demos/trial-readout-PROMPT-WF-08-composer25-1794058677-wf-agentstream-wf-08-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-07 facilitator readout (Claude Sonnet 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-07-claudesonnet55-1794068800-wf-agentstream-wf-07-claude-sonnet55.md](docs/demos/trial-readout-PROMPT-WF-07-claudesonnet55-1794068800-wf-agentstream-wf-07-claude-sonnet55.md) for client `1794068800-wf-agentstream-wf-07-claude-sonnet55` (`REQ-CONFIG_LAYERED_LOADER`; orchestrator `exit_code: 0`; four turns; **`e258bc2`**; **20** green tests; null **clear** rule; close-out gate pass; REQ index **Planned**; pairs [Haiku WF-07 @ 1794063964](docs/demos/trial-readout-PROMPT-WF-07-claudehaiku55-1794063964-wf-agentstream-wf-07-claude-claudehaiku55.md) and [Composer WF-07 @ 1794057839](docs/demos/trial-readout-PROMPT-WF-07-composer25-1794057839-wf-agentstream-wf-07-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-05 facilitator readout (Claude Sonnet 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-05-claudesonnet55-1794066889-wf-agentstream-wf-05-claude-sonnet55.md](docs/demos/trial-readout-PROMPT-WF-05-claudesonnet55-1794066889-wf-agentstream-wf-05-claude-sonnet55.md) for client `1794066889-wf-agentstream-wf-05-claude-sonnet55` (`REQ-CSV_ROW_MAPPER`; orchestrator `exit_code: 0`; four turns; **`f643250`**; **8** green tests; late CITDP YAML; close-out gate pass; REQ index **Planned**; pairs [Sonnet incomplete @ 1794066499](docs/demos/trial-readout-PROMPT-WF-05-claudesonnet55-1794066499-wf-agentstream-wf-05-claude-claudesonnet55.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-05 facilitator readout (Claude Sonnet 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-05-claudesonnet55-1794066499-wf-agentstream-wf-05-claude-claudesonnet55.md](docs/demos/trial-readout-PROMPT-WF-05-claudesonnet55-1794066499-wf-agentstream-wf-05-claude-claudesonnet55.md) for client `1794066499-wf-agentstream-wf-05-claude-claudesonnet55` (`REQ-CSV_ROW_OBJECT_MAPPER`; orchestrator `exit_code: 0`; **26** green tests uncommitted; close-out blocked on `citdp-draft.md`; pairs [Sonnet complete @ 1794055754](docs/demos/trial-readout-PROMPT-WF-05-claudesonnet55-1794055754-wf-agentstream-wf-05-claude-claudesonnet55.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-08 facilitator readout (Claude Haiku 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-08-claudehaiku55-1794064806-wf-agentstream-wf-08-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-08-claudehaiku55-1794064806-wf-agentstream-wf-08-claude-claudehaiku55.md) for client `1794064806-wf-agentstream-wf-08-claude-claudehaiku55` (`REQ-TINY_STATE_MACHINE`; orchestrator `exit_code: 0`; four turns; **`bdc820c`**; **3** green tests; close-out gate pass; REQ index **Planned**; verification gate skipped; pairs [Composer WF-08 @ 1794058677](docs/demos/trial-readout-PROMPT-WF-08-composer25-1794058677-wf-agentstream-wf-08-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-07 facilitator readout (Claude Haiku 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-07-claudehaiku55-1794063964-wf-agentstream-wf-07-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-07-claudehaiku55-1794063964-wf-agentstream-wf-07-claude-claudehaiku55.md) for client `1794063964-wf-agentstream-wf-07-claude-claudehaiku55` (`REQ-CONFIG_LAYERED_LOADER`; orchestrator `exit_code: 0`; **9** green tests uncommitted; null **missing** rule; close-out blocked on CITDP YAML; pairs [Composer WF-07 @ 1794057839](docs/demos/trial-readout-PROMPT-WF-07-composer25-1794057839-wf-agentstream-wf-07-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-06 facilitator readout (Claude Haiku 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-06-claudehaiku55-1794062924-wf-agentstream-wf-06-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-06-claudehaiku55-1794062924-wf-agentstream-wf-06-claude-claudehaiku55.md) for client `1794062924-wf-agentstream-wf-06-claude-claudehaiku55` (`REQ-TOKEN_BUCKET_RATE_LIMITER`; orchestrator `exit_code: 0`; **9** green tests uncommitted; close-out `allowed: false`; pairs [Composer WF-06 @ 1794056678](docs/demos/trial-readout-PROMPT-WF-06-composer25-1794056678-wf-agentstream-wf-06-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+
+## [4.2.1] - 2026-11-07
+
+### Added
+
+- **NVIDIA Auto-Ontology external comparison (non-tied ontology compose)** — Wave 1 methodology capture and Wave 2 × TIED improvement analysis for [NVIDIA/auto-ontology](https://github.com/NVIDIA/auto-ontology) (Generate → Certify → Answer, MCP read / REST write seam, readiness → answerability → ask); local `docs/comparisons/nvidia-auto-ontology*.md` (gitignored); plan slugs [`nvidia-auto-ontology-capture`](tied-project/non-tied-plans/nvidia-auto-ontology-capture/PLAN.md), [`nvidia-auto-ontology-vs-tied`](tied-project/non-tied-plans/nvidia-auto-ontology-vs-tied/PLAN.md); Wave 3 matrix row / bundle cross-links **Defer**; complements Netflix Wave 3 ontology row 17 without minting REQ from comparison prose.
+
+- **Trial methodology version readout ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT], [ARCH-TRIAL_METHODOLOGY_VERSION_READOUT], [IMPL-TRIAL_METHODOLOGY_VERSION_READOUT])** — Turn-1 WF batch + GF bootstrap capture `tied-methodology-version.session.v1.json`; facilitator skills require session TIED semver in readout metadata; contract `mcp-server/contracts/trial-methodology-version/` + `trial-methodology-version-readout-contract.test.mjs`; optional `DIAGNOSTIC: tied_methodology_version` in `wf-trial-process-log.inc.sh`. Close-out `close-out-trial-methodology-version-readout-2026-11-07-final` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/PLAN.md).
+- **WF trial four-phase shell exit ([REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT], [ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT], [IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT])** — `wf-trial-run-four-phase-agentstream.inc.sh` propagates agentstream exit under `set -u`; `T-AGENTSTREAM-EXIT-01` / `T-EXIT-TRAP-01` in `run-traditional-four-phase-agentstream-sh.test.mjs`. Close-out `close-out-wf-four-phase-shell-exit-2026-11-07`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT/PLAN.md).
+- **Prompt-type refine/build phase guard ([REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD], [ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD], [IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD])** — `plan-build-sequence-guard.md`, handoff `plan_phase`, build-plan preflight `PLAN_BUILD_SEQUENCE_VIOLATION`; e2e + bootstrap lint tests. Close-out `close-out-prompt-type-refine-build-phase-guard-2026-11-07`.
+- **MCP test mcp.json write isolation ([REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION], [ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION], [IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION])** — `assertSafeMcpJsonWriteTarget` fail-closed on store paths; HTTP server tests use temp `tied-project`. Close-out `close-out-mcp-test-mcp-json-isolation-2026-11-07`.
+- **Checklist gate operator path ([REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH], [ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH], [IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH])** — Bundled `tied-yaml` skill documents `tied_gate_check` / `tied gate check` and forbids pipe-into-`tied_checklist_gate_validate`; witness `fb-mw6d3pz5`; composition tests. Close-out `close-out-checklist-gate-operator-2026-11-07` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/PLAN.md).
+
+- **PROMPT-WF-08 facilitator readout (Composer 2.5 / Cursor agentstream)** — [trial-readout-PROMPT-WF-08-composer25-1794058677-wf-agentstream-wf-08-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-08-composer25-1794058677-wf-agentstream-wf-08-cursor-composer25.md) for client `1794058677-wf-agentstream-wf-08-cursor-composer25` (`REQ-EXPLICIT_STATE_MACHINE`; orchestrator `exit_code: 0`; four turns; **`b329340`**; **4** green tests; transition table locked in refine; REQ **Implemented**; CITDP **draft**; first WF-08 readout). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-07 facilitator readout (Composer 2.5 / Cursor agentstream)** — [trial-readout-PROMPT-WF-07-composer25-1794057839-wf-agentstream-wf-07-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-07-composer25-1794057839-wf-agentstream-wf-07-cursor-composer25.md) for client `1794057839-wf-agentstream-wf-07-cursor-composer25` (`REQ-CONFIG_DEFAULTS_OVERRIDE`; orchestrator `exit_code: 0`; four turns; **`5d28cd7`**; **6** green tests; null/missing locked in refine; REQ **Implemented**; first WF-07 readout). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-06 facilitator readout (Composer 2.5 / Cursor agentstream)** — [trial-readout-PROMPT-WF-06-composer25-1794056678-wf-agentstream-wf-06-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-06-composer25-1794056678-wf-agentstream-wf-06-cursor-composer25.md) for client `1794056678-wf-agentstream-wf-06-cursor-composer25` (`REQ-TOKEN_BUCKET_RATE_LIMITER`; orchestrator `exit_code: 0`; four turns; **`c129dd1`**; **10** green tests; close-out gate + envelope; REQ index **Planned**; first WF-06 readout). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-05 facilitator readout (Claude Sonnet 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-05-claudesonnet55-1794055754-wf-agentstream-wf-05-claude-claudesonnet55.md](docs/demos/trial-readout-PROMPT-WF-05-claudesonnet55-1794055754-wf-agentstream-wf-05-claude-claudesonnet55.md) for client `1794055754-wf-agentstream-wf-05-claude-claudesonnet55` (`REQ-CSV_ROW_OBJECT_MAPPING`; orchestrator `exit_code: 0`; four turns; **`e067f81`**; **15** green tests; REQ index **Planned**; pairs [Haiku WF-05 @ 1794053115](docs/demos/trial-readout-PROMPT-WF-05-claudehaiku55-1794053115-wf-agentstream-wf-05-claude-claudehaiku55.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-01 facilitator readout (Claude Haiku 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-01-claudehaiku55-1794055051-wf-agentstream-wf-01-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-01-claudehaiku55-1794055051-wf-agentstream-wf-01-claude-claudehaiku55.md) for client `1794055051-wf-agentstream-wf-01-claude-claudehaiku55` (`REQ-SEMVER_COMPARATOR_CHECK`; orchestrator `exit_code: 0`; four turns; **`3e36d85`**; **39** green tests; REQ index **Planned**; pairs same-model [WF-05 @ 1794053115](docs/demos/trial-readout-PROMPT-WF-05-claudehaiku55-1794053115-wf-agentstream-wf-05-claude-claudehaiku55.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-05 facilitator readout (Claude Haiku 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-05-claudehaiku55-1794053115-wf-agentstream-wf-05-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-05-claudehaiku55-1794053115-wf-agentstream-wf-05-claude-claudehaiku55.md) for client `1794053115-wf-agentstream-wf-05-claude-claudehaiku55` (`REQ-CSV_ROW_MAPPER`; four turns; `pre_implementation` gate block; **no product code**; orchestrator `exit_code: 0`; pairs [luna-med 1794052043](docs/demos/trial-readout-PROMPT-WF-05-luna-med-1794052043-wf-agentstream-wf-05-cursor-lunamed.md) inverted harness split). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-05 facilitator readout (GPT-5.6 Luna medium / Cursor agentstream)** — [trial-readout-PROMPT-WF-05-luna-med-1794052043-wf-agentstream-wf-05-cursor-lunamed.md](docs/demos/trial-readout-PROMPT-WF-05-luna-med-1794052043-wf-agentstream-wf-05-cursor-lunamed.md) for client `1794052043-wf-agentstream-wf-05-cursor-lunamed` (`REQ-CSV_ROW_OBJECT_MAPPING`; four turns + close-out gate + traceable **`3b01a3b`**; orchestrator `exit_code: 1`; pairs [Composer complete 1794049382](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794049382-wf-agentstream-wf-05-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-01 facilitator readout (GPT-5.6 Luna medium / Cursor agentstream)** — [trial-readout-PROMPT-WF-01-gpt56lunamediumfast-1794050603-wf-agentstream-wf-01-cursor-gpt56lunamediumfast.md](docs/demos/trial-readout-PROMPT-WF-01-gpt56lunamediumfast-1794050603-wf-agentstream-wf-01-cursor-gpt56lunamediumfast.md) for client `1794050603-wf-agentstream-wf-01-cursor-gpt56lunamediumfast` (`REQ-WF_TRIAL_SEMVER_SATISFACTION`; orchestrator `exit_code: 1` after build-plan; **6** green tests uncommitted; close-out not run). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-05 facilitator readout (Composer 2.5 / Cursor agentstream, success pair)** — [trial-readout-PROMPT-WF-05-composer25-1794049382-wf-agentstream-wf-05-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794049382-wf-agentstream-wf-05-cursor-composer25.md) for client `1794049382-wf-agentstream-wf-05-cursor-composer25` (`REQ-CSV_ROW_MAP`; orchestrator `exit_code: 0`; four turns; pairs incomplete [1794042383](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794042383-wf-agentstream-wf-05-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-05 facilitator readout (Composer 2.5 / Cursor agentstream)** — [trial-readout-PROMPT-WF-05-composer25-1794042383-wf-agentstream-wf-05-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794042383-wf-agentstream-wf-05-cursor-composer25.md) for client `1794042383-wf-agentstream-wf-05-cursor-composer25` (`REQ-CSV_ROW_MAP`; orchestrator `exit_code: 1`; refine-plan artifacts on disk; workflow incomplete). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-01 facilitator readout (Composer 2.5 / Cursor agentstream)** — [trial-readout-PROMPT-WF-01-composer25-1794044147-wf-agentstream-wf-01-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-01-composer25-1794044147-wf-agentstream-wf-01-cursor-composer25.md) for client `1794044147-wf-agentstream-wf-01-cursor-composer25` (`REQ-SEMVER_SATISFIES`; orchestrator `exit_code: 1` after refine; contrasts complete [1793604353](docs/demos/trial-readout-PROMPT-WF-01-composer25-1793604353-wf-agentstream-wf-01.md)). Catalog + demos index updated via `@record-wf-trial`.
+- **PROMPT-WF-01 facilitator readout (Composer 2.5 / Cursor agentstream, success pair)** — [trial-readout-PROMPT-WF-01-composer25-1794048393-wf-agentstream-wf-01-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-01-composer25-1794048393-wf-agentstream-wf-01-cursor-composer25.md) for client `1794048393-wf-agentstream-wf-01-cursor-composer25` (`REQ-SEMVER_SATISFIES`; orchestrator `exit_code: 0`; four turns; pairs incomplete [1794044147](docs/demos/trial-readout-PROMPT-WF-01-composer25-1794044147-wf-agentstream-wf-01-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+
+### Fixed
+
+- **methodology release plan link ([PROC-VOCABULARY_INDEX])** — `tied-project/vocab/tied-methodology.md` **methodology release** row uses `../non-tied-plans/tied-methodology-release-4-2-0/PLAN.md` (was `../../`, broke `validate_vocab_index.rb` / `test-all` step 7).
+
+## [4.2.0] - 2026-11-07
+
+### Fixed
+
+- **MCP HTTPS operator smoke ([REQ-MCP_HTTPS_REMOTE_ACCESS])** — `server_info` `outputSchema` uses `z.looseObject({})` (fixes MCP SDK `_zod` on stdio/HTTP); example compose defaults, host `127.0.0.1:8787`/`8788` publish, `deploy/.env.example`, clearer HTTP CLI `ECONNREFUSED` hints; gitignore local `.env`.
+
+### Changed
+
+- **Store README install spine (disk-first operators)** — Root [README.md](README.md) documents `tied-install` only **from the store root** with a client/primary path; no `--store`, default `--mode`, or process env keys in the README. Primary-repo flags, store resolution, and MCP env catalog: [tools/bootstrap/README.md](tools/bootstrap/README.md) and [docs/tied-first-party-env-catalog.md](docs/tied-first-party-env-catalog.md). [operator-lens.md](docs/tied-experience/operator-lens.md) aligned. Evidence: [readme-store-root-policy-2026-11-07.md](tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md). Cross-ref [REQ-TIED_PRIMARY_REPO_ONBOARDING], [REQ-TIED_ENVIRONMENT_VARIABLE_POLICY].
+
+### Added
+
+- **Netflix observability ontology Wave 3 compose ([REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3], [ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3], [IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3])** — Methodology-composition-matrix §2 row **17**, vocabulary-layer operational-identity subsection, HTOL Netflix source study, comparison sibling reciprocals, three-wave template worked example, bootstrap doc tests; LEAP `REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX` SC-MCM-DOC **17** rows. Close-out `close-out-netflix-wave3-2026-11-07` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3/PLAN.md).
+
+- **MCP HTTPS remote access ([REQ-MCP_HTTPS_REMOTE_ACCESS], [ARCH-MCP_HTTPS_REMOTE_TRANSPORT], [IMPL-MCP_HTTP_SERVER], [IMPL-TIED_CLI_HTTP_TRANSPORT])** — Optional Streamable HTTP for core and optin MCP (`tied mcp serve`, `dist/http-entry.js`); bearer gate; `TIED_CLI_MCP_URL` HTTP client; proxy TLS examples under `mcp-server/deploy/`; stdio default unchanged. Close-out `close-out-mcp-https-2026-11-06` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN-refine.md](tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/PLAN-refine.md).
+
+- **Store README manual MCP acceptance ([REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE], [ARCH-TIED_STORE_README_MCP_ONBOARDING], [IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE])** — README documents Cursor **Settings → Customize → MCPs** and Claude CLI **2 new MCP servers** enable flow (`#manual-mcp-acceptance`); structure-test substrings; operator-lens cross-link; delivery-path tables and copy-paste spine; prerequisites drop obsolete Go references. CITDP: [CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml](tied-project/citdp/CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/PLAN.md).
+
+## [4.1.0] - 2026-11-07
+
+### Added
+
+- **Disk plan handoff ledger ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF], [ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF], [IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF])** — `prompt-skill-disk-handoff.md` and **Plan execution steps** in session-handoff structure; plan/build/close skills and six Task agents enforce disk before stop; e2e contracts in `prompt-type-skills.test.ts` and `prompt-type-subagent.test.ts`. Plan: [PLAN.md](tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/PLAN.md).
+
+- **Methodology semver on demand ([REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND])** — Removed mandatory per-turn `TIEDv{semver}:` from AGENTS, ai-principles, methodology checklist, and TIED-source `.cursor/agents/`; `server_info` now exposes `extensions.tied.methodology` via `resolveTiedMethodologyVersion`; W7 stamp dimensions are warn-only. Plan: [PLAN.md](tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/PLAN.md).
+
+- **MCP `server_info` ([REQ-MCP_SERVER_INFO], [ARCH-MCP_SERVER_INFO], [IMPL-MCP_SERVER_INFO])** — Read-only core-profile tool returning contract v1 identity, compatibility, redacted configuration, runtime, and health with `structuredContent` plus JSON text; reusable `mcp-server/src/server-info/` module and `mcp-server/contracts/server_info/`. Tests: `server-info.test.ts`, full `npm test`. Close-out `close-out-req-mcp-server-info-2026-11-06` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+### Fixed
+
+- **Linked client adherence reconcile (S4 [REQ-TIED_CLIENT_OPERATOR_TOOLING])** — `tied_adherence_reconcile_run` resolves `@tied/agentstream` from the **TIED store** (MCP module self-anchor, `TIED_STORE_ROOT`, client `mcp.json` introspection) instead of requiring `mcp-server/` under the client tree; subprocess `cwd` is client `workspace`. `run-close-out-gates --reconcile` no longer passes client `repo_root` for store lookup; `tied-post-session.sh` uses TS agentstream dist instead of removed Go `adherence-reconcile`. Tests: `adherence-reconcile-resolve.test.ts`.
+
+### Changed
+
+- **WF trial cohort working-folder sync** — Restore store README **H2** anchors (`Getting started`, `Primary implementation`, `TIED source repository setup`; `Methodology development layout` as H3) for `store-readme-structure` tests; mirror project `tied-project/citdp/` and per-REQ `tied-project/working/REQ-*/` CITDP/checklist YAML for [REQ-WF_TRIAL_FOUR_PHASE_HARDENING], [REQ-WF_TRIAL_IMPLEMENTATION_STACK], [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG], [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS], [REQ-TIED_ENVIRONMENT_VARIABLE_POLICY], and related store hygiene/readme trials; extend [tied-product-configuration](tied-project/vocab/tied-product-configuration.md) alphabetical index. Close-out `run-close-out-gates.mjs` 2026-11-05 (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+### Added
+
+- **PROMPT-WF-04 Claude Haiku agentstream facilitator readout** — [trial-readout-PROMPT-WF-04-claudehaiku55-1793853737-wf-agentstream-wf-04-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-04-claudehaiku55-1793853737-wf-agentstream-wf-04-claude-claudehaiku55.md) for disposable `1793853737-wf-agentstream-wf-04-claude-claudehaiku55` (machine close_out pass; CITDP YAML; commit `a01ee62`; REQ **Proposed**; no gate receipt files). Evidence [FACILITATOR-WF-04-1793853737-wf-agentstream-wf-04-claude-claudehaiku55](tied-project/working/FACILITATOR-WF-04-1793853737-wf-agentstream-wf-04-claude-claudehaiku55/). Docs-only.
+
+- **PROMPT-WF-04 Claude Sonnet agentstream facilitator readout (incomplete close-out cohort)** — [trial-readout-PROMPT-WF-04-claudesonnet55-1793852946-wf-agentstream-wf-04-claude-claudesonnet55.md](docs/demos/trial-readout-PROMPT-WF-04-claudesonnet55-1793852946-wf-agentstream-wf-04-claude-claudesonnet55.md) for disposable `1793852946-wf-agentstream-wf-04-claude-claudesonnet55` (four turns; **close_out gate blocked** — CITDP YAML missing; 14/14 tests uncommitted). Evidence [FACILITATOR-WF-04-1793852946-wf-agentstream-wf-04-claude-claudesonnet55](tied-project/working/FACILITATOR-WF-04-1793852946-wf-agentstream-wf-04-claude-claudesonnet55/). Docs-only.
+
+- **PROMPT-WF-04 Cursor agentstream facilitator readout (first traceability-scan cohort cell)** — [trial-readout-PROMPT-WF-04-composer25-1793851888-wf-agentstream-wf-04-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-04-composer25-1793851888-wf-agentstream-wf-04-cursor-composer25.md) for disposable `1793851888-wf-agentstream-wf-04-cursor-composer25` (full four-turn close-out; **wf-trial-ts-node-test-v1** stack; orchestrator process log; RED archived; index/detail REQ status drift). Evidence [FACILITATOR-WF-04-1793851888-wf-agentstream-wf-04-cursor-composer25](tied-project/working/FACILITATOR-WF-04-1793851888-wf-agentstream-wf-04-cursor-composer25/). Docs-only.
+
+- **WF trial implementation stack ([REQ-WF_TRIAL_IMPLEMENTATION_STACK], [ARCH-WF_TRIAL_IMPLEMENTATION_STACK], [IMPL-WF_TRIAL_IMPLEMENTATION_STACK])** — Orchestrator seeds TypeScript ESM + `node --import tsx --test` fixture and `wf-trial-agent-preload-contract.yaml` on disposable clients; `WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1` opt-out; batch refine playbook `wf-trial-refine-plan-stack.md`; catalog stack section; PROMPT-WF-01 TypeScript-only. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_IMPLEMENTATION_STACK/PLAN.md). CITDP: [CITDP-REQ-WF_TRIAL_IMPLEMENTATION_STACK.yaml](tied-project/citdp/CITDP-REQ-WF_TRIAL_IMPLEMENTATION_STACK.yaml). Close-out `run_id=close-out-wf-implementation-stack-2026-11-04` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+- **Store readme-information-architecture facilitator skill ([REQ-TIED_STORE_README_IA_SKILL], [ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY], [IMPL-TIED_STORE_README_IA_SKILL])** — Third `STORE_FACILITATOR_SKILLS` entry `@readme-information-architecture` (`tools/bundled-readme-information-architecture-skill/`); store-only (not methodology, not disposable clients); README intent navigation and Install chapter IA. Tests: `store-facilitator-skills.test.mjs`, `readme-information-architecture-skill.test.ts`. CITDP: [CITDP-REQ-TIED_STORE_README_IA_SKILL.yaml](tied-project/citdp/CITDP-REQ-TIED_STORE_README_IA_SKILL.yaml). Close-out `run_id=close-out-req-tied-store-readme-ia-skill-2026-11-05` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+- **PROMPT-WF-03 Claude Haiku agentstream facilitator readout (complete close-out cohort)** — [trial-readout-PROMPT-WF-03-claudehaiku55-1793842935-wf-agentstream-wf-03-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-03-claudehaiku55-1793842935-wf-agentstream-wf-03-claude-claudehaiku55.md) for disposable `1793842935-wf-agentstream-wf-03-claude-claudehaiku55` (full four-turn close-out; orchestrator process log; RED archived; REQ index **Planned** drift). Evidence [FACILITATOR-WF-03-1793842935-wf-agentstream-wf-03-claude-claudehaiku55](tied-project/working/FACILITATOR-WF-03-1793842935-wf-agentstream-wf-03-claude-claudehaiku55/). Docs-only.
+
+- **TIED environment variable policy ([REQ-TIED_ENVIRONMENT_VARIABLE_POLICY], [ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY], [IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY])** — Hybrid v1: committed allowlist (`tools/bootstrap/fixtures/tied-env-allowlist/env-allowlist.v1.yaml`), bootstrap inventory test (`tools/bootstrap/lib/tied-env-allowlist-inventory.test.mjs`), operator catalog [docs/tied-first-party-env-catalog.md](docs/tied-first-party-env-catalog.md), MCP control-via-env gap audit evidence; **REQ-TIED_RUNTIME_DISK_CONFIG** `depends_on` parent. CITDP: [CITDP-REQ-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml](tied-project/citdp/CITDP-REQ-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml). Close-out `run_id=close-out-evpol-2026-11-04` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+- **WF trial orchestrator process log ([REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG], [ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG], [IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG])** — Default-on tee of orchestrator stdout/stderr on disposable clients (`wf-trial-orchestrator-run.v1.json` manifest); `scripts/lib/wf-trial-process-log.inc.sh`; `@record-wf-trial` log discovery and readout section; composition tests TS-C1/TS-C2. CITDP: [CITDP-REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml](tied-project/citdp/CITDP-REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml). Close-out `run_id=close-out-wf-orchestrator-process-log-2026-11-04` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+- **PROMPT-WF-03 Cursor agentstream facilitator readout (process log cohort)** — [trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md) for disposable `1793820250-wf-agentstream-wf-03-cursor-composer25` (orchestrator stdout/stderr + manifest; RED archived; full four-turn close-out). Evidence [FACILITATOR-WF-03-1793820250-wf-agentstream-wf-03-cursor-composer25](tied-project/working/FACILITATOR-WF-03-1793820250-wf-agentstream-wf-03-cursor-composer25/). Docs-only.
+
+- **WF trial four-phase hardening ([REQ-WF_TRIAL_FOUR_PHASE_HARDENING], [ARCH-WF_TRIAL_FOUR_PHASE_HARDENING], [IMPL-WF_TRIAL_FOUR_PHASE_HARDENING])** — Disposable preload contract materialize, reconcile preflight env vars, traditional four-phase handoff hints, prompt-shared WF playbooks; tests in `workflow-trial-agentstream-sh.test.mjs`. Origin: [1793817075 readout](docs/demos/trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/PLAN.md). CITDP: [CITDP-REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml](tied-project/citdp/CITDP-REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml). Close-out `run_id=close-out-wf-four-phase-hardening-2026-11-04` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+- **PROMPT-WF-03 Cursor agentstream facilitator readout** — [trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md) for disposable `1793817075-wf-agentstream-wf-03-cursor-composer25` (full four-turn close-out; per-turn difficulties table; reconcile **not_run**). Evidence [FACILITATOR-WF-03-1793817075-wf-agentstream-wf-03-cursor-composer25](tied-project/working/FACILITATOR-WF-03-1793817075-wf-agentstream-wf-03-cursor-composer25/). Docs-only.
+
+- **PROMPT-WF-03 Claude Haiku agentstream facilitator readout** — [trial-readout-PROMPT-WF-03-claudehaiku55-1793815895-wf-agentstream-wf-03-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-03-claudehaiku55-1793815895-wf-agentstream-wf-03-claude-claudehaiku55.md) for disposable `1793815895-wf-agentstream-wf-03-claude-claudehaiku55` (13/13 tests on disk; close-out turn not completed). Evidence [FACILITATOR-WF-03-1793815895-wf-agentstream-wf-03-claude-claudehaiku55](tied-project/working/FACILITATOR-WF-03-1793815895-wf-agentstream-wf-03-claude-claudehaiku55/). Docs-only.
+
+- **Claude wf-03 live matrix gaps ([REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS], [ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS], [IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS])** — Canonical `TIED_CLIENT_PROJECT_PATH` / `tied-project/` in `claude-client-validation.mjs`; optional `WF_TRIAL_STRICT_PREFLIGHT=1` fail-closed preflight; four-phase close-out playbook hints; `live-driver-bind` workspace regression test. Plan: [PLAN.md](tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/PLAN.md). CITDP: [CITDP-REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml](tied-project/citdp/CITDP-REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml).
+
+- **Git hygiene test-all-hygiene shell ([REQ-TIED_GIT_HYGIENE], [ARCH-TIED_GIT_HYGIENE_SAFETY], [IMPL-TIED_GIT_HYGIENE])** — Store operator `test-all-hygiene` / `--dry-run` in `scripts/build-commands.sh` restores frozen tracked regenerable paths and deletes untracked gate-test CITDP litter; composition test `tools/bootstrap/build-commands-test-all-hygiene.test.mjs`; IMPL `RUN_STORE_TEST_ALL_HYGIENE`. Plan: [PLAN.md](tied-project/working/REQ-TIED_GIT_HYGIENE/PLAN.md). CITDP: [CITDP-REQ-TIED_GIT_HYGIENE.yaml](tied-project/citdp/CITDP-REQ-TIED_GIT_HYGIENE.yaml). Close-out `run_id=close-out-git-hygiene-test-all-20261104` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+- **WF trial disposable tag ([REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG], [ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG], [IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG])** — `workflow-trial-agentstream` bootstrap `--tag` encodes `{wf-id}-{harness}-{modelBucket}` (e.g. `wf-agentstream-wf-03-cursor-composer25`); helpers in `scripts/lib/wf-trial-disposable-tag.inc.sh`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG/PLAN.md). CITDP: [CITDP-REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml](tied-project/citdp/CITDP-REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml).
+
+- **Agentstream Claude WF-03 harness parity ([REQ-AGENTSTREAM_CLAUDE_WF_PARITY], [ARCH-AGENTSTREAM_CLAUDE_WF_PARITY], [IMPL-AGENTSTREAM_CLAUDE_WF_PARITY])** — Claude live `agentArgv` adds `--strict-mcp-config` / `--mcp-config` (opt-out `AGENTSTREAM_CLAUDE_STRICT_MCP=0`); four-phase batch `{{SKILL_ROOT}}` expansion; optional `AGENTSTREAM_HARNESS_TRACE` JSONL; `scripts/dual-harness-wf03-parity-smoke.sh --dry-run-only`. Plan: [PLAN.md](tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/PLAN.md). CITDP: [CITDP-REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml](tied-project/citdp/CITDP-REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml).
+
+- **Prompt-type skill execution mode ([REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE], [ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE], [IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE])** — Normative **plan** vs **agent** skill execution mode on eight leaves; shared `prompt-execution-mode.md` and `tied-plan-prepare.md`; new leaves `non-tied-refine`, `non-tied-build`, `non-tied-close` (18-leaf inventory); committed non-TIED plans root `tied-project/non-tied-plans/`; **`use-skill`** uses prepare + `tied-plan-citdp-build.md` (not monolithic `tied-plan-citdp.md`); inventory criteria 15→18 on [REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE](tied-project/requirements/REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE.yaml). Plan: [PLAN.md](tied-project/working/REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE/PLAN.md). CITDP: [CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml](tied-project/citdp/CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml). Commits **`8aacb8ba`**, **`c2ac05a5`** (use-skill split + 18-leaf inventory prose).
+
+- **TIED configuration report ([REQ-TIED_CONFIG_REPORT], [ARCH-TIED_CONFIG_REPORT], [IMPL-TIED_CONFIG_REPORT])** — **`tied-config-report.v1`**: `node tools/bootstrap/tied-config-report-cli.mjs`, client **`tied-config-report.sh`**, MCP **`tied_config_report`** (core profile); provenance for paths/operator toggles; default redacts **`JEV_API_KEY`**; **`--include-secrets`** / **`include_secrets`** opt-in; store operator alias **`tied-config-report`** via `source scripts/build-commands.sh` (`how` TIED YAML). Plan: [PLAN-refine.md](tied-project/working/REQ-TIED_CONFIG_REPORT/PLAN-refine.md).
+
+- **TIED Experience Hub normative alignment ([REQ-TIED_STORE_README_EXPERIENCE_HUB])** — LEAP [ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE](tied-project/architecture-decisions/ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE.yaml), [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING](tied-project/requirements/REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING.yaml), [REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE](tied-project/requirements/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml), [IMPL-TIED_STORE_README_SECTIONS](tied-project/implementation-decisions/IMPL-TIED_STORE_README_SECTIONS.yaml) for **Explore TIED** + [docs/tied-experience/](docs/tied-experience/index.md) hub; CITDP [CITDP-REQ-TIED_STORE_README_EXPERIENCE_HUB.yaml](tied-project/citdp/CITDP-REQ-TIED_STORE_README_EXPERIENCE_HUB.yaml).
+
+- **TIED Experience Hub (docs-only)** — [docs/tied-experience/index.md](docs/tied-experience/index.md): audience lenses (sponsor, operator, engineer/agent, facilitator), appendices, and SVG assets; root [README.md](README.md) Band 2 **Explore TIED** replaces in-README certifiable/EDPC essays (canonical narrative in hub). Structure tests: [store-readme-structure.test.ts](mcp-server/src/store-readme-structure.test.ts). Commit **`22c8450e`**.
+
+- **E2e operator metrics alignment ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-E2E-METRICS-ALIGN**: `bootstrap-and-load.test.ts` seeds store `operator.mcp.collect_metrics` so e2e matches **SC-RDC-OPERATOR-DISK** precedence independent of monorepo `.tied/store.yaml` shape; helper `e2e-store-operator-seed.ts`. Plan: [PLAN-rdc-e2e-pass4-refine.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-e2e-pass4-refine.md).
+
+- **Runtime disk config pass 3 ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-OPERATOR-DISK**: non-secret operator toggles (`operator:` in store yaml, `.tied/operator.local.yaml`) sync to client mcp.json on refresh; catalog includes metrics, envelope hooks, agentstream preflight, checklist strict, JEV harness/provider strings; [operator-shell-profile.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/operator-shell-profile.md). Plan: [PLAN-rdc-full-runtime-disk-pass3.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md). Commit **`b2548e98`**.
+
+- **Runtime disk config pass 2 ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-CONSUMERS**: JEV harness store-root resolution drops shell `TIED_MCP_BIN`/`TIED_REPO_ROOT`; operator scripts use checkout anchor; feature defaults read mcp.json only; [operator-shell-profile.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/operator-shell-profile.md). Full non-secret on-disk migration queued in [pending-full-runtime-disk-handoff.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/pending-full-runtime-disk-handoff.md). Plan: [PLAN-rdc-env-cleanup-pass2.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-env-cleanup-pass2.md). Commit **`eb9a0e17`**.
+
+- **Runtime disk config traceability ([REQ-TIED_RUNTIME_DISK_CONFIG], [ARCH-TIED_RUNTIME_DISK_CONFIG], [IMPL-TIED_RUNTIME_DISK_CONFIG])** — Project REQ/ARCH/IMPL stack; bootstrap `tied-runtime-config.mjs`, store `.tied/store.yaml`, layout/store-self refresh LEAP; e2e linked-stub exec follow-through in `bootstrap-and-load.test.ts` ([REQ-TIED_CLI_MCP_JSON_BASE_PATH] SC-CLI-E2E-*). Plan: [PLAN-refine-pass2.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-refine-pass2.md).
+
+### Added
+
+- **Runtime fixture parity ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-FIXTURE-PARITY**: shared catalog `tools/bootstrap/fixtures/tied-runtime/`, loader + cross-runtime parity gate; agentstream tests consume catalog via `tied-runtime-fixture-loader.d.mts`.
+
+- **MCP runtime introspection ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-MCP-INTROSPECTION**: `tied_config_get_base_path` returns disk-resolved `store_root`, `mcp_dist_path`, and `config_sources` via bootstrap resolver. Plan: [PLAN-rdc-mcp-introspection-refine.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-mcp-introspection-refine.md).
+
+### Fixed
+
+- **Runtime disk config spine review ([REQ-TIED_RUNTIME_DISK_CONFIG])** — Install honors shell `TIED_MCP_COLLECT_METRICS=1` when operator/brownfield omit `collect_metrics`; tied-cli CJS tests seed disk-first `mcp.json`; linked vocab index validates `tied-project/vocab`; stale-layout lint allows store runtime paths under `.tied/`. Evidence: [spine-review-2026-11-03.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/spine-review-2026-11-03.md).
+
+- **tied-cli install-only path authority ([REQ-TIED_CLI_MCP_JSON_BASE_PATH])** — Kaizen **`fb-mw0b2pe8-7kp0gt`**: shell-inherited `TIED_*` path env no longer overrides tied-install **`.cursor/mcp.json`**; MCP stdio child uses allowlisted env and **`TIED_PATH_AUTHORITY=install_mcp_json`** (no cwd discovery on CLI path); test helpers use mcp.json fixtures.
+
+### Added
+
+- **PROMPT-WF-03 agentstream facilitator readout** — [trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md](docs/demos/trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md) for disposable `1793605811-wf-agentstream-wf-03` (`workflow-trial-agentstream wf-03`, Composer 2.5, producer/consumer/wiring composition seam); evidence [FACILITATOR-WF-03-1793605811-wf-agentstream-wf-03](tied-project/working/FACILITATOR-WF-03-1793605811-wf-agentstream-wf-03/). Docs-only.
+
+- **PROMPT-WF-01 agentstream facilitator readout** — [trial-readout-PROMPT-WF-01-composer25-1793604353-wf-agentstream-wf-01.md](docs/demos/trial-readout-PROMPT-WF-01-composer25-1793604353-wf-agentstream-wf-01.md) for disposable `1793604353-wf-agentstream-wf-01` (`workflow-trial-agentstream wf-01`, Composer 2.5); evidence [FACILITATOR-WF-01-1793604353-wf-agentstream-wf-01](tied-project/working/FACILITATOR-WF-01-1793604353-wf-agentstream-wf-01/). Docs-only.
+
+- **WF trial orchestrator + factory `--out-path` ([REQ-TIED_SETUP])** — [`workflow-trial-agentstream.sh`](scripts/workflow-trial-agentstream.sh) and `workflow-trial-agentstream` alias bootstrap a tagged disposable client, extract **PROMPT-WF-01…08** from the traditional catalog, and invoke [`run-traditional-four-phase-agentstream.sh`](scripts/run-traditional-four-phase-agentstream.sh) (live by default; `--dry-run` optional). `test-new-tied-client --out-path` prints the absolute client root on stdout (`TIED_BOOTSTRAP_OUT_PATH` routes bootstrap progress to stderr). Tests: `new-tied-client-out-path.test.mjs`, `workflow-trial-agentstream-sh.test.mjs`. Plan: [PLAN-refine-pass1.md](tied-project/working/PLAN-WF-TRIAL-AGENTSTREAM-ORCHESTRATOR/PLAN-refine-pass1.md). CITDP: [CITDP-REQ-TIED_SETUP-wf-trial-orchestration.yaml](tied-project/citdp/CITDP-REQ-TIED_SETUP-wf-trial-orchestration.yaml).
+
+- **Traditional four-phase agentstream automation (facilitator)** — [traditional-four-phase-agentstream.yaml](docs/demos/traditional-four-phase-agentstream.yaml) feature-spec batch and [run-traditional-four-phase-agentstream.sh](scripts/run-traditional-four-phase-agentstream.sh) wrapper (`MODEL_SLUG` → `--model`, no default lead checklist); catalog [Automated agentstream path](docs/demos/catalog-traditional-workflow-trial-prompts.md#automated-agentstream-path) and gawk `WF_ID` remainder extract. Smoke: disposable `1793597183-wf-agentstream` (PROMPT-WF-02, four new sessions). Plan: [PLAN-refine-pass1.md](tied-project/working/PLAN-TRADITIONAL-FOUR-PHASE-AGENTSTREAM/PLAN-refine-pass1.md). Docs/tooling only; no new `[REQ-*]` index.
+
+- **PROMPT-WF-02 nine-model facilitator readout** — [wf-02-nine-model-implementation-comparison.md](docs/demos/wf-02-nine-model-implementation-comparison.md) plus nine `trial-readout-PROMPT-WF-02-*.md` files for stdin line-dedup CLI trials; evidence under [FACILITATOR-WF-02-matrix](tied-project/working/FACILITATOR-WF-02-matrix/). Docs-only.
+
+- **Meta-hub tied-project representation ([REQ-TIED_META_HUB_REPRESENTATION], [ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY], [IMPL-TIED_CITDP_RECONCILE], [IMPL-TIED_CORPUS_MAP_BUILD], [IMPL-TIED_META_HUB_MCP])** — MCP `tied_citdp_reconcile_run` and `tied_corpus_map_build`; DOC-STDD 35-row reconcile dogfood (34 apply actions). Plan: [PLAN-refine-pass1.md](tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md).
+
+- **Structured session handoff ([REQ-TIED_SESSION_HANDOFF_SKILL], [ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY], [IMPL-TIED_SESSION_HANDOFF_SKILL])** — Wave 2: normative [session-handoff-structure.md](tools/bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md), [session-handoff.v1.template.md](tied-bundle/templates/session-handoff.v1.template.md), `@handoff` merge of pending prior requests + environment/deps in resume prompt; bootstrap test [session-handoff-structure-doc.test.mjs](tools/bootstrap/lib/session-handoff-structure-doc.test.mjs). Plan: [PLAN.md](tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/PLAN.md).
+
+- **Client operator tooling parity ([REQ-TIED_CLIENT_OPERATOR_TOOLING])** — Checklist gate uses merged `steps` + `sub_procedures` for slug validation; `pseudocode_validate` strips repo-root `tied-project/` path prefixes; `readTiedMethodologyVersion` falls back to `tied-bundle/install.json` and `AGENTS.md` (no cwd semver luck); `run-close-out-gates.mjs` resolves MCP dist from client `.cursor/mcp.json` / `TIED_MCP_BIN`, runs `--reconcile` after gate receipt persist; `tied-install` writes root `VERSION` create-if-absent. Plan: [PLAN.md](tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md).
+
+- **Traditional four-phase workflow LLM trial catalog** — [catalog-traditional-workflow-trial-prompts.md](docs/demos/catalog-traditional-workflow-trial-prompts.md): eight **PROMPT-WF-*** compact remainders for `add-feature` → `refine-plan` → `build-plan` → `close-out` on disposable clients; seven-dimension grading including **workflow choreography**; pilot matrix for Composer 2.5 and GPT-5.6 Luna (low/med/high). Store-only facilitator skill **`@record-wf-trial`** ([tools/bundled-record-wf-trial-skill/](tools/bundled-record-wf-trial-skill/)) via **`STORE_FACILITATOR_SKILLS`**. [docs/demos/README.md](docs/demos/README.md) workflow readouts section. Docs-only; no new REQ tokens.
+
+- **EDPC meta-hub engagement normative promote (G4, `@citdp-promote`)** — `[REQ-TIED_EDPC_META_HUB_ENGAGEMENT]`, `[ARCH-TIED_EDPC_META_HUB_ENGAGEMENT]`, `[IMPL-TIED_EDPC_META_HUB_METHODOLOGY]` enroll methodology template + guide (shipped `9e2c4c2b`) with contract test `mcp-server/src/edpc/meta-hub-template.test.ts`. CITDP: [CITDP-PLAN-EDPC-META-HUB-ENGAGEMENT.yaml](tied-project/citdp/CITDP-PLAN-EDPC-META-HUB-ENGAGEMENT.yaml). Handoff: [citdp-promote-handoff.md](tied-project/working/PLAN-EDPC-META-HUB-ENGAGEMENT/evidence/citdp-promote-handoff.md).
+
+- **TIED YAML corpus graph comprehension ([REQ-TIED_CORPUS_COMPREHENSION], [ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL], [IMPL-TIED_CORPUS_GRAPH_*], [PROC-TIED_CORPUS_GRAPH_COMPREHENSION])** — Evidence-only `tied_corpus_graph_refresh|map|trace|freshness` MCP tools index `tied-project/` YAML/Markdown for REQ→detail→sidecar trace (DOC-STDD gap G3). Regression tests for gate path with `identity.routing: marker_only` (G6). Plan: [PLAN.md](tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/PLAN.md).
+
+- **Store brownfield tied-project representation (DOC-STDD-TIED-PROJECT-BROWNFIELD)** — Full-repo EDPC dogfood on stdd with `tied-project/` meta hub: committed working evidence (charter, SCM, claims ledger, corpus map, publish gaps), sponsor hub [docs/stdd-workflows.md](docs/stdd-workflows.md), refreshed [envelope-gap-report](tied-project/working/evaluation/envelope-gap-report.v1.yaml) (10-token sample), and removal of 64 net byte-identical duplicate working `CITDP-*.yaml` drafts (canonical copies remain under `tied-project/citdp/`). No REQ/ARCH/IMPL index changes. Plan: [PLAN-refine-pass1.md](tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/PLAN-refine-pass1.md).
+
+- **LEAP unify checklist resume ([REQ-TIED_DURABLE_CHECKLIST_CONTROLLER])** — Shared `@tied/checklist-resume` workspace package for MCP `tied_checklist_controller_resume_plan` and agentstream apply; `checklist.resume_from_tracker` tri-state in `checklist-resume-config.ts`. Plan: [PLAN-LEAP-UNIFY-CHECKLIST-RESUME.md](tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/PLAN-LEAP-UNIFY-CHECKLIST-RESUME.md).
+
+- **Workflow visualization standalone skill ([REQ-TIED_WORKFLOW_VISUALIZATION_SKILL], [ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY], [IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL])** — Sixth `BUNDLED_STANDALONE_CLIENT_SKILLS` entry **`workflow-visualization`** (`@workflow-visualization`): comprehension-grounded visualization catalog, workflow inventory, hub `docs/<project>-workflows.md` plus optional domain/integration satellites; docs-only on target repo. Hooks in README brownfield step 8, [edpc-comprehension.md](tied-project/vocab/edpc-comprehension.md), [client-development-index](tied-bundle/docs/client-development-index.md), and [handoff](tools/bundled-session-handoff-skill/SKILL.md). Tests: [workflow-visualization-skill.test.ts](mcp-server/src/e2e/workflow-visualization-skill.test.ts), [client-skills-catalog.test.mjs](tools/bootstrap/lib/client-skills-catalog.test.mjs). CITDP: [CITDP-REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml](tied-project/citdp/CITDP-REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/PLAN.md).
+
+- **Intent control plane Wave 2 — atomic yaml_updates_apply ([REQ-TIED_YAML_UPDATES_ATOMIC_BATCH], [ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH], [IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH], [REQ-TIED_INTENT_CONTROL_PLANE])** — Batch MCP writes snapshot touched project corpus files and roll back on step failure or post-batch `tied_validate_consistency` rejection (`rolled_back: true`). REQ-CTRL-002 alignment. Plan: [PLAN.md](tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/PLAN.md).
+
+- **Intent control plane Wave 3 — verify manifest provenance ([REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE], [ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE], [IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE], [REQ-TIED_INTENT_CONTROL_PLANE])** — `tied_verify` requires `verification-evidence-manifest.v1` covering `passed_*` tokens; rejects fabricated pass lists (CASE-002) and optional commit mismatch (CASE-005). Opt-out: `verification.require_manifest_provenance: false` in `tied-project/config.yaml`.
+
+- **Intent control plane Wave 4 — durable checklist resume ([REQ-TIED_DURABLE_CHECKLIST_CONTROLLER], [ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER], [IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER], [REQ-TIED_INTENT_CONTROL_PLANE])** — REQ-CTRL-007: `deriveChecklistResumePlan` from Authoritative Tracker; agentstream `--resume-from-tracker`; MCP `tied_checklist_controller_resume_plan` (read-only). Plan: [PLAN.md](tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/PLAN.md).
+
+- **Intent control plane Wave 5 — isolated verification runner ([REQ-TIED_ISOLATED_VERIFICATION_RUNNER], [ARCH-TIED_ISOLATED_VERIFICATION_RUNNER], [IMPL-TIED_ISOLATED_VERIFICATION_RUNNER], [REQ-TIED_INTENT_CONTROL_PLANE])** — REQ-CTRL-009 Option B: `quality_evidence_collect_manifest` spawns `isolated-verification-runner` child when `verification.isolated_runner: true`; manifest records `execution_runner`. Plan: [PLAN.md](tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/PLAN.md).
+
+- **Intent control plane Wave 6 — marker-only project path routing ([REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING], [ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING], [IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING], [REQ-TIED_INTENT_CONTROL_PLANE])** — REQ-CTRL-001 Path 3: `identity.routing: marker_only` resolves MCP writable root from `project-identity.v1.yaml` via cwd discovery; stale env ignored unless it points at a valid unremapped corpus; `tied_config_get_base_path` exposes routing metadata. Plan: [PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md](tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md).
+
+- **CITDP record/promote prompt-type leaves ([REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE], [ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE], [IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE])** — `@citdp-record` (CITDP-only partial sync via `citdp_record_write`) and `@citdp-promote` (full TIED from a named CITDP); extends leaf inventory to 15; e2e `prompt-type-skills.test.ts` / `prompt-type-subagent.test.ts`. CITDP: [CITDP-REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE.yaml](tied-project/citdp/CITDP-REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE.yaml). Plan: [PLAN.md](tied-project/working/PLAN-PROMPT-TYPE-CITDP-RECORD-PROMOTE/PLAN.md).
+
+- **tied-install batch `--targets` ([PLAN-TIED-INSTALL-BATCH-TARGETS])** — YAML list of client directories (or stdin via `-`) for sequential install, `--refresh`, `--doctor`, and migrate flows; filters (`--targets-only-installed`, include/exclude globs, skip-missing) and `--targets-continue-on-error`. [REQ-TIED_LAYERED_CLIENT_INSTALL](tied-project/requirements/REQ-TIED_LAYERED_CLIENT_INSTALL.yaml). CITDP: [CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml](tied-project/citdp/CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml).
+
+- **MCP core / opt-in stdio split ([PLAN-MCP-CORE-OPTIN-SPLIT])** — `TIED_MCP_TOOL_PROFILE` partitions tools into core vs opt-in; bootstrap writes dual `mcpServers` entries; Claude brownfield merge preserves foreign keys; resources gated to core/full. [REQ-TIED_SETUP](tied-project/requirements/REQ-TIED_SETUP.yaml), [REQ-MCP_USAGE_METRICS](tied-project/requirements/REQ-MCP_USAGE_METRICS.yaml), [REQ-TIED_LAYERED_CLIENT_INSTALL](tied-project/requirements/REQ-TIED_LAYERED_CLIENT_INSTALL.yaml). Plan: [CITDP-PLAN-MCP-CORE-OPTIN-SPLIT.yaml](tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/CITDP-PLAN-MCP-CORE-OPTIN-SPLIT.yaml).
+
+- **Open Ontologies Wave 3 — plumb v2** — `change-impact-profile.v1` + **impact-preview.v2** on `tied_plumb_diff_impact_preview` when `profile_path` or `use_default_profile` is set; default **impact-preview.v1** unchanged. [REQ-TIED_OPEN_ONTOLOGIES_WAVE3](tied-project/requirements/REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml); template [change-impact-profile.v1.example.yaml](tied-bundle/templates/tied/analysis/examples/change-impact-profile.v1.example.yaml).
+
+- **Tests vs checker-backed claims Phase 3 ([REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE], [ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF], [IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF])** — [methodology-composition-matrix.md](docs/comparisons/methodology-composition-matrix.md) §2 row 16; guide [Envelope compose](tied-bundle/docs/tests-vs-checker-backed-claims.md#envelope-compose); advisory `independent_proofs[]` / `proof_kind` in `validateRequestEvidenceEnvelope`; contract tests [methodology-composition-matrix-anthropic-fv-row.test.mjs](tools/bootstrap/lib/methodology-composition-matrix-anthropic-fv-row.test.mjs) and [checker-backed-envelope-proof.test.ts](mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts). 36-task benchmark remains **Defer**. Plan: [PLAN-refine-phase3.md](tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN-refine-phase3.md).
+- **Tests vs checker-backed claims Phase 2 ([REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE])** — Canonical **checker-backed claim** / **theorem statement** in [quality-assurance.md](tied-project/vocab/quality-assurance.md); routing and [domain-references.md](tied-project/vocab/domain-references.md) cross-topic; bidirectional [tests-vs-checker-backed-claims.md](tied-bundle/docs/tests-vs-checker-backed-claims.md) links; Anthropic comparison Phase 2 **Done**; extended [tests-checker-claim-compose-doc.test.mjs](tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs). Doc-only; no MCP gate authority. Plan: [PLAN-refine-phase2.md](tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN-refine-phase2.md).
+
+- **Tests vs checker-backed claims Phase 1 ([REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE], [ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE], [IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE])** — [tests-vs-checker-backed-claims.md](tied-bundle/docs/tests-vs-checker-backed-claims.md) from Anthropic FV Wave 3; [client-development-index.md](tied-bundle/docs/client-development-index.md) rows; pseudocode cross-link; [tests-checker-claim-compose-doc.test.mjs](tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs). Doc-only; no new MCP gate authority. Plan: [PLAN.md](tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN.md).
+
+### Changed
+
+- **REQ-TIED_INTENT_CONTROL_PLANE program close-out** — Umbrella REQ detail and `requirements.yaml` index list Waves 1–6 satisfaction criteria; persisted CITDP under `tied-project/citdp/`; full MCP test suite green with store `identity.routing: marker_only` dogfood (`icp-closeout-20261030`).
+
+- **REQ-PROMPT_TYPE_GLOBAL_SKILLS satisfaction criteria order** — Project detail lists citdp-record/promote criterion immediately after bootstrap install criterion ([REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE]); close-out envelope refreshed (`ptgs-closeout-2026-10-30`).
+
+### Fixed
+
+- **Jev harness store dist for linked clients ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — `resolveJevHarnessDistStoreRoot` resolves store `mcp-server/dist/jev` via monolithic cwd, `TIED_MCP_BIN`, `TIED_REPO_ROOT`, or agentstream package anchor; four-phase wrapper clears inherited `AGENTSTREAM_JEV_HARNESS` unless `TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1`. Tests: `jev-harness-shared.test.ts`, extended preflight. CITDP: [CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-STORE-DIST-LINKED-CLIENT.yaml](tied-project/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-STORE-DIST-LINKED-CLIENT.yaml). REQ status unchanged (program closed).
+
+- **MCP unit test path isolation ([REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING], [REQ-TIED_CLIENT_PATH_ENV_MIGRATION])** — `run-mcp-tests.mjs` strips inherited `TIED_CLIENT_*` / `TIED_METHODOLOGY_BUNDLE_PATH` from the parent process; shared `bindWritableProjectCorpus()` helper gives temp corpora a `requirements.yaml` so Path 3 `marker_only` cwd discovery does not override legacy `TIED_BASE_PATH` in tests. Fixes `yaml-loader`, detail-loader, usage-metrics, and impl-pseudocode suites when IDE MCP env is present.
+
+### Changed
+
+- **Canonical mcp.json key order ([REQ-TIED_MCP_JSON_CANONICAL_OUTPUT], [ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT], [IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT])** — `refreshTiedMcpServersJson` emits alphabetically sorted object keys (including `env` / `headers` maps; `args` order preserved). Plan: [PLAN.md](tied-project/working/PLAN-TIED-MCP-JSON-CANONICAL/PLAN.md).
+
+- **Client path env migration ([REQ-TIED_CLIENT_PATH_ENV_MIGRATION], [ARCH-TIED_CLIENT_PATH_ENV_MIGRATION], [IMPL-TIED_CLIENT_PATH_ENV_MIGRATION])** — `tied-install` / `--refresh` writes **`TIED_CLIENT_PROJECT_PATH`** / **`TIED_CLIENT_BUNDLE_PATH`** on `tied-yaml` entries and strips legacy **`TIED_BASE_PATH`** / **`TIED_METHODOLOGY_BUNDLE_PATH`**; MCP server, `tied-cli`, and agentstream preflight dual-read canonical then legacy. Plan: [PLAN.md](tied-project/working/TIED-CLIENT-PATH-ENV-NAMES/PLAN.md). Upgrade store before refreshing client MCP JSON.
+
+- **tied-install MCP path refresh (bootstrap)** — Every install/refresh pass that runs the MCP layer rewrites path env on `tied-yaml` and `tied-yaml-optin` in `.cursor/mcp.json` and `.mcp.json` (see client path env migration above); foreign `mcpServers` and non-path env are preserved. [`applyTiedMcpPathRefresh`](tools/bootstrap/lib/mcp-config.mjs) + [`installMcpLayer`](tools/bootstrap/lib/layers/mcp.mjs). E2E [`bootstrap-and-load.test.ts`](mcp-server/src/e2e/bootstrap-and-load.test.ts) aligned with canonical path env and brownfield merge; bootstrap README drops `--migrate-layout` from markdown ([REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION] / `lint-stale-layout`).
+
+- **Open Ontologies Wave 3 close-out recovery** — Re-ran unified `close_out` gates after local hygiene apply-delete; refreshed committed working envelope/manifest and recovery step-evidence under [REQ-TIED_OPEN_ONTOLOGIES_WAVE3](tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/). Feature delivery unchanged (`7f493e8`).
+
+- **Store README brownfield comprehension** — Quick start section **Brownfield comprehension on an existing codebase** (purpose, EDPC steps A–G, intent elevation, benefits, costs, deep links). Non-tied-plan doc-only; `[PROC-EDPC_COMPREHENSION]`, `[PROC-BROWNFIELD_INTENT_ELEVATION]`. Working evidence: [DOC-README-BROWNFIELD-COMPREHENSION](tied-project/working/DOC-README-BROWNFIELD-COMPREHENSION/). Machine close-out gate **N/A** (no REQ mint). Feedback ingest **N/A**.
+
+### Added
+
+- **PROMPT-GF-06 trial readout (facilitator)** — [trial-readout-PROMPT-GF-06-1792969070-gf-06.md](docs/demos/trial-readout-PROMPT-GF-06-1792969070-gf-06.md) for disposable client `1792969070-gf-06` (**TIED-DEMO-06**, `REQ-IMPL_DESIGN_DOC_VALIDATOR` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-06-1792969070-gf-06/PLAN.md](tied-project/working/FACILITATOR-GF-06-1792969070-gf-06/PLAN.md). Feedback ingest **N/A**.
+
+- **PROMPT-GF-17 trial readout (facilitator)** — [trial-readout-PROMPT-GF-17-1792967943-gf-17.md](docs/demos/trial-readout-PROMPT-GF-17-1792967943-gf-17.md) for disposable client `1792967943-gf-17` (**TIED-DEMO-17** / **ALG-02**, `REQ-DEADLINE_AWARE_SEARCH` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-17-1792967943-gf-17/PLAN.md](tied-project/working/FACILITATOR-GF-17-1792967943-gf-17/PLAN.md). Feedback ingest **N/A**.
+
+- **PROMPT-GF-12 trial readout (facilitator)** — [trial-readout-PROMPT-GF-12-1792966303-gf-12.md](docs/demos/trial-readout-PROMPT-GF-12-1792966303-gf-12.md) for disposable client `1792966303-gf-12` (**TIED-DEMO-12** / **STATE-05**, `REQ-FULFILLMENT_COMMAND_PROCESSOR` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-12-1792966303/PLAN.md](tied-project/working/FACILITATOR-GF-12-1792966303/PLAN.md). Feedback ingest **N/A**.
+
+- **Anthropic LLM formal verification appendix × TIED (Waves 1–2)** — [anthropic-llm-formal-verification-appendix.md](docs/comparisons/anthropic-llm-formal-verification-appendix.md) capture and [anthropic-llm-formal-verification-vs-tied-agent-management.md](docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md) agent-management analysis (binary proofs, Verus interpreter, tests vs proofs, proof boundaries). `.gitignore` allowlist; working evidence under [DOC-ANTHROPIC-FORMAL-VERIFICATION-COMPARISON](tied-project/working/DOC-ANTHROPIC-FORMAL-VERIFICATION-COMPARISON/). No REQ/ARCH/IMPL mint; outcomes **Anthropic-reported** / **not_measured** in stdd. Machine `close_out` gate blocked (DOC outreach tracker).
+
+- **NDTP AI Ontology Extension × TIED (Waves 1–2 outreach)** — Read-only [repository capture](docs/comparisons/ndtp-ai-ontology-extension.md) and [agent-management analysis](docs/comparisons/ndtp-ai-ontology-extension-vs-tied-agent-management.md) mapping the UK NDTP Streamlit HITL ontology extension tool (LLM generation, Owlready2/SHACL validation, optional ABM personas) to TIED sponsor agency and traceability boundaries (**no REQ/ARCH/IMPL mint**). Target repo inspected locally only; upstream claims **NDTP-reported** / **target-repo-observed**, effectiveness **not_measured** in stdd. Minimal doc-only close-out 2026-10-26 (machine gate blocked; commit skipped per unified close_out). Plan: `ndtp_ontology_comparison_c8740da2`.
+
+### Changed
+
+- **Store README operator rhythms (PLAN-README-DUAL-RHYTHMS)** — Quick start **configuration rhythm** (clone → `./build-workspace.sh` → `./tied-install.sh` → MCP confirm) and new **Compact feature rhythm** H3 (`/add-feature` → `/refine-plan` → `/build-plan` → `/close-out`); [client-development-index.md](tied-bundle/docs/client-development-index.md) scenario row; extended [store-readme-structure.test.ts](mcp-server/src/store-readme-structure.test.ts). Plan: [PLAN-refine-pass1.md](tied-project/working/PLAN-README-DUAL-RHYTHMS/PLAN-refine-pass1.md). Machine close-out gate N/A (doc-only).
+
+### Added
+
+- **PROMPT-GF-10 trial readout (facilitator)** — [trial-readout-PROMPT-GF-10-1792950723-gf-10.md](docs/demos/trial-readout-PROMPT-GF-10-1792950723-gf-10.md) for disposable client `1792950723-gf-10` (**TIED-DEMO-10** / **CON-03**, `REQ-ORDERED_PARALLEL_MAP` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-10-1792950723/PLAN.md](tied-project/working/FACILITATOR-GF-10-1792950723/PLAN.md). Feedback ingest **N/A**.
+
+- **Sponsor two-lane delivery ([REQ-TIED_SPONSOR_TWO_LANE_DELIVERY], [ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY], [IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY])** — Charter lane (pre-code) vs selection lane (post-code) with `CLASSIFY_SPONSOR_DECISION_LANE`, checklist warn hook for mid-lane deferral, and MCP `tied_sponsor_questions` lane metadata; doc [sponsor-two-lane-delivery.md](tied-bundle/docs/sponsor-two-lane-delivery.md). Close-out `run_id=close-out-2026-10-25-sponsor-two-lane-unblock-final`; verification manifest + `tied_verify` (REQ Implemented / IMPL Active). Plan: [PLAN.md](tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/PLAN.md).
+
+- **GF-05 Track A close_out gate receipt persist ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** — `run-close-out-gates.mjs` persists `checklist-gate-receipt.v1` for `close_out` by default (`--no-persist-gate-receipt` opt-out); `tied-close-out-process.md` note; contract test `gf05-close-out-runner-persist.test.ts`. Witness **`fb-mvo18hye-i6x5fq`**. Close-out `run_id=close-out-gf05-track-a-20261025`. CITDP [CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml](tied-project/citdp/CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml). Complements Track B commit `ddb7ae14`.
+
+- **GF-05 Track B checklist_gate norm ([PROC-AGENT_REQ_CHECKLIST], [PROC-TIED_VERIFICATION_GATED])** — Sub-procedure `sub-checklist-gate-before-verify-update` in agent checklist YAML/MD; `[PROC-TIED_VERIFICATION_GATED]` cross-link in `processes.md`; `checklist_gate` example in bundled tied-yaml skill; contract test `gf05-verify-gate-checklist-contract.test.ts`. Witness **`fb-mvo18hye-i6x5fq`**. Close-out `run_id=close-out-gf05-track-b-20261025`. CITDP [CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml](tied-project/citdp/CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml). Plan: [PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/PLAN.md](tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/PLAN.md). Track A deferred.
+
+- **PROMPT-GF-05 trial readout (facilitator)** — [trial-readout-PROMPT-GF-05-1792944114.md](docs/demos/trial-readout-PROMPT-GF-05-1792944114.md) for disposable client `1792944114-gf-05` (**TIED-DEMO-05**, `REQ-REQ_TOKEN_COVERAGE` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-05-1792944114/PLAN.md](tied-project/working/FACILITATOR-GF-05-1792944114/PLAN.md). Proxy feedback **`fb-mvo18hye-i6x5fq`** linked; no duplicate ingest.
+
+- **MCP stdio console guard ([REQ-MCP_STDIO_CONSOLE_GUARD], [ARCH-MCP_STDIO_CONSOLE_GUARD], [IMPL-MCP_STDIO_CONSOLE_GUARD])** — Patch `console.log` / `console.debug` / `console.info` in the MCP server process so stdio JSON-RPC keeps stdout exclusive; opt-in stderr diagnostics via **`TIED_MCP_DIAGNOSTICS`**. Kaizen **`fb-mvnztbmv-ez5nep`**. Plan: [PLAN.md](tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/PLAN.md).
+
+### Changed
+
+- **[REQ-TIED_CLI_MCP_JSON_BASE_PATH]** — Working PLAN pass 3 syncs as-built delivery (post-`5ba4086e`); CITDP `delivery_record`; LEAP fix for `resolve-tied-cli-env.mjs` import of `mcp-base-path.mjs`; verify-derived REQ detail status **Implemented**.
+
+### Added
+
+- **[REQ-GF16-KAIZEN-OUTCOME-CLOSE]** — GF-16 dual-track Kaizen coordinator: **`fb-mvny01eb-my451g`** outcome **improved** (GF-16 cwd smoke); **`fb-mvnyr5n2-aaeg1j`** **not_measured** → **`REQ-TIED_CLIENT_FEEDBACK_CAPTURE`**; register and working evidence under `tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/`.
+
+- **Client upstream feedback capture ([REQ-TIED_CLIENT_FEEDBACK_CAPTURE], [ARCH-TIED_CLIENT_FEEDBACK_CAPTURE], [IMPL-TIED_CLIENT_FEEDBACK_CAPTURE])** — Close-out templates and `/feedback` skill forbid narrative-only upstream claims; require receipt, store `fb-*`, client `feedback.yaml`, or **N/A + reason**; `record-gf-trial` documents client-originated vs proxy vs `--skip-feedback-ingest`. Contract tests `client-feedback-capture-contract.test.ts`. GF-16 witness **`fb-mvnyr5n2-aaeg1j`**; Track A outcome **not_measured** until next cohort. Close-out `run_id=close-out-2026-10-25-track-a`. Plan: [PLAN.md](tied-project/working/REQ-TIED_CLIENT_FEEDBACK_CAPTURE/PLAN.md).
+
+- **CLI mcp.json base path ([REQ-TIED_CLI_MCP_JSON_BASE_PATH], [ARCH-TIED_CLI_MCP_JSON_BASE_PATH], [IMPL-TIED_CLI_MCP_JSON_BASE_PATH])** — `tied-cli.sh` / `tied.sh` / `feature-orchestrator.sh` resolve **`TIED_BASE_PATH`** from **`.cursor/mcp.json`** then **`.mcp.json`** (client cwd, optional env override for store CI); **`tools/bootstrap/lib/mcp-base-path.mjs`** + bootstrap tests; Kaizen feedback **`fb-mvny01eb-my451g`** (GF-16 proxy). Plan: [PLAN.md](tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/PLAN.md).
+
+- **PROMPT-GF-16 trial readout (facilitator)** — [trial-readout-PROMPT-GF-16-1792937222.md](docs/demos/trial-readout-PROMPT-GF-16-1792937222.md) for disposable client `1792937222-gf-16` (**TIED-DEMO-16** / **STATE-06**, `REQ-RECONCILIATION_ENGINE` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-16-1792937222/PLAN.md](tied-project/working/FACILITATOR-GF-16-1792937222/PLAN.md). Ingest via `@record-gf-trial`.
+
+- **PROMPT-GF-15 trial readout (facilitator)** — [trial-readout-PROMPT-GF-15-1792863463.md](docs/demos/trial-readout-PROMPT-GF-15-1792863463.md) for disposable client `1792863463` (**TIED-DEMO-15** / **DATA-04**, `REQ-OUT_OF_ORDER_EVENT_AGGREGATOR` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-15-1792863463/PLAN.md](tied-project/working/FACILITATOR-GF-15-1792863463/PLAN.md). Ingest via `@record-gf-trial`.
+
+- **Store-only `@record-gf-trial` facilitator skill** — `tools/bundled-record-gf-trial-skill/` codifies disposable greenfield client inspection, six-dimension grading, `docs/demos/trial-readout-*.md` publish, and optional Kaizen feedback ingest; `manifest.json` **`STORE_FACILITATOR_SKILLS`** + `tools/bootstrap/lib/store-facilitator-skills.mjs` (linked/full stub on store self-install only). Demo protocol: [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md), [docs/demos/README.md](docs/demos/README.md). Plan: [PLAN-RECORD-GF-TRIAL-SKILL/PLAN.md](tied-project/working/PLAN-RECORD-GF-TRIAL-SKILL/PLAN.md).
+
+- **Custom audit brief trial readout (facilitator)** — [trial-readout-CUSTOM-AUDIT-BRIEF-1792861936.md](docs/demos/trial-readout-CUSTOM-AUDIT-BRIEF-1792861936.md) for disposable client `1792861936` (**TIED-DEMO-23** lens, custom greenfield, `REQ-TIED_CLIENT_AUDIT_BRIEF` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-AUDIT-BRIEF-1792861936/PLAN.md](tied-project/working/FACILITATOR-AUDIT-BRIEF-1792861936/PLAN.md).
+
+- **PROMPT-GF-04 trial readout (facilitator)** — [trial-readout-PROMPT-GF-04-1792857852.md](docs/demos/trial-readout-PROMPT-GF-04-1792857852.md) for disposable client `1792857852` (**TIED-DEMO-04** / **L1 rename drift**, `REQ-GLOSSARY_RENAME_CHECK` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-04-1792857852/PLAN.md](tied-project/working/FACILITATOR-GF-04-1792857852/PLAN.md).
+
+- **Sponsor feedback `/feedback` skill ([REQ-TIED_FEEDBACK_REPORT_SKILL], [ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY], [IMPL-TIED_FEEDBACK_REPORT_SKILL])** — Fifth standalone bundled skill (`tools/bundled-feedback-skill/`) installed via bootstrap manifest; catalog and `feedback-skill.test.ts` static install smoke; vocab `/feedback` rows in [project-operations-mcp.md](tied-project/vocab/project-operations-mcp.md). Minimal close-out `run_id=close-out-req-tied-feedback-report-skill-2026-10-24` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). CITDP [CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL.yaml](tied-project/citdp/CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL.yaml). Plan: [PLAN-refine-pass1.md](tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/PLAN-refine-pass1.md).
+
+- **External service comparison skill ([REQ-TIED_EXTERNAL_SERVICE_COMPARISON], [ARCH-TIED_EXTERNAL_SERVICE_COMPARISON], [IMPL-TIED_EXTERNAL_SERVICE_COMPARISON])** — Fourth methodology-harness leaf `@external-service-comparison`: explicit-only three-wave procedure (Wave 1 capture, Wave 2 TIED analysis, Wave 3 handoff-only), mandatory `DOC-{SLUG}-COMPARISON` working folder, bootstrap contract test, and template/index cross-links. Minimal close-out `run_id=esc-close-out-20261023` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/PLAN.md).
+
+- **Ordered YAML list audit + tied-install migration ([REQ-CITDP_ORDERED_LIST_KEYS], [REQ-TIED_LAYERED_CLIENT_INSTALL])** — `scripts/audit-ordered-yaml-lists.mjs` (`--check`); `tools/bootstrap/lib/migrate-ordered-list-keys.mjs`; brownfield `./tied-install.sh --migrate-ordered-list-keys` (with `--dry-run`, `--fail-if-pending`) for `tied-project/citdp` and `tied-project/working`; nested `execution_evidence` / close-out evidence renames in `citdp-ordered-keys.ts`. Working evidence: [ORDERED-LIST-AUDIT-2026-10-23](tied-project/working/ORDERED-LIST-AUDIT-2026-10-23/audit-report.md), [PLAN-TIED-INSTALL-ORDERED-KEYS](tied-project/working/PLAN-TIED-INSTALL-ORDERED-KEYS/PLAN-refine-pass1.md). Minimal close-out 2026-10-23 (machine gate N/A).
+
+- **CITDP ordered command list keys ([REQ-CITDP_ORDERED_LIST_KEYS], [ARCH-CITDP_ORDERED_LIST_KEYS], [IMPL-CITDP_ORDERED_KEY_VALIDATE])** — CITDP ordered verification batteries use `evidence.command_seq` (and related `*_seq` keys under `test_strategy` / `adoption_evidence`); `citdp_record_write` rejects legacy `commands` keys; bulk migration via `scripts/rename-citdp-command-keys.mjs`. Template and `detail-files-schema.md` § CITDP ordered command batteries updated.
+
+- **Committed working git hygiene ([REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE], [ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE], [IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE])** — Store-only `# BEGIN TIED COMMITTED WORKING REGENERABLE (managed)` block mirroring local-working globs onto `tied-project/working/`; `classifyWorkingRelativePath` routes `evidence/gate-*` (and related receipts) to `tied-bundle/working/`; inventory/migrate scripts; wave untrack of regenerable indexed paths (600 in store dogfood); pairing demo fixture under `mcp-server/test/fixtures/methodology-pairing/`. Close-out `run_id=close-out-cwgh-2026-10-23` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). CITDP [CITDP-REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE.yaml](tied-project/citdp/CITDP-REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE/PLAN.md).
+
+- **Data file ordering ([REQ-TIED_YAML_CANONICALIZATION])** — Extended `tied-yaml-canonical-v1` ordered-list key families (`_seq`, `_sequence`, `_order` and prefix/suffix/infix variants); `mcp-server/src/storage-dump.ts` (`safeDumpYaml`, `safeStringifyJson`, `stableJsonForHash`); migrated prioritized YAML writers and JSON slice-1 gate/EASAR/bounded-composition paths; Ruby `yaml_list_sorter` / `yaml_semantic_compare` parity; authoring notes in `detail-files-schema.md`, `processes.md`, bundled tied-yaml skill. Minimal close-out `run_id=close-out-plan-data-file-ordering-final` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). CITDP [CITDP-PLAN-DATA-FILE-ORDERING.yaml](tied-project/citdp/CITDP-PLAN-DATA-FILE-ORDERING.yaml). Plan: [PLAN-refine-pass2.md](tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md).
+
+- **Open Ontologies × TIED (Waves 1–2 outreach)** — Read-only [repository capture](docs/comparisons/open-ontologies-repository.md) and [agent-management analysis](docs/comparisons/open-ontologies-repository-vs-tied-agent-management.md) mapping the Rust ontology engine (plan/apply lifecycle, Lean certificates, MCP surface, CI skip visibility) to TIED traceability and evidence boundaries (**no REQ/ARCH/IMPL mint**). Target repo inspected locally only; upstream claims **Tesseract-reported** / **target-repo-observed**, effectiveness **not_measured** in stdd. Minimal doc-only close-out 2026-10-23 (machine gate blocked; scoped traceable commit). Plan: `open_ontologies_comparison_aecff69f`.
+
+- **AI-SDLC ATDD Software Factory × TIED (Wave 2 outreach)** — Read-only [analysis](docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md) mapping executable-spec factory patterns (protected spec, red-first tests, run records, reconstruction) to TIED traceability, checklist gates, and evidence envelopes (**no REQ/ARCH/IMPL mint**). Target repo inspected locally only; factory outcomes **Factory-reported** / **not_measured** in stdd. Minimal doc-only close-out 2026-10-23. Plan: `ai_sdlc_factory_comparison_080db2c8`.
+
+- **Ludanyi “Illusion of Measurement” × TIED (Waves 1–2 outreach)** — Read-only [capture](docs/comparisons/andras-ludanyi-illusion-of-measurement-judgment-cooperation.md) and [agent-management analysis](docs/comparisons/andras-ludanyi-illusion-of-measurement-judgment-cooperation-vs-tied-agent-management.md) mapping people/management judgment and anti-proxy-metrics themes to TIED proof boundaries and sponsor authority (**no REQ/ARCH/IMPL mint**). Minimal doc-only close-out 2026-10-22 (machine gate N/A; effectiveness **not_measured**). Plan: `manager_method_comparison_f6cae799`.
+
+### Changed
+
+- **Disposable factory `--tag` suffix ([REQ-TIED_SETUP], [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM], [IMPL-TIED_FILES])** — `test-new-tied-client --tag gf-001` creates `$TIED_TEST_ROOT/<epoch>-gf-001`; Bash factory delegates to Node `--disposable` (Windows parity); `resolveBootstrapMetricsClient` treats tagged epoch basenames like plain unix-second dirs. Proof: bootstrap unit tests + `new-tied-client` e2e; manual smoke `1792898539-gf-001`. Minimal close-out `PLAN-DISPOSABLE-CLIENT-TAG` (machine gate N/A; no new REQ index).
+
+- **Close-out Wave 5 completion pass (LEAP `lp-2026-10-24T16-33-13-575Z-707c63d33f60`, Track B)** — [close-out-wave5-completion-pass.md](tools/bundled-prompt-type-skills/prompt-shared/close-out-wave5-completion-pass.md); completion-signals cross-link; [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) close-out recovery procedure. Feedback `fb-mvmmb3lp-723euw` / `PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK`.
+
+- **Close-out scoped workspace hygiene (prompt-shared, [REQ-PROMPT_TYPE_GLOBAL_SKILLS], [REQ-TIED_CLEAR_WORKSPACE_SKILL], [REQ-TIED_GIT_HYGIENE])** — `completion-signals-handoff.md`, `traceable-commit-close-out.md`, `clear-workspace-routing.md`, and `tied-close-out-process.md` define post-REQ workspace clean vs repo-wide drift; `@clear-workspace` documented as router/recovery only. Checklist `traceable-commit` slug notes hygiene receipt and excluded unrelated drift. Feedback `fb-mvmmq5pl-dxzvb6`; plan [PLAN-CLOSE-OUT-WORKSPACE-IN-PASS](tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md).
+
+- **MCP test fixtures (`mcp-server/test/fixtures`)** — Refresh adversarial-inquiry Mode B / Go Mode B mini-project `request-evidence-envelope.v1.json` revision metadata and source-graph mini-repo `source-graph-index.v1.json` `built_at` after `npm test`; `content_hash` and envelope gap payloads unchanged.
+
+- **MCP tool Zod 4 record schemas ([REQ-TIED_TOOL_INPUT_COMPATIBILITY])** — Remaining `mcp-server/src/tools` `inputSchema` definitions use `z.record(z.string(), z.unknown())` for Zod 4; `zod` ^4.6.7 and `@modelcontextprotocol/sdk` ^1.32.2 in `mcp-server/package.json`. Verification: `npm run build` in `mcp-server`.
+
+- **Data file ordering — JSON slice 2 ([REQ-TIED_YAML_CANONICALIZATION])** — `prettyCanonicalJson()`; migrated remaining MCP tool JSON responses, CLI stdout, disk JSON writers, and hash/JSONL paths to `storage-dump` helpers (bounded-composition reports, evidence envelopes, feature store locks, adherence ledger, plumb audit, leap queue, source-graph index). Product commit `9fcaf3ef`. Unified close-out `run_id=close-out-plan-data-file-ordering-slice2-2026-10-23` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Evidence: [json-slice2-build-evidence.md](tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/json-slice2-build-evidence.md), [close-out-handoff.md](tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/close-out-handoff.md).
+
+- **Ludanyi comparison capture (redistribution policy)** — Wave 1 stub now links [LinkedIn Pulse source](https://www.linkedin.com/pulse/illusion-measurement-judgment-individuality-teams-andras-ludanyi-k7ave/) and TL;DR only (no full article body in repo); Wave 2 analysis cross-references off-repo capture. Follow-up traceable commit 2026-10-22.
+
+- **Agent shell working directory ([REQ-PROMPT_TYPE_GLOBAL_SKILLS])** — Prompt-shared [agent-shell-working-directory.md](tools/bundled-prompt-type-skills/prompt-shared/agent-shell-working-directory.md) and [agent-shell-script-header.template.sh](tools/bundled-prompt-type-skills/prompt-shared/agent-shell-script-header.template.sh): absolute `working_directory` / `REPO_ROOT` anchor, fail-closed marker guards, wired from `non-tied-plan`, `tied-implement`, and `other` skills. E2E contract in [prompt-type-skills.test.ts](mcp-server/src/e2e/prompt-type-skills.test.ts). Linked install keeps redirect stubs; canonical content in store bundle.
+
+- **pseudocode_validate path input ([REQ-PSEUDOCODE_VALIDATE_PATH_INPUT], [ARCH-PSEUDOCODE_INPUT_RESOLUTION], [IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT])** — MCP `pseudocode_validate` accepts `essence_pseudocode_path`, alias `pseudocode_path`, and token-only default IMPL sidecar under `TIED_BASE_PATH`; shared resolver with analyze; inline behavior unchanged. Integrated close-out `run_id=closeout-inquiry-20261021-close_out`. CITDP [CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml](tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml). Plan: [PLAN.md](tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md).
+
+- **CLI operator output texture ([REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE], [ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE], [IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE])** — Styled `how()` in `scripts/build-commands.sh` (via `_build_commands_cli_guide.inc.sh`): human help defaults to **stderr** (stdout empty on success); plain mode via `NO_COLOR`, `TIED_CLI_PLAIN=1`, `--plain` / `--no-color`; stdout override via `TIED_CLI_HELP_STDOUT=1` or `--stdout`. Composition tests: [build-commands-how.test.mjs](tools/bootstrap/build-commands-how.test.mjs). **Breaking:** scripts that piped `how TOPIC` from stdout must use `how --stdout TOPIC` or `TIED_CLI_HELP_STDOUT=1`. CITDP draft: [CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml](tied-project/citdp/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/PLAN.md).
+
+- **Primary improvement pending queue ([REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE], [ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE], [IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE])** — Committed [tied-improvement-pending-work-queue.md](tied-bundle/docs/tied-improvement-pending-work-queue.md) and v1 template for local gitignored `TIQ-*` operator index at `tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md` (distinct from MCP `tied_backlog` and LEAP proposals); bootstrap contract test; HARNESS [RESUMPTION.md](tied-project/working/HARNESS-IMPROVEMENT-ARC/RESUMPTION.md) registers `TIQ-20261021-LANGCHAIN-HARNESS-ARC`. CITDP [CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml](tied-project/citdp/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/PLAN.md).
+
+- **Harness improvement arc resumption** — [RESUMPTION.md](tied-project/working/HARNESS-IMPROVEMENT-ARC/RESUMPTION.md): shipped LangChain/Cursor/Traefik compose inventory, pending cohort/Cursor Phase 2/LangSmith items, sponsor involvement bands; Quick reads HTOL row folds charter + [htol-pilot-cohort-runbook.md](tied-bundle/docs/htol-pilot-cohort-runbook.md).
+
+- **HTOL pilot cohort runbook ([REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK], [ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK], [IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK])** — Loop 3 operator checklist composing the learning charter: [htol-pilot-cohort-runbook.md](tied-bundle/docs/htol-pilot-cohort-runbook.md) (charter cross-links in [harness-trace-learning-experiment-charter.md](tied-bundle/docs/harness-trace-learning-experiment-charter.md)), instance template, bootstrap test, charter + HTOL guide cross-links. Outcomes remain **not_measured** / **inconclusive** until a real **htol-v1** cohort. Minimal close-out `run_id=htol-runbook-close-out-20261021` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`). CITDP [CITDP-REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml](tied-project/citdp/CITDP-REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml). Plan: [PLAN.md](tied-project/working/PLAN-HTOL-PILOT-COHORT-RUNBOOK/PLAN.md).
+
+- **LangChain harness Phase 3 ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3], [ARCH-TIED_HARNESS_LANGCHAIN_PHASE3], [IMPL-TIED_HARNESS_LANGCHAIN_PHASE3])** — LangChain comparison Phase 3 compose: methodology-composition-matrix §2 row 15, `@harness-trace-analyzer` skill (normative Task fan-out + Kaizen capture), HTOL guide outer-loop section, enrollment leaf ids for harness skills, LEAP MCM row count 15. Minimal close-out `run_id=lc-p3-close-out-2026-10-21` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`). CITDP [CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml](tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/PLAN.md).
+
+- **Harness trace learning pilot ([REQ-TIED_HARNESS_TRACE_LEARNING_PILOT], [ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT], [IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT])** — LangChain comparison Phase 2 Loop 3 compose: [harness-trace-learning-experiment-charter.md](tied-bundle/docs/harness-trace-learning-experiment-charter.md), HTOL experiment/pilot templates, charter bootstrap test, store dogfood row `mle-htol-pilot-20261021-001` (outcome **inconclusive**), cross-links (HTOL guide Loop 3, LangChain Phase 2 row, client-development-index, feedback-to-tied, harness-trace-review denominator hint). Minimal close-out `run_id=htol-lp-close-out-2026-10-21` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`). CITDP [CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml](tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/PLAN.md).
+
+- **Harness trace observation loop ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP], [ARCH-TIED_HARNESS_TRACE_OBSERVATION], [IMPL-TIED_HARNESS_TRACE_OBSERVATION])** — LangChain comparison Phase 1 compose: [harness-trace-observation-loop.md](tied-bundle/docs/harness-trace-observation-loop.md), explicit `@harness-trace-review` skill, bootstrap contract tests, cross-links (authority checklist, pre-handoff charter, client-development-index). Minimal close-out `run_id=htol-close-out-2026-10-21` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B**). CITDP [CITDP-REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml](tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/PLAN.md).
+
+- **Harness–platform authority seam ([REQ-TIED_HARNESS_PLATFORM_SEAM], [ARCH-TIED_HARNESS_PLATFORM_SEAM], [IMPL-TIED_HARNESS_PLATFORM_SEAM])** — Operator docs from Traefik harness vs platform comparison: session bootstrap (`tied_config_get_base_path`), prompt-type harness profiles in [fresh-client-prompt-activation-map.md](tied-bundle/docs/fresh-client-prompt-activation-map.md), agentstream preflight compose-don't-replace, [authority-boundary-operator-checklist.md](tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/authority-boundary-operator-checklist.md), methodology matrix row 13. Minimal close-out `run_id=hps-close-out-20261020-r1` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). CITDP [CITDP-REQ-TIED_HARNESS_PLATFORM_SEAM.yaml](tied-project/citdp/CITDP-REQ-TIED_HARNESS_PLATFORM_SEAM.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/PLAN.md).
+
+- **PROMPT-GF-14 trial readout (facilitator)** — [trial-readout-PROMPT-GF-14-1792479171.md](docs/demos/trial-readout-PROMPT-GF-14-1792479171.md) for disposable client `1792479171` (**TIED-DEMO-14** / **STATE-01**, `REQ-BATCH_PROCESSOR` on client). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-14-1792479171/PLAN.md](tied-project/working/FACILITATOR-GF-14-1792479171/PLAN.md).
+
+- **close-out prompt-type leaf ([REQ-PROMPT_TYPE_GLOBAL_SKILLS])** — Renamed **`plan-close-out`** → **`close-out`**; bundle at [close-out/SKILL.md](tools/bundled-prompt-type-skills/close-out/SKILL.md), Task wrapper [.cursor/agents/close-out.md](.cursor/agents/close-out.md). **`git_preamble_plan_close_out`** and **`context_mode: plan_close_out`** unchanged. Plan: [PLAN.md](tied-project/working/REQ-PROMPT_TYPE_CLOSE_OUT_RENAME/PLAN.md).
+
+- **add-feature + add-refine-build ([REQ-PROMPT_TYPE_GLOBAL_SKILLS], [REQ-PROMPT_TYPE_SUBAGENT])** — Greenfield leaf **`plan-new-feature`** → **`add-feature`**; TIED-source sequencer **`plan-refine-build`** → **`add-refine-build`** (`add-feature` → `refine-plan` → `build-plan`). No backward-compat stubs. Plan: [PLAN.md](tied-project/working/REQ-PROMPT_TYPE_ADD_FEATURE_RENAME/PLAN.md).
+
+- **Native MCP record inputs ([REQ-TIED_TOOL_INPUT_COMPATIBILITY], [ARCH-TIED_TOOL_INPUT_NORMALIZATION], [IMPL-TIED_TOOL_INPUT_NORMALIZATION])** — Write tools accept **string or object** record payloads via shared `normalizeRecordPayload`; tied-cli emits **`DIAGNOSTIC: TIED_CLI_HINDRANCE`** on transport/validation failures with unchanged exit codes. Integrated close-out `run_id=ntic-close-out-20261020-r1` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). CITDP [CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml](tied-project/citdp/CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md); evidence: [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/closeout-run-close-out-gates.json).
+
+- **Store README operator delivery spine ([REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE], [ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE], [IMPL-TIED_STORE_README_SECTIONS])** — Root [README.md](README.md) Band 1 **Primary operator delivery path** ( `./build-workspace.sh` → `./tied-install.sh` with styled help, `--refresh`, `--migrate-layout` ) and **Store workspace build** H3; tooling/layout list build-workspace entry points first; [client-development-index.md](tied-bundle/docs/client-development-index.md) fresh-clone scenario row; extended [store-readme-structure.test.ts](mcp-server/src/store-readme-structure.test.ts). CITDP [CITDP-REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml](tied-project/citdp/CITDP-REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml). Minimal close-out `run_id=readme-operator-spine-close-out-20261019` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Plan: [PLAN.md](tied-project/working/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE/PLAN.md); evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE/evidence/closeout-run-close-out-gates-final.json).
+
+- **build-workspace `--help` ([REQ-TIED_UNIFIED_TOOLCHAIN])** — `./build-workspace.sh -h` / `--help` (and Windows entry points) print styled operator help via `tools/bootstrap/lib/build-workspace-help.mjs` (same `console.mjs` texture as `tied-install` help); unknown args fail fast. **SC-UNIFIED-BUILD-WORKSPACE-HELP**; **IMPL-TIED_WORKSPACE_BUILD_ENTRY**. Plan: [PLAN-build-workspace-cli-help.md](tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN-build-workspace-cli-help.md).
+
+- **tied-install no-args CLI help ([REQ-TIED_LAYERED_CLIENT_INSTALL])** — `./tied-install.sh` with no arguments (or sole `-h` / `--help`) prints styled operator help aligned with `build-workspace.sh`; install requires an explicit client path or `.`. Shared module `tools/bootstrap/lib/tied-install-help.mjs`; tests `tied-install-help.test.mjs`, `install-layers-help.test.mjs`; **SC-LCI-CLI-HELP-NO-ARGS**. Plan: [PLAN-tied-install-cli-help.md](tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/PLAN-tied-install-cli-help.md).
+
+### Fixed
+
+- **`lint_tied` / `yaml_tool -F` ([REQ-TIED_LAYERED_CLIENT_INSTALL], [REQ-TIED_SETUP], [IMPL-TIED_FILES])** — `lint_tied` runs from `_BUILD_COMMANDS_REPO_ROOT` in a subshell (so `test-all` step 9 no longer depends on caller `pwd`). `yaml_tool.sh --find` accumulates multiple `-F` roots and includes symlinked `*.yaml` (linked-install `tied-bundle` index stubs). Evidence: [close-out-handoff.md](tied-project/working/FIX-LINT-TIED-TEST-ALL/evidence/close-out-handoff.md).
+
+- **Legacy layout close-out receipt** — Correct full commit SHA in [git-hygiene-receipt-2026-10-19.md](tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/git-hygiene-receipt-2026-10-19.md) for the decommission wave (`28fee75a3ea33ca7a75f4097dd17a93c1dbe69bf`).
+
+### Changed
+
+- **plan-close-out traceable commit ([REQ-PROMPT_TYPE_GLOBAL_SKILLS])** — `@plan-close-out` runs default **`tied_git_hygiene`** preview and checklist-aligned **traceable-commit** when unified **close_out** allows; skips commit when blocked. New shared [traceable-commit-close-out.md](tools/bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md); **`git_preamble_plan_close_out`**; updated [plan-close-out/SKILL.md](tools/bundled-prompt-type-skills/plan-close-out/SKILL.md) and [.cursor/agents/plan-close-out.md](.cursor/agents/plan-close-out.md). **`leap-diff-promote`** / **`ammend-commit`** unchanged (no commit). Plan: [PLAN.md](tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/PLAN.md).
+
+- **Legacy layout documentation decommission ([REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION], [ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION], [IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION])** — User-facing docs assume **two-folder** clients only (`tied-project/` + `tied-bundle/`). Removed markdown references to legacy top-level `tied/` and `--migrate-layout` (flag remains on `tied-install --help`). Layer B patterns in [lint-stale-layout.mjs](tools/bootstrap/lib/lint-stale-layout.mjs); [store-readme-structure.test.ts](mcp-server/src/store-readme-structure.test.ts) forbids legacy layout prose; LEAP [REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE](tied-project/requirements/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml) install-help criterion. Plan: [PLAN.md](tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/PLAN.md).
+
+- **Breaking:** `./tied-install.sh` no longer installs the current directory when invoked with zero arguments; use `./tied-install.sh .` instead. Factory pipeline (`new-tied-client`) unchanged (install runs with `cwd` set to the client dir).
+
+- **EDPC Workflow H client assessment ([REQ-TIED_EDPC_CLIENT_ASSESSMENT], [ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL], `IMPL-TIED_EDPC_CLIENT_ASSESSMENT`, [PROC-EDPC_CLIENT_ASSESSMENT])** — Pure JSON MCP `tied_edpc_client_assessment_validate` / `_compose` / `_render`; CAM v1 templates; **SC-CAM-LEDGER-FIELDS** (`statement`/`text`); operator dogfood script; Chart Viewer pilot dogfooded (H0/H2). Platform **`6577f890`** + follow-on close-out `run_id=edpc-cam-closeout-20261019` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B**). CITDP [CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml](tied-project/citdp/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml). Plan: [PLAN-refine-pass2.md](tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/PLAN-refine-pass2.md). Evidence: [closeout-run-close-out-gates-h5.json](tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/evidence/closeout-run-close-out-gates-h5.json), [plan-close-out-proposed-commit.md](tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/evidence/plan-close-out-proposed-commit.md).
+
+- **EDPC Workflow D / OFSM v1.1 (Slice D — [REQ-TIED_EDPC_COMPREHENSION])** — `IMPL-TIED_EDPC_FAILURE_OPS` with MCP `tied_edpc_failure_state_validate` / `_build`; fail-closed health classifications and observation window; ops workflow routes (`operational_health`, `billing_processor_health`, `resource_cost`); publish `ofsm:` / `health:` gaps; D-lite dogfood at `production_touch: none`. Integrated close-out `run_id=edpc-slice-d-closeout-20261019` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [PLAN-slice-d-workflow-d-prod-ops.md](tied-project/working/REQ-TIED_EDPC_COMPREHENSION/PLAN-slice-d-workflow-d-prod-ops.md), [closeout-run-close-out-gates-slice-d.json](tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/closeout-run-close-out-gates-slice-d.json), [slice-d-dogfood-d-lite.md](tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-dogfood-d-lite.md).
+
+- **EDPC orchestration v1 ([REQ-TIED_EDPC_COMPREHENSION], [ARCH-TIED_EDPC_*], `IMPL-TIED_EDPC_*`, [PROC-EDPC_COMPREHENSION])** — `edpc_full` engagement (`easar_full` deprecated alias), three fail-closed `evidence_access_tier` values, file-based SCM shell, MCP `tied_edpc_*` validate/route/publish; dogfood workflows A+B+F on stdd at `toolchain_readonly`. Integrated close-out `run_id=edpc-closeout-20261019` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger` on default reconcile path). **Slice C follow-on** (`edpc-slice-c-bcf-20261019`): B+C+F on `mcp-server/src/edpc`, claims ledger + publish manifest `gaps: []`; Chart Viewer frozen-surface CER `edpc-slice-c-chartviewer-cer-20261019` (4/4 shown). Methodology: [EDPC_Methodology_and_Workflows.md](docs/methodologies/EDPC_Methodology_and_Workflows.md). CITDP [CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml](tied-project/citdp/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml). Evidence: [PLAN.md](tied-project/working/REQ-TIED_EDPC_COMPREHENSION/PLAN.md), [slice-c-dogfood-bcf.md](tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-c-dogfood-bcf.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/closeout-run-close-out-gates.json).
+
+- **TIED bounded composition ([REQ-TIED_BOUNDED_COMPOSITION], [ARCH-TIED_BOUNDED_COMPOSITION], `IMPL-TIED_BOUNDED_*`)** — Default-off Harness²-inspired modules in [mcp-server/src/bounded-composition/](mcp-server/src/bounded-composition/): pilot budget, trajectory evidence, read-only divergence, draft lesson distillation, advisory shadow comparison, injectable AgentDriver seam; envelope and working-root wiring; six IMPL sidecars. Integrated close-out activation `run_id=bc-closeout-20261018` (plan-close-out wave `bc-plan-close-out-20261018`); **45** focused tests; seven binding seams. Proof boundaries: `default_off_opt_in_only`; shadow/divergence advisory not gate authority; raw trajectories operator-local. CITDP [CITDP-REQ-TIED_BOUNDED_COMPOSITION.yaml](tied-project/citdp/CITDP-REQ-TIED_BOUNDED_COMPOSITION.yaml). Evidence: [PLAN-CLOSE-OUT.md](tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/PLAN-CLOSE-OUT.md), [closeout-run-close-out-gates-plan-close-out.json](tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/closeout-run-close-out-gates-plan-close-out.json).
+
+- **Store README certifiable operator onboarding ([REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING], [ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE], [IMPL-TIED_STORE_README_SECTIONS])** — Root [README.md](README.md) three-band IA: macOS quick start (build, greenfield, brownfield), certifiable-workflow operator body (EDSE, gates, `[REQ-TIED_PROCESS_CERTIFICATION_READINESS]`), and **Install and use** appendix with preserved bootstrap anchors; structure test [store-readme-structure.test.ts](mcp-server/src/store-readme-structure.test.ts); [client-development-index.md](tied-bundle/docs/client-development-index.md) certifiability scenario row. CITDP [CITDP-REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING.yaml](tied-project/citdp/CITDP-REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING.yaml). Minimal close-out `run_id=readme-certifiable-close-out-20261018` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Evidence: [PLAN-CLOSE-OUT.md](tied-project/working/REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING/PLAN-CLOSE-OUT.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING/evidence/closeout-run-close-out-gates-final.json).
+
+- **EDSE process certification readiness ([REQ-TIED_PROCESS_CERTIFICATION_READINESS], [ARCH-TIED_PROCESS_CERTIFICATION_READINESS], `IMPL-TIED_PROCESS_CERTIFICATION_*`, [PROC-PROCESS_CERTIFICATION_READINESS])** — Versioned bundle under [tied-bundle/resources/process-certification/](tied-bundle/resources/process-certification/); pure engine in [mcp-server/src/process-certification-readiness/](mcp-server/src/process-certification-readiness/); seven MCP tools + `tied certification` CLI; request-evidence-envelope artifact kinds. Stages 6/8 external/future per [certification-of-workflows.md](docs/methodologies/certification-of-workflows.md). Integrated plan-close-out `run_id=pcr-plan-close-out-20261018` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A** target). Proof boundaries: ready_for_external_appraisal-not-certified; no rollup scores; read-only project TIED YAML. CITDP [CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml](tied-project/citdp/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml). Evidence: [PLAN-CLOSE-OUT.md](tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/PLAN-CLOSE-OUT.md), [plan-close-out-handoff.md](tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/plan-close-out-handoff.md), [closeout-run-close-out-gates-plan-close-out.json](tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/closeout-run-close-out-gates-plan-close-out.json).
+
+- **Handoff and clear-workspace standalone client skills ([REQ-TIED_SESSION_HANDOFF_SKILL], [REQ-TIED_CLEAR_WORKSPACE_SKILL], [ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY], [ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY], [IMPL-TIED_SESSION_HANDOFF_SKILL], [IMPL-TIED_CLEAR_WORKSPACE_SKILL])** — Register **`handoff`** (`/handoff`, evidence log **`session-handoff.md`**) and **`clear-workspace`** (`/clear-workspace`, [clear-workspace-routing.md](tools/bundled-prompt-type-skills/prompt-shared/clear-workspace-routing.md)) in `BUNDLED_STANDALONE_CLIENT_SKILLS`; bootstrap tests expect four standalone skills. Minimal close-out `run_id=handoff-close-out-2026-10-18-r2` and `clear-ws-close-out-2026-10-18` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). CITDP [CITDP-REQ-TIED_SESSION_HANDOFF_SKILL.yaml](tied-project/citdp/CITDP-REQ-TIED_SESSION_HANDOFF_SKILL.yaml), [CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml](tied-project/citdp/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml). Evidence: [PLAN.md](tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/PLAN.md), [plan-close-out-handoff.md](tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/plan-close-out-handoff.md).
+
+- **Context-adaptive practice layer v1 ([REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING], [ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING], `IMPL-TIED_CONTEXT_ADAPTIVE_*`, [PROC-CONTEXT_ADAPTIVE_PRACTICE])** — Opt-in MCP `context_adaptive_*` tools, deterministic selector, seed `PRACTICE-*` library under `tied-bundle/resources/context-adaptive/`; EASAR dogfood pilot `cae-easar-pilot-20261018` (observational). Integrated close-out `run_id=cae-close-out-20261018` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). CITDP [CITDP-REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml](tied-project/citdp/CITDP-REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml). Evidence: [PLAN.md](tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/PLAN.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/closeout-run-close-out-gates-final.json).
+
+- **Mode C EASAR MVP ([REQ-TIED_EASAR_RECOVERY], [ARCH-TIED_EASAR_ARTIFACT_MODEL], [IMPL-TIED_EASAR_RECEIPTS], [PROC-EASAR_RECOVERY])** — Umbrella recovery engagement composing BFIE, source graph, claims review, and inquiry under Tracker `engagement: easar_full`; versioned receipts (`inventory.v1.json`, code-graph matrix, claim-matrix map, `reflexion-report.v1.json`) and MCP builders in `mcp-server/src/easar-receipts/`; integrated close-out `run_id=easar-close-out-20261018` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). CITDP [CITDP-REQ-TIED_EASAR_RECOVERY.yaml](tied-project/citdp/CITDP-REQ-TIED_EASAR_RECOVERY.yaml). Evidence: [PLAN.md](tied-project/working/REQ-TIED_EASAR_RECOVERY/PLAN.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/closeout-run-close-out-gates.json).
+
+- **Path-scoped review guidance ([REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE], [ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE], [IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE])** — [path-scoped-review-guidance.md](tied-bundle/docs/path-scoped-review-guidance.md) documents optional client-owned **`REVIEW.md`** and **`tied-project/review/`** patterns; templates [path-scoped-REVIEW.v1.example.md](tied-bundle/templates/path-scoped-REVIEW.v1.example.md) and [tied-project-review-index.v1.example.md](tied-bundle/templates/tied-project-review-index.v1.example.md); bootstrap test [path-scoped-review-guidance-doc.test.mjs](tools/bootstrap/lib/path-scoped-review-guidance-doc.test.mjs). Doc-only; no MCP gate authority. CITDP [CITDP-REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE.yaml](tied-project/citdp/CITDP-REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE.yaml). Evidence: [PLAN.md](tied-project/working/REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE/PLAN.md).
+
+- **Client DevOps integration appendix Phase 5 ([REQ-TIED_CLIENT_DEVOPS_APPENDIX], [ARCH-TIED_CLIENT_DEVOPS_APPENDIX], [IMPL-TIED_CLIENT_DEVOPS_APPENDIX])** — [client-devops-integration-appendix.md](tied-bundle/docs/client-devops-integration-appendix.md) documents client-owned PR/CI/release handoff fields (tests evidence, risk tier, rollback) composing with Claude comparison Phases 1–4; example template [client-pr-handoff-fields.v1.example.yaml](tied-bundle/templates/client-pr-handoff-fields.v1.example.yaml); [client-development-index.md](tied-bundle/docs/client-development-index.md) Quick read; bootstrap test [client-devops-integration-appendix-doc.test.mjs](tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs). Doc-only; not TIED core authority. Minimal close-out `run_id=close-out-2026-10-17-client-devops-appendix-final` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). CITDP [CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml](tied-project/citdp/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml). Evidence: [PLAN.md](tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/PLAN.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/closeout-run-close-out-gates.json).
+
+- **Incident/revert evaluation corpus Phase 4 ([REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS], [ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS], [IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS])** — [incident-revert-evaluation-corpus.md](tied-bundle/docs/incident-revert-evaluation-corpus.md) guides bounded Loop 3 `evaluation-corpus.v1` rows (post-merge incidents, reverts, review false positives) with denominators, provenance, privacy tier, and pilot stop criteria; example template [evaluation-corpus-incident-revert-rows.v1.example.yaml](tied-bundle/templates/evaluation-corpus-incident-revert-rows.v1.example.yaml); composes with [review-convergence-policy.md](tied-bundle/docs/review-convergence-policy.md); [client-development-index.md](tied-bundle/docs/client-development-index.md) Quick read; bootstrap test [incident-revert-eval-corpus-doc.test.mjs](tools/bootstrap/lib/incident-revert-eval-corpus-doc.test.mjs). Doc-only; no new MCP gate authority. Evidence: [PLAN.md](tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/PLAN.md).
+
+- **Review convergence policy Phase 3 ([REQ-TIED_REVIEW_CONVERGENCE_POLICY], [ARCH-TIED_REVIEW_CONVERGENCE_POLICY], [IMPL-TIED_REVIEW_CONVERGENCE_POLICY])** — [review-convergence-policy.md](tied-bundle/docs/review-convergence-policy.md) documents Loop 2 norms (round cap, diff-only re-review, class-level fixes, repeated-finding suppression); Kaizen **operational observation** measurement path; composes with [pre-handoff-verification-charter.md](tied-bundle/docs/pre-handoff-verification-charter.md) and [sponsor-risk-tier-playbook.md](tied-bundle/docs/sponsor-risk-tier-playbook.md); [client-development-index.md](tied-bundle/docs/client-development-index.md) Quick read; bootstrap test [review-convergence-policy-doc.test.mjs](tools/bootstrap/lib/review-convergence-policy-doc.test.mjs). Minimal close-out `run_id=close-out-2026-10-17-review-convergence` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`). CITDP [CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml](tied-project/citdp/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml). Evidence: [PLAN.md](tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/PLAN.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/closeout-run-close-out-gates.json).
+
+- **Sponsor risk-tier playbook Phase 2 ([REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK], [ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK], [IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK])** — [sponsor-risk-tier-playbook.md](tied-bundle/docs/sponsor-risk-tier-playbook.md) maps assurance profiles and CITDP `depth_tier` to sponsor/reviewer attention (advisory; never auto-approve costly choices); composes with [pre-handoff-verification-charter.md](tied-bundle/docs/pre-handoff-verification-charter.md); [client-development-index.md](tied-bundle/docs/client-development-index.md) Quick read; bootstrap test [sponsor-risk-tier-playbook-doc.test.mjs](tools/bootstrap/lib/sponsor-risk-tier-playbook-doc.test.mjs). Minimal close-out `run_id=close-out-2026-10-17-sponsor-risk-tier` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`). CITDP [CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml](tied-project/citdp/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml). Evidence: [PLAN.md](tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/PLAN.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/closeout-run-close-out-gates.json).
+
+- **Pre-handoff verification charter Phase 1 ([REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER], [ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER], [IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER])** — [pre-handoff-verification-charter.md](tied-bundle/docs/pre-handoff-verification-charter.md) lists executable checks and evidence before PR/commit/agent handoff (doc-only; no new MCP gate authority); [client-development-index.md](tied-bundle/docs/client-development-index.md) Quick read link; bootstrap test [pre-handoff-charter-doc.test.mjs](tools/bootstrap/lib/pre-handoff-charter-doc.test.mjs). Distinct from [REQ-TIED_DAE_VERIFICATION_CHARTER] opt-in tooling. Minimal close-out `run_id=close-out-2026-10-17-pre-handoff` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`). LEAP **`lp-2026-10-17T16-41-21-621Z-441a8fc5136b`** marked applied. CITDP [CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml](tied-project/citdp/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml). Evidence: [PLAN.md](tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/PLAN.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/closeout-run-close-out-gates.json).
+
+- **Brownfield methodology docs on linked client install ([REQ-TIED_LAYERED_CLIENT_INSTALL], [REQ-TIED_BROWNFIELD_INTENT_ELEVATION], [IMPL-TIED_LAYERED_CLIENT_INSTALL])** — `tools/bootstrap/manifest.json` extends `DOCS_TO_COPY` and `METHODOLOGY_TEMPLATES_TO_COPY`; factory `new-tied-client` integration asserts `tied-bundle/docs/brownfield-intent-elevation.md`, `working-artifact-placement.md`, matrix template, and rejects auto-seeded `tied-project/working/REQ-*` trees; contract test `brownfield-client-doc-stack-contract.test.ts`. Minimal close-out `run_id=lci-brownfield-closeout-2026-10-17-r2` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Traceable-commit **`166338c1`** (feature), **`919436fe`** (hygiene pins). CITDP [CITDP-REQ-TIED_LAYERED_CLIENT_INSTALL-brownfield-doc-stack.yaml](tied-project/citdp/CITDP-REQ-TIED_LAYERED_CLIENT_INSTALL-brownfield-doc-stack.yaml). Evidence: [PLAN-CLOSE-OUT.md](tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/PLAN-CLOSE-OUT.md), [run-close-out-gates-close-out-r2.txt](tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/evidence/run-close-out-gates-close-out-r2.txt).
+
+- **Client INSTALL MANAGED gitignore excludes BASE_FILES agent loaders ([REQ-TIED_SETUP], [REQ-TIED_TWO_FOLDER_LAYOUT], [ARCH-TIED_LAYERED_CLIENT_INSTALL], [IMPL-TIED_LAYERED_CLIENT_INSTALL], [IMPL-TIED_TWO_FOLDER_LAYOUT])** — [`writeGitignoreBlock`](tools/bootstrap/lib/layers/gitignore-block.mjs) lists `AGENTS.md` and `.cursorrules` (v2 block unchanged); unit/integration tests in `gitignore-block.test.mjs` and `install-layers.integration.test.mjs`. Minimal close-out `run_id=close-out-ignore-generated-guides-2026-10-16` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Traceable-commit **`77b0f656`**. Evidence: [CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml](tied-project/citdp/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml), [closeout-ignore-generated-guides-2026-10-16.json](tied-project/working/REQ-TIED_SETUP/evidence/closeout-ignore-generated-guides-2026-10-16.json).
+
+- **Gate adherence ledger JSONL path guard ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT], [REQ-TIED_WORKING_ARTIFACT_PLACEMENT], [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT])** — `assertJsonlLedgerPath` in [mcp-server/src/adherence-ledger.ts](mcp-server/src/adherence-ledger.ts) rejects `.yaml`/`.yml` and non-`.jsonl` ledger paths before append; unit tests in `adherence-ledger.test.ts`. Renamed P3 committed ledger `PLAN-TIED-LG-P3-TDD/evidence/gate-ledger.v1.yaml` → `gate-ledger.jsonl`. Minimal close-out `run_id=gljp-closeout-2026-10-13` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Working token `REQ-TIED_GATE_LEDGER_JSONL_PATH` (inline CITDP defer persist). Evidence: [session-handoff.md](tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/closeout-run-close-out-gates.json).
+
+- **Methodology composition matrix (docs-only, plan-close-out) ([REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX], [ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX], [IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX])** — [methodology-composition-matrix.md](docs/comparisons/methodology-composition-matrix.md): QMM Loop 1/2/3 × methods (**27** §1 rows) + Layer C adjacent frameworks (**10** §2 rows); prefilled dispositions and `_TBD_` sponsor mechanism columns; cross-links from [tied-vs-well-known-methodologies.md](docs/comparisons/tied-vs-well-known-methodologies.md) and [qmm-kaizen-vs-tied.md](docs/comparisons/qmm-kaizen-vs-tied.md). CITDP **defer persist**. Minimal close-out `run_id=mcm-closeout-2026-10-13` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Traceable-commit **`9ddaef0c`**. Evidence: [session-handoff.md](tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/closeout-run-close-out-gates.json).
+
+- **Source graph comprehension Phase 2 slice 1 ([REQ-TIED_SOURCE_GRAPH_COMPREHENSION], [ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL], [IMPL-TIED_SOURCE_GRAPH_REFRESH], [IMPL-TIED_SOURCE_GRAPH_MAP], [IMPL-TIED_SOURCE_GRAPH_TRAVERSE], [PROC-TIED_SOURCE_GRAPH_COMPREHENSION])** — Evidence-only `tied_source_graph_refresh|map|trace|freshness` MCP tools and `mcp-server/src/source-graph/` (TS/JS static index, no project YAML mutation). Minimal-depth close-out `run_id=sgc-closeout-2026-10-13` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`). **`tied_verify`** → REQ Implemented. Traceable-commit **`5a47378f`**. Optional BFIE dogfood: matrix rows 4–6 `code_graph` in [intent-elevation-matrix.md](tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/intent-elevation-matrix.md). Evidence: [session-handoff.md](tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/closeout-run-close-out-gates.json).
+
+- **Brownfield intent elevation Phase 1 ([REQ-TIED_BROWNFIELD_INTENT_ELEVATION], [ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL], [IMPL-TIED_BROWNFIELD_VALIDATION], [PROC-BROWNFIELD_INTENT_ELEVATION])** — Report-only `brownfield_intent_evidence_validate` MCP tool and `mcp-server/src/brownfield-intent-evidence/` (Markdown/YAML matrix parity, disposition rules, no project YAML mutation); checklist `brownfield_intent_elevation.mode` branching documented; vocab RECORD in [pseudocode-and-citdp.md](tied-project/vocab/pseudocode-and-citdp.md). Minimal-depth close-out `run_id=bfie-closeout-2026-10-13` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Phase 2 source graph deferred. Traceable-commit **`a2be105e`**. Evidence: [session-handoff.md](tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/closeout-run-close-out-gates.json).
+
+- **Project index write isolation ([REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION], [ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION], [IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION])** — MCP `insertRecord` / `updateRecord` / `upsertRecord` persist **project-only** index rows in [mcp-server/src/yaml-loader.ts](mcp-server/src/yaml-loader.ts); advisory `methodology_index_duplicated_in_project` in [mcp-server/src/consistency-validator.ts](mcp-server/src/consistency-validator.ts); [scripts/prune-project-index-methodology-duplicates.mjs](scripts/prune-project-index-methodology-duplicates.mjs) (dry-run default, positional client path); Tier A docs + [tied-project/vocab/tied-yaml-mcp.md](tied-project/vocab/tied-yaml-mcp.md). **SC-PIWI-DOCS met:** Tier B live surfaces (`tied-bundle/docs`, `.cursor/agents`, [AGENTS.md](AGENTS.md), [tools/bundled-tied-yaml-skill/SKILL.md](tools/bundled-tied-yaml-skill/SKILL.md)); Tier C [check-docs-vocab-links.mjs](tools/bootstrap/lib/check-docs-vocab-links.mjs) `DOC_LINK_SCAN_ROOTS` + [lint-stale-layout.mjs](tools/bootstrap/lib/lint-stale-layout.mjs) `LIVE_SURFACE_ROOTS` (incl. `tied-bundle/docs`) and unit tests. Close-out refresh `run_id=piwi-closeout-tier-bc-2026-10-13` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Traceable-commit **`e8e47dcf`**. Evidence: [session-handoff.md](tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/closeout-run-close-out-gates.json).
+
+### Changed
+
+- **Claude comparison umbrella PLAN close-out ([PLAN-CLAUDE-REVIEW-FEEDBACK-MCP])** — Minimal machine close-out `run_id=close-out-2026-10-17-plan-claude-review-feedback-mcp` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`); backfilled [not-applicable-receipt.v1.json](tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/not-applicable-receipt.v1.json); evidence [closeout-run-close-out-gates.json](tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/closeout-run-close-out-gates.json). Complements per-phase REQ close-outs (Phases **1–5**). Handoff: [session-handoff.md](tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/session-handoff.md).
+
+- **Claude Code team review comparison — compose snapshot ([PLAN-CLAUDE-REVIEW-FEEDBACK-MCP])** — [claude-code-team-code-review-vs-tied.md](docs/comparisons/claude-code-team-code-review-vs-tied.md): **Compose status (snapshot)** section, refreshed §7/RESOLVE/layer annotations, **Pending after compose** table; Kaizen store on **`fb-mvclklsa-t5gzbo`** (digest, pilot, outcome **`inconclusive`**); Loop 3 experiment **`mle-claude-compose-20261017-001`**; vocabulary RECORD **review convergence** / **comparison compose snapshot** in [quality-assurance.md](tied-project/vocab/quality-assurance.md); [client-development-index.md](tied-bundle/docs/client-development-index.md) Quick read + scenario row.
+
+- **YAML index and working tracker canonical styling (co-staged)** — Quoted scalars and normalized structure across `tied-bundle/` methodology indexes and widespread `tied-project/working/**` checklist/CITDP YAML (~153 files); no semantic token or requirement content change intended. Verify with `lint_yaml` and spot diff before commit.
+
+- **Methodology composition matrix full mechanism fill ([REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX])** — [methodology-composition-matrix.md](docs/comparisons/methodology-composition-matrix.md): agent-drafted TIED mechanism columns for **37/37** rows after `/unblock defaults` + remaining-15 authorization; [sponsor-decisions-evidence.md](tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/sponsor-decisions-evidence.md). Verification `run_id=mcm-verification-full-fill-2026-10-13`; close_out `run_id=mcm-closeout-full-fill-2026-10-13` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Evidence: [session-handoff.md](tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/closeout-run-close-out-gates.json). Traceable-commit **`acfe0f01`** (follows skeleton **`9ddaef0c`**).
+
+- **Source graph index path LEAP ([REQ-TIED_SOURCE_GRAPH_COMPREHENSION], [IMPL-TIED_SOURCE_GRAPH_REFRESH])** — Default regenerable index under `tied-bundle/reports/source-graph/` (was `.tied/source-graph/`); fixture golden moved under [mini-repo/tied-bundle/reports/source-graph/](mcp-server/test/fixtures/source-graph/mini-repo/tied-bundle/reports/source-graph/); CITDP/PLAN and BFIE matrix row 4 updated. Verification replay `run_id=sgc-verification-2026-10-13-index-path`; close_out `run_id=sgc-closeout-2026-10-13` (`blocking_gap_count=0`, reconcile band **B**). Evidence: [plan-close-out-handoff.md](tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/plan-close-out-handoff.md), [refine-plan-full-tree-close-out-2026-10-13.md](tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/refine-plan-full-tree-close-out-2026-10-13.md). Traceable-commit **`fd55b4d6`**.
+
+- **BFIE optional dogfood evidence ([REQ-TIED_BROWNFIELD_INTENT_ELEVATION])** — [build-plan-dogfood-2026-10-13.md](tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/build-plan-dogfood-2026-10-13.md), [dogfood-validation-receipt.json](tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/dogfood-validation-receipt.json), matrix path refresh; close_out envelope replay pass. Co-staged with SGC LEAP per full-tree close-out.
+
+- **Close-out hygiene pins (co-staged with PIWI)** — Adversarial Mode B mini-project fixture envelope metadata (2 paths under `mcp-server/test/fixtures/`); checklist gate fixture `1787603099` [regression-manifest.json](tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/regression-manifest.json) `stdd_revision`; JEV [context-pruning-benchmark.v1.json](tied-project/working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json) `git_rev` / timestamp refresh.
+
+- **Operating environment externalities v0 + STDD pilot (docs-only, plan-close-out)** — [docs/tied-operating-environment-externalities.md](docs/tied-operating-environment-externalities.md), [docs/tied-concept-impact-inquiry.md](docs/tied-concept-impact-inquiry.md), [operating-environment-externalities.md](tied-project/vocab/operating-environment-externalities.md), routing **2e**, [client-development-index](tied-bundle/docs/client-development-index.md) scenario row, pilot [OEE-TIED-CLIENT-DELIVERY](tied-project/working/OEE-TIED-CLIENT-DELIVERY/). CITDP **defer persist**. **OEE implementation postponed** — resume [session-handoff.md](tied-project/working/OEE-TIED-CLIENT-DELIVERY/evidence/session-handoff.md). Touchpoint 3 VALIDATE. Traceable-commit **`799cba66`**.
+
+- **LangGraph program P2 evidence wiring (PLAN-TIED-LG-P2-EVIDENCE)** — `tools/langgraph-pilot/` envelope adapter, gap routing, run ledger v1, staleness stub, and mocked composition tests (16 pytest). Integrated machine close-out `run_id=p2-closeout-closeout-20261012` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [session-handoff.md](tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/closeout-run-close-out-gates.json).
+
+- **LangGraph program P3 TDD subgraph (PLAN-TIED-LG-P3-TDD)** — `tools/langgraph-pilot/` ValidRedEvidence policy, test-weakening heuristics, `task_tdd` LangGraph subgraph, subprocess runner, hermetic `tdd-mini-repo` composition (27 pytest, 1 skipped). Integrated machine close-out `run_id=p3-closeout-closeout-20261012` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Traceable-commit **`ebda93d5`**. Evidence: [session-handoff.md](tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/closeout-run-close-out-gates.json).
+
+- **LangGraph program P4 acceptance gate (PLAN-TIED-LG-P4-ACCEPTANCE)** — `tools/langgraph-pilot/` deterministic acceptance policy, verification evidence schema, `graphs/verification.py`, MCP implement vs verification separation (41 pytest, 1 skipped). Integrated machine close-out `run_id=p4-closeout-closeout-20261031` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Traceable-commit **`58c1fa9b`**. Evidence: [session-handoff.md](tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/closeout-run-close-out-gates.json).
+
+- **TIED compact demo tool catalog (docs-only, build-plan)** — Idea bank [catalog-tied-compact-tools.md](docs/demos/catalog-tied-compact-tools.md) (`TIED-DEMO-01`–`24`, five families + meta runbooks), grading dimensions with explicit **proof boundaries** and forbidden maturity-score framing; [docs/demos/README.md](docs/demos/README.md) index bridging the agent resilience exercise catalog. CITDP **defer persist** (non-executable `docs/demos/` only; no new semantic tokens). Touchpoint 3 VALIDATE per [feedback-to-tied.md](tied-project/vocab/feedback-to-tied.md) and [quality-assurance.md](tied-project/vocab/quality-assurance.md). Traceable-commit **`5c081759`**.
+
+- **Agent resilience exercise catalog (docs-only)** — [catalog-compact-programming-exercises.md](docs/demos/catalog-compact-programming-exercises.md) (ENV/DATA/CON/STATE/ALG/ADV IDs, L0–L6 disturbances, property rubric, §10 `REQ-01`–`REQ-06` ambiguity exercises as catalog labels only). Completes cross-links from [catalog-tied-compact-tools.md](docs/demos/catalog-tied-compact-tools.md). CITDP **defer persist**. Touchpoint 3 VALIDATE: **agent resilience exercise catalog** vs **compact TIED demo tool** per build-plan vocabulary. Traceable-commit **`4566445b`**.
+
+- **Greenfield trial readout PROMPT-GF-02 (docs-only, plan-close-out)** — [trial-readout-PROMPT-GF-02-1791739774.md](docs/demos/trial-readout-PROMPT-GF-02-1791739774.md): facilitator dimensioned readout for disposable client `1791739774` (**REQ-CONFIG_MERGE** client token only), **TIED-DEMO-02** / **DATA-01** catalog map, **proof boundary** `executable_behavior`; recorded-trials rows in [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md) and [docs/demos/README.md](docs/demos/README.md). CITDP **defer persist**. Traceable-commit **`c49fa901`**.
+
+- **Greenfield trial readout PROMPT-GF-25 (docs-only, plan-close-out)** — [trial-readout-PROMPT-GF-25-1791754135.md](docs/demos/trial-readout-PROMPT-GF-25-1791754135.md): facilitator dimensioned readout for disposable client `1791754135` (**REQ-PKG_SEMVER_SATISFIES** client token only), **PROMPT-GF-25** / **TIED-DEMO-23** bootstrap note, proof boundaries `executable_behavior` + `traceability_structure`; recorded-trials rows in [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md) and [docs/demos/README.md](docs/demos/README.md). CITDP **defer persist**. Touchpoint 3 VALIDATE per [feedback-to-tied.md](tied-project/vocab/feedback-to-tied.md) and [quality-assurance.md](tied-project/vocab/quality-assurance.md). Traceable-commit **`f9a39a07`**.
+
+- **Greenfield trial readout PROMPT-GF-11 (docs-only, plan-close-out)** — [trial-readout-PROMPT-GF-11-1792344147.md](docs/demos/trial-readout-PROMPT-GF-11-1792344147.md): facilitator `/xlate` + dimensioned readout for disposable client `1792344147` (**REQ-LEASE_TASK_QUEUE** client token only), **TIED-DEMO-11** / **CON-04** catalog map, proof boundaries `executable_behavior` + `traceability_structure`; recorded-trials rows in [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md) and [docs/demos/README.md](docs/demos/README.md). CITDP **defer persist** (non-executable store readout; no new semantic tokens). Touchpoint 3 VALIDATE per [feedback-to-tied.md](tied-project/vocab/feedback-to-tied.md) and [quality-assurance.md](tied-project/vocab/quality-assurance.md). Traceable-commit **`7a8fe8c1`**.
+
+- **Checklist and process review operator docs ([REQ-CHECKLIST-PROCESS-REVIEW], [ARCH-CHECKLIST-PROCESS-REVIEW], [IMPL-CHECKLIST-PROCESS-REVIEW])** — Operator procedure [checklist-process-review-plan.md](docs/checklist-process-review-plan.md) and worksheet [checklist-process-review-checklist.md](docs/checklist-process-review-checklist.md); program inventory and phase 3 doc path hygiene under [tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/REVIEW-20261010/](tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/REVIEW-20261010/) (CPR-F01–F03 + legacy `../tied/*` → `tied-project/` in `docs/`). Minimal-depth close-out `run_id=cpr-closeout-20261011` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`; adherence **thin_ledger** documented). Traceable-commit **`27c04f4c`**. Evidence: [session-handoff.md](tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/session-handoff.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/closeout-run-close-out-gates-final.json).
+
+- **Store bundle git policy ([REQ-TIED_STORE_BUNDLE_GIT_POLICY], [ARCH-TIED_STORE_BUNDLE_GIT_POLICY], [IMPL-TIED_STORE_BUNDLE_GIT_POLICY])** — Asymmetric store gitignore: commit `tied-bundle/` methodology corpus while ignoring whole-root `tied-bundle/working/` and `install.json`; migrate indexed local-working pins to `mcp-server/test/fixtures/store-local-working/`; bootstrap tests `store-gitignore-policy.test.mjs` / `working-gitignore.test.mjs`; install-resource-matrix store git row. Minimal-depth close-out (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Traceable-commit **`63880649`**. Evidence: [session-handoff.md](tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/session-handoff.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/closeout-run-close-out-gates-final.json).
+
+- **QMM methodology client resources — phase-1 bundle promotion ([REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES], [ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST], [IMPL-TIED_FILES])** — Promoted six QMM/QA methodology stacks (W1–W3, W5, follow-on **(a)**, W4 `REQ-EVIDENCE_CHAIN_REPORT`) into store `tied-bundle/` with manifest gates `QMM_METHODOLOGY_REQUIRED_FILES` and `QA_EVIDENCE_CHAIN_METHODOLOGY_REQUIRED_FILES` (`verifyQmmMethodology`, `verifyQaEvidenceChainMethodology`); reserved empty `QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES` for phase-2 cohort corpus. Promotion script: `tools/bootstrap/scripts/promote-qmm-phase1-bundle.mjs`. Integrated close-out `run_id=qmm-closeout-20261010` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Promotion **`c735e310`**; close-out evidence **`aa437b0e`**. Evidence: [session-handoff.md](tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/session-handoff.md), [gitignore-close-out-hygiene-evidence.md](tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/gitignore-close-out-hygiene-evidence.md).
+
+- **Methodology learning cohort export (QMM follow-on c) ([REQ-METHODOLOGY-LEARNING-COHORT-EXPORT], [ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT], [IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT])** — MCP `tied_methodology_learning_cohort_export_run` validates explicit manifests, resolves W1 experiments at `shareable_hashed`, composes W4 client-cohort reporting, and emits redacted export YAML under `mcp-server/src/methodology-learning-cohort-export/`. W1 validator accepts `shareable_hashed` tier. Integrated `close_out` with `run_id=mlce-closeout-20261010` (envelope `blocking_gap_count=0`). Traceable-commit **`9b093ed2`**. Child plan: [tied-qmm-followon-c-methodology-cohort-export-plan.md](docs/tied-qmm-followon-c-methodology-cohort-export-plan.md). Evidence: [session-handoff.md](tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/session-handoff.md).
+
+- **Methodology surface experiment pre-implementation gate (QMM follow-on a) ([REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE], [ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE], [IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE])** — CITDP-scoped `methodology_surface_change_class` and W1 experiment link gate runs before W2 pairing at `pre_implementation`; module under `mcp-server/src/methodology-surface-experiment-gate/` with checklist seam in `checklist-validator.ts`. Integrated `close_out` with `run_id=mseg-closeout-20261010` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, four advisory inquiry gaps). Traceable-commit **`d641081`**. Child plan status: [tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md](docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md). Evidence: [session-handoff.md](tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/evidence/session-handoff.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/evidence/closeout-run-close-out-gates-final.json).
+
+- **Client bootstrap skills ([REQ-TIED_CLIENT_BOOTSTRAP_SKILLS], [ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS], [IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS], [IMPL-TIED_UNBLOCK_SKILL])** — `manifest.json` `BUNDLED_STANDALONE_CLIENT_SKILLS` drives install of bundled **xlate** and **unblock** skills via `client-skills-catalog.mjs` on Cursor and Claude (`--mode full` copy and `--mode linked` stubs). Tests: `client-skills-catalog.test.mjs`, `client-bootstrap-skills.test.ts`. Close-out `run_id=bootstrap-cbs-close-20261008` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [plan-close-out-handoff.md](tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/plan-close-out-handoff.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/closeout-run-close-out-gates-final.json).
+
+- **Kaizen MCP composition wiring ([REQ-KAIZEN-FEEDBACK-MCP-WIRING], [ARCH-KAIZEN-FEEDBACK-MCP-WIRING], [IMPL-KAIZEN-FEEDBACK-MCP-WIRING])** — MCP tools `tied_feedback_analysis_digest`, `tied_feedback_review_bridge`, `tied_feedback_outcome_record`, and `tied_feedback_pilot_run` delegate to Phase 4–7 modules via `kaizen-feedback-mcp-handlers.ts`. Composition tests in `kaizen-feedback-mcp-composition.test.ts` (4/4).
+
+### Fixed
+
+- **Envelope batch collect `envelope_source` when on-disk file exists ([REQ-REQUEST_EVIDENCE_ENVELOPE], [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH])** — Gap report classification uses permissive validate (normalized envelope when present) so integrated client rows after backfill report `envelope_file` instead of `missing`; unreadable on-disk JSON still tags `envelope_file` with `envelope_schema_invalid`. Regenerated `envelope-gap-report.v1.yaml` (client `1787603099` included). Aligned batch-collect operator docs and evaluation-corpus notes to repo-root paths with `--project-root ..`. Tests: `request-evidence-envelope-batch.test.ts` (12/12). Close-out envelope refresh `run_id=ree-batch-collect-fix-20261018` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
+- **Prompt-type skill frontmatter YAML ([REQ-PROMPT_TYPE_GLOBAL_SKILLS])** — Double-quote `description` in all 14 `tools/bundled-prompt-type-skills/*/SKILL.md` files so Cursor and strict YAML parsers accept linked stubs and full installs (fixes parse failures for `ammend-commit`, `debug`, `leap-ad-hoc`, `leap-diff-promote`, `plan-close-out`). Tests: `assertFrontMatterParses` + linked install in [prompt-type-skills.test.ts](mcp-server/src/e2e/prompt-type-skills.test.ts); stub loop in [skills-linked.test.mjs](tools/bootstrap/lib/layers/skills-linked.test.mjs). Brownfield: `tied-install.sh --refresh`. Close-out `run_id=pt-yaml-fm-closeout-2026-10-13`. Traceable-commit **`5c2d257d`**. Evidence: [plan-close-out-handoff.md](tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER/plan-close-out-handoff.md), [closeout-run-close-out-gates.json](tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER/evidence/closeout-run-close-out-gates.json).
+
+- **Request evidence envelope validate accepts PLAN-* tokens ([REQ-REQUEST_EVIDENCE_ENVELOPE])** — `validateRequestEvidenceEnvelope` uses `isValidWorkingRequestToken` so integrated close-out for `PLAN-*` working folders is not blocked by `envelope_schema_invalid:identity.request_token`.
+
+- **Methodology bundle reference closure (A4b) ([REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE], [REQ-PROMPT_TYPE_GLOBAL_SKILLS], [REQ-PROMPT_TYPE_SUBAGENT])** — Promoted prompt-type GLOBAL/SUBAGENT R+A+I into store `tied-bundle/`, indexed `ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET`, LEAP-trimmed `IMPL-FEAT_ORCHESTRATION_COMMANDS` from checklist gate `see_also`, added `PROMPT_TYPE_METHODOLOGY_REQUIRED_FILES` / `verifyPromptTypeMethodology`, minimal-client `methodology-bundle-consistency.test.ts`, and bootstrap E2E index asserts. Close-out `run_id=methodology-a4b-close-20261009` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [plan-close-out-handoff.md](tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/plan-close-out-handoff.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/closeout-run-close-out-gates-final.json).
+
+- **Vocabulary ownership methodology bundle (A4a) ([REQ-TIED_VOCABULARY_OWNERSHIP], [ARCH-TIED_VOCABULARY_LAYERS], [IMPL-TIED_VOCABULARY_REFRESH])** — Promoted REQ/ARCH/IMPL vocabulary stack and sidecar into store `tied-bundle/`, synced bundle `REQ-TIED_SETUP` cross-refs, added `VOCABULARY_OWNERSHIP_METHODOLOGY_REQUIRED_FILES` manifest gate with `verifyVocabularyOwnershipMethodology`, and extended bootstrap E2E assertions. Close-out `run_id=vocab-a4a-close-20261009` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [plan-close-out-handoff.md](tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/plan-close-out-handoff.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/closeout-run-close-out-gates-final.json).
+
+- **Post-program hygiene (2026-10-08)** — Adversarial MCP composition tests assert TIED index immutability under `tied-project/` ([REQ-TIED_ADVERSARIAL_INQUIRY], two-folder layout). Vocab link validator ignores in-document `#fragment` anchors ([PROC-VOCABULARY_INDEX]). Removed temporary debug ingest from `claude-adherence-bridge` ([REQ-TIED_CLAUDE_ADHERENCE_HOOKS]). Refreshed adversarial mode-b fixtures, checklist gate fixture `1787603099` regression manifest, JEV context-pruning benchmark, and envelope gap report batch row. Evidence: [post-closeout-hygiene-20261008-evidence.md](tied-project/working/evaluation/post-closeout-hygiene-20261008-evidence.md).
+
+### Changed
+
+- **`REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION` stack reconcile** — Requirement detail status aligned to **`Implemented`** (index already matched); traceability tests cite `feedback-promotion.test.ts` and Batch 5 MCP composition. Evidence: [promotion-status-reconcile-evidence.md](tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/promotion-status-reconcile-evidence.md). Phase 3 transport reaffirmed closed (Option A).
+
+- **Kaizen MCP wiring close-out (`REQ-KAIZEN-FEEDBACK-MCP-WIRING`)** — Integrated close-out `run_id=kaizen-kmcp-close-20261008` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Program orchestrator `post_program_follow_up.status: closed`. Linked plan and [`kaizen-program-execution-checklist.yaml`](tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml) updated for post-program state. Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/closeout-run-close-out-gates-final.json).
+
+- **Kaizen linked plan request closed (`PLAN-TIED-KAIZEN-FEEDBACK-LOOP`)** — Updated [`docs/tied-kaizen-feedback-loop-plan.md`](docs/tied-kaizen-feedback-loop-plan.md) handoff to **program EXIT** (Phases 1–2, 4–7 implemented; Phase 3 transport deferred). Refine tracker `traceable-commit` completed; orchestrator records `planning_request_close_out`. Hygiene: ignore/remove wrong-root `mcp-server/tied-project/` from misconfigured MCP runs.
+
+### Added
+
+- **Kaizen Phase 7 feedback pilot ([REQ-KAIZEN-FEEDBACK-PILOT], [ARCH-KAIZEN-FEEDBACK-PILOT], [IMPL-KAIZEN-FEEDBACK-PILOT])** — `feedback-kaizen-pilot.ts` resolves named pilot cohorts, emits denominator-aware catalog metrics, evaluates documented stop criteria (transport-linked criteria `not_applicable` while Phase 3 deferred), and surfaces `analysis_only` promotion_rule on every report without canonical YAML writes. Integrated `close_out` with `run_id=kaizen-p7-close-20261007` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Verification `run_id=kaizen-p7-verify-20261007` (8/8 module tests). Kaizen program orchestrator `program_phase: closed`, `current_step: EXIT`; **Phase 3 transport remains deferred**. Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/evidence/request-evidence-envelope.v1.json).
+
+- **Kaizen Phase 6 outcome loop ([REQ-KAIZEN-OUTCOME-LOOP], [ARCH-KAIZEN-OUTCOME-LOOP], [IMPL-KAIZEN-OUTCOME-LOOP])** — `feedback-outcome-loop.ts` records follow-up outcome observations against baselines and follow-up windows, validates evidence links, routes regression to feedback analysis, and keeps canonical TIED YAML immutable. Integrated `close_out` with `run_id=kaizen-p6-close-20261007` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Verification `run_id=kaizen-p6-verify-20261007` (9/9 module tests). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/evidence/request-evidence-envelope.v1.json).
+
+- **Kaizen Phase 5 review bridge ([REQ-KAIZEN-REVIEW-BRIDGE], [ARCH-KAIZEN-REVIEW-BRIDGE], [IMPL-KAIZEN-REVIEW-BRIDGE])** — `feedback-review-bridge.ts` resolves digest findings to existing entry ids, blocks stale evidence and canonical-write attempts, and delegates approve paths to `createReviewedLeapProposal` on the single LEAP queue. Integrated `close_out` with `run_id=kaizen-p5-close-20261007` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Verification `run_id=kaizen-p5-verify-20261007` (9/9 module tests). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/request-evidence-envelope.v1.json).
+
+- **Kaizen Phase 4 feedback analysis ([REQ-KAIZEN-FEEDBACK-ANALYSIS], [ARCH-KAIZEN_FEEDBACK_ANALYSIS], [IMPL-KAIZEN_FEEDBACK_ANALYSIS])** — Read-only `feedback-analysis.ts` digest projection with denominators, cohort compatibility, golden fixtures, and store immutability tests. Integrated `close_out` with `run_id=kaizen-p4-close-20261007` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/request-evidence-envelope.v1.json).
+
+- **Kaizen Phase 2 source normalization ([REQ-KAIZEN-SOURCE-NORMALIZATION], [ARCH-KAIZEN_SOURCE_NORMALIZATION], [IMPL-KAIZEN_SOURCE_NORMALIZATION])** — Shared `feedback-source-normalization.ts` for observation kind and feedback entry type inference across capture and operational adapters; fixes P1 capture dependency on the normalization module. Integrated `close_out` with `run_id=kaizen-p2-close-20261007` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/request-evidence-envelope.v1.json).
+
+- **Kaizen Phase 1 observation capture ([REQ-KAIZEN-OBSERVATION-CAPTURE], [ARCH-KAIZEN_OBSERVATION_CAPTURE], [IMPL-KAIZEN_OBSERVATION_CAPTURE])** — MCP tool `tied_feedback_capture_observation` with `operator_local` privacy, idempotent append, and structured receipt (`feedback-capture.ts`). Integrated `close_out` via `run-close-out-gates.mjs` with `run_id=kaizen-p1-close-20261007` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/request-evidence-envelope.v1.json).
+
+- **Primary implementation repository onboarding ([REQ-TIED_PRIMARY_REPO_ONBOARDING])** — README H2 for linked install with explicit `--store`, MCP env, skills stubs, verification checklist, and Windows/Unix entry points; bootstrap README cross-link; ARCH/IMPL traceability. Close-out: `run_id=close-out-primary-repo-onboarding-macos-20261005`, envelope `blocking_gap_count=0` (advisory/minimal depth). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json).
+
+- **Bootstrap Windows spawn + Node MCP invoke ([REQ-TIED_SETUP], [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM])** — `childProcessSpawnOptions` (`windowsHide` on win32), `invokeTiedCliMcpTool` for verify-store and bootstrap subprocess paths; regression matrix + `new-tied-client` e2e green; `.claude/adherence-bridge.log` gitignored. Close-out: `run_id=close-out-bootstrap-spawn-macos-20261005`, envelope `blocking_gap_count=0`, adherence band **A**. Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_SETUP/evidence/closeout-run-close-out-gates-final.json), [CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml](tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml).
+
+- **MCP project operations batch close-out ([REQ-TIED_PROJECT_LINT], [REQ-TIED_GIT_HYGIENE], [REQ-TIED_SPONSOR_QUESTIONS], [REQ-TIED_XLATE_SKILL])** — Read-mostly MCP tools (`tied_project_lint`, `tied_git_hygiene`, `tied_sponsor_questions`), bundled `/xlate` skill bootstrap, and integrated `close_out` with inquiry run id `close-out-project-lint-20261004` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-MCP-PROJECT-OPERATIONS/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-TIED_PROJECT_LINT/evidence/request-evidence-envelope.v1.json).
+
+### Fixed
+
+- **MCP dependency audit + evaluation pin refresh** — `npm audit fix` on [mcp-server/package-lock.json](mcp-server/package-lock.json) (transitive `js-yaml`, `hono`, `fast-uri`, `ip-address`, `qs`); `npm test` green; **3** high advisories remain (`fast-glob`/`braces`, no upstream fix). Co-staged: adversarial Mode B fixture envelopes (`REQ-FIXTURE-ADVERSARIAL`), checklist fixture `1787603099` regression manifest @ `f2dc1be`, Jev context-pruning benchmark ([context-pruning-benchmark.v1.json](tied-project/working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json)). Untrack **194** fleet v2 dry-run IMPL byte snapshots under `tied-project/working/fleet-constraint-v2/waves/*/dry-run/snapshots*`; add matching `tied-project/working/…` [`.gitignore`](.gitignore) patterns so dry-runs regenerate locally only.
+
+- **Two-folder layout follow-up ([REQ-TIED_TWO_FOLDER_LAYOUT])** — Slim client install-managed `.gitignore` (no `tied-project/` or legacy LOCAL WORKING blocks; **SC-TFL-CLIENT-GITIGNORE-SLIM** on REQ-TFL); bootstrap gitignore tests and install-layer integration coverage; regenerated install-resource matrix and close-out envelope for staged revision. Co-staged regression pins: adversarial Mode B fixture envelopes, [envelope-gap-report.v1.yaml](tied-project/working/evaluation/envelope-gap-report.v1.yaml), checklist fixture `1787603099`, Jev context-pruning benchmark, Node toolchain quality-manifest captures. Integrated `close_out` re-run with `run_id` `phase8-verify-2026-10-02` (`gate.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/closeout-run-close-out-gates-final.json), [plan-close-out-handoff.md](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/plan-close-out-handoff.md).
+
+### Added
+
+- **Node-only controlled TIED toolchain ([REQ-TIED_NODE_TOOLCHAIN_DEFAULT])** — Controlled build, test, shell, and Jev replay entrypoints use Node/npm/npx/tsx; static contract test blocks Bun regression in canonical paths. Minimal `close_out` via `run-close-out-gates.mjs` (`gate.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/request-evidence-envelope.v1.json).
+
+### Fixed
+
+- **Adherence reconcile request resolution ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** — `trackerRequestToken` in `@tied/agentstream` now falls back to `execution_evidence.request` and legacy `request`, matching checklist validator and `validateTrackerIdentity`; process-grade manifest lookup works when top-level `request_token` is absent. Tests: `adherence-reconcile.test.ts` (5/5). Fixture `1787603099` regression manifest pinned to `06e49de`; adversarial Mode B fixture envelopes and fleet `envelope-gap-report.v1.yaml` refreshed.
+
+### Added
+
+- **Two-folder layout close-out ([REQ-TIED_TWO_FOLDER_LAYOUT])** — Integrated `close_out` via `run-close-out-gates.mjs` with inquiry run id `phase8-verify-2026-10-02` (`gate.allowed=true`, envelope `blocking_gap_count=0`). **Field validation:** disposable linked client `/Users/fareed/Documents/dev/test/1791037288` shipped `mac-displays-cli` (`REQ-MACOS_DISPLAY_CLI`) with G4 `two_folder_layout.ok`, 12/12 unit tests, and live Darwin CLI (sponsor success). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/closeout-run-close-out-gates-final.json), [factory-field-client-1791037288-evidence.md](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/factory-field-client-1791037288-evidence.md), [plan-close-out-handoff.md](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/plan-close-out-handoff.md).
+
+### Fixed
+
+- **Factory onboarding working path ([REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH])** — Onboarding audit receipt writes to `tied-project/working/tied-new-client-audit.v1.json` on two-folder clients (`committedWorkingFileRel` in `new-client-onboarding-audit.mjs`); bash `_run_new_client_onboarding_audit` mirrors layout rules without spurious repo-root `working/` mkdir; G4 adds warn-only **SC-TFL-NO-ROOT-WORKING** when both working roots exist. Tests: `new-client-onboarding-audit.test.mjs`, extended `tied-new-client-audit.test.mjs`, `mcp-server/src/e2e/new-tied-client.test.ts`. Close-out: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/request-evidence-envelope.v1.json) (`blocking_gap_count: 0`).
+
+### Added
+
+- **Two-folder layout phase 8 verification slice ([REQ-TIED_TWO_FOLDER_LAYOUT])** — Align bootstrap e2e tests with `tied-project/` + linked MCP env (`TIED_METHODOLOGY_BUNDLE_PATH`, exec-wrapper `tied-cli.sh`); fix `resolveTiedBasePathForYamlFile` when YAML lives inside the traceability root; run key YAML/style tests via `tsx` on `src/*.test.ts` (tsconfig excludes tests from `tsc`); `test_bootstrap_layered_install` and `lint-stale-layout` green on store. MCP **`test/fixtures/**/mini-project`** traceability trees renamed to **`tied-project/`** with optional **`tied` → `tied-project`** symlinks; Mode B scope loader and **`resolveProjectManifest`** resolve base path via **`resolveTiedLayout`**; adversarial/vocabulary fixture tests moved to the **`tsx`** test front-end in **`npm test`**. **`npm test`** now runs **`scripts/run-mcp-tests.mjs`**: all **`src/**`**, **`test/**`**, and **`packages/*/src/**`** `*.test.ts` via **`tsx --test`** (drops stale **`dist/*.test.js`**), plus **`test/*.test.cjs`** and Jev replay; **`tsx`** devDependency; workspace package **`test`** scripts updated likewise.
+
+- **Two-folder layout phase 7 tooling ([REQ-TIED_TWO_FOLDER_LAYOUT])** — `tools/bootstrap/lint-stale-layout.mjs` scans live surfaces for pre-migration paths (`tied/docs`, `copy_files`, legacy bootstrap flags); wired into `test-all` with unit tests and allowlist. G4 **`tied-new-client-audit`** adds **`two_folder_layout`** checks (`git check-ignore tied-bundle/`, no top-level `tied/`, `tied-project/config.yaml`). **`check-docs-vocab-links.mjs`** validates relative links under `tied-bundle/docs` and `tied-project/vocab`. Install matrix refreshed for `tied-project/` + `tied-bundle/` (`verify-install-matrix-doc`).
+
+### Fixed
+
+- **Checklist gate remediation close-out slice ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** — YAML canonicalization resolves `tied/` from the file’s project root (`tiedBasePathForYamlContext`); methodology templates for checklist gate REQ/ARCH/IMPL; fixture `1787603099` regression manifest refresh; integrated `close_out` via `run-close-out-gates.mjs` with activation `run_id` `wave8-closeout-20260911` (`allowed: true`, zero blocking envelope gaps). Evidence: [closeout-run-close-out-gates-final.json](working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/closeout-run-close-out-gates-final.json), [plan-close-out-handoff.md](working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/plan-close-out-handoff.md).
+
+### Added
+
+- **Sponsor–agent relationship layer ([REQ-TIED_SPONSOR_AGENT_RELATIONSHIP])** — Canonical glossary and `tied/docs/sponsor-agent-relationship.md`, principles P16 + checklist markers, exported `validateHingeFields` / `hinge_field_incomplete` (advisory warn-only), `mcp-server/src/relationship/consequence-ladder.ts`, contract and parity tests, templates promotion, CITDP + integrated adversarial inquiry close-out (`closeout-sar-2026-10-01`), verification-gated `tied_verify` → Implemented.
+
+- **Local JEV decision provider ([REQ-TIED_JEV_LOCAL_DECISION_PROVIDER])** — Provider-first `jevDecide` routing (`TIED_JEV_DECISION_PROVIDER`), subprocess [`local-client`](mcp-server/src/jev/local-client.ts), stub [`jev-local-laya-mlx-bridge.py`](mcp-server/scripts/jev-local-laya-mlx-bridge.py) (`0.5` placeholder), harness [`decisionBackendReady`](mcp-server/src/jev/harness-config.ts), agentstream preflight egress visibility. W5: **31** focused tests, `tsc -b`, integrated close-out (`closeout-inquiry-2026-09-30-close_out` inquiry ×3 PASS, `run-close-out-gates.mjs` `allowed: true`, zero envelope blockers). Evidence: [closeout-run-close-out-gates-final.json](working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/request-evidence-envelope.v1.json), [co5-sponsor-commit-payload.v1.json](working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/co5-sponsor-commit-payload.v1.json).
+
+- **Jev vs Laya comparison reference (DOC-JEV-LAYA-COMPARISON)** — Publish [`system-one-jev-vs-laya.md`](docs/comparisons/system-one-jev-vs-laya.md) (gitignore exception), RECORD Laya lexicon in [`decision-copilot.md`](tied/vocab/decision-copilot.md), cross-links from taxonomy and jev-for-tied header; minimal close-out evidence [`doc-jev-laya-comparison-closeout-2026-09-30.json`](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-closeout-2026-09-30.json).
+
+- **Blueprint C checklist evidence sufficiency pre-gate ([REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY])** — Opt-in Jev evidence sufficiency fan-out before `tied_checklist_gate_validate` (default-off; never authoritative gate receipts); MCP composition tests, labeled benchmark corpus, optional `JEV_DECIDE_TRACE` JSONL. Close-out run `closeout-2026-09-30`: adversarial inquiry PASS on real prod/test paths (Mode A + bidirectional fidelity alignment), `verification-evidence-manifest.v1.json`, Layer C PSA, `evidence-chain-profile.v1.json`. Evidence: [closeout-run-close-out-gates.json](working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.json), [request-evidence-envelope.v1.json](working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json), [checklist-evidence-sufficiency-benchmark.v1.json](working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/checklist-evidence-sufficiency-benchmark.v1.json).
+
+- **Blueprint D harness tool safety gating ([REQ-TIED_JEV_TOOL_SAFETY_GATING])** — Extends opt-in W5 [`harness-tool-guard`](mcp-server/src/jev/harness-tool-guard.ts) with Blueprint D noul question ids (`noul_destructive_risk`, `noul_scope_violation`), combined max thresholds, declared workspace scope, deterministic fast-deny, and fail-closed behavior when Jev is unavailable for blocking tools; [`tool-safety-benchmark`](mcp-server/src/jev/tool-safety-benchmark.ts) + replay script; read-only MCP [`tied_jev_tool_safety_evaluate`](mcp-server/src/tools/tool-safety-mcp.ts); agentstream live [`jev-harness-live-tool-gate`](mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts) workspace binding. Default-off harness unchanged. W5 verification: **33** focused unit tests, `tsc -b`, mocked benchmark replay. Close-out run `closeout-inquiry-2026-09-30-close_out`: Mode A inquiry ×3, unified `run-close-out-gates.mjs` `close_out` `allowed: true`, zero envelope blockers. Evidence: [closeout-run-close-out-gates-final.json](working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/request-evidence-envelope.v1.json), [verification-evidence-manifest.v1.json](working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/verification-evidence-manifest.v1.json), [evidence-chain-profile.v1.json](working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/evidence-chain-profile.v1.json), [tool-safety-benchmark.v1.json](working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tool-safety-benchmark.v1.json), [w5-verify-closeout.v1.json](working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w5-verify-closeout.v1.json), [co5-sponsor-commit-payload.v1.json](working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/co5-sponsor-commit-payload.v1.json).
+
+- **Blueprint A context log pruning close-out ([REQ-TIED_JEV_CONTEXT_LOG_PRUNING])** — Builds on commit `36dbd9c` (opt-in `context-log-pruner`, replay benchmark, agentstream hook). Close-out adds integrated checklist/evidence (`run-close-out-gates.mjs` `close_out` + `verification` `allowed: true`, run_id `close-out-2026-09-29-graph`), `verification-evidence-manifest.v1.json`, and `evidence-chain-profile.v1.json` under `working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/`. **Adversarial inquiry trim fix:** non-string graph refs emit `MALFORMED_REFERENCE` without throwing; `normalizeInquiryActivation` trims `run_id`; `mixed` gate policy treats advisory finding diagnostics as non-blocking; advisory PASS gates record `status: passed`. Evidence: [request-evidence-envelope.v1.json](working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/request-evidence-envelope.v1.json), [context-pruning-benchmark.v1.json](working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json).
+
+- **Jev harness missing-dist hard stop G2/S2 2C ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — When `AGENTSTREAM_JEV_HARNESS` / `jev.agentstream_harness` is enabled, dry-run and live agentstream **exit 1** unless `mcp-server/dist/jev/harness-tool-guard.js` exists (stable build hint); live-executor belt if gate is still null. Injected preflight deps remain allowed for unit smoke. Comparison doc S2→**2C**, G2 Fixed; CITDP `CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C`; evidence [g2-dist-2c-close-out-2026-09-28.md](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-close-out-2026-09-28.md). REQ status unchanged.
+
+- **Jev sponsor-policy follow-on G1/G3/G4 ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — G1: shadow/plan-skills mark vendor errors with `jev_error` and `agrees: false`; live vocab replay exits on `jev_errors`. G3: harness aborts on `confirm` when `CI=true` or `AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT=1`. G4: Claude live NDJSON collect shares `jevToolGate` with Cursor. Canonical comparison doc updated; evidence [g1-g3-g4-close-out-2026-09-28.md](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g1-g3-g4-close-out-2026-09-28.md) and [close-out-gates-g1-g3-g4-2026-09-28.json](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-g1-g3-g4-2026-09-28.json) (`close_out` allowed). REQ status unchanged (program closed).
+
+- **Bootstrap CURSOR_CLI_NAME + full-tools client flags ([REQ-TIED_SETUP], [IMPL-TIED_FILES], [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM])** — `resolveCursorAgentCli` defaults to **`agent`** when both `agent` and `cursor` are on PATH (override with **`CURSOR_CLI_NAME`** or **`TIED_CURSOR_AGENT_CMD`**); bootstrap README env table and [fresh-client-prompt-activation-map.md](tied/docs/fresh-client-prompt-activation-map.md) updates. Optional **`--full-tools`** and granular **`--with-*`** flags seed **`jev.plan_skills`**, optional DAE threshold, and **`templates/tied/analysis/`** BBCE starters via **`client-tool-use-bootstrap.mjs`**. Bundled plan skills link **`plan-process-tools-adjunct.md`**. Proof: **`client-tool-use-bootstrap.test.mjs` (7/7)**, **`new-tied-client.test.ts` src e2e (13/13)** (includes disposable MCP metrics client id; see Fixed below). Close-out run `close-out-combined-bootstrap-metrics-20260928`; evidence [close-out-gates-2026-09-28.json](working/REQ-TIED_SETUP/evidence/close-out-gates-2026-09-28.json) and [request-evidence-envelope.v1.json](working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json) (envelope blocking gaps **0**).
+
+- **Jev W6d plan-skills tiebreak + triage MCP ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — Builds on W6: optional advisory tiebreak display on `tied_jev_vocab_shadow`; MCP `tied_jev_adversarial_triage_pilot`; build-plan hook after pre_implementation gate; decision-copilot vocab and plan-skills adjunct updates. Integrated close-out run `w6d-plan-skills-close-20260927`; evidence [close-out-gates-w6d-2026-09-27.json](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-w6d-2026-09-27.json).
+
+- **Jev W6 plan-skills wiring ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — Opt-in `jev.plan_skills` / `TIED_JEV_PLAN_SKILLS`; MCP `tied_jev_status` and `tied_jev_vocab_shadow`; merged routing baseline; plan-skills adjunct in four bundled plan skills; activation map §2.9/§3.3 ([fresh-client-prompt-activation-map.md](tied/docs/fresh-client-prompt-activation-map.md)). Integrated close-out run `w6-plan-skills-close-20260927`; evidence [close-out-gates-2026-09-27.json](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-27.json).
+
+- **BBCE–TIED alignment advisory pilot (`PLAN-TIED-BBCE-ALIGNMENT`)** — W0–W4 integration docs, provisional glossary ([tied/vocab/behavior-bounded-change-engineering.md](tied/vocab/behavior-bounded-change-engineering.md)), agentstream slice map ([tied/analysis/agentstream-slice-map.yaml](tied/analysis/agentstream-slice-map.yaml)), change-locality and shared-code/boundary analysis modules, optional plumb audit v2 locality (`PLUMB_AUDIT_LOCALITY=1`), advisory checklist hook `sub-bbce-advisory-verification-pass`, and [ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml](templates/architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml). Tracked excerpt [docs/bbce-and-tied-excerpt.md](docs/bbce-and-tied-excerpt.md); full comparison remains local under gitignored `docs/comparisons/`. Program traceable-commit `21ff5d4`; close-out evidence [close-out-gates-2026-09-27.json](working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-gates-2026-09-27.json) (integrated/advisory; envelope waiver on file).
+
+- **Client refresh parity gate ([REQ-TIED_CLIENT_REFRESH_PARITY], [REQ-TIED_YAML_COMPARE_RUBY_LOAD])** — Hoist `YamlSemanticCompare::DEFAULT_RECORD_LIST_KEYS` so `compare_yaml_dirs.rb` loads; post-`copy_files` parity report (`client-refresh-parity-report.v1`) comparing `templates/` to client `tied/methodology/` and hash-drifting `DOCS_TO_COPY` docs; `verify-client-methodology.mjs` CLI and bootstrap flags (`--strict-refresh`, `--skip-parity-gate`, `--parity-gate-report-only`); directory-only fix for false `warnModifiedCopyTarget` warnings. Methodology migration Phase 1 step 6 documents operator verify. Close-out: `run-close-out-gates.mjs` verification + close_out `allowed: true`; evidence under `working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/`.
+
+- **TIED Residuality Analysis pilot tranche (PLAN-TIED-RESIDUALITY-ANALYSIS)** — W1–W4 workshop/classification/LEAP (P0+P1) and residuality pilot tests on `[REQ-FEAT_TASK_EXECUTION_RECOVERY]` / `[REQ-FEAT_IDEMPOTENT_CREATION]` (`mcp-server/src/feature-orchestration/w4-residuality-pilot.*.test.ts`, **43** pass). Working evidence under `working/PLAN-TIED-RESIDUALITY-ANALYSIS/`; tracked comparison excerpt [docs/residuality-theory-and-tied-excerpt.md](docs/residuality-theory-and-tied-excerpt.md) (full synthesis remains local under gitignored `docs/comparisons/`). Close-out gate [close_out-2026-09-27T06-39-00-000Z.json](working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-2026-09-27T06-39-00-000Z.json) `allowed: true`; pre-fix envelope waiver [request-evidence-envelope-waiver.v1.json](working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/request-evidence-envelope-waiver.v1.json).
+
+- **W5 residuality promotion (PLAN-TIED-RESIDUALITY-ANALYSIS)** — **Adopt (revise)**: optional `sub-residuality-analysis-pass` on `[PROC-AGENT_REQ_CHECKLIST]`; glossary and feature plan §10; CITDP attach pattern in [citdp-policy.md](tied/docs/citdp-policy.md). `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` + MCP `stressor_residue_record_validate` (`mcp-server/src/residuality/`). Request-evidence envelope accepts **`PLAN-*`** working tokens ([envelope investigation](working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/envelope-investigation-2026-09-27.md)).
+
+- **Bootstrap `.tied-yaml.yaml` ([REQ-TIED_YAML_STYLE_CONFIGURATION], [REQ-TIED_SETUP], [IMPL-TIED_FILES])** — `copy_files` seeds repo-root repository YAML style config from `templates/.tied-yaml.yaml` (create-if-absent, templates-first via `resolveTemplateFile`); Windows bootstrap smoke hard-asserts the file; contract tests in `claude-harness.test.mjs` (**19/19**). Close-out: [close-out-gates-2026-09-26.json](working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/close-out-gates-2026-09-26.json).
+
+- **Jev decision coprocessor ([REQ-TIED_JEV_DECISION_COPROCESSOR])** — W0–W5 core: server-side Jev `/v1/decide` client, shadow vocab PRELOAD, prompt-type advisory, adversarial triage pilot, opt-in `@tied/agentstream` harness preflight and tool guard. Program close-out: [close-out-gates-2026-09-26.json](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-2026-09-26.json) `allowed: true`.
+- **Jev W5 live tool gate (git-hygiene follow-on)** — Per-turn `evaluateStreamToolProposal` in the `@tied/agentstream` live loop; `jev-harness-live-tool-gate` tests; live calibration evidence under `working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/` ([git-hygiene-receipt-2026-09-26.md](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/git-hygiene-receipt-2026-09-26.md), run-id `jev-w5-middleware-git-hygiene-2026-09-26`). REQ/CITDP status unchanged.
+
+### Changed
+
+- **Post Laya close-out git-hygiene (`jev-laya-post-closeout-git-hygiene-2026-09-30`)** — `test-all` subshell steps fail fast with explicit `|| exit 1`; add [`refresh-tied-client.sh`](scripts/refresh-tied-client.sh); isolate `TIED_BASE_PATH` in onboarding and YAML MCP/canonicalizer tests; sync DOC-JEV-LAYA `gates/ledger.jsonl` + missing close-out receipt. Receipt: [git-hygiene-receipt-2026-09-30.md](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/git-hygiene-receipt-2026-09-30.md). REQ status unchanged.
+
+- **Gitignore close-out hygiene ([PROC-GITIGNORE_CLOSE_OUT])** — Ignore `mcp-server/working/` MCP gate scratch,
+  `working/*-CLIENT-*/` disposable client demos, and `working/REQ-ENVELOPE_TRACKER_HASH_STABILITY/` debug probes;
+  canonical-sort residuality LEAP list fields in feature REQ/ARCH/IMPL YAML and checklist sub-procedure order.
+
+- **`docs/comparisons/`** — Treat as **private local** planning notes again (`.gitignore`); remove from git index; keep files on disk. Tracked program history remains **`working/REQ-TIED_DAE_INCORPORATION/PLAN.md`** and **RESIDUAL-PLAN.md**.
+- **DAE residual program** — R1–R4 documentation LEAP close-out; parent gate refresh `close-out-gates-2026-09-25-residual.json` (`allowed: true`).
+
+### Added
+
+- **Methodology client boundary ([REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY])** — DAE residual **R4** program closed: Phase A opt-in bootstrap read-only + client hook template + CI guard doc; Phase B bundled methodology read (`TIED_METHODOLOGY_BUNDLE_PATH`), release `methodology-bundle:pack`, tied-cli pilot parity, offline/air-gap runbook + sponsor sign-off; migration gates **G1–G5** met. **`1058`** `mcp-server` tests. Close-out: [close-out-gates-2026-09-25.json](working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-gates-2026-09-25.json) `allowed: true`; envelope blocking gaps **0** (envelope gitignored per program policy).
+
+- **DAE incorporation program ([REQ-TIED_DAE_INCORPORATION])** — Waves 0–5: `@tied/cli`
+  `gate check`, `next`, and `handoff validate`; branch hygiene, pseudocode leakage lint,
+  CITDP express lane, **diff-scoped change-risk report** (W2d; stable ids `diff_scoped_crap` /
+  upstream DAE CP7 metric), four-way closure join via `pseudocode_analyze`, ontology rules and
+  charter compliance table on `tied_validate_consistency` / checklist gate. Coordinator guide +
+  linked plan under `working/REQ-TIED_DAE_INCORPORATION/`. **1036** `mcp-server` tests.
+
+- **DAE verification charter ([REQ-TIED_DAE_VERIFICATION_CHARTER])** — Opt-in mutation cache,
+  hard disjoint verifier in `tied_checklist_gate_validate`, and gauntlet runner (charter-off
+  default). Child REQ of incorporation program; close-out envelope under
+  `working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/`.
+
+- **Claude adherence hook bridge ([REQ-TIED_CLAUDE_ADHERENCE_HOOKS])** — Bootstrap safe-merge of
+  `.claude/settings.json` `PostToolUse` → `claude-adherence-bridge.js`; normalizer + fixtures;
+  **`action_attempted`** ledger when **active-turn marker** present; mitigates **RISK-BOOT-005**
+  (marker-gated; not full interactive IDE adherence). **`7`** hook unit/composition tests + **`3`**
+  bootstrap merge tests; **`20/20`** `claude-harness.test.mjs`.
+
+- **Claude-first disposable client factory** — `test-new-claude-tied-client` /
+  `new-claude-tied-client` / `validate-claude-tied-client` (Node-first; skips Cursor
+  `mcp enable` when `--harness claude`); `runClaudeClientValidation` and
+  `working/tied-claude-client-validation.v1.json` receipt; Windows
+  `test-new-claude-tied-client.cmd`. Trace: REQ-TIED_CLAUDE_BOOTSTRAP_OPS,
+  REQ-TIED_CLAUDE_HARNESS, REQ-TIED_SETUP. Close-out:
+  `working/REQ-TIED_CLAUDE_CLIENT_FACTORY/`. Opt-in **`claude_code_interactive_smoke`**
+  (`--with-claude-code-interactive-smoke` / `TIED_CLAUDE_CODE_INTERACTIVE_SMOKE=1`).
+
+- **Claude doc remainder program (R1–R8)** — Comparison doc program-closed; working
+  evidence under `working/REQ-TIED_CLAUDE_DOC_REMAINDER/` (interactive onboarding
+  **Current**, operator MCP approval, live agentstream one-turn with
+  `AGENTSTREAM_CLAUDE_LIVE_OK=1`; R8 adherence **N/A**, **RISK-BOOT-005** watch-only);
+  machine close_out gate + envelope replay on this close-out.
+
+- **R7 oracle maintenance ([REQ-TIED_CLAUDE_LIVE_DRIVER])** — Real CLI **2.1.273**
+  frozen NDJSON under `fixtures/claude/`; parser `error_during_execution` / `errors[]`;
+  IMPL pseudo-code LEAP; **53/53** agentstream tests.
+
+- **Optional repo-root skills re-root ([REQ-TIED_CLAUDE_SKILLS_REROOT])** — `TIED_SKILLS_REROOT=1`
+  installs Cursor and Claude managed skill bundles under repo-root `skills/` (default off); gated by
+  `WINDOWS_COPY_PROVEN_IN_CI` and `ARCH-TIED_CLAUDE_SKILLS_REROOT`. **`17/17`**
+  `claude-harness.test.mjs`; Windows assert CLI honors re-root when env set. Supersedes bootstrap
+  ops **B3** deferral disposition for sponsor-scoped R3.
+
+- **Claude bootstrap ops ([REQ-TIED_CLAUDE_BOOTSTRAP_OPS])** — Windows CI workflow
+  (`.github/workflows/windows-bootstrap-smoke.yml`) green on GitHub Actions run
+  [36031010940](https://github.com/fareedst/tied/actions/runs/36031010940); Bun/bootstrap
+  deps in CI; **`windows_copy_proven_in_ci` / `WINDOWS_COPY_PROVEN_IN_CI` = true** after
+  Windows runner proof (not darwin-only). Windows smoke asserts (`ASSERT_WINDOWS_BOOTSTRAP_CLAUDE`),
+  symlink gate tests (`GATE_SYMLINK_ON_WINDOWS_PROOF`), comparison-plan doc refresh (B5), and
+  close-out envelope under `working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/`. **B3** skills re-root
+  ownership moved to [REQ-TIED_CLAUDE_SKILLS_REROOT] (R3); **B4** adherence N/A with receipt.
+  Gitignore hygiene: `working/REFINE-*/`, `working/**/gate-args*.json` when staging `.gitignore`.
+
+- **Comparison planning docs (`docs/comparisons/`)** — Track Claude Code / DAE / disciplined
+  agentic engineering comparison notes in-repo (removed blanket `.gitignore` on `docs/comparisons/`).
+
+- **Claude live AgentDriver ([REQ-TIED_CLAUDE_LIVE_DRIVER])** — Fixture-gated
+  Claude stream/session oracles under `mcp-server/packages/agentstream/fixtures/claude/`,
+  `claude-driver` / `claude-stream` / live-driver select+bind modules, live-executor composition
+  for `--harness claude`,   README CLI pin and dry-vs-live operator table; 53/53 `@tied/agentstream`
+  npm tests; close-out envelope and gate receipts under `working/REQ-TIED_CLAUDE_LIVE_DRIVER/`.
+  Parent [REQ-TIED_CLAUDE_HARNESS] Tracker unchanged; SC-CLAUDE-P2 live ownership recorded via
+  CITDP LEAP note only.
+
+- **Claude Code multi-harness Phases 0–3 ([REQ-TIED_CLAUDE_HARNESS])** — Dual bootstrap
+  (`.claude/skills/`, repo-root `.mcp.json` safe merge, harness metrics), `@tied/agentstream`
+  `--harness claude` / `SELECT_AGENT_HARNESS` dry-run wiring with 41/41 package tests and 8 bootstrap
+  contract tests, client-development-index REQ vs FEAT matrix, and close-out evidence envelope under
+  `working/REQ-TIED_CLAUDE_HARNESS/`. Operator helpers in `scripts/build-commands.sh`:
+  `test-bootstrap-claude-harness`, `close-out-req`, `run-close-out-gates`, `how close-out`.
+  Live Claude AgentDriver and integrated MCP adversarial inquiry remain explicitly deferred.
+
+### Changed
+
+- **Bootstrap ops LEAP ([REQ-TIED_CLAUDE_BOOTSTRAP_OPS])** — B3 skills re-root deferral superseded
+  by implemented [REQ-TIED_CLAUDE_SKILLS_REROOT]; CITDP and deferred evidence updated accordingly.
+
+- **Gitignore close-out ([PROC-GITIGNORE_CLOSE_OUT])** — `!working/REQ-TIED_CLAUDE_SKILLS_REROOT/`
+  gate and envelope negations mirror other Claude REQ close-outs.
+
+- **Operator docs — unified TypeScript toolchain ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
+  Align README, `AGENTS.md`, `tied/docs/*` agent guides, preload contracts, and domain
+  vocabulary with post–Phase **4b** (Ruby removal) and **4d** (Go removal) reality: prefer
+  **`tied agentstream`** / **`@tied/agentstream`**, document `mcp-server` workspace packages,
+  bundled `tools/bundled-tied-yaml-skill/`, feature orchestration, and historical Ruby/Go paths
+  in `tied/vocab/agentstream.md`, `agent-stream-ruby.md`, routing, and `tools/agentstream/README.md`.
+
+- **Phase 4 arc process close-out ([REQ-TIED_UNIFIED_TOOLCHAIN])** — Authoritative
+  [checklist-tracker-phase4-arc-closed.yaml](working/REQ-TIED_UNIFIED_TOOLCHAIN/checklist-tracker-phase4-arc-closed.yaml),
+  idle post-arc tracker stub, CITDP activation/evidence sync for post-4d delivery, PLAN and
+  planning-notes snapshot, and `.gitignore` close-out hygiene patterns.
+
+### Fixed
+
+- **Disposable bootstrap MCP metrics client id ([REQ-TIED_SETUP], [REQ-MCP_USAGE_METRICS], [IMPL-TIED_FILES])** — `resolveBootstrapMetricsClient` in [`mcp-config.mjs`](tools/bootstrap/lib/mcp-config.mjs) sets **`TIED_MCP_METRICS_CLIENT`** in new **`.cursor/mcp.json`** and **`.mcp.json`** to the **`dev/test/{id}`** or unix-seconds directory name instead of inheriting the operator shell label (e.g. `stdd-dev`). Named project dirs still honor explicit env override. Proof: **`mcp-config.test.mjs` (4/4)**, **`new-tied-client.test.ts` (13/13)** src e2e.
+
+- **Operator `test-all` (`scripts/build-commands.sh`)** — Run the fail-closed gate in a subshell
+  so `set -e` no longer exits the interactive shell that sourced `build-commands.sh`; same
+  pattern for `new-tied-client` / `test-new-tied-client` bootstrap helper.
+
+- **Bun workspace build recursion ([REQ-TIED_UNIFIED_TOOLCHAIN])** — Root `mcp-server` `build`
+  used nested `npm run build --workspaces --if-present`, which Bun re-entered with appended flags
+  and looped under `build-all`. Use `bun run --workspaces --if-present build` so workspace
+  packages compile once after root `tsc`.
+
+### Added
+
+- **Operator `test-all` gate (`scripts/build-commands.sh`)** — Fail-closed validation:
+  full workspace build, aggregate `test-mcp`, umbrella CLI smoke, `validate-tied`,
+  `validate-vocab`, and `lint-tied`. Aligns `build-all` with a single workspace build and Bun
+  filter helpers for incremental agentstream/CLI rebuilds.
+
+- **Unified Node developer toolchain — Phase 4 slices 4a–4d ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
+  TS `@tied/agentstream` live executor and tracker-mode paths; Ruby `tools/agent-stream` and shell
+  adherence bridge retired; default **`TIED_AGENTSTREAM_IMPL=ts`**; Go **`tools/agentstream`** tree
+  removed with oracle fixtures frozen under `mcp-server/packages/agentstream/testdata/` and
+  `working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json`. REQ **Implemented** via
+  **`tied_verify`** (2026-09-23); operator path is Node/`tied` only (Tier 3 YAML shell/Ruby deferred
+  per OQ-4-3). Tests: `mcp-server` npm test (**991/991**); Go no longer required for agentstream.
+
+- **Unified Node developer toolchain — Phase 3b slices 2a–2d ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
+  TS `@tied/agentstream` strangler: native dry-run (`EXECUTOR_DRY_RUN_TS`), pipeline/batch preview
+  (`PIPELINE_BATCH_TS`), lead-checklist preview (`CHECKLIST_RENDER_TS`), adherence reconcile
+  (`ADHERENCE_STRANGLER_TS`); Go oracle parity tests in `mcp-server/packages/agentstream`; MCP
+  `tied_adherence_reconcile_run` prefers TS dist when built. Go `tools/agentstream` remains default for
+  **live executor** and unqualified argv until Phase 4. REQ status **In Progress** (partial delivery).
+  Close-out: unified Phase 3b `close_out` gate allowed (integrated/advisory); envelope blocking gaps **0**.
+  Tests: `mcp-server` npm test; `go test ./...` under `tools/agentstream`; adherence Ruby contract test.
+
+- **Unified Node developer toolchain — Phase 3b slice 1 ([REQ-TIED_UNIFIED_TOOLCHAIN])** —
+  npm/pnpm workspace rooted at `mcp-server/` with `@tied/cli`, `@tied/bootstrap`, `@tied/yaml-cli`, and
+  `@tied/agentstream` (dispatcher, tiedpreflight, TS `--checklist-tracker-preview`); MCP adherence hook in TypeScript;
+  umbrella `tied` CLI brand documented. Go `tools/agentstream` remains default for most argv until Phase 3b backlog
+  (checklist render, pipeline, executor dry-run, adherence strangler) completes. REQ status **In Progress** (partial
+  strangler delivery). Close-out: `close_out` gate allowed (minimal/advisory); envelope blocking gaps **0**.
+  Tests: `mcp-server` npm test; `go test ./...` under `tools/agentstream`; adherence Ruby contract test.
+
+- **Fleet constraint v2 — Track B exit NB-3/NB-4 + G4 maintenance + new-client adherence** —
+  NB-3 tranche two ([REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO]): sponsor `od-nb3-acceptance.v1.json`, wave-3
+  orchestration (`run-nb3-*`, `scripts/fleet-nb3-orchestration.test.mjs` 7/7), machine close-out under
+  `working/fleet-constraint-v2/NB-3/`. NB-4 tranche final ([REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL]): two-client
+  wave, `od-nb4-acceptance.v1.json`, Track B program exit (18/18 `not_enrolled` **fleet-migrated-client**);
+  `tied-win-diff` fleet bypass documented in [`program-status.v1.yaml`](working/fleet-constraint-v2/program-status.v1.yaml).
+  Continuous G4 ([REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE]): [`scripts/run-fleet-g4-maintenance.mjs`](scripts/run-fleet-g4-maintenance.mjs),
+  runbook, receipt schema (`working/fleet-constraint-v2/g4-maintenance/last-run.v1.json`), tests 6/6.
+  New TIED client audit slice ([REQ-TIED_NEW_CLIENT_ADHERENCE]): `scripts/run-tied-new-client-audit.mjs`,
+  bootstrap pipeline hooks, plan/runbook under `docs/pseudocode-new-client-tied-adherence-*.md` (WS-NC-3..6 deferred).
+  Plans: [`docs/pseudocode-constraint-v2-fleet-completion-plan.md`](docs/pseudocode-constraint-v2-fleet-completion-plan.md),
+  [`docs/pseudocode-constraint-v2-fleet-nb3-plan.md`](docs/pseudocode-constraint-v2-fleet-nb3-plan.md),
+  [`docs/pseudocode-constraint-v2-fleet-nb4-plan.md`](docs/pseudocode-constraint-v2-fleet-nb4-plan.md).
+  Close-out: `run-close-out-gates.mjs` `close_out` **allowed** and envelope blocking gaps **0** on all four REQs;
+  `tied_validate_consistency` **ok**. Orchestrator [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] remains **closed**.
+
+- **Fleet constraint v2 — NB-2 Track B tranche one ([REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE])** —
+  Sponsor gate `od-nb2-acceptance.v1.json` (accepted), wave-2 selection for five lowest-burden
+  `not_enrolled_phase_4` clients, NB-2 orchestration exports in `scripts/lib/fleet-nb1-orchestration.mjs`,
+  `run-nb2-*` wave helpers, and `scripts/fleet-nb2-orchestration.test.mjs` (7/7). G3 dry-run receipts and
+  manifest rollup under `working/fleet-constraint-v2/`; program batch REQ **Implemented** with orchestrator
+  **REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION** unchanged (closed). Plan:
+  [`docs/pseudocode-constraint-v2-fleet-nb2-plan.md`](docs/pseudocode-constraint-v2-fleet-nb2-plan.md).
+  Close-out: `run-close-out-gates.mjs` `close_out` allowed, envelope blocking gaps **0**; G4 CI ok;
+  `tied_validate_consistency` ok. Evidence:
+  `working/fleet-constraint-v2/NB-2/evidence/nb2-client-closeout-summary.json`,
+  `working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/command-artifacts/nb2-orchestration-tests/`.
+  **Follow-on:** NB-3/NB-4 completed 2026-09-13 (see entry above); OD-NB2-2/3 open decisions on CITDP slice remain historical.
+
+### Changed
+
+- **Fleet program doc consolidation ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** — Single canonical
+  [`docs/pseudocode-constraint-v2-fleet-program.md`](docs/pseudocode-constraint-v2-fleet-program.md); removed per-phase
+  fleet plans and client migration history from git (`working/fleet-constraint-v2/waves/`, client migration REQ stubs).
+  Inventory/governance YAML and `program-status.v1.yaml` remain tracked; wave receipts regenerate locally.
+  Evidence: `working/fleet-constraint-v2/doc-consolidation-commit-report.v1.json` (G4 CI + TIED consistency replay).
+
+### Added
+
+- **Fleet constraint v2 migration — Phase 5 G4 governance + traceable commit ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** —
+  Phase 5 program exit (P5-H): G4 CI via `scripts/run-fleet-g4-ci-checks.mjs`, constraint-enforced-v2
+  bootstrap audit (P5-F), FEAT-spawned integrated envelope policy (P5-G), v1 parser quarantine policy;
+  CITDP `phase_5_module`; GRAMMAR_V2 / ARCH governance LEAP. Evidence:
+  `working/fleet-constraint-v2/phase-5-exit-review.v1.json`,
+  `working/fleet-constraint-v2/p5-h-phase-5-exit-report.v1.json`,
+  `working/fleet-constraint-v2/seq-10-p5-traceable-commit-report.v1.json`. Orchestrator REQ stays
+  closed (seq 8). **Does not** migrate the 18 `not_enrolled_phase_4` manifest rows (OD-P5-2 deferred).
+
+- **Fleet constraint v2 migration — Phase 4 closeout seq 8 orchestrator machine close-out ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** —
+  After M2 (seq 7), verification and close_out checklist gates **allowed: true** with integrated advisory inquiry;
+  `tied_verify` set REQ **Implemented** and **IMPL-PSEUDOCODE_MIGRATION_TOOLING** **Active**; unified
+  `run-close-out-gates.mjs` with envelope blocking gaps **0**. Evidence:
+  `working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json`. M4 / Phase 5 entry remains seq 9.
+
+- **Fleet constraint v2 migration — Phase 1 close-out ([REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION])** —
+  Grand and Phase 1 program plans; frozen `working/fleet-constraint-v2/` inventory and waiver schemas;
+  **REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION**, **ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE**,
+  **IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION**, CITDP, and Tracker; LEAP amend to
+  [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]; vocab naming bridge. Integrated advisory `close_out` gate allowed with
+  evidence-chain profile and verification manifest (policy-only executable partition).
+
+### Changed
+
+- **Working evidence gitignore hygiene** — Expand `.gitignore` for ephemeral `working/**/evidence/` artifacts;
+  remove previously tracked close-out scratch from multiple REQ folders (regenerate locally per close-out run).
+
+### Fixed
+
+- **Diff-or-stage close-out (envelope hooks, checklist tests, agentstream preflight)** —
+  `tryPatchArtifactFile` / `tryPatchRequestEvidenceEnvelope` respect `TIED_ENVELOPE_HOOKS=1` and
+  emit `DIAGNOSTIC` warnings on patch failure ([REQ-REQUEST_EVIDENCE_ENVELOPE]).
+  `SkipTiedMCPPreflightEffective` applies CLI-over-env precedence for tied-yaml MCP preflight
+  ([REQ-GOAGENT-CLI-CONFIG]). MCP gate/activation tests and fixture envelope JSON aligned with
+  authoritative tracker source evidence ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]). Async methodology
+  glossary title/index hygiene ([REQ-TIED_ASYNC_METHODOLOGY] vocab).
+
+### Added
+
+- **§E — Pre-cohort grammar v2 automation ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT], [REQ-TIED_SETUP])** —
+  Evaluation-corpus grammar v2 replay driver and audit runner; adherence replay extension;
+  post-session hook; plumb-diff impact preview test stability; disposable-client baseline
+  git commit message derived from AGENTS.md methodology version. Incremental integrated
+  close-out `grammar-v2-section-e-closeout-20260911`: analysis 305/305, §E script tests,
+  bootstrap E2E 7/7; envelope blocking gaps zero. Operator runbook:
+  `docs/pre-cohort-client-test-grammar-v2-and-evidence.md`; §14 sync in
+  `docs/evidence-collection-conversation-patterns.md`.
+
+- **Track A — Grammar v2 default for new TIED projects ([REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT])** —
+  Canonical template and `copy_files.sh` bootstrap emit `Grammar-Version: v2`;
+  `selectNewProjectGrammarDefault` / `classifySidecarVersion` modules with 12 unit
+  tests; disposable-client audit CLI with independent dimensions (header, Layer B,
+  Layer C, constraint_flow=false, legacy-v1) and composition tests; migration and
+  client-development docs updated. Close-out `grammar-v2-closeout-20260911`:
+  verification + close_out gates allowed; envelope zero blocking gaps; 15/15
+  targeted tests pass. Combined Step 7 with Tracks C and B per
+  `docs/pseudocode-grammar-v2-and-hygiene-plan.md`.
+
+- **Track C — Layer B validator hardening ([REQ-PSEUDOCODE_STATIC_ANALYSIS])** —
+  `tokenScanStart` / `tokenScanEnd` attribute block-leads to owning procedures;
+  negated `mutat*` prose no longer emits `MISSING_DATA_TRANSITION`; CFG
+  `[start,end)` unchanged. CITDP persisted as
+  `tied/citdp/CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS-track-c-validator-hardening.yaml`;
+  minimal-depth close_out gate allowed; analysis regression guard 304/305
+  (one plumb-diff preview env flake).
+
+- **Track B — Sidecar block-lead sweep ([REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP])** —
+  `normalize-sidecar-block-leads` CLI (6/6 unit tests), waves B1–B3 with receipts,
+  full-repo `--check` zero external-only / inter-procedure leaks; B4 internal-placement
+  mandate in `pseudocode-format-and-practices.md`. Integrated close-out
+  `track-b-verification-20260911` + `track-b-closeout-20260911`; envelope
+  blocking gaps zero; advisory inquiry warn only.
+
+- **Wave 8 — Adherence realignment ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  W8-D1 PSA auto-load for gate validate (`checklist-gate-evidence-hydration.ts`);
+  W8-D2 sync emits `outcome_verified` ledger rows (`sync-tracker-dispositions.mjs`,
+  `adherence_ledger.go`); W8-D3 profile substance chain in unified close-out runner;
+  W8-D4 merged gate+envelope blocking decision; W8-D5 skill defaults requiring
+  `--envelope-blocking --sync-dispositions --reconcile`; W8-D6 cohort replay fixtures
+  (`scripts/replay-adherence-fixtures.mjs`); W8-D7 agentstream enforce default at
+  integrated depth. Close-out `wave8-closeout-20260911`: verification + close_out gates
+  allowed; envelope zero blocking gaps; FILEHASH disposable smoke pass. Docs:
+  `docs/adherence-realignment-wave8-plan.md`, `docs/adherence-realignment-wave8-close-out.md`.
+
+- **Wave 7 — Conversation adherence measurement and operator adoption ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  W7-D1 transcript scoring CLI (`scripts/conversation-adherence-score.mjs`) with seven
+  dimension rubric and fixture corpus; W7-D2 operator backfill script
+  (`scripts/backfill-client-envelopes.mjs`); W7-D3 evaluation corpus
+  `require_envelope` adoption; W7-D4 agentstream `--enforce-envelope` warn/enforce pilot
+  at traceable-commit; W7-D5 PSA gate hydration when envelope reports
+  `expected_artifact_missing`. Integrated depth inquiry (advisory); verification gate
+  `wave7-verification-20260911` allowed; close-out reuses Wave 5 inquiry activation
+  (`wave5-closeout-20260910`). Docs: `docs/evidence-collection-conversation-patterns.md`,
+  `tied/docs/conversation-analysis-tools.md`.
+
+### Changed
+
+- **Unified close-out runner — minimal depth activation skip ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  `run-close-out-gates-activation.mjs` skips `tied_checklist_activation_collect`
+  when `depth_tier` is `minimal` or inquiry waiver applies, while `--run-id` remains
+  valid for manifest and runner identity (fixes `run_id_provenance_mismatch` on
+  post-W8 sidecar follow-up).
+
+- **Layer B sidecar hygiene — post-W8 follow-up ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Six procedure blocks in `IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT` sidecar: declare
+  `DATA_TRANSITION: none` on read-only `HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION`;
+  move block-lead token comments inside procedure bodies for Wave-8-adjacent
+  validators. Clears three post-W8 `pseudocode_validate` diagnostics without
+  behavior change. Close-out `layerb-sidecar-fix-20260911`: minimal depth;
+  inquiry waiver `inquiry_not_required_sidecar_only`; PSA Layer C refreshed;
+  envelope zero blocking gaps. Docs: `docs/layerb-sidecar-fix-close-out.md`.
+
+- **LEAP close-out — REQ/IMPL status reconciliation (2026-09-10)** —
+  Promoted `[REQ-PSEUDOCODE_TYPED_FLOW]` and `[IMPL-PSEUDOCODE_TYPED_FLOW]` to
+  **Implemented** / **Active** after pilot + Phase 3 close-out. Promoted async
+  methodology stack (`[REQ-TIED_ASYNC_METHODOLOGY]`, `[REQ-ASYNC_*]` W0–W6
+  child REQs) to **Implemented**; `[IMPL-ASYNC_BINDING_VALIDATOR]` and
+  `[IMPL-ASYNC_BOUNDARY_ANALYZER]` to **Active**. Updated
+  `[REQ-TIED_ASYNC_METHODOLOGY]` satisfaction criteria for W5/W6. Formalized
+  PSEUDOCODE-CONSTRAINT-STUDY go/no-go sponsor sign-off (bounded typed-flow
+  adopted; full constraint-language deferred).
+
+### Added
+
+- **TIED Async Methodology W5+W6 ([REQ-TIED_ASYNC_METHODOLOGY])** —
+  W5: optional async_semantics and cancellation columns on binding inventory,
+  async seam validation rules, CONTROLLED_COMPOSITION_FAULT composition tests,
+  and composition-coverage.md fault patterns; proof boundary binding exercised
+  never race-free. REQ-ASYNC_COMPOSITION_INVENTORY /
+  ARCH-ASYNC_COMPOSITION_BINDING / IMPL-ASYNC_BINDING_VALIDATOR.
+  W6: advisory agent-preload-contract async_methodology section, agentstream
+  Phase B/G async highlights, scoped analysis async_diagnostic_summary in
+  impact_preview; copy_files.sh compatibility documented. Close-out gates
+  (w5-closeout-20260910, w6-closeout-20260910, advisory). Envelope zero
+  blocking gaps. Tests: 12/12 binding inventory + 7/7 quality-validation MCP +
+  1/1 scoped preview + agentstream highlight green.
+
+- **TIED Async Methodology W4 ([REQ-TIED_ASYNC_METHODOLOGY])** —
+  Layer C async_boundary opt-in pass with seven structural diagnostics,
+  24-fixture corpus, MCP async_boundary/async_gate_errors flags, and D7
+  gate promotion for ASYNC_EFFECTS_WITHOUT_BOUNDARY only;
+  REQ-ASYNC_BOUNDARY_ANALYSIS / ARCH-ASYNC_ANALYSIS_PASS /
+  IMPL-ASYNC_BOUNDARY_ANALYZER; pilot after-w4 Layer C summary for
+  IMPL-GOAGENT-EXECUTOR.   Close-out gate (w4-closeout-20260910, advisory).
+
+- **TIED Async Methodology W3 ([REQ-TIED_ASYNC_METHODOLOGY])** —
+  CITDP candidate trigger wiring (deriveAsyncCitdpTriggers), nine-row evidence
+  matrix, ASYNC-001..006 activation contract, validateAsyncCitdpActivation;
+  REQ-ASYNC_CITDP_TRIGGERS / ARCH-ASYNC_CITDP_EVIDENCE /
+  IMPL-ASYNC_CITDP_PROFILE_WIRING; citdp-async-triggers module + tests;
+  pilot after-w3 for IMPL-GOAGENT-EXECUTOR. Close-out gate
+  (w3-closeout-20260910, advisory). W4–W6 deferred.
+
+- **TIED Async Methodology T0+W2 ([REQ-TIED_ASYNC_METHODOLOGY], [REQ-ASYNC_REQ_ARCH_TEMPLATES], [REQ-ASYNC_PSEUDOCODE_CONTRACTS], [REQ-ASYNC_CHECKLIST_CATALOG])** —
+  T0 (W0–W1): seven-class async glossary, REQ/ARCH authoring guidance, optional v1
+  contract rows (ASYNC_BOUNDARY, TIMEOUT, CANCELLATION, SEQUENCING, MESSAGE_CONTRACT,
+  RETRY, IDEMPOTENCY), 14+ structural fixtures, and pre-async-contract legacy grace.
+  W2: checklist gating via `async_in_scope` disposition (candidate trigger only),
+  `catalog-async-boundaries` closed table, `flag-async-contradictions` routing,
+  `checklist-async-dispositions` module, and pilot catalog/contradiction artifacts
+  for IMPL-GOAGENT-EXECUTOR. Eleven ASYNC tokens registered; 37/37 async tests green;
+  minimal gate depth with integrated checklist-text inquiry waiver (MCP inquiry W3).
+  Close-out: `t0w2-closeout-20260910`, envelope zero blocking gaps (advisory).
+
+- **Wave 5 — Process-adherence evidence grade ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT], [REQ-REQUEST_EVIDENCE_ENVELOPE])** —
+  Envelope dedupes gate receipts per phase and treats inquiry byte-identical artifacts
+  as fresh when provenance run_ids differ; auto-detects dual-write trackers, manifest
+  gaps, hash drift, and thin ledger;
+  `fail_on_process_gaps` validate flag; `sub-close-out-evidence-sync` checklist sub_procedure;
+  `sync-tracker-dispositions.mjs`; extended `run-close-out-gates.mjs`;
+  `process_grade` extension on `tied_adherence_reconcile_run`.
+  Docs: `docs/process-adherence-evidence-grade-plan.md`.
+  Integrated close-out gates: `wave5-verify-20260910`, `wave5-closeout-20260910` (advisory).
+
+- **Methodology close-out integrity program — Waves 1–4 ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT], [REQ-PSEUDOCODE_STATIC_ANALYSIS], [REQ-TIED_ADVERSARIAL_INQUIRY], [REQ-TIED_SETUP])** —
+  Unified gate receipts and request evidence envelopes; auto-hydration of phase
+  inquiry artifacts and PSA reports in `run-close-out-gates.mjs`; envelope
+  `fail_on_error_gaps` blocking mode; canonical slug registry and
+  `validatePseudocodeAnalysisEvidence`; procedure-aware inquiry scope
+  (`scope-validation.ts`, `STALE_BLOCK_NAME`); bootstrap provenance integrity
+  and `ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM`; evidence-chain profile on primary
+  REQ. Integrated close-out gates: `mci-pre-20260910`, `mci-verify-20260910`,
+  `mci-closeout-20260910` (advisory). Regression: 51 Node tests + agentstream
+  checklist suite green; `tied_validate_consistency` ok. Demo client
+  `1789069630` documented-only (not patched).
+
+- **PSA Layer C close-out — IMPL-TIED_FILES remediation ([REQ-PSEUDOCODE_STATIC_ANALYSIS], DOC-PSA-LAYER-C-CLOSEOUT)** —
+  Remediated `IMPL-TIED_FILES-pseudocode.md` via procedure reorder (callees
+  before callers) and legacy CALL→RUN grammar fixes; all impl_inventory PSA
+  reports pass with `gate_mode_applied: true`. Identity-bound integrated inquiry
+  pairing: `doc-psa-lc-pre-20260911`, `doc-psa-lc-verify-20260911`,
+  `doc-psa-lc-closeout-20260911`. Envelope zero blocking gaps at close_out
+  (advisory).
+
+- **Full constraint-language + grammar v2 ([REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE])** —
+  Opt-in `constraint_flow` composes after typed-flow; grammar v2 via
+  `Grammar-Version: v2` header; refinements, interproc summaries, alias/mutation
+  policy, fixed-point solver; `sections.constraint_language` on report v1; 40
+  corpus fixtures; qualification harness (`run-constraint-*.ts`);
+  PSA-CONSTRAINT-001..004; F11 pass (median 5 lines); evidence envelope;
+  integrated gates (`cl-pre-impl-20260910`, `cl-verify-20260910`,
+  `cl-closeout-20260910`, advisory).
+
+- **Request evidence envelope Slices 0–5 complete ([REQ-REQUEST_EVIDENCE_ENVELOPE])** —
+  Per-REQ `request-evidence-envelope.v1.json` machine index with read-only
+  `request_evidence_envelope_build` / `validate`, producer hooks
+  (`TIED_ENVELOPE_HOOKS=1`), agentstream dual-write, typed `evidence_refs`,
+  `request_evidence_envelope_batch_collect` (gap report, no score field),
+  and `request_evidence_envelope_backfill` MCP+CLI for legacy timestamp repos;
+  operator guide at `tied/docs/request-evidence-envelope.md`; evaluation-corpus
+  `/dev/test/*` rows flipped to `require_envelope`; pilots on 1788547701
+  (minimal, zero gaps) and 1787603099 (integrated, gap codes documented);
+  35/35 envelope tests; integrated gates revalidated (`ree-*-20260910`,
+  advisory). Operator report at `working/evaluation/envelope-gap-report.v1.yaml`
+  (gitignored).
+
+- **Gitignore close-out hygiene ([REQ-PROMPT_TYPE_GLOBAL_SKILLS], [PROC-GITIGNORE_CLOSE_OUT])** — Advisory close-out step in `tied-close-out-process.md` and checklist slug `gitignore-close-out-hygiene` (before `traceable-commit`); shared reference `gitignore-close-out-hygiene.md`; plan-close-out handoff bullet for patterns proposed/applied unstaged or explicit N/A.
+
+- **Bounded typed-flow Layer C pilot ([REQ-PSEUDOCODE_TYPED_FLOW])** — Optional
+  `typed_flow` pass on `pseudocode_analyze` emitting `sections.typed_flow`;
+  expression parser, typed IR, and CFG join transfer
+  ([IMPL-PSEUDOCODE_TYPED_FLOW], [ARCH-PSEUDOCODE_TYPED_FLOW_PASS]); parser
+  extensions for CALL args and `contract.values`; corpus fixtures 1–17; client
+  qualification harness under `working/PSEUDOCODE-CONSTRAINT-STUDY/`; grammar
+  v1 typed-flow extension doc; pilot measurement report (F1–F12 proceed); 626/626
+  mcp-server tests; integrated `close_out` gate (`tf-closeout-20260910`, advisory).
+
+- **`REQ-PSEUDOCODE_PARSER_UNIFICATION`** — shared `pseudocode-shared.ts` primitives; validator/parser refactor preserving `layer-b-pseudocode-validator.v1` goldens; integrated close_out gate (`parser-unification-closeout-20260908`).
+
+### Changed
+
+- **Sub-phase 3d constraint gate errors ([REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE])** —
+  `constraint_gate_errors` defaults effective **true** when
+  `gate_mode && typed_flow && constraint_flow`; explicit `false` opts out;
+  sponsor approved 2026-09-10.
+
+- **REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE plan-close-out** — Tracker reconciled to
+  committed state (`1a656ee`); formal close-out complete; integrated `close_out`
+  gate revalidated (`cl-closeout-20260910`).
+
+- **`.gitignore`** — constraint-language qualification per-entry sweep patterns
+  and token-payloads; ignore TypeScript `*.tsbuildinfo`, typed-flow qualification
+  baseline per-entry reports, pilot/snapshots dirs, ephemeral
+  `compare-summary.json`, and per-REQ `run-pre-implementation-gates.mjs`.
+
+- **PSA Layer C mandatory gate ([REQ-PSEUDOCODE_STATIC_ANALYSIS])** — `gate_mode` on `pseudocode_analyze` fails `ok` on error diagnostics and truncation; mandatory `sub-pseudocode-static-analysis-pass` at `gate-pseudocode-validation`; grammar v1 author guide and Layer C checklist; integrated close_out gate (`doc-psa-full-update-closeout-20260909`).
+- **PSA follow-up Mode A fidelity** — adversarial-inquiry-psa fixture; inquiry PASS reused via close-out waiver (`psa-fidelity-rerun-20260908`); follow-up gate `psa-followup-closeout-20260908`.
+- **Evidence-chain profile** — opt-in `invoke_pseudocode_analyze` flag (default off) with pilot evidence (path/identity refs); minimal close_out gate (`ecp-psa-analyze-closeout-20260908`).
+- **PSA CITDP LEAP** — shared-parser migration moved from non_goals to `follow_up_completed` under `REQ-PSEUDOCODE_PARSER_UNIFICATION`.
+- **`.gitignore`** — ignore local PSA pilot outputs and per-track close-out evidence receipts.
+
+### Changed
+
+- **Phase 3 typed gate errors ([REQ-PSEUDOCODE_TYPED_FLOW])** — `typed_gate_errors`
+  defaults effective **true** when `gate_mode && typed_flow`; explicit `false`
+  preserves warnings-only typed diagnostics; scoped to annotated procedures;
+  sponsor approved 2026-09-10 (`phase3-measurement-report.md`).
+
+- **REQ-PSEUDOCODE_TYPED_FLOW plan-close-out** — Tracker reconciled to committed
+  state (`c28211f`); formal close-out complete; integrated `close_out` gate
+  revalidated (`tf-closeout-20260910`).
+
+### Deferred
+
+- **Phase C3 (validator consumes parser IR)** — deferred to a separate future C3 plan; close-out records the handoff only.
+
+- **MCP tool `tied_cycles`** — Response now includes `ok` aligned with `has_cycles` (`ok === !has_cycles`) for evidence-chain structural validator parity. Additive contract change; existing `cycles` and `has_cycles` fields unchanged.
+
+### Added
+
+- **Contract-aware pseudo-code static analysis ([REQ-PSEUDOCODE_STATIC_ANALYSIS])** — Additive MCP `pseudocode_analyze` (schema `pseudocode-analysis-report.v1`); parser/IR, symbols, CFG, call graph, bounded abstract analysis, obligations under [IMPL-PSEUDOCODE_ANALYSIS_ENGINE]; preserves `pseudocode_validate` / `layer-b-pseudocode-validator.v1`; integrated close_out gate (`psa-closeout-20260908`, advisory, external-input-security); 567/567 mcp-server tests.
+
+- **Claims and Evidence Review Profile slice 1 ([REQ-TIED_CLAIMS_EVIDENCE_REVIEW])** —
+  Read-only evaluation of frozen claim surfaces with `shown` / `unsettled` /
+  `not_examined` dispositions, proof boundaries, and append-only artifacts under
+  `working/{SCOPE}/claims-evidence-review/` (distinct from adversarial-inquiry
+  ledgers). MCP tool `tied_claims_evidence_review_run`; modules under
+  `mcp-server/src/claims-evidence-review/`; TIED-native generator
+  `scripts/build_claims_evidence_from_tied.rb` (Option C default token);
+  tied-generated fixture and pilot output. Vocabulary in
+  `tied/vocab/fidelity-research.md` § Claims and evidence review. Integrated
+  `close_out` gate passed (`cer-close-out-1`, advisory policy,
+  `external-input` trigger); 9/9 focused tests and 543/543 mcp-server suite pass.
+
+- **Cross-platform TIED bootstrap ([ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM])** — Shared Node engine under `tools/bootstrap/` with `manifest.json` as the single list source; thin `copy_files.sh`, `copy_files.cmd`, and `bootstrap_without_mcp.cmd` entry points delegate to `copy-files.mjs`; Windows `scripts/new-tied-client.cmd`, `scripts/test-new-tied-client.cmd`, and `scripts/lint_yaml.cmd` parity; disposable client pipeline (`CREATE_DISPOSABLE_TIED_CLIENT`, `RUN_NEW_TIED_CLIENT_PIPELINE`) via `tools/bootstrap/new-tied-client.mjs`; manual Windows smoke runbook under `working/REQ-TIED_SETUP-windows-bootstrap/`; IMPL-TIED_FILES pseudo-code blocks `LOAD_BOOTSTRAP_MANIFEST`, `BOOTSTRAP_TIED_NODE`, `RUN_BOOTSTRAP_ENTRYPOINT`, and disposable-client pipeline blocks; 15/15 bootstrap E2E tests pass; minimal-depth `close_out` gate passed (CITDP-REQ-TIED_SETUP-windows-bootstrap, CITDP-REQ-TIED_SETUP-new-tied-client).
+
+- **Offline vocabulary explorer ([REQ-VOCABULARY_EXPLORER])** —
+  Read-only `mcp-server/src/vocabulary-explorer/` pipeline produces
+  `vocabulary-explorer.v1` JSON and self-contained offline HTML from scoped
+  source walk and merged TIED indexes. Surfaces: CLI (`npm run
+  vocabulary-explorer`) and MCP `tied_vocabulary_explorer_run`. Golden
+  byte-stable tests, hostile-input HTML renderer tests, composition and MCP
+  tests, offline HTML smoke tests. TIED stack: REQ-VOCABULARY_ANALYSIS,
+  REQ-VOCABULARY_VIEWER_STATE, ARCH-VOCABULARY_*, IMPL-VOCABULARY_*.
+  Integrated `close_out` gate passed with `external-input-security` profile.
+
+- **Checklist adherence Stage Q — inquiry sub-turn + rollout ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Process-composition test `TestTrackerComposition_inquirySubTurn` exercises
+  `sub-adversarial-inquiry-pass` through agentstream subprocess with
+  `fake_tracker_inquiry_agent.rb`. Second controlled-client pilot via
+  `BuildStageQPilotControlledClientFixture` writes `pilot-report-stage-q.json`
+  (`pilot_client: stdd-stage-q`, stage-q phase run_ids); `EvaluateRolloutStop`
+  passes (`should_stop: false`). Tests: `TestRunControlledClientPilot_stageQSecondPilot`.
+  CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-q`. Acceptance A33–A34.
+  Closes post–Stage L remaining-work plan (Stages M–Q).
+
+- **Checklist adherence Stages M–Q — integrated close-out ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Consolidated capstone CITDP and Authoritative Tracker bind the complete
+  A21–A34 chain to the integrated `close_out` gate. All five stage Trackers
+  and the consolidated Tracker now complete `traceable-commit` with
+  `CHANGELOG.md` and `gate-adherence-chain-m-q-close-out.json` evidence.
+  The identity-bound close-out gate passed with `allowed: true`, and the
+  verification battery passed across Go, Ruby, TypeScript/MCP, build,
+  reconcile parity, and YAML lint; `scripts/validate_tokens.sh` is not
+  present in this repository.
+
+- **Checklist adherence Stage P — command_evidence ref hardening ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Stage P trigger composition test (`A32 trigger fires when gate accepts manual Tracker with
+  nonexistent evidence_refs`) documents that the shared TS gate accepts unresolved refs from
+  non-agentstream writers; Go `ResolveEvidenceRefs` extended for inline JSON and
+  `command_evidence:` prefix refs aligned with `validateCommandEvidence`. Tests:
+  `TestResolveEvidenceRefs_CommandEvidence_*`. TS Option B (`validateTrackerEvidenceRefs`)
+  deferred. CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-p`. Acceptance A32.
+
+- **Checklist adherence Stage O — migration preview + doc hygiene ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  `PreviewTrackerMigration` in `tracker_migration_preview.go` emits read-only
+  `tracker-migration-preview.v1` JSON (slug diff, stale dispositions; no Tracker mutation).
+  CLI flag `--checklist-tracker-preview` in `config.go` / `main.go`. Operator doc
+  `docs/checklist-adherence-remaining-work-plan.md`; parent improvement plan §1 historical
+  annotation and §10 links updated. README expanded with hook bridge, reconcile CLI/MCP runbook,
+  and full flag catalog. Static contract test `config_docs_test.go` (`TestREADMEDocumentsAllConfigFlags`).
+  IMPL block `PREVIEW_TRACKER_MIGRATION`. Vocabulary `PreviewTrackerMigration` in
+  `tied/vocab/agentstream.md`. CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-o`.
+  Acceptance A29–A31.
+
+- **Checklist adherence Stage N — operator reconciliation surface ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Go `cmd/adherence-reconcile` emits read-only `ReconcileReport` JSON on stdout (parity with
+  `adherence_reconcile.go`); MCP `tied_adherence_reconcile_run` spawns the Go binary via
+  `adherence-reconcile-runner.ts` with no TypeScript finding-logic port. Tests:
+  `cmd/adherence-reconcile/main_test.go`, `adherence-reconcile-mcp.test.ts` (Stage L pilot corpus
+  parity). CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-n`. Acceptance A26–A28.
+  Closes Stage K deferral for optional MCP reconcile tool.
+
+- **Checklist adherence Stage M — live `action_attempted` capture ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  `AppendActionAttempted` in `adherence_ledger.go`; `adherence_active_turn.go` writes/clears
+  `active-turn-marker.v1` around checklist subprocess; `main.go` wires marker lifecycle after
+  `instruction_rendered`. Hook bridge: `.cursor/hooks/log.rb` →
+  `scripts/adherence_append_action_attempted.rb` (append-only, fail-silent without marker).
+  Bounded `evidence_refs` and `hook_log_ref` only — no prompt/tool bodies in ledger. Tests:
+  `adherence_ledger_test.go`, `adherence_active_turn_test.go`,
+  `adherence_append_action_attempted_test.rb`, `tracker_composition_test.go` (turn order A21),
+  `adherence_reconcile_test.go` (live fixture A25). Vocabulary in `tied/vocab/agentstream.md`.
+  IMPL blocks `ACTIVE_TURN_MARKER`, `APPEND_ACTION_ATTEMPTED`. CITDP
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m`. Acceptance A21–A25.
+  Closes Stage K deferral for live `action_attempted` hook capture.
+
+- **Checklist adherence Stage L — controlled-client pilot + rollout stop ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Go `rollout_stop.go` implements observational `EvaluateRolloutStop` (writer corruption,
+  unbound receipt advance, blocking reconcile findings, canonical checklist byte drift);
+  `adherence_pilot.go` runs `RunControlledClientPilot` and writes
+  `adherence-pilot-report.v1` JSON. Controlled-client corpus under
+  `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/` (`pilot-report.json`,
+  `adherence/pilot-events.jsonl`, `gates/pilot/`). Acceptance A19/A20 covered by
+  `adherence_pilot_test.go` and `TestReconcileAdherenceChain_gotoClearsCompletedWithUnresolvedFinding`.
+  Final planned slice of the adherence improvement plan (Stages G–L).
+
+- **Checklist adherence Stage K — reconciliation report ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  Go `adherence_reconcile.go` implements read-only `RECONCILE_ADHERENCE_CHAIN`:
+  loads `agent-adherence-event.v1` JSONL, validates correlation fields for all
+  six event classes, emits deterministic finding codes (`rendered_without_acknowledgment`,
+  `acknowledged_without_attempt`, `attempt_without_verified_outcome`,
+  `completed_with_unresolved_evidence`, `gate_without_current_evidence`,
+  `status_change_without_verification_receipt`, `legacy_no_adherence_chain`) without
+  mutating Tracker or TIED YAML. Reuses `ResolveEvidenceRefs` and `StableHash`
+  (gate receipt parity). Tests: table-driven `adherence_reconcile_test.go` plus
+  six-class linked synthetic fixture (A19). Pilot and live hook capture shipped in Stages L and M;
+  operator MCP reconcile shipped in Stage N.
+
+- **Checklist adherence Stage J — gate/status durable receipts ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  MCP Stage J slice: `gate-receipt.ts` implements `PERSIST_GATE_DECISION_RECEIPT`
+  (atomic gate JSON with `tracker_hash`/`citdp_hash` under
+  `working/{REQ-TOKEN}/gates/` plus `gate_decided` ledger row); `adherence-ledger.ts`
+  adds `appendGateDecided` and `appendStatusMutated`; `verify.ts` wires
+  `PERSIST_STATUS_MUTATION_RECEIPT` on `tied_verify` dry_run/apply with fail-closed
+  `missing_gate_receipt_ref`. Acceptance A17/A18 covered by
+  `gate-receipt.test.ts` and `verify.test.ts`.
+
+- **Checklist adherence Stage I — tracker hardening ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  closes residual producer test debt: `request_token` mismatch on
+  `ValidateTrackerIdentity`/`EnsureTracker`; `not_applicable` and `waived`
+  writer apply tests; `clearCloseOutGateSummaries` on goto invalidation;
+  composition test with `fake_tracker_goto_agent.rb` proving tracker-mode goto
+  calls `InvalidateTrackerDownstream`.
+
+- **Checklist adherence Stage H — evidence ref resolution ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  agentstream Stage H slice: `evidence_resolve.go` runs `ResolveEvidenceRefs` after
+  receipt binding and before Tracker write (A16); rejects generic prose, missing
+  files, and invalid manifests; `AppendOutcomeVerified` emits `outcome_verified`
+  ledger rows with artifact hashes. Wired in `main.go` via
+  `ApplyReceiptWithEvidenceResolution`. Tests: `evidence_resolve_test.go`,
+  `adherence_ledger_test.go` (`AppendOutcomeVerified`),
+  `tracker_composition_test.go` (composition with temp file + manifest fixture).
+  CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-h`.
+  **Deferred:** inline `command_evidence` JSON refs; TS-side duplicate resolution (Option A).
+
+- **Checklist adherence Stage G — instruction binding ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  agentstream Stage G slice: `adherence_ledger.go` emits `instruction_rendered`
+  JSONL rows before subprocess; `executor.RunResult.FinalText` excludes thinking
+  stream (A14); receipt binding validates nonce/hash/request_token/run_id before
+  Tracker write (A15). CLI `--adherence-ledger` wired in `main.go`/`config.go`.
+  Tests: `adherence_ledger_test.go`, `executor_binding_test.go`,
+  `tracker_receipt_test.go`, `tracker_composition_test.go`. Expanded
+  `docs/checklist-adherence-improvement-plan.md` evidence model (§9–§10) and
+  Stages G–L sequence; CITDP `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-g`.
+  **Deferred:** inline `command_evidence` JSON refs; TS-side duplicate resolution (Option A).
+
+- **Checklist gate close-out enforcement ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  restored the authoritative `tied_checklist_gate_validate` MCP surface and completed
+  file-backed verification/close-out inquiry evidence with phase-bound activation pairing
+  (distinct run_ids and gate receipts per phase), tracker dispositions, and fail-closed
+  provenance checks. The remediation adds stable diagnostics for sparse or synthetic
+  Trackers, incomplete provenance, unresolved findings, unproven command success, stale
+  evidence, invalid waivers, and dirty close-out trees; validates the A1–A18 acceptance
+  matrix and replays 15/15 controlled evidence-corpus cases. Retained remediation tests:
+  20 tests across acceptance matrix and fixture corpus regression (2-suite command).
+  Verification and close_out checklist gates allowed; close_out adversarial inquiry is
+  advisory `status: warn` with `verdict: PASS` (non-blocking). Proof boundary remains
+  UI-free: A12, A15, and A17 are unit-only, macOS UI visibility is not established, and
+  `REQ-LISTENING_PORT_REPORT` remains out of scope.
+
+- **Authoritative Tracker writer ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** —
+  agentstream materializes state-only `checklist-tracker.v1` Authoritative Trackers,
+  requires strict per-turn completion receipts before advancing checklist Turns,
+  atomically merges disposition evidence via `ApplyTrackerDisposition`, invalidates
+  downstream rows on loop-back, and composes with the existing shared
+  `tied_checklist_gate_validate` / `tied_verify` boundary without a second gate
+  evaluator. Go modules: `tracker.go`, `tracker_writer.go`, `tracker_receipt.go`;
+  composition tests in `tracker_composition_test.go`; TypeScript fixtures consume
+  `gate-writer-minimal-tracker.yaml`. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer`.
+
+- **Build-plan 6 optional hygiene (2026-08-24)** — Closes the outstanding-work prioritized plan
+  sequence (build-plans 1–6). F4 automated YAML/Markdown adversarial task marker parity test
+  (`checklist-yaml-md-parity.test.ts`, 19 cases); canonical `npm test` runner documented in
+  `mcp-server/README.md` (460 tests; Bun full-suite limitation noted); P2 Go adapter and H5 header
+  doc sync; G6 post-rebuild MCP tool-catalog smoke (`g6-mcp-reload-smoke.sh`, 66 tools); G2 live
+  stdd-repo Go Mode B close_out dogfood (`g2-dogfood/replay-g2-stdd-dogfood.sh`, integrated gate
+  allowed); REQ `criterion_id` fields and IMPL dogfood `adversarial_inquiry` spec for Mode B on the
+  methodology repo.
+
+- **Client YAML styling gates (Slice 1 + Slice 2)** —
+  `[REQ-TIED_YAML_STYLE_CONFIGURATION]` / `[ARCH-TIED_YAML_STYLE_RESOLUTION]` /
+  `[IMPL-TIED_YAML_STYLE_RESOLVER]`: checklist `sub-client-yaml-styling` governs
+  optional `client_formatter` presentation after baseline canonical writes with
+  post-style evidence at verification-gate, sync-tied-stack, and traceable-commit;
+  executable fail-closed hook runner (`yaml-client-formatter.ts`) with path guards,
+  `yaml_semantic_compare` acceptance, 12-case fixture matrix, and MCP
+  `tied_client_yaml_styling_apply`. CITDP: `CITDP-REQ-TIED_YAML_STYLING_GATES`.
+
+- **Native Go Mode B project-input adapter (Slice G2)** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[IMPL-TIED_ADVERSARIAL_INQUIRY]` /
+  `[ARCH-TIED_ADVERSARIAL_INQUIRY]`: Mode B dispatch accepts Go `_test.go` and
+  production `.go` paths with realpath confinement; `PARSE_GO_TEST_EVIDENCE`
+  normalizes read-only Go test evidence; MCP `runProjectInquiry` forwards
+  activation for checklist pairing. Fixture:
+  `mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/`; composition test
+  proves inquiry → collect → gate at integrated verification depth.
+  `docs/adversarial-inquiry-adoption.md` documents Go Mode B operator sequence.
+  CITDP: `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG2`.
+
+- **Minimal waiver warn diagnostic (Batch 2 Slice A3)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  `validateMinimalWaiver` / `VALIDATE_MINIMAL_WAIVER` emits warn-only
+  `minimal_depth_missing_waiver` when `eligibility_triggers_matched` is
+  non-empty, `depth_tier` is `minimal`, and `integrated_waiver` is incomplete;
+  advisory `gate_policy` does not block. CITDP field
+  `eligibility_triggers_matched` documented in template and `citdp-policy.md`.
+  CITDP: `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3`.
+
+- **Strict-approved live client pilots (Slice S)** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]`: client `1787416567` / `REQ-VOLUMESTATS-CLI`
+  pilot runbook at
+  `working/client-1787416567-strict-pilot/replay-strict-approved-pilot.sh`
+  records strict-candidate → strict-approved promotion with sponsor human
+  approval, negative controls, and `blocking: true` gate-result evidence;
+  methodology integrated activation gates for `REQ-TIED_ADVERSARIAL_INQUIRY`
+  with phase-scoped artifacts. CITDP:
+  `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS`. Activation recommendation §P2
+  updated.
+
+- **Record-aware YAML canonicalization** — `[REQ-TIED_YAML_CANONICALIZATION]` / `[ARCH-TIED_YAML_CANONICAL_PROFILE]` / `[IMPL-TIED_YAML_CANONICALIZER]`: recognized record lists (`satisfaction_criteria`, `validation_criteria`, `alternatives_considered`, `files`, `functions`, `risks`) now sort complete mapping records by configured stable fields in both TypeScript default lint and Ruby `--sort-lists` (whole-block sorting preserves optional fields), while heterogeneous lists use tier-0/tier-1 ordering and workflow `steps` lists retain document order. `yaml_format` metadata adds `record_list_rule`; `yaml_semantic_compare` accepts record-list reorder via fingerprint multiset compare. Expanded fixtures cover registry fields, shorthand/mixed records, and heterogeneous checklist inputs. First bulk lint after upgrade will reorder registered record lists deterministically.
+
+- **1787507684 integrated activation replay script** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` /
+  `[REQ-MCP_USAGE_METRICS]`: operator runbook
+  `working/client-1787507684-activation-audit/replay-integrated-activation.sh`
+  re-runs three-phase inquiry → collect → gate for client 1787507684 /
+  REQ-ROOTJOBS using shipped Mode A builder and `tied-cli.sh` (`--dry-run`,
+  `--check`). Wire `test/tied-cli-metrics-client.test.cjs` into `npm test`.
+  H5 live pilot and `findings-report.yaml` update remain operator-owned.
+  Working CITDP: `working/client-1787507684-activation-audit/CITDP-replay-script.yaml`.
+
+- **Prompt-type and checklist alignment (Slice A)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[REQ-TIED_ADVERSARIAL_INQUIRY]` /
+  `[REQ-PROMPT_TYPE_SUBAGENT]`: block silent `integrated_waiver` on eligibility
+  triggers at `risk-assessment`; expand Tracker `operator_evidence` template
+  with phase subdirs and `tied_checklist_activation_collect`; require
+  build-plan/plan-close-out to fail handoff when integrated-depth gates return
+  `allowed: false`. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA`.
+
+- **Go / non-Ruby Mode A builder (Slice G)** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]` /
+  `[IMPL-TIED_FILES]`: `scripts/build_adversarial_inquiry_from_tied.rb` emits
+  normalized graph/fidelity from TIED tokens, declared test/production paths,
+  and optional `build-config.yaml`; `--emit-mode-a` pipes through the existing
+  Mode A envelope builder. Reference fixture:
+  `mcp-server/test/fixtures/adversarial-inquiry-go-rootjobs/` (1787507684
+  REQ-ROOTJOBS pilot). Native Go Mode B adapter remains deferred. CITDP:
+  `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG`.
+
+- **Metrics client attribution and phase-aware analyzer (Slice M)** —
+  `[REQ-MCP_USAGE_METRICS]` / `[IMPL-MCP_USAGE_METRICS]` /
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]`: `tied-cli.sh` resolves
+  `TIED_MCP_METRICS_CLIENT` from env, `--client`, or `/dev/test/{id}`
+  auto-detect from JSON `project_root`; `analyze_tied_mcp_metrics.rb`
+  reports per-phase artifact completeness, `phases_complete`, and
+  `integrated_activation_complete` while keeping root projection as a
+  convenience field only. CITDP: `CITDP-REQ-MCP_USAGE_METRICS-sliceM`.
+
+- **Activation collect MCP (Batch 2 Slice 2)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  `tied_checklist_activation_collect` read-only MCP tool and `collectChecklistActivation`
+  assemble `{ receipt, artifacts, expected }` from
+  `working/{REQ}/adversarial-inquiry/phase-{phase}/`; fails closed on missing
+  phase dir, artifact absence, or `run_id` provenance mismatch; optional
+  `metrics_path` supports inquiry metrics lookup without blocking success.
+  Runbook: `tied/vocab/tied-yaml-mcp.md`; operator sequence:
+  `docs/adversarial-inquiry-adoption.md`. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2`.
+
+- **CITDP depth upgrade path (Slice U)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  `validateCitdpOpenRecord` separates open-record persistence from progression
+  gate pairing; `citdp_record_write` allows `integrated` depth with activation
+  omitted pre-inquiry, requires `prior_depth_tier: minimal` when upgrading from
+  on-disk minimal, preserves `prior_depth_tier` on overwrite, and rejects
+  partial supplied activation; verification/close_out gates unchanged. Docs:
+  `docs/adversarial-inquiry-adoption.md` § Depth upgrade path. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceU`.
+
+- **Phase-scoped adversarial-inquiry artifact persistence (Slice P)** —
+  `[REQ-TIED_ADVERSARIAL_INQUIRY]` / `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]` /
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`: when `activation.phase` is present,
+  `persistWorkingArtifacts` writes authoritative artifacts under
+  `working/{REQ}/adversarial-inquiry/phase-{phase}/`, projects latest snapshots
+  to the root for close-out convenience only, and `validateActivationPairing`
+  rejects cross-phase and root-projection artifact paths. CITDP:
+  `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceP`.
+
+- **Checklist gate validator hotfixes (Batch 2 Slice 0)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  reject placeholder waiver values (`~`, empty, null); derive
+  `activation.expected` from a complete receipt when omitted; require minimal
+  sub-stub disposition (`not_applicable` or `waived`, not `pending`); enforce
+  integrated parent–child slug consistency when parent steps are completed while
+  `sub-adversarial-inquiry-pass` remains pending. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice0`.
+
+- **Integrated activation audit findings** — records the minimal-tier evidence,
+  checklist-integrity findings, and operator-friction follow-ups for client
+  `1787507684`; makes no integrated activation claim.
+
+- **Integrated activation checklist enforcement (Batch 2 Slice 1)** —
+  `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  `validateChecklistGate` now auto-derives phase-aware Tracker slug sets at
+  integrated depth (and `strict_candidate` at verification/close_out), validates
+  `completion_criteria.activation` on gate read, rejects silent depth downgrades
+  without waiver, binds inquiry receipts to gate phase, and requires paired
+  activation unless a valid close-out inquiry waiver applies. CITDP:
+  `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2`.
+
+- **Machine-enforced checklist evidence gates** — `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` /
+  `[ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT]` / `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`:
+  shared pure `validateChecklistGate` for Tracker dispositions, CITDP adversarial
+  depth, and identity-bound activation pairing; MCP `tied_checklist_gate_validate`;
+  fail-closed integration in `tied_verify`, feature lifecycle close-out, CITDP
+  writer shape validation, prompt-type skills/agents, and agentstream checklist
+  rendering. CITDP: `CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT`.
+
+- **Evidence chain statistics report v2** — `--report-version v2` emits
+  `evidence-chain-statistics-report.v2` with **denominator fingerprint**
+  sub-cohorts inside each **client cohort** (`[REQ-EVIDENCE_CHAIN_REPORT]`).
+  Client 1787461685 bare/reprofile golden fixture yields two sub-cohorts under
+  the same `compatibility_key`; v1 remains the default and byte-stable.
+
+- **Profile metrics opt-in field** — `operational.metrics_opt_in` on generated
+  profiles now reflects `isMetricsEnabled()` (`TIED_MCP_COLLECT_METRICS`) at
+  generation time (`[REQ-EVIDENCE_CHAIN_PROFILE]`).
+
+- **Dormant evidence-chain adapter contracts (Phase 4)** —
+  `[IMPL-EVIDENCE_CHAIN_PROFILE]` catalogs `COLLECT_FILE_INVENTORY` and
+  `COLLECT_VOCAB_DRIFT` as dormant pseudo-code contracts with
+  `pseudo_code_structure` proof boundary only; no orchestrator wiring,
+  production symbols, tests, or profile activation. CITDP:
+  `CITDP-REQ-DEFERRED_STATS_ROADMAP-adapters`.
+
+- **Shared TIED project identity (slice 1)** — `[ARCH-TIED_PROJECT_IDENTITY]` /
+  `[IMPL-TIED_PROJECT_IDENTITY]` (deferred-stats roadmap slice 1 via
+  `CITDP-REQ-DEFERRED_STATS_ROADMAP-identity`); env-only `TIED_MCP_PROJECT_ID`
+  uses trim, validation, and hashing, with path fallback when unset. Metrics
+  JSONL and evidence-chain profiles now share opaque `project_id` values and
+  expose `identity_source`; raw paths and configured IDs remain excluded.
+
+- **Evidence chain statistics report** — TIED-source offline CLI
+  `mcp-server/src/cli/evidence-chain-report.ts` consumes an
+  `evidence-chain-report-inputs.v1` manifest and already-generated
+  `evidence-chain-profile.v1` artifacts, partitions **client cohorts** by
+  `schema_version|profile_depth`, and writes count-only
+  `evidence-chain-statistics-report.v1` YAML plus a deterministic Markdown
+  projection (`[REQ-EVIDENCE_CHAIN_REPORT]`). `strict` writes nothing on
+  rejection (exit 2); `partial` excludes and continues (exit 1 if none
+  accepted). PROFILE generator tokens and `tied/docs/evidence-chain-profile.md`
+  are now inherited via `templates/` and `DOCS_TO_COPY`; REPORT tokens stay
+  source-repo-only.
+
+### Fixed
+
+- **Bootstrap inherited methodology detail-file integrity** —
+  `[REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY]` now promotes the required feedback
+  detail files, verifies inherited detail artifacts during `copy_files.sh`,
+  and treats sentinel paths as absent across the MCP path resolver and detail
+  loader. Unit, composition, bootstrap-smoke, and TIED consistency checks pass.
+
+### Changed
+
+- **Evidence chain attach-provenance wiring** — Checklist `sub-evidence-chain-profile`
+  now requires quality manifest collection and `manifest_reference` attach before
+  profiling; `verification-gate` clarifies attach vs run-only semantics.
+  MCP `evidence_chain_profile_generate` accepts optional
+  `invoke_structural_validators` (default `false`) to populate observed
+  structural rows. Operator docs in `tied/docs/evidence-chain-profile.md`;
+  **attach provenance** recorded in `tied/vocab/quality-assurance.md`.
+  Close-out CITDP: `tied/citdp/CITDP-REQ-EVIDENCE_CHAIN_PROFILE-wiring.yaml`;
+  pilot artifacts under `working/evidence-chain/`.
+
+- **Evidence-chain profile and reporting hardening** — Profile graph counts now
+  use selected TIED dependency graphs, omitted inventory/vocabulary checks are
+  explicitly measured as unknown or not measured, adapter failures are
+  structured, and human-research evidence is retained. Report reruns clear
+  stale generated outputs, render validation errors, and surface denominator
+  incompatibilities as residual risks. The metrics path now uses recursive
+  signature canonicalization, hashed project identity, redacted errors, and
+  schema-aware deterministic offline analysis.
+
+- **Bounded MCP metrics signature aggregation** — The offline Ruby analyzer now
+  emits deterministic top-50 rows with explicit `signature_coverage`, marks
+  aggregate results approximate after per-file truncation or visible candidate
+  overflow, selects stable canonical samples regardless of input order, and
+  sums per-file `schema_errors` without conflating parse failures
+  (`[REQ-MCP_USAGE_METRICS]` / `[IMPL-MCP_USAGE_METRICS]`). CITDP:
+  `CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation`.
+
+- **Adversarial inquiry activation close-out** — `[IMPL-TIED_FILES]` now records
+  fail-closed inheritance verification, paired inquiry metrics and artifact
+  checks, with Ruby smoke and bootstrap E2E coverage. The primary CITDP records
+  integrated depth and request-scoped activation evidence; remaining H5/native
+  Go adapter/operator smoke work stays deferred.
+
+- **Adversarial inquiry checklist composition (Batches 5–6)** — Extended
+  `[PROC-AGENT_REQ_CHECKLIST]` with §4 adversarial task text on all parent-plan
+  slugs, mandatory `sub-adversarial-inquiry-pass`, bounded assurance rows (Batch 5),
+  strict-eligibility warn-only branch and pilot CITDP evidence (Batch 6), adoption
+  doc checklist-integration table, vocabulary subsections, agentstream GOTO hints,
+  and optional `adversarial_inquiry_scope` preload field. Go slug coverage tests
+  and extended TypeScript integration tests gate parity. Checklist-composition closes
+  via IMPL + tests + CITDP extend; no sixth REQ satisfaction criterion added.
+
+- **Layered vocabulary ownership** — `[REQ-TIED_VOCABULARY_OWNERSHIP]`,
+  `[ARCH-TIED_VOCABULARY_LAYERS]`, and
+  `[IMPL-TIED_VOCABULARY_REFRESH]` now keep refreshable methodology glossaries
+  under `tied/methodology/vocab/`, preserve client-owned `tied/vocab/` handoffs,
+  and provide report-first legacy migration plus independent layer validation.
+  Close-out evidence is recorded in
+  [`tied/citdp/CITDP-REQ-TIED_VOCABULARY_OWNERSHIP.yaml`](tied/citdp/CITDP-REQ-TIED_VOCABULARY_OWNERSHIP.yaml).
+
+- **Source-only Prompt Composer vocabulary** — `copy_files.sh` excludes
+  `tied/vocab/prompt-composer.md` from client seed and merge operations, and
+  filters source-only references from client-facing vocabulary indexes and
+  prompt-type documentation. Bootstrap E2E coverage records the boundary.
+
+- **Vocabulary validation** — Added the structural
+  `scripts/validate_vocab_index.rb` gate to the process and agent checklist
+  VALIDATE touchpoint, covering glossary structure, catalog membership, links,
+  and alphabetical-index definitions.
+
+- **Feature orchestration onboarding offline handoff** — `[IMPL-FEAT_ONBOARDING_COMMANDS]` now merges local-default diagnostics with an explicit `using-tied-without-mcp.md` corrective path when `TIED_MCP_BIN` is missing, treats actionable offline fallback as exit code 0 for demo/operator flows, and documents the behavior in onboarding pseudo-code and unit tests.
+
+- **Prompt-type client distribution** — `copy_files.sh` installs only the canonical prompt-type **skills** into client `.cursor/skills/`. Prompt-type Task wrappers under `.cursor/agents/` remain TIED-source development artifacts for static contract tests; they are no longer copied into client projects alongside skills.
+
+- **Prompt-type payloads** — `[REQ-PROMPT_TYPE_GLOBAL_SKILLS]` / `[REQ-PROMPT_TYPE_SUBAGENT]` skills and agents consume an **invocation remainder** (text after the skill or agent name) and, for `refine-plan` / `build-plan`, a **linked plan**. They no longer use `:::` as a payload delimiter or emit composer “Prepare to process…” headers.
+
+### Added
+
+- **Evidence chain profiles** — `[REQ-EVIDENCE_CHAIN_PROFILE]` adds the
+  read-only `evidence-chain-profile.v1` generator for `integrated` and
+  `human_research` profile depths, fail-closed wrong TIED base path handling,
+  and explicit no finding-ledger append/case promotion behavior.
+
+- **Adversarial inquiry evidence tooling** — `[REQ-TIED_ADVERSARIAL_INQUIRY]`,
+  `[ARCH-TIED_ADVERSARIAL_INQUIRY]`, `[IMPL-TIED_ADVERSARIAL_INQUIRY]`, and
+  `[IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST]` add deterministic read-only
+  obligation mapping, bidirectional fidelity checks, bounded Ruby Minitest
+  evidence, review-gated findings, scoped strict eligibility, bounded working
+  artifacts under `working/{REQ-TOKEN}/adversarial-inquiry/`, agentstream
+  checklist rendering, and MCP integration through
+  `tied_adversarial_inquiry_run`. Mode B adds an explicit project-input
+  adapter (`project-scope-loader`, `project-orchestrator`) that loads declared
+  TIED records and source paths read-only before delegating to the normalized
+  core. CITDP:
+  [`tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml`](tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml),
+  [`tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml`](tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml),
+  [`tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_MODE_B.yaml`](tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_MODE_B.yaml).
+  Vocab: [`tied/vocab/fidelity-research.md`](tied/vocab/fidelity-research.md).
+
+- **Client orchestration publication (Option A) via `copy_files.sh`** — `[REQ-FEAT_ADOPTION_GUIDANCE]`, `[REQ-FEAT_ONBOARDING_COMMANDS]`, `[REQ-FEAT_ORCHESTRATION_SURFACE]`, `[REQ-TIED_SETUP]`, `[IMPL-TIED_FILES]`, and `[IMPL-FEAT_ONBOARDING_COMMANDS]` deliver the client distribution layer for feature orchestration onboarding. Artifacts installed copy-if-missing: `tied/constitution.example.yaml`; [`tied/docs/tied-feature-onboarding.md`](tied/docs/tied-feature-onboarding.md) (relocated from `docs/tied-feature-onboarding.md`); `tools/bundled-tied-yaml-skill/scripts/tied.sh` and `feature-orchestrator.sh` (baked `TIED_REPO_ROOT`); additive vocabulary merge for [`tied/vocab/feature-orchestration.md`](tied/vocab/feature-orchestration.md). Bootstrap gate: fail-closed `verify_feature_orchestration_methodology` with E2E coverage in `mcp-server/src/e2e/bootstrap-and-load.test.ts`. Explicit non-goals: no Batch 0–6 FEAT token promotion into methodology YAML; no npm publish; no git/worktree mutation. CITDP: [`tied/citdp/CITDP-REQ-FEAT_ONBOARDING_PUBLICATION.yaml`](tied/citdp/CITDP-REQ-FEAT_ONBOARDING_PUBLICATION.yaml). Entry point: [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md).
+
+- **Staged feature orchestration demo** — [`docs/tied-feature-demo.md`](docs/tied-feature-demo.md) provides a disposable, copy-paste walkthrough for onboarding, lifecycle, views, migration preview, research/feedback boundaries, and repository TIED validation without mutating project YAML.
+
+- **Adoption documentation** — Added the value proposition matrix,
+  certified-workflows thesis, and extended feature-orchestration demo.
+
+- **Feature smoke helpers** — Added onboarding and lifecycle checks to
+  `scripts/build-commands.sh`.
+
+- **Feature orchestration foundation through onboarding (batches 0–6)** — Feature
+  manifests, lifecycle and readiness gates, clarifications and constitution,
+  task scheduling and agentstream adapter, generated views, orchestration CLI/MCP,
+  research and feedback boundaries, onboarding delegates, offline compatibility,
+  and migration preview/apply are implemented in `mcp-server/src/feature-orchestration/`
+  with full TIED traceability (CITDP-FEAT-ORCH-BATCH-0..6), adoption docs, and
+  validation evidence. Git integration remains explicitly deferred.
+
+- **Greenfield TIED outreach** — `docs/tied-greenfield-reddit-post.md` provided a first-day workflow walkthrough; the retired draft is retained only in repository history.
+
+- **Prompt-type Task subagents** — `[REQ-PROMPT_TYPE_SUBAGENT]` / `[ARCH-PROMPT_TYPE_SUBAGENT]` / `[IMPL-PROMPT_TYPE_SUBAGENT]` provide one explicit-only foreground Cursor Task wrapper per leaf prompt type at `.cursor/agents/<prompt-type>.md` in the TIED source repository, plus the `plan-refine-build` sequence orchestrator that Task-launches `plan-new-feature`, then `refine-plan`, then `build-plan`. Implementing and close-out wrappers are writable; `question` and `other` are readonly.
+
+- **Global prompt-type skills** — `[REQ-PROMPT_TYPE_GLOBAL_SKILLS]` / `[ARCH-PROMPT_TYPE_GLOBAL_SKILLS]` / `[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]` add a git-tracked canonical bundle under `tools/bundled-prompt-type-skills/` (13 explicit-only leaf skills, `prompt-type-router`, and 14 `prompt-shared` references) installed into client `.cursor/skills/` by `copy_files.sh` while preserving unrelated skills and existing MCP configuration. Added static contract and bootstrap integration tests in `mcp-server/src/e2e/prompt-type-skills.test.ts`, distribution docs in [`tied/docs/prompt-type-skills.md`](tied/docs/prompt-type-skills.md), vocabulary in [`tied/vocab/prompt-composer.md`](tied/vocab/prompt-composer.md), and CITDP [`tied/citdp/CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml`](tied/citdp/CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml).
+
+- **Deterministic TIED YAML canonicalization** — `[REQ-TIED_YAML_CANONICALIZATION]` / `[ARCH-TIED_YAML_CANONICAL_PROFILE]` / `[IMPL-TIED_YAML_CANONICALIZER]` now provide one typed `tied-yaml-canonical-v1` profile for MCP writers and compatibility frontends, with ordered-list exceptions, opaque-text boundaries, atomic writes, and `yaml_format` metadata. Added canonicalizer unit coverage, UI-free MCP composition coverage, and preserved the existing non-UI CLI compatibility path.
+
+- **TIED 3.0.0 vocabulary layer** — Domain vocabulary is now an explicit agent-control layer in the requirement implementation checklist. `RESOLVE`, `PRELOAD`, `RECORD`, and `VALIDATE` guide conversation, naming, discovery, artifact alignment, and commit readiness alongside TIED, CITDP, LEAP, and TDD.
+
+- **Methodology migration hardening** — `[REQ-TIED_SETUP]` / `[ARCH-TIED_STRUCTURE]` / `[IMPL-TIED_FILES]` now define and verify non-destructive inherited-snapshot refresh, project YAML preservation, additive `--merge-vocab`, promoted quality detail and token-commented pseudo-code sidecars, and stale-file pruning. Added disposable-client E2E coverage and completed the Layer B pseudo-code gate.
+
+- **Non-destructive MCP configuration** — `copy_files.sh` initializes `.cursor/mcp.json` only when absent and preserves an existing file byte-for-byte, including custom settings or a missing `tied-yaml` entry. The bootstrap E2E fixture and `[REQ-TIED_SETUP]` / `[ARCH-TIED_STRUCTURE]` / `[IMPL-TIED_FILES]` records cover the contract.
+
+- **Risk-triggered quality evidence** — `[REQ-QUALITY_ASSURANCE_EVIDENCE]` / `[ARCH-QUALITY_ASSURANCE_PROFILES]` now have dedicated IMPL ownership for manifest generation, bounded command execution, command-to-manifest collection, security, Layer B pseudo-code, binding inventory, and test adequacy validation. Added seven MCP validators (`test_adequacy_validate`, `quality_evidence_manifest_build`, `quality_evidence_collect`, `quality_security_profile_validate`, `quality_evidence_collect_manifest`, `pseudocode_validate`, and `binding_inventory_validate`), UI-free composition coverage, and an HTTP/SQLite webhook pilot covering authentication, retries, persistence failures, bounded batches, oversized input, and competing claims. Added the quality-assurance vocabulary and [`tied/docs/quality-assurance-commands.md`](tied/docs/quality-assurance-commands.md), [`tied/docs/quality-assurance-pilot.md`](tied/docs/quality-assurance-pilot.md), and [`tied/docs/quality-evidence-manifest.md`](tied/docs/quality-evidence-manifest.md). Proof boundaries and evidence provenance are recorded in [`tied/citdp/CITDP-REQ-QUALITY_ASSURANCE_EVIDENCE.yaml`](tied/citdp/CITDP-REQ-QUALITY_ASSURANCE_EVIDENCE.yaml).
+
+- **TIED fidelity research first slice** — `[REQ-TIED_FIDELITY_RESEARCH]` / `[ARCH-TIED_FIDELITY_RESEARCH]` / `[IMPL-TIED_FIDELITY_RESEARCH]` add read-only one-project, one-IMPL/module analysis with eleven token-commented blocks, validated modules, `RUN_FIRST_SLICE` composition, concrete pilot wiring, append-only findings, specification-state classification, proof-bounded structural/fidelity/binding adapters, adjudicated case promotion, and deterministic rerun duplicate linking. Methodology seeds via `copy_files.sh`; pilot integration coverage is in `mcp-server/src/fidelity-research/pilot.test.ts`. CITDP: [`tied/citdp/CITDP-REQ-TIED_FIDELITY_RESEARCH.yaml`](tied/citdp/CITDP-REQ-TIED_FIDELITY_RESEARCH.yaml). Vocab: [`tied/vocab/fidelity-research.md`](tied/vocab/fidelity-research.md).
+
+
+- **Composition binding validation** — [REQ-MODULE_VALIDATION] / [ARCH-MODULE_VALIDATION] / [IMPL-MODULE_VALIDATION] elevate a six-phase lifecycle with **COMPOSITION_BINDING_VALIDATION**: binding inventory, UI-free composition evidence before integration, E2E only for named platform constraints. Guide: [`tied/docs/composition-coverage.md`](tied/docs/composition-coverage.md). Vocab: **binding inventory**, **composition evidence**. Agentstream composition coverage tests under `tools/agentstream/checklist/` and `pipeline/`. CITDP: [`tied/citdp/CITDP-REQ-MODULE_VALIDATION-COMPOSITION.yaml`](tied/citdp/CITDP-REQ-MODULE_VALIDATION-COMPOSITION.yaml).
+
+- **IMPL contract precision grammar** — Language-agnostic contract fields **PRE**, **POST**, **EFFECTS**, **FAILURE_MODES**, **DATA_TRANSITION**, **TERMINATION** (CONTROL remains env/flags/ordering). Required for **new/changed** Active procedure blocks; Template stubs stay minimal; untouched legacy Active blocks may use Layer B N/A `pre-contract-grammar` until next edit. Canonical docs: [`tied/docs/implementation-decisions.md`](tied/docs/implementation-decisions.md), [`templates/impl-essence-pseudocode-template.md`](templates/impl-essence-pseudocode-template.md), [`tied/vocab/pseudocode-and-citdp.md`](tied/vocab/pseudocode-and-citdp.md). Enforcement: Layer B **SHAPE-003..006** + tightened CONTRACT/COVER/minimum_gating_rules in [`tied/docs/pseudocode-validation-checklist.yaml`](tied/docs/pseudocode-validation-checklist.yaml); Phase B/D and agent checklist gates in [`tied/docs/processes.md`](tied/docs/processes.md), [`templates/processes.md`](templates/processes.md), [`tied/docs/agent-req-implementation-checklist.yaml`](tied/docs/agent-req-implementation-checklist.yaml) / `.md`. CITDP: [`tied/citdp/CITDP-IMPL-CONTRACT-PRECISION.yaml`](tied/citdp/CITDP-IMPL-CONTRACT-PRECISION.yaml). No MCP structural parser in this change.
+
+- **Netscape Bookmark HTML format note** — Reference for the de facto `NETSCAPE-Bookmark-file-1` export/import shape: [`docs/Netscape-Bookmark-HTML-Format.md`](docs/Netscape-Bookmark-HTML-Format.md) (same commit as contract precision; not wired into agentstream/bookmark IMPLs here).
+
+- **Opt-in MCP usage metrics** — `[REQ-MCP_USAGE_METRICS]` / `[ARCH-MCP_USAGE_METRICS]` / `[IMPL-MCP_USAGE_METRICS]`: env-gated JSONL per MCP tool call (`TIED_MCP_COLLECT_METRICS`), sanitized `args_summary` / `args_signature`, registration-time `wrapToolHandler`, **tied-cli** client tag, offline [`scripts/analyze_tied_mcp_metrics.rb`](scripts/analyze_tied_mcp_metrics.rb). CITDP: [`tied/citdp/CITDP-REQ-MCP_USAGE_METRICS.yaml`](tied/citdp/CITDP-REQ-MCP_USAGE_METRICS.yaml). Vocab: [`tied/vocab/tied-yaml-mcp.md`](tied/vocab/tied-yaml-mcp.md).
+
+- **Bootstrap metrics configuration** — `copy_files.sh` adds `TIED_MCP_COLLECT_METRICS=1` and a `TIED_MCP_METRICS_CLIENT` label to newly created `.cursor/mcp.json` files when opt-in collection is enabled, using the project basename when no explicit label is provided; existing MCP configurations remain byte-for-byte unchanged.
+
+- **Token rename extra substitution targets** — `tied_token_rename` accepts `extra_globs` / `extra_extensions` anchored at **client project root** (`getClientProjectRoot()`), beyond default TIED rename scope.
+
+- **Semantic YAML compare tooling** — [`scripts/yaml_semantic_compare.rb`](scripts/yaml_semantic_compare.rb) (value compare; post-sort validation) and [`scripts/compare_yaml_dirs.rb`](scripts/compare_yaml_dirs.rb) (directory CLI). [`scripts/yaml_list_sorter.rb`](scripts/yaml_list_sorter.rb) rejects sorts that fail semantic comparison.
+
+- **Vocabulary routing index and client development index** — [`tied/vocab/routing.md`](tied/vocab/routing.md) (~70-line bootstrap router); [`tied/docs/client-development-index.md`](tied/docs/client-development-index.md); outreach copies under [`docs/`](docs/) for vocabulary research / LEAP+CITDP narrative.
+
+### Changed
+
+- **Brownfield TIED outreach** — `docs/vocab-indices-and-tied-reddit-post.md` described adopting TIED in an existing codebase; the retired draft is retained only in repository history.
+
+- **Cursor MCP enable command** — documentation, skills, and the bootstrap E2E contract now use `agent mcp enable tied-yaml`; the legacy command is explicitly rejected by the contract test.
+
+- **Prompt-type wrapper metadata** — TIED-source `.cursor/agents/*.md` wrappers now use `model: inherit` and single-line frontmatter descriptions aligned with the bundled skills.
+
+- **Build-command metrics opt-in** — [`scripts/build-commands.sh`](scripts/build-commands.sh) exports `TIED_MCP_COLLECT_METRICS=1` for local bootstrap and test flows.
+
+- **YAML writer canonicalization** — `yaml_tool`, MCP writers, and `tied_token_rename` now share typed `tied-yaml-canonical-v1` output instead of the default double-quoted `yq` lint; `tied_yaml_format` exposes the profile and successful writes report `yaml_format`.
+
+- **Deterministic mixed-case YAML ordering** — Recursive map keys and eligible phrase lists now use case-insensitive-primary, locale-independent lexical ordering with the original value as a deterministic tie-breaker across TypeScript and Ruby compatibility paths.
+
+- **Repository YAML scalar-style enforcement** — `[REQ-TIED_YAML_STYLE_CONFIGURATION]` / `[ARCH-TIED_YAML_STYLE_RESOLUTION]` / `[IMPL-TIED_YAML_STYLE_RESOLVER]` add repository-over-global `wrapped`/`unwrapped` selection. `yaml_tool`, `--sort-lists`, `tied-cli.sh`, and MCP writers now use the same resolved policy; wrapped mode quotes strings only and preserves typed booleans, numbers, and nulls.
+
+- **`copy_files.sh` MCP behavior** — Existing `.cursor/mcp.json` files are no longer refreshed; bootstrap initializes the file only when absent and preserves existing configuration byte-for-byte. Clients that need new `tied-yaml` paths must update the MCP configuration explicitly or remove it before bootstrapping. CITDP: `CITDP-REQ-TIED_SETUP-VOCABULARY_LAYER`.
+
+- **yaml_list_sorter order-preserving keys** — Lists under map keys matching `order` / `*_order` / `order_*` / `*_order_*` (e.g. `recommended_validation_order`) keep document order; sibling non-order lists still sort. Unit coverage in [`scripts/yaml_list_sorter_test.rb`](scripts/yaml_list_sorter_test.rb). Checklist loader coerces quoted bools for `agentstream_new_session` after double-quoted scalar lint.
+
+- **Quiet unchanged YAML sorting output** — `yaml_list_sorter` and `yaml_tool --sort-lists` now omit unchanged paths from normal stdout while retaining summaries for modified paths and diagnostics for failures.
+
+- **YAML double-quoted scalar lint** — Default [`scripts/yaml_tool.sh`](scripts/yaml_tool.sh) / `lint_yaml` now runs `yq -i 'sort_keys(.. style="double")'` (one file per invocation): recursive key sort + double-quoted scalars. **Bool/int become string scalars on disk** (e.g. `e2e_only: "false"`). Bulk TIED YAML re-linted; MCP `tied_token_rename` pretty-print aligned; `[PROC-YAML_EDIT_LOOP]`, IMPL-TIED_FILES pseudocode (`CANONICALIZE_YAML_FILE` / `LINT_YAML_PATHS`), vocab, READMEs updated. CITDP: [`tied/citdp/CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT.yaml`](tied/citdp/CITDP-YAML_TOOL_DOUBLE_QUOTE_SORT.yaml). Client trees produce a large first-lint diff until re-canonicalized.
+
+- **`mcp-server/package-lock.json`** — Transitive lock refresh (`@modelcontextprotocol/sdk`, `@hono/node-server`, and related); no `package.json` change.
+
+- **Vocab routing index rename** — [`tied/vocab/domain-references-routing.md`](tied/vocab/routing.md) → [`tied/vocab/routing.md`](tied/vocab/routing.md) as the primary `tied/vocab/` directory entry for PRELOAD. Full catalog remains [`tied/vocab/domain-references.md`](tied/vocab/domain-references.md) (on-demand). Updated AGENTS.md, process/checklist docs, outreach mirrors, and `copy_files.sh` seed comment. Existing client trees keep the old filename until renamed locally (`copy_files.sh` never overwrites client vocab files).
+
+- **Pseudo-code validation — remove YAML profile deferral** — Deleted `tailoring.profiles` (`agent_req_checklist_pre_red` / `agent_req_checklist_post_test`) from [`tied/docs/pseudocode-validation-checklist.yaml`](tied/docs/pseudocode-validation-checklist.yaml). Pre-RED vs post-test gating is now documented in prose ([`pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md) § Validation layers; [`agent-req-implementation-checklist.yaml`](tied/docs/agent-req-implementation-checklist.yaml) caller contexts). Aligned: agent REQ checklist Markdown, [`processes.md`](tied/docs/processes.md) § `[PROC-PSEUDOCODE_VALIDATION]`, fidelity/retrofit agent prompts. Client trees that copied an older checklist retain profiles until methodology docs are refreshed manually (`copy_files.sh` does not overwrite existing files).
+
+- **Domain vocabulary three-touchpoint model** — [`tied/docs/agent-req-implementation-checklist.yaml`](tied/docs/agent-req-implementation-checklist.yaml) v1.7.0 formalizes mandatory vocab gates: **RESOLVE** at prompt intake (`translate-sponsor-intent`, `change-definition`); **PRELOAD** before reading TIED/docs/code (`session-bootstrap`, `impact-discovery`); **VALIDATE** before commit (`traceable-commit`). `sub-vocabulary-sync` gains PRELOAD and VALIDATE modes. Aligned: [`agent-req-implementation-checklist.md`](tied/docs/agent-req-implementation-checklist.md), [`processes.md`](tied/docs/processes.md) § `[PROC-VOCABULARY_INDEX]`, [`AGENTS.md`](AGENTS.md), [`ai-principles.md`](tied/docs/ai-principles.md), [`vocabulary-index-analysis-and-standards.md`](tied/docs/vocabulary-index-analysis-and-standards.md), [`domain-references.md`](tied/vocab/domain-references.md).
+
+This release (when tagged) will summarize work that **(a)** makes **`tied/docs/`** the canonical in-tree location for TIED guide and reference **`.md`** files, **(b)** has **`copy_files.sh`** copy guide/schema docs from **`tied/docs/`**, and **(c)** aligns **Go `agentstream`**, batch **shell** drivers, **AGENTS.md** / **preload** paths, and **IMPL-TIED** text with **`tied/agent-preload-contract.yaml`**, **`tied/docs/agent-req-implementation-checklist.yaml`**, and **`tied/docs/…`** entry points. Removed duplicate methodology files at the repo **root**, under **`tied/`**, and under **`docs/`** where they mirrored `tied/docs/`.
+
+### Removed
+
+- **Reddit outreach drafts** — Removed `docs/tied-greenfield-reddit-post.md` and
+  `docs/vocab-indices-and-tied-reddit-post.md`; current adoption guidance lives
+  in the feature demos, value proposition matrix, and certified-workflows thesis.
+
+- **`tied/docs/new-feature-process.md` and orphan `[PROC-NEW_FEATURE]`** — Superseded by **`[PROC-AGENT_REQ_CHECKLIST]`** ([`tied/docs/agent-req-implementation-checklist.md`](tied/docs/agent-req-implementation-checklist.md) + [`.yaml`](tied/docs/agent-req-implementation-checklist.yaml)) for the step-by-step procedure and [`tied/docs/methodology-diagrams.md`](tied/docs/methodology-diagrams.md) Diagrams 2/3/4 for the visual flow. **README.md**, **CONTRIBUTING.md**, and **`copy_files.sh`** references retargeted; historical CHANGELOG entries preserved.
+
+- **`tied/docs/impl-code-test-linkage.md`** and **`tied/docs/impl-essence-pseudocode-mcp-workflow.md`** — Bookmark stub files deleted. **`copy_files.sh`** no longer installs **`new-feature-process.md`** or legacy stub paths under **`DOCS_TO_COPY`** (including **`impl-pseudocode-block-comment-linkage.md`**). All narrative for three-way alignment, sidecar MCP/CLI mechanics, and block linkage stays in [`tied/docs/pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md).
+
+### Changed
+
+- **`scripts/yaml_list_sorter.rb`** — Qualifying list groups now sort at **2+** items (was 3+). Optional **`--sort-keys`** recursively alphabetizes sibling map keys at every indent level; forwarded by **`yaml_tool.sh --sort-lists --sort-keys`**. Vocabulary and **[PROC-YAML_EDIT_LOOP]** updated in **`tied/vocab/tied-methodology.md`** and **`tied/docs/processes.md`**.
+
+### Added
+
+- **`scripts/yaml_tool.sh`** — Combined YAML utility: default lint/pretty-print (`yq -i -P`, one file per invocation); `--sort-lists` runs **`scripts/yaml_list_sorter.rb`** on the same path set (`-F`, stdin, NUL-separated paths). **`scripts/lint_yaml.sh`** remains a lint-only backward-compatible wrapper. **`scripts/yaml_list_sorter_test.rb`** covers sorter and shell integration.
+
+- **Domain vocabulary index** — [`tied/vocab/`](tied/vocab/) corpus (nine topic glossaries + [`domain-references.md`](tied/vocab/domain-references.md) index), process token **`[PROC-VOCABULARY_INDEX]`**, checklist **`sub-vocabulary-sync`** / **`VOCAB_INDEX`**, and meta-standard [`tied/docs/vocabulary-index-analysis-and-standards.md`](tied/docs/vocabulary-index-analysis-and-standards.md) (includes STDD `tied/vocab/*.md` convention).
+
+- **Bootstrap: vocab seed and tied-cli TIED_REPO_ROOT** — **`copy_files.sh`** seeds **`tied/vocab/*.md`** when the client tree has no vocab files yet; installs the bundled skill from **`tools/bundled-tied-yaml-skill/`**; bakes **`TIED_REPO_ROOT`** into client **`.cursor/skills/tied-yaml/scripts/tied-cli.sh`** so **`TIED_MCP_BIN`** resolves when the TIED source repo differs from the client project.
+
+- **YAML list sort normalization** — Mechanical alphabetization of qualifying list groups (3+ items) across TIED index **`cross_references`** and similar lists via **`yaml_tool.sh --sort-lists`**.
+
+- **Block-lead traceability comments** — Go **`agentstream`** packages and tests use **`[IMPL-*] [ARCH-*] [REQ-*]`** plus **`How:`** lines aligned with IMPL pseudo-code sidecars ([`PROC-IMPL_PSEUDOCODE_TOKENS`]).
+
+- **Track C pseudo-code prompts** — [`tied/docs/impl-pseudocode-from-code-agent-prompt.md`](tied/docs/impl-pseudocode-from-code-agent-prompt.md) (retrofit sidecars from existing code/tests) and [`tied/docs/pseudocode-fidelity-audit-agent-prompt.md`](tied/docs/pseudocode-fidelity-audit-agent-prompt.md) (audit fidelity); **Track C** section in [`tied/docs/pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md).
+
+- **Pseudocode format doc, sidecar template, and author UX** — New [`tied/docs/pseudocode-format-and-practices.md`](tied/docs/pseudocode-format-and-practices.md) (portable format, vocabulary, validation layers, and block-token rules). New [`templates/impl-essence-pseudocode-template.md`](templates/impl-essence-pseudocode-template.md) (canonical copy-paste body for hand-authored **`IMPL-*-pseudocode.md`** sidecars). [`tied/docs/pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md) gains **sidecar preference** for non-trivial or growing IMPLs, **`#canonical-structure-for-essence_pseudocode`**, and template/portable doc links. [`tools/bundled-tied-yaml-skill/SKILL.md`](tools/bundled-tied-yaml-skill/SKILL.md) aligns with the same. [`AGENTS.md`](AGENTS.md) Key files and **README** call out the portable doc, template, and **sidecar-first** usability for evolving IMPLs. [`tied/docs/ai-principles.md`](tied/docs/ai-principles.md) and [`tied/docs/tied-yaml-agent-index.md`](tied/docs/tied-yaml-agent-index.md) link the template and portable doc for discoverability.
+
+- **Go `agentstream` (dynamic checklist control)** — On live runs with **`--lead-checklist-yaml`**, captures assistant output and parses optional fenced JSON **`agentstream_control`**; validated **`goto`** replaces the remaining checklist from **`target`**, and the driver clears **`loop_back_clearance`** step completion markers on the on-disk lead checklist when configured. TIED: **`REQ-GOAGENT-CHECKLIST-CONTROL`**, **`ARCH-GOAGENT-CHECKLIST-CONTROL`**, **`IMPL-GOAGENT-CHECKLIST-CONTROL`**.
+- **Lead checklist (executable YAML)** — **`flag-contradictory-specs`**, related **`loop_back_clearance`**, and **unit-test-green** text/flow to emit control JSON when the focused RED test is satisfied but other tests still fail: **`tied/docs/agent-req-implementation-checklist.yaml`**; **human guide** updates in **`tied/docs/agent-req-implementation-checklist.md`**.
+- **`scripts/feature-relay.sh`** — Lead-checklist-only driver: sponsor `CHANGE_TITLE`, `FEATURE_GOAL`, and `FEATURE_BEHAVIOR` (third arg **`-`** reads a multiline summary from **stdin**); additional arguments pass through to **agentstream**.
+- **Go `agentstream` (non-compact HTML output)** — Optional CLI **`--non-compact-html`** and **`--non-compact-html-indent`**: when enabled, turn body strings (checklist- and TDD-loop–rendered content) are written as human-/diff-friendly multi-line UTF-8 HTML after preload, via **`tools/agentstream/htmlformat/`**. TIED: **`REQ-GOAGENT-NON-COMPACT-HTML-FORMAT`**, **`ARCH-GOAGENT-NON-COMPACT-HTML-FORMAT`**, **`IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT`**; default and off-path behavior unchanged.
+- **IMPL `essence_pseudocode` sidecar** — Bodies in **`tied/implementation-decisions/IMPL-TOKEN-pseudocode.md`**, merged on `yaml_detail_read` (not an inline block in `IMPL-TOKEN.yaml` in normal use). **MCP** **`impl_detail_set_essence_pseudocode`**: exactly one of `essence_pseudocode` or `essence_pseudocode_path`. **`tied_token_rename`** renames matching **`-pseudocode.md`**; **`include_markdown`** updates **`tied/docs/processes.md`**. New modules/tests: **`impl-pseudocode-input`**, `detail-loader`, **`yaml-dump`**, **`token-rename`**.
+- **Migration and CLI large bodies** — **`scripts/migrate_impl_essence_to_sidecar.py`**. **`TIED_CLI_IMPL_ESSENCE_FILE`** and **`TIED_CLI_IMPL_ESSENCE_STDIN`** on `tied-cli` / `tied-mcp-stdio-client.cjs` and **`@/path` JSON** args. Doc: [**`tied/docs/pseudocode-writing-and-validation.md`**](tied/docs/pseudocode-writing-and-validation.md) § Mechanics plus runbook, agent index, [AGENTS.md](AGENTS.md) YAML vs sidecar rules, and bundled [tools/bundled-tied-yaml-skill](tools/bundled-tied-yaml-skill).
+
+### Changed
+
+- **`lint_yaml.sh`** — Delegates to **`scripts/yaml_tool.sh`**; **`--sort-lists`** redirects to yaml_tool with a hint.
+
+- **AGENTS.md / bundled skill** — Canonical tied-yaml source is **`tools/bundled-tied-yaml-skill/`** in the TIED repository; client installs live under **`.cursor/skills/tied-yaml/`**. **`[PROC-YAML_EDIT_LOOP]`** documents yaml_tool as the primary validate path.
+
+- **Onboarding and cross-links** — **`CONTRIBUTING.md`** session-commit alignment references **`[PROC-AGENT_REQ_CHECKLIST]`** instead of **`PROC-NEW_FEATURE`** (example block updated). **README** workflow and methodology tree link the agent REQ checklist and **`methodology-diagrams.md`** instead of **`new-feature-process.md`**; IMPL pseudo-code UX paragraph and methodology index bullets point at **`pseudocode-writing-and-validation.md`** § Mechanics. **`docs/leap-tied-citdp-costs-and-benefits.md`** deep-links the unified pseudocode guide. **`tied/docs/ai-agent-tied-mcp-usage.md`**, **`tied/docs/agent-req-implementation-checklist`** (Markdown/YAML references table), and **`tied/docs/tied-first-implementation-procedure.md`** drop stub mentions.
+
+- **Unified IMPL pseudo-code documentation** — [`tied/docs/pseudocode-writing-and-validation.md`](tied/docs/pseudocode-writing-and-validation.md) is the **only** shipped narrative for three-way alignment, MCP/sidecar mechanics, block linkage, phases A–I, LEAP, and validation; legacy split-guide filenames were retired (no stub redirect files). Layer B remains [`tied/docs/pseudocode-validation-checklist.yaml`](tied/docs/pseudocode-validation-checklist.yaml). Cross-references updated across AGENTS.md, agent REQ checklist (Markdown/YAML), README, implementation-decisions.md, tied-yaml index, runbook, and related docs.
+
+### Fixed
+
+- **Client tied-cli MCP binary path** — Installed **`tied-cli.sh`** no longer assumes **`mcp-server/dist/index.js`** lives at the client project root when TIED source and client repo differ; **`TIED_REPO_ROOT`** is baked at bootstrap (e2e: **`mcp-server/src/e2e/bootstrap-and-load.test.ts`**).
+
+- **Block-lead literal copy** — [`tied/docs/pseudocode-format-and-practices.md`](tied/docs/pseudocode-format-and-practices.md) §3a, [`templates/impl-essence-pseudocode-template.md`](templates/impl-essence-pseudocode-template.md), and agent REQ checklist ([`tied/docs/agent-req-implementation-checklist.md`](tied/docs/agent-req-implementation-checklist.md), [`.yaml`](tied/docs/agent-req-implementation-checklist.yaml)) require **[PROC-IMPL_PSEUDOCODE_TOKENS]** block leads copied **verbatim** into matching test and production comment sites; full rule in [`tied/docs/pseudocode-writing-and-validation.md` § Block lead](tied/docs/pseudocode-writing-and-validation.md#block-lead-and-literal-copy-in-tests-and-code).
+
+- **README and [`tied/docs/using-tied-without-mcp.md`](tied/docs/using-tied-without-mcp.md)** — Point users at **`tied/docs/`** for all methodology guides; README traceability and tree show **`IMPL-TOKEN-pseudocode.md`**.
+- **`.gitignore`** — Also ignore **`.cursor/skills/tied-yaml/`** (local skill copy) and **`scripts/__pycache__`**.
+- **Single canonical TIED methodology markdown** — Core guides and schemas in the TIED repository are **only** under **`tied/docs/`**; duplicate copies at the repo root, under **`tied/`**, and under **`docs/`** (for the same files) were removed. **`copy_files.sh`** sources guides and reference docs from **`tied/docs/`**. **Go `agentstream`**, **`FindRepoRoot`**, and batch driver defaults use **`tied/docs/agent-req-implementation-checklist.yaml`** and **`tied/agent-preload-contract.yaml`**. **AGENTS.md**, **README**, **`tied/docs/ai-principles.md`** pathing, preload contracts, and IMPL-TIED copy descriptions updated.
+- **`processes.md` live path** — **`tied/docs/processes.md`** in the TIED source repository is the **live** file (agents, **`processes_path`** in preload). **`copy_files.sh`** copies it from **`tied/docs/`** when missing on the client, alongside the other guide **`.md`** files and `detail-files-schema.md`. **IMPL-TIED_FILES** and **README** manual-mirror text updated.
+
+### Added
+
+- **TIED YAML MCP / CLI** — Tools **`yaml_detail_append_implementation_approach_details`** (append `implementation_approach.details` without replacing the whole array) and **`citdp_record_write`** (write `tied/citdp/CITDP-*.yaml` safely). Detail YAML writes emit non-empty **`essence_pseudocode`** as a literal block (`|-`) for readability. **`tied-cli.sh`** accepts **`@/path/to.json`** as the second argument instead of inline JSON; for any args other than `{}`, arguments are passed via **`TIED_CLI_ARGS_FILE`** (temp file) so large **`tied_token_create_with_detail`** calls are not capped by **`execve` env size**; **`tied-mcp-stdio-client.cjs`** builds JSON-RPC with **`JSON.stringify`**. Regression: **`mcp-server/test/tied-cli-large-args.test.cjs`**. Docs: **`mcp-server/README.md`**, **`.cursor/skills/tied-yaml/`** (SKILL, reference), **`tied/docs/pseudocode-writing-and-validation.md`** (CLI/MCP notes; Bash `$(…)` trailing-newline capture called out where relevant).
+- **Go `agentstream` (`tools/agentstream`)** — CLI and `stdd/agentstream` packages to drive **`cursor agent`** with multi-turn prompts: feature-spec batch (order filter, preview), TDD YAML paths, lead checklist YAML (optional step bounds, skip sub), dry-run, mid-batch resume (`--first-turn`, `--session-id`), and **static tied-yaml MCP preflight** on `.cursor/mcp.json` (`--mcp-json`, `-y`, `AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`). TIED traceability: **`REQ-GOAGENT-*`**, **`ARCH-GOAGENT-*`**, **`IMPL-GOAGENT-*`** under **`tied/`**.
+- **`scripts/run-feature-batch-agentstream.sh`** — Same options as **`run-feature-batch.sh`** but invokes Go **`agentstream`** (`AGENTSTREAM` or `go run`); forwards checklist step bounds and resume flags.
+- **`scripts/verify-agentstream-dry-run-parity.sh`** plus **`scripts/testdata-dry-run-parity/`** — Parity check between Go dry-run and Ruby argv reconstruction.
+- **`scripts/lint_yaml.sh`** — Lint helper for TIED YAML edits.
+- **Conversation analysis** — **`docs/conversation-analysis-tools.md`** (catalog), **`docs/checklist_feedback_loops.md`** (checklist feedback / Mermaid), **`docs/reddit-intro-tied-agentstream.md`** (short intro); Ruby stream extractors **`scripts/extract_user_prompts.rb`**, **`extract_repeated_tool_calls.rb`**, **`extract_tool_failure_bursts.rb`**, **`extract_agent_struggle_phrases.rb`**, **`extract_struggle_episodes.rb`** with smoke tests.
+
+### Changed
+
+- **`copy_files.sh`** — **Fails fast** if **`mcp-server/dist/index.js`** is missing; always refreshes **`tied-yaml`** in `.cursor/mcp.json` with absolute **`TIED_BASE_PATH`** for the target project and the central server **`args`**; writes MCP entries with **`type: "stdio"`** and **`disabled: false`** when creating minimal config.
+- **`AGENTS.md`** / **`tied/docs/ai-principles.md`** — Mandatory **`tied_config_get_base_path`** check before MCP writes; wrong-**`TIED_BASE_PATH`** risk note; **Go agentstream** preflight and skip flags; client-repo **REQ-GOAGENT-*** policy; checklist item for base-path confirmation.
+- **`docs/adding-tied-mcp-and-invoking-passes.md`**, **`docs/ai-agent-tied-mcp-usage.md`**, **`docs/yaml-update-mcp-runbook.md`** (and **`tied/docs/`** copies) — Central TIED repo wording, **`copy_files.sh`** rewrite behavior, **`tied_config_get_base_path`** safety, links to **`mcp-server/README.md`**, **`scripts/lint_yaml.sh`** in the YAML edit loop.
+- **`.cursor/hooks/log.rb`** — **`sessionStart`** normalized details include **`model`** (alongside session and transcript path metadata).
+- **`hello_world_script_entry_test.go`** — Additional coverage aligned with the bash hello contract (see diff).
+- **`tied/docs/processes.md`**, **`tied/implementation-decisions.yaml`**, **`tied/requirements*.yaml`**, architecture/requirements detail files, **`tied/semantic-tokens.yaml`** — Updates for **CONFIG_DISCOVERY**, **GOAGENT** REQ/ARCH/IMPL, and related methodology alignment.
+- **README** — [Spec-Driven Development with TIED](README.md#spec-driven-development-with-tied) and [Repository Structure](README.md#repository-structure): Go **agentstream** path, **run-feature-batch-agentstream.sh**, **copy_files.sh** / **TIED_BASE_PATH** safety, conversation-log analysis docs and scripts, **sessionStart** **`model`** in hook logs.
+
+### Removed
+
+- **`TIED.md`** and **`tied-language-spec.md`** — Removed from the repository root; they were never copied by **`copy_files.sh`**, so client projects never received them. **`AGENTS.md`** and methodology pointers now use **`tied/docs/ai-principles.md`**, **`tied/docs/processes.md`**, **`tied/docs/methodology-diagrams.md`**, etc. **README** no longer lists the removed files.
+- **`tasks.md` template** — Removed root and `tied/tasks.md` optional task-ledger files; **`copy_files.sh`** no longer copies `tasks.md` into client `tied/`. Planning and agent execution are documented via TIED REQ/ARCH/IMPL, in-session notes, and the **agent requirement implementation checklist** (agentstream), not a separate tasks file.
+- **Legacy markdown→YAML migration surface** — Deleted root **`migrate-*.md`** guides, **`docs/migration-methodology-project-yaml.md`** (and **`tied/docs/`** copy), **`mcp-server/src/convert/`**, and MCP tools **`convert_monolithic_*`** and **`convert_detail_markdown_to_yaml`**. **Breaking change:** MCP clients must not call the removed tools; projects are expected to use YAML-native **`copy_files.sh`** bootstrap and normal index/detail tools. Guide markdown (**`requirements.md`**, **`architecture-decisions.md`**, **`implementation-decisions.md`**) no longer includes “Migration from Monolithic File” sections.
+- **Root-level TIED indexes and detail trees (template repo)** — `requirements.yaml`, `architecture-decisions.yaml`, `implementation-decisions.yaml`, `semantic-tokens.yaml` and root `requirements/`, `architecture-decisions/`, `implementation-decisions/` duplicates removed; canonical project TIED data for this repository lives under **`tied/`** only (avoids parallel copies). Templates for methodology remain under **`templates/`** for `copy_files.sh`.
+- **mcp-server/scripts/sync-ruby-tied-index.mjs** — Removed. Client Ruby demo tokens should not be merged into this repo’s project `tied/`; use `mcp-server/scripts/remove-client-reqs-from-tied.mjs` to strip client-only REQ/ARCH/IMPL from indexes and detail files when needed.
+- **MCP checklist state guide tools** — `tdd_state_guide`, `documentation_first_state_guide`, `agent_req_state_guide`, and `req_impl_state_guide` removed from `mcp-server/src/tools/index.ts`. `mcp-server/package.json` `npm test` no longer runs those tool suites. **Breaking change:** MCP clients must not call the removed tools; use `requirement_list_state_guide` and checklist documentation (e.g. **`tied/docs/agent-req-implementation-checklist.md`**) instead.
+
+### Changed
+
+- **README** — [Getting Started](README.md#getting-started-with-a-new-project): manual bootstrap replaced with guidance to prefer `copy_files.sh` and mirror `templates/` → `tied/methodology/` vs project `tied/*.yaml` when copying by hand.
+- **docs/run-agent-stream-tied.md** — Traceability link to **`tied/semantic-tokens.yaml`**; new section on **mid-run resume** with `--session-id` and `--first-turn` (Ruby `run_agent_stream.rb` and `run-feature-batch.sh`).
+- **tools/agent-stream** — `lib/agent_stream_argv.rb` / `run_agent_stream.rb` updates aligned with batch resume and stream behavior (see git diff).
+- **AGENTS.md** — **Single-writer** rule for project `tied/` YAML when MCP tools exist; **YAML structural rules** pointer to `detail-files-schema.md`; **existence gate** checklist item (`EXISTENCE_GATE`).
+- **ai-principles.md** — Principle **13 (SOURCE_PRECEDENCE)** for resolving contradictions across IMPL/REQ/ARCH/tests/README; detail-YAML shape checks in change matrices.
+- **processes.md** / **tied/docs/processes.md** — Aligned process edits (see git diff).
+- **detail-files-schema.md** / **tied/docs/detail-files-schema.md** — Expanded **structural rules and common errors** for REQ/ARCH/IMPL detail files.
+- **docs/agent-req-implementation-checklist.md** / **.yaml** and **tied/docs/** copies — Checklist and workspace path / task updates (see git diff).
+- **tied/** — Project indexes and detail files updated (architecture, implementation, requirements, semantic tokens, ATDD IMPL/REQ touch-ups); methodology copies under `tied/methodology/` and **templates/** adjusted where diff shows merges.
+- **README** — [TIED YAML MCP Server](README.md#tied-yaml-mcp-server) § Value of MCP: LEAP proposal queue bullet notes UTF-8 BOM stripping when loading `leap-proposals/queue.json` so BOM-prefixed files from common editors still parse.
+- **TIED (LEAP proposal queue)** — Project `tied/` REQ/ARCH indexes and detail files for `REQ-LEAP_PROPOSAL_QUEUE` / `ARCH-LEAP_PROPOSAL_QUEUE` list `leap-proposal-mcp.test.ts` under `traceability.tests` with unit tests; `IMPL-MCP_LEAP_PROPOSAL_QUEUE` carries `s13_sync` checklist evidence; `semantic-tokens.yaml` metadata updated for those tokens (agent checklist sync-tied-stack sync).
+- **README** — [Spec-Driven Development with TIED](README.md#spec-driven-development-with-tied): checklist-first path (CITDP, LEAP, TDD), mermaid pipelines, agent preload contract, `run-feature-batch.sh`, cross-links to Getting Started and Example Workflow.
+- **`.gitignore`** — `tied/` is no longer ignored; `prompts` and `docs/commit-message-format.md` / `docs/visuals/visual-specs.md` entries grouped/reordered so project `tied/` can be committed; ignore `logs/*.sh` and `logs/*.txt`.
+- **`tied/citdp/CITDP-REQ-LEAP_PROPOSAL_QUEUE.yaml`** — Optional maintenance path for LEAP proposal queue work: `remove-client-reqs-from-tied.mjs` (replaces reference to removed `sync-ruby-tied-index.mjs`).
+- **Agent preload** — Added `tied/docs/agent-preload-contract-tied-repo.yaml` for sessions where the workspace is this repository (YAML indexes at repo root). `tied/docs/agent-preload-contract-template.yaml` comments direct agents to that file in that layout.
+- **copy_files.sh** — `req-impl-state-guide-agent-workflow.md` removed from `DOCS_TO_COPY`.
+- **scripts/run-feature-batch.sh** — Default workspace is `.` (repo root); `tied/agent-preload-contract.yaml` and `prompts/all.yaml` are optional when absent; `--prompt-file` is passed only when set; `set -x` / `set +x` around the Ruby runner; **`-f` / `--first-turn`** passthrough for mid-batch resume (requires `--session-id` when `N > 1`).
+
+### Added
+
+- **docs/tdd_development_loop.yaml** — Large expansion of step content and related material for driving the six-step TDD loop via `--tdd-yaml` (see git diff size/stat).
+- **mcp-server/src/analysis/leap-proposal-queue.test.ts** — Additional coverage (see git diff).
+- **LEAP proposal queue (MCP)** — Optional non-canonical documentation hints under `{project_root}/leap-proposals/` (`queue.json`, `audit-log.jsonl`). MCP tools `tied_leap_proposal_*` (list, add, extract diff, import session, reject, approve, mark applied, update, snapshot); opt-in `explicit_opt_in` for extract/import; queue tools do not write project `tied/*.yaml`. Module `mcp-server/src/analysis/leap-proposal-queue.ts`, composition tests `mcp-server/src/tools/leap-proposal-mcp.test.ts`. User doc: [docs/leap-proposal-queue.md](docs/leap-proposal-queue.md). TIED: `REQ-LEAP_PROPOSAL_QUEUE`, `ARCH-LEAP_PROPOSAL_QUEUE`, `IMPL-MCP_LEAP_PROPOSAL_QUEUE`.
+- **mcp-server/scripts/remove-client-reqs-from-tied.mjs** — One-shot removal of client-only REQ/ARCH/IMPL keys (TreeGrep, Ruby multiply demo, CRSRBRW main list) from project `tied/` indexes and detail files.
+- **ATDD agent stream import (permanence)** — Full TIED traceability for the Cursor `agent` CLI harness (`REQ-ATDD-*`, `ARCH-ATDD-*`, `IMPL-ATDD-*`) in root and `semantic-tokens.yaml` / index YAML; detail files under `requirements/`, `architecture-decisions/`, `implementation-decisions/` with IMPL `essence_pseudocode` and upstream note (commit `eb88236290009b78eb11ea561816f0854176bf12`).
+- **`tools/agent-stream/`** — Vendored `run_agent_stream.rb`, `export_tdd_prompts.rb`, and `lib/` (argv/YAML expansion, TDD loop, lead checklist, feature batch prompts). README documents usage from repo root.
+- **Docs** — `docs/run-agent-stream-tied.md` (index), `docs/run-agent-stream-impl-e2e.md`, `docs/run-agent-stream-impl-composition.md`, `docs/run-agent-stream-upstream.md`, `docs/tdd_development_loop.yaml` (six-turn loop for `--tdd-yaml`).
+- **`scripts/run-feature-batch.sh`** — Default runner and checklist paths are resolved relative to the repository (`tools/agent-stream/run_agent_stream.rb`, `docs/agent-req-implementation-checklist.yaml`) instead of a fixed `$HOME/.../atdd` path.
+- **`mcp-server/src/consistency-validator.ts`** — `extractTokensFromText` bracket token regex allows hyphens in suffixes (e.g. `[REQ-ATDD-COMPOS-...]`) so pseudocode validation matches multi-segment token IDs.
+
+### Fixed
+
+- **`.cursor/hooks/log.rb`** — `beforeReadFile`: file `content` is kept as opaque text instead of being passed through JSON-oriented parsing, avoiding spurious parse noise in hook YAML logs for non-JSON files.
+- **LEAP proposal queue `loadQueue`** (`mcp-server/src/analysis/leap-proposal-queue.ts`) — Strips a leading UTF-8 BOM before parsing `leap-proposals/queue.json`, so valid queue files saved with a BOM (common on some platforms/editors) load proposals instead of falling back to an empty queue.
+- **mcp-server `loadDetail`** (`detail-loader.ts`) — Uses `yaml.loadAll` and selects the document whose top-level key matches the token, so methodology bundled multi-document YAML (multiple `---`-separated records per file under `tied/methodology/`) loads correctly and `tied_validate_consistency` no longer reports spurious “Failed to parse detail file” for those paths.
+- **`.cursor/hooks/log.rb`** — Transcript embedding is configurable (`--transcript` or env `CURSOR_HOOK_LOG_TRANSCRIPT`): default **`none`** writes `transcript_path` and `transcript_meta` (`bytes` only) instead of loading the full JSONL into every record (avoids O(n²) YAML growth). Modes: **`full`** (legacy behavior), **`tail:N`**, **`end-only`** (full body on `sessionEnd` / `stop` / `beforeSubmitPrompt` only), **`delta`** (append `transcript_delta` with new JSONL since last byte offset; offsets stored under `transcript_offsets` in `~/.cursor/logs/.conversation_start_times.json` per conversation).
+- **`.cursor/hooks/log.rb`** — Normalize `postToolUseFailure` into `normalized.details` (`tool_name`, `error_message`, `failure_type`, `tool_input`, etc.) via `KIND_MAP` / `details_for` / `extracted_raw_keys`, instead of falling through to generic `keys` only.
+- **`.cursor/hooks/log.rb`** — Open `~/.cursor/logs/.conversation_start_times.json` with UTF-8 and normalize reads before `JSON.parse`, so state files containing non-ASCII text in `long_text_registry` no longer raise `Encoding::InvalidByteSequenceError` and block YAML log writes.
+
+### Added
+
+- **`scripts/citdp_hook_log_evidence_build.rb`** — Regenerates CITDP ↔ hook-log correlation markdown and TSV from `tied/citdp/CITDP-*.yaml` and `~/.cursor/logs/conv_ruby_treegrep_*.yaml` (same-day hook-log counts for audits). Optional outputs can be committed under `docs/` when publishing evidence.
+- **scripts/cursor_hook_log_stream.rb** — Shared streaming helpers for `~/.cursor/logs/conv_*.yaml`: strip embedded `transcript:` / `transcript_path:` lines (O(1) memory), split records on unindented top-level YAML list items (`- `); `epoch` is not required for splitting.
+- **scripts/strip_transcripts.rb** — Stream-edit large hook logs: remove transcript blocks and `transcript_path` lines; `--dry-run` (size report), optional `--backup` (keep `*.strip.bak`).
+- **scripts/analyze_hook_log.rb** — Streaming per-record analysis (no full-file YAML load): event counts, `postToolUseFailure` aggregation, redundant reads, sessions/compactions, shell heuristics; `--dir`, `--min-size`, `--aggregate`.
+- **scripts/cursor_hook_log_stream_test.rb** — Smoke test for stream helpers.
+- **scripts/transcript_long_text_dedupe.rb** — Shared long-`content` dedupe (3+ lines, SHA256 digest prefix) for hook YAML trees; used by `scripts/dedupe_transcript_yaml.rb` and `.cursor/hooks/log.rb`.
+- **`.cursor/hooks/log.rb`** — Inline long-text dedupe on each append: per-conversation `long_text_registry` (full string → digest) stored in `~/.cursor/logs/.conversation_start_times.json` next to `started_at`; `--no-dedupe` to disable.
+- **scripts/transcript_long_text_dedupe_test.rb** — Smoke test for incremental dedupe and registry JSON migration.
+- **docs/agent-req-implementation-checklist.yaml** — v1.0.1: `workspace_paths` with `WORKSPACE_ROOT` (/Users/fareed/Documents/dev/chatgpt/stdd); session-bootstrap/impact-discovery/author-requirement/author-architecture/persist-implementation-records/three-way-alignment-unit/composition-integration/verification-gate/sync-tied-stack/persist-citdp-record/sub-yaml-edit-loop/sub-leap-micro-cycle tasks require tied-yaml MCP for project TIED YAML, absolute paths, and links to yaml-update-mcp-runbook / ai-agent-tied-mcp-usage; sub-yaml-edit-loop requires `tied_validate_consistency` when TIED changes.
+- **docs/yaml-update-mcp-runbook.md** — Agent runbook: mandatory MCP routing for project TIED YAML, tool cheat sheet, failure playbook (no silent fallback to patch/write), alignment with sub-yaml-edit-loop. Linked from [ai-agent-tied-mcp-usage.md](docs/ai-agent-tied-mcp-usage.md), session-bootstrap and sub-yaml-edit-loop in [agent-req-implementation-checklist.md](docs/agent-req-implementation-checklist.md). Copied to client `tied/docs/` via [copy_files.sh](copy_files.sh) (`DOCS_TO_COPY`).
+- **tied/docs/agent-preload-contract-template.yaml** — `tied_paths`: `TIED_BASE_PATH`, `project_yaml_writable_globs`, `methodology_readonly_glob`, `mcp_tied_yaml_verified_this_session`.
+- **scripts/dedupe_transcript_yaml.rb** — Deduplicate long (3+ line) text in hook transcript YAML (first 16 hex chars of SHA256): finds any hash with a `content` key (depth-first preorder), handling array parts (`type: text` / `text`), scalar `content` strings (sibling `digest` on the parent hash), and `content.value` hashes; per-file backup, validation, backup removed on success (`--dry-run`, `--keep-backup`, `--force`). Default-on post-dedupe pruning (`--[no-]prune-keys`): removes keys with YAML null / nil (bare `key:`), empty string/array/hash, all `conversation_id`, and `kind` when value is `unknown`; stats include `pruned_keys`.
+- **`scripts/transcript_yaml_prune.rb`** — Shared post-order prune for transcript/hook YAML trees (used by `scripts/dedupe_transcript_yaml.rb` and `.cursor/hooks/log.rb`).
+- **`scripts/yaml_minimize.sh`** — Stream-edit large YAML to drop empty-ish key lines (exec/preview/approve modes; O(1) memory per line).
+- **`scripts/run-feature-batch.sh`** — agent stream helper for a feature spec batch (workspace, runner, checklist YAML, prompt file, and related options).
+- **`docs/conversation-log-yaml-structure-and-agent-difficulties.md`** — Hook YAML record shape and agent-facing pitfalls when working from conversation logs.
+- **`mcp-server/package.json`** — `npm test` includes `requirement-list-state-guide` unit tests.
+- **Methodology vs project YAML split** `[PROC-TIED_METHODOLOGY_READONLY]` — TIED-sourced YAML is read-only in client projects; client-specific data lives only in project YAML so methodology can be refreshed without losing project data.
+  - **Process**: New `[PROC-TIED_METHODOLOGY_READONLY]` in processes.md (purpose, scope, rules: do not modify `tied/methodology/`; add/edit only in project YAML; re-run `copy_files.sh` to refresh methodology). Token registered in templates/semantic-tokens.yaml.
+  - **copy_files.sh**: Methodology index and detail files are copied into `tied/methodology/` and **always overwritten** on each run. Project index YAMLs at `tied/` root are **created if missing** (minimal content) and **never overwritten**. Script header documents the split.
+  - **MCP server**: yaml-loader merges methodology + project on read when `tied/methodology/` exists; writes go only to project index/detail files. detail-loader: read from methodology or project by token; write/update/delete only to project; update/delete fail for methodology-owned tokens. consistency-validator resolves detail paths for methodology vs project.
+  - **Migration**: New doc `docs/migration-methodology-project-yaml.md` (one-time steps for clients with mixed YAML); referenced from processes.md and added to DOCS_TO_COPY in copy_files.sh.
+
+### Changed
+
+- **AGENTS.md** — Client inheritance and Key Files state that TIED-sourced YAML is read-only under `tied/methodology/` and client data lives only in project YAML; MCP and agents write only to project YAML. During-work checklist: do not edit methodology YAML; only edit project YAML.
+- **ai-principles.md** — New principle 12: TIED-sourced YAML read-only in client; project tokens only in project YAML; reference `[PROC-TIED_METHODOLOGY_READONLY]`.
+- **processes.md** — `[PROC-YAML_DB_OPERATIONS]`: new "Methodology vs project split" subsection (where each index/detail set lives, merged read, write only to project); append/record guidance targets project files only. `[PROC-TIED_DEV_CYCLE]`: steps 2 and 9 restrict REQ/ARCH/IMPL updates to project index and detail files only. Inherited tokens note methodology/project layout.
+- **TIED.md** — "For more information": note that in the client, TIED YAML is read-only and refreshed by copy; project YAML holds client data; paths clarified (`tied/methodology/` vs `tied/`).
+- **docs/using-tied-without-mcp.md** — Bootstrap and Managing REQ/ARCH/IMPL updated: methodology read-only in `tied/methodology/`; add/edit only in project YAML; re-run copy to refresh methodology.
+
+### Added (existing entries)
+
+- **copy_files.sh: methodology docs in tied/docs/** — Script now creates `tied/docs/` and copies 10 methodology docs from `docs/` into the client's `tied/docs/` (agent-req-implementation-checklist, tied-first-implementation-procedure, impl-code-test-linkage, implementation-order, LEAP, ai-agent-tied-mcp-usage, methodology-diagrams, new-feature-process, using-tied-without-mcp, adding-tied-mcp-and-invoking-passes). Ensures references in AGENTS.md, ai-principles.md, and processes.md resolve after bootstrap.
+- **Standardized paths to tied/docs/ and tied/** — All references to methodology docs in AGENTS.md, ai-principles.md, processes.md, README.md, and in the copied docs now use `tied/docs/...` or `tied/...` so the same content works in the TIED repo (after `copy_files.sh .`) and in any client. Checklist and sibling docs use `tied/docs/processes.md`, `tied/docs/detail-files-schema.md`, `tied/docs/impl-code-test-linkage.md`, etc.; root-level links from `tied/docs/` use `../../` for AGENTS.md and ai-principles.md.
+- **`[PROC-TIED_VERIFICATION_GATED]`** — Verification-gated status: requirement (and optionally IMPL) status derived only from test results; do not edit status by hand; run verify step (e.g. MCP `tied_verify` with update) after tests. Documented in processes.md; token registered in semantic-tokens.yaml.
+- **`[PROC-TIED_DEPENDENCY_GRAPH]`** — Dependency graph and backlog views: cycle detection, topological order, backlog views (blockers, critical, quick-wins) from requirement/IMPL `depends_on`. Documented in processes.md; token registered.
+- **`[PROC-TIED_BOOTSTRAP_FROM_TESTS]`** — Bootstrap TIED from existing tests: discover tests and token-like markers, propose or update REQ/IMPL traceability from test metadata when adopting TIED on an existing codebase. Documented in processes.md; token registered.
+- **`[PROC-TIED_PHASED_DELIVERY]`** — Phased delivery with backlog: assign phase/priority to requirements; use backlog views and dependency order; verify and status per phase. Documented in processes.md; token registered.
+- **MCP tools: tied_verify, tied_cycles, tied_backlog** — `tied_verify`: update requirement and optionally implementation index status from passed REQ/IMPL tokens (verification-gated). `tied_cycles`: detect cycles in requirement or implementation dependency graph. `tied_backlog`: backlog views (e.g. critical, blockers, quick-wins). New mcp-server modules: `dependency-graph.ts` (buildRequirementGraph, buildImplementationGraph, findCycles, topologicalSort, getBacklogView, getRequirementStatusAndPriority), `verify.ts` (updateStatusFromPassedTokens); tools wired in `tools/index.ts`.
+- **Agent state guides, checklists, and pseudo-code validation tooling** — Added new agent-driven state guide docs and checklists to support TDD progression and IMPL pseudo-code validation:
+  - Docs: `docs/pseudocode-writing-and-validation.md`, `docs/pseudocode-validation-checklist.yaml`. (Execution uses `docs/agent-req-implementation-checklist.yaml` as `--lead-checklist-yaml`; optional `--tdd-yaml` uses `docs/tdd_development_loop.yaml`. PoC `docs/agent-req-checklist-state-machine.yaml` and duplicate `docs/tdd-development-checklist.yaml` were removed—they were never part of that runtime path.)
+  - MCP: new state guide tools `agent_req_state_guide`, `documentation_first_state_guide`, and `tdd_state_guide` (including tool descriptors and unit tests).
+  - MCP: `requirement_list_state_guide` — step through a client-supplied requirement list using round-tripped `continuation_state` (base64url JSON); first call passes `requirements`, later calls pass `current_state`.
+  - **requirement_list_state_guide agent workflow** — Doc `docs/requirement-list-state-guide-agent-workflow.md`: list on first call, `continuation_state` for advance, walk until `end_requirement_list`/`error`, full REQ checklist through `end_agent_req` per requirement. `copy_files.sh` copies into `tied/docs/`.
+  - Updated supporting language spec references for YAML-based `essence_pseudocode` validation guidance.
+
+### Changed
+
+- **MCP state guide terminal states** — Each guide now returns a **prefixed** terminal `state`/`id` so documentation is unambiguous: `end_agent_req` (`agent_req_state_guide`), `end_documentation_first`, `end_tdd`, `end_requirement_list` (`requirement_list_state_guide`). Legacy `current_state: end` remains accepted for the three linear checklist tools as an alias for that tool’s terminal id.
+- **AGENTS.md, ai-principles.md, processes.md** — References to agent checklist, LEAP, ai-agent-tied-mcp-usage, and tied-first-implementation-procedure now use `tied/docs/...` instead of `docs/...`.
+- **docs/agent-req-implementation-checklist.md** — All reference and table paths updated to `tied/docs/processes.md`, `tied/docs/detail-files-schema.md`, `tied/docs/...` for sibling docs; session-bootstrap uses `tied/` for indexes and guides.
+- **docs/new-feature-process.md, docs/using-tied-without-mcp.md, docs/tied-first-implementation-procedure.md, docs/impl-code-test-linkage.md, docs/LEAP.md, docs/implementation-order.md, docs/adding-tied-mcp-and-invoking-passes.md** — Links updated to `tied/` and `tied/docs/` (or `../../` for project root) so they resolve when files live in `tied/docs/`.
+- **README.md** — Full procedure link updated from `docs/new-feature-process.md` to `tied/docs/new-feature-process.md`. MCP section: state guides (`requirement_list_state_guide`, `req_impl_state_guide`), explicit terminal `end_*` ids, `lint_yaml` for manual YAML and `tied_token_rename`; [yaml-update-mcp-runbook.md](docs/yaml-update-mcp-runbook.md); Scripts list for hook-log analysis and maintenance utilities.
+
+### Added (existing entries)
+
+- **MCP tool `tied_token_rename`** — Rename a single semantic token across the TIED tree (YAML indexes, detail files, and detail file name). Params: `old_token`, `new_token` (same prefix required), optional `dry_run`, `include_markdown` (tied/docs/processes.md). Modified YAML is pretty-printed with `yq -i -P` when available (agents use `lint_yaml` per `processes.md` for hand-edited YAML). Returns `ok`, `files_modified`, `file_renamed`, `errors`. mcp-server: new module `token-rename.ts` (`renameSemanticToken`); unit tests `token-rename.test.ts`; test script updated to run token-rename tests.
+- **`[PROC-TIED_FIRST_IMPLEMENTATION]` TIED-first implementation procedure** — When REQ/ARCH/IMPL are already authored or updated in TIED and tests/code are pending, agents follow a variant of the agent checklist: change-definition–impact-discovery define change and impact from the **updated** TIED (desired = new design, current = prior tests/code); author-requirement–S06 are verify-only (completeness and IMPL block token comments); risk-assessment–traceable-commit unchanged. New document `docs/tied-first-implementation-procedure.md` with entry-point semantics, step modifiers, strict TDD from new IMPL, three-way alignment and LEAP, and flow diagram. Registered in `processes.md` and `semantic-tokens.yaml`. Agent checklist updated with new entry point "TIED prepared; tests/code not updated" and mandatory order (IMPL pseudo-code → RED tests → code).
+- **MCP write tools: JSON or YAML input** — `yaml_index_insert`, `yaml_index_update`, `yaml_detail_create`, `yaml_detail_update`, and `tied_token_create_with_detail` now accept **JSON or YAML** strings for record/updates/detail_record/index_record. New module `parse-content.ts` (`parseRecordOrYaml`: try JSON then YAML; reject null/array/primitive). Unit tests in `parse-content.test.ts`.
+- **Safe YAML emission for TIED writes** — New module `yaml-dump.ts` (`safeDump` with `forceQuotes: true`, `quotingType: '"'`) so string values containing `:` (e.g. in satisfaction criteria) are double-quoted and parse correctly. All TIED YAML writes in the MCP server (yaml-loader, detail-loader, feedback, convert runner and detail-markdown-to-yaml) now use `safeDump` instead of `yaml.dump`.
+- **LEAP (Logic Elevation And Propagation)** `[PROC-LEAP]` — Canonical process in `tied/docs/processes.md`: when code or tests diverge from IMPL, update the stack in reverse order (IMPL → ARCH → REQ) in the same work item; work may start at any layer but must apply up and down the stack for completion. Code is valid only when all tests pass and all requirements are met. README: new "LEAP (for non-programmers)" and "TIED traceability walkthrough" (R/A/I chain, pseudo-code block example, how TIED with LEAP develops tests/code/E2E and closes the loop).
+- **IMPL pseudo-code token comments (most critical)** `[PROC-IMPL_PSEUDOCODE_TOKENS]` — Every block in IMPL `essence_pseudocode` must have a comment naming REQ/ARCH/IMPL and how the block implements them; top-level and sub-block rules documented in AGENTS.md, ai-principles.md, implementation-decisions.md, and processes.md. Registered in `semantic-tokens.yaml`.
+- **Client inheritance of LEAP R+A+I** — All TIED projects inherit a core set of REQ/ARCH/IMPL and PROC tokens via `copy_files.sh` from `templates/` (methodology-enforcing tokens and detail files). Agents refer to `templates/` in the TIED repo for structure and sample records; same filename at repo root (template) vs `tied/` (project index). `copy_files.sh`: index YAMLs and detail dirs copied from `templates/` when present, else repo root; guide `.md` files always from root.
+- **Inherited tokens documentation** — `processes.md`: new "Inherited tokens (TIED/LEAP methodology)" subsection; `semantic-tokens.md`: new "Inherited tokens" section listing REQ/ARCH/IMPL/PROC inherited set and reference to `templates/`.
+- **Consistency validation: missing IMPL token comments** — `tied_validate_consistency` now reports `missing_token_comments` when IMPL `essence_pseudocode` is non-empty but contains no [REQ-]/[ARCH-]/[IMPL-] token comments, and fails the report (`[PROC-IMPL_PSEUDOCODE_TOKENS]`). MCP server: `consistency-validator.ts` and tool description updated; docs (adding-tied-mcp, mcp-server/README) updated.
+- **TIED.md** — "Costs and Trade-offs"; "Documentation Structure in TIED Projects"; "Bugs vs Requirements: How to Think About Them"; "Configuring AI Agents (for project maintainers)". ai-principles.md reference updated.
+- **docs/ai-agent-tied-mcp-usage.md** — New "1.1 YAML detail storage, MCP, and cognitive load" (rationale for working from IMPL pseudo-code vs scanning source).
+- **E2E test** — `bootstrap-and-load.test.ts` asserts inherited token `REQ-MODULE_VALIDATION`; comments updated for core methodology (inherited LEAP R+A+I).
+- **Unified agent requirement implementation checklist** (`[PROC-AGENT_REQ_CHECKLIST]`) — Primary step-by-step procedure for every new REQ or change to the tested system. Document: `docs/agent-req-implementation-checklist.md`. Unifies CITDP, TIED dev cycle, IMPL_CODE_TEST_SYNC, LEAP, and validation into one executable checklist with entry points (new requirement, change, TIED-prepared implementation pending, bug fix) and variant for TIED-first implementation. AGENTS.md, ai-principles.md, processes.md (PROC-TIED_DEV_CYCLE, PROC-CITDP, PROC-IMPL_CODE_TEST_SYNC), docs/impl-code-test-linkage.md, docs/implementation-order.md, and docs/new-feature-process.md updated to reference it.
+- **scripts/extract_queries.rb** — Extracts `<user_query>` bodies from YAML (e.g. agent transcripts), deduplicates, and prints one query per line.
+
+### Changed
+
+- **AGENTS.md** — TIED data access (MCP-first): added that writing TIED YAML via MCP ensures valid output (e.g. values with `:` quoted); direct file edits often produce invalid YAML.
+- **docs/agent-req-implementation-checklist.md** — Mandatory order line (IMPL pseudo-code → RED tests → code); new entry point "TIED prepared; tests/code not updated" and variant subsection linking to `docs/tied-first-implementation-procedure.md` (`[PROC-TIED_FIRST_IMPLEMENTATION]`).
+- **docs/ai-agent-tied-mcp-usage.md** — Added guidance to avoid direct edits to `tied/**/*.yaml` for writes; use MCP write tools so the server emits valid YAML.
+- **MCP tool descriptions** — Read/write tool descriptions updated to mention using MCP for TIED updates (valid YAML) and to state that record/updates parameters accept "JSON or YAML" where applicable.
+- **AGENTS.md** — Methodology background pointer (TIED.md, docs/LEAP.md); bootstrap includes `implementation-decisions.md` and [PROC-IMPL_PSEUDOCODE_TOKENS]; new Core TIED Obligations: IMPL pseudo-code token comments, LEAP, implementation order (tests first, code via TDD, glue, E2E, closing the loop); TIED data access reworded to "MCP-first" with MCP usage guidance; Client inheritance of LEAP R+A+I and `templates/`; checklists updated (IMPL block comments, LEAP reverse-order update); Key Files table (templates/, processes.md row); removed separate docs/ai-agent-tied-mcp-usage.md row. Last Updated 2026-03-05.
+- **README.md** — `copy_files.sh` step describes core methodology (inherited LEAP R+A+I) from `templates/`; Example Workflow condensed to capture intent → design → review → implement (tests first, TDD, glue, E2E, close loop) → close the loop; references to docs/new-feature-process.md and AGENTS.md; prepare_readme_demo.sh and Query Examples wording; Methodology Documentation list (docs/LEAP.md, docs/implementation-order.md, ai-principles.md); removed "Visual Guides" section (new-requirement-timeline, traceability-graph, task-token-alignment).
+- **ai-principles.md** — Title "AI Agent Principles & Operations"; purpose and methodology background pointer to TIED.md; structure condensed (Core Principles, Change Impact Tracking, Development Process, Work Planning, Checklist, Related Documents, Critical Reminders); IMPL pseudo-code token comments and LEAP/MCP/TIED data access integrated; long Documentation Structure, Semantic Token System, and Bugs vs Requirements sections replaced with shorter operational rule; Critical Reminders add [PROC-IMPL_PSEUDOCODE_TOKENS]. Last Updated 2026-03-05.
+- **processes.md** — PROC-TIED_DEV_CYCLE expanded to 10 steps: tests-first, Author TIED docs ([PROC-IMPL_PSEUDOCODE_TOKENS]), Add and align tests, Implement to tests (TDD), Implement minimal glue, Add E2E tests, Validate and close test gaps, Sync TIED, Update README/CHANGELOG, Write commit message; mandatory implementation order (tests first → TDD → glue → E2E → validate/sync) stated explicitly.
+- **docs/new-feature-process.md** — Flow diagram renumbered (Implement via TDD, glue, E2E, validate, sync, release); E2E as required step after glue; phase table and governing process updated for 10-step PROC-TIED_DEV_CYCLE; reference to `tied/docs/processes.md` for agent-executable procedure.
+- **Template file naming** — Removed `.template` infix from TIED template files; same filename is used at repo root (template) and in `tied/` (project index). Location distinguishes use.
+  - Renamed: `requirements.template.md` → `requirements.md`, `requirements.template.yaml` → `requirements.yaml`, and similarly for `architecture-decisions`, `implementation-decisions`, `processes`, `semantic-tokens`, `tasks` (`.md` and `.yaml` where applicable).
+  - **copy_files.sh**: Copies root files into `tied/` with the same filename (no suffix stripping). Detail-file examples are copied from repo-root `requirements/`, `architecture-decisions/`, and `implementation-decisions/` (no `.template` suffix).
+  - **mcp-server/src/yaml-loader.ts**: Resolves index path as `{basePath}/{index}.yaml` then `cwd/{index}.yaml`; removed `TEMPLATE_FILES` fallbacks.
+  - **Docs**: README, AGENTS.md, ai-principles.md, TIED.md, ANNOUNCEMENT.md, migrate-*.md, and mcp-server references updated to the new names and location semantics.
+  - **mcp-server**: Added `yaml-loader.test.ts` (unit tests for `getBasePath` and `resolveIndexPath` preferring base then cwd); exported `clearBasePathCache()` for tests. `copy_files.sh`: hooks copy is conditional on source existing so bootstrap works without `.cursor/hooks.json`.
+  - **mcp-server**: E2E tests in `src/e2e/bootstrap-and-load.test.ts` — run `copy_files.sh` into a temp dir, set `TIED_BASE_PATH` to `tied/`, then assert the loader reads `requirements` and `semantic-tokens` indexes from the copied files. Included in `npm test`.
+- **AGENTS.md** — Implementation order expanded to 6 steps (unit tests, unit code via TDD, composition tests, composition code via TDD, E2E with justification, closing the loop); `[PROC-YAML_EDIT_LOOP]` added to MCP usage and checklists; language-specific lint gate checklist item added during/after work.
+- **ai-principles.md** — Principle 9 (Separation of Concerns): E2E-only reworded; event bindings composition-testable. Principle 11: entry-point wiring composition-tested. Phase 3 mandatory order: 6 steps with lint gates. YAML edit loop in change-impact checklist.
+- **processes.md** — `[PROC-TEST_STRATEGY]`: new composition-tests-cover-bindings principle; E2E-only requires named platform constraint. `[PROC-YAML_DB_OPERATIONS]`: `[PROC-YAML_EDIT_LOOP]` subsection (controlling loop for YAML create/edit/validate/use). `[PROC-TIED_DEV_CYCLE]`: 11 steps; steps 3–7 governed by TDD inner loop (RED-GREEN-REFACTOR with lint gate); unit vs. composition distinction; E2E requires justification; managed vs. unmanaged code scope.
+- **semantic-tokens.md** — Minor formatting fix.
+- **processes.md** — CITDP procedure document reference updated from `docs/CITDP-v1.0.0.md` to `docs/agent-req-implementation-checklist.md` (`[PROC-AGENT_REQ_CHECKLIST]`).
+
+### Added
+
+- **MCP feedback tools** ([REQ-FEEDBACK_TO_TIED], [ARCH-FEEDBACK_STORAGE], [IMPL-MCP_FEEDBACK_TOOLS]) — Projects and users can submit feature requests, bug reports, and methodology improvement suggestions and export them for reporting to the TIED project.
+  - **`tied_feedback_add`**: Add a feedback entry (type: feature_request | bug_report | methodology_improvement) with title, description, optional context. Creates or appends to `tied/feedback.yaml`. Returns ok, id, created_at, and optionally a copy-paste-ready markdown snippet for a TIED issue.
+  - **`tied_feedback_export`**: Export all feedback entries as markdown or JSON for copy-paste into an issue or report.
+  - **Storage**: Single file `{TIED_BASE_PATH}/feedback.yaml` with top-level `entries` array; each entry has id, type, title, description, optional context, created_at (ISO 8601).
+  - **TIED docs**: New requirement REQ-FEEDBACK_TO_TIED, architecture decision ARCH-FEEDBACK_STORAGE, implementation decision IMPL-MCP_FEEDBACK_TOOLS with detail files and essence_pseudocode; tokens registered in semantic-tokens.yaml and index files.
+  - **mcp-server**: New module `src/feedback.ts` (load/append/export) and unit tests `src/feedback.test.ts`; tool descriptors in `mcp-server/tool-descriptors/`.
+  - **Docs**: mcp-server/README.md updated with feedback tools table and "Feedback (report to TIED)" subsection; main README MCP API line updated.
+
+- **New feature process (`[PROC-NEW_FEATURE]`)** — Top-level procedure for implementing a new feature from a user prompt.
+  - **docs/new-feature-process.md**: Flow diagram (user prompt → commit), governing process and tied-yaml MCP usage, step-by-step procedure aligned with PROC-TIED_DEV_CYCLE, and post-implementation steps (sync REQ/ARCH/IMPL, unit/e2e tests, README/CHANGELOG, commit). Direct YAML edits must be documented and validated with `lint_yaml` per `[PROC-YAML_EDIT_LOOP]` (`processes.md`).
+  - **tied/docs/processes.md**: New section `[PROC-NEW_FEATURE]` referencing the full procedure and diagram.
+  - **tied/semantic-tokens.yaml**: Registered `PROC-NEW_FEATURE`.
+  - **CONTRIBUTING.md**: Commit message guidelines (one session commit; reference main REQ/ARCH/IMPL tokens).
+
+- **Test strategy and E2E-only minimization** ([PROC-TEST_STRATEGY], [REQ-MODULE_VALIDATION])
+  - **processes.template.md**: New process `[PROC-TEST_STRATEGY]` — Test strategy and coverage (minimize untested code). Principles: E2E is expensive; unit + integration cover logic; IMPL–test alignment; coverage gates; minimize E2E-only code. Activities: run coverage and coverage-gap report; document E2E-only IMPLs with `e2e_only_reason` or `test_coverage_note`.
+  - **processes.template.md**: New process `[PROC-TIED_DEV_CYCLE]` — TIED development cycle (session workflow). Nine steps: Plan from TIED; Author TIED docs (pseudo-code + tokens); Add and align tests; Implement to tests (TDD); Implement minimal glue; Validate and close test gaps; Sync TIED to code and tests; Update README and CHANGELOG; Write commit message. Supports traceability and token audit/validation.
+  - **implementation-decisions.template.md**: Optional IMPL schema fields `testability` (`unit` | `integration` | `e2e_only`) and `e2e_only_reason` (required when `testability` is `e2e_only`). New section **Testability classification and E2E-only code**: classify code paths, document E2E-only reasons, entry-point logic must be extracted or justified. Traceability-to-tests bullet: optional block comments for test level (e.g. `# unit-testable:`, `# E2E-only:`).
+  - **requirements.template.md**: New principle **Testability and E2E-only minimization** — minimize code only measurable from E2E/manual testing; logic in testable modules unless justified; references [REQ-MODULE_VALIDATION] and [PROC-TEST_STRATEGY].
+  - **semantic-tokens.template.yaml**: Registered `PROC-TEST_STRATEGY` and `PROC-TIED_DEV_CYCLE`.
+  - **README.md**: Key Principles §6 for test strategy and E2E minimization; processes.template.md description updated to list new process tokens.
+
+- **IMPL pseudo-code as source of consistent logic** — Documentation and implementation-decision template now treat IMPL `essence_pseudocode` as the **authoritative source of consistent logic** for implementation; logical and flow issues must be resolved there before writing tests or code.
+  - **AGENTS.md**: Under Documentation-First Flow, added that all implementation issues (logical and flow) are addressed in IMPL pseudo-code before tests or code; `essence_pseudocode` is the source of consistent logic.
+  - **ai-principles.md**: Stated that IMPL pseudo-code is where logical/flow issues are resolved before tests or code; added to session acknowledgment and Pseudo-Code section that issues must be resolved in IMPL pseudo-code first.
+  - **implementation-decisions.template.md**:
+    - Intro and **Mandatory essence_pseudocode** section: every IMPL detail file must include `essence_pseudocode`; use for collision detection, Algol-style notation, one action per step, traceability to tests.
+    - **Preferred vocabulary for essence_pseudocode**: INPUT, OUTPUT, DATA, CONTROL, ON/WHEN, SEND/BROADCAST/RETURN, IF/ELSE, UPPER_SNAKE procedure names, FOR/WHILE, error/failure patterns, AWAIT/Promise for async.
+    - **Expressing sequence and structure**: numbered steps, contract block (Contract:, INPUT/OUTPUT/DATA/CONTROL).
+    - **Template and stub pseudo-code**: when status is Template use a stub; when Active, pseudo-code must be complete.
+    - **Managed code and block token rules**: REQ/ARCH/IMPL token comments in blocks of managed code (including pseudo-code in TIED detail YAML); block and nested-block rules, selective token naming.
+    - **Minimal example** of `essence_pseudocode` with token comment, contract, procedure, and preferred keywords.
+    - **Collision detection using essence_pseudocode**: process for comparing IMPL pseudo-code when IMPLs are composed or share code paths; checklist table for key composition pairs (e.g. IMPL-STORAGE_INDEX, IMPL-BOOKMARK_ROUTER, IMPL-MESSAGE_HANDLING, IMPL-BADGE_REFRESH, IMPL-FILE_STORAGE_*, IMPL-CONFIG_*).
+  - Schema reference for `essence_pseudocode` updated to point to the new mandatory and vocabulary sections.
+
+- **MCP tool `tied_config_get_base_path`**: Reports the effective TIED base path (resolved from `TIED_BASE_PATH` or default `tied`) and the raw env value. Use to verify server configuration or debug path resolution. Documented in `mcp-server/README.md` and MCP setup docs.
+
+- **AI agent directive for TIED data access** (`docs/ai-agent-tied-mcp-usage.md`): Instructs AI agents to use the TIED MCP server as the **primary** interface for reading and writing TIED data; direct file access is permitted only when no MCP tool supports the operation (such cases are candidates for new tools). Document also states that TIED is the db that controls/directs the build—significant code is created in TIED first, then implemented with TDD. Referenced from `AGENTS.md` (Core TIED Obligations and Key Files).
+
+- **Validation for TIED data**: Documented for both AI agents and users:
+  - **`yaml_index_validate`** (MCP): Validates YAML syntax of all index files under `TIED_BASE_PATH`; run after index edits to ensure parseability.
+  - **Token validation**: Use project scripts (e.g. `./scripts/validate_tokens.sh`) together with `yaml_index_validate` for full data validation (syntax + token registry and traceability) before considering a pass complete. README and [docs/adding-tied-mcp-and-invoking-passes.md](docs/adding-tied-mcp-and-invoking-passes.md) updated to describe this workflow.
+
+- **YAML detail files for REQ, ARCH, and IMPL** [TIED spec update]: Individual token detail files are now YAML (replacing Markdown) so transformations (validation, merge, report generation, MCP tools) can operate on them.
+  - **Schema**: New `detail-files-schema.md` describes the YAML structure for `requirements/REQ-*.yaml`, `architecture-decisions/ARCH-*.yaml`, and `implementation-decisions/IMPL-*.yaml` (one token per file, top-level key = token id; fields aligned with index for merge/validation).
+  - **Templates**: Added YAML detail files in `requirements.template/` (REQ-TIED_SETUP, REQ-MODULE_VALIDATION, REQ-IDENTIFIER), `architecture-decisions.template/` (ARCH-TIED_STRUCTURE, ARCH-MODULE_VALIDATION, ARCH-EXAMPLE_DECISION), `implementation-decisions.template/` (IMPL-TIED_FILES, IMPL-MODULE_VALIDATION).
+  - **Indexes**: All `detail_file` paths in `requirements.template.yaml`, `architecture-decisions.template.yaml`, `implementation-decisions.template.yaml`, and `semantic-tokens.template.yaml` now reference `.yaml` (e.g. `requirements/REQ-TIED_SETUP.yaml`).
+  - **Docs**: AGENTS.md Key Files table and ai-principles.md Related Documents updated to describe detail files as YAML and to reference `detail-files-schema.md`; processes.template.md and guide templates (requirements, architecture-decisions, implementation-decisions) use `.yaml` in examples.
+  - **Bootstrap**: `copy_files.sh` copies `*.yaml` detail files from template directories into `tied/` and copies `detail-files-schema.md` into `tied/` when present.
+  - **Legacy**: Existing `.md` detail files in template directories are unchanged and can remain for reference; indexes and scripts now treat YAML as the canonical detail format.
+
+- **TIED YAML MCP Server** (`mcp-server/`): Model Context Protocol server for programmatic access to TIED YAML indexes
+  - **Tools**: Read, list tokens, filter by field, validate YAML; traceability tools `get_decisions_for_requirement` and `get_requirements_for_decision`; write tools `yaml_index_insert`, `yaml_index_update`
+  - **Resources**: Read-only URIs for full indexes (`tied://requirements`, `tied://architecture-decisions`, `tied://implementation-decisions`, `tied://semantic-tokens`) and single records (`tied://requirement/{token}`, `tied://decision/{token}`)
+  - **Configuration**: `TIED_BASE_PATH` environment variable for index location; supports `tied/` layout and template-only repos
+  - **Cursor**: Documented MCP config for Cursor IDE in `mcp-server/README.md`
+
+- **MCP Server: REQ/ARCH/IMPL detail access and create-with-detail**
+  - **Batch detail read**: New tool `yaml_detail_read_many` — request details by token list and/or by type (requirement | architecture | implementation); returns a map of token → detail record or `{ error }`.
+  - **Create token with details**: New tool `tied_token_create_with_detail` — create a new REQ, ARCH, or IMPL in one call: writes index record (with `detail_file`) and detail YAML file; optional `upsert_index` to merge into existing index.
+  - **Resources**: New read-only URIs for all details by type: `tied://details/requirements`, `tied://details/architecture`, `tied://details/implementation` (each returns token → detail object).
+  - **Docs**: `mcp-server/README.md` updated with new tools and resources; conversion section now refers to detail YAML (not markdown).
+
+- **MCP Server: Hybrid layout (detail .md and .yaml)** — support for reference-style TIED projects where index `detail_file` points to either `.md` or `.yaml` per token
+  - **Detail path resolution**: Loader resolves path from index `detail_file` when present; falls back to `{subdir}/{token}.yaml` then `{subdir}/{token}.md` so hybrid layouts work without changing indexes.
+  - **Markdown detail reading**: For `.md` detail files, `loadDetail()` returns `{ _raw_markdown, _format: "markdown" }`; tools and resources expose this so MCP can read reference projects that keep some tokens in Markdown.
+  - **Listing**: `listDetailTokens(type)` now includes tokens from the index (where `detail_file` is set) and from the filesystem (both `.yaml` and `.md` in the detail directory).
+  - **Update guard**: `yaml_detail_update` returns an error when the detail file is Markdown (edit `.md` files directly).
+  - **Import/inspect tool**: New tool `tied_import_summary` — optional `base_path`; reads requirements/architecture/implementation YAML indexes and reports token counts and which `detail_file` paths exist (for validating or inspecting an existing TIED directory).
+  - **Docs**: `mcp-server/README.md` updated with “Hybrid layout” section and `tied_import_summary`; detail read/list descriptions updated.
+
+- **`[PROC-CITDP]` Change Impact and Test Design Procedure** — 8-step procedure for analyzing, planning, testing, and implementing behavior changes; integrates with `[PROC-TIED_DEV_CYCLE]`, `[PROC-LEAP]`, `[PROC-TEST_STRATEGY]`, `[PROC-YAML_EDIT_LOOP]`; produces YAML analysis record. Defined in `processes.md`.
+
+- **`[PROC-IMPL_CODE_TEST_SYNC]` IMPL-to-Code-and-Tests Linkage** — 33-step checklist (9 phases A-I) for discovering, analyzing, documenting, and synchronizing IMPL pseudo-code with managed code and tests; enforces three-way alignment (pseudo-code / tests / code) from unit TDD through composition and E2E. Defined in `processes.md`; registered in `semantic-tokens.yaml`.
+
+- **`[PROC-SWIFT_BUILD]` Swift Build and Validation Process** — Build, test, run, and validation commands for Swift applications; lint/type-check gate for `[PROC-TIED_DEV_CYCLE]` inner loop. Defined in `processes.md`; registered in `semantic-tokens.yaml`.
+
+- **`[PROC-YAML_EDIT_LOOP]`** — Controlling loop for creating or editing TIED YAML: edit, validate with `lint_yaml`, use only after validation passes. Defined in `processes.md` under `[PROC-YAML_DB_OPERATIONS]`.
+
+- **docs/impl-code-test-linkage.md** — Practical guide for three-way alignment (IMPL pseudo-code / tests / code); 9 phases with worked examples, LEAP micro-cycle, and process diagram. Process token: `[PROC-IMPL_CODE_TEST_SYNC]`.
+
+- **docs/methodology-diagrams.md** — 6 mermaid diagrams covering TIED traceability stack with LEAP propagation, three development phases, PROC-TIED_DEV_CYCLE session workflow, TDD inner loop (RED-GREEN-REFACTOR), CITDP procedure, and YAML edit loop.
+
+### Changed
+
+- **Monolithic-to-TIED conversion (REQ, ARCH, IMPL)** – improved migration in `mcp-server/src/convert/` for lossless conversion from STDD-style monolithic markdown to TIED YAML indexes and detail files:
+  - **Requirements**
+    - Section regex allows optional numbering (e.g. `### 2. [REQ-...]`); end-of-string lookahead fixed so section bodies are no longer truncated at newlines.
+    - "Next bold label" parsing: each labeled field’s value runs until the next `**Label**`/`**Label**:`, preserving multi-line Satisfaction Criteria, Validation Criteria, and Implementation Notes.
+    - Same-line values (e.g. `**Priority: P0 (Critical)**`) and rest-of-line values (e.g. `**Description**: text`) both captured; backtick-only lines (e.g. `` `[PROC:TOKEN_AUDIT]`: ``) not treated as field values.
+    - Trailing colon stripped from normalized keys so `**Rationale:**` maps to `rationale`.
+    - Detail files: Implementation Notes section when present; "Original section (from monolithic source)" collapsible block with full body for fidelity.
+    - YAML records: optional `implementation_notes` when present.
+  - **Architecture**
+    - Section regex allows decimal numbering (e.g. `## 4.1`, `## 14.1.`); optional `[REQ-*]`/`[IMPL-*]` after `[ARCH-*]`.
+    - `### Decision: ...` block extracted; then "next bold label" parsing for Rationale, Alternatives Considered, Implementation (and Implementation Plan), Token Coverage, Implementation Status.
+    - Detail files: Status from parsed content; Token Coverage section from source when present; "Original section" block; Alternatives Considered shows "—" when empty.
+    - Fallback regex uses `(?![\s\S])` for end-of-string.
+    - YAML records: `token_coverage` and status from source when present.
+  - **Implementation**
+    - Section regex allows `N.`, `2a.`, `8.1.`-style numbering; header may contain `[ARCH-*]` `[REQ-*]` `[IMPL-*]` refs.
+    - `### Decision: ...` and `### Implementation Approach: ...` blocks extracted; "next bold label" parsing for Rationale, Code Markers, Token Coverage, Validation Evidence, Implementation Details.
+    - Detail files: Decision, Rationale, Implementation Approach, Implementation Details, Code Markers, Token Coverage, Validation Evidence; Status from source; "Original section" block.
+    - YAML records: `token_coverage`, `code_markers`, `validation_evidence`; `implementation_approach.details` from Implementation Details; status and decision used when present.
+  - **Shared**
+    - Colon-style tokens (`[REQ:*]`, `[ARCH:*]`, `[IMPL:*]`) normalized to hyphen before parsing when `token_format` is `"both"` or `"colon"`.
+    - REQ, ARCH, and IMPL conversions now use the same parsing and fidelity patterns so all captured info is preserved in both detail YAML and index.
+    - Detail output is now YAML only (REQ-*.yaml, ARCH-*.yaml, IMPL-*.yaml); index `detail_file` paths reference .yaml.
+
+## [4.0.0] - 2026-10-24
+
+### Changed
+
+- **TIED 4.0.0 response stamp ([REQ-TIED_SETUP])** — Replaced the legacy **`Observing AI principles!`** acknowledgment with a versioned first-line stamp **`TIEDv4.0.0:`** (full semver from root `VERSION` / **TIED Methodology Version**). Updated AGENTS, ai-principles, checklists, `.cursor/agents`, and REQ-TIED_SETUP validation criteria on bundle detail, project detail, and `tied-project/requirements.yaml` mirror. **`readTiedMethodologyVersion()`** centralizes semver for envelope `methodology_snapshot_id` and evidence-chain-profile defaults; W7 conversation-adherence adds `response_stamp_*` dimensions with **warn-only** legacy phrase handling. Plan: [PLAN-TIED-4.0-RESPONSE-STAMP](tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/PLAN.md).
+
+## [2.2.0] - 2026-02-23
+
+### Changed
+
+- **Documentation and version alignment**: All methodology version references updated to TIED 2.2.0 (README.md, conversation.template.md, tasks.template.md). Removed redundant document version line from ai-principles.md. mcp-server/README.md: fixed broken CLI/samples paragraph (CLI script and sample files not yet in repo; use MCP conversion tools); conversion tools description now references TIED 2.x output format.
+
+## [2.1.0] - 2026-02-09
+
+### Changed
+
+- **Task Tracking Now Optional**: Task tracking via `tasks.md` is no longer mandatory in the TIED methodology
+  - **Rationale**: The core value of TIED is in the **traceability chain** (requirements → architecture → implementation → tests → code) maintained through semantic tokens and YAML indexes, not in task tracking artifacts. Agents can naturally maintain planning state in-session (e.g., conversation-based todo lists) or document work breakdown directly in `implementation-decisions`, making a separate task file redundant.
+  - **Benefits**:
+    - Less ceremony: No need to "plan in tasks.md before implementation," update subtasks, or remove completed subtasks
+    - Single source of truth: Traceability stays in the token chain and decision logs
+    - Agent-native workflow: Agents already break work into steps and track progress in-conversation
+    - Simpler bootstrap: Session start no longer requires reviewing tasks.md
+    - Fewer artifacts: One less template and one less file to create per project
+  - **What Changed**:
+    - `AGENTS.md`: Removed "Review tasks.md" from session bootstrap, removed Task Management section, removed tasks.md from all checklists and Key Files table
+    - `ai-principles.md`: Renamed Phase 2 from "Pseudo-Code → Tasks" to "Planning Implementation", removed Task Tracking System section, updated all checklists to remove tasks.md references
+    - Template files: Removed tasks.md from `REQ-TIED_SETUP`, architecture structure, and all YAML indexes
+    - `tasks.template.md`: Added prominent note that it's optional as of TIED 2.1.0
+    - Token audit/validation results: Now logged only in `implementation-decisions` (previously logged in both tasks.md and implementation-decisions)
+  - **What Stayed the Same**:
+    - All semantic token types: `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, `[TEST-*]`, `[PROC-*]`
+    - Documentation-first flow: expand requirements, record ARCH/IMPL decisions immediately, then implement
+    - Module validation mandate: validate modules independently before integration
+    - Priority order: Tests > Code > Basic Functions > Infrastructure
+    - Token audit and validation processes (only logging location changed)
+  - **Migration**: Projects currently using `tasks.md` can continue using it - it's simply no longer required. Projects can also switch to in-session planning or document work breakdown in `implementation-decisions.yaml`. No breaking changes to existing workflows.
+  - **Optional Use**: Projects that benefit from a shared task list for human visibility can continue using `tasks.template.md`
+
+### Removed
+
+- Mandatory task tracking from methodology requirements
+- `tasks.md` references from AGENTS.md session bootstrap and all operational checklists
+- Task Tracking System section from ai-principles.md (replaced with optional work planning note)
+- `tasks.md` from required file lists in templates (REQ-TIED_SETUP, ARCH-TIED_STRUCTURE, implementation setup)
+
+### Note
+
+- This release represents a minor version bump (2.0.0 → 2.1.0) because while task tracking was previously positioned as mandatory, the methodology's core value proposition - semantic token traceability - remains unchanged. Making task tracking optional simplifies the methodology without removing functionality, as agents and teams can still choose to use `tasks.md` if desired.
+
+---
+
+## [2.0.0] - 2026-02-08
+
+### Changed
+
+- **Methodology Rename**: Renamed from STDD (Semantic Token-Driven Development) to TIED (Token-Integrated Engineering & Development)
+  - **Rationale**: The new name better captures the methodology's core value proposition: semantic tokens "tie" code to intent, making it impossible to modify code without confronting related context. The term "integrated" emphasizes how tokens are woven throughout the development lifecycle, while "engineering & development" broadens the scope beyond just "development" to include the full engineering process.
+  - **Breaking Changes**:
+    - Methodology name changed throughout all documentation
+    - Repository recommended directory structure changed from `stdd/` to `tied/`
+    - GitHub repository URL changed from `github.com/fareedst/stdd` to `github.com/fareedst/tied`
+    - File renames: `STDD.md` → `TIED.md`, `stdd-language-spec.md` → `tied-language-spec.md`
+    - Token identifiers updated: `REQ-STDD_SETUP` → `REQ-TIED_SETUP`, `ARCH-STDD_STRUCTURE` → `ARCH-TIED_STRUCTURE`
+  - **Preserved**:
+    - All semantic token types remain unchanged: `[REQ-*]`, `[ARCH-*]`, `[IMPL-*]`, `[TEST-*]`, `[PROC-*]`
+    - The semantic token mechanism and traceability system remain unchanged
+    - All methodology principles, processes, and workflows remain unchanged
+    - Version history preserved (this is v2.0.0, building on v1.5.0)
+  - **Migration**: Existing TIED projects should update their documentation references from "STDD" to "TIED" and rename their `stdd/` directory to `tied/`. The methodology itself remains functionally identical.
+
+### Note
+
+- This release represents a major version bump (1.5.0 → 2.0.0) due to the breaking changes in terminology and directory structure. However, the core methodology, semantic token system, and all technical features remain unchanged from v1.5.0.
+
+---
+
+## [1.5.0] - 2026-02-07
+
+### Added
+
+- **Structured YAML Schema** [v1.5.0 Schema Enhancement]: Restructured all three YAML index files to use machine-parseable structured fields instead of markdown-formatted string blobs
+  - **traceability field**: Now a structured map with separate lists for `architecture[]`, `implementation[]`, `tests[]`, and `code_annotations[]` (previously markdown-formatted string)
+  - **rationale field**: Now a structured map with `why`, `problems_solved[]`, and `benefits[]` (previously plain string)
+  - **satisfaction_criteria** (requirements): Now a list of structured items with `criterion` and optional `metric` (previously markdown-formatted string)
+  - **validation_criteria** (requirements): Now a list of structured items with `method` and `coverage` (previously markdown-formatted string)
+  - **alternatives_considered** (architecture): Now a list of structured items with `name`, `pros[]`, `cons[]`, and `rejected_reason` (previously markdown-formatted string)
+  - **implementation_approach** (architecture/implementation): Now a structured map with `summary` and `details[]` (previously markdown-formatted string)
+  - **code_markers → code_locations** (implementation): Renamed and restructured with `files[]` and `functions[]` lists with structured metadata (previously markdown-formatted string)
+  - **metadata field**: Grouped flat fields (`created`, `last_updated`, `last_validated`, `last_validator`) into structured maps with date/author/reason/result sub-fields
+  - Enables direct field access: `yq '.REQ-X.traceability.architecture[]'` instead of parsing markdown text
+  - Enables structured queries: `yq '.REQ-X.satisfaction_criteria[].criterion'`
+  - Better validation and tool integration support
+
+- **YAML Database Indexes** [PROC-YAML_DB_OPERATIONS]: Transformed all three index files from Markdown tables to YAML database files for improved programmatic access and append-only semantics
+  - `requirements.template.yaml` - YAML database with all requirement records (replaces Markdown tables in requirements.template.md)
+  - `architecture-decisions.template.yaml` - YAML database with all architecture decision records (replaces Markdown tables in architecture-decisions.template.md)
+  - `implementation-decisions.template.yaml` - YAML database with all implementation decision records (replaces Markdown tables in implementation-decisions.template.md)
+  - Each YAML file includes comprehensive header documentation and template blocks for easy appending
+  - Schema tailored per type with structured fields (see Structured YAML Schema above)
+  - Append-only design: copy template block from bottom, paste at end, fill fields
+  - Enables programmatic querying with `yq`, `grep`, Python `yaml.safe_load()`, and other YAML tools
+
+- **YAML Operations Process Documentation** [PROC-YAML_DB_OPERATIONS]: Comprehensive process guide in `processes.template.md`
+  - Appending new records (manual and scripted) with v1.5.0 structured schema
+  - Reading specific records (`yq`, `grep`, Python)
+  - Filtering by status/priority
+  - Validating YAML syntax
+  - Listing all tokens
+  - Checking cross-references with structured traceability fields
+  - Querying structured content (satisfaction criteria, alternatives, code locations, metadata)
+  - Complete examples for all operations using v1.5.0 schema
+
+- **YAML Index Migration Guide** (`migrate-to-yaml-indexes.md`): Comprehensive migration instructions
+  - Updated with v1.4.0 → v1.5.0 migration section for structured schema conversion
+  - Python migration script for automated field restructuring
+  - Pre-migration checklist
+  - Step-by-step migration for all three index types
+  - Manual and scripted conversion approaches
+  - Cross-reference updates
+  - YAML syntax validation
+  - Traceability verification
+  - Post-migration checklist
+  - Rollback procedure
+  - Troubleshooting section
+
+### Changed
+
+- **`.template.md` guide files**: Updated with v1.5.0 schema examples
+  - `requirements.template.md` - Updated append examples and query patterns to show structured traceability, rationale, satisfaction_criteria, validation_criteria, and metadata
+  - `architecture-decisions.template.md` - Updated append examples and query patterns to show structured traceability, rationale, alternatives_considered, implementation_approach, and metadata
+  - `implementation-decisions.template.md` - Updated append examples and query patterns to show structured traceability, rationale, implementation_approach, code_locations (renamed from code_markers), and metadata
+  - All three files now serve as **guide files** explaining how to use YAML indexes with structured fields
+
+- **Detail file templates**: Updated traceability sections to reference structured YAML format
+  - `requirements.template/*.md` - Updated traceability section format and added notes about structured YAML lists
+  - `architecture-decisions.template/*.md` - Kept clean format (already compatible)
+  - `implementation-decisions.template/*.md` - Updated code markers section to code locations with structured format notes
+
+- **`processes.template.md`**: Updated `[PROC-YAML_DB_OPERATIONS]` section
+  - Scripted append example updated to v1.5.0 structured schema
+  - Added structured traceability query examples
+  - Added structured content query examples (satisfaction criteria, alternatives, implementation approach, metadata)
+
+- **`copy_files.sh`**: Updated to copy YAML template files
+  - Added `requirements.template.yaml` to TEMPLATE_FILES array
+  - Added `architecture-decisions.template.yaml` to TEMPLATE_FILES array
+  - Added `implementation-decisions.template.yaml` to TEMPLATE_FILES array
+
+- **Version Alignment**: Updated all methodology files to STDD v1.5.0
+  - `AGENTS.md`: v1.5.0
+  - `ai-principles.md`: v1.2.0, STDD v1.5.0
+  - `semantic-tokens.template.md`: v1.5.0
+  - `requirements.template.md`: v1.5.0
+  - `architecture-decisions.template.md`: v1.5.0
+  - `implementation-decisions.template.md`: v1.5.0
+
+- **`semantic-tokens.template.md`**: Updated all references to mention `.yaml` index files alongside `.md` guide files
+  - Added `[PROC-YAML_DB_OPERATIONS]` to Process Tokens Registry
+
+- **`AGENTS.md`**: Updated Key Files table and Section 2 to reference `.yaml` index files
+  - Index files listed as YAML databases with `.md` files as guides
+
+- **`ai-principles.md`**: Comprehensive updates throughout
+  - Documentation Structure section updated to reference `.yaml` files
+  - Related Documents section updated with `.yaml` file references
+  - Feature documentation format updated to use `.yaml` file references
+  - Critical reminders updated to reference `.yaml` files
+  - Change Impact Tracking matrix updated to use `.yaml` files
+  - All checklist items updated to reference `.yaml` files
+
+- **`STDD.md`**: Updated references to mention YAML index format in documentation outputs and template file listings
+
+### Benefits
+
+- **Direct Field Access**: `yq '.REQ-X.traceability.architecture[]'` instead of parsing markdown strings
+- **Structured Queries**: `yq '.REQ-X.satisfaction_criteria[].criterion'` for targeted data extraction
+- **Easy Filtering**: `yq '.REQ-X.metadata.last_validated.result'` for validation status checks
+- **Programmatic Access**: Query, filter, and validate indexes using standard YAML tools (`yq`, Python, etc.)
+- **Append-Only Semantics**: Add new records by copying template block and pasting at end - reduces merge conflicts
+- **Structured Data**: YAML provides proper data types (lists, maps, multi-line strings) vs. Markdown table text or string blobs
+- **Easier Validation**: `yq '.' file.yaml` validates syntax; custom scripts can validate cross-references and field structure
+- **Better Tooling**: Standard YAML parsers available in all languages with native support for structured queries
+- **Consistent Format**: No Markdown table formatting issues or alignment problems
+- **Preserve Detail Files**: Detail `.md` files remain unchanged - only indexes converted to YAML with structured fields
+
+### Rationale
+
+**Schema Restructuring (v1.5.0)**: Markdown-formatted string blobs in YAML fields require text parsing and regex matching for programmatic access. Structured YAML fields enable direct queries (`yq '.field.subfield[]'`), type safety, easier validation, and better tool integration. This change completes the transformation from human-only readable Markdown to machine-readable structured data while maintaining human readability.
+
+**YAML Database Indexes (v1.4.0 foundation)**: Markdown tables become unwieldy for programmatic operations (filtering, querying, validation). YAML provides:
+1. **Machine-readable structure** while maintaining human readability
+2. **Append-only workflow** that minimizes merge conflicts
+3. **Rich data types** (lists, maps, multi-line strings) vs. plain text in table cells
+4. **Standard tooling** available across all programming languages
+5. **Easier validation** of both syntax and semantic consistency
+
+The `.md` guide files explain how to use the YAML indexes, while the YAML files themselves serve as the canonical database. Detail files remain in Markdown for narrative documentation.
+
+---
+
+## [1.4.0] - 2026-02-06
+
+### Added
+
+- **Scalable Requirements Structure**: Transformed `requirements.template.md` from a monolithic file into an index + detail files pattern for scalability
+  - Main file now serves as a lightweight **index** with a table of all requirements
+  - Individual requirements stored in `requirements.template/` directory as separate files (e.g., `REQ-STDD_SETUP.md`)
+  - Mirrors the architecture-decisions (v1.3.0) and implementation-decisions (v1.2.0) structure
+  - Status tracking per requirement: ✅ Implemented, ⏳ Planned, Template
+  - Optional domain-based grouping for very large projects
+
+- **Requirements Migration Guide** (`migrate-requirements.md`): Comprehensive AI agent instructions for migrating existing projects from monolithic requirements files to the new scalable structure
+  - Pre-migration checklist
+  - Step-by-step migration process with commands
+  - Post-migration verification
+  - Handling special cases (missing tokens, duplicates, cross-references)
+  - Complete worked example
+  - Rollback procedure
+
+- **Example Requirements Detail Files** (`requirements.template/`): Complete reference implementations
+  - `REQ-STDD_SETUP.md`
+  - `REQ-MODULE_VALIDATION.md`
+  - `REQ-IDENTIFIER.md` (template example)
+
+### Changed
+
+- **`requirements.template.md`**: Now contains index table, detail file template, and instructions for the new structure
+- **`copy_files.sh`**: Updated to copy requirements detail files from `requirements.template/` directory
+- **`semantic-tokens.template.md`**: Updated Requirements Tokens Registry reference to point to both index and detail files directory
+- **Cross-references**: Updated `ai-principles.md`, `AGENTS.md`, `README.md`, and `STDD.md` to reflect new requirements structure
+- **Version Alignment**: Updated all methodology files to STDD v1.4.0
+
+### Rationale
+
+As projects grow, monolithic requirements files become unwieldy for both humans and AI agents. This change (completing the pattern started with implementation-decisions in v1.2.0 and architecture-decisions in v1.3.0) preserves all information while enabling:
+- Faster navigation and context loading
+- Cleaner git history per-requirement
+- Reduced merge conflicts
+- Domain-based organization for large projects
+- Consistent pattern across all STDD documentation types (requirements, architecture, implementation)
+
+---
+
+## [1.3.0] - 2026-01-17
+
+### Added
+
+- **Unified Semantic Token Format**: Standardized all semantic tokens from colon format (`[TYPE:IDENTIFIER]`) to hyphen format (`[TYPE-IDENTIFIER]`)
+  - Enables single regex pattern for both text and filenames
+  - Consistent mental model - tokens look the same everywhere
+  - Simplified tooling - no format translation needed
+  - Easier searchability - agents can use one pattern for all contexts
+
+- **Scalable Architecture Decisions Structure**: Transformed `architecture-decisions.template.md` from a monolithic file into an index + detail files pattern for scalability
+  - Main file now serves as a lightweight **index** with a table of all architecture decisions
+  - Individual decisions stored in `architecture-decisions/` directory as separate files (e.g., `ARCH-STDD_STRUCTURE.md`)
+  - Mirrors the implementation-decisions structure from v1.2.0
+  - Status tracking per decision: Active, Deprecated, Template, Superseded
+  - Optional domain-based grouping for very large projects
+
+- **Token Format Migration Guide** (`migrate-semantic-token-format.md`): Comprehensive AI agent instructions for migrating existing projects from colon-based tokens to hyphen-based tokens
+  - Pre-migration checklist
+  - Automated sed/grep commands for bulk replacement
+  - Universal migration script
+  - Post-migration verification steps
+  - Rollback procedure
+
+- **Architecture Decisions Migration Guide** (`migrate-architecture-decisions.md`): Comprehensive AI agent instructions for migrating existing projects from monolithic architecture-decisions files to the new scalable structure
+  - Pre-migration checklist
+  - Step-by-step migration process with commands
+  - Post-migration verification
+  - Handling special cases (missing tokens, duplicates, cross-references)
+  - Complete worked example
+  - Rollback procedure
+
+- **Example Architecture Detail Files** (`architecture-decisions.template/`): Complete reference implementations
+  - `ARCH-STDD_STRUCTURE.md`
+  - `ARCH-MODULE_VALIDATION.md`
+  - `ARCH-EXAMPLE_DECISION.md`
+
+### Changed
+
+- **All Documentation Files**: Updated to use hyphen-based token format (`[TYPE-IDENTIFIER]`)
+- **`architecture-decisions.template.md`**: Now contains index table, detail file template, and instructions for the new structure
+- **`semantic-tokens.template.md`**: Updated Architecture Tokens Registry reference to point to both index and detail files directory
+- **Version Alignment**: Updated all methodology files to STDD v1.3.0
+
+### Rationale
+
+**Token Format Change**: The colon (`:`) character is invalid in filenames on many operating systems. Previously this required different patterns for tokens in text vs. filenames. The hyphen format unifies both, enabling single-pattern matching and simplified tooling.
+
+**Architecture Decisions Structure**: As projects grow, monolithic documentation files become unwieldy for both humans and AI agents. This change (mirroring the v1.2.0 implementation-decisions change) preserves all information while enabling faster navigation, cleaner git history, reduced merge conflicts, and domain-based organization.
+
+---
+
+## [1.2.0] - 2026-01-17
+
+### Added
+
+- **Scalable Implementation Decisions Structure**: Transformed `implementation-decisions.template.md` from a monolithic file into an index + detail files pattern for scalability
+  - Main file now serves as a lightweight **index** with a table of all implementation decisions
+  - Individual decisions stored in `implementation-decisions/` directory as separate files (e.g., `IMPL-CONFIG_STRUCT.md`)
+  - Filename convention: Replace `:` with `-` to handle OS filename restrictions (`[IMPL-TOKEN]` → `IMPL-TOKEN.md`)
+  - Status tracking per decision: Active, Deprecated, Template, Superseded
+  - Optional domain-based grouping for very large projects
+
+- **Migration Guide** (`migrate-implementation-decisions.md`): Comprehensive AI agent instructions for migrating existing projects from monolithic implementation-decisions files to the new scalable structure
+  - Pre-migration checklist
+  - Step-by-step migration process with commands
+  - Post-migration verification
+  - Handling special cases (missing tokens, duplicates, cross-references)
+  - Complete worked example
+  - Rollback procedure
+
+- **Example Detail File** (`implementation-decisions.template/IMPL-MODULE_VALIDATION.md`): Complete reference implementation of a detail file
+
+### Changed
+
+- **`implementation-decisions.template.md`**: Now contains index table, detail file template, and instructions for the new structure
+- **`semantic-tokens.template.md`**: Updated Implementation Tokens Registry reference to point to both index and detail files directory
+- **Version Alignment**: Updated all methodology files to STDD v1.2.0
+
+### Rationale
+
+As projects grow, monolithic documentation files become unwieldy for both humans and AI agents. This change preserves all information while enabling:
+- Faster navigation and context loading
+- Cleaner git history per-decision
+- Reduced merge conflicts
+- Domain-based organization for large projects
+
+---
+
+## [1.1.0] - 2025-12-19
+
+### Added
+
+- **Processes as a Primary STDD Pillar** [PROC-PROJECT_SURVEY_AND_SETUP] [PROC-BUILD_PIPELINE_VALIDATION]: Elevated processes from optional guidance to a core methodology component so operational rituals remain traceable to requirements, architecture, and implementation tokens.
+
+### Changed
+
+- **Version Alignment**: Updated every methodology guide, template, and project copy to cite STDD v1.1.0 so downstream projects instantly inherit the processes-first workflow expectations.
+
+### Rationale
+
+Adding processes to the primary STDD methodology is a major capability improvement that affects every consumer of these templates, necessitating a version bump.
+
+## [1.0.2] - 2025-01-27
+
+### Added
+
+- **Module Validation Requirement** [REQ-MODULE_VALIDATION]: Mandatory requirement for independent module validation before integration
+  - Logical modules must be validated independently before integration into code satisfying specific requirements
+  - Each module must have clear boundaries, interfaces, and validation criteria defined before development
+  - Modules must pass independent validation (unit tests with mocks, integration tests with test doubles, contract validation, edge case testing, error handling validation) before integration
+  - Integration only occurs after module validation passes
+  - **Rationale**: Eliminates bugs related to code complexity by ensuring each module works correctly in isolation before combining with other modules
+
+- **Module Validation Architecture Decision** [ARCH-MODULE_VALIDATION]: Architecture decision documenting the module validation strategy
+  - Module identification requirements
+  - Validation approach (unit testing, integration testing with test doubles, contract validation, edge case testing, error handling validation)
+  - Integration requirements
+  - Alternatives considered and rationale for rejection
+
+- **Module Validation Implementation Decision** [IMPL-MODULE_VALIDATION]: Implementation decision documenting how module validation is implemented
+  - Module identification phase
+  - Module development phase
+  - Module validation phase (before integration)
+  - Integration phase (after validation)
+  - Task structure and code markers
+
+- **Template bootstrap script**: `copy_files.sh` copies every STDD template file into a target project’s `stdd/` directory, making STDD installation as easy as downloading the repository somewhere convenient and running the script from the desired project root.
+
+### Changed
+
+- **Development Process**: Enhanced Phase 1, Phase 2, and Phase 3 to include module identification, development, validation, and integration steps
+- **AI-First Principles**: Added Principle 8 for independent module validation before integration
+- **Task Template**: Updated to include module validation subtasks in task examples
+- **All Templates**: Updated version numbers to 1.0.2
+
+### Rationale
+
+This enhancement addresses the need to eliminate bugs related to code complexity by requiring logical modules to be validated independently prior to integration. This ensures each module works correctly in isolation before combining with other modules, reducing integration complexity and catching bugs early in the development cycle.
+
+## [1.0.1] - 2025-11-19
+
+### Changed
+
+- Made the repository language-neutral by removing specific language references
+- Updated documentation to be language-agnostic
+
+## [1.0.0] - 2025-11-08
+
+### Added
+
+- Initial release of STDD methodology template (Version 1.0.0)
+- Complete STDD principles and process guide (`ai-principles.md`)
+- STDD methodology overview for beginners, intermediate, and expert developers (`STDD.md`)
+- Template files for project setup (with `.template.md` suffix):
+  - `requirements.template.md` - Template for project requirements
+  - `architecture-decisions.template.md` - Template for architecture decisions
+  - `implementation-decisions.template.md` - Template for implementation decisions
+  - `processes.template.md` - Template for process tracking
+  - `semantic-tokens.template.md` - Template for semantic token registry
+  - `tasks.template.md` - Template for task tracking
+- AI agent operating guide (`AGENTS.md`) and Cursor IDE loader (`.cursorrules` template)
+- Comprehensive README with getting started guide and template usage instructions
+- Version file (`VERSION`) containing methodology version
+
+### Methodology Components
+- **Requirements Documentation** - Template file (`requirements.template.md`) for documenting requirements with `[REQ-*]` tokens
+- **Architecture Decisions** - Template file (`architecture-decisions.template.md`) for documenting architecture decisions with `[ARCH-*]` tokens
+- **Implementation Decisions** - Template file (`implementation-decisions.template.md`) for documenting implementation decisions with `[IMPL-*]` tokens
+- **Process Management** - Template file (`processes.template.md`) for repeatable processes
+- **Semantic Token System** - Template file (`semantic-tokens.template.md`) for central token registry and cross-referencing system
+- **Task Management** - Template file (`tasks.template.md`) for priority-based task tracking system
+- **Development Process** - Three-phase development process (Requirements → Pseudo-Code → Tasks → Implementation)
+
+### Template Structure
+- Template files use `.template.md` suffix to distinguish them from project-specific files
+- Projects copy templates to their own files (without `.template` suffix) for project-specific development
+- Methodology documentation files (`STDD.md`, `ai-principles.md`) remain as reference in the STDD repository
+- All references in methodology files point to project files (without `.template`), as those are what exist in actual projects
+
+### Key Features
+- Intent preservation through semantic tokens
+- Traceability from requirements to code
+- Living documentation system
+- AI agent integration (Cursor IDE)
+- Template-based structure for easy adoption
+
+[4.0.0]: https://github.com/fareedst/tied/releases/tag/v4.0.0
+[3.0.0]: https://github.com/fareedst/tied/releases/tag/v3.0.0
+[2.2.0]: https://github.com/fareedst/tied/releases/tag/v2.2.0
+[2.1.0]: https://github.com/fareedst/tied/releases/tag/v2.1.0
+[1.0.0]: https://github.com/fareedst/tied/releases/tag/v1.0.0
+

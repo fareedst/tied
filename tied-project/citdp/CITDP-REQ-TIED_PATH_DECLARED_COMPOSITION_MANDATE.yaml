@@ -1,0 +1,65 @@
+CITDP-REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE:
+  change_definition:
+    current_behavior: "Composition-integration checklist and build-plan skills require binding tests but not path-declared composition suffixes; project-size comp column may be 0 while inference passes WF subcheck."
+    desired_behavior: "When composition bindings are in scope, agents name *.binding|*.integration|*.contract.test.ts paths; MCP tied_path_declared_composition_validate enforces mandate at verification per enforcement mode; WF subcheck unchanged."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/project-size/path-declared-composition-validate.ts; mcp-server/src/tools/index.ts; tools/bundled-prompt-type-skills/prompt-shared/tied-composition-test-naming-adjunct.md; build-plan/SKILL.md; tied-implement.md; agent-req-implementation-checklist.md composition-integration; run-close-out-gates.mjs advisory hook; tied-project/vocab/tied-methodology.md"
+    tied_tokens_new:
+      - "ARCH-TIED_PATH_DECLARED_COMPOSITION_MANDATE"
+      - "IMPL-TIED_COMPOSITION_TEST_NAMING_SKILL"
+      - "IMPL-TIED_PATH_DECLARED_COMPOSITION_VALIDATE"
+      - "REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE"
+  non_goals:
+    - "Blocking pre_implementation checklist gate at minimal depth"
+    - "Change wf_composition_evidence_subcheck pass rule"
+    - "Merge manifest or PROOF_LABEL into coarse composition_tests"
+  path_declared_composition:
+    default_derivation: "disposable_wf_or_minimal_until_composition_integration"
+    enforcement: "advisory"
+    phases:
+      - "close_out"
+      - "verification-gate"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Blocking enforcement on every disposable WF trial without sponsor opt-in"
+        - "Treating composition_inferred as satisfying path-declared comp"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "PDC-D6 defaults blocking for store composition-integration scope"
+        - "Subcheck pass rule unchanged per sponsor lock"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE/PLAN.md"
+        - "tied-project/working/REQ-TIED_TRIAL_PROOF_INTENT_STACK/evidence/proof-test-label-taxonomy.md"
+      falsification_questions:
+        - "Does WF subcheck change if validator is advisory only?"
+        - "Would store build-plan still miss path naming if enforcement stays advisory?"
+      gate_policy: "advisory"
+      integrated_waiver:
+        approval: "sponsor-accepted-plan"
+        expiry: {}
+        owner: "plan-refine-leaf"
+        rationale: "Plan and refine at minimal; optional integrated dogfood at build-plan."
+      rationale: "Process + read-only validator; WF disposable default advisory."
+      research_profile: "read-only-local"
+    depth_tier: "minimal"
+    eligibility_triggers_matched:
+      - "methodology_tooling_mcp"
+      - "prompt_type_workflow"
+    gate_policy: "advisory"
+    prior_depth_tier: null
+    rationale: "Methodology MCP and prompt-shared; eligibility for integrated at build-plan dogfood only."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-PDC-01 through SC-PDC-05 in test-strategy.md"
+  test_strategy:
+    bootstrap:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+    composition:
+      - "mcp-server/src/project-size/path-declared-composition-validate.binding.test.ts"
+    unit:
+      - "mcp-server/src/project-size/path-declared-composition-validate.test.ts"
+  unchanged_behavior: "wf-composition-evidence-subcheck inference pass; snapshot 1.1.0 facet keys; binding-inventory validator"

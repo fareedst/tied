@@ -407,6 +407,7 @@ steps:
       - "Identify bindings: event listeners, IPC channels, entry-point delegation, function wiring, platform hooks."
       - "Refer to vocab before writing composition tests/code: CALL sub-vocabulary-sync (RESOLVE) so binding, channel, and test names use the preferred domain terms in ./tied-project/vocab/*.md; CALL sub-vocabulary-sync (RECORD) for any new binding/channel concept ([PROC-VOCABULARY_INDEX])."
       - "Responsibility: test/code owner step. Composition wiring must be covered by existing or newly authored pseudocode before code is finalized."
+      - "Use path-declared composition suffixes (*.binding.test.ts, *.integration.test.ts, *.contract.test.ts) per proof-test-label taxonomy; before verification-gate run tied_path_declared_composition_validate with enforcement from tracker/CITDP."
       - "Write composition code to pass the test. No composition code without preceding failing test."
       - "Write failing composition test for each binding (before composition code); carries IMPL token comments; verifies trigger -> unit called -> arguments -> effect; does not invoke UI."
     title: "Bindings without UI; test-first wiring (Phase G)"

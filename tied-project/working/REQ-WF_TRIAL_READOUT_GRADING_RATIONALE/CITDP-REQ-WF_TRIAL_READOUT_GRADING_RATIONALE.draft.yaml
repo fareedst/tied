@@ -3,9 +3,9 @@ CITDP-REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
     current_behavior: "@record-wf-trial requires a Session grading table with letter bands but does not define rationale prose. Many PROMPT-WF readouts use placeholder em dashes or long jargon paragraphs. No bootstrap test guards rationale quality."
     desired_behavior: "Facilitator reference, SKILL Grade step, and workflow catalog document concise grade-aware rationale rules. A contract test fails when any PROMPT-WF readout has empty/placeholder rationales or sub-A bands without substantive text. All 84 WF readouts are backfilled (rationale only; bands frozen)."
     non_goals:
-      - "GF or CUSTOM trial readout backfill"
-      - "Changing facilitator letter bands or registry disposition"
       - "Automated registry band lock test"
+      - "Changing facilitator letter bands or registry disposition"
+      - "GF or CUSTOM trial readout backfill"
       - "Hard max-word count in CI"
     success_criteria:
       - "SC-GR-01 through SC-GR-04 pass in tools/bootstrap contract test"
@@ -14,9 +14,9 @@ CITDP-REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
   impact_analysis:
     modules_or_boundaries: "tools/bundled-record-wf-trial-skill; docs/demos/catalog-traditional-workflow-trial-prompts.md; docs/demos/trial-readout-PROMPT-WF-*.md; tools/bootstrap/lib/"
     tied_tokens_new:
-      - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
       - "ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE"
       - "IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE"
+      - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"

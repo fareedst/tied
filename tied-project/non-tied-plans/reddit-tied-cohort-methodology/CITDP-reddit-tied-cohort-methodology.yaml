@@ -1,28 +1,25 @@
+evidence:
+  primary:
+    - "docs/demos/catalog-tied-size-and-trial-statistics.md"
+    - "tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md"
+risks:
+  - description: "MCP, yaml paths, agentstream dominate opening"
+    id: "jargon_creep"
+    mitigation: "JARGON-GLOSSARY; wf03-style plain opening"
+  - description: "Readers infer best harness/model from size columns"
+    id: "leaderboard_drift"
+    mitigation: "test-strategy.md; honesty block; aggregate-only composition sentence"
+  - description: "Readers treat pf/atom or unit count as product quality"
+    id: "quality_conflation"
+    mitigation: "Part E explicitly separates fidelity lane from verify/readout"
 schema: "citdp-plan-draft.v1"
-slug: "reddit-tied-cohort-methodology"
 scope:
-  summary: |
-    Long-form Reddit article: TIED as per-change resolver (not waterfall/agile),
-    L1 application guide, and predictable WF cohort measurement via project-size
-    layers (aggregate evidence only).
   in_scope:
     - "Markdown under tied-project/non-tied-plans/reddit-tied-cohort-methodology/"
   out_of_scope:
+    - "Editing live comparison-table or snapshot receipts"
     - "Product code changes"
     - "Project REQ/ARCH/IMPL YAML"
-    - "Editing live comparison-table or snapshot receipts"
+  summary: "Long-form Reddit article: TIED as per-change resolver (not waterfall/agile),\nL1 application guide, and predictable WF cohort measurement via project-size\nlayers (aggregate evidence only).\n"
+slug: "reddit-tied-cohort-methodology"
 tied_tokens_new: []
-evidence:
-  primary:
-    - "tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md"
-    - "docs/demos/catalog-tied-size-and-trial-statistics.md"
-risks:
-  - id: "leaderboard_drift"
-    description: "Readers infer best harness/model from size columns"
-    mitigation: "test-strategy.md; honesty block; aggregate-only composition sentence"
-  - id: "quality_conflation"
-    description: "Readers treat pf/atom or unit count as product quality"
-    mitigation: "Part E explicitly separates fidelity lane from verify/readout"
-  - id: "jargon_creep"
-    description: "MCP, yaml paths, agentstream dominate opening"
-    mitigation: "JARGON-GLOSSARY; wf03-style plain opening"

@@ -1,6 +1,6 @@
 # Close-out — REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK
 
-**Commit:** `76037cde`
+**Commits:** `76037cde` (feature), `374dc188` (close-out CITDP + evidence)
 
 Summary column **wall_clock** (integer minutes). Receipts unchanged.
 
@@ -9,7 +9,7 @@ Summary column **wall_clock** (integer minutes). Receipts unchanged.
 | Signal | Status |
 | --- | --- |
 | Machine close-out | Gates allowed; envelope OK (`close_out` 2026-11-11) |
-| Process contract | Product @ `76037cde`; CITDP gate fix in follow-up commit |
+| Process contract | Complete @ `76037cde` + `374dc188` |
 | Adherence ledger | thin_ledger (advisory) |
 
 ## Verification

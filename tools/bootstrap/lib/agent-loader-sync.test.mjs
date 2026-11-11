@@ -34,27 +34,27 @@ describe("syncAgentsMd [REQ-TIED_AGENT_LOADER_REFRESH]", () => {
   it("T1a creates missing AGENTS.md", () => {
     const store = fs.mkdtempSync(path.join(os.tmpdir(), "alr-store-"));
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "alr-client-"));
-    seedStore(store, "4.2.1");
+    seedStore(store, "4.2.2");
     const result = syncAgentsMd(client, store);
     assert.equal(result.action, "created");
-    assert.equal(fs.readFileSync(path.join(client, "AGENTS.md"), "utf8").includes("4.2.1"), true);
+    assert.equal(fs.readFileSync(path.join(client, "AGENTS.md"), "utf8").includes("4.2.2"), true);
   });
 
   it("T1b updates stale client semver", () => {
     const store = fs.mkdtempSync(path.join(os.tmpdir(), "alr-store-"));
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "alr-client-"));
-    seedStore(store, "4.2.1");
+    seedStore(store, "4.2.2");
     fs.writeFileSync(path.join(client, "AGENTS.md"), agentsBody("4.0.0"));
     const result = syncAgentsMd(client, store);
     assert.equal(result.action, "updated");
-    assert.ok(fs.readFileSync(path.join(client, "AGENTS.md"), "utf8").includes("4.2.1"));
+    assert.ok(fs.readFileSync(path.join(client, "AGENTS.md"), "utf8").includes("4.2.2"));
   });
 
   it("T1c skips equal semver", () => {
     const store = fs.mkdtempSync(path.join(os.tmpdir(), "alr-store-"));
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "alr-client-"));
-    seedStore(store, "4.2.1");
-    const bytes = agentsBody("4.2.1");
+    seedStore(store, "4.2.2");
+    const bytes = agentsBody("4.2.2");
     fs.writeFileSync(path.join(client, "AGENTS.md"), bytes);
     const result = syncAgentsMd(client, store);
     assert.equal(result.action, "skipped");
@@ -65,7 +65,7 @@ describe("syncAgentsMd [REQ-TIED_AGENT_LOADER_REFRESH]", () => {
   it("T1d skips when client semver is newer", () => {
     const store = fs.mkdtempSync(path.join(os.tmpdir(), "alr-store-"));
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "alr-client-"));
-    seedStore(store, "4.2.1");
+    seedStore(store, "4.2.2");
     const bytes = agentsBody("4.3.0");
     fs.writeFileSync(path.join(client, "AGENTS.md"), bytes);
     const result = syncAgentsMd(client, store);
@@ -77,17 +77,17 @@ describe("syncAgentsMd [REQ-TIED_AGENT_LOADER_REFRESH]", () => {
   it("T1e updates unparseable client semver", () => {
     const store = fs.mkdtempSync(path.join(os.tmpdir(), "alr-store-"));
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "alr-client-"));
-    seedStore(store, "4.2.1");
+    seedStore(store, "4.2.2");
     fs.writeFileSync(path.join(client, "AGENTS.md"), "# no version\n");
     const result = syncAgentsMd(client, store);
     assert.equal(result.action, "updated");
-    assert.ok(fs.readFileSync(path.join(client, "AGENTS.md"), "utf8").includes("4.2.1"));
+    assert.ok(fs.readFileSync(path.join(client, "AGENTS.md"), "utf8").includes("4.2.2"));
   });
 
   it("T1f preserve skips update", () => {
     const store = fs.mkdtempSync(path.join(os.tmpdir(), "alr-store-"));
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "alr-client-"));
-    seedStore(store, "4.2.1");
+    seedStore(store, "4.2.2");
     const bytes = agentsBody("4.0.0");
     fs.writeFileSync(path.join(client, "AGENTS.md"), bytes);
     const result = syncAgentsMd(client, store, { preserveAgentLoader: true });
@@ -117,13 +117,13 @@ describe("warnAgentsLoaderDrift [REQ-TIED_AGENT_LOADER_REFRESH]", () => {
       mode: "linked",
       harness: "cursor",
       methodology_bundle: "live",
-      store_methodology_version: "4.2.1",
-      tied_version: "4.2.1",
-      installer_version: "4.2.1",
+      store_methodology_version: "4.2.2",
+      tied_version: "4.2.2",
+      installer_version: "4.2.2",
     });
     const result = warnAgentsLoaderDrift(client);
     assert.equal(result.drift, true);
-    assert.equal(result.pin, "4.2.1");
+    assert.equal(result.pin, "4.2.2");
     assert.equal(result.clientSemver, "4.0.0");
   });
 });

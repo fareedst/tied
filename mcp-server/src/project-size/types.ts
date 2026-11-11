@@ -2,10 +2,11 @@
  * [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
  * [ARCH-TIED_PROJECT_SIZE_SNAPSHOT] [ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
  * [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
+ * [REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE]
  */
 
 export const RECEIPT_SCHEMA_VERSION = "project-size-snapshot-receipt.v1";
-export const VALIDATOR_VERSION = "1.1.0";
+export const VALIDATOR_VERSION = "1.2.0";
 export const COHORT_ROW_SCHEMA_VERSION = "wf-trial-cohort-run.v1";
 
 export const PROOF_BOUNDARY =
@@ -38,6 +39,16 @@ export type ProjectSizeProofFacetsLayer = {
   e2e_tests: number;
   binding_inventory_tests: number;
   verify_evidence_files: number;
+  /** [REQ-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE] proof_subtype → case count (validator_version ≥ 1.2.0). */
+  label_case_counts?: Record<string, number>;
+  /** Cases in path-unit files where binding heuristic fired (does not change composition_tests). */
+  composition_inferred_cases?: number;
+};
+
+export type ProofInferenceDiagnostic = {
+  path: string;
+  binding_inferred: boolean;
+  uses_subprocess: boolean;
 };
 
 export type ProjectSizeCrossLayer = {
@@ -74,4 +85,5 @@ export type ProjectSizeSnapshotReceipt = {
   hashes: ProjectSizeHashes;
   trial_factors?: TrialFactorsAnnex;
   diagnostics: Array<{ code: string; message: string }>;
+  proof_inference_diagnostics?: ProofInferenceDiagnostic[];
 };

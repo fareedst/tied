@@ -109,6 +109,10 @@ import {
   tiedCorpusGraphTrace,
 } from "../corpus-graph/mcp-handlers.js";
 import { tiedProjectSizeSnapshot } from "../project-size/mcp-handler.js";
+import { validatePathDeclaredComposition } from "../project-size/path-declared-composition-validate.js";
+import type { BindingInventoryRow } from "../analysis/binding-inventory.js";
+import { runCompositionEvidenceSubcheck } from "../project-size/wf-composition-evidence-subcheck.js";
+import { validateWfProofManifest } from "../project-size/wf-proof-manifest-validate.js";
 import {
   tiedSourceGraphFreshness,
   tiedSourceGraphMap,
@@ -3682,6 +3686,98 @@ export const allTools = [
       include_trial_factors?: boolean;
     }) => {
       return textContent(prettyCanonicalJson(await tiedProjectSizeSnapshot(args)));
+    },
+  },
+  {
+    name: "tied_path_declared_composition_validate",
+    config: {
+      description:
+        "[REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE] Read-only path-declared composition mandate check: composition_tests from path suffixes; enforcement advisory or blocking.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        binding_inventory_path: z.string().optional(),
+        binding_inventory_rows: z.array(z.record(z.string(), z.unknown())).optional(),
+        composition_integration_required: z.boolean().optional(),
+        composition_integration_na: z.boolean().optional(),
+        exempt_reason: z.string().optional(),
+        enforcement: z.enum(["advisory", "blocking"]).optional(),
+        tracker_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      binding_inventory_path?: string;
+      binding_inventory_rows?: BindingInventoryRow[];
+      composition_integration_required?: boolean;
+      composition_integration_na?: boolean;
+      exempt_reason?: string;
+      enforcement?: "advisory" | "blocking";
+      tracker_path?: string;
+    }) => {
+      return textContent(prettyCanonicalJson(await validatePathDeclaredComposition(args)));
+    },
+  },
+  {
+    name: "tied_wf_proof_manifest_validate",
+    config: {
+      description:
+        "[REQ-WF_TRIAL_PROOF_MANIFEST_LITE] Validate proof-facet-manifest.v1 JSON on a WF trial client; optional reconcile with project-size snapshot label_case_counts. Default advisory (blocking=false).",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        manifest: z.record(z.string(), z.unknown()).optional(),
+        manifest_path: z.string().optional(),
+        reconcile_snapshot: z.boolean().optional(),
+        blocking: z.boolean().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      manifest?: Record<string, unknown>;
+      manifest_path?: string;
+      reconcile_snapshot?: boolean;
+      blocking?: boolean;
+    }) => {
+      return textContent(
+        prettyCanonicalJson(
+          await validateWfProofManifest({
+            repo_root: args.repo_root,
+            manifest: args.manifest as import("../project-size/wf-proof-manifest-types.js").ProofFacetManifestV1 | undefined,
+            manifest_path: args.manifest_path,
+            reconcile_snapshot: args.reconcile_snapshot,
+            blocking: args.blocking,
+          }),
+        ),
+      );
+    },
+  },
+  {
+    name: "tied_trial_composition_evidence_subcheck",
+    config: {
+      description:
+        "[REQ-WF_TRIAL_COMPOSITION_EVIDENCE_SUBCHECK] Lens A composition evidence subcheck: coarse receipt, label histogram, optional manifest reconcile, binding signal for PROMPT-WF-09..12.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        prompt_id: z.string().optional(),
+        primary_lens: z.string().optional(),
+        manifest_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      prompt_id?: string;
+      primary_lens?: string;
+      manifest_path?: string;
+    }) => {
+      return textContent(
+        prettyCanonicalJson(
+          await runCompositionEvidenceSubcheck({
+            repo_root: args.repo_root,
+            prompt_id: args.prompt_id,
+            primary_lens: args.primary_lens,
+            manifest_path: args.manifest_path,
+          }),
+        ),
+      );
     },
   },
   {

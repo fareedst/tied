@@ -74,6 +74,12 @@
 | **tied-methodology-version.session.v1** | session semver evidence | JSON under `tied-project/working/{REQ-TOKEN}/evidence/`; captured via MCP `server_info` on turn 1 ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT](../requirements/REQ-TRIAL_METHODOLOGY_VERSION_READOUT.yaml)); consumed by `@record-wf-trial`. |
 | **tied_methodology_version** | inventory semver mirror | Optional top-level field on `trial-workflow-interaction-inventory.v1.json` mirroring session evidence. |
 | **WF_TRIAL_SKIP_IMPLEMENTATION_STACK** | skip stack seed | When set, **`workflow-trial-agentstream.sh`** skips TypeScript fixture seed and WF-specific preload materialize; matrix comparability waived. See same PLAN. |
+| **WF trial proof manifest gate** | L3 orchestrator gate | **`workflow-trial-agentstream.sh`** default-on: requires valid **`proof-facet-manifest.v1`** on the client for **all PROMPT-WF-01..12** before exit 0 (min-shape + **FILE_EXISTS** + **FILE_COVERAGE**). [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE](../requirements/REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE.yaml). |
+| **WF trial slim checklist tracker** | disposable Authoritative Tracker | Template `tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml` seeds `working/{product_REQ}/checklist-tracker.yaml`; forbids prompt-type slugs in `execution_evidence.completed`. [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../requirements/REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK.yaml) |
+| **WF trial phase handoff gate** | post-four-phase gate | Default-on after four-phase: requires `phase-handoff-*.md` turns 1–3 and turn-3 tests when stack seeded; escape **`WF_TRIAL_SKIP_PHASE_HANDOFF_GATE`**. [REQ-WF_TRIAL_PHASE_HANDOFF_GATE](../requirements/REQ-WF_TRIAL_PHASE_HANDOFF_GATE.yaml) |
+| **WF_TRIAL_SKIP_PHASE_HANDOFF_GATE** | skip phase handoff gate | When set, orchestrator skips post-four-phase handoff/test checks. [REQ-WF_TRIAL_PHASE_HANDOFF_GATE](../requirements/REQ-WF_TRIAL_PHASE_HANDOFF_GATE.yaml) |
+| **WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT** | strict closeout preflight | When `1`, orchestrator fails if persisted `CITDP-{REQ}.yaml` or verification receipt missing when handoff claims verification. [REQ-WF_TRIAL_PHASE_HANDOFF_GATE](../requirements/REQ-WF_TRIAL_PHASE_HANDOFF_GATE.yaml) |
+| **WF_TRIAL_SKIP_PROOF_MANIFEST** | skip proof manifest gate | When set, disables the orchestrator L3 manifest gate (dry-run also skips). |
 
 ---
 

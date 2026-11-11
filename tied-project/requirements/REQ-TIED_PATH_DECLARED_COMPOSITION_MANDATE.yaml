@@ -1,0 +1,9 @@
+REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE:
+  acceptance_criteria:
+    - "SC-PDC-01 through SC-PDC-05 in working test-strategy"
+  description: "Path-declared composition mandate for @build-plan work with bindings."
+  satisfaction_criteria:
+    - criterion: "build-plan SKILL references naming adjunct"
+      id: "SC-PDC-04"
+    - criterion: "tied_path_declared_composition_validate registered and unit-tested"
+      id: "SC-PDC-03"

@@ -1,51 +1,45 @@
 CITDP-REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE:
-  title: "WF trial model catalog resolve (all Cursor/Claude names)"
+  change_definition:
+    success_criteria:
+      - "SC-CAT-ALIAS"
+      - "SC-CAT-COMPOSER-CLAUDE-FAIL"
+      - "SC-CAT-MATRIX"
+      - "SC-CAT-SLUG"
+      - "SC-CAT-SYNC-CHECK"
+      - "SC-CAT-USAGE"
+  current_behavior: "workflow_trial_range resolves only keys in docs/demos/wf-trial-model-specs.yaml (six matrix config ids).\nOperator refs such as haiku-5-5, claude-haiku-5-5, or gpt-5.6-luna-low-fast fail with unknown config id.\ncomposer-2.5 on Claude harness maps to claude-haiku-5-5 (matrix parity).\n"
+  desired_behavior: "Second positional MODEL_REF resolves via matrix, harness alias, then committed wf-trial-model-catalog.yaml.\nAll agent models slugs and Claude /v1/models ids work when present in the snapshot.\ncomposer-2.5 is cursor-only; Claude Haiku uses claude-haiku-5-5 or aliases haiku-5-5 / haiku55.\n"
   metadata:
     created:
       author: "refine-plan"
       date: "2026-11-10"
   related_tokens:
-    - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
-    - "REQ-WF_TRIAL_MODEL_EFFORT"
     - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
     - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
     - "REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE"
-  current_behavior: |
-    workflow_trial_range resolves only keys in docs/demos/wf-trial-model-specs.yaml (six matrix config ids).
-    Operator refs such as haiku-5-5, claude-haiku-5-5, or gpt-5.6-luna-low-fast fail with unknown config id.
-    composer-2.5 on Claude harness maps to claude-haiku-5-5 (matrix parity).
-  desired_behavior: |
-    Second positional MODEL_REF resolves via matrix, harness alias, then committed wf-trial-model-catalog.yaml.
-    All agent models slugs and Claude /v1/models ids work when present in the snapshot.
-    composer-2.5 is cursor-only; Claude Haiku uses claude-haiku-5-5 or aliases haiku-5-5 / haiku55.
-  change_definition:
-    success_criteria:
-      - "SC-CAT-ALIAS"
-      - "SC-CAT-SLUG"
-      - "SC-CAT-MATRIX"
-      - "SC-CAT-COMPOSER-CLAUDE-FAIL"
-      - "SC-CAT-SYNC-CHECK"
-      - "SC-CAT-USAGE"
+    - "REQ-WF_TRIAL_MODEL_EFFORT"
+    - "REQ-WF_TRIAL_MODEL_SPEC_CLI"
+  risk_assessment:
+    - mitigation: "Matrix wins; derive rules unit-tested; D-CAT-MATRIX-WINS"
+      reversibility: "reversible"
+      risk: "MODEL_CONFIG derive mismatch for disposable tags"
+    - mitigation: "PLAN migration table; grep at build-plan"
+      reversibility: "reversible"
+      risk: "Breaking claude composer-2.5 matrix scripts"
+    - mitigation: "sync --check in verification manifest"
+      reversibility: "reversible"
+      risk: "Catalog drift vs live agent models"
   satisfaction_criteria:
     - "SC-CAT-ALIAS"
-    - "SC-CAT-SLUG"
-    - "SC-CAT-MATRIX"
     - "SC-CAT-COMPOSER-CLAUDE-FAIL"
+    - "SC-CAT-MATRIX"
+    - "SC-CAT-SLUG"
     - "SC-CAT-SYNC-CHECK"
     - "SC-CAT-USAGE"
-  risk_assessment:
-    - risk: "Breaking claude composer-2.5 matrix scripts"
-      reversibility: "reversible"
-      mitigation: "PLAN migration table; grep at build-plan"
-    - risk: "Catalog drift vs live agent models"
-      reversibility: "reversible"
-      mitigation: "sync --check in verification manifest"
-    - risk: "MODEL_CONFIG derive mismatch for disposable tags"
-      reversibility: "reversible"
-      mitigation: "Matrix wins; derive rules unit-tested; D-CAT-MATRIX-WINS"
   test_strategy:
-    unit:
-      - "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
-      - "tools/bootstrap/lib/wf-trial-model-catalog.test.mjs"
     composition:
       - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    unit:
+      - "tools/bootstrap/lib/wf-trial-model-catalog.test.mjs"
+      - "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+  title: "WF trial model catalog resolve (all Cursor/Claude names)"

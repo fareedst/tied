@@ -1,0 +1,7 @@
+IMPL-WF_TRIAL_PROOF_MANIFEST_LITE:
+  code_locations:
+    - "mcp-server/src/project-size/wf-proof-manifest-validate.ts"
+    - "mcp-server/src/tools/index.ts"
+    - "tied-bundle/templates/proof-facet-manifest.v1.template.json"
+  description: "Validate shape, file presence, snapshot reconcile; template in tied-bundle."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-WF_TRIAL_PROOF_MANIFEST_LITE-pseudocode.md"

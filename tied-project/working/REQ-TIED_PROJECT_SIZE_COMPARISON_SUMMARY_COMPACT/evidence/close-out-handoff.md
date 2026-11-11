@@ -17,6 +17,10 @@
 - `npx tsx --test mcp-server/src/project-size/project-size.test.ts` — 7/7
 - `tied_validate_consistency` — ok: true
 
+## Commit
+
+`652c81a2`
+
 ## Scope
 
 Comparison summary v2: epoch floor, dedupe, `wall_time`, snapshot `orchestrator_wall_time_seconds`, cohort table regen.

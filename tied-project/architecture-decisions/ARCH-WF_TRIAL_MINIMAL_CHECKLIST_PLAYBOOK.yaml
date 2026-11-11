@@ -1,0 +1,2 @@
+ARCH-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK:
+  rationale: "Separates store methodology delivery from per-trial product REQ folders; avoids 158KB checklist template on disposable clients."

@@ -3,7 +3,7 @@
 **handoff_kind:** prompt-skill-disk  
 **request_token:** REQ-WF_TRIAL_MODEL_SPEC_CLI  
 **date:** 2026-11-09  
-**plan_phase:** close-out-ready  
+**plan_phase:** complete  
 
 ---
 
@@ -24,7 +24,7 @@
 
 ## Do next
 
-**`@close-out`** when ready to commit (verification gate + traceable commit).
+Close-out complete — commit `5038754d`. Optional follow-up: close `REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP` (help inc shipped in same commit; index/detail still untracked).
 
 ---
 

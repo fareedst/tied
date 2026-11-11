@@ -40,6 +40,7 @@ Options:
   --include-trial-factors Pass trial_factors annex to snapshot builder
   --summary-epoch-min N   Summary epoch floor (strict >); default ${DEFAULT_SUMMARY_EPOCH_MIN}
   --verbose-table         Second expanded metrics table
+  --fine-labels           Append fine label_case_counts table (1.2.0 receipts)
   --dry-run               List targets only
   --out-dir PATH          Output directory
   --store-root PATH       TIED store root (required; dist + registry)
@@ -57,6 +58,7 @@ function parseArgs(argv) {
     includeStore: false,
     includeTrialFactors: false,
     verboseTable: false,
+    fineLabels: false,
     dryRun: false,
     outDir: DEFAULT_OUT,
     summaryEpochMin: DEFAULT_SUMMARY_EPOCH_MIN,
@@ -114,6 +116,9 @@ function parseArgs(argv) {
         break;
       case "--verbose-table":
         opts.verboseTable = true;
+        break;
+      case "--fine-labels":
+        opts.fineLabels = true;
         break;
       case "--dry-run":
         opts.dryRun = true;
@@ -204,6 +209,7 @@ export async function runProjectSizeBatchCompare(argv = process.argv, env = proc
     patternRegex: discovered.patternRegex,
     discoverDiagnostics: discovered.diagnostics,
     verboseTable: opts.verboseTable,
+    fineLabels: opts.fineLabels,
     summaryEpochMin: opts.summaryEpochMin,
   });
 
@@ -220,6 +226,7 @@ export async function runProjectSizeBatchCompare(argv = process.argv, env = proc
       include_trial_factors: opts.includeTrialFactors,
       summary_epoch_min: opts.summaryEpochMin,
       verbose_table: opts.verboseTable,
+      fine_labels: opts.fineLabels,
     },
     discover_diagnostics: discovered.diagnostics,
     targets: discovered.targets,

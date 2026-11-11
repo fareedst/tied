@@ -1,6 +1,6 @@
 # TIED Experience Hub
 
-**TIED Methodology Version**: 4.2.0
+**TIED Methodology Version**: 4.2.2
 
 This hub teaches **Token-Integrated Engineering & Development** by example: the [TIED store](https://github.com/fareedst/tied) you are reading is also a TIED client (`tied-project/`). Structure here mirrors the methodology—aligned facets, audience lanes, and explicit proof boundaries—instead of one linear specification.
 

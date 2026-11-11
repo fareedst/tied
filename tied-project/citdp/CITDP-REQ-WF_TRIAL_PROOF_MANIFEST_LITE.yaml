@@ -1,0 +1,8 @@
+CITDP-REQ-WF_TRIAL_PROOF_MANIFEST_LITE:
+  change_definition:
+    desired_behavior: "WF-lite manifest + MCP validate + snapshot label overrides"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-MAN-01 through SC-MAN-05"

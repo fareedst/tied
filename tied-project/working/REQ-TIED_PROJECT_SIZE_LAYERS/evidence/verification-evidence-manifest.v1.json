@@ -1,7 +1,7 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
   "run_id": "close-out-project-size-layers-2026-11-09",
-  "commit": "f9e2e23a",
+  "commit": "a51753bb",
   "environment": {
     "node": "test"
   },

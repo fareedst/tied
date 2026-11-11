@@ -9,3 +9,5 @@
 **Excluded unrelated drift:** WF trial readouts under `docs/demos/trial-readout-*`; `REQ-WF_TRIAL_*` / `REQ-TIED_AGENT_LOADER_REFRESH` working trees; facilitator `FACILITATOR-WF-*`; agentstream model-effort edits; `tied-bundle/reports/*` fixture index churn.
 
 **Combined scope:** Includes sibling [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS](../../REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS/PLAN.md) code and docs in one store commit.
+
+**Commit:** `a650b0b258e110cc191b1c7c014b509c04c75368` on `main` (not pushed).

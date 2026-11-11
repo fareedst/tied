@@ -21,4 +21,4 @@ cd mcp-server/packages/agentstream && npm run build && find src -name '*.test.ts
 
 ## Traceable commit
 
-**SHA:** `f1fce4f0`
+**SHA:** `eacb1737`

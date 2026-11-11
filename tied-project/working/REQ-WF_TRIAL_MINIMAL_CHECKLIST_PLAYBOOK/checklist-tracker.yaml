@@ -1,0 +1,56 @@
+description: "Authoritative tracker — methodology build for WF checklist adherence"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "risk-assessment"
+    - "test-strategy"
+  request: "REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Methodology tooling change; integrated inquiry not required."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "pending"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

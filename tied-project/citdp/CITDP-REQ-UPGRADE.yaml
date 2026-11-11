@@ -1,0 +1,6 @@
+CITDP-REQ-UPGRADE:
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: integrated
+      gate_policy: advisory
+      prior_depth_tier: minimal

@@ -1,0 +1,5 @@
+ARCH-TIED_PATH_DECLARED_COMPOSITION_MANDATE:
+  constraints:
+    - "No merge of manifest into coarse composition_tests"
+    - "WF subcheck pass rule unchanged"
+  description: "Validator module plus enforcement advisory vs blocking on tracker/CITDP."

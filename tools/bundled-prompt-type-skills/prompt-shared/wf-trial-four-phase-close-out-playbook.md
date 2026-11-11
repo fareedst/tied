@@ -16,7 +16,9 @@ Traditional **agentstream** batch on **disposable** clients; `depth_tier: minima
 
 - Use **`tied_gate_check`** with **file paths** `citdp_path` + `tracker_path` (inner CITDP body).
 - **`run-close-out-gates.mjs`:** `--envelope-blocking --reconcile` when dist exists.
-- **`--sync-dispositions`:** **optional** at minimal WF trial depth when `sub-adversarial-inquiry-pass` is N/A; pending checklist steps may remain without blocking advisory `close_out`.
+- **`sub-close-out-evidence-sync`:** When a **`gates/verification-*.json`** receipt exists from turn 3, run sync (or `run-close-out-gates.mjs --sync-dispositions`) **before** `tied_gate_check` close_out — do not waive for grade-uplift cohorts.
+- **`--sync-dispositions`:** At minimal depth with verification receipt, **recommended**; still optional for legacy waiver-only cells when no verification receipt was written.
+- **`traceable-commit`:** Only when `tied_gate_check` returns **`allowed: true`**; otherwise handoff must say **INCOMPLETE** (symmetric with turn 3 build deliverables).
 
 ## Traceable commit
 

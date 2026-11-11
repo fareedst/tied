@@ -1,0 +1,2 @@
+ARCH-WF_TRIAL_PROOF_MANIFEST_LITE:
+  description: "Advisory validate by default; manifest overrides label_case_counts via snapshot input."

@@ -494,6 +494,7 @@ alias workflow-trial-agentstream=workflow_trial_agentstream
 # shellcheck source=lib/wf-trial-model-spec.inc.sh
 source "${_BUILD_COMMANDS_DIR}/lib/wf-trial-model-spec.inc.sh"
 
+# [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] workflow_trial_agentstream inherits default-on proof manifest gate
 workflow_trial_range ()
 {
     if [[ $# -eq 0 ]]; then
@@ -696,3 +697,5 @@ alias test-tied-feature-lifecycle=test_tied_feature_lifecycle
 
 # --- CLI guide ---
 . "${_BUILD_COMMANDS_DIR}/_build_commands_cli_guide.inc.sh"
+
+export ee=echo_exec

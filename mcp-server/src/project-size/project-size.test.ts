@@ -53,10 +53,33 @@ describe("project-size snapshot [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [IMPL-TIED_PRO
 
   it("proof facets: unit_tests count test cases not files [SC-PFC-01] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]", async () => {
     const receipt = await buildProjectSizeSnapshot({ repo_root: fixtureRoot });
-    assert.equal(receipt.validator_version, "1.1.0");
+    assert.equal(receipt.validator_version, "1.2.0");
     const unitCases = receipt.layers.proof_facets.unit_tests;
-    assert.equal(unitCases, 5);
+    assert.equal(unitCases, 7);
     assert.ok(unitCases > 3, "more cases than unit-classified files in fixture");
+  });
+
+  it("proof facets: composition suffix paths sum cases [SC-PPS-01] [REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS]", async () => {
+    const receipt = await buildProjectSizeSnapshot({ repo_root: fixtureRoot });
+    assert.equal(receipt.layers.proof_facets.composition_tests, 3);
+    assert.equal(receipt.layers.proof_facets.unit_tests, 7);
+  });
+
+  it("label_case_counts and inference [SC-INF-01] [SC-INF-02] [SC-INF-03] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE]", async () => {
+    const receipt = await buildProjectSizeSnapshot({ repo_root: fixtureRoot });
+    const pf = receipt.layers.proof_facets;
+    assert.equal(receipt.validator_version, "1.2.0");
+    assert.ok(pf.label_case_counts);
+    assert.equal(pf.label_case_counts["unit.default"], 7);
+    assert.equal(pf.label_case_counts["composition.integration"], 1);
+    assert.equal(pf.label_case_counts["composition.wiring"], 1);
+    assert.equal(pf.label_case_counts["composition.contract"], 1);
+    const labelSum = Object.values(pf.label_case_counts).reduce((a, b) => a + b, 0);
+    const facetSum = pf.unit_tests + pf.composition_tests + pf.e2e_tests + pf.binding_inventory_tests;
+    assert.equal(labelSum, facetSum);
+    assert.equal(pf.composition_tests, 3);
+    assert.equal(pf.composition_inferred_cases, 2);
+    assert.ok(receipt.proof_inference_diagnostics?.some((d) => d.path.includes("colocated-wiring")));
   });
 
   it("utf8 mass fields on receipt [SC-UTF8-01] [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS]", async () => {

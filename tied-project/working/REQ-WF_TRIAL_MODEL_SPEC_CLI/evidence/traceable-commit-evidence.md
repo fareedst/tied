@@ -6,4 +6,6 @@
 
 **gate receipt:** tied-project/working/REQ-WF_TRIAL_MODEL_SPEC_CLI/evidence/closeout-run-close-out-gates-final.json
 
+**commit:** `5038754d`
+
 **upstream feedback:** N/A

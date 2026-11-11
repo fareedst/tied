@@ -1,0 +1,19 @@
+REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK:
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+      - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+    related_to:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE"
+  satisfaction_criteria:
+    - criterion: "Orchestrator copy-if-absent seeds checklist-tracker.yaml under disposable product working/{product_REQ}/ when phase-handoff-add-feature names request_token."
+      id: "SC-WF-CLP-05"
+    - criterion: "prompt-shared wf-trial-checklist-gates-adjunct.md gives numbered tied-cli/MCP gate script for turns 2-4."
+      id: "SC-WF-CLP-02"
+    - criterion: "tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml lists minimal greenfield slugs and forbids prompt-type slugs in execution_evidence.completed."
+      id: "SC-WF-CLP-01"
+    - criterion: "traditional-four-phase-agentstream.yaml and wf-trial-agent-preload-contract.yaml reference slim tracker and adjunct."
+      id: "SC-WF-CLP-03"
+    - criterion: "wf-trial-build-plan-handoff.md documents verification receipt path, sub-adversarial not_applicable, and tracker slug list."
+      id: "SC-WF-CLP-04"

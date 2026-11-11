@@ -1,0 +1,24 @@
+copy_hygiene: "Fresh tracker for REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS refine-plan"
+description: "Tracker — L1 proof path semantics (trial proof-intent stack)"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Classifier and catalog clarification; advisory gates."
+    slug: "sub-adversarial-inquiry-pass"

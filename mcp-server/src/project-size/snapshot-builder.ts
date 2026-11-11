@@ -1,7 +1,7 @@
 /**
  * [IMPL-TIED_PROJECT_SIZE_SNAPSHOT] [IMPL-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [IMPL-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
  * [ARCH-TIED_PROJECT_SIZE_SNAPSHOT] [ARCH-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [ARCH-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
- * [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES]
+ * [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS] [REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES] [REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS]
  */
 
 import { createHash } from "node:crypto";
@@ -13,12 +13,17 @@ import yaml from "js-yaml";
 
 import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
 import { refreshCorpusGraphIndex } from "../corpus-graph/index-builder.js";
+import { analyzeTestFileInference } from "./proof-facet-inference.js";
+import { resolveProofSubtypeWithManifest } from "./proof-label-resolve.js";
+import type { ProofFacetManifestV1 } from "./wf-proof-manifest-types.js";
+import { classifyTestFile } from "./proof-test-classify.js";
 import { countTestCasesInSource } from "./test-case-count.js";
 import {
   PROOF_BOUNDARY,
   RECEIPT_SCHEMA_VERSION,
   VALIDATOR_VERSION,
   type ProjectSizeSnapshotReceipt,
+  type ProofInferenceDiagnostic,
   type TrialFactorsAnnex,
 } from "./types.js";
 
@@ -85,21 +90,6 @@ function countVocabPreferredTerms(vocabText: string): number {
     if (/^\|\s+\*\*[^*]+\*\*\s+\|/.test(line)) count += 1;
   }
   return count;
-}
-
-function classifyTestFile(relPath: string): "unit" | "composition" | "e2e" | "binding" {
-  const base = relPath.replace(/\\/g, "/");
-  const lower = base.toLowerCase();
-  if (lower.includes("binding-inventory") || lower.includes("binding_inventory")) {
-    return "binding";
-  }
-  if (lower.includes("e2e") || lower.endsWith(".e2e.test.ts")) {
-    return "e2e";
-  }
-  if (lower.includes("composition") || lower.endsWith(".composition.test.ts")) {
-    return "composition";
-  }
-  return "unit";
 }
 
 async function countIndexAtoms(repoRoot: string, tiedRel: string): Promise<{
@@ -179,6 +169,8 @@ export async function buildProjectSizeSnapshot(input: {
   repo_root: string;
   tied_project_rel?: string;
   include_trial_factors?: boolean;
+  /** [REQ-WF_TRIAL_PROOF_MANIFEST_LITE] Optional agent-declared per-file label overrides. */
+  proof_facet_manifest?: ProofFacetManifestV1;
 }): Promise<ProjectSizeSnapshotReceipt> {
   const repoRoot = path.resolve(input.repo_root);
   const tiedRel = input.tied_project_rel ?? "tied-project";
@@ -306,6 +298,10 @@ export async function buildProjectSizeSnapshot(input: {
     e2e_tests: 0,
     binding_inventory_tests: 0,
   };
+  const labelCaseCounts: Record<string, number> = {};
+  let compositionInferredCases = 0;
+  const proofInferenceDiagnostics: ProofInferenceDiagnostic[] = [];
+
   for (const rel of testFiles) {
     const text = await readFile(path.join(repoRoot, rel), "utf8");
     const cases = countTestCasesInSource(text);
@@ -314,6 +310,19 @@ export async function buildProjectSizeSnapshot(input: {
     else if (kind === "e2e") proofCounts.e2e_tests += cases;
     else if (kind === "composition") proofCounts.composition_tests += cases;
     else proofCounts.unit_tests += cases;
+
+    const subtype = resolveProofSubtypeWithManifest(rel, text, input.proof_facet_manifest);
+    labelCaseCounts[subtype] = (labelCaseCounts[subtype] ?? 0) + cases;
+
+    const inference = analyzeTestFileInference(text);
+    if (inference.binding_inferred && kind === "unit") {
+      compositionInferredCases += cases;
+      proofInferenceDiagnostics.push({
+        path: rel.replace(/\\/g, "/"),
+        binding_inferred: true,
+        uses_subprocess: inference.uses_subprocess,
+      });
+    }
   }
 
   const verifyEvidence = await fg(
@@ -370,6 +379,8 @@ export async function buildProjectSizeSnapshot(input: {
       proof_facets: {
         ...proofCounts,
         verify_evidence_files: verifyEvidence.length,
+        label_case_counts: labelCaseCounts,
+        composition_inferred_cases: compositionInferredCases,
       },
     },
     cross_layer: crossLayer,
@@ -379,5 +390,8 @@ export async function buildProjectSizeSnapshot(input: {
     },
     ...(trial_factors ? { trial_factors } : {}),
     diagnostics,
+    ...(proofInferenceDiagnostics.length > 0
+      ? { proof_inference_diagnostics: proofInferenceDiagnostics }
+      : {}),
   };
 }

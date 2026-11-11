@@ -1,0 +1,8 @@
+IMPL-WF_TRIAL_COMPOSITION_EVIDENCE_SUBCHECK:
+  code_locations:
+    - "mcp-server/src/project-size/wf-composition-evidence-subcheck.ts"
+    - "mcp-server/src/tools/index.ts"
+    - "tied-bundle/templates/wf-composition-evidence-subcheck.v2.template.json"
+    - "tools/bundled-record-wf-trial-skill/reference.md"
+  description: "MCP tool and bootstrap contract tests; template wf-composition-evidence-subcheck.v2."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-WF_TRIAL_COMPOSITION_EVIDENCE_SUBCHECK-pseudocode.md"

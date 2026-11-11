@@ -1,0 +1,10 @@
+description: "Facilitator hints for interpreting proof inference on WF disposable clients. Does not change snapshot math; documents prompt-family expectations."
+rules:
+  - notes:
+      - "binding_inferred on unit-classified paths is supplementary, not Lens A pass."
+      - "Monolith + unit-only layouts may show composition_inferred_cases = 0 even when many unit cases exist."
+    prompt_id: "PROMPT-WF-09"
+  - notes:
+      - "Primary stress is in-process argv to core; subprocess tests (uses_subprocess) are supplementary signal only."
+    prompt_id: "PROMPT-WF-10"
+schema_version: "wf-trial-proof-inference.rules.v1"

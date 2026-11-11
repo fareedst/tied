@@ -4,15 +4,15 @@ CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver:
     desired_behavior: "Tiered resolver A–D (E optional) plus orchestrator-dir excludes; gate stderr lists working basenames and found-unparsed handoff paths; SC-WF-PHG-06 LEAP."
     non_goals:
       - "Infer product REQ from PROMPT-WF id or FEATURE_REMAINDER"
-      - "Per-turn agentstream hooks"
       - "Integrated adversarial inquiry"
+      - "Per-turn agentstream hooks"
     success_criteria:
       - "Bootstrap tests in test-strategy.md pass"
       - "WF-10 Haiku medium cell resolves product REQ when turn-1 table handoff present"
   impact_analysis:
     impl_inventory:
-      - "IMPL-WF_TRIAL_PHASE_HANDOFF_GATE"
       - "IMPL-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+      - "IMPL-WF_TRIAL_PHASE_HANDOFF_GATE"
     modules_or_boundaries: "scripts/lib/wf-trial-product-req.inc.sh; scripts/lib/wf-trial-phase-handoff-gate.inc.sh; tools/bootstrap/workflow-trial-agentstream-sh.test.mjs; docs/demos/traditional-four-phase-agentstream.yaml; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-checklist-gates-adjunct.md"
     tied_tokens_affected:
       - "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
@@ -39,5 +39,5 @@ CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver:
     depth_tier: "minimal"
     gate_policy: "advisory"
     reversible_choices:
-      - "WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1 for matrix debug"
       - "Defer tier E inventory scrape to follow-on if not trivial in build"
+      - "WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1 for matrix debug"

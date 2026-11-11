@@ -1,7 +1,7 @@
 # Close-out handoff — REQ-WF_TRIAL_MODEL_SPEC_CLI
 
 **date:** 2026-11-09  
-**plan_phase:** close-out-ready
+**plan_phase:** complete
 
 ## Completion signals
 
@@ -20,4 +20,6 @@ workflow_trial_range cursor luna-low medium 2 2
 
 ## Commit
 
-See [proposed-commit-message.txt](./proposed-commit-message.txt). **Excluded** unrelated dirty tree (facilitator WF folders, other REQs).
+**SHA:** `5038754d` — see [proposed-commit-message.txt](./proposed-commit-message.txt).
+
+**Excluded** unrelated dirty tree (facilitator WF folders, `REQ-TIED_AGENT_LOADER_REFRESH`, unstaged `REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP` index/detail).

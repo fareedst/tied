@@ -5,18 +5,18 @@ CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
   impact_analysis:
     modules_or_boundaries: "tools/bootstrap/lib/project-size-comparison-render.mjs; project-size-comparison-render.test.mjs; comparison-table.md (regenerated)"
     tied_tokens_new:
-      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
       - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
       - "IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
+      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
   non_goals:
-    - "orchestrator_wall_minutes on receipt"
     - "CLI unit selection"
+    - "orchestrator_wall_minutes on receipt"
   risk_analysis:
     adversarial_inquiry:
       depth_tier: "minimal"
-      gate_policy: "advisory"
       evidence_references:
         - "tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK/evidence/sub-adversarial-inquiry-pass-na.md"
+      gate_policy: "advisory"
     risk_assessment:
       depth_tier: "minimal"
       gate_policy: "advisory"

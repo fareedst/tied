@@ -1,6 +1,6 @@
 # PLAN — [REQ-WF_TRIAL_MODEL_COMPOSE] (refine-plan)
 
-**Status:** refine-plan complete  
+**Status:** close-out complete (`0ad209be`)  
 **Workflow:** add-feature → **refine-plan** → `@build-plan` → close-out  
 **Request token:** `REQ-WF_TRIAL_MODEL_COMPOSE`  
 **plan_phase:** `pre-implementation`  

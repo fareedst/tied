@@ -1,22 +1,22 @@
-schema_version: "checklist-tracker.v1"
 description: "Authoritative tracker — wave 2 product REQ resolver (phase handoff gate)"
 execution_evidence:
   completed:
     - "change-definition"
-    - "risk-assessment"
-    - "test-strategy"
-    - "unit-test-red"
-    - "unit-test-green"
     - "composition-integration"
-    - "verification-gate"
+    - "risk-assessment"
     - "sub-close-out-evidence-sync"
+    - "test-strategy"
     - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
   request: "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
 execution_profile:
   depth_tier: "minimal"
   gate_policy: "advisory"
   profile_depth: "minimal"
 request: "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+schema_version: "checklist-tracker.v1"
 steps:
   - disposition: "completed"
     slug: "change-definition"
@@ -56,10 +56,10 @@ steps:
     slug: "sub-close-out-evidence-sync"
     tracking:
       evidence_refs:
-        - path: "tied-project/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/evidence/verification-evidence-manifest.v1.json"
-          type: "verification_manifest"
         - path: "tied-bundle/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/gates/close_out-2026-11-11T15-24-11-678Z.json"
           type: "gate_receipt"
+        - path: "tied-project/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/evidence/verification-evidence-manifest.v1.json"
+          type: "verification_manifest"
       status: "completed"
   - disposition: "completed"
     slug: "traceable-commit"

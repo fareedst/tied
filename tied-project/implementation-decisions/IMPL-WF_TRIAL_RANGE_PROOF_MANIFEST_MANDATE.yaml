@@ -1,0 +1,10 @@
+IMPL-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE:
+  code_locations:
+    - "scripts/build-commands.sh"
+    - "scripts/lib/wf-trial-proof-manifest-gate.inc.sh"
+    - "scripts/workflow-trial-agentstream.sh"
+    - "tools/bootstrap/lib/wf-trial-proof-manifest-gate.mjs"
+    - "tools/bootstrap/lib/wf-trial-proof-manifest-gate.test.mjs"
+    - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  description: "wf-trial-proof-manifest-gate.inc.sh and wf-trial-proof-manifest-gate.mjs"
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE-pseudocode.md"

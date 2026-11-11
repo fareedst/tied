@@ -1,14 +1,14 @@
 # TIED Methodology
 
-**TIED Methodology Version**: 4.2.1
+**TIED Methodology Version**: 4.2.2
 
 [TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store**—clone it, build the workspace, install methodology into your client, then ship compact features with Prompt Composer. **Visual how-to and methodology by example:** [TIED Experience Hub](docs/tied-experience/index.md). Core seven index: [client development index](tied-bundle/docs/client-development-index.md).
 
-**Release highlights (4.2.1):** Methodology patch since 4.2.0 — **NVIDIA Auto-Ontology** external comparison compose (certified semantic layer × TIED harness preflight/read-write seam), plus trial methodology version readout, WF shell exit hardening, checklist gate operator path, and related close-outs. Full notes: [CHANGELOG — 4.2.1](CHANGELOG.md#421---2026-11-07).
+**Release highlights (4.2.2):** Methodology patch since 4.2.1 — **trial proof-intent stack** (L1 path/fine labels through L4 composition evidence subcheck) and **WF trial range proof-manifest mandate** for PROMPT-WF-01…12. Full notes: [CHANGELOG — 4.2.2](CHANGELOG.md#422---2026-11-10).
 
-- **NVIDIA Auto-Ontology compose (non-tied)** — Wave 1 capture + Wave 2 × TIED improvement analysis; plan packages under `tied-project/non-tied-plans/nvidia-auto-ontology-*` (comparisons local gitignored).
-- **Trial methodology version readout** — turn-1 session semver capture for WF/GF trials ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT]).
-- **Checklist gate operator path** — `tied gate check` documented in bundled tied-yaml skill ([REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH]).
+- **Trial proof-intent stack (L1–L4)** — `validator_version` **1.2.0** label case counts, `proof-facet-manifest.v1`, MCP `tied_wf_proof_manifest_validate`, composition subcheck + `@record-wf-trial` proof histogram ([REQ-TIED_TRIAL_PROOF_INTENT_STACK]).
+- **WF range proof-manifest mandate** — `workflow_trial_range` enables post–four-phase manifest gate for all PROMPT-WF-01…12 ([REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE]).
+- **NVIDIA Auto-Ontology compose (4.2.1)** — Wave 1 capture + Wave 2 × TIED improvement analysis; plan packages under `tied-project/non-tied-plans/nvidia-auto-ontology-*` (comparisons local gitignored).
 - **Netflix observability Wave 3 (4.2.0)** — methodology composition matrix row 17 ([REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3]); see [CHANGELOG — 4.2.0](CHANGELOG.md#420---2026-11-07) for MCP HTTPS and store README spine.
 
 ## How to use this README

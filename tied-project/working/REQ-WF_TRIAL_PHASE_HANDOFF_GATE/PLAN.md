@@ -4,7 +4,7 @@
 **Parent context:** [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK/PLAN.md) (wave 1 shipped)  
 **Incident:** Disposable run `1794406459-wf-agentstream-wf-10-claude-claudehaiku55medium` — orchestrator stopped with `could not resolve product REQ` before handoff file checks.  
 **Request token:** `REQ-WF_TRIAL_PHASE_HANDOFF_GATE`  
-**plan_phase:** `post-build`  
+**plan_phase:** `close-out complete`  
 **profile_depth:** `minimal` · **gate_policy:** `advisory`
 
 **CITDP:** [CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml](../../../citdp/CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml)  
@@ -58,4 +58,4 @@ node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
 
 ## Do next
 
-**`@close-out`** (close-out evidence sync + traceable commit deferred).
+REQ **shipped** on store (`80b62f97`). Optional: parent playbook LEAP line; commit batch [comparison-table](../../../non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) regen + doc cross-links (uncommitted).

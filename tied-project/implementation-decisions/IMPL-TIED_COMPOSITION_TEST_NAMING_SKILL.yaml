@@ -1,0 +1,7 @@
+IMPL-TIED_COMPOSITION_TEST_NAMING_SKILL:
+  code_locations:
+    - "tools/bundled-prompt-type-skills/build-plan/SKILL.md"
+    - "tools/bundled-prompt-type-skills/prompt-shared/tied-composition-test-naming-adjunct.md"
+  description: "tied-composition-test-naming-adjunct.md wired into build-plan and tied-implement."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_COMPOSITION_TEST_NAMING_SKILL-pseudocode.md"
+  implementation_approach: "Documentation and skill wiring only."

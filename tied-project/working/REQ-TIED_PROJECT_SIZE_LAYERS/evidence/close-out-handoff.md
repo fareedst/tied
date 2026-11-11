@@ -21,4 +21,4 @@ node --test tools/bootstrap/lib/project-size-record-wf-trial-contract.test.mjs
 
 ## Traceable commit
 
-**SHA:** `f9e2e23a`
+**SHA:** `a51753bb`

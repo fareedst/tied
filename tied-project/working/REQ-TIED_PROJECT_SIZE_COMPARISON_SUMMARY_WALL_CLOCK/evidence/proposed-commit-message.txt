@@ -1,0 +1,3 @@
+chore(tied): close-out CITDP and handoff for wall_clock REQ
+
+Fix CITDP adversarial_inquiry block so close_out gates pass; record traceable close-out evidence.

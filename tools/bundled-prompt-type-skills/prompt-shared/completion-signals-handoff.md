@@ -12,6 +12,17 @@ Every prompt type that reports implementation or close-out status must **separat
 | **Process contract** | Did baseline-functional steps run with typed refs? | Authoritative Tracker dispositions match `execution_evidence.completed`; verification manifest when test slugs completed; Layer C PSA reports when IMPL inventory non-empty; `sub-close-out-evidence-sync` completed before close-out gates. |
 | **Adherence ledger** | Are slug outcomes hash-correlated? | `tied_adherence_reconcile_run` with `include_process_grade: true`; `outcome_verified` rows for completed slugs (or explicit thin-ledger waiver). |
 
+## Path-declared composition (build-plan adjunct)
+
+When **`composition-integration`** is in scope, record a fourth **receipt line** under **Process contract** (not a replacement for the three signals above):
+
+| Field | Source |
+| --- | --- |
+| **path_declared_composition** | `tied_path_declared_composition_validate` → `ok`, `mandate_applies`, `satisfied`, `enforcement` |
+| **failure** | `ok: false` with `enforcement: blocking` → verification-gate incomplete; `advisory` → document diagnostics in handoff |
+
+---
+
 ## Workspace cleanliness (scoped REQ)
 
 This is **not** a fourth completion signal. It clarifies what “workspace clean” means after a REQ or PLAN wave closes.

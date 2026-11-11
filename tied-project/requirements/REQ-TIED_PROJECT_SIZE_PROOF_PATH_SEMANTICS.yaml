@@ -1,0 +1,11 @@
+REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS:
+  acceptance_criteria:
+    - "SC-PPS-01 through SC-PPS-07 in working PLAN"
+  description: "Path-declared proof facets with classifyTestFileFine, composition suffixes, PROOF_LABEL header contract; receipt stays validator_version 1.1.0."
+  satisfaction_criteria:
+    - criterion: "classifyTestFileFine unit-tested; snapshot facets at 1.1.0."
+      id: "SC-PPS-06"
+    - criterion: "integration, binding, contract suffixes classify as composition with correct fine subtype."
+      id: "SC-PPS-01"
+    - criterion: "tied_validate_consistency ok."
+      id: "SC-PPS-07"

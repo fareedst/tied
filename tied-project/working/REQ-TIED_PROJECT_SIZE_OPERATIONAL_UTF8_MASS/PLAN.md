@@ -4,7 +4,7 @@
 **Track:** `@add-feature` → **@refine-plan** (this revision) → `@build-plan` → `@close-out`  
 **Parent:** [REQ-TIED_PROJECT_SIZE_LAYERS](../REQ-TIED_PROJECT_SIZE_LAYERS/PLAN.md) (closed v1; additive LEAP)  
 **Linked Cursor plan:** `.cursor/plans/operational_utf-8_mass_metrics_4aae86de.plan.md`  
-**plan_phase:** `post-build`
+**plan_phase:** `closed`
 
 ---
 
@@ -77,4 +77,4 @@ Add **UTF-8 byte mass** beside **line counts** in the **operational intent** lay
 
 ## Handoff
 
-**Do next:** `@close-out` (optional commit) or refresh facilitator comparison table.
+**Do next:** Closed @ `a650b0b2` (with PROOF_FACET close-out). Push optional.

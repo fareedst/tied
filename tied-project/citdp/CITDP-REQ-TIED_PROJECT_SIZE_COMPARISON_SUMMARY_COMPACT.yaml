@@ -10,10 +10,10 @@ CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
       - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
   non_goals:
     - "Cohort JSONL automation"
-    - "Registry metric semantics"
-    - "validator_version bumps"
-    - "Trimming Failed/skipped section labels"
     - "Discover limit/pattern changes for this slice"
+    - "Registry metric semantics"
+    - "Trimming Failed/skipped section labels"
+    - "validator_version bumps"
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
@@ -44,8 +44,8 @@ CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
     - "SC-CSC-01 through SC-CSC-10 in PLAN.md"
     - "tied_validate_consistency ok"
   test_strategy:
-    unit:
-      - "tools/bootstrap/lib/project-size-comparison-render.test.mjs"
     integration:
       - "mcp-server project-size snapshot trial_factors wall time (when test exists)"
+    unit:
+      - "tools/bootstrap/lib/project-size-comparison-render.test.mjs"
   unchanged_behavior: "Discover labels in manifest; Failed/skipped full basename; proof_boundary footer; size layer counts unchanged."

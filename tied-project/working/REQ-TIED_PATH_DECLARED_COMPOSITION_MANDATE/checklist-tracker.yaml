@@ -1,0 +1,27 @@
+copy_hygiene: "Fresh tracker for REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE — clear completed before build-plan"
+description: "Tracker stub — path-declared composition mandate"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE"
+metadata:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  path_declared_composition_enforcement: "advisory"
+  profile_depth: "not_measured"
+  workflow_trial_disposable: false
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "PDC-D1/D2; optional integrated dogfood at build-plan only."
+    slug: "sub-adversarial-inquiry-pass"

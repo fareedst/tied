@@ -16,19 +16,12 @@ CITDP-REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
     - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
     - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
     - "REQ-WF_TRIAL_MODEL_EFFORT"
-  risk_assessment:
-    - mitigation: "Document in handoff; unlikely automation depended on failure"
-      reversibility: "reversible"
-      risk: "Empty argv changes exit 2 to 0"
-  satisfaction_criteria:
-    - "Operators can discover workflow_trial_range effort slot from help text"
-    - "workflow-trial-agentstream-sh.test.mjs covers empty argv, --help, plain, stdout override, help without gawk"
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Help prints but operators still miss workflow_trial_range effort slot"
         - "Empty argv exit 0 breaks scripts that expected exit 2"
+        - "Help prints but operators still miss workflow_trial_range effort slot"
       depth_tier: "minimal"
       disconfirming_observations:
         - "workflow-trial-agentstream-sh.test.mjs covers help-only exit 0 without bootstrap"
@@ -40,6 +33,13 @@ CITDP-REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
     depth_tier: "minimal"
     gate_policy: "advisory"
     rationale: "Shell help only; contract tests in workflow-trial-agentstream-sh.test.mjs"
+  risk_assessment:
+    - mitigation: "Document in handoff; unlikely automation depended on failure"
+      reversibility: "reversible"
+      risk: "Empty argv changes exit 2 to 0"
+  satisfaction_criteria:
+    - "Operators can discover workflow_trial_range effort slot from help text"
+    - "workflow-trial-agentstream-sh.test.mjs covers empty argv, --help, plain, stdout override, help without gawk"
   test_strategy:
     unit:
       - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

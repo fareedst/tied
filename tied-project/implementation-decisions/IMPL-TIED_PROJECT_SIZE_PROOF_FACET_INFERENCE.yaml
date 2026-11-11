@@ -1,0 +1,8 @@
+IMPL-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE:
+  code_locations:
+    - "mcp-server/src/project-size/proof-facet-inference.ts"
+    - "mcp-server/src/project-size/proof-label-resolve.ts"
+    - "mcp-server/src/project-size/snapshot-builder.ts"
+    - "tools/bootstrap/lib/project-size-comparison-render.mjs"
+  description: "Inference module, label resolve, snapshot 1.2.0 fields, batch compare --fine-labels."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE-pseudocode.md"

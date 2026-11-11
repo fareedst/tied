@@ -5,7 +5,7 @@
 **Parent:** [REQ-TIED_PROJECT_SIZE_LAYERS](../REQ-TIED_PROJECT_SIZE_LAYERS/PLAN.md) (v1 closed; additive LEAP)  
 **Siblings:** [REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS](../REQ-TIED_PROJECT_SIZE_OPERATIONAL_UTF8_MASS/PLAN.md) (post-build, uncommitted)  
 **Linked Cursor plan:** `.cursor/plans/proof_facet_test_cases_ac507abe.plan.md`  
-**plan_phase:** `post-build`
+**plan_phase:** `closed`
 
 ---
 

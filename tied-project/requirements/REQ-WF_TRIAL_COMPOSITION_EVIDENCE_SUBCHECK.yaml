@@ -1,0 +1,4 @@
+REQ-WF_TRIAL_COMPOSITION_EVIDENCE_SUBCHECK:
+  acceptance_criteria:
+    - "SC-SUB-01 through SC-SUB-04"
+  description: "tied_trial_composition_evidence_subcheck v2; record-wf-trial proof labels histogram for PROMPT-WF-09..12."

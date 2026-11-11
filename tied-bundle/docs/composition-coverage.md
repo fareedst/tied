@@ -4,6 +4,8 @@
 
 **Purpose**: Define how to inventory bindings between validated modules, prove each binding with a composition test (no UI), and reserve E2E for named platform constraints only. Referenced by `composition-integration` in `[PROC-AGENT_REQ_CHECKLIST]`.
 
+**Path-declared names:** Composition tests that count toward receipt `composition_tests` must use filename suffixes from the [proof-test-label taxonomy](../../tied-project/working/REQ-TIED_TRIAL_PROOF_INTENT_STACK/evidence/proof-test-label-taxonomy.md) (e.g. `pipeline.binding.test.ts`, not `pipeline_test.go` unless your stack maps equivalently). Example inventory rows should cite `*.binding.test.ts` paths. Validate with **`tied_path_declared_composition_validate`** before verification-gate ([REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE](../../tied-project/working/REQ-TIED_PATH_DECLARED_COMPOSITION_MANDATE/PLAN.md)).
+
 ---
 
 ## What counts as a binding

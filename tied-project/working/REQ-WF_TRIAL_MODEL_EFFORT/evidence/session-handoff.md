@@ -5,7 +5,7 @@
 **prompt_type:** handoff  
 **date:** 2026-11-09  
 **plan_phase:** post-build (phase 3) — **closed**  
-**traceable_commit:** `f1fce4f0`  
+**traceable_commit:** `eacb1737`  
 **canonical_handoff:** [handoff.md](./handoff.md)
 
 ---
@@ -61,7 +61,7 @@
 ## Not finished / regression
 
 - **`scripts/build-commands.sh`:** Phase 3 `workflow_trial_range` usage + composer DIAGNOSTIC **reverted** during close-out (`git checkout HEAD -- build-commands.sh`); **must re-apply** before bootstrap SC-RANGE-* pass and commit
-- **Traceable commit:** `f1fce4f0` (phase 3 slug + shell SC-RANGE)
+- **Traceable commit:** `eacb1737` (phase 3 slug + shell SC-RANGE)
 - **Bootstrap:** SC-RANGE-USAGE/WARN green; full file suite still long-running for live matrix cases
 - **wf-trial-agentstream-help.inc.sh:** untracked (operator-help REQ); only batch-note lines needed for model-effort docs may land in operator-help commit
 
@@ -71,8 +71,8 @@
 
 | Signal | Status | Notes |
 | --- | --- | --- |
-| Machine close_out | **pass** | Gates `allowed=true`; commit `f1fce4f0` |
-| Process contract | **pass** | CITDP + manifest aligned to `f1fce4f0` |
+| Machine close_out | **pass** | Gates `allowed=true`; commit `eacb1737` |
+| Process contract | **pass** | CITDP + manifest aligned to `eacb1737` |
 | Adherence ledger | partial | `legacy_no_adherence_chain` (minimal depth) |
 
 **Upstream feedback:** N/A
@@ -86,7 +86,7 @@
 - [x] leap-phase3, green-slug-argv, docs-range, unit tests (8/8)
 - [x] **green-range-shell** — `workflow_trial_range` usage + composer DIAGNOSTIC restored
 - [x] validate-phase3 bootstrap — SC-RANGE-USAGE / SC-RANGE-WARN green; agentstream unit 125/125
-- [x] close-out commit — `f1fce4f0`
+- [x] close-out commit — `eacb1737`
 
 ### Resume
 

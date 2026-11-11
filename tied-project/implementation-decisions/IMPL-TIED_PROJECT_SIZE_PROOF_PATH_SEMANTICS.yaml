@@ -1,0 +1,8 @@
+IMPL-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS:
+  code_locations:
+    - "mcp-server/src/project-size/proof-label-parse.ts"
+    - "mcp-server/src/project-size/proof-test-classify.ts"
+    - "mcp-server/src/project-size/snapshot-builder.ts"
+  description: "classifyTestFileFine, extended classifyTestFile suffixes, header parsers; snapshot imports coarse classifier."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS-pseudocode.md"
+  implementation_approach: "Pure classify module; snapshot facet loop unchanged."

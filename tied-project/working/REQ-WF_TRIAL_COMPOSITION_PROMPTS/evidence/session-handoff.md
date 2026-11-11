@@ -40,7 +40,7 @@
 - [x] orchestrator — `WF-01…12`; help strings
 - [x] tests — contract + shell tests green
 - [x] tied-stack — REQ/ARCH/IMPL, pseudo-code, vocab, CHANGELOG
-- [ ] close-out — scoped commit + envelope (deferred)
+- [x] close-out — scoped commit `0a3f50da`
 
 ### Changelog (this REQ)
 
@@ -85,8 +85,8 @@
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | **not_run** |
-| Process contract | **partial** (build + tests; no envelope) |
+| Machine close-out | **pass** (`0a3f50da`) |
+| Process contract | **advisory** (minimal depth) |
 | Adherence ledger | **not_run** |
 
 ---

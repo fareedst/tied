@@ -1,5 +1,5 @@
 # wf-trial-implementation-stack.inc.sh — TypeScript stack seed + WF preload for matrix trials.
-# [REQ-WF_TRIAL_IMPLEMENTATION_STACK] [IMPL-WF_TRIAL_IMPLEMENTATION_STACK]
+# [REQ-WF_TRIAL_IMPLEMENTATION_STACK] [IMPL-WF_TRIAL_IMPLEMENTATION_STACK] [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK]
 
 wf_trial_implementation_stack_enabled() {
   if [[ -n "${WF_TRIAL_SKIP_IMPLEMENTATION_STACK:-}" && "${WF_TRIAL_SKIP_IMPLEMENTATION_STACK}" != "0" ]]; then

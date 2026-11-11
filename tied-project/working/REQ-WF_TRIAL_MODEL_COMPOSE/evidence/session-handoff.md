@@ -42,7 +42,7 @@
 - [x] resolver-effort — `resolveWfTrialModelRef` + tier conflict + CLI `[effort]`
 - [x] shell-wire — `wf_trial_resolve_model_ref` + `workflow_trial_range` usage
 - [x] tied-stack — REQ/ARCH/IMPL, CITDP, vocab, CHANGELOG
-- [ ] close-out — traceable commit + verification envelope (deferred)
+- [x] close-out — commit `0ad209be` + verification manifest
 
 ### Optional
 
@@ -88,8 +88,8 @@
 | --- | --- | --- | --- | --- |
 | REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE | REQ | implemented (committed) | no | `tied-project/working/REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE/evidence/` |
 | REQ-WF_TRIAL_MODEL_EFFORT | REQ | draft (orthogonal) | no | `tied-project/working/REQ-WF_TRIAL_MODEL_EFFORT/` |
-| REQ-WF_TRIAL_MODEL_COMPOSE | REQ | implemented-uncommitted | no | this folder |
-| REQ-WF_TRIAL_COMPOSITION_PROMPTS | REQ | implemented-uncommitted | no | `tied-project/working/REQ-WF_TRIAL_COMPOSITION_PROMPTS/evidence/session-handoff.md` |
+| REQ-WF_TRIAL_MODEL_COMPOSE | REQ | committed (`0ad209be`) | no | this folder |
+| REQ-WF_TRIAL_COMPOSITION_PROMPTS | REQ | committed (`0a3f50da`) | no | `tied-project/working/REQ-WF_TRIAL_COMPOSITION_PROMPTS/evidence/close-out-handoff.md` |
 
 ---
 
@@ -108,7 +108,7 @@
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | **not_run** (no envelope, no `run-close-out-gates`) |
+| Machine close-out | **pass** (`0ad209be`, verification manifest) |
 | Process contract | **partial** — build-plan + tests + TIED stack; checklist Tracker not closed |
 | Adherence ledger | **not_run** |
 
