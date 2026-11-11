@@ -44,7 +44,7 @@ Build a TypeScript CLI that summarizes CSV text with row count and column count.
 - **TIED:** REQ index + detail; PLAN + handoffs 1–4; proof manifest **2** unit rows with **on-disk** paths; **no** persisted `tied-project/citdp/CITDP-REQ-CSV_SUMMARY_CLI.yaml`.
 - **Stack:** `wf-trial-ts-node-test-v1`; orchestrator manifest **`exit_code: 0`**; wall **~427s** (7.1 min).
 - **Git:** bootstrap pin **`eb83f76`** only — product tree **uncommitted**.
-- **Project size layers:** unit tests **21**; `operational_intent_hash` empty ([facilitator snapshot](../../tied-project/working/FACILITATOR-WF-10-1794407806-wf-agentstream-wf-10-claude-claudehaiku55medium/evidence/project-size-snapshot.v1.json)).
+- **Project size layers:** unit **21**; comp **0**; `operational_intent_hash` empty; batch **`wall_clock` 7** min ([receipt](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794407806-wf-agentstream-wf-10-claude-claudehaiku55medium.json) · [summary row `wf-10-claude-claudehaiku55medium`](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md)).
 
 ---
 
@@ -184,5 +184,6 @@ Session **4.2.2** captured on turn 1 — not an effectiveness claim for medium e
 ## Related links
 
 - [Traditional workflow catalog](catalog-traditional-workflow-trial-prompts.md)
+- [Batch size comparison (summary row)](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) — **WF-10** post-resolver Haiku effort matrix (`1794407806` / `1794408633` / `1794409094`)
 - [Facilitator evidence](../../tied-project/working/FACILITATOR-WF-10-1794407806-wf-agentstream-wf-10-claude-claudehaiku55medium/evidence/build-plan-verification-evidence.md)
 - [Peer negative control @ 1794376176](trial-readout-PROMPT-WF-10-claudehaiku55medium-1794376176-wf-agentstream-wf-10-claude-claudehaiku55medium.md)

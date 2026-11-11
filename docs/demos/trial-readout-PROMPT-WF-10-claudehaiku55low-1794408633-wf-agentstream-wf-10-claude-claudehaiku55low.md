@@ -44,7 +44,7 @@ Build a TypeScript CLI that summarizes CSV text with row count and column count.
 - **TIED:** PLAN + handoffs 1–4; slim tracker still lists legacy slugs **`red-tests`** / **`implement-code`**; **`execution_evidence.completed` empty**; no persisted CITDP YAML.
 - **Stack:** `wf-trial-ts-node-test-v1`; orchestrator **`exit_code: 0`**; wall **~301s** (5.0 min).
 - **Git:** bootstrap pin **`f1f07df`** — product tree **untracked**.
-- **Project size layers:** unit tests **23** ([facilitator snapshot](../../tied-project/working/FACILITATOR-WF-10-1794408633-wf-agentstream-wf-10-claude-claudehaiku55low/evidence/project-size-snapshot.v1.json)).
+- **Project size layers:** snapshot unit **16** · comp **7** (path-classified); facilitator **`npm test` 23/23**; batch **`wall_clock` 5** min ([receipt](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794408633-wf-agentstream-wf-10-claude-claudehaiku55low.json) · [summary row `wf-10-claude-claudehaiku55low`](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md)).
 - **Proof manifest:** **3** `files[]` rows + **1** `bindings[]`; `cli.binding.test.ts` **exists** on disk.
 
 ---
@@ -185,5 +185,6 @@ Session **4.2.2** on turn 1 — not an effectiveness claim for low effort or res
 ## Related links
 
 - [Traditional workflow catalog](catalog-traditional-workflow-trial-prompts.md)
+- [Batch size comparison (summary row)](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md)
 - [Facilitator evidence](../../tied-project/working/FACILITATOR-WF-10-1794408633-wf-agentstream-wf-10-claude-claudehaiku55low/evidence/build-plan-verification-evidence.md)
 - [Peer low @ 1794371036](trial-readout-PROMPT-WF-10-claudehaiku55low-1794371036-wf-agentstream-wf-10-claude-claudehaiku55low.md)

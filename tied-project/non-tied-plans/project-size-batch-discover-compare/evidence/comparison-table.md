@@ -1,6 +1,6 @@
 # Project size comparison (facilitator)
 
-**Generated:** 2026-11-11T00:15:33.570Z
+**Generated:** 2026-11-11T15:30:40.433Z
 **Discover parent:** `/Users/fareed/Documents/dev/test`
 **Pattern (substring):** `wf-agentstream`
 
@@ -21,7 +21,9 @@ Three layers: **atoms** (agreement footprint), **operational intent** (IMPL pseu
 | **applied_lines** | operational intent | Non-template pseudo-code lines across merged `IMPL-*-pseudocode.md` sidecars (gross minus template overlap). |
 | **procedures** | operational intent | Analyzer procedure count in pseudo-code (`procedure_count`). |
 | **unit** | proof facets | Unit test **cases** (`node:test` `it`/`test` per file) under subject `src/`. Receipt `validator_version` ≥ 1.1.0. |
-| **comp** | proof facets | Composition test **cases** per classified file (same counting rule). |
+| **comp** | proof facets | Path-declared composition test **cases** (suffixes per [proof path semantics](../../tied-project/requirements/REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS.yaml)). |
+| **comp_inferred** | proof facets | `composition_inferred_cases` (validator_version ≥ 1.2.0): binding heuristic on path-unit files; does not change **comp**. |
+| **lbl:*** | proof facets | `label_case_counts` subtypes (`composition.wiring`, etc.) when `--fine-labels` (1.2.0 receipts). |
 | **e2e** | proof facets | E2E test **cases** per classified file (same counting rule). |
 | **oi/atom** | cross-layer | `operational_intent_per_atom`: applied_lines ÷ (Vocab + REQ + ARCH + IMPL + optional corpus nodes). Rounded to nearest integer in table; receipt JSON keeps full precision. |
 | **utf8/atom** | cross-layer | `operational_intent_utf8_per_atom`: applied_utf8_bytes ÷ same atom denominator. Rounded to nearest integer in table. |
@@ -58,14 +60,20 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-06-cursor-composer25high | 1 | 1 | 1 | 0 | 3527 | 69 | 5 | 11 | 0 | 0 | 12 | 588 | 2 | 17 |
 | wf-06-cursor-grok47medmedium | 1 | 1 | 1 | 7 | 5100 | 84 | 5 | 15 | 0 | 0 | 6 | 392 | 1 | 32 |
 | wf-07-claude-claudehaiku55medium | 1 | 1 | 1 | 0 | 2307 | 44 | 2 | 12 | 0 | 0 | 7 | 385 | 2 | 8 |
-| wf-07-cursor-grok47medmedium | 1 | 1 | 1 | 0 | 1969 | 31 | 1 | 8 | 0 | 0 | 5 | 328 | 1 | — |
+| wf-07-cursor-grok47medmedium | 1 | 1 | 1 | 0 | 1969 | 31 | 1 | 8 | 0 | 0 | 5 | 328 | 1 | 31 |
 | wf-08-claude-claudehaiku55medium | 1 | 1 | 1 | 0 | 4772 | 86 | 6 | 3 | 0 | 0 | 14 | 795 | 1 | 7 |
+| wf-08-cursor-grok47medmedium | 1 | 1 | 1 | 6 | 1861 | 34 | 2 | 3 | 0 | 0 | 3 | 155 | 0 | 31 |
 | wf-09-claude-claudehaiku55high | 1 | 1 | 1 | 0 | 4437 | 75 | 0 | 14 | 0 | 0 | 13 | 740 | 2 | 14 |
 | wf-09-claude-claudehaiku55low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | — | — | — | 3 |
 | wf-09-claude-claudehaiku55medium | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | 0 | 0 | 0 | 7 | 5 |
 | wf-09-claude-claudesonnet55high | 1 | 1 | 3 | 0 | 11102 | 158 | 6 | 26 | 0 | 0 | 16 | 1110 | 3 | 13 |
 | wf-09-claude-claudesonnet55low | 1 | 1 | 1 | 0 | 430 | 4 | 0 | 9 | 0 | 0 | 1 | 72 | 2 | 2 |
 | wf-09-claude-claudesonnet55medium | 1 | 1 | 1 | 0 | 1458 | 23 | 1 | 11 | 0 | 0 | 4 | 243 | 2 | 5 |
+| wf-10-claude-claudehaiku55high | 1 | 1 | 2 | 0 | 6710 | 176 | 5 | 50 | 0 | 0 | 22 | 839 | 6 | 14 |
+| wf-10-claude-claudehaiku55low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | 7 | 0 | — | — | — | 5 |
+| wf-10-claude-claudehaiku55medium | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | 0 | 0 | 0 | 11 | 7 |
+| wf-10-claude-claudesonnet55low | 1 | 1 | 1 | 0 | 541 | 4 | 0 | 8 | 0 | 0 | 1 | 90 | 1 | 3 |
+| wf-10-claude-claudesonnet55medium | 1 | 1 | 4 | 0 | 1462 | 27 | 0 | 28 | 0 | 0 | 2 | 122 | 2 | 5 |
 
 ## Failed / skipped
 

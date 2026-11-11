@@ -11,6 +11,7 @@ Human-readable catalogs for picking small programs and TIED-shaped build exercis
 | [Greenfield plan-new-feature prompt catalog](catalog-greenfield-plan-new-feature-prompts.md) | Plain-language `@add-feature` trial prompts for `test-new-tied-client` clients (facilitator grading maps to `TIED-DEMO-*`) |
 | [Traditional four-phase workflow trial catalog](catalog-traditional-workflow-trial-prompts.md) | Compact **PROMPT-WF-01…12** remainders (09–12 require module binding tests); four-phase skills; LLM comparison (Composer 2.5, Luna, Grok, Claude) |
 | [Traditional workflow trial runs registry](traditional-workflow-trial-runs-registry.md) | Facilitator matrix of **Recorded trials** rows (harness, model, grades, disposable dirname era, latest-for-cell) |
+| [Project size batch comparison (summary)](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) | Discover cohort **Summary** — atoms, proof facets, **`wall_clock`** (minutes); see [size catalog](catalog-tied-size-and-trial-statistics.md) |
 
 ## Trial readouts (facilitator — greenfield)
 

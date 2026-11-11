@@ -2,7 +2,7 @@
   "schema_version": "project-size-snapshot-receipt.v1",
   "ok": true,
   "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
-  "validator_version": "1.1.0",
+  "validator_version": "1.2.0",
   "repo_root": "/Users/fareed/Documents/dev/test/1794256511-wf-agentstream-wf-01-cursor-composer25medium",
   "layers": {
     "atoms": {
@@ -29,7 +29,11 @@
       "composition_tests": 0,
       "e2e_tests": 0,
       "binding_inventory_tests": 0,
-      "verify_evidence_files": 0
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 7
+      },
+      "composition_inferred_cases": 0
     }
   },
   "cross_layer": {
@@ -41,11 +45,6 @@
   "hashes": {
     "operational_intent_hash": "245c3ab4faf3736d798c22a58fa280e56fa2df3ee46af1a01db7a6e8ec35d1ab",
     "corpus_graph_content_hash": "1ff2720a19193ff2499e34300df19c742bc3ffcc07c68c912af62b3fde0995d7"
-  },
-  "trial_factors": {
-    "implementation_stack_id": "wf-trial-ts-node-test-v1",
-    "orchestrator_exit_code": 0,
-    "orchestrator_wall_time_seconds": 1085
   },
   "diagnostics": []
 }

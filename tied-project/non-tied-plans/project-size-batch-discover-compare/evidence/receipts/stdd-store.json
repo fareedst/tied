@@ -2,45 +2,47 @@
   "schema_version": "project-size-snapshot-receipt.v1",
   "ok": true,
   "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
-  "validator_version": "1.1.0",
+  "validator_version": "1.2.0",
   "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
   "layers": {
     "atoms": {
       "vocab_preferred_terms": 935,
-      "index_req": 202,
-      "index_arch": 197,
-      "index_impl": 238,
-      "corpus_graph_nodes": 670,
-      "corpus_graph_edges": 3333
+      "index_req": 205,
+      "index_arch": 200,
+      "index_impl": 241,
+      "corpus_graph_nodes": 679,
+      "corpus_graph_edges": 3358
     },
     "operational_intent": {
-      "sidecar_count": 258,
-      "gross_lines": 17397,
-      "template_overlap_lines": 2268,
-      "applied_lines": 15129,
-      "gross_utf8_bytes": 1104512,
-      "template_overlap_utf8_bytes": 29757,
-      "applied_utf8_bytes": 1074755,
-      "procedure_count": 778,
-      "parse_node_count": 4148
+      "sidecar_count": 261,
+      "gross_lines": 17485,
+      "template_overlap_lines": 2280,
+      "applied_lines": 15205,
+      "gross_utf8_bytes": 1108726,
+      "template_overlap_utf8_bytes": 29907,
+      "applied_utf8_bytes": 1078819,
+      "procedure_count": 784,
+      "parse_node_count": 4178
     },
     "proof_facets": {
       "unit_tests": 0,
       "composition_tests": 0,
       "e2e_tests": 0,
       "binding_inventory_tests": 0,
-      "verify_evidence_files": 109
+      "verify_evidence_files": 123,
+      "label_case_counts": {},
+      "composition_inferred_cases": 0
     }
   },
   "cross_layer": {
-    "operational_intent_per_atom": 6.747992863514719,
-    "operational_intent_utf8_per_atom": 479.37332738626225,
+    "operational_intent_per_atom": 6.727876106194691,
+    "operational_intent_utf8_per_atom": 477.3535398230089,
     "proof_facets_per_atom": 0,
     "tests_per_procedure": 0
   },
   "hashes": {
-    "operational_intent_hash": "0f07be166cfb05a47de7d5759fa16101ef27662be09e5fd5ec77c49e9fd862c9",
-    "corpus_graph_content_hash": "f1339588eee1e8ce0fe7652d754afad0dae4ff811dd453d1ad5c5bb8ec43a3ce"
+    "operational_intent_hash": "e3686415c81c3241bd4971c919d49f8e10925d1766de8a166952dbb7993d8832",
+    "corpus_graph_content_hash": "d38a388768885cad3e4c8d11fd30fada4a899f28ea78cb5f8588d3aa29a25c11"
   },
   "diagnostics": []
 }

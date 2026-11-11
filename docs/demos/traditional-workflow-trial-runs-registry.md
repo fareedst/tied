@@ -10,6 +10,8 @@
 
 Full trial protocol and rubric: [catalog-traditional-workflow-trial-prompts.md](catalog-traditional-workflow-trial-prompts.md).
 
+**Size + wall clock (minutes):** facilitator cohort [**comparison-table Summary**](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) — deduped by `wf-NN-…` label; this registry keeps **per-run** history and grades with **Run time** in **seconds**.
+
 ---
 
 ## Disposable client naming (tag eras)

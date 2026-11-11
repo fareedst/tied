@@ -16,6 +16,8 @@
 
 **Validator note:** `layers.proof_facets` tier integers counted **files** when `validator_version` &lt; 1.1.0; **test cases** from 1.1.0 onward.
 
+**Path-declared composition ([REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS](../../tied-project/requirements/REQ-TIED_PROJECT_SIZE_PROOF_PATH_SEMANTICS.yaml)):** `composition_tests` sums **path-declared** composition-tier cases only (including `*.integration.test.ts`, `*.binding.test.ts`, `*.contract.test.ts`). Fine **`proof_subtype`** labels (e.g. `composition.wiring`) are path-derived in the store classifier; receipt **`label_case_counts`** ships at `validator_version` **1.2.0** ([REQ-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE](../../tied-project/requirements/REQ-TIED_PROJECT_SIZE_PROOF_FACET_INFERENCE.yaml)). Pre-1.2.0 receipts lack `label_case_counts` and `composition_inferred_cases`. Taxonomy: [proof-test-label-taxonomy.md](../../tied-project/working/REQ-TIED_TRIAL_PROOF_INTENT_STACK/evidence/proof-test-label-taxonomy.md).
+
 **Co-update rule:** `operational_intent_hash` is derived from merged IMPL `*-pseudocode.md` bodies and recomputed on every snapshot.
 
 ## Cross-layer ratios
@@ -29,7 +31,21 @@ Receipt `cross_layer` holds simple ratios (e.g. `operational_intent_per_atom`, `
 3. `@record-wf-trial` readout **Project size layers** appendix cites the receipt ([reference § Size layers](../../tools/bundled-record-wf-trial-skill/reference.md#project-size-layers)).
 4. Cohort append: `runs.jsonl` via facilitator tooling ([IMPL-TIED_PROJECT_SIZE_COHORT_JSONL](../../tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_COHORT_JSONL.yaml)).
 
+## Facilitator cohort summary (discover batch)
+
+**Authoritative multi-client table:** [`comparison-table.md`](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) — **`## Summary`** rows with size layers plus **`wall_clock`** (orchestrator wall time in **whole minutes**). Rows dedupe by display label (`wf-NN-…`); latest discover epoch wins.
+
+Regenerate after new disposable clients land under the discover parent (default `~/Documents/dev/test`):
+
+```bash
+node tools/bootstrap/lib/project-size-batch-compare.mjs \
+  --store-root /path/to/stdd \
+  --include-trial-factors
+```
+
+Receipts: `tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/*.json`. Plan: [project-size-batch-discover-compare](../../tied-project/non-tied-plans/project-size-batch-discover-compare/PLAN.md).
+
 ## Related
 
 - [REQ-TIED_PROJECT_SIZE_LAYERS](../../tied-project/requirements/REQ-TIED_PROJECT_SIZE_LAYERS.yaml)
-- [Traditional workflow trial runs registry](./traditional-workflow-trial-runs-registry.md)
+- [Traditional workflow trial runs registry](./traditional-workflow-trial-runs-registry.md) (grades and **Run time** in seconds — complementary, not duplicate)

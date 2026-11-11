@@ -5,7 +5,7 @@
 | **Purpose** | Short **invocation remainders** for **`@add-feature`** in a **disposable client**, then **`@refine-plan`**, **`@build-plan`**, and **`@close-out`** as **separate sponsor turns**. Stresses **workflow choreography** and **LLM differences** (Composer 2.5, GPT-5.6 Luna low/med/high) while reusing compact product scopes. |
 | **Audience** | Trial sponsors (paste text) · facilitators (grading + `@record-wf-trial`) |
 | **Status** | Draft catalog |
-| **Last updated** | 2026-11-10 |
+| **Last updated** | 2026-11-11 |
 | **Contrast** | [Greenfield catalog](catalog-greenfield-plan-new-feature-prompts.md) — typically one long planning session; this catalog **requires four explicit skills**. |
 | **Facilitator maps** | [TIED compact demo tool catalog](catalog-tied-compact-tools.md) · [Agent resilience exercise catalog](catalog-compact-programming-exercises.md) |
 
@@ -324,6 +324,8 @@ Build a TypeScript command tool that reads a command name from arguments and opt
 ## Recorded trials (facilitator)
 
 **Registry:** [traditional-workflow-trial-runs-registry.md](traditional-workflow-trial-runs-registry.md) — harness, model, tag era, session grades, and **latest for cell** per row below; [Latest-run comparison matrix](traditional-workflow-trial-runs-registry.md#latest-run-comparison-matrix) (newest run per toolset × PROMPT-WF-01…12; rows for **09–12** appear when facilitators record trials).
+
+**Size cohort summary:** [comparison-table.md](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) — deduped **`wf-NN-…`** rows with **`wall_clock`** (minutes) after `project-size-batch-compare.mjs` regen ([size catalog](catalog-tied-size-and-trial-statistics.md)).
 
 | Prompt | Model config | Client | Readout |
 | --- | --- | --- | --- |

@@ -34,7 +34,7 @@ Build a TypeScript CLI that summarizes CSV text with row count and column count.
 - **TIED:** REQ/ARCH/IMPL records; persisted **`tied-project/citdp/CITDP-REQ-CSV_SUMMARY_CLI.yaml`**; registry slugs in tracker `completed`.
 - **Stack:** `wf-trial-ts-node-test-v1`; orchestrator **`exit_code: 0`**; wall **~812s** (13.5 min).
 - **Git:** product commit **`705835c`** (`feat(csv-summary): add CSV summary CLI`).
-- **Project size layers:** unit tests **50**; applied_lines **176**; atoms REQ/ARCH/IMPL indexed ([facilitator snapshot](../../tied-project/working/FACILITATOR-WF-10-1794409094-wf-agentstream-wf-10-claude-claudehaiku55high/evidence/project-size-snapshot.v1.json)).
+- **Project size layers:** unit **50**; applied_lines **176**; atoms REQ/ARCH/IMPL indexed; batch **`wall_clock` 14** min ([receipt](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794409094-wf-agentstream-wf-10-claude-claudehaiku55high.json) · [summary row `wf-10-claude-claudehaiku55high`](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md)).
 - **Proof manifest:** **2** `files[]` + binding; `cli.test.ts` labeled composition.wiring.
 
 ---
@@ -173,4 +173,5 @@ Session **4.2.2** — not an effectiveness claim for `high` effort alone.
 ## Related links
 
 - [Traditional workflow catalog](catalog-traditional-workflow-trial-prompts.md)
+- [Batch size comparison (summary row)](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) — **WF-10** Haiku effort trio (`1794407806` / `1794408633` / `1794409094`)
 - [Facilitator evidence](../../tied-project/working/FACILITATOR-WF-10-1794409094-wf-agentstream-wf-10-claude-claudehaiku55high/evidence/build-plan-verification-evidence.md)
