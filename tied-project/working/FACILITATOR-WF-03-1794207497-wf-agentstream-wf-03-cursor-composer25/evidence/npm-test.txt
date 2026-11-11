@@ -1,0 +1,26 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ consumer
+  ✔ accept appends and received preserves order (0.520916ms)
+  ✔ rejects duplicate id on second accept (0.196166ms)
+  ✔ does not import producer module (0.141083ms)
+✔ consumer (1.326958ms)
+▶ producer
+  ✔ produce returns monotonic string ids (0.618583ms)
+  ✔ trims payload before assign (0.06225ms)
+  ✔ rejects blank or whitespace-only payload (0.146708ms)
+  ✔ does not import consumer module (0.142959ms)
+✔ producer (1.424708ms)
+▶ wiring composition evidence
+  ✔ deliver runs produce then accept; inbox tail equals returned message (0.491959ms)
+✔ wiring composition evidence (0.85225ms)
+ℹ tests 8
+ℹ suites 3
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 85.293167

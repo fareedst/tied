@@ -1,0 +1,26 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ satisfies
+  ✔ >= true when equal (0.389292ms)
+  ✔ >= false when lower (0.05175ms)
+  ✔ > false when equal (0.038125ms)
+  ✔ > true when greater patch (0.042ms)
+  ✔ <= and = / == at boundary (0.051458ms)
+  ✔ < strict less (0.037625ms)
+  ✔ leading v on version (0.036208ms)
+  ✔ trim outer whitespace (0.037625ms)
+  ✔ internal whitespace in comparator is false (0.044583ms)
+  ✔ reject-as-false malformed inputs without throw (0.067875ms)
+  ✔ leading zero in component is false (0.034541ms)
+  ✔ operator matrix spot checks (0.038334ms)
+✔ satisfies (1.353166ms)
+ℹ tests 12
+ℹ suites 1
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.844791

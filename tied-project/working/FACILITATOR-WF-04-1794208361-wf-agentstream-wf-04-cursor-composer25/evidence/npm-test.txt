@@ -1,0 +1,32 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+{"matches":{"REQ-MATCHED":[{"file":"block.ts","line":3,"column":4},{"file":"marked.ts","line":1,"column":5},{"file":"marked.ts","line":2,"column":4}]},"orphans":{"REQ-ORPHAN":[{"file":"marked.ts","line":3,"column":4}]},"unreferenced":["REQ-UNUSED"]}
+cannot read index: /Users/fareed/Documents/dev/test/1794208361-wf-agentstream-wf-04-cursor-composer25/fixtures/comment-marker-scan/missing.json
+▶ RUN_FIXTURE_SCAN_CLI
+  ✔ does not read live tied-project indexes (5.893916ms)
+  ✔ exit 1 when orphans exist in fixture tree (0.500125ms)
+  ✔ exit 2 on invalid index path (0.095458ms)
+  ✔ prints JSON report on stdout for fixture tree (59.816042ms)
+✔ RUN_FIXTURE_SCAN_CLI (66.730167ms)
+▶ COMPARE_MARKERS_TO_INDEX
+  ✔ partitions match, orphan, and unreferenced (0.458125ms)
+✔ COMPARE_MARKERS_TO_INDEX (0.78575ms)
+▶ EXTRACT_COMMENT_MARKERS
+  ✔ collects bracket and bare markers in line comments (0.50525ms)
+  ✔ uses the line that contains the id inside a block comment (0.053125ms)
+  ✔ ignores REQ spelling inside string literals (0.044166ms)
+✔ EXTRACT_COMMENT_MARKERS (0.979625ms)
+▶ LOAD_ALLOWED_ID_INDEX
+  ✔ dedupes valid allowed ids (0.9295ms)
+  ✔ rejects invalid JSON shape (0.739917ms)
+✔ LOAD_ALLOWED_ID_INDEX (2.05675ms)
+ℹ tests 10
+ℹ suites 4
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 146.021167

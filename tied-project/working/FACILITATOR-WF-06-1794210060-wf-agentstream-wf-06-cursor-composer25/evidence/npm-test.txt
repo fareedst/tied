@@ -1,0 +1,51 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+DEBUG: TokenBucket constructed { rate: 2, burst: 10, balance: 10 }
+DEBUG: TokenBucket constructed { rate: 2, burst: 10, balance: 10 }
+TRACE: refill { elapsedMs: 2500, added: 5, before: 0, after: 5 }
+TRACE: refill { elapsedMs: 10000, added: 20, before: 5, after: 10 }
+DEBUG: TokenBucket constructed { rate: 1, burst: 3, balance: 3 }
+DEBUG: TokenBucket constructed { rate: 1, burst: 1, balance: 1 }
+DEBUG: TokenBucket constructed { rate: 1, burst: 2, balance: 2 }
+DEBUG: TokenBucket constructed { rate: 1, burst: 1, balance: 1 }
+DEBUG: TokenBucket constructed { rate: 4, burst: 8, balance: 8 }
+TRACE: refill { elapsedMs: 500, added: 2, before: 0, after: 2 }
+DEBUG: TokenBucket constructed { rate: 10, burst: 10, balance: 10 }
+TRACE: refill { elapsedMs: 1000, added: 10, before: 0, after: 10 }
+▶ TokenBucket
+  ▶ AC-1 construction [CONSTRUCT_TOKEN_BUCKET]
+    ✔ throws when rate is not finite and strictly positive (0.326667ms)
+    ✔ throws when burst is not finite and strictly positive (0.06125ms)
+    ✔ starts full at burst capacity (0.291666ms)
+  ✔ AC-1 construction [CONSTRUCT_TOKEN_BUCKET] (0.961875ms)
+  ▶ AC-2 refill [REFILL_IF_NEEDED]
+    ✔ refills proportionally to elapsed time up to burst (0.149ms)
+  ✔ AC-2 refill [REFILL_IF_NEEDED] (0.19725ms)
+  ▶ AC-3 tryConsume [TRY_CONSUME]
+    ✔ returns true and deducts when enough tokens (0.083959ms)
+    ✔ returns false without deducting when insufficient (0.060625ms)
+  ✔ AC-3 tryConsume [TRY_CONSUME] (0.2515ms)
+  ▶ AC-4 consume [CONSUME_OR_THROW]
+    ✔ deducts when sufficient (0.076167ms)
+    ✔ throws InsufficientTokensError without deducting when insufficient (0.079917ms)
+  ✔ AC-4 consume [CONSUME_OR_THROW] (0.222958ms)
+  ▶ AC-5 available [AVAILABLE]
+    ✔ applies refill without deducting (0.103708ms)
+  ✔ AC-5 available [AVAILABLE] (0.142417ms)
+  ▶ AC-6 clock [REFILL_IF_NEEDED]
+    ✔ uses injectable now() for deterministic stepping (0.088375ms)
+  ✔ AC-6 clock [REFILL_IF_NEEDED] (0.113041ms)
+  ▶ AC-7 scope [MODULE_BOUNDARY]
+    ✔ token-bucket module source does not import fs or net (0.340792ms)
+  ✔ AC-7 scope [MODULE_BOUNDARY] (0.367625ms)
+✔ TokenBucket (2.789333ms)
+ℹ tests 11
+ℹ suites 8
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 74.723541

@@ -1,0 +1,22 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ LOAD_MERGED_CONFIGURATION REQ-CONFIG_OVERRIDE_MERGE
+  ✔ replaces a defaults value when the override value is present and is not an explicit null (0.461375ms)
+  ✔ keeps the defaults value for a missing key (0.054125ms)
+  ✔ omits a key when the override value is an explicit null (0.040208ms)
+  ✔ replaces a nested object wholesale and may alias the override value (0.05325ms)
+  ✔ replaces an array wholesale and may alias the override value (0.060916ms)
+  ✔ returns INVALID_INPUT and no merged configuration when an input is not a plain object (0.073417ms)
+  ✔ returns a new object and does not mutate the defaults object or the override object (0.065ms)
+  ✔ copies own keys from a null-prototype plain object and rejects a custom prototype (0.048917ms)
+✔ LOAD_MERGED_CONFIGURATION REQ-CONFIG_OVERRIDE_MERGE (1.283458ms)
+ℹ tests 8
+ℹ suites 1
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.822

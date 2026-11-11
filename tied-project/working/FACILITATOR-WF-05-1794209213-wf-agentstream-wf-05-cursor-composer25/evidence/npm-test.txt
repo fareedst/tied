@@ -1,0 +1,23 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ parseCsvToRowObjects
+  ✔ TS-HEADER-ONLY: header-only document returns empty list (0.477417ms)
+  ✔ TS-ONE-ROW: one data row yields one object with string values (0.122417ms)
+  ✔ TS-QUOTED-COMMA: comma inside quoted field is preserved (0.048ms)
+  ✔ TS-HEADER-ABSENT: empty string (0.14125ms)
+  ✔ TS-HEADER-ABSENT: whitespace-only (0.039875ms)
+  ✔ TS-PARSE-ERROR: unclosed quote (0.038541ms)
+  ✔ TS-RAGGED-SHORT: short data row pads missing keys with empty string (0.047083ms)
+  ✔ TS-RAGGED-LONG: extra trailing cells are ignored (0.049541ms)
+  ✔ TS-DUP-HEADER: duplicate header keys fail (0.057625ms)
+✔ parseCsvToRowObjects (1.499958ms)
+ℹ tests 9
+ℹ suites 1
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.210417

@@ -1,0 +1,76 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+DEBUG: CREATE_TOKEN_BUCKET full bucket { ratePerSecond: 2, burst: 5 }
+TRACE: TRY_TAKE first finite nowMs { nowMs: 0 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 4 }
+DEBUG: CREATE_TOKEN_BUCKET construction_invalid { ratePerSecond: 0, burst: 1 }
+DEBUG: CREATE_TOKEN_BUCKET construction_invalid { ratePerSecond: -1, burst: 1 }
+DEBUG: CREATE_TOKEN_BUCKET construction_invalid { ratePerSecond: NaN, burst: 1 }
+DEBUG: CREATE_TOKEN_BUCKET construction_invalid { ratePerSecond: Infinity, burst: 1 }
+DEBUG: CREATE_TOKEN_BUCKET construction_invalid { ratePerSecond: 1, burst: 0 }
+DEBUG: CREATE_TOKEN_BUCKET construction_invalid { ratePerSecond: 1, burst: -2 }
+DEBUG: CREATE_TOKEN_BUCKET construction_invalid { ratePerSecond: 1, burst: NaN }
+DEBUG: CREATE_TOKEN_BUCKET construction_invalid { ratePerSecond: 1, burst: Infinity }
+DEBUG: CREATE_TOKEN_BUCKET full bucket { ratePerSecond: 1, burst: 2 }
+TRACE: TRY_TAKE first finite nowMs { nowMs: 0 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 1 }
+TRACE: TRY_TAKE no refill for backward or equal nowMs { nowMs: 0, lastNowMs: 0 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 0 }
+TRACE: TRY_TAKE no refill for backward or equal nowMs { nowMs: 0, lastNowMs: 0 }
+DEBUG: TRY_TAKE denial { requested: 1, remaining: 0 }
+TRACE: TRY_TAKE no refill for backward or equal nowMs { nowMs: 0, lastNowMs: 0 }
+DEBUG: TRY_TAKE denial { requested: 1, remaining: 0 }
+DEBUG: CREATE_TOKEN_BUCKET full bucket { ratePerSecond: 0.5, burst: 2 }
+TRACE: TRY_TAKE first finite nowMs { nowMs: 0 }
+DEBUG: TRY_TAKE grant { requested: 2, remaining: 0 }
+TRACE: TRY_TAKE refill { elapsedSeconds: 1, before: 0, after: 0.5 }
+DEBUG: TRY_TAKE denial { requested: 1, remaining: 0.5 }
+TRACE: TRY_TAKE refill { elapsedSeconds: 2, before: 0.5, after: 1.5 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 0.5 }
+DEBUG: CREATE_TOKEN_BUCKET full bucket { ratePerSecond: 10, burst: 2 }
+TRACE: TRY_TAKE first finite nowMs { nowMs: 0 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 1 }
+TRACE: TRY_TAKE refill { elapsedSeconds: 100, before: 1, after: 2 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 1 }
+DEBUG: CREATE_TOKEN_BUCKET full bucket { ratePerSecond: 1, burst: 2 }
+TRACE: TRY_TAKE first finite nowMs { nowMs: 0 }
+DEBUG: TRY_TAKE denial { requested: 3, remaining: 2 }
+DEBUG: CREATE_TOKEN_BUCKET full bucket { ratePerSecond: 10, burst: 5 }
+TRACE: TRY_TAKE first finite nowMs { nowMs: 0 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 4 }
+DEBUG: TRY_TAKE denial invalid take size { requested: 0, remaining: 4 }
+DEBUG: TRY_TAKE denial invalid take size { requested: -1, remaining: 4 }
+DEBUG: TRY_TAKE denial invalid take size { requested: NaN, remaining: 4 }
+DEBUG: TRY_TAKE denial non-finite nowMs { nowMs: NaN, remaining: 4 }
+TRACE: TRY_TAKE refill { elapsedSeconds: 10, before: 4, after: 5 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 4 }
+DEBUG: CREATE_TOKEN_BUCKET full bucket { ratePerSecond: 10, burst: 5 }
+TRACE: TRY_TAKE first finite nowMs { nowMs: 5000 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 4 }
+TRACE: TRY_TAKE no refill for backward or equal nowMs { nowMs: 1000, lastNowMs: 5000 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 3 }
+TRACE: TRY_TAKE no refill for backward or equal nowMs { nowMs: 5000, lastNowMs: 5000 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 2 }
+DEBUG: CREATE_TOKEN_BUCKET full bucket { ratePerSecond: 1, burst: 2 }
+DEBUG: TRY_TAKE denial non-finite nowMs { nowMs: NaN, remaining: 2 }
+TRACE: TRY_TAKE first finite nowMs { nowMs: 5000 }
+DEBUG: TRY_TAKE grant { requested: 1, remaining: 1 }
+▶ CREATE_TOKEN_BUCKET [REQ-IN_MEMORY_TOKEN_BUCKET]
+  ✔ construct full bucket (0.540375ms)
+  ✔ reject invalid rate or burst (0.396708ms)
+✔ CREATE_TOKEN_BUCKET [REQ-IN_MEMORY_TOKEN_BUCKET] (1.293208ms)
+▶ TRY_TAKE [REQ-IN_MEMORY_TOKEN_BUCKET]
+  ✔ grant then deny (0.34775ms)
+  ✔ refill and burst cap (0.156458ms)
+  ✔ deny oversized and bad inputs (0.190958ms)
+✔ TRY_TAKE [REQ-IN_MEMORY_TOKEN_BUCKET] (0.777833ms)
+ℹ tests 5
+ℹ suites 2
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.799292

@@ -1,0 +1,14 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794407806-wf-agentstream-wf-10-claude-claudehaiku55medium",
+  "layers": {
+    "proof_facets": {
+      "unit_tests": 21,
+      "composition_tests": 0
+    }
+  },
+  "hashes": {
+    "operational_intent_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade."
+}

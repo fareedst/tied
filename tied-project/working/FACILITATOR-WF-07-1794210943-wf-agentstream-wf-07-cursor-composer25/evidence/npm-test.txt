@@ -1,0 +1,22 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ loadConfig [REQ-CONFIG_DEFAULTS_OVERRIDE]
+  ✔ override precedence replaces top-level scalar (0.27225ms)
+  ✔ deep merge preserves sibling nested keys (0.225792ms)
+  ✔ override array replaces default array at key (0.043791ms)
+  ✔ missing override key preserves default (0.04325ms)
+  ✔ explicit null clears top-level key (0.034792ms)
+  ✔ explicit null clears nested key under deep merge (0.047375ms)
+  ✔ missing differs from explicit null clear (0.029833ms)
+  ✔ does not mutate defaults or override inputs (0.067916ms)
+✔ loadConfig [REQ-CONFIG_DEFAULTS_OVERRIDE] (1.195625ms)
+ℹ tests 8
+ℹ suites 1
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.92175

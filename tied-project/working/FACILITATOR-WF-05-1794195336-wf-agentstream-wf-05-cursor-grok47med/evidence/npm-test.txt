@@ -1,0 +1,29 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ MAP_CSV_DOCUMENT REQ-CSV_ROW_OBJECTS
+  ✔ TS-HEADER-ONLY returns an empty list for a header-only document (0.513584ms)
+  ✔ TS-ONE-ROW returns one object whose keys follow the header row (0.122125ms)
+  ✔ TS-STRING-PRESERVE keeps numeric-looking and boolean-looking cells as strings (0.05125ms)
+  ✔ TS-EMPTY-CELL maps an empty cell to the empty string (0.050833ms)
+  ✔ TS-NO-TRIM keeps surrounding spaces in the cell string (0.040292ms)
+  ✔ TS-TWO-ROWS keeps document order (0.048375ms)
+  ✔ TS-HEADER-ABSENT rejects empty and whitespace-only input (0.053208ms)
+  ✔ TS-RAGGED rejects a short row, a long row, and an empty line after a complete record (0.048583ms)
+  ✔ TS-DUP-HEADER rejects a repeated header cell (0.044917ms)
+  ✔ TS-EMPTY-HEADER rejects an empty header cell before a duplicate header name (0.057875ms)
+  ✔ TS-MALFORMED rejects an unclosed quote and a quote that does not open a field (0.047375ms)
+  ✔ TS-TRAILING-NEWLINE does not add an object for CR, LF, or CRLF after the last record (0.052125ms)
+✔ MAP_CSV_DOCUMENT REQ-CSV_ROW_OBJECTS (1.630166ms)
+▶ SPLIT_RECORDS REQ-CSV_ROW_OBJECTS
+  ✔ TS-QUOTED keeps a comma, a doubled quote, and a newline inside one cell (0.046125ms)
+✔ SPLIT_RECORDS REQ-CSV_ROW_OBJECTS (0.082333ms)
+ℹ tests 13
+ℹ suites 2
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 74.074709

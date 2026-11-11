@@ -1,0 +1,13 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794409094-wf-agentstream-wf-10-claude-claudehaiku55high",
+  "layers": {
+    "atoms": { "index_req": 1, "index_arch": 1, "index_impl": 2 },
+    "proof_facets": { "unit_tests": 50, "composition_tests": 0 },
+    "operational_intent": { "applied_lines": 176 }
+  },
+  "hashes": {
+    "operational_intent_hash": "b2e0fd76e8822cf4f6824e86c2b4598a6e4a666aec294b1923a60f6eabe919df"
+  },
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade."
+}

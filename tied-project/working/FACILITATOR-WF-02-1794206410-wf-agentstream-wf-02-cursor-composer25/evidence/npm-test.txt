@@ -1,0 +1,22 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ EMIT_DEDUPLICATED_STREAM [REQ-STDIN_LINE_DEDUPE] order-ab-a (61.076583ms)
+✔ EMIT_DEDUPLICATED_STREAM [REQ-STDIN_LINE_DEDUPE] order-ba-b (55.532167ms)
+✔ EMIT_DEDUPLICATED_STREAM [REQ-STDIN_LINE_DEDUPE] empty stdin (55.012083ms)
+✔ EMIT_DEDUPLICATED_STREAM [REQ-STDIN_LINE_DEDUPE] empty line kept once (53.8705ms)
+✔ EMIT_DEDUPLICATED_STREAM [REQ-STDIN_LINE_DEDUPE] crlf (53.850834ms)
+✔ FILTER_FIRST_SEEN_LINES [REQ-STDIN_LINE_DEDUPE] order-ab-a (0.498042ms)
+✔ FILTER_FIRST_SEEN_LINES [REQ-STDIN_LINE_DEDUPE] order-ba-b (0.054042ms)
+✔ FILTER_FIRST_SEEN_LINES [REQ-STDIN_LINE_DEDUPE] empty line kept once (0.037292ms)
+✔ SPLIT_STDIN_TO_LINES [REQ-STDIN_LINE_DEDUPE] crlf strips CR before compare (0.09475ms)
+✔ SPLIT_STDIN_TO_LINES [REQ-STDIN_LINE_DEDUPE] empty stdin (0.054208ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 354.23925

@@ -1,0 +1,227 @@
+[
+  {
+    "fname": "trial-readout-PROMPT-WF-03-composer25medium-1794263616-wf-agentstream-wf-03-cursor-composer25medium.md",
+    "wf_num": "03",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794263616-wf-agentstream-wf-03-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`24a5f4a`**; **8/8** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-03-composer25high-1794264348-wf-agentstream-wf-03-cursor-composer25high.md",
+    "wf_num": "03",
+    "slug": "composer25high",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=high**)",
+    "dirname": "1794264348-wf-agentstream-wf-03-cursor-composer25high",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`b5fdb21`**; **5/5** tests; effort `high`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-02-luna-low-medium-1794255679-wf-agentstream-wf-02-cursor-lunalowmedium.md",
+    "wf_num": "02",
+    "slug": "luna-low-medium",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low (**effort=medium**)",
+    "dirname": "1794255679-wf-agentstream-wf-02-cursor-lunalowmedium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`718032b`**; **6/6** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-02-claudehaiku55medium-1794255744-wf-agentstream-wf-02-claude-haiku55medium.md",
+    "wf_num": "02",
+    "slug": "claudehaiku55medium",
+    "catalog_model": "Cursor agentstream / Claude Haiku 5.5 (**effort=medium**)",
+    "dirname": "1794255744-wf-agentstream-wf-02-claude-haiku55medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`fc7e7f6`**; **11/11** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25-1794246289-wf-agentstream-wf-01-cursor-composer25.md",
+    "wf_num": "01",
+    "slug": "composer25",
+    "catalog_model": "Cursor agentstream / Composer 2.5",
+    "dirname": "1794246289-wf-agentstream-wf-01-cursor-composer25",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`90dac89`**; **12/12** tests",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-claudehaiku55medium-1794249088-wf-agentstream-wf-01-claude-haiku55medium.md",
+    "wf_num": "01",
+    "slug": "claudehaiku55medium",
+    "catalog_model": "Cursor agentstream / Claude Haiku 5.5 (**effort=medium**)",
+    "dirname": "1794249088-wf-agentstream-wf-01-claude-haiku55medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`197fbf5`**; **31/31** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794249821-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794249821-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`1e48c96`**; **10/10** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**C+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794249984-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794249984-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`9688585`**; **0/?** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**C**/**B**/**A\u2212**/**C+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794250166-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794250166-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`f00f2cd`**; **0/?** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**C**/**B**/**A\u2212**/**C+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794250240-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794250240-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`1364bf5`**; **0/?** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**C**/**B**/**A\u2212**/**C+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794256180-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794256180-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`24f7c77`**; **10/10** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794256441-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794256441-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`69ea2bd`**; **7/7** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794256511-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794256511-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`f3ec506`**; **7/7** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794256625-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794256625-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`7b53997`**; **10/10** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-composer25medium-1794256930-wf-agentstream-wf-01-cursor-composer25medium.md",
+    "wf_num": "01",
+    "slug": "composer25medium",
+    "catalog_model": "Cursor agentstream / Composer 2.5 (**effort=medium**)",
+    "dirname": "1794256930-wf-agentstream-wf-01-cursor-composer25medium",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`6d9283e`**; **10/10** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-medium-1794259375-wf-agentstream-wf-01-cursor-lunalowmedium.md",
+    "wf_num": "01",
+    "slug": "luna-low-medium",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low (**effort=medium**)",
+    "dirname": "1794259375-wf-agentstream-wf-01-cursor-lunalowmedium",
+    "catalog_summary": "**workflow complete (exit 2 postamble)** \u2014 orchestrator **`exit_code: 2`**; **`69acae9`**; **6/6** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**B+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-medium-1794259573-wf-agentstream-wf-01-cursor-lunalowmedium.md",
+    "wf_num": "01",
+    "slug": "luna-low-medium",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low (**effort=medium**)",
+    "dirname": "1794259573-wf-agentstream-wf-01-cursor-lunalowmedium",
+    "catalog_summary": "**workflow complete (exit 2 postamble)** \u2014 orchestrator **`exit_code: 2`**; **`45e6c03`**; **5/5** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**B+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-medium-1794259664-wf-agentstream-wf-01-cursor-lunalowmedium.md",
+    "wf_num": "01",
+    "slug": "luna-low-medium",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low (**effort=medium**)",
+    "dirname": "1794259664-wf-agentstream-wf-01-cursor-lunalowmedium",
+    "catalog_summary": "**workflow complete (exit 2 postamble)** \u2014 orchestrator **`exit_code: 2`**; **`2db5b23`**; **3/3** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**B+**/**A**/**A\u2212**/**B+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-medium-1794259796-wf-agentstream-wf-01-cursor-lunalowmedium.md",
+    "wf_num": "01",
+    "slug": "luna-low-medium",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low (**effort=medium**)",
+    "dirname": "1794259796-wf-agentstream-wf-01-cursor-lunalowmedium",
+    "catalog_summary": "**workflow complete (exit 2 postamble)** \u2014 orchestrator **`exit_code: 2`**; **`a74f364`**; **6/6** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**B+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-medium-1794259987-wf-agentstream-wf-01-cursor-lunalowmedium.md",
+    "wf_num": "01",
+    "slug": "luna-low-medium",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low (**effort=medium**)",
+    "dirname": "1794259987-wf-agentstream-wf-01-cursor-lunalowmedium",
+    "catalog_summary": "**workflow complete (exit 2 postamble)** \u2014 orchestrator **`exit_code: 2`**; **`458808f`**; **4/4** tests; effort `medium`",
+    "grades_compact": "**A**/**A\u2212**/**B+**/**A**/**A\u2212**/**B+**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-1794260880-wf-agentstream-wf-01-cursor-lunalow.md",
+    "wf_num": "01",
+    "slug": "luna-low",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low",
+    "dirname": "1794260880-wf-agentstream-wf-01-cursor-lunalow",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`f802856`**; **4/4** tests",
+    "grades_compact": "**A**/**A\u2212**/**B+**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-1794261164-wf-agentstream-wf-01-cursor-lunalow.md",
+    "wf_num": "01",
+    "slug": "luna-low",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low",
+    "dirname": "1794261164-wf-agentstream-wf-01-cursor-lunalow",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`c4f86c5`**; **0/?** tests",
+    "grades_compact": "**A**/**A\u2212**/**C**/**B**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-1794261284-wf-agentstream-wf-01-cursor-lunalow.md",
+    "wf_num": "01",
+    "slug": "luna-low",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low",
+    "dirname": "1794261284-wf-agentstream-wf-01-cursor-lunalow",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`415e670`**; **5/5** tests",
+    "grades_compact": "**A**/**A\u2212**/**A**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-1794261316-wf-agentstream-wf-01-cursor-lunalow.md",
+    "wf_num": "01",
+    "slug": "luna-low",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low",
+    "dirname": "1794261316-wf-agentstream-wf-01-cursor-lunalow",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`1e0d117`**; **3/3** tests",
+    "grades_compact": "**A**/**A\u2212**/**B+**/**A**/**A\u2212**/**A**/**A\u2212**"
+  },
+  {
+    "fname": "trial-readout-PROMPT-WF-01-luna-low-1794261371-wf-agentstream-wf-01-cursor-lunalow.md",
+    "wf_num": "01",
+    "slug": "luna-low",
+    "catalog_model": "Cursor agentstream / GPT-5.6 Luna low",
+    "dirname": "1794261371-wf-agentstream-wf-01-cursor-lunalow",
+    "catalog_summary": "**workflow complete** \u2014 orchestrator **`exit_code: 0`**; **`55b7112`**; **4/4** tests",
+    "grades_compact": "**A**/**A\u2212**/**B+**/**A**/**A\u2212**/**A**/**A\u2212**"
+  }
+]

@@ -1,0 +1,33 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ file (0.464ms)
+✔ stdin (0.047958ms)
+✔ neither (0.036208ms)
+✔ both (0.037917ms)
+✔ file without path (0.038417ms)
+✔ unknown flag (0.035167ms)
+✔ file mode (0.647334ms)
+✔ stdin mode injected (0.067209ms)
+✔ missing file exits 1 (0.114291ms)
+✔ usage exits 2 (0.047792ms)
+✔ spawned child stdin (88.230417ms)
+✔ simple (0.521875ms)
+✔ quoted comma (0.057417ms)
+✔ embedded newline (0.0525ms)
+✔ escaped quote (0.043875ms)
+✔ CRLF (0.041125ms)
+✔ blank lines ignored (0.0325ms)
+✔ header only (0.035584ms)
+✔ empty (0.039042ms)
+✔ ragged (0.045167ms)
+✔ unterminated quote (0.163375ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 195.687458

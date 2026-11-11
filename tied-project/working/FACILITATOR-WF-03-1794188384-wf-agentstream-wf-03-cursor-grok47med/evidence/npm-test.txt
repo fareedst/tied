@@ -1,0 +1,37 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+TRACE: ACCEPT_MESSAGE stored 1 inbox 1
+TRACE: ACCEPT_MESSAGE stored 2 inbox 2
+TRACE: ACCEPT_MESSAGE BLANK_PAYLOAD inbox 0
+TRACE: ACCEPT_MESSAGE stored 9 inbox 1
+TRACE: ACCEPT_MESSAGE DUPLICATE_ID 9
+✔ ACCEPT_MESSAGE REQ-PRODUCER_CONSUMER_WIRING preserves accept order (0.705875ms)
+✔ ACCEPT_MESSAGE REQ-PRODUCER_CONSUMER_WIRING rejects blank payload and leaves inbox empty (0.182709ms)
+✔ ACCEPT_MESSAGE REQ-PRODUCER_CONSUMER_WIRING rejects duplicate id and keeps length 1 (0.088292ms)
+✔ consumer source does not import producer REQ-PRODUCER_CONSUMER_WIRING (0.298542ms)
+TRACE: PRODUCE_MESSAGE id 1
+TRACE: PRODUCE_MESSAGE id 2
+TRACE: PRODUCE_MESSAGE BLANK_PAYLOAD next_id unchanged 1
+TRACE: PRODUCE_MESSAGE id 1
+✔ PRODUCE_MESSAGE REQ-PRODUCER_CONSUMER_WIRING yields decimal ids (0.687083ms)
+✔ PRODUCE_MESSAGE REQ-PRODUCER_CONSUMER_WIRING rejects blank payload before id advances (0.201375ms)
+✔ producer source does not import consumer REQ-PRODUCER_CONSUMER_WIRING (0.148292ms)
+TRACE: PRODUCE_MESSAGE id 1
+TRACE: ACCEPT_MESSAGE stored 1 inbox 1
+TRACE: DELIVER_THROUGH_WIRING accepted 1
+TRACE: PRODUCE_MESSAGE id 2
+TRACE: ACCEPT_MESSAGE stored 2 inbox 2
+TRACE: DELIVER_THROUGH_WIRING accepted 2
+TRACE: PRODUCE_MESSAGE BLANK_PAYLOAD next_id unchanged 1
+✔ DELIVER_THROUGH_WIRING REQ-PRODUCER_CONSUMER_WIRING delivers in order (0.742458ms)
+✔ DELIVER_THROUGH_WIRING REQ-PRODUCER_CONSUMER_WIRING rejects blank payload and leaves inbox empty (0.397041ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.3455

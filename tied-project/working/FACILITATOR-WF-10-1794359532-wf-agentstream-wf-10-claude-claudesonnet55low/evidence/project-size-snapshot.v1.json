@@ -1,0 +1,46 @@
+{
+  "cross_layer": {
+    "operational_intent_per_atom": 2.4,
+    "operational_intent_utf8_per_atom": 141.7,
+    "proof_facets_per_atom": 2.1,
+    "tests_per_procedure": null
+  },
+  "diagnostics": [],
+  "hashes": {
+    "corpus_graph_content_hash": "3ac4ebdbae79f13a4c66d01a98ba1d0970d8844c1388d8ba476d6642520a1207",
+    "operational_intent_hash": "36cff920c9412ccdd45fc979a89c88df5e07e9dff98f9b51212b61e3821af3a9"
+  },
+  "layers": {
+    "atoms": {
+      "corpus_graph_edges": 11,
+      "corpus_graph_nodes": 5,
+      "index_arch": 1,
+      "index_impl": 3,
+      "index_req": 1,
+      "vocab_preferred_terms": 0
+    },
+    "operational_intent": {
+      "applied_lines": 24,
+      "applied_utf8_bytes": 1417,
+      "gross_lines": 24,
+      "gross_utf8_bytes": 1417,
+      "parse_node_count": 0,
+      "procedure_count": 0,
+      "sidecar_count": 3,
+      "template_overlap_lines": 0,
+      "template_overlap_utf8_bytes": 0
+    },
+    "proof_facets": {
+      "binding_inventory_tests": 0,
+      "composition_tests": 0,
+      "e2e_tests": 0,
+      "unit_tests": 21,
+      "verify_evidence_files": 0
+    }
+  },
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794359532-wf-agentstream-wf-10-claude-claudesonnet55low",
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "validator_version": "1.1.0"
+}

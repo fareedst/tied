@@ -1,0 +1,18 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ explicit state machine
+  ✔ T-LEGAL-1: legal sequence idle → start → active → complete → done (0.253458ms)
+  ✔ T-ILLEGAL-1: idle + complete throws; state remains idle (0.153542ms)
+  ✔ T-ERROR-1: StateTransitionError documents state and event (0.07175ms)
+  ✔ T-TERMINAL-1: from done, start throws; state remains done (0.043708ms)
+✔ explicit state machine (0.909583ms)
+ℹ tests 4
+ℹ suites 1
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.264125

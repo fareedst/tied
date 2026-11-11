@@ -1,0 +1,27 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ PARSE_SEMANTIC_VERSION [REQ-SEMVER_SATISFIES]
+  ✔ accepts a numeric triple, optional leading v or V, and surrounding whitespace (0.538542ms)
+  ✔ reject-as-false for empty, partial, extra, prerelease, build, and leading zero (0.097292ms)
+✔ PARSE_SEMANTIC_VERSION [REQ-SEMVER_SATISFIES] (1.012291ms)
+▶ PARSE_COMPARATOR [REQ-SEMVER_SATISFIES]
+  ✔ accepts the six operators and treats = like == (0.087084ms)
+  ✔ reject-as-false for unknown operators, internal whitespace, and empty comparator (0.0595ms)
+✔ PARSE_COMPARATOR [REQ-SEMVER_SATISFIES] (0.219208ms)
+▶ COMPARE_TRIPLES [REQ-SEMVER_SATISFIES]
+  ✔ orders major, then minor, then patch as integers (0.056084ms)
+✔ COMPARE_TRIPLES [REQ-SEMVER_SATISFIES] (0.094458ms)
+▶ SATISFIES_COMPARATOR [REQ-SEMVER_SATISFIES]
+  ✔ returns true on the equal and greater-or-equal boundary (0.060542ms)
+  ✔ does not throw when either argument is empty (0.037834ms)
+✔ SATISFIES_COMPARATOR [REQ-SEMVER_SATISFIES] (0.168958ms)
+ℹ tests 7
+ℹ suites 4
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 73.772834

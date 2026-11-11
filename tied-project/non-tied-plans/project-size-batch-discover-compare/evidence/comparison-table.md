@@ -1,6 +1,6 @@
 # Project size comparison (facilitator)
 
-**Generated:** 2026-11-11T15:30:40.433Z
+**Generated:** 2026-11-11T15:48:24.598Z
 **Discover parent:** `/Users/fareed/Documents/dev/test`
 **Pattern (substring):** `wf-agentstream`
 
@@ -72,6 +72,7 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-10-claude-claudehaiku55high | 1 | 1 | 2 | 0 | 6710 | 176 | 5 | 50 | 0 | 0 | 22 | 839 | 6 | 14 |
 | wf-10-claude-claudehaiku55low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | 7 | 0 | — | — | — | 5 |
 | wf-10-claude-claudehaiku55medium | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | 0 | 0 | 0 | 11 | 7 |
+| wf-10-claude-claudesonnet55high | 1 | 1 | 3 | 0 | 8833 | 136 | 0 | 49 | 9 | 0 | 14 | 883 | 6 | — |
 | wf-10-claude-claudesonnet55low | 1 | 1 | 1 | 0 | 541 | 4 | 0 | 8 | 0 | 0 | 1 | 90 | 1 | 3 |
 | wf-10-claude-claudesonnet55medium | 1 | 1 | 4 | 0 | 1462 | 27 | 0 | 28 | 0 | 0 | 2 | 122 | 2 | 5 |
 

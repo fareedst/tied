@@ -1,0 +1,23 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ an orphan sets exit 1 and writes the JSON report (66.247042ms)
+✔ unreferenced allowed ids alone keep exit 0 (54.130292ms)
+✔ an invalid index sets exit 2 with one stderr line and no JSON report (60.066083ms)
+✔ a missing argument sets exit 2 (53.0055ms)
+✔ matches, orphans, and unreferenced allowed ids are disjoint (5.633583ms)
+✔ bracket and bare comment markers are collected and string spellings are ignored (0.978583ms)
+✔ a block comment records the line that contains the id (0.105667ms)
+✔ duplicates collapse to one id in lexicographic order (5.677167ms)
+✔ a non-marker id is an invalid index (0.13ms)
+✔ a missing index file is an invalid index (0.061166ms)
+✔ the walk skips the allowed-id index and does not follow a symlink (0.982542ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 313.803667

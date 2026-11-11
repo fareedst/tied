@@ -1,6 +1,6 @@
 {
   "schema_version": "project-size-batch-manifest.v1",
-  "generated_at": "2026-11-11T15:30:40.433Z",
+  "generated_at": "2026-11-11T15:48:24.598Z",
   "options": {
     "store_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
     "parent": "/Users/fareed/Documents/dev/test",
@@ -24,6 +24,10 @@
     }
   ],
   "targets": [
+    {
+      "label": "1794411691-wf-agentstream-wf-10-claude-claudesonnet55high",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794411691-wf-agentstream-wf-10-claude-claudesonnet55high"
+    },
     {
       "label": "1794409094-wf-agentstream-wf-10-claude-claudehaiku55high",
       "repo_root": "/Users/fareed/Documents/dev/test/1794409094-wf-agentstream-wf-10-claude-claudehaiku55high"
@@ -219,13 +223,10 @@
     {
       "label": "1794259796-wf-agentstream-wf-01-cursor-lunalowmedium",
       "repo_root": "/Users/fareed/Documents/dev/test/1794259796-wf-agentstream-wf-01-cursor-lunalowmedium"
-    },
-    {
-      "label": "1794259664-wf-agentstream-wf-01-cursor-lunalowmedium",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794259664-wf-agentstream-wf-01-cursor-lunalowmedium"
     }
   ],
   "receipt_paths": [
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794411691-wf-agentstream-wf-10-claude-claudesonnet55high.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794409094-wf-agentstream-wf-10-claude-claudehaiku55high.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794408633-wf-agentstream-wf-10-claude-claudehaiku55low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794407806-wf-agentstream-wf-10-claude-claudehaiku55medium.json",
@@ -274,8 +275,7 @@
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794261164-wf-agentstream-wf-01-cursor-lunalow.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794260880-wf-agentstream-wf-01-cursor-lunalow.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794259987-wf-agentstream-wf-01-cursor-lunalowmedium.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794259796-wf-agentstream-wf-01-cursor-lunalowmedium.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794259664-wf-agentstream-wf-01-cursor-lunalowmedium.json"
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794259796-wf-agentstream-wf-01-cursor-lunalowmedium.json"
   ],
   "snapshot_count": 50
 }

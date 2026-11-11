@@ -1,0 +1,87 @@
+{
+  "schema_version": "wf-09-composition-subcheck.v1",
+  "recorded_at": "2026-11-11",
+  "prompt_id": "PROMPT-WF-09",
+  "paste_generation": "goal-first",
+  "rubric_ref": "docs/demos/catalog-traditional-workflow-trial-prompts.md#test-strategy-sub-check--composition-evidence-wf-0912",
+  "primary_lens": "wf-cohort",
+  "cohort_summary": {
+    "clients": 6,
+    "composition_evidence_fail": 6,
+    "composition_evidence_pass": 0
+  },
+  "clients": [
+    {
+      "client_id": "1794350349",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium",
+      "model_slug": "claude-haiku-5-5",
+      "model_effort": "medium",
+      "implementation_modules_excluding_index": 1,
+      "binding_test_present": false,
+      "receipt_composition_tests": 0,
+      "composition_evidence_subcheck": "fail",
+      "readout": "docs/demos/trial-readout-PROMPT-WF-09-claudehaiku55medium-1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium.md",
+      "published_test_strategy_band": "B"
+    },
+    {
+      "client_id": "1794350685",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794350685-wf-agentstream-wf-09-claude-claudehaiku55high",
+      "model_slug": "claude-haiku-5-5",
+      "model_effort": "high",
+      "implementation_modules_excluding_index": 1,
+      "binding_test_present": false,
+      "receipt_composition_tests": 0,
+      "composition_evidence_subcheck": "fail",
+      "readout": "docs/demos/trial-readout-PROMPT-WF-09-claudehaiku55high-1794350685-wf-agentstream-wf-09-claude-claudehaiku55high.md",
+      "published_test_strategy_band": "B"
+    },
+    {
+      "client_id": "1794351557",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794351557-wf-agentstream-wf-09-claude-claudehaiku55low",
+      "model_slug": "claude-haiku-5-5",
+      "model_effort": "low",
+      "implementation_modules_excluding_index": 1,
+      "binding_test_present": false,
+      "receipt_composition_tests": 0,
+      "composition_evidence_subcheck": "fail",
+      "readout": "docs/demos/trial-readout-PROMPT-WF-09-claudehaiku55low-1794351557-wf-agentstream-wf-09-claude-claudehaiku55low.md",
+      "published_test_strategy_band": "B-"
+    },
+    {
+      "client_id": "1794352390",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794352390-wf-agentstream-wf-09-claude-claudesonnet55low",
+      "model_slug": "claude-sonnet-5-5",
+      "model_effort": "low",
+      "implementation_modules_excluding_index": 1,
+      "binding_test_present": false,
+      "receipt_composition_tests": 0,
+      "composition_evidence_subcheck": "fail",
+      "readout": "docs/demos/trial-readout-PROMPT-WF-09-claudesonnet55low-1794352390-wf-agentstream-wf-09-claude-claudesonnet55low.md",
+      "published_test_strategy_band": "C+"
+    },
+    {
+      "client_id": "1794352615",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium",
+      "model_slug": "claude-sonnet-5-5",
+      "model_effort": "medium",
+      "implementation_modules_excluding_index": 1,
+      "binding_test_present": false,
+      "receipt_composition_tests": 0,
+      "composition_evidence_subcheck": "fail",
+      "readout": "docs/demos/trial-readout-PROMPT-WF-09-claudesonnet55medium-1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium.md",
+      "published_test_strategy_band": "B"
+    },
+    {
+      "client_id": "1794353174",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794353174-wf-agentstream-wf-09-claude-claudesonnet55high",
+      "model_slug": "claude-sonnet-5-5",
+      "model_effort": "high",
+      "implementation_modules_excluding_index": 1,
+      "binding_test_present": false,
+      "receipt_composition_tests": 0,
+      "composition_evidence_subcheck": "fail",
+      "readout": "docs/demos/trial-readout-PROMPT-WF-09-claudesonnet55high-1794353174-wf-agentstream-wf-09-claude-claudesonnet55high.md",
+      "published_test_strategy_band": "B"
+    }
+  ]
+}
