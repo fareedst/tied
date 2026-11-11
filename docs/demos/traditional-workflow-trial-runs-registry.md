@@ -3,9 +3,9 @@
 | Field | Value |
 | --- | --- |
 | **Purpose** | Facilitator index of **PROMPT-WF-01…12** recorded trials — harness, model slug, session grades, orchestrator **Run time**, and **latest for cell** (composition prompts **09–12**; note **paste generation** `goal-first` vs `architect-in-paste` when comparing structure across models) |
-| **Rows** | **102** (matches [Recorded trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
+| **Rows** | **108** (matches [Recorded trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
 | **Status** | Maintainer snapshot |
-| **Last updated** | 2026-11-09 |
+| **Last updated** | 2026-11-11 |
 | **Disclaimer** | Store documentation only — not a `[REQ-*]` token, not a maturity score, not a model leaderboard |
 
 Full trial protocol and rubric: [catalog-traditional-workflow-trial-prompts.md](catalog-traditional-workflow-trial-prompts.md).
@@ -135,6 +135,12 @@ Rows are **PROMPT-WF-01…08** cells from [Recorded trials](catalog-traditional-
 | 01 | 1794261284 | cursor | `gpt-5.6-luna-low-fast` | 0 | 909 | 3.87 · A/A−/A/A/A−/A/A− | no | [readout](trial-readout-PROMPT-WF-01-luna-low-1794261284-wf-agentstream-wf-01-cursor-lunalow.md) |
 | 01 | 1794261316 | cursor | `gpt-5.6-luna-low-fast` | 0 | 946 | 3.77 · A/A−/B+/A/A−/A/A− | no | [readout](trial-readout-PROMPT-WF-01-luna-low-1794261316-wf-agentstream-wf-01-cursor-lunalow.md) |
 | 01 | 1794261371 | cursor | `gpt-5.6-luna-low-fast` | 0 | 1084 | 3.77 · A/A−/B+/A/A−/A/A− | yes | [readout](trial-readout-PROMPT-WF-01-luna-low-1794261371-wf-agentstream-wf-01-cursor-lunalow.md) |
+| 09 | 1794350349 | claude | `claude-haiku-5-5` | 0 | 296 | 3.06 · A/B−/B/A−/C+/B/B− | yes | [readout](trial-readout-PROMPT-WF-09-claudehaiku55medium-1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium.md) |
+| 09 | 1794350685 | claude | `claude-haiku-5-5` | 0 | 838 | 3.57 · A/B+/B/A/B+/A−/A− | yes | [readout](trial-readout-PROMPT-WF-09-claudehaiku55high-1794350685-wf-agentstream-wf-09-claude-claudehaiku55high.md) |
+| 09 | 1794351557 | claude | `claude-haiku-5-5` | 0 | 191 | 2.51 · B+/D+/B−/B+/C/B−/C+ | yes | [readout](trial-readout-PROMPT-WF-09-claudehaiku55low-1794351557-wf-agentstream-wf-09-claude-claudehaiku55low.md) |
+| 09 | 1794352390 | claude | `claude-sonnet-5-5` | 0 | 146 | 2.71 · B/B−/C+/B/C+/B/B− | yes | [readout](trial-readout-PROMPT-WF-09-claudesonnet55low-1794352390-wf-agentstream-wf-09-claude-claudesonnet55low.md) |
+| 09 | 1794352615 | claude | `claude-sonnet-5-5` | 0 | 286 | 3.43 · A/B+/B/A−/B/A−/B+ | yes | [readout](trial-readout-PROMPT-WF-09-claudesonnet55medium-1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium.md) |
+| 09 | 1794353174 | claude | `claude-sonnet-5-5` | 0 | 799 | 3.63 · A/A−/B/A/B+/A−/A− | yes | [readout](trial-readout-PROMPT-WF-09-claudesonnet55high-1794353174-wf-agentstream-wf-09-claude-claudesonnet55high.md) |
 
 ---
 
@@ -154,6 +160,7 @@ Each cell: orchestrator **wall time** (seconds, four sponsor turns) · session g
 | [PROMPT-WF-06](catalog-traditional-workflow-trial-prompts.md#prompt-wf-06) | **883s**<br>**3.87**<br>[readout](trial-readout-PROMPT-WF-06-composer25-1794210060-wf-agentstream-wf-06-cursor-composer25.md) | **409s**<br>**3.30**<br>[readout](trial-readout-PROMPT-WF-06-luna-low-1794097458-wf-agentstream-wf-06-cursor-lunalow.md) | — | **1018s**<br>**2.51**<br>[readout](trial-readout-PROMPT-WF-06-luna-high-1794081715-wf-agentstream-wf-06-cursor-lunahigh.md) | **2562s**<br>**3.87**<br>[readout](trial-readout-PROMPT-WF-06-grok47-med-1794197658-wf-agentstream-wf-06-cursor-grok47med.md) | **374s**<br>**3.34**<br>[readout](trial-readout-PROMPT-WF-06-claudehaiku55-1794062924-wf-agentstream-wf-06-claude-claudehaiku55.md) | **260s**<br>**3.67**<br>[readout](trial-readout-PROMPT-WF-06-claudesonnet55-1794102962-wf-agentstream-wf-06-claude-sonnet55.md) | — | — | — | — |
 | [PROMPT-WF-07](catalog-traditional-workflow-trial-prompts.md#prompt-wf-07) | **797s**<br>**3.87**<br>[readout](trial-readout-PROMPT-WF-07-composer25-1794210943-wf-agentstream-wf-07-cursor-composer25.md) | **421s**<br>**3.29**<br>[readout](trial-readout-PROMPT-WF-07-luna-low-1794099967-wf-agentstream-wf-07-cursor-lunalow.md) | — | **1367s**<br>**3.63**<br>[readout](trial-readout-PROMPT-WF-07-luna-high-1794086713-wf-agentstream-wf-07-cursor-lunahigh.md) | **2149s**<br>**3.87**<br>[readout](trial-readout-PROMPT-WF-07-grok47-med-1794200222-wf-agentstream-wf-07-cursor-grok47med.md) | **294s**<br>**3.43**<br>[readout](trial-readout-PROMPT-WF-07-claudehaiku55-1794063964-wf-agentstream-wf-07-claude-claudehaiku55.md) | **423s**<br>**3.81**<br>[readout](trial-readout-PROMPT-WF-07-claudesonnet55-1794103222-wf-agentstream-wf-07-claude-sonnet55.md) | — | — | — | — |
 | [PROMPT-WF-08](catalog-traditional-workflow-trial-prompts.md#prompt-wf-08) | **706s**<br>**3.57**<br>[readout](trial-readout-PROMPT-WF-08-composer25-1794211741-wf-agentstream-wf-08-cursor-composer25.md) | **523s**<br>**3.34**<br>[readout](trial-readout-PROMPT-WF-08-luna-low-1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow.md) | — | **521s**<br>**1.23**<br>[readout](trial-readout-PROMPT-WF-08-luna-high-1794088871-wf-agentstream-wf-08-cursor-lunahigh.md) | **2542s**<br>**3.87**<br>[readout](trial-readout-PROMPT-WF-08-grok47-med-1794202372-wf-agentstream-wf-08-cursor-grok47med.md) | **340s**<br>**3.63**<br>[readout](trial-readout-PROMPT-WF-08-claudehaiku55-1794064806-wf-agentstream-wf-08-claude-claudehaiku55.md) | **290s**<br>**3.61**<br>[readout](trial-readout-PROMPT-WF-08-claudesonnet55-1794103645-wf-agentstream-wf-08-claude-sonnet55.md) | — | — | — | — |
+| [PROMPT-WF-09](catalog-traditional-workflow-trial-prompts.md#prompt-wf-09) | — | — | — | — | — | **838s**<br>**3.57**<br>[readout](trial-readout-PROMPT-WF-09-claudehaiku55high-1794350685-wf-agentstream-wf-09-claude-claudehaiku55high.md) | **799s**<br>**3.63**<br>[readout](trial-readout-PROMPT-WF-09-claudesonnet55high-1794353174-wf-agentstream-wf-09-claude-claudesonnet55high.md) | — | — | — | **296s**<br>**3.06**<br>[readout](trial-readout-PROMPT-WF-09-claudehaiku55medium-1794350349-wf-agentstream-wf-09-claude-claudehaiku55medium.md) |
 
 ---
 
