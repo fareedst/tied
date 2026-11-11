@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial demo backlog (traceable-commit)** — Commit **30** pending `docs/demos/trial-readout-*.md` files referenced from the workflow catalog, matching `FACILITATOR-WF-*` verification evidence, and regenerated [batch size summary](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) manifest rows.
+
 - **PROMPT-WF-10 facilitator readout (Claude Sonnet 5.5 high @ 1794411691)** — **4.2.2** via `workflow_trial_agentstream wf-10`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md) updated via `@record-wf-trial`. **Workflow complete** — orchestrator `exit_code: 0`; **`1610292`**; **58/58** tests; **`composition_tests: 9`**; partial adherence ledger.
 
 - **Reddit outreach (non-tied cohort methodology)** — Publish-ready post under [`tied-project/non-tied-plans/reddit-tied-cohort-methodology/`](tied-project/non-tied-plans/reddit-tied-cohort-methodology/PLAN.md): TIED as per-change resolver, V+R+A+I vs waterfall phase-gate decisions, disposable trial size layers; `REDDIT-POST.md`, title/comment variants, CITDP draft (`tied_tokens_new: []`).
