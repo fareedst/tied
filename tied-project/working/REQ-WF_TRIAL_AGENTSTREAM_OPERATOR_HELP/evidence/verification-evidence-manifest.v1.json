@@ -1,0 +1,18 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "request_token": "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP",
+  "generated_at": "2026-11-11T00:00:00.000Z",
+  "commands": [
+    {
+      "label": "workflow-trial-agentstream-sh",
+      "command": "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs",
+      "exit_code": 0,
+      "notes": "27 tests incl operator help cases"
+    },
+    {
+      "label": "tied_validate_consistency",
+      "command": "MCP tied_validate_consistency",
+      "exit_code": 0
+    }
+  ]
+}

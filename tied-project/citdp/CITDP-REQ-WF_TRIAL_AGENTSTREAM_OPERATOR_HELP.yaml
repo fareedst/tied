@@ -1,0 +1,50 @@
+CITDP-REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  change_definition:
+    success_criteria:
+      - "SC-WF-TRIAL-HELP-EARLY"
+      - "SC-WF-TRIAL-HELP-EXIT"
+      - "SC-WF-TRIAL-HELP-TEXTURE"
+  current_behavior: "workflow-trial-agentstream.sh printed plain usage on --help; empty argv exited 2 after usage.\n"
+  desired_behavior: "Styled operator help on stderr (stdout override via --stdout / TIED_CLI_HELP_STDOUT) for zero args, -h, and --help.\nExit 0 on help-only invocations without gawk or bootstrap.\nEarly dispatch before REPO_ROOT gate.\nSectioned help aligned with how() texture (REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE).\n"
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-09"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-09"
+      reason: "Implementation landed"
+  related_tokens:
+    - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    - "REQ-TIED_SETUP"
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP"
+    - "REQ-WF_TRIAL_MODEL_EFFORT"
+  risk_assessment:
+    - mitigation: "Document in handoff; unlikely automation depended on failure"
+      reversibility: "reversible"
+      risk: "Empty argv changes exit 2 to 0"
+  satisfaction_criteria:
+    - "Operators can discover workflow_trial_range effort slot from help text"
+    - "workflow-trial-agentstream-sh.test.mjs covers empty argv, --help, plain, stdout override, help without gawk"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Help prints but operators still miss workflow_trial_range effort slot"
+        - "Empty argv exit 0 breaks scripts that expected exit 2"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "workflow-trial-agentstream-sh.test.mjs covers help-only exit 0 without bootstrap"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP/evidence/build-plan-verification-evidence.md"
+      falsification_questions:
+        - "Does styled help reduce mistaken wf-09-only usage vs plain heredoc?"
+      gate_policy: "advisory"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Shell help only; contract tests in workflow-trial-agentstream-sh.test.mjs"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  title: "WF trial agentstream operator help"

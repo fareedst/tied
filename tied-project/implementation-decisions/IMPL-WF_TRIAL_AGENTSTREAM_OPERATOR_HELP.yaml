@@ -1,0 +1,7 @@
+IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP-pseudocode.md"
+  implementation_approach: "Early argv peel for --help, -h, --plain, --stdout, and empty argv; source wf-trial-agentstream-help.inc.sh; wf_trial_agentstream_print_help then exit 0. Retain fail() for orchestration errors only."
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-09"

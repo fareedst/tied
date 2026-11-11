@@ -1,0 +1,36 @@
+REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-09"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-09"
+      reason: "build-plan verification"
+  rationale:
+    benefits:
+      - "Aligned stderr-first operator texture"
+      - "Discoverability for matrix facilitators"
+      - "Early help without repo root or gawk"
+    problems_solved:
+      - "Help is not styled per REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+      - "Help text lacks MODEL_EFFORT and workflow_trial_range batch syntax"
+      - "No-args invocation exits 2 after plain usage"
+    why: "Operators discover orchestrator flags and MODEL_EFFORT surface via no-args or --help without reading catalog or handoff notes."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Help path does not require gawk or valid TIED store root marker."
+      id: "SC-WF-TRIAL-HELP-EARLY"
+    - criterion: "Help uses section headers and command/note layout aligned with how() plain and textured modes (NO_COLOR vs TTY)."
+      id: "SC-WF-TRIAL-HELP-TEXTURE"
+    - criterion: "workflow-trial-agentstream.sh with zero args or --help/-h exits 0; stdout empty unless TIED_CLI_HELP_STDOUT=1 or --stdout."
+      id: "SC-WF-TRIAL-HELP-EXIT"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  status: "Implemented"

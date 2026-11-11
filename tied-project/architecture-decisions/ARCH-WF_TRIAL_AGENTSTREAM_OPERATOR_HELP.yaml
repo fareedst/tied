@@ -1,0 +1,17 @@
+ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP:
+  alternatives_considered:
+    - description: "Match build-workspace.sh stdout help"
+      name: "Node help via console.mjs"
+      rejected_because: "Existing composition test contract is stderr-first; would require console stderr writers"
+  consequences:
+    negative:
+      - "Duplicate texture helpers until shared inc extraction"
+    positive:
+      - "Consistent with how() stream matrix"
+      - "Operators get help outside store root for quick reference"
+  context: "workflow-trial-agentstream.sh is a bash orchestrator; help is the second WF-trial adopter of CLI operator texture after how()."
+  decision: "Help dispatches before REPO_ROOT validation and WF_ID parsing. Stream roles mirror ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE: stderr default, --stdout and TIED_CLI_HELP_STDOUT override, plain via NO_COLOR/TIED_CLI_PLAIN/non-TTY. Content lives in scripts/lib/wf-trial-agentstream-help.inc.sh; workflow-trial-agentstream.sh delegates print only."
+  metadata:
+    created:
+      author: "refine-plan"
+      date: "2026-11-09"

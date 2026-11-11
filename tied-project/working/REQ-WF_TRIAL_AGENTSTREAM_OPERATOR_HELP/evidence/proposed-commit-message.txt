@@ -1,0 +1,10 @@
+feat(wf-trial): close-out operator help REQ (TIED + evidence)
+
+Implementation already on main (help.inc.sh + tests). This commit adds REQ/ARCH/IMPL
+detail YAML, CITDP persist, CHANGELOG, and close-out evidence.
+
+[REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP] [ARCH-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP]
+[IMPL-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP]
+
+Close-out: merged_decision.allowed=true; envelope blocking_gap_count=0.
+Tests: workflow-trial-agentstream-sh.test.mjs (27/27).
