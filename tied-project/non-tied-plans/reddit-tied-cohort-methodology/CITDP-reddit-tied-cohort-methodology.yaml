@@ -1,0 +1,28 @@
+schema: "citdp-plan-draft.v1"
+slug: "reddit-tied-cohort-methodology"
+scope:
+  summary: |
+    Long-form Reddit article: TIED as per-change resolver (not waterfall/agile),
+    L1 application guide, and predictable WF cohort measurement via project-size
+    layers (aggregate evidence only).
+  in_scope:
+    - "Markdown under tied-project/non-tied-plans/reddit-tied-cohort-methodology/"
+  out_of_scope:
+    - "Product code changes"
+    - "Project REQ/ARCH/IMPL YAML"
+    - "Editing live comparison-table or snapshot receipts"
+tied_tokens_new: []
+evidence:
+  primary:
+    - "tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md"
+    - "docs/demos/catalog-tied-size-and-trial-statistics.md"
+risks:
+  - id: "leaderboard_drift"
+    description: "Readers infer best harness/model from size columns"
+    mitigation: "test-strategy.md; honesty block; aggregate-only composition sentence"
+  - id: "quality_conflation"
+    description: "Readers treat pf/atom or unit count as product quality"
+    mitigation: "Part E explicitly separates fidelity lane from verify/readout"
+  - id: "jargon_creep"
+    description: "MCP, yaml paths, agentstream dominate opening"
+    mitigation: "JARGON-GLOSSARY; wf03-style plain opening"

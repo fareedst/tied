@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Reddit outreach (non-tied cohort methodology)** — Publish-ready post under [`tied-project/non-tied-plans/reddit-tied-cohort-methodology/`](tied-project/non-tied-plans/reddit-tied-cohort-methodology/PLAN.md): TIED as per-change resolver, V+R+A+I vs waterfall phase-gate decisions, disposable trial size layers; `REDDIT-POST.md`, title/comment variants, CITDP draft (`tied_tokens_new: []`).
+
 - **WF trial phase handoff gate wave 2 ([REQ-WF_TRIAL_PHASE_HANDOFF_GATE], [ARCH-WF_TRIAL_PHASE_HANDOFF_GATE], [IMPL-WF_TRIAL_PHASE_HANDOFF_GATE])** — Tiered `wf_trial_resolve_product_req_token` (table handoffs + dirname fallback); actionable resolve DIAGNOSTICs; **SC-WF-PHG-06** bootstrap coverage (53/53). Close-out `close-out-phg-wave2-20261111-r2` (`merged_decision.allowed=true`, `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/PLAN.md). CITDP: [CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml](tied-project/citdp/CITDP-REQ-WF_TRIAL_PHASE_HANDOFF_GATE-wave2-resolver.yaml).
 
 - **PROMPT-WF-10 facilitator readout (Claude Sonnet 5.5 low @ 1794366012)** — **4.2.2** re-run via `workflow_trial_agentstream wf-10`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md) + [batch size summary](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) updated via `@record-wf-trial`. **Split signal** — **8/8** tests uncommitted; close-out **incomplete** (Tracker `invalid_slug`); **`composition_tests: 0`**.

@@ -1,0 +1,4 @@
+docs(outreach): add Reddit cohort methodology post (non-tied-plan)
+
+Publish-ready markdown for TIED vs waterfall/agile, V+R+A+I phase-gate mapping,
+and project-size trial layers; companion title and comment summary.
