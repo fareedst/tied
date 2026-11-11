@@ -1,6 +1,6 @@
 # PLAN — REQ-WF_TRIAL_PHASE_HANDOFF_GATE (wave 2: product REQ resolver)
 
-**Status:** build-plan complete · ready for `@close-out`  
+**Status:** close-out complete (`80b62f97`)  
 **Parent context:** [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK/PLAN.md) (wave 1 shipped)  
 **Incident:** Disposable run `1794406459-wf-agentstream-wf-10-claude-claudehaiku55medium` — orchestrator stopped with `could not resolve product REQ` before handoff file checks.  
 **Request token:** `REQ-WF_TRIAL_PHASE_HANDOFF_GATE`  

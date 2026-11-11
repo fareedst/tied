@@ -27,6 +27,10 @@ Project-size proofs, composition subcheck, path-declared mandate, proof manifest
 
 TIED index YAML commits include **only** `REQ-WF_TRIAL_PHASE_HANDOFF_GATE` / `ARCH-*` / `IMPL-*` entries (HEAD + PHG). Other parallel REQ index WIP remains in untracked detail files — re-insert indexes before those REQs close.
 
+## Commit SHA
+
+`80b62f97` — feat(wf-trial): close-out phase handoff gate wave 2
+
 ## Completion signals (pre-commit)
 
 | Signal | Status |

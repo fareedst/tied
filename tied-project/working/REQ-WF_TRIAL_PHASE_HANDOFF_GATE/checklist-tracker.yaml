@@ -10,6 +10,7 @@ execution_evidence:
     - "composition-integration"
     - "verification-gate"
     - "sub-close-out-evidence-sync"
+    - "traceable-commit"
   request: "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
 execution_profile:
   depth_tier: "minimal"
@@ -60,7 +61,10 @@ steps:
         - path: "tied-bundle/working/REQ-WF_TRIAL_PHASE_HANDOFF_GATE/gates/close_out-2026-11-11T15-24-11-678Z.json"
           type: "gate_receipt"
       status: "completed"
-  - disposition: "pending"
+  - disposition: "completed"
     slug: "traceable-commit"
     tracking:
-      status: "pending"
+      evidence_refs:
+        - path: "80b62f97"
+          type: "git_commit_sha"
+      status: "completed"
