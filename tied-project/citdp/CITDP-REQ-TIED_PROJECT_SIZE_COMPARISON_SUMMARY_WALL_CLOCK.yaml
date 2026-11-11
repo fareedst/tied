@@ -12,9 +12,26 @@ CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
     - "orchestrator_wall_minutes on receipt"
     - "CLI unit selection"
   risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Operator compares wall_clock minutes to old wall_time seconds screenshots"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Receipt JSON still exposes orchestrator_wall_time_seconds for audit"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does formatWallClockMinutes use Math.round(seconds/60)?"
+      gate_policy: "advisory"
+      rationale: "Display-only minutes column."
+      research_profile: "integrated-agent"
     depth_tier: "minimal"
     gate_policy: "advisory"
     rationale: "Markdown display only."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
   success_criteria:
     - "SC-CWC-01 through SC-CWC-06 in PLAN.md"
   test_strategy:
