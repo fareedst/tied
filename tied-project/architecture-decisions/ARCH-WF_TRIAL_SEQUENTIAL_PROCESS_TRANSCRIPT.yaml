@@ -1,0 +1,11 @@
+ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
+  consequences:
+    - "Agentstream live-executor owns flush timing; shell orchestrator unchanged except optional stdout scan alignment."
+    - "Operator lines may appear on both streams by design; consumers must tolerate duplicate content across live stderr vs archived stdout."
+  cross_references:
+    requirements:
+      - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  decision_id: "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  rationale: "Split turn-marker emission: mirror copy to process stdout transcript for evidence while immediate stderr flush preserves live UX; strip flushed operator prefix from final stderrAcc return."
+  status: "Accepted"
+  title: "Dual-stream turn operator lines in agentstream live executor"

@@ -1,0 +1,19 @@
+IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+    requirements:
+      - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  decision_id: "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  metadata:
+    last_updated:
+      author: "refine-plan"
+      date: "2026-11-12"
+      reason: "emitTurnOperatorLine contract + exit de-dup"
+  related_files:
+    - "mcp-server/packages/agentstream/src/live-executor.ts"
+    - "scripts/lib/wf-trial-abort-signal.inc.sh"
+    - "scripts/lib/wf-trial-process-log.inc.sh"
+    - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  status: "Active"
+  title: "emitTurnOperatorLine dual-stream flush"

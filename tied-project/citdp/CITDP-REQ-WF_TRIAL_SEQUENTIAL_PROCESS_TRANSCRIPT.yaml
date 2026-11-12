@@ -1,0 +1,73 @@
+CITDP-REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
+  change_definition:
+    current_behavior: "Turn banners and session_id= accumulate in agentstream stderrAcc only; orchestrator stdout/stderr log files are disjoint."
+    desired_behavior: "Dual-stream turn operator lines: stdout transcript mirror + immediate stderr flush; exit stderr de-dup by omission from stderrAcc."
+    non_goals:
+      - "Merge all agentstream stderr into stdout"
+      - "Register disposable run 1794504138"
+    success_criteria:
+      - "SC-WF-ABS-* regression unchanged"
+      - "SC-WF-SPT-01 through SC-WF-SPT-04 satisfied"
+    unchanged_behavior: "WF_TRIAL_SKIP_PROCESS_LOG and harness trace semantics unchanged; wf-trial-abort-signal.inc.sh stderr-only in wave 1."
+  completion_criteria:
+    activation:
+      phase: "post-build"
+      request_token: "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+      run_id: "refine-plan-spt-2026-11-12"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    command_seq:
+      - "cd mcp-server/packages/agentstream && npm test"
+      - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    manifest_reference: "tied-project/working/REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/evidence/"
+    proof_boundaries:
+      - "Agentstream unit + bootstrap composition; no live LLM re-run required for gate"
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/packages/agentstream/src/live-executor.ts; workflow-trial-agentstream-sh.test.mjs; optional wf-trial-abort-signal stdout scan deferred"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+      - "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+      - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  metadata:
+    created:
+      author: "add-feature"
+      date: "2026-11-12"
+    title: "WF trial sequential process transcript"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+    citdp_id: "CITDP-REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+    status: "implemented"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Operator flush doubles agent stderr volume"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "SC-WF-SPT-03 exit stderr lacks operator lines; live tee captured them"
+      disposition: "not_used"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/evidence/not-applicable-receipt.v1.json"
+      falsification_questions:
+        - "Does bootstrap 60/60 keep SC-WF-ABS green?"
+        - "Does executeLiveRun return stdoutAcc including mirrored banners?"
+      gate_policy: "advisory"
+      rationale: "Agentstream unit + bootstrap tests; integrated inquiry not required."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    unit:
+      - "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts"

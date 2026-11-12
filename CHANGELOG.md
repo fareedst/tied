@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial sequential process transcript ([REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT], [ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT], [IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT])** — `emitTurnOperatorLine` dual-stream turn markers (stdout transcript mirror + live stderr flush); exit stderr de-dup by omission; **SC-WF-SPT-01..04**; **66/66** bootstrap + **134/134** agentstream (implementation in `50326bab`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/PLAN.md).
+
 - **WF trial session capacity highlight (wave 1.5, [REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL])** — Operator stderr `ERROR` block for Claude session limits at preflight (fail-closed), live turn, and post-classify; shared `wf-trial-operator-highlight.inc.sh`; provider-abort gate skip when no product REQ (**SC-WF-ABS-05..08**); **66/66** bootstrap + **134/134** agentstream tests; `sonnet-4-6` catalog alias. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/PLAN.md).
 
 - **WF trial four-phase abort signal ([REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL], [ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL], [IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL])** — Classify provider aborts from disposable `process.stdout`/`process.stderr` before phase-handoff gate errors; manifest `incomplete_reason` merge; **SC-WF-ABS-01..04**; **58/58** `workflow-trial-agentstream-sh.test.mjs`. Incident fixtures from `1794504138` (not registered). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/PLAN.md).

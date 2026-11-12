@@ -4719,3 +4719,27 @@ REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
   related_requirements:
     depends_on:
       - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
+  description: "Dual-stream turn operator lines so wf-trial process.stdout.log carries sequential turn markers and session_id while live stderr flushes immediately."
+  detail_file: "requirements/REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
+  related_requirements:
+    depends_on:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+      - "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  satisfaction_criteria:
+    - criterion: "Agentstream process exit stderr does not duplicate operator lines already flushed (de-dup at exit)."
+      id: "SC-WF-SPT-03"
+    - criterion: "Each turn banner and session_id= line is written to stderr and flushed before the next turn starts (live terminal visibility)."
+      id: "SC-WF-SPT-02"
+    - criterion: "Turn banners and session_id= lines appear in orchestrator process.stdout.log interleaved with agent stdout during multi-turn live runs."
+      id: "SC-WF-SPT-01"
+    - criterion: "workflow-trial-agentstream-sh.test.mjs covers stdout transcript layout and stderr de-dup; SC-WF-ABS regression unchanged."
+      id: "SC-WF-SPT-04"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+    implementation:
+      - "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"

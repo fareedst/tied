@@ -1603,6 +1603,15 @@ ARCH-WF_TRIAL_PHASE_HANDOFF_GATE:
   name: "WF phase handoff gate architecture"
   status: "Active"
   type: "ARCH"
+ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
+  cross_references:
+    - "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+    - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  description: "Dual-stream turn operator line architecture in agentstream live executor"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
+  name: "WF trial sequential transcript architecture"
+  status: "Proposed"
+  type: "ARCH"
 IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Implementation"
   cross_references:
@@ -3531,6 +3540,15 @@ IMPL-WF_TRIAL_PHASE_HANDOFF_GATE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
   name: "WF phase handoff gate implementation"
   status: "Active"
+  type: "IMPL"
+IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
+  cross_references:
+    - "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+    - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  description: "emitTurnOperatorLine and stderr de-dup at agentstream exit"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
+  name: "WF trial sequential transcript implementation"
+  status: "Planned"
   type: "IMPL"
 PROC-AGENT_REQ_CHECKLIST:
   cross_references:
@@ -5690,4 +5708,13 @@ REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
   detail_file: "requirements/REQ-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
   name: "WF trial phase handoff gate"
   status: "Active"
+  type: "REQ"
+REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
+  cross_references:
+    - "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+    - "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  description: "Dual-stream turn operator lines for sequential process.stdout transcript"
+  detail_file: "requirements/REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
+  name: "WF trial sequential process transcript"
+  status: "Draft"
   type: "REQ"

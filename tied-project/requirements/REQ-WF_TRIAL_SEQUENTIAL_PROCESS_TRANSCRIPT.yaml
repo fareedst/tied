@@ -1,0 +1,10 @@
+REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
+  acceptance_criteria:
+    - "SC-WF-SPT-01"
+    - "SC-WF-SPT-02"
+    - "SC-WF-SPT-03"
+    - "SC-WF-SPT-04"
+  description: "When agentstream buffers turn markers only in stderrAcc until exit, orchestrator tees disjoint stdout/stderr files and abort classifiers cannot see turn boundaries in stdout."
+  request_id: "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  status: "Implemented"
+  title: "WF trial sequential process transcript (dual-stream turn markers)"

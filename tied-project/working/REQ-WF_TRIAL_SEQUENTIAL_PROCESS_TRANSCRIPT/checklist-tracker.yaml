@@ -1,0 +1,66 @@
+description: "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT — dual-stream turn transcript"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+    - "traceable-commit"
+  request: "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Agentstream unit + bootstrap tests; integrated inquiry not required."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      note: "agentstream 130/130; live-executor-turn-operator.test.ts"
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      note: "bootstrap 60/60 SC-WF-SPT + ABS"
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      note: "close-out gates 2026-11-12; 134 agentstream + 66 bootstrap"
+      status: "completed"
+  - disposition: "completed"
+    slug: "traceable-commit"
+    tracking:
+      note: "close-out 18df8220"
+      status: "completed"

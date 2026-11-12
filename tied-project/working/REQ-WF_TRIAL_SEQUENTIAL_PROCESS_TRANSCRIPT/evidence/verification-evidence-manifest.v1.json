@@ -1,0 +1,54 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "seq-closeout-verify-2026-11-12",
+  "commit": "50326bab553ade8565f25a06232af20252bb781c",
+  "covered_tokens": [
+    "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT",
+    "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "proof_boundaries": [
+    "Agentstream unit + bootstrap composition; no live LLM re-run required for gate"
+  ],
+  "command_results": [
+    {
+      "id": "agentstream-npm-test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/agentstream",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 11000
+    },
+    {
+      "id": "bootstrap-wf-trial",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 9600
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "evidence_method": "command",
+      "rationale": "CITDP quality profile matrix",
+      "result": "passed"
+    }
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}
