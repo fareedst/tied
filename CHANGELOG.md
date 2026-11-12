@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Project size comparison Summary atoms order (v4, [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT], [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT])** — Summary columns after `label` are **`Vocab | REQ | ARCH | IMPL`** (**SC-CSC-12**); column definitions match; regenerated [comparison-table.md](tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md). Plan: [PLAN.md](tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT/PLAN.md).
+
 - **WF trial range canonical input ([REQ-WF_TRIAL_RANGE_CANONICAL_INPUT], [ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT], [IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT])** — Compose ref `grok-4.7`; `disposable_model_bucket` + single-tier disposable tags (`grok46med` not `grok46medmedium`); **SC-WRC-01..05**; close_out **allowed**. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_RANGE_CANONICAL_INPUT/PLAN.md).
+
+- **PROMPT-WF-10 facilitator readout (Cursor Grok 4.7 low @ 1794522969)** — **4.2.2** via `workflow_trial_agentstream wf-10` (`HARNESS=cursor`; **`grok-4.7-low-fast`** / **`grok47-low`**; disposable tag **`grok47low`**); catalog + [demos index](docs/demos/README.md) + project-size [comparison table](tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md). **Workflow complete** — orchestrator `exit_code: 0`; **`c326354`**; **8/8** tests (thin library-only product); close_out **allowed**. [Readout](docs/demos/trial-readout-PROMPT-WF-10-grok47low-1794522969-wf-agentstream-wf-10-cursor-grok47low.md).
 
 - **PROMPT-WF-10 facilitator readout (Cursor Grok 4.6 high @ 1794519432)** — **4.2.2** via `workflow_trial_agentstream wf-10` (`HARNESS=cursor`; **`cursor-grok-4.6-high-fast`** / **`grok46-high`**); catalog + [demos index](docs/demos/README.md) + project-size [comparison table](tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md). **Workflow complete** — orchestrator `exit_code: 0`; **`d5964eb`**; **57/57** tests; close_out **allowed**.
 

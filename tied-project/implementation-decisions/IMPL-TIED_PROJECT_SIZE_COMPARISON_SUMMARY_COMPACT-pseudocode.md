@@ -58,6 +58,7 @@ procedure RENDER_SUMMARY_ROW:
     EFFECTS: pure string format
   SET display TO TRIM_COMPARISON_DISPLAY_LABEL label
   SET wall TO ORCHESTRATOR_WALL_TIME_SECONDS receipt
+  FORMAT atom cells vocab_preferred_terms then index_req then index_arch then index_impl after display
   FORMAT utf8/atom oi/atom pf/atom as nearest integers in that column order
   EMIT Summary row with wall_time last column
 

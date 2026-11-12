@@ -1,6 +1,6 @@
 {
   "schema_version": "project-size-batch-manifest.v1",
-  "generated_at": "2026-11-12T22:04:19.640Z",
+  "generated_at": "2026-11-12T23:08:03.952Z",
   "options": {
     "store_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
     "parent": "/Users/fareed/Documents/dev/test",
@@ -11,7 +11,7 @@
     "include_trial_factors": true,
     "summary_epoch_min": 1794259000,
     "verbose_table": false,
-    "fine_labels": false
+    "fine_labels": true
   },
   "discover_diagnostics": [
     {
@@ -24,6 +24,10 @@
     }
   ],
   "targets": [
+    {
+      "label": "1794522969-wf-agentstream-wf-10-cursor-grok47low",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794522969-wf-agentstream-wf-10-cursor-grok47low"
+    },
     {
       "label": "1794519432-wf-agentstream-wf-10-cursor-grok46highhigh",
       "repo_root": "/Users/fareed/Documents/dev/test/1794519432-wf-agentstream-wf-10-cursor-grok46highhigh"
@@ -221,11 +225,12 @@
       "repo_root": "/Users/fareed/Documents/dev/test/1794285506-wf-agentstream-wf-01-cursor-composer25high"
     },
     {
-      "label": "1794264348-wf-agentstream-wf-03-cursor-composer25high",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794264348-wf-agentstream-wf-03-cursor-composer25high"
+      "label": "stdd-store",
+      "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
     }
   ],
   "receipt_paths": [
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794522969-wf-agentstream-wf-10-cursor-grok47low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794519432-wf-agentstream-wf-10-cursor-grok46highhigh.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794518198-wf-agentstream-wf-10-cursor-grok46medmedium.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794517047-wf-agentstream-wf-10-cursor-grok46lowlow.json",
@@ -275,7 +280,7 @@
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794287063-wf-agentstream-wf-03-cursor-composer25high.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794286175-wf-agentstream-wf-02-cursor-composer25high.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794285506-wf-agentstream-wf-01-cursor-composer25high.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/1794264348-wf-agentstream-wf-03-cursor-composer25high.json"
+    "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/stdd-store.json"
   ],
-  "snapshot_count": 50
+  "snapshot_count": 51
 }

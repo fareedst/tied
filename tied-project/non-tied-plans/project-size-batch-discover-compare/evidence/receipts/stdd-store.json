@@ -6,43 +6,43 @@
   "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
   "layers": {
     "atoms": {
-      "vocab_preferred_terms": 935,
-      "index_req": 205,
-      "index_arch": 200,
-      "index_impl": 241,
-      "corpus_graph_nodes": 679,
-      "corpus_graph_edges": 3358
+      "vocab_preferred_terms": 946,
+      "index_req": 208,
+      "index_arch": 203,
+      "index_impl": 244,
+      "corpus_graph_nodes": 688,
+      "corpus_graph_edges": 3420
     },
     "operational_intent": {
-      "sidecar_count": 261,
-      "gross_lines": 17485,
-      "template_overlap_lines": 2280,
-      "applied_lines": 15205,
-      "gross_utf8_bytes": 1108726,
-      "template_overlap_utf8_bytes": 29907,
-      "applied_utf8_bytes": 1078819,
-      "procedure_count": 784,
-      "parse_node_count": 4178
+      "sidecar_count": 272,
+      "gross_lines": 17911,
+      "template_overlap_lines": 2326,
+      "applied_lines": 15585,
+      "gross_utf8_bytes": 1132039,
+      "template_overlap_utf8_bytes": 30449,
+      "applied_utf8_bytes": 1101590,
+      "procedure_count": 807,
+      "parse_node_count": 4351
     },
     "proof_facets": {
       "unit_tests": 0,
       "composition_tests": 0,
       "e2e_tests": 0,
       "binding_inventory_tests": 0,
-      "verify_evidence_files": 123,
+      "verify_evidence_files": 124,
       "label_case_counts": {},
       "composition_inferred_cases": 0
     }
   },
   "cross_layer": {
-    "operational_intent_per_atom": 6.727876106194691,
-    "operational_intent_utf8_per_atom": 477.3535398230089,
+    "operational_intent_per_atom": 6.8086500655307995,
+    "operational_intent_utf8_per_atom": 481.2538226299694,
     "proof_facets_per_atom": 0,
     "tests_per_procedure": 0
   },
   "hashes": {
-    "operational_intent_hash": "e3686415c81c3241bd4971c919d49f8e10925d1766de8a166952dbb7993d8832",
-    "corpus_graph_content_hash": "d38a388768885cad3e4c8d11fd30fada4a899f28ea78cb5f8588d3aa29a25c11"
+    "operational_intent_hash": "976eba67cf1d991a9379a67c52516312b768880bf1843e90a6f2b932ddf12d2d",
+    "corpus_graph_content_hash": "b0e49ec99652247b3414b806fc36486f652bda20f4ff313eaaf3e9cf67f692a8"
   },
   "diagnostics": []
 }

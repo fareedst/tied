@@ -1,7 +1,7 @@
 CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
   change_definition:
-    current_behavior: "Facilitator comparison Summary lists every ok receipt with trimmed labels; duplicate display labels and pre-cutoff epochs appear together; no orchestrator wall-time column."
-    desired_behavior: "Summary (and verbose first column set) applies optional epoch floor, dedupes by display label keeping latest discover epoch, sorts by display label; cross-layer columns display utf8/atom then oi/atom then pf/atom after proof facets; last column wall_clock (minutes). CLI --summary-epoch-min default 1794259000. Full basename remains in manifest and receipts."
+    current_behavior: "Summary atom columns after label are REQ, ARCH, IMPL, Vocab; cross-layer utf8/atom, oi/atom, pf/atom before wall_clock (v3)."
+    desired_behavior: "Summary atom columns after label are Vocab, REQ, ARCH, IMPL; retain v3 cross-layer order and wall_clock; epoch floor, dedupe, sort unchanged. CLI --summary-epoch-min default 1794259000. Full basename remains in manifest and receipts."
   impact_analysis:
     modules_or_boundaries: "tools/bootstrap/lib/project-size-comparison-render.mjs; tools/bootstrap/lib/project-size-comparison-render.test.mjs; tools/bootstrap/lib/project-size-batch-compare.mjs; mcp-server/src/project-size/snapshot-builder.ts; mcp-server/src/project-size/types.ts; tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md (regenerated)"
     tied_tokens_new:
@@ -41,7 +41,7 @@ CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
     depth_tier: "minimal"
     gate_policy: "advisory"
   success_criteria:
-    - "SC-CSC-01 through SC-CSC-11 in PLAN.md"
+    - "SC-CSC-01 through SC-CSC-12 in PLAN.md"
     - "tied_validate_consistency ok"
   test_strategy:
     integration:

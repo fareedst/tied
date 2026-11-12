@@ -7,12 +7,12 @@
 | Module | Responsibility |
 | --- | --- |
 | [`project-size-comparison-render.mjs`](../../../tools/bootstrap/lib/project-size-comparison-render.mjs) | Label trim, `prepareComparisonSummaryRows`, markdown Summary + verbose |
-| [`project-size-comparison-render.test.mjs`](../../../tools/bootstrap/lib/project-size-comparison-render.test.mjs) | SC-CSC-01…11 contract tests |
+| [`project-size-comparison-render.test.mjs`](../../../tools/bootstrap/lib/project-size-comparison-render.test.mjs) | SC-CSC-01…12 contract tests |
 | [`project-size-batch-compare.mjs`](../../../tools/bootstrap/lib/project-size-batch-compare.mjs) | `--summary-epoch-min`; manifest `options.summary_epoch_min` |
 | [`project-size-discover-clients.mjs`](../../../tools/bootstrap/lib/project-size-discover-clients.mjs) | `parseEpochFromBasename` (imported by render) |
 | [`snapshot-builder.ts`](../../../mcp-server/src/project-size/snapshot-builder.ts) | `trial_factors.orchestrator_wall_time_seconds` when `--include-trial-factors` |
 
-## Unit tests — render (v1 + v2 + v3)
+## Unit tests — render (v1 + v2 + v3 + v4)
 
 ### `trimComparisonDisplayLabel` / sort / prepare
 
@@ -35,7 +35,17 @@ Unchanged cases **SC-CSC-07…10**.
 
 **SC-CSC-11:** definitions table lists **utf8/atom** before **oi/atom** before **pf/atom**.
 
-**Fixture:** dogfood JSON + `minimalOkReceipt` with distinct `cross_layer` values for order assertion.
+### v4 — atoms column order (SC-CSC-12)
+
+| ID | Asserts |
+| --- | --- |
+| **SC-CSC-12** | Header matches `\| label \| Vocab \| REQ \| ARCH \| IMPL \| applied_utf8 \| …`; fixture receipt with distinct `vocab_preferred_terms`, `index_req`, `index_arch`, `index_impl` emits cells in that order after display label |
+
+**RED first:** update `SUMMARY_HEADER` regex before render green.
+
+**SC-CSC-12 (definitions):** column definitions table lists **Vocab** before **REQ** before **ARCH** before **IMPL** among atom columns.
+
+**Fixture:** dogfood JSON + `minimalOkReceipt` with distinct `cross_layer` values for order assertion (v3) and distinct atom counts (v4).
 
 ## Snapshot builder
 

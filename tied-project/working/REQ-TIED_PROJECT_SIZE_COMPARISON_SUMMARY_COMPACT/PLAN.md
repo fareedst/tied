@@ -5,7 +5,7 @@
 **Parent:** [REQ-TIED_PROJECT_SIZE_LAYERS](../REQ-TIED_PROJECT_SIZE_LAYERS/PLAN.md) (v1 closed; additive facilitator UX)  
 **Facilitator:** [project-size-batch-discover-compare](../../non-tied-plans/project-size-batch-discover-compare/PLAN.md)  
 **Linked Cursor plan:** `.cursor/plans/summary_table_column_order_58ac7679.plan.md` (v3 column order) · v2: `comparison_summary_cohort_577194c9.plan.md`  
-**plan_phase:** `pre-implementation` (v3 cross-layer column order)  
+**plan_phase:** `pre-implementation` (v4 atoms column order)  
 **depth_tier / gate_policy:** `minimal` / `advisory`
 
 ---
@@ -55,6 +55,20 @@ Reorder **cross-layer** Summary columns only (receipt JSON unchanged):
 
 **Proof boundary:** Display-only; manifest and receipts retain full-precision `cross_layer` fields.
 
+### v4 (add-feature — locked 2026-11-12)
+
+Reorder **atoms** Summary columns immediately after **`label`** (receipt JSON unchanged):
+
+| Change | Rule |
+| --- | --- |
+| **Column order** | **`label \| Vocab \| REQ \| ARCH \| IMPL \|`** then operational-intent and proof columns unchanged |
+| **Was** | `label \| REQ \| ARCH \| IMPL \| Vocab \|` |
+| **Rationale** | Sponsor scan: vocabulary footprint first, then R→A→I index counts in methodology order |
+| **Definitions block** | Same order in `renderColumnDefinitionsSection()` for the four atom columns |
+| **Cross-layer / wall_clock** | Unchanged from v3 (**SC-CSC-11**) |
+
+**Proof boundary:** Display-only; snapshot `layers.atoms.*` field names unchanged.
+
 ---
 
 ## RESOLVE
@@ -93,6 +107,13 @@ Reorder **cross-layer** Summary columns only (receipt JSON unchanged):
 3. **REQ** index criterion **SC-CSC-11**; IMPL `RENDER_SUMMARY_ROW` FORMAT line.
 4. **Regen** [`comparison-table.md`](../../non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) via batch compare (no hand-edit).
 
+## Refinements (v4 — build-plan)
+
+1. **`renderComparisonMarkdown`** — Summary header, column definitions, and data cells: emit atom values **Vocab → REQ → ARCH → IMPL**.
+2. **`SUMMARY_HEADER`** + **SC-CSC-12** in [`project-size-comparison-render.test.mjs`](../../../tools/bootstrap/lib/project-size-comparison-render.test.mjs) (fixture row asserts cell order when atoms differ).
+3. **REQ** index criterion **SC-CSC-12**; IMPL `RENDER_SUMMARY_ROW` atom FORMAT line.
+4. **Regen** [`comparison-table.md`](../../non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) via batch compare (no hand-edit).
+
 ---
 
 ## Acceptance criteria
@@ -110,6 +131,7 @@ Reorder **cross-layer** Summary columns only (receipt JSON unchanged):
 | SC-CSC-09 | `wall_time` is last Summary column; rounded seconds (e.g. 994 from sample ISO pair). |
 | SC-CSC-10 | `summaryEpochMin: 0` (or omit) retains dogfood `stdd-store` row in tests. |
 | SC-CSC-11 | Summary header and rows order cross-layer columns **`utf8/atom \| oi/atom \| pf/atom`** before `wall_clock`. |
+| SC-CSC-12 | After **`label`**, Summary header and rows order atom columns **`Vocab \| REQ \| ARCH \| IMPL`**. |
 
 ---
 
@@ -143,6 +165,7 @@ Reorder **cross-layer** Summary columns only (receipt JSON unchanged):
 | Dedupe hides earlier epochs | **Reversible** — manifest + `receipts/*.json` retain full basename |
 | Missing wall time on old receipts | **Reversible** — re-snapshot with `--include-trial-factors` |
 | Operator treats display label as unique key | **Reversible** — glossary states dedupe policy |
+| Muscle memory on old REQ–ARCH–IMPL–Vocab order | **Reversible** — column definitions document v4 order |
 
 ---
 
@@ -158,8 +181,20 @@ Reorder **cross-layer** Summary columns only (receipt JSON unchanged):
 
 ---
 
+## Build sequence v4 (`@build-plan`)
+
+| Step | Deliverable |
+| --- | --- |
+| 1 | RED **SC-CSC-12** (header regex + row atom cell order) |
+| 2 | GREEN render reorder in `project-size-comparison-render.mjs` |
+| 3 | LEAP REQ + IMPL pseudo-code FORMAT line |
+| 4 | Regen `comparison-table.md`; render tests green |
+| 5 | `tied_validate_consistency` |
+
+---
+
 ## Handoff
 
-**Do next:** `@build-plan` for **v3** cross-layer column order ([session-handoff](./evidence/session-handoff.md)).
+**Do next:** `@build-plan` for **v4** atoms column order ([session-handoff](./evidence/session-handoff.md)). v3 shipped in **`f6ec162d`**.
 
 **Disk:** [checklist-tracker.yaml](./checklist-tracker.yaml) · [test-strategy.md](./test-strategy.md) · [evidence/session-handoff.md](./evidence/session-handoff.md)

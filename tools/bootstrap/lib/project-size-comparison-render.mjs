@@ -163,12 +163,12 @@ function renderColumnDefinitionsSection() {
   lines.push(
     "| **label** | — | Display label: `wf-NN-…` suffix when basename matches `/(wf-\\d{2}-.+)$/i`; else full basename. Full discover name remains in `manifest.v1.json` and `receipts/*.json`. Summary applies an epoch floor (`summary_epoch_min` in manifest), then dedupes by display label (max discover epoch wins), then sorts. |",
   );
-  lines.push("| **REQ** | atoms | Count of REQ tokens in `tied-project/requirements.yaml` index. |");
-  lines.push("| **ARCH** | atoms | Count of ARCH tokens in `tied-project/architecture-decisions.yaml` index. |");
-  lines.push("| **IMPL** | atoms | Count of IMPL tokens in `tied-project/implementation-decisions.yaml` index. |");
   lines.push(
     "| **Vocab** | atoms | Rows in client vocab preferred-term tables under `tied-project/vocab/`. |",
   );
+  lines.push("| **REQ** | atoms | Count of REQ tokens in `tied-project/requirements.yaml` index. |");
+  lines.push("| **ARCH** | atoms | Count of ARCH tokens in `tied-project/architecture-decisions.yaml` index. |");
+  lines.push("| **IMPL** | atoms | Count of IMPL tokens in `tied-project/implementation-decisions.yaml` index. |");
   lines.push(
     "| **applied_utf8** | operational intent | `applied_utf8_bytes`: UTF-8 byte length of trimmed non-empty lines minus template overlap bytes. |",
   );
@@ -257,7 +257,7 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   );
   lines.push("");
   lines.push(
-    "| label | REQ | ARCH | IMPL | Vocab | applied_utf8 | applied_lines | procedures | unit | comp | e2e | utf8/atom | oi/atom | pf/atom | wall_clock |",
+    "| label | Vocab | REQ | ARCH | IMPL | applied_utf8 | applied_lines | procedures | unit | comp | e2e | utf8/atom | oi/atom | pf/atom | wall_clock |",
   );
   lines.push(
     "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
@@ -273,10 +273,10 @@ export function renderComparisonMarkdown(rows, meta = {}) {
     lines.push(
       [
         displayLabel,
+        fmtNum(atoms.vocab_preferred_terms),
         fmtNum(atoms.index_req),
         fmtNum(atoms.index_arch),
         fmtNum(atoms.index_impl),
-        fmtNum(atoms.vocab_preferred_terms),
         fmtNum(oi.applied_utf8_bytes),
         fmtNum(oi.applied_lines),
         fmtNum(oi.procedure_count),

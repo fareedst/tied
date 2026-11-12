@@ -2,28 +2,28 @@
 
 **Date:** 2026-11-12  
 **depth_tier / gate_policy:** minimal / advisory  
-**Wave:** v3 (SC-CSC-11 cross-layer column order) on top of v2 close-out `652c81a2`
+**Wave:** v4 (**SC-CSC-12** Summary atom column order **Vocab | REQ | ARCH | IMPL**) on v3 `f6ec162d`
 
 ## Completion signals
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | pass — `run-close-out-gates.mjs` merged_decision.allowed true; envelope blocking_gaps=0 |
-| Process contract | partial — minimal tracker; build-plan v3 + regen evidence; scoped traceable commit |
-| Adherence ledger | thin_ledger advisory — reconcile process_grade B (88) |
+| Machine close-out | **pass** — `run-close-out-gates.mjs` `merged_decision.allowed: true`; `blocking_gap_count: 0` |
+| Process contract | **pass** — build-plan v4 + regen evidence; scoped traceable commit |
+| Adherence ledger | **thin_ledger advisory** — minimal depth |
 
 ## Verification
 
-- `node --test tools/bootstrap/lib/project-size-comparison-render.test.mjs` — 13/13 (SC-CSC-11)
-- `tied_validate_consistency` — CSC tokens valid; **pre-existing** WF proof-manifest subtype drift unstaged
+- `node --test tools/bootstrap/lib/project-size-comparison-render.test.mjs` — **14/14** (SC-CSC-12)
+- Gate receipt: `tied-bundle/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT/gates/close_out-2026-11-12T23-13-44-372Z.json`
 
 ## Commit
 
-*(SHA recorded after traceable commit)*
+`888f7872`
 
 ## Scope
 
-v3: Summary cross-layer columns `utf8/atom | oi/atom | pf/atom` before `wall_clock`; regen `comparison-table.md` + batch receipts/manifest; promote `tied-project/citdp/CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml`.
+v4: Summary atom columns `Vocab | REQ | ARCH | IMPL` after `label`; regen `comparison-table.md` + manifest; CITDP v4 `desired_behavior`; IMPL `RENDER_SUMMARY_ROW` atom FORMAT.
 
 ## Parent
 

@@ -1,3 +1,10 @@
-feat(project-size): cohort summary epoch dedupe and wall_time
+feat(project-size): summary table Vocab-first atom columns (SC-CSC-12)
 
-Add prepareComparisonSummaryRows, --summary-epoch-min, and orchestrator wall time on snapshot receipts so the facilitator comparison table dedupes WF rows and shows rounded wall_time.
+Reorder facilitator comparison Summary to label | Vocab | REQ | ARCH | IMPL; align column definitions and render tests. Regenerate batch comparison-table evidence.
+
+REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT
+IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT
+ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT
+
+Tests: project-size-comparison-render.test.mjs (14 pass).
+Gates: close_out allowed; envelope blocking_gaps=0.

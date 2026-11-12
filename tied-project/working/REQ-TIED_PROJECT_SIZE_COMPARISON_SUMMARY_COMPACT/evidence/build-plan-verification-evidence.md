@@ -1,34 +1,33 @@
-# Build-plan verification — REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT
+# Build-plan verification — REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT (v4)
 
-**Date:** 2026-11-10 (v2 cohort)
+**Date:** 2026-11-12  
+**Slice:** **SC-CSC-12** — Summary atom columns **Vocab | REQ | ARCH | IMPL** after `label`.
 
-## Commands
+## Tests
 
-```bash
+```text
 node --test tools/bootstrap/lib/project-size-comparison-render.test.mjs
-npx tsx --test mcp-server/src/project-size/project-size.test.ts
-npm run build --prefix mcp-server
-node tools/bootstrap/lib/project-size-batch-compare.mjs \
-  --store-root . --include-store --include-trial-factors --summary-epoch-min 1794259000
-# tied_validate_consistency → ok: true
+→ 14/14 pass (includes SC-CSC-12 atom column order + column definitions order)
 ```
 
-## Results
+## Regenerated cohort table
 
-- 10/10 render tests (SC-CSC-01…10 including prepare + wall_time)
-- 7/7 project-size snapshot tests (orchestrator_wall_time_seconds fixture → 994s)
-- Cohort `comparison-table.md` regenerated: 51 snapshots → 29 deduped Summary rows @ floor `1794259000`
-- Manifest `options.summary_epoch_min` = `1794259000`; `include_trial_factors` true
-- `tied_validate_consistency` ok: true
+```bash
+node tools/bootstrap/lib/project-size-batch-compare.mjs \
+  --store-root "$PWD" --pattern wf-agentstream \
+  --fine-labels --include-store --include-trial-factors \
+  --summary-epoch-min 1794259000 \
+  --out-dir tied-project/non-tied-plans/project-size-batch-discover-compare/evidence
+```
 
-## Artifacts
+→ **51** snapshots; Summary header `| label | Vocab | REQ | ARCH | IMPL | …`.
+
+## Files touched
 
 - `tools/bootstrap/lib/project-size-comparison-render.mjs`
 - `tools/bootstrap/lib/project-size-comparison-render.test.mjs`
-- `tools/bootstrap/lib/project-size-batch-compare.mjs`
-- `mcp-server/src/project-size/snapshot-builder.ts`
-- `mcp-server/src/project-size/types.ts`
-- `mcp-server/src/project-size/project-size.test.ts`
-- `tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md`
-- `tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/manifest.v1.json`
-- `tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/receipts/*.json`
+- `tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT-pseudocode.md`
+- `tied-project/citdp/CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml` (v4 desired_behavior via MCP)
+- `tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md` (generated)
+
+**Do next:** `@close-out` when sponsor ready.
