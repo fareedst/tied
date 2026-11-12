@@ -43,6 +43,13 @@ describe("wf-trial-model-spec.mjs", () => {
     assert.equal(r.resolution, "alias");
   });
 
+  it("resolves sonnet-4-6 alias on claude [SC-CAT-ALIAS]", () => {
+    const r = resolveWfTrialModelRef("claude", "sonnet-4-6", REGISTRY);
+    assert.equal(r.model_slug, "claude-sonnet-4-6");
+    assert.equal(r.model_config, "claude-sonnet-4-6");
+    assert.equal(r.resolution, "alias");
+  });
+
   it("resolves cursor catalog slug luna-low-fast [SC-CAT-SLUG]", () => {
     const r = resolveWfTrialModelRef("cursor", "gpt-5.6-luna-low-fast", REGISTRY);
     assert.equal(r.model_config, "luna-low");

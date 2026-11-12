@@ -1,31 +1,32 @@
 # Test strategy — REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
 
 **profile_depth:** minimal · **gate_policy:** advisory  
-**Tracker slugs (build):** `unit-test-red` → `unit-test-green` → `composition-integration` → `verification-gate`
+**Waves:** 1 (shipped) · **1.5** (build-plan)
 
-## Unit — abort classifier (`@build-plan` RED first)
+## Wave 1 — regression
 
-Add cases to [`workflow-trial-agentstream-sh.test.mjs`](../../../tools/bootstrap/workflow-trial-agentstream-sh.test.mjs). Source `wf-trial-abort-signal.inc.sh` in bash subshells with temp log files.
+Existing SC-WF-ABS-01..04 cases in [`workflow-trial-agentstream-sh.test.mjs`](../../../tools/bootstrap/workflow-trial-agentstream-sh.test.mjs) must stay green after wave 1.5.
 
-| Case | Fixture | Expected | SC |
+## Wave 1.5 — bootstrap (`@build-plan` RED first)
+
+| Case | Setup | Expected | SC |
 | --- | --- | --- | --- |
-| Incident 1794504138 | Copy [`evidence/fixture-1794504138-process.stderr.log`](./evidence/fixture-1794504138-process.stderr.log) + stdout tail into tmp | `wf_trial_classify_incomplete_reason` prints `claude_session_limit`; turn 3 | SC-WF-ABS-01 |
-| Missing session 2 | Synthetic stderr: turn 1 id, turn 2 banner only | `turn_missing_session_id`; turn 2 | SC-WF-ABS-02 |
-| Happy complete stderr | Four turns each with `session_id=` | empty or `unknown` only when gate would pass | SC-WF-ABS-03 prep |
-| Gate ordering | Stub workspace + classifier env + missing build handoff | stderr line order: incomplete_reason DIAGNOSTIC before handoff ERROR | SC-WF-ABS-04 |
+| Gate skip no REQ | `WF_TRIAL_INCOMPLETE_REASON=claude_session_limit`, empty working | handoff skip DIAGNOSTIC; no product REQ ERROR | SC-WF-ABS-05 |
+| Proof skip | same enum | proof manifest skip DIAGNOSTIC | SC-WF-ABS-05 |
+| Post-classifier order | fixture stdout tail + `wf_trial_abort_signal_apply_workspace` | ERROR headline before incomplete_reason DIAGNOSTIC; provider substring | SC-WF-ABS-06 |
+| Preflight block | temp validation JSON smoke detail session limit + handler | exit block; no “continuing may weaken MCP parity” | SC-WF-ABS-07 |
+| Preflight advisory other | failed validation, non-limit detail | continues unless STRICT | SC-WF-ABS-07 neg |
 
-## Manifest merge
+## Wave 1.5 — agentstream unit
 
-| Case | Action | Expected |
+| Case | Expected | SC |
 | --- | --- | --- |
-| Merge reason | Call `wf_trial_process_log_set_incomplete_reason` on temp manifest JSON | `incomplete_reason` + `incomplete_turn` present after finalize |
-
-## Regression
-
-Run full `workflow-trial-agentstream-sh.test.mjs` — all SC-WF-PHG-* pass unchanged.
+| `detectClaudeSessionLimitLine` | matches provider message; rejects unrelated | SC-WF-ABS-08 |
+| Highlight idempotence | second call same run no duplicate ERROR headline | SC-WF-ABS-08 |
 
 ## Commands
 
 ```bash
 node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
+cd mcp-server/packages/agentstream && npm test
 ```

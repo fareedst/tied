@@ -28,6 +28,7 @@ import {
 import { runAdherenceReconcileCli } from "./adherence-reconcile-cli.js";
 import {
   executeLiveRun,
+  liveExitStdoutIsOperatorMirrorOnly,
   qualifiesForTsNativeLiveRun,
 } from "./live-executor.js";
 import {
@@ -249,7 +250,7 @@ async function runLiveOrReject(args: string[]): Promise<void> {
     if (result.stderr) {
       process.stderr.write(result.stderr);
     }
-    if (result.stdout) {
+    if (result.stdout && !liveExitStdoutIsOperatorMirrorOnly(result.stdout)) {
       process.stdout.write(result.stdout);
     }
     process.exit(result.exitCode);

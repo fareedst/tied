@@ -3,6 +3,8 @@
 
 # shellcheck source=scripts/lib/wf-trial-process-log.inc.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-process-log.inc.sh"
+# shellcheck source=scripts/lib/wf-trial-operator-highlight.inc.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-operator-highlight.inc.sh"
 
 WF_TRIAL_ABORT_EVIDENCE_REL="tied-project/working/wf-trial-orchestrator-run/evidence"
 
@@ -75,16 +77,39 @@ wf_trial_abort_signal_analyze_workspace() {
   return 0
 }
 
+wf_trial_incomplete_batch_is_provider_abort() {
+  case "${WF_TRIAL_INCOMPLETE_REASON:-}" in
+    claude_session_limit | turn_missing_session_id) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+wf_trial_abort_signal_emit_session_limit_highlight_if_needed() {
+  if [[ "${WF_TRIAL_INCOMPLETE_REASON:-}" != "claude_session_limit" ]]; then
+    return 0
+  fi
+  local stdout_file="${WF_TRIAL_ABORT_STDOUT:-}"
+  if [[ -z "$stdout_file" || ! -f "$stdout_file" ]]; then
+    wf_trial_emit_session_limit_highlight ""
+    return 0
+  fi
+  local human_line
+  human_line="$(wf_trial_extract_session_limit_line "$stdout_file")"
+  wf_trial_emit_session_limit_highlight "$human_line"
+}
+
 wf_trial_abort_signal_emit_diagnostic() {
   if [[ -z "${WF_TRIAL_INCOMPLETE_REASON:-}" ]]; then
     return 0
   fi
+  wf_trial_abort_signal_emit_session_limit_highlight_if_needed
   if [[ -n "${WF_TRIAL_INCOMPLETE_TURN:-}" ]]; then
     printf 'DIAGNOSTIC: wf_trial_incomplete_reason=%s incomplete_turn=%s\n' \
       "$WF_TRIAL_INCOMPLETE_REASON" "$WF_TRIAL_INCOMPLETE_TURN" >&2
   else
     printf 'DIAGNOSTIC: wf_trial_incomplete_reason=%s\n' "$WF_TRIAL_INCOMPLETE_REASON" >&2
   fi
+  export WF_TRIAL_ABORT_SIGNAL_DIAG_EMITTED=1
 }
 
 wf_trial_abort_signal_apply_workspace() {

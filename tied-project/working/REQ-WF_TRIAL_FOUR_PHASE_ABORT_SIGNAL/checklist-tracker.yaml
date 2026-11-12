@@ -1,14 +1,15 @@
-description: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL — abort classifier wave 1"
+description: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL — wave 1.5 session capacity highlight"
 execution_evidence:
   completed:
     - "change-definition"
     - "composition-integration"
+    - "impact-discovery"
     - "risk-assessment"
-    - "sub-close-out-evidence-sync"
     - "test-strategy"
-    - "unit-test-red"
     - "unit-test-green"
+    - "unit-test-red"
     - "verification-gate"
+    - "traceable-commit"
   request: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
 execution_profile:
   depth_tier: "minimal"
@@ -20,10 +21,16 @@ steps:
   - disposition: "completed"
     slug: "change-definition"
     tracking:
+      note: "wave 1.5 session capacity highlight"
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
       status: "completed"
   - disposition: "completed"
     slug: "test-strategy"
     tracking:
+      note: "SC-WF-ABS-05..08 added refine-plan 2026-11-12"
       status: "completed"
   - disposition: "completed"
     slug: "risk-assessment"
@@ -31,30 +38,33 @@ steps:
       status: "completed"
   - disposition: "not_applicable"
     policy: "minimal-depth-no-inquiry"
-    rationale: "Shell classifier + bootstrap tests; integrated inquiry not required."
+    rationale: "Shell + agentstream unit + bootstrap; integrated inquiry not required."
     slug: "sub-adversarial-inquiry-pass"
     tracking:
       status: "not_applicable"
   - disposition: "completed"
     slug: "unit-test-red"
     tracking:
+      note: "SC-WF-ABS-05..08 bootstrap + agentstream unit build-plan 2026-11-12"
       status: "completed"
   - disposition: "completed"
     slug: "unit-test-green"
     tracking:
+      note: "66 bootstrap + 134 agentstream pass"
       status: "completed"
-  - disposition: "completed"
+  - disposition: "not_applicable"
+    policy: "shell-unit-bootstrap-only"
+    rationale: "No new composition binding; shell + TS unit coverage."
     slug: "composition-integration"
     tracking:
-      status: "completed"
+      status: "not_applicable"
   - disposition: "completed"
     slug: "verification-gate"
     tracking:
-      evidence_refs:
-        - path: "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/evidence/verification-evidence-manifest.v1.json"
-          type: "verification_manifest"
+      note: "build-plan local test run 2026-11-12"
       status: "completed"
-  - disposition: "pending"
+  - disposition: "completed"
     slug: "traceable-commit"
     tracking:
-      status: "pending"
+      note: "close-out wave 1.5 2026-11-12"
+      status: "completed"

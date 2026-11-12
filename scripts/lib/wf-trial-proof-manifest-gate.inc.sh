@@ -1,5 +1,7 @@
 # wf-trial-proof-manifest-gate.inc.sh — orchestrator L3 post-four-phase gate (default on).
 # [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] [IMPL-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE]
+# shellcheck source=scripts/lib/wf-trial-abort-signal.inc.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-abort-signal.inc.sh"
 
 _wf_trial_proof_manifest_gate_default_diag_emitted=0
 
@@ -64,6 +66,12 @@ wf_trial_proof_manifest_gate_check() {
     return 0
   fi
   if ! wf_trial_proof_manifest_gate_applies "$wf_norm"; then
+    return 0
+  fi
+
+  if wf_trial_incomplete_batch_is_provider_abort; then
+    printf 'DIAGNOSTIC: WF trial proof manifest gate: skipped (incomplete batch; incomplete_reason=%s)\n' \
+      "$WF_TRIAL_INCOMPLETE_REASON" >&2
     return 0
   fi
 

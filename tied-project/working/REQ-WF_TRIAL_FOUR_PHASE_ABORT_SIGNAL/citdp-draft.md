@@ -11,6 +11,8 @@
 
 Improve operator and facilitator diagnosis when traditional four-phase agentstream aborts mid-batch (session limits, missing `session_id` after turn banner) so post-run [SC-WF-PHG-01] failures are not misread as handoff omission alone.
 
+**Wave 1.5 (2026-11-12):** Salient stderr **session capacity highlight** (ERROR + provider reset line) before machine `incomplete_reason`; preflight fail-closed when Claude smoke already reports session limit (without `WF_TRIAL_STRICT_PREFLIGHT`); live agentstream highlight on Claude turn abort.
+
 **risk_analysis**
 
 | Risk | Likelihood | Impact | Mitigation |

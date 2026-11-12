@@ -1,93 +1,121 @@
-# Session handoff — REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
+# Session handoff — program wave (ABS 1.5 + SEQ)
 
 - handoff_kind: session
 - date: 2026-11-12
 - request_token: REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
 - prompt_type: handoff
 - plan_phase: post-build
+- run_id: handoff-2026-11-12-wf-trial-wave
 
 ## Plan spine
 
-- PLAN: [../PLAN.md](../PLAN.md) — wave 1 abort classifier + build-plan handoff stub goal
-- Program: incident `1794504138-wf-agentstream-wf-10-claude-claudefable52low` (do **not** register)
-- Related plan (not yet scaffolded): [REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT](../REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/evidence/session-handoff.md)
+| REQ | Phase | PLAN |
+| --- | --- | --- |
+| **REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL** | Wave 1 **shipped** `3b9ea925` · Wave **1.5** refine complete | [PLAN.md](../PLAN.md) · [Cursor session limit plan](../../../../.cursor/plans/session_limit_highlight_349881a2.plan.md) |
+| **REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT** | build-plan done; **close-out** pending | [../REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/PLAN.md](../../REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/PLAN.md) |
 
 ## Authoritative refs
 
-| Artifact | Path |
+| Artifact | Path / note |
 | --- | --- |
-| Tracker | [../checklist-tracker.yaml](../checklist-tracker.yaml) |
-| CITDP draft | [../citdp-draft.md](../citdp-draft.md) |
-| Test strategy | [../test-strategy.md](../test-strategy.md) |
-| Build handoff | [phase-handoff-build-plan.md](./phase-handoff-build-plan.md) |
-| Incident fixtures | [fixture-1794504138-process.stderr.log](./fixture-1794504138-process.stderr.log) |
+| ABS tracker (1.5) | [checklist-tracker.yaml](../checklist-tracker.yaml) |
+| ABS test strategy | [test-strategy.md](../test-strategy.md) |
+| IMPL pseudo (1.5) | [IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL-pseudocode.md](../../../implementation-decisions/IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL-pseudocode.md) — `pseudocode_validate` **ok** |
+| SEQ handoff | [../../REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/evidence/session-handoff.md](../../REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/evidence/session-handoff.md) |
+| Wave 1 close-out | commit `3b9ea925` |
 
 ## Plan execution steps
 
-**Last updated:** 2026-11-12 · **prompt_type:** handoff · **PLAN:** ../PLAN.md
+**Last updated:** 2026-11-12 · **prompt_type:** handoff · **PLAN:** [../PLAN.md](../PLAN.md)
 
-### Required
-- [x] refine-plan-lock — RESOLVE R1–R9; D2 inter-turn fail-fast deferred wave 2
-- [x] unit-test-red / unit-test-green — SC-WF-ABS-01..04 in `workflow-trial-agentstream-sh.test.mjs`
-- [ ] verification-gate — formal receipt + `tied_verify` at close-out
-- [ ] sub-close-out-evidence-sync
-- [ ] traceable-commit — only when close_out allowed
+### Required — ABS wave 1.5
+
+- [x] add-feature / plan — wave 1.5 scope in Cursor + working PLAN
+- [x] refine-plan — contracts L1–L3 highlight; SC-WF-ABS-05..08; pseudo-code
+- [x] build-plan — `wf-trial-operator-highlight.inc.sh`, preflight strict on session limit, L2 live, tests
+- [ ] close-out — single commit bundling 1.5 + uncommitted debug/SPT/alias
+
+### Required — SEQ
+
+- [x] add-feature · refine-plan · build-plan
+- [ ] close-out — verification envelope, `tied_verify`, commit
 
 ### Optional
-- [ ] wave-2 REQ `REQ-WF_TRIAL_FOUR_PHASE_INTERTURN_GATE`
+
+- [ ] Re-run WF-10 Claude after **session limit reset** (do **not** register 1794507861 / 1794509066)
+- [ ] Push `main` (ahead 2 + large dirty tree)
 
 ### Changelog (this REQ)
-- 2026-11-12 refine-plan: locked scope; fixtures from 1794504138.
-- 2026-11-12 build-plan: shipped W1.1–W1.7; REQ/ARCH/IMPL + semantic tokens; **58/58** bootstrap tests.
+
+- 2026-11-12 build-plan: wave 1.5 highlight L1–L3; 66 bootstrap + 134 agentstream pass
+- 2026-11-12 handoff: program snapshot; ABS 1.5 next build-plan
+- 2026-11-12 refine-plan: wave 1.5 pseudo + vocab + REQ SC-05..08
+- 2026-11-12 debug: SC-WF-ABS-05 gate skip, SPT exit-stdout dedup, sonnet-4-6 alias (uncommitted)
 
 ## Environment
 
-- execution_site: TIED store repo `/Users/fareed/Documents/dev/chatgpt/stdd`
-- TIED_BASE_PATH: `tied-project/` (client project under store root)
-- disposable incident client (forensic only): `/Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low`
+- execution_site: TIED store `/Users/fareed/Documents/dev/chatgpt/stdd`
+- TIED_BASE_PATH: `tied-project/`
+- git: `main` ahead **2**; **large uncommitted** diff (see below)
+- Claude ops: **session capacity limit** frequent — preflight smoke fails until reset (~2:20pm America/Los_Angeles in recent runs)
 
 ## Requirements and dependencies
 
-- Primary: `REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL`
-- depth_tier: minimal · gate_policy: advisory
-- depends_on: `REQ-WF_TRIAL_PHASE_HANDOFF_GATE`, `REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG`
+| Token | Role |
+| --- | --- |
+| **REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL** | Primary active — wave 1.5 session **capacity highlight** |
+| **REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT** | dual-stream turn markers — impl done, uncommitted |
+| **REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE** | ERROR on stderr for highlight |
+| **REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS** | preflight validation report path |
+
+**depth_tier:** minimal · **gate_policy:** advisory
 
 ## Related and pending prior requests
 
-| id | kind | status | blocks_current | evidence_link |
+| id | kind | status | blocks_current | evidence |
 | --- | --- | --- | --- | --- |
-| WF-10-1794504138 | operational | incomplete | no | incident fixtures above; do not `@record-wf-trial` |
-| REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT | REQ | planned | no | [session-handoff.md](../REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/evidence/session-handoff.md) |
+| 1794504138 | operational | do not register | no | ABS fixtures |
+| 1794507861 / 1794509066 | operational | session-limit abort | no | validates ABS-05 skip + incomplete_reason |
+| SEQ close-out | REQ | pending | no | SEQ working folder |
 
-## Finished this session
+## Finished this session (cumulative)
 
-- **REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL** implementation: `wf-trial-abort-signal.inc.sh`, orchestrator hook, manifest `incomplete_reason`, gate DIAGNOSTIC ordering, turn-3 stub in `traditional-four-phase-agentstream.yaml`
-- Bootstrap: `node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs` → **58/58 pass**
-- TIED: REQ/ARCH/IMPL indexes + `IMPL-*-pseudocode.md` + semantic tokens
-- Docs: [cursor-and-claude-model-catalog.md](../../../docs/cursor-and-claude-model-catalog.md) (unrelated reference)
-- **Plan only:** sequential process transcript ([`.cursor/plans/sequential_wf_trial_transcript_014fe989.plan.md`](../../../../.cursor/plans/sequential_wf_trial_transcript_014fe989.plan.md))
+- **ABS wave 1:** close-out `3b9ea925`
+- **SEQ:** `emitTurnOperatorLine`, 130/130 agentstream + 60/60 bootstrap
+- **Debug (uncommitted):** provider-abort gate skip (SC-WF-ABS-05), duplicate turn banner fix (SPT exit stdout), `sonnet-4-6` catalog alias
+- **ABS 1.5 refine:** PLAN W15.*, tests SC-06..08, preflight **fail-closed on session limit** (sponsor)
+
+## Uncommitted inventory (high signal)
+
+- **Shell:** `wf-trial-abort-signal`, phase-handoff-gate, proof-manifest-gate
+- **Agentstream:** `live-executor`, `index.ts`, `live-executor-turn-operator.test.ts`
+- **Catalog:** `wf-trial-model-catalog.yaml`, sync defaults, spec test
+- **Bootstrap:** `workflow-trial-agentstream-sh.test.mjs` (+SC-WF-ABS-05)
+- **TIED:** ABS REQ detail SC-05..08, IMPL pseudo v2, vocab, working PLAN/tracker
+- **SEQ:** full token stack + working (untracked/new files)
+- **Unrelated:** `docs/cursor-and-claude-model-catalog.md`, `docs/evidence/` — exclude from WF commit unless intended
 
 ## Completion signals
 
-- Machine close-out: **not_run** — defer `@close-out`
-- Process contract: **partial** — build-plan handoff on disk; no `gates/verification-*.json`, no persisted CITDP YAML
-- Adherence ledger: **not_run**
+| Signal | ABS 1.5 | SEQ |
+| --- | --- | --- |
+| Machine close-out | not_run (wave 1 done in `3b9ea925`) | not_run |
+| Process contract | build-plan handoff; CITDP gate waiver pending | build handoff; verification gate pending |
+| Adherence ledger | not_run | not_run |
 
 ## Do next
 
-1. **`@close-out`** on this REQ — CITDP persist, verification gate, traceable commit when allowed
-2. **`@add-feature`** then **`@refine-plan`** / **`@build-plan`** for **REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT** (incremental turn flush + stdout markers)
-3. **Operational (sponsor):** fresh WF-10 re-run after Claude session limit reset (Sonnet 5.5 medium recommended); do not register `1794504138`
+1. **`@close-out`** — one commit: wave 1.5 + pending debug/SPT/alias + optional SEQ close-out (second commit if preferred); fix `malformed_citdp:adversarial_inquiry` if gate blocks
 
 ## Constraints
 
-- Do not register trial `1794504138`
-- Do not use `WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1` for cohort cells
-- Uncommitted implementation on store branch — no commit this handoff
-- Wave 2 true inter-turn fail-fast remains out of scope for ABS
+- Do **not** register disposable runs **1794504138**, **1794507861**, **1794509066**
+- Keep DIAGNOSTIC/ERROR texture on stderr per operator output contract
+- Sponsor: session limit at preflight → **block four-phase** (not advisory continue)
 
 ## Repeatable verification
 
 ```bash
-node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
+node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs   # expect 66 pass
+cd mcp-server/packages/agentstream && npm test                          # expect 134 pass
 ```

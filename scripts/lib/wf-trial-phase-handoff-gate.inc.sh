@@ -3,6 +3,8 @@
 
 # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-product-req.inc.sh"
+# shellcheck source=scripts/lib/wf-trial-abort-signal.inc.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-abort-signal.inc.sh"
 
 _wf_trial_phase_handoff_gate_default_diag_emitted=0
 
@@ -29,6 +31,9 @@ wf_trial_count_colocated_test_files() {
 }
 
 _wf_trial_phase_handoff_emit_incomplete_reason() {
+  if [[ "${WF_TRIAL_ABORT_SIGNAL_DIAG_EMITTED:-0}" == "1" ]]; then
+    return 0
+  fi
   if [[ -z "${WF_TRIAL_INCOMPLETE_REASON:-}" ]]; then
     return 0
   fi
@@ -53,6 +58,10 @@ wf_trial_phase_handoff_gate_check() {
   local token
   token="$(wf_trial_resolve_product_req_token "$ws" || true)"
   if [[ -z "$token" ]]; then
+    if wf_trial_incomplete_batch_is_provider_abort; then
+      printf 'DIAGNOSTIC: WF trial phase handoff gate: skipped (incomplete batch; no product REQ)\n' >&2
+      return 0
+    fi
     wf_trial_diagnose_product_req_resolve_failure "$ws"
     printf 'ERROR: WF trial phase handoff gate: could not resolve product REQ from working folder\n' >&2
     return 1

@@ -211,7 +211,7 @@ if [[ "${HARNESS:-cursor}" == "claude" && "$DRY_RUN" -eq 0 ]]; then
   if [[ -f "$VALIDATION" ]]; then
     VALIDATION_EXIT=0
     node "$VALIDATION" --client-root "$WORKSPACE" --no-agentstream-dry-run --with-claude-code-interactive-smoke || VALIDATION_EXIT=$?
-    wf_trial_handle_claude_validation_exit "$VALIDATION_EXIT" || fail "Claude client validation preflight blocked (WF_TRIAL_STRICT_PREFLIGHT)"
+    wf_trial_handle_claude_validation_exit "$VALIDATION_EXIT" "$WORKSPACE" || fail "Claude client validation preflight blocked (WF_TRIAL_STRICT_PREFLIGHT)"
   else
     printf 'DIAGNOSTIC: run-tied-claude-client-validation.mjs missing; skip Claude preflight\n' >&2
   fi

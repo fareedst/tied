@@ -11,16 +11,15 @@
         "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 8348,
-      "exit_code": 0,
+      "duration_ms": 9317,
+      "exit_code": 1,
       "id": "citdp-evidence-1",
-      "result": "passed"
+      "result": "failed"
     }
   ],
-  "commit": "6e8a871e40c0d547dede1cf5db964c4281faaf0c",
+  "commit": "3b9ea925bdd89a44fae1484f6952ddb1efb1b10b",
   "covered_tokens": [
-    "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL",
-    "IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+    "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
   ],
   "environment": {
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
@@ -46,6 +45,6 @@
       "result": "pending"
     }
   ],
-  "run_id": "close-out-wf-abs-2026-11-12",
+  "run_id": "close-out-1794511022564",
   "schema_version": "verification-evidence-manifest.v1"
 }

@@ -66,10 +66,83 @@ import {
   invalidateTrackerDownstream,
   type TurnIdentity,
 } from "./tracker-writer.js";
+import {
+  formatSessionLimitHighlightBlock,
+  detectClaudeSessionLimitLine,
+  type SessionLimitHighlightState,
+  writeSessionLimitHighlightToFd2,
+} from "./session-limit-highlight.js";
 
 export type LiveRunStreams = DryRunStreams;
 
 const TRACEABLE_COMMIT_SLUG = "traceable-commit";
+
+/** [IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT] [REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT] */
+const TURN_BANNER_OPERATOR_RE = /^--- turn /;
+const SESSION_ID_OPERATOR_RE = /^session_id=/;
+
+/** [IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT] Pure predicate for dual-stream operator lines. */
+export function isTurnOperatorLine(text: string): boolean {
+  const line = text.replace(/\n$/, "").trim();
+  if (line === "") {
+    return false;
+  }
+  return TURN_BANNER_OPERATOR_RE.test(line) || SESSION_ID_OPERATOR_RE.test(line);
+}
+
+/** True when live fd1 already received operator mirrors; skip exit stdout write to avoid duplicates. */
+export function liveExitStdoutIsOperatorMirrorOnly(stdout: string): boolean {
+  if (stdout.trim() === "") {
+    return true;
+  }
+  for (const raw of stdout.split("\n")) {
+    const line = raw.trimEnd();
+    if (line === "") {
+      continue;
+    }
+    if (!isTurnOperatorLine(`${line}\n`)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export type EmitTurnOperatorLineResult =
+  | { ok: true }
+  | { ok: false; reason: "flush_failed"; detail: string };
+
+type TurnOperatorStreams = { stdoutAcc: string; stderrAcc: string };
+
+/**
+ * [IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT] [ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT]
+ * Mirror turn operator lines to stdoutAcc and live fds 1/2; never append to stderrAcc.
+ */
+export function emitTurnOperatorLine(
+  line: string,
+  streams: TurnOperatorStreams,
+  writeSync: typeof fs.writeSync = fs.writeSync,
+): EmitTurnOperatorLineResult {
+  if (!isTurnOperatorLine(line)) {
+    throw new Error("emitTurnOperatorLine: line is not a turn operator line");
+  }
+  let normalized = line;
+  if (!normalized.endsWith("\n")) {
+    normalized += "\n";
+  }
+  const stderrBefore = streams.stderrAcc;
+  streams.stdoutAcc += normalized;
+  try {
+    writeSync(1, normalized);
+    writeSync(2, normalized);
+  } catch (err) {
+    streams.stdoutAcc = streams.stdoutAcc.slice(0, -normalized.length);
+    return { ok: false, reason: "flush_failed", detail: String(err) };
+  }
+  if (streams.stderrAcc !== stderrBefore) {
+    throw new Error("emitTurnOperatorLine: stderrAcc must not change");
+  }
+  return { ok: true };
+}
 
 function evaluateTraceableCommitEnvelope(input: {
   projectRoot: string;
@@ -245,6 +318,13 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
   }
 
   let stderrAcc = pre.stderr + dae.stderr + jev.stderr;
+  let stdoutAcc = "";
+  const emitOperatorLine = (line: string): EmitTurnOperatorLineResult => {
+    const streams: TurnOperatorStreams = { stdoutAcc, stderrAcc };
+    const result = emitTurnOperatorLine(line, streams);
+    stdoutAcc = streams.stdoutAcc;
+    return result;
+  };
   const usingTracker = cfg.checklistTrackerYaml.trim() !== "";
   if (usingTracker) {
     const requestToken = trackerRequestTokenFromVars(cfg.checklistVars);
@@ -256,7 +336,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       );
     } catch (err) {
       stderrAcc += `agentstream: tracker ensure failed: ${String(err)}\n`;
-      return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+      return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
     }
   }
   let runID = cfg.runID.trim();
@@ -271,7 +351,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
   );
   if (missingDistAbort !== null) {
     return {
-      stdout: "",
+      stdout: stdoutAcc,
       stderr: stderrAcc + missingDistAbort,
       exitCode: 1,
     };
@@ -301,6 +381,22 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
   }
 
   let running = "";
+  const sessionLimitHighlight: SessionLimitHighlightState = { emitted: false };
+
+  const maybeHighlightClaudeSessionLimit = (turnStdout: string): void => {
+    if (cfg.agentHarness !== "claude") {
+      return;
+    }
+    const aggregate = `${stdoutAcc}\n${turnStdout}`;
+    const highlighted = writeSessionLimitHighlightToFd2(
+      aggregate,
+      sessionLimitHighlight,
+    );
+    if (highlighted) {
+      const humanLine = detectClaudeSessionLimitLine(aggregate);
+      stderrAcc += formatSessionLimitHighlightBlock(humanLine);
+    }
+  };
 
   for (let i = 0; i < turns.length; i++) {
     const t = turns[i]!;
@@ -314,7 +410,11 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     if (t.stepStub !== "") {
       stub = ` [${t.stepStub}]`;
     }
-    stderrAcc += `\n--- turn ${cfg.firstTurn + i}/${originalTotal}${label}${stub} ---\n`;
+    const turnBanner = `\n--- turn ${cfg.firstTurn + i}/${originalTotal}${label}${stub} ---\n`;
+    const bannerEmit = emitOperatorLine(turnBanner);
+    if (!bannerEmit.ok) {
+      stderrAcc += `DIAGNOSTIC: turn operator flush failed: ${bannerEmit.detail}\n`;
+    }
 
     if (usingTracker && t.stepStub.trim() !== "") {
       const requestToken = trackerRequestTokenFromVars(cfg.checklistVars);
@@ -331,7 +431,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       }
       if (envelopeEval.block) {
         stderrAcc += `agentstream: ${envelopeEval.message}\n`;
-        return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+        return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
       }
     }
 
@@ -356,7 +456,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       const requestToken = trackerRequestTokenFromVars(cfg.checklistVars);
       if (requestToken === "") {
         stderrAcc += "agentstream: tracker mode requires REQUEST checklist var\n";
-        return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+        return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
       }
       const instructionHash = hashRenderedInstructionParts(t.parts);
       const instructionNonce = issueInstructionNonce(runID, cfg.firstTurn + i);
@@ -380,7 +480,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
           appendInstructionRendered(cfg.adherenceLedger, correlation);
         } catch (err) {
           stderrAcc += `agentstream: adherence ledger write failed: ${String(err)}\n`;
-          return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+          return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
         }
         activeMarkerPath = activeTurnMarkerPath(cfg.workspace, requestToken);
         try {
@@ -397,7 +497,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
           });
         } catch (err) {
           stderrAcc += `agentstream: active-turn marker write failed: ${String(err)}\n`;
-          return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+          return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
         }
       }
     }
@@ -446,6 +546,9 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       ...effortEnv,
     ]);
     const { result, exitCode } = turnOutcome;
+    maybeHighlightClaudeSessionLimit(
+      `${result.transcript}\n${result.finalText}\n${result.thinkingText}`,
+    );
     if (turnOutcome.jevGateStderr) {
       stderrAcc += turnOutcome.jevGateStderr;
     }
@@ -469,7 +572,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
         });
       }
       clearMarker();
-      return { stdout: "", stderr: stderrAcc, exitCode };
+      return { stdout: stdoutAcc, stderr: stderrAcc, exitCode };
     }
     if (result.sessionId === "") {
       if (liveBinding.driverKind === "cursor") {
@@ -482,9 +585,13 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       }
       stderrAcc += "No session_id in stream; cannot continue with --resume\n";
       clearMarker();
-      return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+      return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
     }
-    stderrAcc += `session_id=${result.sessionId}\n`;
+    const sessionLine = `session_id=${result.sessionId}\n`;
+    const sessionEmit = emitOperatorLine(sessionLine);
+    if (!sessionEmit.ok) {
+      stderrAcc += `DIAGNOSTIC: turn operator flush failed: ${sessionEmit.detail}\n`;
+    }
     running = result.sessionId;
 
     if (harnessTraceEnabled()) {
@@ -517,7 +624,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     if (parsed.error) {
       clearMarker();
       stderrAcc += `agentstream: control parse error: ${parsed.error.message}\n`;
-      return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+      return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
     }
 
     if (usingTracker) {
@@ -535,7 +642,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       if (trackerErr !== null) {
         clearMarker();
         stderrAcc += `agentstream: tracker composition failed: ${trackerErr}\n`;
-        return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+        return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
       }
     }
 
@@ -549,7 +656,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     if (valErr) {
       clearMarker();
       stderrAcc += `agentstream: invalid control block: ${valErr.message}\n`;
-      return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+      return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
     }
 
     if (parsed.decision.action === ACTION_GOTO) {
@@ -567,7 +674,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
         } catch (err) {
           clearMarker();
           stderrAcc += `agentstream: tracker loop-back invalidation failed: ${String(err)}\n`;
-          return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+          return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
         }
       }
       try {
@@ -575,12 +682,12 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       } catch (err) {
         clearMarker();
         stderrAcc += `agentstream: control routing failed: ${String(err)}\n`;
-        return { stdout: "", stderr: stderrAcc, exitCode: 1 };
+        return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
       }
       stderrAcc += `DIAGNOSTIC: agentstream_control goto ${target}: ${parsed.decision.reason ?? ""}\n`;
     }
     clearMarker();
   }
 
-  return { stdout: "", stderr: stderrAcc, exitCode: 0 };
+  return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 0 };
 }

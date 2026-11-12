@@ -18,6 +18,7 @@ const PROCESS_LOG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-process-log.i
 const PROOF_MANIFEST_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-proof-manifest-gate.inc.sh");
 const PHASE_HANDOFF_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-phase-handoff-gate.inc.sh");
 const ABORT_SIGNAL_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-abort-signal.inc.sh");
+const OPERATOR_HIGHLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-operator-highlight.inc.sh");
 const PRODUCT_REQ_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-product-req.inc.sh");
 const FIXTURE_1794504138_STDERR = path.join(
   REPO_ROOT,
@@ -868,6 +869,176 @@ ERROR: something else
     }
   });
 
+  it("phase handoff gate skips when provider abort and no product REQ [SC-WF-ABS-05]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-gate-skip-"));
+    try {
+      fs.mkdirSync(path.join(tmp, "tied-project/working"), { recursive: true });
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-phase-handoff-gate.inc.sh
+        source "${PHASE_HANDOFF_GATE_INC}"
+        export WF_TRIAL_INCOMPLETE_REASON=claude_session_limit
+        export WF_TRIAL_INCOMPLETE_TURN=1
+        unset WF_TRIAL_SKIP_PHASE_HANDOFF_GATE
+        wf_trial_phase_handoff_gate_check "${tmp}" "${REPO_ROOT}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.match(r.stderr, /skipped \(incomplete batch; no product REQ\)/);
+      assert.doesNotMatch(r.stderr, /ERROR: WF trial phase handoff gate: could not resolve product REQ/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("post-classifier highlight before incomplete_reason DIAGNOSTIC [SC-WF-ABS-06]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-hl-order-"));
+    try {
+      const evRel = "tied-project/working/wf-trial-orchestrator-run/evidence";
+      const ev = path.join(tmp, evRel);
+      fs.mkdirSync(ev, { recursive: true });
+      const stdout = fs.readFileSync(FIXTURE_1794504138_STDOUT_TAIL, "utf8");
+      fs.writeFileSync(path.join(ev, "process.stdout.log"), stdout);
+      fs.writeFileSync(path.join(ev, "process.stderr.log"), fs.readFileSync(FIXTURE_1794504138_STDERR, "utf8"));
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-abort-signal.inc.sh
+        source "${ABORT_SIGNAL_INC}"
+        wf_trial_abort_signal_apply_workspace "${tmp}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      const errIdx = r.stderr.indexOf(
+        "DIAGNOSTIC: wf_trial_incomplete_reason=claude_session_limit",
+      );
+      const headlineIdx = r.stderr.indexOf(
+        "ERROR: WF trial stopped: Claude session capacity limit",
+      );
+      assert.ok(headlineIdx >= 0, r.stderr);
+      assert.ok(errIdx >= 0, r.stderr);
+      assert.ok(headlineIdx < errIdx, `highlight ${headlineIdx} diag ${errIdx}`);
+      assert.match(r.stderr, /session limit/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("preflight blocks on smoke session limit without STRICT [SC-WF-ABS-07]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-preflight-limit-"));
+    try {
+      const working = path.join(tmp, "tied-project/working");
+      fs.mkdirSync(working, { recursive: true });
+      const limitDetail =
+        "You've hit your session limit · resets 2:20pm (America/Los_Angeles)";
+      fs.writeFileSync(
+        path.join(working, "tied-claude-client-validation.v1.json"),
+        JSON.stringify(
+          {
+            schema_version: "tied-claude-client-validation.v1",
+            ok: false,
+            checks: [
+              {
+                id: "claude_code_interactive_smoke",
+                status: "fail",
+                detail: limitDetail,
+              },
+            ],
+          },
+          null,
+          2,
+        ),
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-claude-preflight.inc.sh
+        source "${PREFLIGHT_INC}"
+        unset WF_TRIAL_STRICT_PREFLIGHT
+        wf_trial_handle_claude_validation_exit 1 "${tmp}"
+        echo exit=$?
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.match(r.stdout, /exit=1/);
+      assert.match(r.stderr, /ERROR: WF trial stopped: Claude session capacity limit/);
+      assert.doesNotMatch(
+        r.stderr,
+        /continuing may weaken MCP parity/,
+      );
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("preflight advisory when validation fails for non-limit reason [SC-WF-ABS-07]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-preflight-other-"));
+    try {
+      const working = path.join(tmp, "tied-project/working");
+      fs.mkdirSync(working, { recursive: true });
+      fs.writeFileSync(
+        path.join(working, "tied-claude-client-validation.v1.json"),
+        JSON.stringify(
+          {
+            schema_version: "tied-claude-client-validation.v1",
+            ok: false,
+            checks: [
+              {
+                id: "mcp_json_harness_contract",
+                status: "fail",
+                detail: "TIED_BASE_PATH missing",
+              },
+            ],
+          },
+          null,
+          2,
+        ),
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-claude-preflight.inc.sh
+        source "${PREFLIGHT_INC}"
+        unset WF_TRIAL_STRICT_PREFLIGHT
+        wf_trial_handle_claude_validation_exit 1 "${tmp}"
+        echo exit=$?
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.match(r.stdout, /exit=0/);
+      assert.match(r.stderr, /continuing may weaken MCP parity/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_emit_session_limit_highlight contract [SC-WF-ABS-06]", () => {
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-operator-highlight.inc.sh
+      source "${OPERATOR_HIGHLIGHT_INC}"
+      wf_trial_emit_session_limit_highlight "You've hit your session limit"
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    const lines = r.stderr.split("\n");
+    assert.equal(
+      lines[0],
+      "ERROR: WF trial stopped: Claude session capacity limit",
+    );
+    assert.match(lines[1], /session limit/);
+    assert.match(r.stderr, /harness=cursor/);
+  });
+
+  it("proof manifest gate skips when provider abort [SC-WF-ABS-05]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-proof-skip-"));
+    try {
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-proof-manifest-gate.inc.sh
+        source "${PROOF_MANIFEST_GATE_INC}"
+        export WF_TRIAL_INCOMPLETE_REASON=claude_session_limit
+        wf_trial_proof_manifest_gate_check "${tmp}" "WF-10" "${REPO_ROOT}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.match(r.stderr, /proof manifest gate: skipped \(incomplete batch/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
   it("phase handoff gate emits incomplete_reason before ERROR [SC-WF-ABS-04]", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-gate-order-"));
     try {
@@ -896,6 +1067,61 @@ ERROR: something else
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true });
     }
+  });
+
+  it("live-executor exports emitTurnOperatorLine dual-stream helper [SC-WF-SPT-04]", () => {
+    const liveExecutorSrc = fs.readFileSync(
+      path.join(REPO_ROOT, "mcp-server/packages/agentstream/src/live-executor.ts"),
+      "utf8",
+    );
+    assert.match(liveExecutorSrc, /export function emitTurnOperatorLine/);
+    assert.match(liveExecutorSrc, /writeSync\(1,/);
+    assert.match(liveExecutorSrc, /writeSync\(2,/);
+    assert.doesNotMatch(
+      liveExecutorSrc,
+      /stderrAcc \+= `\\n--- turn /,
+      "turn banner must use emitTurnOperatorLine, not stderrAcc",
+    );
+    assert.doesNotMatch(
+      liveExecutorSrc,
+      /stderrAcc \+= `session_id=\$\{/,
+      "session_id operator line must use emitTurnOperatorLine",
+    );
+  });
+
+  it("emitTurnOperatorLine smoke via tsx [SC-WF-SPT-04]", () => {
+    const liveExecutor = path.join(
+      REPO_ROOT,
+      "mcp-server/packages/agentstream/dist/live-executor.js",
+    );
+    if (!fs.existsSync(liveExecutor)) {
+      const r = spawnSync("npm", ["run", "build"], {
+        cwd: path.join(REPO_ROOT, "mcp-server/packages/agentstream"),
+        encoding: "utf8",
+        env: process.env,
+      });
+      assert.equal(r.status, 0, r.stderr || r.stdout);
+    }
+    const code = `
+      import { emitTurnOperatorLine } from "./dist/live-executor.js";
+      const streams = { stdoutAcc: "", stderrAcc: "keep\\n" };
+      const line = "--- turn 1/2 (new session) ---\\n";
+      const order = [];
+      const writeSync = (fd, buf) => { order.push(fd); return String(buf).length; };
+      const r = emitTurnOperatorLine(line, streams, writeSync);
+      if (!r.ok) process.exit(2);
+      if (streams.stderrAcc !== "keep\\n") process.exit(3);
+      if (!streams.stdoutAcc.includes("--- turn 1/2")) process.exit(4);
+      if (JSON.stringify(order) !== "[1,2]") process.exit(5);
+      console.log("ok-spt-smoke");
+    `;
+    const r = spawnSync("node", ["--input-type=module", "-e", code], {
+      cwd: path.join(REPO_ROOT, "mcp-server/packages/agentstream"),
+      encoding: "utf8",
+      env: process.env,
+    });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-spt-smoke/);
   });
 
   it("wf_trial_process_log_set_incomplete_reason merges manifest [SC-WF-ABS-01]", () => {

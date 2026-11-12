@@ -7,7 +7,7 @@
 
 ## Staged scope (this commit)
 
-Feature shell + TIED YAML + working artifacts + CITDP index record.
+Wave 1.5 highlight shell + agentstream TS + bootstrap tests + ABS TIED YAML + working PLAN/tracker/handoffs. Bundled SPT live-executor dedup + `sonnet-4-6` catalog alias (no SEQ index YAML).
 
 ## Excluded (unrelated / other REQ)
 

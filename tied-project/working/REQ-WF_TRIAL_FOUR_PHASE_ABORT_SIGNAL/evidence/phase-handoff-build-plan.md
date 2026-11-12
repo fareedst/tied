@@ -1,34 +1,50 @@
-# phase-handoff-build-plan — REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
-
-request_token: REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL  
+---
+request_token: REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
 prompt_type: build-plan
+run_id: build-plan-2026-11-12-wf-abs-w15
+---
 
-## Verification gate
+# Phase handoff — build-plan (wave 1.5)
 
-Bootstrap: `node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs` — **58/58 pass** (includes SC-WF-ABS-01..04).
+## REQ
 
-## Implementation summary
+`REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL` — session capacity operator highlight (SC-WF-ABS-05..08)
 
-| Deliverable | Path |
+## Deliverables
+
+| ID | Path |
 | --- | --- |
-| Abort classifier | `scripts/lib/wf-trial-abort-signal.inc.sh` |
-| Manifest merge | `wf_trial_process_log_set_incomplete_reason` in `scripts/lib/wf-trial-process-log.inc.sh` |
-| Orchestrator hook | `scripts/workflow-trial-agentstream.sh` |
-| Gate ordering | `scripts/lib/wf-trial-phase-handoff-gate.inc.sh` |
-| Batch stub goal | `docs/demos/traditional-four-phase-agentstream.yaml` |
-| Adjunct | `tools/bundled-prompt-type-skills/prompt-shared/wf-trial-build-plan-handoff.md` |
-
-## TIED tokens
-
-- `REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL`
-- `ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL`
-- `IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL`
+| W15.1 | `scripts/lib/wf-trial-operator-highlight.inc.sh` |
+| W15.2 | `scripts/lib/wf-trial-abort-signal.inc.sh` (L3 highlight before diagnostic) |
+| W15.3 | `scripts/lib/wf-trial-claude-preflight.inc.sh` + `workflow-trial-agentstream.sh` client_root arg |
+| W15.4 | `mcp-server/packages/agentstream/src/session-limit-highlight.ts` + `live-executor.ts` |
+| W15.5 | `tools/bootstrap/workflow-trial-agentstream-sh.test.mjs` |
+| W15.6 | `mcp-server/packages/agentstream/src/session-limit-highlight.test.ts` |
 
 ## Tracker
 
-- `unit-test-green` — bootstrap tests green
-- `verification-gate` — deferred formal receipt until close-out sync
+**sub-adversarial-inquiry-pass:** `not_applicable` (minimal depth)
+
+**Completed slugs:** `unit-test-red`, `unit-test-green`, `composition-integration` (n/a), `verification-gate` (local tests)
+
+**Pending:** `traceable-commit` → `@close-out`
+
+## Verification
+
+| Command | Result |
+| --- | --- |
+| `node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs` | 66 pass |
+| `cd mcp-server/packages/agentstream && npm test` | 134 pass |
+| `pseudocode_validate` IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL | ok |
+
+**Verification gate receipt:** [gates/verification-2026-11-12T19-10-53-510Z.json](../gates/verification-2026-11-12T19-10-53-510Z.json) — `allowed: false` (`malformed_citdp:adversarial_inquiry`; reconcile at close-out)
+
+**RED evidence:** not archived (tests added GREEN in same pass; no separate RED capture)
+
+## composition_path_declared
+
+(none — composition-integration not_applicable)
 
 ## Next
 
-`@close-out` — persist CITDP YAML, traceable commit when gates allow.
+`@close-out` — single commit: wave 1.5 + pending debug/SPT/alias per [session-handoff.md](./session-handoff.md)

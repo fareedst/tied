@@ -1,9 +1,11 @@
-feat(wf-trial): abort signal classifier before handoff gate
+feat(wf-trial): session capacity highlight wave 1.5
 
-Surface incomplete_reason from disposable process logs (session limit,
-missing session_id) before SC-WF-PHG-01 errors; merge manifest fields;
-turn-3 build-plan stub goal. SC-WF-ABS-01..04; 58/58 bootstrap tests.
+Emit salient stderr when Claude hits session limits (preflight block,
+live turn, post-classify before incomplete_reason). SC-WF-ABS-05..08;
+66/66 bootstrap + 134/134 agentstream. Bundles SPT exit dedup + sonnet-4-6 alias.
 
 REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
 ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
 IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
+REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
+REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS

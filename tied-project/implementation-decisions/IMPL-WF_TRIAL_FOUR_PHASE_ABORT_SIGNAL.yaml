@@ -7,7 +7,11 @@ IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
   decision_id: "IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
   related_files:
     - "docs/demos/traditional-four-phase-agentstream.yaml"
+    - "mcp-server/packages/agentstream/src/live-executor.ts"
+    - "mcp-server/packages/agentstream/src/session-limit-highlight.ts"
     - "scripts/lib/wf-trial-abort-signal.inc.sh"
+    - "scripts/lib/wf-trial-claude-preflight.inc.sh"
+    - "scripts/lib/wf-trial-operator-highlight.inc.sh"
     - "scripts/lib/wf-trial-phase-handoff-gate.inc.sh"
     - "scripts/lib/wf-trial-process-log.inc.sh"
     - "scripts/workflow-trial-agentstream.sh"
