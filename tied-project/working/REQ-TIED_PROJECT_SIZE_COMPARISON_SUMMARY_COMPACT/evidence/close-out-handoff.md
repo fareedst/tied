@@ -1,29 +1,29 @@
 # Close-out handoff — REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT
 
-**Date:** 2026-11-10  
-**depth_tier / gate_policy:** minimal / advisory
+**Date:** 2026-11-12  
+**depth_tier / gate_policy:** minimal / advisory  
+**Wave:** v3 (SC-CSC-11 cross-layer column order) on top of v2 close-out `652c81a2`
 
 ## Completion signals
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | `run-close-out-gates.mjs` merged_decision.allowed true; envelope 0 blocking gaps |
-| Process contract | build-plan v2 + regen evidence; scoped commit |
-| Adherence ledger | thin_ledger (advisory) |
+| Machine close-out | pass — `run-close-out-gates.mjs` merged_decision.allowed true; envelope blocking_gaps=0 |
+| Process contract | partial — minimal tracker; build-plan v3 + regen evidence; scoped traceable commit |
+| Adherence ledger | thin_ledger advisory — reconcile process_grade B (88) |
 
 ## Verification
 
-- `node --test tools/bootstrap/lib/project-size-comparison-render.test.mjs` — 10/10
-- `npx tsx --test mcp-server/src/project-size/project-size.test.ts` — 7/7
-- `tied_validate_consistency` — ok: true
+- `node --test tools/bootstrap/lib/project-size-comparison-render.test.mjs` — 13/13 (SC-CSC-11)
+- `tied_validate_consistency` — CSC tokens valid; **pre-existing** WF proof-manifest subtype drift unstaged
 
 ## Commit
 
-`652c81a2`
+*(SHA recorded after traceable commit)*
 
 ## Scope
 
-Comparison summary v2: epoch floor, dedupe, `wall_time`, snapshot `orchestrator_wall_time_seconds`, cohort table regen.
+v3: Summary cross-layer columns `utf8/atom | oi/atom | pf/atom` before `wall_clock`; regen `comparison-table.md` + batch receipts/manifest; promote `tied-project/citdp/CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml`.
 
 ## Parent
 

@@ -1,22 +1,19 @@
 # Session handoff — REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT
 
 **handoff_kind:** session  
+**date:** 2026-11-12  
 **request_token:** REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT  
-**date:** 2026-11-10  
-**prompt_type:** handoff (end of chat)  
-**plan_phase:** closed (v2 @ `652c81a2`)
+**prompt_type:** @handoff (after build-plan v3)  
+**plan_phase:** post-build  
 
 ---
 
 ## Plan spine
 
-| Field | Value |
-| --- | --- |
-| **PLAN** | [../PLAN.md](../PLAN.md) |
-| **Parent** | [REQ-TIED_PROJECT_SIZE_LAYERS](../../REQ-TIED_PROJECT_SIZE_LAYERS/PLAN.md) |
-| **Facilitator** | [project-size-batch-discover-compare](../../../non-tied-plans/project-size-batch-discover-compare/PLAN.md) |
-| **Prior close-out** | UTF-8 + proof cases @ `a650b0b2` ([proof handoff](../../REQ-TIED_PROJECT_SIZE_PROOF_FACET_TEST_CASES/evidence/session-handoff.md)) |
-| **Verification** | [build-plan-verification-evidence.md](./build-plan-verification-evidence.md) |
+- **Workflow:** add-feature → refine-plan (v3) → **build-plan (done)** → `@close-out` (deferred)
+- **Linked plan:** [../PLAN.md](../PLAN.md)
+- **Cursor plan:** `.cursor/plans/summary_table_column_order_58ac7679.plan.md`
+- **depth_tier / gate_policy:** minimal / advisory
 
 ---
 
@@ -24,124 +21,102 @@
 
 | Artifact | Path |
 | --- | --- |
-| Render module | `tools/bootstrap/lib/project-size-comparison-render.mjs` |
-| Tests | `tools/bootstrap/lib/project-size-comparison-render.test.mjs` |
-| Cohort table | [comparison-table.md](../../../non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) |
-| CITDP | [CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml](../../../citdp/CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml) |
-| Tracker | [checklist-tracker.yaml](../checklist-tracker.yaml) |
+| PLAN | `tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT/PLAN.md` |
+| Tracker | `tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT/checklist-tracker.yaml` |
+| CITDP draft | `tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT/CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.draft.yaml` |
+| Test strategy | `tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT/test-strategy.md` |
+| REQ | `tied-project/requirements/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml` |
 
 ---
 
 ## Plan execution steps
 
-**Last updated:** 2026-11-10 · **prompt_type:** handoff · **PLAN:** [../PLAN.md](../PLAN.md)
+**Last updated:** 2026-11-12 · **prompt_type:** build-plan · **PLAN:** ../PLAN.md
 
-### Required
+### Required (v3)
 
-- [x] add-feature / refine-plan
-- [x] build-plan — TIED enroll, TDD render, initial table regen
-- [x] sponsor UX tweaks — drop `ok`, drop Summary `verify_ev`, integer cross-layer, label trim
-- [x] refine-plan v2 — epoch floor, dedupe, wall_time, `--summary-epoch-min` (PLAN locked)
-- [x] build-plan v2 — render + snapshot trial_factors + regen table
-- [x] close-out — scoped traceable commit `652c81a2`
+- [x] `sc-csc-11-render` — cross-layer column order in `project-size-comparison-render.mjs`
+- [x] `sc-csc-11-tests` — header regex + row order test (13/13 render tests)
+- [x] `leap-req-impl` — **SC-CSC-11** on REQ; IMPL FORMAT line
+- [x] `regen-comparison-table` — batch compare → `comparison-table.md`
 
 ### Optional
 
-- [ ] `git push` main (sponsor only)
-- [ ] Parent **cohort-jsonl-automation** ([parent handoff](../../REQ-TIED_PROJECT_SIZE_LAYERS/evidence/session-handoff.md))
+- [ ] `close-out-commit` — scoped git commit + CITDP persist from draft
 
 ### Recommendations
 
-- Close-out commit should include **only** `project-size-comparison-render.*`, `comparison-table.md`, `manifest.v1.json`, and `REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT` TIED artifacts — workspace has **many** unrelated modified/untracked paths (WF trials, agentstream, etc.).
+- Split commits: (A) COMPACT v3 render/tests/YAML/table vs (B) unrelated session edits (grok46 compose, WF readouts) unless sponsor wants one squash.
 
 ### Changelog (this REQ)
 
-| Date | prompt_type | Summary |
-| --- | --- | --- |
-| 2026-11-10 | add-feature → refine-plan | Scope locked |
-| 2026-11-10 | build-plan | trimComparisonDisplayLabel; Summary 14 cols |
-| 2026-11-10 | agent | Removed Summary `verify_ev` (verbose only); cross-layer rounded to int |
-| 2026-11-10 | handoff | Disk handoff refresh |
-| 2026-11-10 | refine-plan v2 | Cohort filter/dedupe/wall_time; SC-CSC-07…10 |
-| 2026-11-10 | handoff | End-of-chat session log |
-| 2026-11-10 | build-plan v2 | prepareComparisonSummaryRows, wall_time, snapshot annex, table regen |
+- 2026-11-12 refine-plan: v3 column order locked (utf8 → oi → pf)
+- 2026-11-12 build-plan: SC-CSC-11 implemented; table regenerated
 
 ---
 
 ## Environment
 
-| Key | Value |
+| Field | Value |
 | --- | --- |
-| **execution_site** | TIED methodology **store** |
-| **workspace_root** | `/Users/fareed/Documents/dev/chatgpt/stdd` |
-| **TIED_BASE_PATH** | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
-| **git** | `main` **ahead 23** · HEAD **`652c81a2`** (COMPACT v2 close-out) |
+| workspace_root | `/Users/fareed/Documents/dev/chatgpt/stdd` |
+| TIED_BASE_PATH | `tied-project/` (confirm `tied_config_get_base_path` in new chat) |
+| execution_site | TIED store (stdd) |
+| git | not inspected — sponsor paste branch/SHA if needed |
 
 ---
 
 ## Requirements and dependencies
 
-| | |
-| --- | --- |
-| **Primary** | `REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT` (v2 implemented on disk; **not** committed) |
-| **Parent** | `REQ-TIED_PROJECT_SIZE_LAYERS` |
-| **depth_tier / gate_policy** | minimal / advisory |
+**Primary:** REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT · ARCH/IMPL same prefix  
+
+**depends_on:** REQ-TIED_PROJECT_SIZE_LAYERS (v1) · facilitator batch compare under `non-tied-plans/project-size-batch-discover-compare/`
 
 ---
 
-## Related and pending prior requests
+## Related and pending prior requests (same session, uncommitted)
 
 | id | kind | status | blocks_current | evidence_link |
 | --- | --- | --- | --- | --- |
-| cohort-jsonl-automation | parent follow-on | pending | no | [REQ-TIED_PROJECT_SIZE_LAYERS session-handoff](../../REQ-TIED_PROJECT_SIZE_LAYERS/evidence/session-handoff.md) |
-| git-push | ops | pending | no | — |
-| wf-trial-drift | repo hygiene | pending | no | unrelated uncommitted WF/facilitator folders |
-| REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS | REQ | committed `17a87250` | no | [close-out-handoff](../../REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS/evidence/close-out-handoff.md) |
+| REQ-WF_TRIAL_MODEL_COMPOSE | REQ | Wave 2 implemented | no | `tied-project/working/REQ-WF_TRIAL_MODEL_COMPOSE/evidence/session-handoff.md` |
+| PROMPT-WF-10 readouts | docs | recorded | no | `docs/demos/trial-readout-PROMPT-WF-10-grok46*.md` |
 
 ---
 
-## Finished this session (2026-11-10 handoff chat)
+## Finished this session
 
-**This thread (COMPACT v2):**
-
-- `@add-feature` + cohort plan — filter `epoch > 1794259000`, dedupe by label, `wall_time` column, CLI `--summary-epoch-min`
-- `@refine-plan` — PLAN / CITDP / test-strategy / IMPL pseudo-code / REQ acceptance **SC-CSC-07…10**
-- `@handoff` — this log
-
-**Earlier in thread (other REQ):**
-
-- `REQ-WF_TRIAL_COMPOSITION_GOAL_PROMPTS` `@close-out` → **`17a87250`**
-
-**Cumulative v1 on disk (uncommitted):**
-
-- Render: trim labels, 14-col Summary, integer cross-layer; tests 4/4; table regen 50 rows (pre-v2 rules — duplicate labels still in Summary)
+| Item | Evidence |
+| --- | --- |
+| **v3 Summary column order** | `utf8/atom \| oi/atom \| pf/atom`; tests green |
+| **Grok 4.6 compose** | `workflow_trial_range cursor cursor-grok-4.6 low …` → `cursor-grok-4.6-low-fast` |
+| **@record-wf-trial** | `1794517047` (low), `1794518198` (med); comparison table includes both rows |
+| **Grok46 WF-10 trials** | disposable clients complete; readouts + CHANGELOG entries |
 
 ---
 
-## Completion signals
+## Completion signals (primary REQ — COMPACT v3)
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | **run** — close_out gate allowed; envelope 0 blocking gaps |
-| Process contract | **complete** — `652c81a2` |
-| Adherence ledger | **thin_ledger** advisory |
+| Machine close_out | **not_run** |
+| Process contract | **partial** — build-plan + tests; no close-out gate |
+| Adherence ledger | **not_run** |
 
 ---
 
 ## Do next
 
-1. **`@close-out`** — scoped traceable commit (render, batch CLI, snapshot, tests, comparison-table + receipts, COMPACT TIED).
-
-**Resume prompt:** see chat fenced block below (canonical).
+1. **`@close-out`** @ `tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT/PLAN.md` — scoped COMPACT v3 commit
+2. Optional second **`@close-out`** or commit for **REQ-WF_TRIAL_MODEL_COMPOSE** Wave 2 + trial docs
+3. Operator: `workflow_trial_range cursor grok46 medium 1 1` smoke after sourcing `build-commands.sh`
 
 ---
 
 ## Constraints
 
-- No hand-edit `runs.jsonl`
-- Receipt JSON and manifest labels stay full precision / full basename
-- Cohort proof tiers: filter by `validator_version` when comparing pre-1.1.0 archives
-- No leaderboard language in facilitator output
+- No git commit in `@handoff`
+- Do not hand-edit `comparison-table.md`; regenerate via batch compare CLI
+- `wall_clock` header unchanged (no `wall_mins` rename)
 
 ---
 
@@ -149,6 +124,8 @@
 
 ```bash
 node --test tools/bootstrap/lib/project-size-comparison-render.test.mjs
-# From store root, after MCP build if needed:
-# tied_validate_consistency
+node --test tools/bootstrap/lib/project-size-batch-compare.test.mjs
+node tools/bootstrap/lib/project-size-batch-compare.mjs \
+  --store-root "$PWD" --pattern wf-agentstream \
+  --out-dir tied-project/non-tied-plans/project-size-batch-discover-compare/evidence
 ```

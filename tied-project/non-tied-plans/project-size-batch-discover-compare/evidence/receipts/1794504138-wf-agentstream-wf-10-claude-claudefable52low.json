@@ -1,0 +1,69 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "validator_version": "1.2.0",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low",
+  "layers": {
+    "atoms": {
+      "vocab_preferred_terms": 0,
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 5,
+      "corpus_graph_nodes": 7,
+      "corpus_graph_edges": 41
+    },
+    "operational_intent": {
+      "sidecar_count": 5,
+      "gross_lines": 106,
+      "template_overlap_lines": 6,
+      "applied_lines": 100,
+      "gross_utf8_bytes": 7597,
+      "template_overlap_utf8_bytes": 66,
+      "applied_utf8_bytes": 7531,
+      "procedure_count": 0,
+      "parse_node_count": 0
+    },
+    "proof_facets": {
+      "unit_tests": 60,
+      "composition_tests": 7,
+      "e2e_tests": 10,
+      "binding_inventory_tests": 0,
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 60,
+        "composition.wiring": 7,
+        "e2e.ui": 10
+      },
+      "composition_inferred_cases": 19
+    }
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 7.142857142857143,
+    "operational_intent_utf8_per_atom": 537.9285714285714,
+    "proof_facets_per_atom": 5.5,
+    "tests_per_procedure": null
+  },
+  "hashes": {
+    "operational_intent_hash": "3b1320b5ad1dfa4f4be1f95f7d32a70cf6a30a04dfdb5de15f87d0d134bb375c",
+    "corpus_graph_content_hash": "37d0262c0d2c05af351242756cf40bb40925a3eaa4f31974172a3875cf2255ba"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 1,
+    "orchestrator_wall_time_seconds": 619
+  },
+  "diagnostics": [],
+  "proof_inference_diagnostics": [
+    {
+      "path": "src/pipeline.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    },
+    {
+      "path": "src/summary.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    }
+  ]
+}

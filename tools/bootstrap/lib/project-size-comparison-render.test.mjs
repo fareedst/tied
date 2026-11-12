@@ -21,7 +21,7 @@ const DOGFOOD = path.resolve(
 );
 
 const SUMMARY_HEADER =
-  /\| label \| REQ \| ARCH \| IMPL \| Vocab \| applied_utf8 \| applied_lines \| procedures \| unit \| comp \| e2e \| oi\/atom \| utf8\/atom \| pf\/atom \| wall_clock \|/;
+  /\| label \| REQ \| ARCH \| IMPL \| Vocab \| applied_utf8 \| applied_lines \| procedures \| unit \| comp \| e2e \| utf8\/atom \| oi\/atom \| pf\/atom \| wall_clock \|/;
 
 const minimalOkReceipt = {
   ok: true,
@@ -82,7 +82,7 @@ test("renderComparisonMarkdown from dogfood receipt", () => {
   assert.match(md, SUMMARY_HEADER);
   assert.doesNotMatch(md, /\| label \| ok \|/);
   assert.match(md, /\| stdd-store \| 194 \|/);
-  assert.match(md, /\| stdd-store \|.*\| 7 \| — \| 0 \|/);
+  assert.match(md, /\| stdd-store \|.*\| — \| 7 \| 0 \|/);
 });
 
 test("renderComparisonMarkdown trims wf label and verbose table", () => {
@@ -168,7 +168,42 @@ test("cross-layer integer rounding", () => {
     },
   };
   const md = renderComparisonMarkdown([{ label: "stdd-store", receipt }]);
-  assert.match(md, /\| stdd-store \|.*\| 3 \| 33 \| 1 \| — \|/);
+  assert.match(md, /\| stdd-store \|.*\| 33 \| 3 \| 1 \| — \|/);
+});
+
+test("cross-layer column order SC-CSC-11", () => {
+  const receipt = {
+    ok: true,
+    repo_root: "/tmp/x",
+    proof_boundary: "test",
+    layers: {
+      atoms: { index_req: 1, index_arch: 0, index_impl: 0, vocab_preferred_terms: 0 },
+      operational_intent: {
+        applied_utf8_bytes: 1,
+        applied_lines: 1,
+        procedure_count: 1,
+      },
+      proof_facets: {
+        unit_tests: 1,
+        composition_tests: 0,
+        e2e_tests: 0,
+        verify_evidence_files: 0,
+      },
+    },
+    cross_layer: {
+      operational_intent_per_atom: 10,
+      operational_intent_utf8_per_atom: 20,
+      proof_facets_per_atom: 30,
+    },
+  };
+  const md = renderComparisonMarkdown([{ label: "stdd-store", receipt }], { summaryEpochMin: 0 });
+  assert.match(md, SUMMARY_HEADER);
+  assert.match(md, /\| stdd-store \|.*\| 20 \| 10 \| 30 \| — \|/);
+  const defs = md.split("## Summary")[0];
+  const utf8Pos = defs.indexOf("**utf8/atom**");
+  const oiPos = defs.indexOf("**oi/atom**");
+  const pfPos = defs.indexOf("**pf/atom**");
+  assert.ok(utf8Pos < oiPos && oiPos < pfPos, "column definitions utf8 before oi before pf");
 });
 
 test("formatWallClockMinutes SC-CWC-02 SC-CWC-04", () => {

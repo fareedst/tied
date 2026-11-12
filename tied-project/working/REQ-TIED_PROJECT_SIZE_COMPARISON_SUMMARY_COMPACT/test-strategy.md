@@ -7,49 +7,51 @@
 | Module | Responsibility |
 | --- | --- |
 | [`project-size-comparison-render.mjs`](../../../tools/bootstrap/lib/project-size-comparison-render.mjs) | Label trim, `prepareComparisonSummaryRows`, markdown Summary + verbose |
-| [`project-size-comparison-render.test.mjs`](../../../tools/bootstrap/lib/project-size-comparison-render.test.mjs) | SC-CSC-01…10 contract tests |
+| [`project-size-comparison-render.test.mjs`](../../../tools/bootstrap/lib/project-size-comparison-render.test.mjs) | SC-CSC-01…11 contract tests |
 | [`project-size-batch-compare.mjs`](../../../tools/bootstrap/lib/project-size-batch-compare.mjs) | `--summary-epoch-min`; manifest `options.summary_epoch_min` |
 | [`project-size-discover-clients.mjs`](../../../tools/bootstrap/lib/project-size-discover-clients.mjs) | `parseEpochFromBasename` (imported by render) |
 | [`snapshot-builder.ts`](../../../mcp-server/src/project-size/snapshot-builder.ts) | `trial_factors.orchestrator_wall_time_seconds` when `--include-trial-factors` |
 
-## Unit tests — render (existing + v2)
+## Unit tests — render (v1 + v2 + v3)
 
-### `trimComparisonDisplayLabel` / sort
+### `trimComparisonDisplayLabel` / sort / prepare
 
-Unchanged from v1 (WF disposable, `stdd-store`, synthetic).
-
-### `prepareComparisonSummaryRows`
-
-| ID | Case |
-| --- | --- |
-| SC-CSC-07 | `1794259000-wf-agentstream-wf-01-x` excluded; `1794259001-wf-agentstream-wf-01-x` included at min `1794259000` |
-| SC-CSC-08 | Two ok rows, same trim, epochs A&lt;B → only B in output |
-| SC-CSC-10 | `summaryEpochMin: 0` passes `stdd-store` / no-epoch labels |
+Unchanged cases **SC-CSC-07…10**.
 
 ### `renderComparisonMarkdown`
 
 | ID | Asserts |
 | --- | --- |
-| SC-CSC-01 | Header 14 data columns + **wall_time** (15 headers total) |
+| SC-CSC-01 | Summary has no `ok` column |
 | SC-CSC-02 / 03 | Trim and verbatim labels |
 | SC-CSC-04 | Integer cross-layer cells |
-| SC-CSC-09 | Last cell rounded wall time when `trial_factors.orchestrator_wall_time_seconds` set |
-| Baseline | Proof boundary; no forbidden phrases |
+| SC-CSC-06 | Dogfood render; proof boundary |
+| SC-CSC-09 | `wall_clock` last column (minutes) when trial_factors set |
+| **SC-CSC-11** | Header matches `\| … \| e2e \| utf8/atom \| oi/atom \| pf/atom \| wall_clock \|`; data row with known `cross_layer` emits **utf8, oi, pf** in that order (e.g. `33, 3, 1` rounded) |
 
-**Fixture:** dogfood JSON + synthetic receipts with `trial_factors` and paired WF basenames.
+**v3 RED first:** update `SUMMARY_HEADER` regex before render green.
+
+### Column definitions section
+
+**SC-CSC-11:** definitions table lists **utf8/atom** before **oi/atom** before **pf/atom**.
+
+**Fixture:** dogfood JSON + `minimalOkReceipt` with distinct `cross_layer` values for order assertion.
 
 ## Snapshot builder
 
-| Case | Assert |
-| --- | --- |
-| Wall from manifest | Fixture `wf-trial-orchestrator-run.v1.json` with known ISO pair → integer seconds on annex |
-
-Run via existing mcp-server / project-size test harness if present; else minimal fixture test in bootstrap or `mcp-server` package test.
+Unchanged (v2 wall time annex).
 
 ## Composition / E2E
 
-Optional: one batch dry-run asserting manifest contains `summary_epoch_min`. Full regen is operator evidence, not CI gate.
+Regen `comparison-table.md` via batch CLI — operator evidence after v3 green.
 
 ## Security
 
-Read-only render and snapshot; hydration reads orchestrator JSON only when repo exists.
+Read-only render; no change in v3.
+
+## Verification manifest
+
+```text
+node --test tools/bootstrap/lib/project-size-comparison-render.test.mjs
+node --test tools/bootstrap/lib/project-size-batch-compare.test.mjs
+```

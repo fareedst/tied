@@ -1,7 +1,7 @@
 REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
   REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
     acceptance_criteria:
-      - "SC-CSC-01 through SC-CSC-10 in working PLAN"
+      - "SC-CSC-01 through SC-CSC-11 in working PLAN"
     description: "Display-only facilitator comparison table UX."
     satisfaction_criteria:
       - criterion: "render tests green and tied_validate_consistency ok."
@@ -10,3 +10,5 @@ REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
         id: "SC-CSC-02"
       - criterion: "Summary has no ok column."
         id: "SC-CSC-01"
+      - criterion: "Summary cross-layer columns utf8/atom oi/atom pf/atom before wall_clock."
+        id: "SC-CSC-11"

@@ -4,8 +4,8 @@
 **Track:** `@add-feature` → `@refine-plan` (v2 cohort) → **`@build-plan`** → `@close-out`  
 **Parent:** [REQ-TIED_PROJECT_SIZE_LAYERS](../REQ-TIED_PROJECT_SIZE_LAYERS/PLAN.md) (v1 closed; additive facilitator UX)  
 **Facilitator:** [project-size-batch-discover-compare](../../non-tied-plans/project-size-batch-discover-compare/PLAN.md)  
-**Linked Cursor plan:** `.cursor/plans/comparison_summary_cohort_577194c9.plan.md`  
-**plan_phase:** `pre-implementation` (v2 cohort rules — v1 trim/integer already on disk, uncommitted)  
+**Linked Cursor plan:** `.cursor/plans/summary_table_column_order_58ac7679.plan.md` (v3 column order) · v2: `comparison_summary_cohort_577194c9.plan.md`  
+**plan_phase:** `pre-implementation` (v3 cross-layer column order)  
 **depth_tier / gate_policy:** `minimal` / `advisory`
 
 ---
@@ -41,6 +41,20 @@ Cohort **Summary** for WF matrix comparison ([comparison-table.md](../../non-tie
 
 **Cohort note (50 receipts @ floor 1794259000):** ~20 rows before dedupe (~16 unique display labels after dedupe, estimate).
 
+### v3 (refine-plan — locked 2026-11-12)
+
+Reorder **cross-layer** Summary columns only (receipt JSON unchanged):
+
+| Change | Rule |
+| --- | --- |
+| **Column order** | After `unit \| comp \| e2e`: **`utf8/atom \| oi/atom \| pf/atom \| wall_clock`** |
+| **Was** | `oi/atom \| utf8/atom \| pf/atom` |
+| **Rationale** | Sponsor scan: paired OI ratios (`utf8` then `oi`), then proof density **`pf/atom`** adjacent to proof facet counts |
+| **Definitions block** | Same order in `renderColumnDefinitionsSection()` |
+| **`wall_clock` header** | Unchanged (REQ-WALL_CLOCK **SC-CWC-01**); **not** renamed to `wall_mins` |
+
+**Proof boundary:** Display-only; manifest and receipts retain full-precision `cross_layer` fields.
+
 ---
 
 ## RESOLVE
@@ -72,6 +86,13 @@ Cohort **Summary** for WF matrix comparison ([comparison-table.md](../../non-tie
 6. **Glossary:** update Summary intro (floor, dedupe, sort); add **wall_time** row; note unique display labels in Summary after dedupe.
 7. **LEAP:** update CITDP `desired_behavior`, REQ acceptance through **SC-CSC-10**; IMPL pseudo-code blocks for prepare + wall time.
 
+## Refinements (v3 — build-plan)
+
+1. **`renderComparisonMarkdown`** — header, column definitions, and data cells: emit cross-layer values **utf8 → oi → pf**.
+2. **`SUMMARY_HEADER`** + **SC-CSC-11** in [`project-size-comparison-render.test.mjs`](../../../tools/bootstrap/lib/project-size-comparison-render.mjs).
+3. **REQ** index criterion **SC-CSC-11**; IMPL `RENDER_SUMMARY_ROW` FORMAT line.
+4. **Regen** [`comparison-table.md`](../../non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) via batch compare (no hand-edit).
+
 ---
 
 ## Acceptance criteria
@@ -88,6 +109,7 @@ Cohort **Summary** for WF matrix comparison ([comparison-table.md](../../non-tie
 | SC-CSC-08 | Dedupe: same display label → row with higher discover epoch wins. |
 | SC-CSC-09 | `wall_time` is last Summary column; rounded seconds (e.g. 994 from sample ISO pair). |
 | SC-CSC-10 | `summaryEpochMin: 0` (or omit) retains dogfood `stdd-store` row in tests. |
+| SC-CSC-11 | Summary header and rows order cross-layer columns **`utf8/atom \| oi/atom \| pf/atom`** before `wall_clock`. |
 
 ---
 
@@ -124,8 +146,20 @@ Cohort **Summary** for WF matrix comparison ([comparison-table.md](../../non-tie
 
 ---
 
+## Build sequence v3 (`@build-plan`)
+
+| Step | Deliverable |
+| --- | --- |
+| 1 | RED **SC-CSC-11** (header regex + row cell order) |
+| 2 | GREEN render reorder in `project-size-comparison-render.mjs` |
+| 3 | LEAP REQ + IMPL pseudo-code FORMAT line |
+| 4 | Regen `comparison-table.md`; render + batch smoke tests |
+| 5 | `tied_validate_consistency` |
+
+---
+
 ## Handoff
 
-**Do next:** `@build-plan` for v2 cohort rules (v1 code already on disk).
+**Do next:** `@build-plan` for **v3** cross-layer column order ([session-handoff](./evidence/session-handoff.md)).
 
 **Disk:** [checklist-tracker.yaml](./checklist-tracker.yaml) · [test-strategy.md](./test-strategy.md) · [evidence/session-handoff.md](./evidence/session-handoff.md)

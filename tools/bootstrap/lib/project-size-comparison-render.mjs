@@ -192,10 +192,10 @@ function renderColumnDefinitionsSection() {
   );
   lines.push("| **e2e** | proof facets | E2E test **cases** per classified file (same counting rule). |");
   lines.push(
-    "| **oi/atom** | cross-layer | `operational_intent_per_atom`: applied_lines ÷ (Vocab + REQ + ARCH + IMPL + optional corpus nodes). Rounded to nearest integer in table; receipt JSON keeps full precision. |",
+    "| **utf8/atom** | cross-layer | `operational_intent_utf8_per_atom`: applied_utf8_bytes ÷ (Vocab + REQ + ARCH + IMPL + optional corpus nodes). Rounded to nearest integer in table. |",
   );
   lines.push(
-    "| **utf8/atom** | cross-layer | `operational_intent_utf8_per_atom`: applied_utf8_bytes ÷ same atom denominator. Rounded to nearest integer in table. |",
+    "| **oi/atom** | cross-layer | `operational_intent_per_atom`: applied_lines ÷ same atom denominator. Rounded to nearest integer in table; receipt JSON keeps full precision. |",
   );
   lines.push(
     "| **pf/atom** | cross-layer | `proof_facets_per_atom`: (unit + comp + e2e + binding-inventory **cases**) ÷ same atom denominator. Pre-1.1.0 receipts counted **files**. Rounded to nearest integer in table. |",
@@ -257,7 +257,7 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   );
   lines.push("");
   lines.push(
-    "| label | REQ | ARCH | IMPL | Vocab | applied_utf8 | applied_lines | procedures | unit | comp | e2e | oi/atom | utf8/atom | pf/atom | wall_clock |",
+    "| label | REQ | ARCH | IMPL | Vocab | applied_utf8 | applied_lines | procedures | unit | comp | e2e | utf8/atom | oi/atom | pf/atom | wall_clock |",
   );
   lines.push(
     "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
@@ -283,8 +283,8 @@ export function renderComparisonMarkdown(rows, meta = {}) {
         fmtNum(pf.unit_tests),
         fmtNum(pf.composition_tests),
         fmtNum(pf.e2e_tests),
-        fmtNum(cross.operational_intent_per_atom, CROSS_LAYER_DECIMALS),
         fmtNum(cross.operational_intent_utf8_per_atom, CROSS_LAYER_DECIMALS),
+        fmtNum(cross.operational_intent_per_atom, CROSS_LAYER_DECIMALS),
         fmtNum(cross.proof_facets_per_atom, CROSS_LAYER_DECIMALS),
         wallCell,
       ]

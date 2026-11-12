@@ -1,0 +1,64 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "validator_version": "1.2.0",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794514372-wf-agentstream-wf-10-cursor-composer25medmedium",
+  "layers": {
+    "atoms": {
+      "vocab_preferred_terms": 0,
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 5,
+      "corpus_graph_nodes": 7,
+      "corpus_graph_edges": 23
+    },
+    "operational_intent": {
+      "sidecar_count": 5,
+      "gross_lines": 63,
+      "template_overlap_lines": 0,
+      "applied_lines": 63,
+      "gross_utf8_bytes": 2691,
+      "template_overlap_utf8_bytes": 0,
+      "applied_utf8_bytes": 2691,
+      "procedure_count": 7,
+      "parse_node_count": 40
+    },
+    "proof_facets": {
+      "unit_tests": 27,
+      "composition_tests": 3,
+      "e2e_tests": 6,
+      "binding_inventory_tests": 0,
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 27,
+        "composition.wiring": 3,
+        "e2e.ui": 6
+      },
+      "composition_inferred_cases": 2
+    }
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 4.5,
+    "operational_intent_utf8_per_atom": 192.21428571428572,
+    "proof_facets_per_atom": 2.5714285714285716,
+    "tests_per_procedure": 5.142857142857143
+  },
+  "hashes": {
+    "operational_intent_hash": "1b61df0b217d8fc011d6ea303c078a6dce1f8047d6af7ce4a459dbe79ef51839",
+    "corpus_graph_content_hash": "3b95be53d1b663af4bc72ab11d31cf7f2f457b0fdb384a211381e1008ab6bff9"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 908
+  },
+  "diagnostics": [],
+  "proof_inference_diagnostics": [
+    {
+      "path": "src/input.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    }
+  ]
+}
