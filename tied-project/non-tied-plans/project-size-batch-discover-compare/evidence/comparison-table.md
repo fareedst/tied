@@ -1,6 +1,6 @@
 # Project size comparison (facilitator)
 
-**Generated:** 2026-11-12T23:08:03.952Z
+**Generated:** 2026-11-12T23:50:26.846Z
 **Discover parent:** `/Users/fareed/Documents/dev/test`
 **Pattern (substring):** `wf-agentstream`
 
@@ -39,13 +39,10 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | label | Vocab | REQ | ARCH | IMPL | applied_utf8 | applied_lines | procedures | unit | comp | e2e | utf8/atom | oi/atom | pf/atom | wall_clock |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | wf-01-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | 0 | 0 | 0 | 7 | 6 |
-| wf-01-cursor-composer25high | 0 | 1 | 1 | 1 | 2126 | 50 | 4 | 12 | 0 | 0 | 354 | 8 | 2 | 11 |
 | wf-01-cursor-grok47medmedium | 8 | 1 | 1 | 1 | 6235 | 131 | 5 | 9 | 0 | 0 | 445 | 9 | 1 | 34 |
 | wf-02-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 5 | 6 |
-| wf-02-cursor-composer25high | 0 | 1 | 1 | 2 | 2576 | 50 | 4 | 9 | 0 | 0 | 322 | 6 | 1 | 15 |
 | wf-02-cursor-grok47medmedium | 9 | 1 | 1 | 1 | 2283 | 49 | 3 | 9 | 0 | 0 | 152 | 3 | 1 | 29 |
 | wf-03-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 2 | 4 |
-| wf-03-cursor-composer25high | 0 | 1 | 1 | 1 | 2450 | 47 | 5 | 4 | 0 | 0 | 408 | 8 | 1 | 16 |
 | wf-03-cursor-grok47medmedium | 7 | 1 | 1 | 1 | 3882 | 65 | 5 | 9 | 0 | 0 | 299 | 5 | 1 | 35 |
 | wf-04-claude-claudehaiku55medium | 0 | 1 | 1 | 1 | 2332 | 39 | 0 | 15 | 0 | 0 | 389 | 7 | 3 | 9 |
 | wf-04-cursor-composer25high | 0 | 1 | 1 | 1 | 2664 | 39 | 4 | 8 | 0 | 0 | 444 | 7 | 1 | 13 |
@@ -70,7 +67,8 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-10-claude-claudehaiku55high | 0 | 1 | 1 | 2 | 6710 | 176 | 5 | 50 | 0 | 0 | 839 | 22 | 6 | 14 |
 | wf-10-claude-claudehaiku55low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | 7 | 0 | — | — | — | 5 |
 | wf-10-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | 0 | 0 | 0 | 11 | 7 |
-| wf-10-claude-claudesonnet46low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — | — | — | 0 |
+| wf-10-claude-claudesonnet46low | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 6 | 4 | 0 | 0 | 0 | 5 | 13 |
+| wf-10-claude-claudesonnet46medium | 0 | 1 | 1 | 1 | 1762 | 43 | 2 | 3 | 4 | 0 | 294 | 7 | 1 | 17 |
 | wf-10-claude-claudesonnet55high | 0 | 1 | 1 | 3 | 8833 | 136 | 0 | 49 | 9 | 0 | 883 | 14 | 6 | 12 |
 | wf-10-claude-claudesonnet55low | 0 | 1 | 1 | 1 | 541 | 4 | 0 | 8 | 0 | 0 | 90 | 1 | 1 | 3 |
 | wf-10-claude-claudesonnet55medium | 0 | 1 | 1 | 4 | 1462 | 27 | 0 | 28 | 0 | 0 | 122 | 2 | 2 | 5 |
@@ -79,6 +77,7 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-10-cursor-grok46lowlow | 13 | 1 | 1 | 5 | 8471 | 180 | 9 | 23 | 2 | 4 | 314 | 7 | 1 | 13 |
 | wf-10-cursor-grok46medmedium | 21 | 1 | 1 | 1 | 11986 | 261 | 6 | 44 | 5 | 0 | 444 | 10 | 2 | 18 |
 | wf-10-cursor-grok47low | 0 | 1 | 1 | 1 | 2646 | 41 | 0 | 8 | 0 | 0 | 441 | 7 | 1 | 14 |
+| wf-10-cursor-grok47med | 10 | 1 | 1 | 1 | 7026 | 136 | 5 | 31 | 3 | 0 | 439 | 9 | 2 | 30 |
 
 ## Failed / skipped
 
@@ -90,13 +89,10 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | label | lbl:wiring | lbl:integration | lbl:contract | comp_inferred |
 | --- | --- | --- | --- | --- |
 | wf-01-claude-claudehaiku55medium | — | — | — | 0 |
-| wf-01-cursor-composer25high | — | — | — | 0 |
 | wf-01-cursor-grok47medmedium | — | — | — | 0 |
 | wf-02-claude-claudehaiku55medium | — | — | — | 0 |
-| wf-02-cursor-composer25high | — | — | — | 0 |
 | wf-02-cursor-grok47medmedium | — | — | — | 0 |
 | wf-03-claude-claudehaiku55medium | — | — | — | 4 |
-| wf-03-cursor-composer25high | — | — | — | 1 |
 | wf-03-cursor-grok47medmedium | — | — | — | 3 |
 | wf-04-claude-claudehaiku55medium | — | — | — | 0 |
 | wf-04-cursor-composer25high | — | — | — | 5 |
@@ -121,7 +117,8 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-10-claude-claudehaiku55high | — | — | — | 0 |
 | wf-10-claude-claudehaiku55low | 7 | — | — | 0 |
 | wf-10-claude-claudehaiku55medium | — | — | — | 0 |
-| wf-10-claude-claudesonnet46low | — | — | — | 0 |
+| wf-10-claude-claudesonnet46low | 4 | — | — | 0 |
+| wf-10-claude-claudesonnet46medium | 4 | — | — | 0 |
 | wf-10-claude-claudesonnet55high | 9 | — | — | 0 |
 | wf-10-claude-claudesonnet55low | — | — | — | 4 |
 | wf-10-claude-claudesonnet55medium | — | — | — | 0 |
@@ -130,6 +127,7 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-10-cursor-grok46lowlow | 2 | — | — | 0 |
 | wf-10-cursor-grok46medmedium | 5 | — | — | 0 |
 | wf-10-cursor-grok47low | — | — | — | 0 |
+| wf-10-cursor-grok47med | 3 | — | — | 0 |
 
 ---
 

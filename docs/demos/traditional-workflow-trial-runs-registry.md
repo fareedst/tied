@@ -3,9 +3,9 @@
 | Field | Value |
 | --- | --- |
 | **Purpose** | Facilitator index of **PROMPT-WF-01…12** recorded trials — harness, model slug, session grades, orchestrator **Run time**, and **latest for cell** (composition prompts **09–12**; note **paste generation** `goal-first` vs `architect-in-paste` when comparing structure across models) |
-| **Rows** | **116** (matches [Recorded trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
+| **Rows** | **117** (matches [Recorded trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
 | **Status** | Maintainer snapshot |
-| **Last updated** | 2026-11-11 |
+| **Last updated** | 2026-11-12 |
 | **Disclaimer** | Store documentation only — not a `[REQ-*]` token, not a maturity score, not a model leaderboard |
 
 Full trial protocol and rubric: [catalog-traditional-workflow-trial-prompts.md](catalog-traditional-workflow-trial-prompts.md).
@@ -152,6 +152,10 @@ Rows are **PROMPT-WF-01…08** cells from [Recorded trials](catalog-traditional-
 | 10 | 1794408633 | claude | `claude-haiku-5-5` | 0 | 301 | 3.04 · A−/C+/A/A/D+/B/B | no | [readout](trial-readout-PROMPT-WF-10-claudehaiku55low-1794408633-wf-agentstream-wf-10-claude-claudehaiku55low.md) |
 | 10 | 1794409094 | claude | `claude-haiku-5-5` | 0 | 812 | 3.71 · A/A−/A/A/B+/A−/B+ | yes | [readout](trial-readout-PROMPT-WF-10-claudehaiku55high-1794409094-wf-agentstream-wf-10-claude-claudehaiku55high.md) |
 | 10 | 1794411691 | claude | `claude-sonnet-5-5` | 0 | 723 | 3.86 · A/A/A/A/A−/A/B+ | yes | [readout](trial-readout-PROMPT-WF-10-claudesonnet55high-1794411691-wf-agentstream-wf-10-claude-claudesonnet55high.md) |
+| 10 | 1794522969 | cursor | `grok-4.7-low-fast` | 0 | 868 | 3.61 · A−/A/C+/B+/B+/A/A− | yes | [readout](trial-readout-PROMPT-WF-10-grok47low-1794522969-wf-agentstream-wf-10-cursor-grok47low.md) |
+| 10 | 1794525072 | cursor | `grok-4.7-medium-fast` | 0 | 1789 | 3.57 · A/A/A−/A−/B+/A−/A− | yes | [readout](trial-readout-PROMPT-WF-10-grok47med-1794525072-wf-agentstream-wf-10-cursor-grok47med.md) |
+| 10 | 1794526284 | claude | `claude-sonnet-4-6` | 0 | 1044 | 2.86 · B+/C/C+/B/C/A−/B+ | no | [readout](trial-readout-PROMPT-WF-10-claudesonnet46medium-1794526284-wf-agentstream-wf-10-claude-claudesonnet46medium.md) |
+| 10 | 1794525155 | claude | `claude-sonnet-4-6` | 0 | 777 | 3.24 · A−/C+/B/B+/B−/A/A− | yes | [readout](trial-readout-PROMPT-WF-10-claudesonnet46low-1794525155-wf-agentstream-wf-10-claude-claudesonnet46low.md) |
 
 ---
 

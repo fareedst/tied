@@ -38,6 +38,7 @@
 | 2026-11-09 | non-tied-plan | Cursor plan: discover + comparison table |
 | 2026-11-09 | non-tied-refine | Linked plan; locked defaults |
 | 2026-11-10 | non-tied-build | Bootstrap CLI + tests; first discover pass (`limit` 25, parent `~/Documents/dev/test`) |
+| 2026-11-12 | refresh | `--fine-labels` + `--limit` 50 regen; adds `wf-10-cursor-composer25medmedium` + **Fine label counts** section |
 
 ## Do next
 
