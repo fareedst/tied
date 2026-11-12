@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-WF_TRIAL_COMPOSITION_PROMPTS] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK] [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK] [REQ-WF_TRIAL_PHASE_HANDOFF_GATE]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-WF_TRIAL_COMPOSITION_PROMPTS] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK] [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK] [REQ-WF_TRIAL_PHASE_HANDOFF_GATE] [REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -188,6 +188,8 @@ source "${SCRIPT_DIR}/lib/wf-trial-implementation-stack.inc.sh"
 source "${SCRIPT_DIR}/lib/wf-trial-proof-manifest-gate.inc.sh"
 # shellcheck source=lib/wf-trial-phase-handoff-gate.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-phase-handoff-gate.inc.sh"
+# shellcheck source=lib/wf-trial-abort-signal.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-abort-signal.inc.sh"
 if wf_trial_implementation_stack_enabled; then
   wf_trial_apply_implementation_stack "$WORKSPACE" "$REPO_ROOT"
 else
@@ -225,6 +227,7 @@ PHASE_HANDOFF_EXIT=0
 GATE_EXIT=0
 STRICT_CLOSEOUT_EXIT=0
 if ((DRY_RUN == 0)); then
+  wf_trial_abort_signal_apply_workspace "$WORKSPACE"
   materialize_wf_trial_minimal_checklist_tracker "$WORKSPACE" "$REPO_ROOT"
   wf_trial_phase_handoff_gate_check "$WORKSPACE" "$REPO_ROOT" || PHASE_HANDOFF_EXIT=$?
   wf_trial_proof_manifest_gate_check "$WORKSPACE" "$WF_NORM" "$REPO_ROOT" || GATE_EXIT=$?

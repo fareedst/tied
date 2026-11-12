@@ -44,7 +44,9 @@ workflow_trial_range claude claude-haiku-5-5 haiku-5-5 medium 2 2
 source scripts/build-commands.sh
 workflow_trial_range cursor composer-2.5 high 8
 workflow_trial_range cursor grok-4.7 medium 8
+workflow_trial_range claude fable-5-2 low 10 10
 workflow_trial_range claude haiku-5-5 high 8
+workflow_trial_range claude sonnet-5-5 high 8
 
 $ agent models | grep grok | sort
 

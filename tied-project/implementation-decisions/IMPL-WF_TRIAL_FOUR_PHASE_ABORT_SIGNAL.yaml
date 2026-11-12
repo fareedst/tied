@@ -1,0 +1,16 @@
+IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+    requirements:
+      - "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+  decision_id: "IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+  related_files:
+    - "docs/demos/traditional-four-phase-agentstream.yaml"
+    - "scripts/lib/wf-trial-abort-signal.inc.sh"
+    - "scripts/lib/wf-trial-phase-handoff-gate.inc.sh"
+    - "scripts/lib/wf-trial-process-log.inc.sh"
+    - "scripts/workflow-trial-agentstream.sh"
+    - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  status: "Active"
+  title: "wf-trial-abort-signal.inc.sh"

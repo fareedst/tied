@@ -1,0 +1,64 @@
+CITDP-REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
+  change_definition:
+    current_behavior: "Post-run phase-handoff gate errors read as handoff omission when provider aborted mid-batch (session limits, missing session_id after turn banner)."
+    desired_behavior: "Classifier on disposable process logs emits incomplete_reason before handoff ERROR; manifest merges incomplete_reason on finalize; turn 3 build-plan stub goal in batch YAML."
+    non_goals:
+      - "Registering incomplete disposable trials"
+      - "WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1 default change"
+      - "Wave 2 inter-turn fail-fast (separate REQ)"
+    success_criteria:
+      - "SC-WF-ABS-01..04 pass in workflow-trial-agentstream-sh.test.mjs"
+      - "Incident 1794504138 fixtures classify claude_session_limit"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+      run_id: "close-out-wf-abs-2026-11-12"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    manifest_reference: "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/evidence/"
+    proof_boundaries:
+      - "Shell classifier only; no live LLM re-run required"
+  impact_analysis:
+    modules_or_boundaries: "scripts/lib/wf-trial-abort-signal.inc.sh; scripts/lib/wf-trial-process-log.inc.sh; scripts/lib/wf-trial-phase-handoff-gate.inc.sh; scripts/workflow-trial-agentstream.sh; docs/demos/traditional-four-phase-agentstream.yaml"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+      - "IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+      - "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+    citdp_id: "CITDP-REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+    status: "implemented"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Shell classifier + bootstrap tests; integrated inquiry not required."
+      counterexamples:
+        - "Regex matches unrelated session limit text in agent stdout"
+      disconfirming_observations:
+        - "SC-WF-ABS-02 synthetic stderr without session limit line"
+      falsification_questions:
+        - "Does classifier prefer session_limit over turn_missing_session_id?"
+        - "Does gate emit DIAGNOSTIC before ERROR when reason set?"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/evidence/not-applicable-receipt.v1.json"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

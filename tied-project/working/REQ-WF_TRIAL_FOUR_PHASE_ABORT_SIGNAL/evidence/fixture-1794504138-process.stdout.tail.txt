@@ -1,0 +1,3 @@
+- **Proof manifest:** it has only the seeded `src/cli.binding.test.ts` row, and that file does not exist yet.
+
+Next is `@build-plan`, starting by setting `sub-adversarial-inquiry-pass` to `not_applicable`.Now the product code.You've hit your session limit · resets 2:20pm (America/Los_Angeles)

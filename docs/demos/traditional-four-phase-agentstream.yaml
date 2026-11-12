@@ -55,6 +55,7 @@ features:
       RED → GREEN product code/tests under `src/`; verification via `npm test` when stack seeded.
       When composition-integration applies, read prompt-shared tied-composition-test-naming-adjunct.md before RED composition tests.
       Follow prompt-shared wf-trial-build-plan-handoff.md and wf-trial-checklist-gates-adjunct.md (RED archive, tracker slugs, verification receipt).
+      At turn start (before RED), write minimal `evidence/phase-handoff-build-plan.md` with front matter `in_progress: true`, `request_token`, and `prompt_type: build-plan`; finalize the handoff at turn end per wf-trial-build-plan-handoff.md.
       Read prompt-shared wf-trial-proof-manifest-adjunct.md: complete
       `tied-project/working/proof-facet-manifest/evidence/proof-facet-manifest.v1.json`
       (one `files[]` row per test file) before `evidence/phase-handoff-build-plan.md`.

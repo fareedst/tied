@@ -28,6 +28,18 @@ wf_trial_count_colocated_test_files() {
   find "$src" -type f -name '*.test.ts' 2>/dev/null | wc -l | tr -d ' '
 }
 
+_wf_trial_phase_handoff_emit_incomplete_reason() {
+  if [[ -z "${WF_TRIAL_INCOMPLETE_REASON:-}" ]]; then
+    return 0
+  fi
+  if [[ -n "${WF_TRIAL_INCOMPLETE_TURN:-}" ]]; then
+    printf 'DIAGNOSTIC: wf_trial_incomplete_reason=%s incomplete_turn=%s\n' \
+      "$WF_TRIAL_INCOMPLETE_REASON" "$WF_TRIAL_INCOMPLETE_TURN" >&2
+  else
+    printf 'DIAGNOSTIC: wf_trial_incomplete_reason=%s\n' "$WF_TRIAL_INCOMPLETE_REASON" >&2
+  fi
+}
+
 wf_trial_phase_handoff_gate_check() {
   local ws="$1"
   local _store_root="${2:-}"
@@ -35,6 +47,8 @@ wf_trial_phase_handoff_gate_check() {
   if ! wf_trial_phase_handoff_gate_enabled; then
     return 0
   fi
+
+  _wf_trial_phase_handoff_emit_incomplete_reason
 
   local token
   token="$(wf_trial_resolve_product_req_token "$ws" || true)"

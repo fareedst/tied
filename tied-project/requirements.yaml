@@ -4533,6 +4533,23 @@ REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
       - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
     implementation:
       - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
+  description: "Classify four-phase provider aborts (session limit, missing session_id) from orchestrator process logs before phase-handoff gate errors."
+  detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL.yaml"
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+      - "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+  satisfaction_criteria:
+    - criterion: "Incident fixture 1794504138 logs classify claude_session_limit with incomplete_turn 3."
+      id: "SC-WF-ABS-01"
+    - criterion: "Phase handoff gate stderr emits wf_trial_incomplete_reason DIAGNOSTIC before handoff ERROR when env set."
+      id: "SC-WF-ABS-04"
+    - criterion: "SC-WF-PHG regression tests in workflow-trial-agentstream-sh.test.mjs remain passing."
+      id: "SC-WF-ABS-03"
+    - criterion: "Synthetic stderr with turn 2 banner and no session_id classifies turn_missing_session_id."
+      id: "SC-WF-ABS-02"
+  status: "Implemented"
 REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
   category: "Tooling"
   detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"

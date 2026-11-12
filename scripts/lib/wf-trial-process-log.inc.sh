@@ -146,3 +146,30 @@ wf_trial_process_log_finalize() {
   _wf_trial_process_log_merge_finalize "$WF_TRIAL_PROCESS_LOG_MANIFEST" "$exit_code" "$finished_at"
   printf 'DIAGNOSTIC: wf-trial process log manifest=%s\n' "$WF_TRIAL_PROCESS_LOG_MANIFEST" >&2
 }
+
+# [REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL] Additive manifest fields when abort classifier runs.
+wf_trial_process_log_set_incomplete_reason() {
+  local manifest_path="$1"
+  local reason="$2"
+  local turn="${3:-}"
+
+  [[ -f "$manifest_path" ]] || return 0
+  [[ -n "$reason" ]] || return 0
+
+  node -e '
+    const fs = require("fs");
+    const [path, reason, turn] = process.argv.slice(1);
+    const doc = JSON.parse(fs.readFileSync(path, "utf8"));
+    if (doc.incomplete_reason) {
+      process.exit(0);
+    }
+    doc.incomplete_reason = reason;
+    if (turn !== "") {
+      const n = Number(turn);
+      if (!Number.isNaN(n)) {
+        doc.incomplete_turn = n;
+      }
+    }
+    fs.writeFileSync(path, JSON.stringify(doc, null, 2) + "\n");
+  ' "$manifest_path" "$reason" "$turn"
+}

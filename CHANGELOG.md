@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **WF trial four-phase abort signal ([REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL], [ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL], [IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL])** — Classify provider aborts from disposable `process.stdout`/`process.stderr` before phase-handoff gate errors; manifest `incomplete_reason` merge; **SC-WF-ABS-01..04**; **58/58** `workflow-trial-agentstream-sh.test.mjs`. Incident fixtures from `1794504138` (not registered). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/PLAN.md).
+
 ### Fixed
 
 - **Git hygiene — CITDP gate-test litter** — Remove six accidental `tied-project/citdp/CITDP-REQ-{ACTIVATION,NESTED,PRESERVE,UNIT_TEST,UPGRADE*}.yaml` files from the store index; ignore local `.claude/adherence-bridge.log` and `settings.local.json`; run `test-all-hygiene` restore pass.

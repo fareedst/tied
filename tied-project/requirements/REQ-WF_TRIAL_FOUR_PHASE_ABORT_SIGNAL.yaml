@@ -1,0 +1,10 @@
+REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
+  acceptance_criteria:
+    - "SC-WF-ABS-01"
+    - "SC-WF-ABS-02"
+    - "SC-WF-ABS-03"
+    - "SC-WF-ABS-04"
+  description: "When agentstream aborts mid-batch, orchestrator must surface incomplete_reason on manifest and stderr before generic handoff gate failures."
+  request_id: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+  status: "In Progress"
+  title: "WF trial four-phase abort signal"

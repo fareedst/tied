@@ -1,0 +1,9 @@
+feat(wf-trial): abort signal classifier before handoff gate
+
+Surface incomplete_reason from disposable process logs (session limit,
+missing session_id) before SC-WF-PHG-01 errors; merge manifest fields;
+turn-3 build-plan stub goal. SC-WF-ABS-01..04; 58/58 bootstrap tests.
+
+REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
+ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
+IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL

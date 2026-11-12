@@ -17,7 +17,16 @@ const STACK_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-implementation-stac
 const PROCESS_LOG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-process-log.inc.sh");
 const PROOF_MANIFEST_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-proof-manifest-gate.inc.sh");
 const PHASE_HANDOFF_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-phase-handoff-gate.inc.sh");
+const ABORT_SIGNAL_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-abort-signal.inc.sh");
 const PRODUCT_REQ_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-product-req.inc.sh");
+const FIXTURE_1794504138_STDERR = path.join(
+  REPO_ROOT,
+  "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/evidence/fixture-1794504138-process.stderr.log",
+);
+const FIXTURE_1794504138_STDOUT_TAIL = path.join(
+  REPO_ROOT,
+  "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/evidence/fixture-1794504138-process.stdout.tail.txt",
+);
 const PROOF_MANIFEST_GATE_MJS = path.join(REPO_ROOT, "tools/bootstrap/lib/wf-trial-proof-manifest-gate.mjs");
 const TIED_CLI = path.join(REPO_ROOT, "mcp-server/packages/cli/dist/index.js");
 
@@ -793,6 +802,123 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
     assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
     assert.match(r.stdout, /ok-range-effort/);
+  });
+
+  it("orchestrator sources abort signal inc [REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL]", () => {
+    const src = fs.readFileSync(SCRIPT, "utf8");
+    assert.ok(src.includes("wf-trial-abort-signal.inc.sh"));
+    assert.ok(fs.existsSync(ABORT_SIGNAL_INC));
+  });
+
+  it("wf_trial_classify_incomplete_reason incident 1794504138 [SC-WF-ABS-01]", () => {
+    const stdout = fs.readFileSync(FIXTURE_1794504138_STDOUT_TAIL, "utf8");
+    const stderr = fs.readFileSync(FIXTURE_1794504138_STDERR, "utf8");
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-fixture-"));
+    try {
+      const stdoutPath = path.join(tmp, "out.log");
+      const stderrPath = path.join(tmp, "err.log");
+      fs.writeFileSync(stdoutPath, stdout);
+      fs.writeFileSync(stderrPath, stderr);
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-abort-signal.inc.sh
+        source "${ABORT_SIGNAL_INC}"
+        wf_trial_classify_incomplete_reason_from_logs "${stdoutPath}" "${stderrPath}"
+        printf '%s\\n' "$WF_TRIAL_INCOMPLETE_REASON"
+        printf '%s\\n' "$WF_TRIAL_INCOMPLETE_TURN"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      const lines = r.stdout.trim().split("\n");
+      assert.equal(lines[0], "claude_session_limit");
+      assert.equal(lines[1], "3");
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_classify_incomplete_reason missing session turn 2 [SC-WF-ABS-02]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-turn2-"));
+    try {
+      const stderrPath = path.join(tmp, "err.log");
+      fs.writeFileSync(
+        stderrPath,
+        `--- turn 1/4 (new session) ---
+session_id=aaa
+
+--- turn 2/4 (new session) ---
+ERROR: something else
+`,
+      );
+      const stdoutPath = path.join(tmp, "out.log");
+      fs.writeFileSync(stdoutPath, "no limit here\n");
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-abort-signal.inc.sh
+        source "${ABORT_SIGNAL_INC}"
+        wf_trial_classify_incomplete_reason_from_logs "${stdoutPath}" "${stderrPath}"
+        printf '%s\\n' "$WF_TRIAL_INCOMPLETE_REASON"
+        printf '%s\\n' "$WF_TRIAL_INCOMPLETE_TURN"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      const lines = r.stdout.trim().split("\n");
+      assert.equal(lines[0], "turn_missing_session_id");
+      assert.equal(lines[1], "2");
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("phase handoff gate emits incomplete_reason before ERROR [SC-WF-ABS-04]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-gate-order-"));
+    try {
+      const token = "REQ-ABS-GATE-ORDER";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        `request_token: ${token}\n`,
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-phase-handoff-gate.inc.sh
+        source "${PHASE_HANDOFF_GATE_INC}"
+        export WF_TRIAL_INCOMPLETE_REASON=claude_session_limit
+        export WF_TRIAL_INCOMPLETE_TURN=3
+        unset WF_TRIAL_SKIP_PHASE_HANDOFF_GATE
+        wf_trial_phase_handoff_gate_check "${tmp}" "${REPO_ROOT}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.notEqual(r.status, 0);
+      const diagIdx = r.stderr.indexOf("DIAGNOSTIC: wf_trial_incomplete_reason=claude_session_limit");
+      const errIdx = r.stderr.indexOf("ERROR: WF trial phase handoff gate:");
+      assert.ok(diagIdx >= 0);
+      assert.ok(errIdx >= 0);
+      assert.ok(diagIdx < errIdx, `diag at ${diagIdx} err at ${errIdx}`);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_process_log_set_incomplete_reason merges manifest [SC-WF-ABS-01]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-abs-manifest-"));
+    try {
+      const manifest = path.join(tmp, "wf-trial-orchestrator-run.v1.json");
+      fs.writeFileSync(
+        manifest,
+        `${JSON.stringify({ schema: "wf-trial-orchestrator-run.v1", exit_code: 1 }, null, 2)}\n`,
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-process-log.inc.sh
+        source "${path.join(REPO_ROOT, "scripts/lib/wf-trial-process-log.inc.sh")}"
+        wf_trial_process_log_set_incomplete_reason "${manifest}" claude_session_limit 3
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      const doc = JSON.parse(fs.readFileSync(manifest, "utf8"));
+      assert.equal(doc.incomplete_reason, "claude_session_limit");
+      assert.equal(doc.incomplete_turn, 3);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
   });
 
   it("WF_TRIAL_SKIP_PROCESS_LOG=1 skips evidence dir [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]", () => {

@@ -2,9 +2,13 @@
 
 **Tokens:** [REQ-WF_TRIAL_FOUR_PHASE_HARDENING](../../../tied-project/requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml) · [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../../../tied-project/requirements/REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK.yaml) · Gates: [wf-trial-checklist-gates-adjunct.md](./wf-trial-checklist-gates-adjunct.md) · Close-out: [wf-trial-four-phase-close-out-playbook.md](./wf-trial-four-phase-close-out-playbook.md)
 
+## Turn 3 start (stub before RED)
+
+Write a minimal **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.md`** stub first (YAML front matter: `in_progress: true`, `request_token`, `prompt_type: build-plan`) so provider aborts mid-turn still leave a build-plan handoff artifact on disk.
+
 ## End of turn 3 (build-plan)
 
-Write **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.md`** including:
+Finalize **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.md`** (remove or clear `in_progress`) including:
 
 | Field | Content |
 | --- | --- |

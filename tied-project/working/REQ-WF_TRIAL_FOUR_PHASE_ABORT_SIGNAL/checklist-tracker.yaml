@@ -1,0 +1,60 @@
+description: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL — abort classifier wave 1"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "risk-assessment"
+    - "sub-close-out-evidence-sync"
+    - "test-strategy"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "verification-gate"
+  request: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Shell classifier + bootstrap tests; integrated inquiry not required."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - path: "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/evidence/verification-evidence-manifest.v1.json"
+          type: "verification_manifest"
+      status: "completed"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

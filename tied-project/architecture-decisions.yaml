@@ -3060,6 +3060,14 @@ ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
       - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
     requirements:
       - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
+  architecture_decisions:
+    - "ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+  cross_references:
+    requirements:
+      - "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL.yaml"
+  status: "Accepted"
 ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
   status: "Accepted"

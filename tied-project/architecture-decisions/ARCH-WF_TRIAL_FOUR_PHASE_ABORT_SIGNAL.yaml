@@ -1,0 +1,10 @@
+ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
+  consequences:
+    - "Inter-turn fail-fast deferred to future REQ; wave 1 is post-hoc diagnosis only."
+  cross_references:
+    requirements:
+      - "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+  decision_id: "ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
+  rationale: "Shell-only seam: read disposable client process.stdout/stderr under wf-trial-orchestrator-run evidence, set WF_TRIAL_INCOMPLETE_REASON env, merge additive manifest fields, order gate DIAGNOSTICs before SC-WF-PHG-01 errors."
+  status: "Accepted"
+  title: "Process log classifier before handoff gate"

@@ -1,0 +1,28 @@
+Disposable TIED client: /Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low
+DIAGNOSTIC: tied_methodology_version=4.2.2 source=orchestrator_resolver (secondary; session evidence file canonical)
+DEBUG: workflow-trial-agentstream wf=WF-10 workspace=/Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low dry_run=0 harness=claude disposable_tag=wf-agentstream-wf-10-claude-claudefable52low model_effort=low
+DIAGNOSTIC: WF trial stack seeded: /Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low/package.json
+DIAGNOSTIC: WF trial stack seeded: /Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low/tsconfig.json
+DIAGNOSTIC: WF trial stack seeded: /Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low/src/.gitkeep
+DIAGNOSTIC: materialized WF trial preload contract: /Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low/tied-project/agent-preload-contract.yaml
+DIAGNOSTIC: WF trial proof manifest gate: default on (all PROMPT-WF; use WF_TRIAL_SKIP_PROOF_MANIFEST=1 to skip)
+DIAGNOSTIC: proof manifest scaffold seeded: /Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low/tied-project/working/proof-facet-manifest/evidence/proof-facet-manifest.v1.json (agent must complete files[] before close-out)
+
+Traditional four-phase agentstream
+--------------------------------------------------------
+Launch
+DIAGNOSTIC: harness=claude model=claude-fable-5-2 model_effort=low workspace=/Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low dry_run=0
+DIAGNOSTIC: batch=/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/traditional-four-phase-batch.lh8Qwt1H6T.yaml
+--------------------------------------------------------
+
+--- turn 1/4 (new session) ---
+session_id=fd4b803b-987c-4aa7-963b-ce0348b2fb73
+
+--- turn 2/4 (new session) ---
+session_id=ed29b0d5-f80c-4249-af01-52bf05baa0b2
+
+--- turn 3/4 (new session) ---
+DIAGNOSTIC: wf-trial process log manifest=/Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low/tied-project/working/wf-trial-orchestrator-run/evidence/wf-trial-orchestrator-run.v1.json
+DIAGNOSTIC: WF trial slim checklist tracker exists: /Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low/tied-project/working/REQ-CSV_SUMMARY_CLI/checklist-tracker.yaml
+DIAGNOSTIC: WF trial phase handoff gate: default on (use WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1 to skip)
+ERROR: WF trial phase handoff gate: missing /Users/fareed/Documents/dev/test/1794504138-wf-agentstream-wf-10-claude-claudefable52low/tied-project/working/REQ-CSV_SUMMARY_CLI/evidence/phase-handoff-build-plan.md
