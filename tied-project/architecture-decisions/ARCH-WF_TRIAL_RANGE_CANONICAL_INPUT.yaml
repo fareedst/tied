@@ -1,0 +1,11 @@
+ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT:
+  ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT:
+    consequences:
+      negative:
+        - "LEAP adjust SC-TAG-EFFORT / SC-WF-TAG-EFFORT-SUFFIX semantics for tiered configs"
+      positive:
+        - "Catalog allowlist unchanged"
+        - "grok-4.7 low operator form"
+        - "Readable disposable dirs"
+    context: "Operators use workflow_trial_range with compose families; dirname and MODEL_SLUG must not double-encode effort."
+    decision: "Resolver exports disposable_model_bucket; tag builder uses bucket without appending MODEL_EFFORT when tier is in MODEL_CONFIG; compose family keys include dotted catalog bases per cursor-and-claude-model-catalog.md."

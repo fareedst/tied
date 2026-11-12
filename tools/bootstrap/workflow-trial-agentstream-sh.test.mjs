@@ -194,6 +194,18 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     );
   });
 
+  it("build_wf_trial_disposable_tag uses disposable bucket [SC-WRC-02]", () => {
+    assert.equal(
+      buildDisposableTag("wf-10", {
+        HARNESS: "cursor",
+        MODEL_CONFIG: "grok46-med",
+        MODEL_EFFORT: "medium",
+        WF_TRIAL_DISPOSABLE_MODEL_BUCKET: "grok46med",
+      }),
+      "wf-agentstream-wf-10-cursor-grok46med",
+    );
+  });
+
   it("rejects invalid MODEL_EFFORT before bootstrap [REQ-WF_TRIAL_MODEL_EFFORT]", () => {
     const r = runScript(["wf-02", "--dry-run"], { MODEL_EFFORT: "bogus" });
     assert.notEqual(r.status, 0);
@@ -461,6 +473,56 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.match(r.stdout, /ok-cursor-slug/);
   });
 
+  it("workflow_trial_range usage documents grok-4.7 [SC-WRC-05]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range 2>&1
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    const out = `${r.stderr}\n${r.stdout}`;
+    assert.match(out, /grok-4\.7/);
+  });
+
+  it("workflow_trial_range grok46 medium sets bucket tag [SC-WRC-05]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      workflow_trial_agentstream() { :; }
+      # shellcheck source=scripts/lib/wf-trial-disposable-tag.inc.sh
+      source "${TAG_INC}"
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range cursor grok46 medium 1 1 : 2>/dev/null
+      tag="$(build_wf_trial_disposable_tag wf-10)"
+      [[ "\${WF_TRIAL_DISPOSABLE_MODEL_BUCKET:-}" == "grok46med" ]] || exit 3
+      [[ "\$tag" == *-grok46med ]] || exit 4
+      [[ "\$tag" != *grok46medmedium ]] || exit 5
+      printf ok-grok46-tag\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-grok46-tag/);
+  });
+
+  it("workflow_trial_range grok-4.7 low resolves [SC-WRC-01]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      workflow_trial_agentstream() { :; }
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range cursor grok-4.7 low 1 1 : 2>/dev/null
+      [[ "\${MODEL_SLUG:-}" == "grok-4.7-low-fast" ]] || exit 3
+      [[ "\${MODEL_CONFIG:-}" == "grok47-low" ]] || exit 4
+      [[ "\${WF_TRIAL_DISPOSABLE_MODEL_BUCKET:-}" == "grok47low" ]] || exit 5
+      printf ok-grok47-dot\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-grok47-dot/);
+  });
+
   it("workflow_trial_range resolves grok47-med for cursor [SC-SPEC-RESOLVE]", () => {
     const bash = `
       export ECHO_EXEC=:
@@ -475,6 +537,23 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
     assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
     assert.match(r.stdout, /ok-grok47/);
+  });
+
+  it("workflow_trial_range composes cursor-grok-4.6 + effort [SC-COMPOSE-GROK46]", () => {
+    const bash = `
+      export ECHO_EXEC=:
+      workflow_trial_agentstream() { :; }
+      # shellcheck source=scripts/build-commands.sh
+      source "${BUILD_COMMANDS}"
+      workflow_trial_range cursor cursor-grok-4.6 low 1 1 : 2>/dev/null
+      [[ "\${MODEL_SLUG:-}" == "cursor-grok-4.6-low-fast" ]] || exit 3
+      [[ "\${MODEL_CONFIG:-}" == "grok46-low" ]] || exit 4
+      [[ "\${MODEL_EFFORT:-}" == "low" ]] || exit 5
+      printf ok-grok46-compose\\n
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.match(r.stdout, /ok-grok46-compose/);
   });
 
   it("workflow_trial_range resolves luna-low for cursor [SC-SPEC-RESOLVE]", () => {

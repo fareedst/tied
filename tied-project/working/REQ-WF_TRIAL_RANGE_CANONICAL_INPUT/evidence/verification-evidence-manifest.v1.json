@@ -1,0 +1,38 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-wrc-2026-11-12",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "covered_tokens": [
+    "REQ-WF_TRIAL_RANGE_CANONICAL_INPUT",
+    "ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT",
+    "IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT"
+  ],
+  "proof_boundaries": [
+    "Shell resolve-ref and disposable tag; no live LLM matrix"
+  ],
+  "command_results": [
+    {
+      "id": "sc-wrc-spec",
+      "command": ["node", "--test", "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "sc-wrc-compose",
+      "command": ["node", "--test", "tools/bootstrap/lib/wf-trial-model-compose.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "sc-wrc-shell",
+      "command": ["node", "--test", "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ]
+}

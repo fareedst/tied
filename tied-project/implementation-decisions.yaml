@@ -3769,6 +3769,17 @@ IMPL-WF_TRIAL_PHASE_HANDOFF_GATE:
       - "ARCH-WF_TRIAL_PHASE_HANDOFF_GATE"
     requirements:
       - "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE.yaml"
+  status: "Planned"
+IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT:
+  cross_references:
+    - "ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT"
+    - "IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "IMPL-WF_TRIAL_MODEL_COMPOSE"
+    - "REQ-WF_TRIAL_RANGE_CANONICAL_INPUT"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
+  status: "Active"
 IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
   name: "WF grading rationale parser and contract test"

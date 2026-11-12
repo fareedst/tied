@@ -1,0 +1,46 @@
+CITDP-REQ-WF_TRIAL_RANGE_CANONICAL_INPUT:
+  change_definition:
+    current_behavior: "workflow_trial_range compose refs like grok-4.7 fail resolve; disposable tags concatenate tiered MODEL_CONFIG with MODEL_EFFORT producing grok46medmedium."
+    desired_behavior: "Dotted compose family grok-4.7 resolves; disposable_model_bucket encodes tier once; resolved slugs gated by wf-trial-model-catalog per cursor-and-claude-model-catalog.md."
+    success_criteria:
+      - "SC-WRC-01 through SC-WRC-05 in PLAN.md"
+      - "tied_validate_consistency ok"
+    unchanged_behavior: "Claude harness resolve paths; --workspace bypass; catalog sync script; matrix tier conflict rules."
+  impact_analysis:
+    modules_or_boundaries: "docs/demos/wf-trial-model-specs.yaml; tools/bootstrap/lib/wf-trial-model-spec.mjs; scripts/lib/wf-trial-model-spec.inc.sh; scripts/lib/wf-trial-disposable-tag.inc.sh; scripts/build-commands.sh; docs/workflow-trials.md; tools/bootstrap/*.test.mjs"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT"
+      - "IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT"
+      - "REQ-WF_TRIAL_RANGE_CANONICAL_INPUT"
+  non_goals:
+    - "Grok 4.5 compose"
+    - "Rename existing disposable clients"
+    - "Runtime agent models fetch in orchestrator"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Double effort suffix grok46medmedium on compose path"
+        - "grok-4.7 compose missing yields unknown model ref"
+        - "Tiered grok47-med plus conflicting effort accepted"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "wf-trial-model-spec.test.mjs and workflow-trial-agentstream-sh.test.mjs gate SC-WRC rows"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_CANONICAL_INPUT/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_CANONICAL_INPUT/PLAN.md"
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_CANONICAL_INPUT/test-strategy.md"
+      falsification_questions:
+        - "Does compose grok46 medium tag omit doubled effort?"
+        - "Does grok-4.7 low resolve without grok47 alias?"
+        - "Does grok47-med plus medium fail closed?"
+      gate_policy: "advisory"
+      rationale: "Shell resolver and tag composition only."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/wf-trial-model-compose.test.mjs"
+      - "tools/bootstrap/lib/wf-trial-model-spec.test.mjs"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

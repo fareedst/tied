@@ -4710,6 +4710,38 @@ REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
       - "ARCH-WF_TRIAL_PHASE_HANDOFF_GATE"
     implementation:
       - "IMPL-WF_TRIAL_PHASE_HANDOFF_GATE"
+REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  description: "L3 proof manifest gate validates every files[] row; FACET_AS_SUBTYPE when coarse proof_facet used as proof_subtype; operator diagnostics."
+  detail_file: "requirements/REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE.yaml"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_TRIAL_PROOF_INTENT_STACK"
+      - "REQ-WF_TRIAL_PROOF_MANIFEST_LITE"
+      - "REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+    implementation:
+      - "IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+REQ-WF_TRIAL_RANGE_CANONICAL_INPUT:
+  category: "Tooling"
+  cross_references:
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE"
+    - "REQ-WF_TRIAL_MODEL_COMPOSE"
+    - "REQ-WF_TRIAL_MODEL_EFFORT"
+  detail_file: "requirements/REQ-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
+  name: "WF trial range canonical input and disposable tag dedup"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+      - "REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE"
+      - "REQ-WF_TRIAL_MODEL_COMPOSE"
+    related_to:
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
+  status: "Implemented"
 REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
   category: "Documentation"
   description: "Require concise grade-aware Rationale cells in PROMPT-WF facilitator readouts; contract test over docs/demos corpus."

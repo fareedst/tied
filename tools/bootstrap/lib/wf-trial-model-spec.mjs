@@ -1,5 +1,6 @@
 /**
  * [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE] [REQ-WF_TRIAL_MODEL_COMPOSE]
+ * [REQ-WF_TRIAL_RANGE_CANONICAL_INPUT] [IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT]
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -16,6 +17,58 @@ import { parseCursorCatalogSlug } from "./cursor-catalog-model-slug.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
 const DEFAULT_REGISTRY_REL = "docs/demos/wf-trial-model-specs.yaml";
+
+const TIER_EMBEDDED_CONFIG_RE = /-(low|med|medium|high|xhigh|max)$/;
+
+/**
+ * [REQ-WF_TRIAL_RANGE_CANONICAL_INPUT] — D-TAG-SINGLE-TIER bucket encoding
+ * @param {string} modelConfig
+ */
+export function stripDotsHyphensForBucket(modelConfig) {
+  return String(modelConfig).toLowerCase().replace(/[.-]/g, "");
+}
+
+/**
+ * @param {string} modelConfig
+ */
+export function tierAlreadyInModelConfig(modelConfig) {
+  const cfg = String(modelConfig).trim().toLowerCase();
+  if (cfg === "composer-2.5") {
+    return false;
+  }
+  return TIER_EMBEDDED_CONFIG_RE.test(cfg);
+}
+
+/**
+ * @param {string} modelConfig
+ * @param {string} [effort]
+ */
+export function deriveDisposableModelBucket(modelConfig, effort = "-") {
+  const normalized = stripDotsHyphensForBucket(modelConfig);
+  const e = normalizeComposeEffort(effort);
+  if (tierAlreadyInModelConfig(modelConfig)) {
+    return normalized;
+  }
+  if (e !== "") {
+    return normalized + stripDotsHyphensForBucket(e);
+  }
+  return normalized;
+}
+
+/**
+ * @param {Record<string, unknown>} result
+ * @param {string} effort
+ */
+function withDisposableModelBucket(result, effort) {
+  const modelConfig = result.model_config;
+  if (typeof modelConfig !== "string" || modelConfig === "") {
+    return result;
+  }
+  return {
+    ...result,
+    disposable_model_bucket: deriveDisposableModelBucket(modelConfig, effort),
+  };
+}
 
 export const WF_TRIAL_MODEL_SPEC_SCHEMA = "wf-trial-model-spec.v1";
 export const WF_TRIAL_MODEL_SPEC_SCHEMA_V2 = "wf-trial-model-spec.v2";
@@ -198,47 +251,59 @@ export function resolveWfTrialModelRef(harness, modelRef, registryPath, catalogP
 
   if (h === "cursor" && Object.prototype.hasOwnProperty.call(compose, ref)) {
     const composed = composeCursorCatalogSlug(ref, effort, compose[ref], catPath);
-    return {
-      config_id: undefined,
-      model_config: composed.model_config,
-      model_slug: composed.model_slug,
-      resolution: "compose",
-      model_ref: modelRef,
-      compose_family: ref,
-    };
+    return withDisposableModelBucket(
+      {
+        config_id: undefined,
+        model_config: composed.model_config,
+        model_slug: composed.model_slug,
+        resolution: "compose",
+        model_ref: modelRef,
+        compose_family: ref,
+      },
+      effort,
+    );
   }
 
   if (Object.prototype.hasOwnProperty.call(specs, ref)) {
     const resolved = resolveWfTrialModelSpec(h, ref, regPath);
     assertCursorSlugEffortConsistency(resolved.model_slug, effort, ref);
-    return {
-      ...resolved,
-      resolution: /** @type {"matrix"|"alias"|"catalog"|"compose"} */ (aliasUsed ? "alias" : "matrix"),
-      model_ref: ref,
-    };
+    return withDisposableModelBucket(
+      {
+        ...resolved,
+        resolution: /** @type {"matrix"|"alias"|"catalog"|"compose"} */ (aliasUsed ? "alias" : "matrix"),
+        model_ref: ref,
+      },
+      effort,
+    );
   }
 
   const bySlug = findMatrixSpecBySlug(specs, h, ref);
   if (bySlug) {
     const resolved = resolveWfTrialModelSpec(h, bySlug.config_id, regPath);
     assertCursorSlugEffortConsistency(resolved.model_slug, effort, ref);
-    return {
-      ...resolved,
-      resolution: "matrix",
-      model_ref: ref,
-    };
+    return withDisposableModelBucket(
+      {
+        ...resolved,
+        resolution: "matrix",
+        model_ref: ref,
+      },
+      effort,
+    );
   }
 
   const catRow = catalogSlugLookup(h, ref, regPath, catPath);
   if (catRow) {
     assertCursorSlugEffortConsistency(catRow.slug, effort, ref);
-    return {
-      config_id: undefined,
-      model_config: catRow.model_config,
-      model_slug: catRow.slug,
-      resolution: aliasUsed ? "alias" : "catalog",
-      model_ref: ref,
-    };
+    return withDisposableModelBucket(
+      {
+        config_id: undefined,
+        model_config: catRow.model_config,
+        model_slug: catRow.slug,
+        resolution: aliasUsed ? "alias" : "catalog",
+        model_ref: ref,
+      },
+      effort,
+    );
   }
 
   const err = new Error(

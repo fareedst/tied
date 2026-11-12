@@ -1603,6 +1603,18 @@ ARCH-WF_TRIAL_PHASE_HANDOFF_GATE:
   name: "WF phase handoff gate architecture"
   status: "Active"
   type: "ARCH"
+ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  cross_references:
+    - "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  description: "Validate all manifest rows before FILE_EXISTS"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE.yaml"
+  name: "Proof manifest subtype gate architecture"
+  status: "Proposed"
+  type: "ARCH"
+ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
+  status: "Planned"
+  type: "ARCH"
 ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   cross_references:
     - "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
@@ -3540,6 +3552,19 @@ IMPL-WF_TRIAL_PHASE_HANDOFF_GATE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
   name: "WF phase handoff gate implementation"
   status: "Active"
+  type: "IMPL"
+IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  cross_references:
+    - "ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+    - "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  description: "wf-trial-proof-manifest-gate.mjs per-row validation"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE.yaml"
+  name: "proofSubtypeValidationError"
+  status: "Planned"
+  type: "IMPL"
+IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
+  status: "Planned"
   type: "IMPL"
 IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   cross_references:
@@ -5708,6 +5733,20 @@ REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
   detail_file: "requirements/REQ-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
   name: "WF trial phase handoff gate"
   status: "Active"
+  type: "REQ"
+REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  cross_references:
+    - "ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+    - "IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  description: "Per-row proof_subtype validation; FACET_AS_SUBTYPE diagnostics"
+  detail_file: "requirements/REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE.yaml"
+  name: "WF trial proof manifest subtype gate"
+  status: "Draft"
+  type: "REQ"
+REQ-WF_TRIAL_RANGE_CANONICAL_INPUT:
+  detail_file: "requirements/REQ-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
+  name: "WF trial range canonical input"
+  status: "Planned"
   type: "REQ"
 REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   cross_references:

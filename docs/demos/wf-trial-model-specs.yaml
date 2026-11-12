@@ -1,4 +1,4 @@
-schema: "wf-trial-model-spec.v2"
+schema: wf-trial-model-spec.v2
 compose:
   luna:
     catalog_base: gpt-5.6-luna
@@ -7,6 +7,18 @@ compose:
   grok47:
     catalog_base: grok-4.7
     model_config_prefix: grok47
+    speed_suffix: fast
+  grok-4.7:
+    catalog_base: grok-4.7
+    model_config_prefix: grok47
+    speed_suffix: fast
+  grok46:
+    catalog_base: cursor-grok-4.6
+    model_config_prefix: grok46
+    speed_suffix: fast
+  cursor-grok-4.6:
+    catalog_base: cursor-grok-4.6
+    model_config_prefix: grok46
     speed_suffix: fast
   sol:
     catalog_base: gpt-5.6-sol
@@ -17,26 +29,25 @@ compose:
     model_config_prefix: composer-2.5
     speed_suffix: fast
     effort_in_slug: false
-
 specs:
   claude-sonnet-5-5:
-    claude_slug: "claude-sonnet-5-5"
-    model_config: "claude-sonnet-5-5"
+    claude_slug: claude-sonnet-5-5
+    model_config: claude-sonnet-5-5
   claude-haiku-5-5:
-    claude_slug: "claude-haiku-5-5"
-    model_config: "claude-haiku-5-5"
+    claude_slug: claude-haiku-5-5
+    model_config: claude-haiku-5-5
   composer-2.5:
-    cursor_slug: "composer-2.5-fast"
-    model_config: "composer-2.5"
+    cursor_slug: composer-2.5-fast
+    model_config: composer-2.5
   grok47-med:
-    cursor_slug: "grok-4.7-medium-fast"
-    model_config: "grok47-med"
+    cursor_slug: grok-4.7-medium-fast
+    model_config: grok47-med
   luna-high:
-    cursor_slug: "gpt-5.6-luna-high-fast"
-    model_config: "luna-high"
+    cursor_slug: gpt-5.6-luna-high-fast
+    model_config: luna-high
   luna-low:
-    cursor_slug: "gpt-5.6-luna-low-fast"
-    model_config: "luna-low"
+    cursor_slug: gpt-5.6-luna-low-fast
+    model_config: luna-low
   luna-med:
-    cursor_slug: "gpt-5.6-luna-med-fast"
-    model_config: "luna-med"
+    cursor_slug: gpt-5.6-luna-med-fast
+    model_config: luna-med

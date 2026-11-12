@@ -1,5 +1,6 @@
 # wf-trial-model-spec.inc.sh — resolve model ref to MODEL_SLUG / MODEL_CONFIG.
 # [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE] [REQ-WF_TRIAL_MODEL_COMPOSE]
+# [REQ-WF_TRIAL_RANGE_CANONICAL_INPUT] [IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT]
 # [IMPL-WF_TRIAL_MODEL_SPEC_CLI] [IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE] [IMPL-WF_TRIAL_MODEL_COMPOSE]
 
 _wf_trial_model_spec_repo_root() {
@@ -62,7 +63,7 @@ wf_trial_registry_has_model_ref() {
 }
 
 # PRE: harness cursor|claude; model_ref known or error
-# POST: export MODEL_CONFIG MODEL_SLUG
+# POST: export MODEL_CONFIG MODEL_SLUG WF_TRIAL_DISPOSABLE_MODEL_BUCKET
 # FAILURE: return non-zero; ERROR on stderr
 wf_trial_resolve_model_ref() {
   local harness="${1:?harness}"
@@ -86,6 +87,13 @@ wf_trial_resolve_model_ref() {
   MODEL_CONFIG="$(node -p "JSON.parse(process.argv[1]).model_config" "$json")" || return $?
   MODEL_SLUG="$(node -p "JSON.parse(process.argv[1]).model_slug" "$json")" || return $?
   export MODEL_CONFIG MODEL_SLUG
+  local bucket
+  bucket="$(node -p "JSON.parse(process.argv[1]).disposable_model_bucket || ''" "$json" 2>/dev/null || true)"
+  if [[ -n "$bucket" ]]; then
+    export WF_TRIAL_DISPOSABLE_MODEL_BUCKET="$bucket"
+  else
+    unset WF_TRIAL_DISPOSABLE_MODEL_BUCKET
+  fi
   resolution="$(node -p "JSON.parse(process.argv[1]).resolution || ''" "$json" 2>/dev/null || true)"
   if [[ -n "$resolution" && "$resolution" != "matrix" ]]; then
     printf 'DIAGNOSTIC: wf_trial_model_ref: %s via %s\n' "$model_ref" "$resolution" >&2

@@ -1,8 +1,13 @@
 # wf-trial-disposable-tag.inc.sh — disposable --tag for workflow-trial-agentstream bootstrap.
-# [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [IMPL-WF_TRIAL_MODEL_EFFORT]
+# [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [REQ-WF_TRIAL_RANGE_CANONICAL_INPUT]
+# [IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [IMPL-WF_TRIAL_MODEL_EFFORT] [IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT]
 # Requires normalize_wf_tag_suffix(wf_id) when sourced from workflow-trial-agentstream.sh.
 
 normalize_wf_trial_model_suffix() {
+  if [[ -n "${WF_TRIAL_DISPOSABLE_MODEL_BUCKET:-}" ]]; then
+    printf '%s' "$WF_TRIAL_DISPOSABLE_MODEL_BUCKET"
+    return 0
+  fi
   local raw="${MODEL_CONFIG:-}"
   local effort_suffix=""
   if [[ -z "$raw" ]]; then

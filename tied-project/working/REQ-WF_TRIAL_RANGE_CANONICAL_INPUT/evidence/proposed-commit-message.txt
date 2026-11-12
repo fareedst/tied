@@ -1,0 +1,5 @@
+feat(wf-trial): canonical grok-4.7 compose and disposable bucket tags
+
+Enable workflow_trial_range cursor grok-4.7 {tier} with single-tier disposable
+dirname buckets (SC-WRC-01..05). LEAP parent SC-WF-TAG-EFFORT-SUFFIX exception.
+Close-out gate allowed; envelope blocking_gap_count 0.

@@ -17,10 +17,11 @@ REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
     related_to:
       - "REQ-GOAGENT-FEATURESPEC-BATCH"
       - "REQ-WF_TRIAL_MODEL_EFFORT"
+      - "REQ-WF_TRIAL_RANGE_CANONICAL_INPUT"
   satisfaction_criteria:
     - criterion: "Default bootstrap --tag is wf-agentstream-{wf-id}-{harness}-{modelBucket} with modelBucket from MODEL_CONFIG first else MODEL_SLUG (lowercase, no dots or hyphens)."
       id: "SC-WF-TAG-SHAPE"
-    - criterion: "When MODEL_EFFORT is set, modelBucket appends normalized effort before the harness segment (same lowercase and strip rules)."
+    - criterion: "When MODEL_EFFORT is set, modelBucket appends normalized effort unless WF_TRIAL_DISPOSABLE_MODEL_BUCKET from resolve-ref is set (tier already in MODEL_CONFIG; composer-2.5 flat config unchanged)."
       id: "SC-WF-TAG-EFFORT-SUFFIX"
     - criterion: "workflow-trial-agentstream-sh.test.mjs covers tag helper cases."
       id: "SC-WF-TAG-TEST"

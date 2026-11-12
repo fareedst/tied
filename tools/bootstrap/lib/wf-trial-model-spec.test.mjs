@@ -1,5 +1,5 @@
 /**
- * [REQ-WF_TRIAL_MODEL_SPEC_CLI] [SC-SPEC-REGISTRY]
+ * [REQ-WF_TRIAL_MODEL_SPEC_CLI] [SC-SPEC-REGISTRY] [REQ-WF_TRIAL_RANGE_CANONICAL_INPUT]
  */
 import assert from "node:assert/strict";
 import path from "node:path";
@@ -8,11 +8,15 @@ import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   defaultWfTrialModelSpecRegistryPath,
+  deriveDisposableModelBucket,
   hasWfTrialModelRef,
   hasWfTrialModelSpecId,
+  loadWfTrialModelSpecDocument,
   resolveWfTrialModelRef,
   resolveWfTrialModelSpec,
 } from "./wf-trial-model-spec.mjs";
+import { WF_TRIAL_MODEL_EFFORT_TIERS } from "./wf-trial-model-compose.mjs";
+import { defaultWfTrialModelCatalogPath, loadWfTrialModelCatalog } from "./wf-trial-model-catalog.mjs";
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const REGISTRY = defaultWfTrialModelSpecRegistryPath(REPO_ROOT);
@@ -126,5 +130,58 @@ describe("wf-trial-model-spec.mjs", () => {
     const parsed = JSON.parse(r.stdout.trim());
     assert.equal(parsed.resolution, "compose");
     assert.equal(parsed.model_slug, "gpt-5.6-luna-medium-fast");
+  });
+
+  it("composes cursor-grok-4.6 with effort [SC-COMPOSE-GROK46]", () => {
+    const r = resolveWfTrialModelRef("cursor", "cursor-grok-4.6", REGISTRY, undefined, "low");
+    assert.equal(r.resolution, "compose");
+    assert.equal(r.model_slug, "cursor-grok-4.6-low-fast");
+    assert.equal(r.model_config, "grok46-low");
+    assert.equal(r.compose_family, "cursor-grok-4.6");
+  });
+
+  it("composes grok46 alias with effort [SC-COMPOSE-GROK46-ALIAS]", () => {
+    const r = resolveWfTrialModelRef("cursor", "grok46", REGISTRY, undefined, "medium");
+    assert.equal(r.model_slug, "cursor-grok-4.6-medium-fast");
+    assert.equal(r.model_config, "grok46-med");
+  });
+
+  it("composes grok-4.7 low with bucket [SC-WRC-01]", () => {
+    const r = resolveWfTrialModelRef("cursor", "grok-4.7", REGISTRY, undefined, "low");
+    assert.equal(r.resolution, "compose");
+    assert.equal(r.model_slug, "grok-4.7-low-fast");
+    assert.equal(r.model_config, "grok47-low");
+    assert.equal(r.disposable_model_bucket, "grok47low");
+  });
+
+  it("rejects grok47-med with conflicting effort [SC-WRC-03]", () => {
+    assert.throws(
+      () => resolveWfTrialModelRef("cursor", "grok47-med", REGISTRY, undefined, "low"),
+      /tier mismatch/,
+    );
+  });
+
+  it("deriveDisposableModelBucket tiered vs effort [SC-WRC-02]", () => {
+    assert.equal(deriveDisposableModelBucket("grok46-med", "medium"), "grok46med");
+    assert.equal(deriveDisposableModelBucket("composer-2.5", "medium"), "composer25medium");
+  });
+
+  it("compose families × efforts in catalog [SC-WRC-04]", () => {
+    const doc = loadWfTrialModelSpecDocument(REGISTRY);
+    const catalog = loadWfTrialModelCatalog(defaultWfTrialModelCatalogPath(REPO_ROOT));
+    for (const [family, familyDef] of Object.entries(doc.compose)) {
+      if (family === "composer-2.5") {
+        continue;
+      }
+      const efforts = WF_TRIAL_MODEL_EFFORT_TIERS.filter((e) => e !== "max");
+      for (const effort of efforts) {
+        const r = resolveWfTrialModelRef("cursor", family, REGISTRY, undefined, effort);
+        assert.equal(
+          catalog.cursorBySlug.has(r.model_slug),
+          true,
+          `${family} ${effort} → ${r.model_slug}`,
+        );
+      }
+    }
   });
 });

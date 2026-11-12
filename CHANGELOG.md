@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial range canonical input ([REQ-WF_TRIAL_RANGE_CANONICAL_INPUT], [ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT], [IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT])** — Compose ref `grok-4.7`; `disposable_model_bucket` + single-tier disposable tags (`grok46med` not `grok46medmedium`); **SC-WRC-01..05**; close_out **allowed**. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_RANGE_CANONICAL_INPUT/PLAN.md).
+
+- **PROMPT-WF-10 facilitator readout (Cursor Grok 4.6 high @ 1794519432)** — **4.2.2** via `workflow_trial_agentstream wf-10` (`HARNESS=cursor`; **`cursor-grok-4.6-high-fast`** / **`grok46-high`**); catalog + [demos index](docs/demos/README.md) + project-size [comparison table](tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md). **Workflow complete** — orchestrator `exit_code: 0`; **`d5964eb`**; **57/57** tests; close_out **allowed**.
+
+- **PROMPT-WF-10 facilitator readout (Cursor Grok 4.6 medium @ 1794518198)** — **`cursor-grok-4.6-medium-fast`** / **`grok46-med`**; **49/49** tests; **`2bd9ddb`**; [readout](docs/demos/trial-readout-PROMPT-WF-10-grok46med-1794518198-wf-agentstream-wf-10-cursor-grok46medmedium.md); comparison row **`wf-10-cursor-grok46medmedium`**.
+
+- **PROMPT-WF-10 facilitator readout (Cursor Grok 4.6 low @ 1794517047)** — **4.2.2** via `workflow_trial_agentstream wf-10` (`HARNESS=cursor`; **`cursor-grok-4.6-low-fast`** / **`grok46-low`**); catalog + [demos index](docs/demos/README.md) + project-size [comparison table](tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md). **Workflow complete** — orchestrator `exit_code: 0`; **`027809a`**; **29/29** tests; close_out **allowed**.
+
+- **PROMPT-WF-10 facilitator readout (Cursor Composer 2.5 medium @ 1794514372)** — **4.2.2** via `workflow_trial_agentstream wf-10` (`HARNESS=cursor`); catalog + [demos index](docs/demos/README.md) updated via `@record-wf-trial`. **Workflow complete** — orchestrator `exit_code: 0`; **`6e56f8e`**; **36/36** tests; fine proof manifest subtypes; `composition_evidence_subcheck: pass`.
+
 - **WF trial sequential process transcript ([REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT], [ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT], [IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT])** — `emitTurnOperatorLine` dual-stream turn markers (stdout transcript mirror + live stderr flush); exit stderr de-dup by omission; **SC-WF-SPT-01..04**; **66/66** bootstrap + **134/134** agentstream (implementation in `50326bab`). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT/PLAN.md).
 
 - **WF trial session capacity highlight (wave 1.5, [REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL])** — Operator stderr `ERROR` block for Claude session limits at preflight (fail-closed), live turn, and post-classify; shared `wf-trial-operator-highlight.inc.sh`; provider-abort gate skip when no product REQ (**SC-WF-ABS-05..08**); **66/66** bootstrap + **134/134** agentstream tests; `sonnet-4-6` catalog alias. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/PLAN.md).

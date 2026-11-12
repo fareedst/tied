@@ -1,0 +1,4 @@
+IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT:
+  IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT:
+    essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT-pseudocode.md"
+    implementation_approach: "extend wf-trial-model-specs compose keys; deriveDisposableModelBucket in wf-trial-model-spec.mjs; wf_trial_resolve_model_ref exports bucket; wf-trial-disposable-tag.inc.sh consumes bucket; tests and docs."
