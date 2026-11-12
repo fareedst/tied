@@ -291,6 +291,8 @@ AGENTS.md
 .cursor/hooks.json
 .claude/hooks/
 .claude/settings.json
+.claude/settings.local.json
+.claude/adherence-bridge.log
 # END TIED INSTALL MANAGED
 # Store vendor skills (skills.sh) — store checkout only; not rewritten by tied-install
 .agents/skills/

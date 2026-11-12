@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Git hygiene — CITDP gate-test litter** — Remove six accidental `tied-project/citdp/CITDP-REQ-{ACTIVATION,NESTED,PRESERVE,UNIT_TEST,UPGRADE*}.yaml` files from the store index; ignore local `.claude/adherence-bridge.log` and `settings.local.json`; run `test-all-hygiene` restore pass.
+
 ### Added
 
 - **WF trial demo backlog (traceable-commit)** — Commit **30** pending `docs/demos/trial-readout-*.md` files referenced from the workflow catalog, matching `FACILITATOR-WF-*` verification evidence, and regenerated [batch size summary](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) manifest rows.
