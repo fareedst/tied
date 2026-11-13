@@ -1,12 +1,25 @@
-# Traceable commit — REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM M2
+# traceable-commit — HMEP M3+M4
 
-**Gate receipt:** `tied-bundle/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/gates/close_out-2026-11-13T06-22-00-195Z.json`  
-**Envelope:** `tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/evidence/request-evidence-envelope.v1.json`  
-**Verification manifest:** `tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/evidence/verification-evidence-manifest.v1.json`  
-**Hygiene:** `git-hygiene-receipt-2026-11-13.md`
+**date:** 2026-11-13  
+**VALIDATE:** harness-model-eval vocab terms match CLI/README (regression baseline, replay manifest, billing ledger).
 
-**Vocab VALIDATE:** `harness-model-eval.md` — SC-HMEP-M2, list-price-v1.
+## Gates
 
-**Excluded drift:** HEMC handoffs, yaml-canonicalizer, WF range tracker, project-size draft CITDP.
+- `run-close-out-gates.mjs --envelope-blocking`: `merged_decision.allowed=true`, `blocking_gap_count=0`
+- Receipt: `tied-bundle/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/gates/close_out-2026-11-13T06-54-39-818Z.json`
 
-**Upstream feedback capture:** N/A — no capture this pass.
+## Verification
+
+- `verification-evidence-manifest.v1.json` — 30 package + 5 contract tests pass
+
+## Hygiene
+
+- `evidence/git-hygiene-receipt-2026-11-13-m3m4.md`
+
+## Excluded drift
+
+See git-hygiene receipt excluded list (yaml-canonicalizer, HEMC sibling REQ, WF_TRIAL_RANGE tracker).
+
+## Upstream feedback
+
+N/A — client close-out; no `tied_feedback` receipt in scope.

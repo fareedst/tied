@@ -1,44 +1,45 @@
 CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
   change_definition:
-    current_behavior: "WF trials and agentstream capture orchestration and facilitator readouts; token usage, cache breakdown, and comparable cost are not stored in a harness-neutral schema. Stream-json parsing in agentstream is session/text oriented."
-    desired_behavior: "harness-eval ingests WF manifests and stream-json into SQLite v2 with list-price catalog, suite verifiers, and cohort report CLI; null-safe tokens and costs; no @record-wf-trial grade merge."
+    current_behavior: "harness-eval M2 cohort/pricing shipped; M3 billing and M4 regression/replay built uncommitted."
+    desired_behavior: "M3+M4 close-out: file-backed billing reconcile and regression baseline compare + replay batch manifest import (registry compose manual)."
     success_criteria:
-      - "SC-HMEP-M1-01 through SC-HMEP-M1-08 in PLAN.md"
-      - "SC-HMEP-M2-01 through SC-HMEP-M2-06 in PLAN.md"
-      - "tied_validate_consistency ok after REQ/ARCH/IMPL mint"
-    unchanged_behavior: "workflow_trial_agentstream; tied agentstream checklist turns; @record-wf-trial grading; project-size-batch-compare size/wall_clock/grades columns."
+      - "SC-HMEP-M1-01 through SC-HMEP-M1-08 in PLAN.md (shipped)"
+      - "SC-HMEP-M2-01 through SC-HMEP-M2-06 in PLAN.md (shipped)"
+      - "SC-HMEP-M3-01 through SC-HMEP-M3-05 in PLAN.md (close-out M3)"
+      - "SC-HMEP-M4-01 through SC-HMEP-M4-05 in PLAN.md (close-out M4)"
+      - "tied_validate_consistency ok after M4 REQ mint"
+    unchanged_behavior: "workflow_trial_agentstream; @record-wf-trial grading; M3 billing opt-in; cohort and verify CLI."
   impact_analysis:
-    modules_or_boundaries: "mcp-server/packages/harness-eval; mcp-server/contracts/harness-eval; docs/demos/harness-eval; scripts/build-commands.sh optional; tied-project/vocab/harness-model-eval.md"
-    tied_tokens_new:
-      - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
-      - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
-      - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    modules_or_boundaries: "mcp-server/packages/harness-eval/src/regression; src/runner/replay.ts; cli; contracts harness-eval-baseline + replay-manifest; docs/demos/harness-eval/baselines|replay"
+    tied_tokens_new: []
   non_goals:
-    - "Milestone 3+ provider billing APIs and actual_charged_cost"
-    - "Tokenizer fabrication when CLI omits usage"
-    - "Web dashboard or hosted eval service"
+    - "Baseline expectations on facilitator grades"
+    - "Live provider billing APIs"
+    - "Network fetch of disposable clients"
+    - "Parse traditional-workflow-trial-runs-registry.md in M4"
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Collapse materially different configuration fingerprints"
-        - "Double-count resume cumulative Claude usage"
-        - "Fabricate zero tokens when usage missing"
-        - "Treat agent exit 0 as verified pass without F-12 verifiers"
+        - "Baseline tolerance treats null observed as pass"
+        - "Compare invents token counts when trial row null"
+        - "Compare merges facilitator grade dimensions"
+        - "Replay batch duplicates token_observations (violates SC-HMEP-M1-03)"
+        - "Replay creates trial rows for missing client_root"
       depth_tier: "minimal"
       disconfirming_observations:
-        - "SC-HMEP-M1-01 rejects fabricated counts"
-        - "SC-HMEP-M1-02 and SC-HMEP-M1-03 tests green on fixtures"
-        - "SC-HMEP-M2-04 token_present fails exit-0 without observations"
+        - "SC-HMEP-M4-02 null baseline metric skips field"
+        - "SC-HMEP-M4-03 second batch adds zero observations"
+        - "SC-HMEP-M4-04 manifest-only leaves tokens null"
       evidence_references:
+        - "tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/evidence/refine-plan-m4-pass4.md"
         - "tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md"
         - "tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/test-strategy.md"
       falsification_questions:
-        - "Does manifest-only import avoid inventing tokens?"
-        - "Does missing usage become null everywhere in export?"
-        - "Does re-import duplicate usage rows?"
+        - "Does regression compare read wf-trial readout grades?"
+        - "Does replay batch scrape the runs registry markdown?"
       gate_policy: "advisory"
-      rationale: "M1 close-out uses fixture-backed unit tests; full integrated inquiry deferred to M2."
+      rationale: "M4 file-local replay; integrated inquiry on idempotency at build-plan."
   risk_assessment:
     depth_tier: "minimal"
     gate_policy: "advisory"

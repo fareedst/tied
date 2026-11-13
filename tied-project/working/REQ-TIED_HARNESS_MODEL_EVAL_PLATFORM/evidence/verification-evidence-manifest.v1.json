@@ -1,7 +1,7 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
   "request_token": "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM",
-  "generated_at": "2026-11-13T06-22:00-08:00",
+  "generated_at": "2026-11-13T22-55-00-08:00",
   "commands": [
     {
       "id": "hmep-package-tests",
@@ -10,10 +10,10 @@
       "claimed_success": true,
       "tokens": [
         "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM",
-        "SC-HMEP-M1-01",
-        "SC-HMEP-M1-08",
-        "SC-HMEP-M2-01",
-        "SC-HMEP-M2-06"
+        "SC-HMEP-M3-01",
+        "SC-HMEP-M3-05",
+        "SC-HMEP-M4-01",
+        "SC-HMEP-M4-05"
       ]
     },
     {
@@ -21,14 +21,12 @@
       "command": "node --test mcp-server/contracts/harness-eval/*.test.mjs",
       "exit_code": 0,
       "claimed_success": true,
-      "tokens": ["REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM", "SC-HMEP-M2-01"]
-    },
-    {
-      "id": "pseudocode-validate",
-      "command": "tied MCP pseudocode_validate IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM",
-      "exit_code": 0,
-      "claimed_success": true,
-      "tokens": ["IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"]
+      "tokens": [
+        "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM",
+        "SC-HMEP-M3-01",
+        "SC-HMEP-M4-01",
+        "SC-HMEP-M4-05"
+      ]
     }
   ]
 }

@@ -1,0 +1,9 @@
+schema_version: harness-eval-billing-ledger-v1
+ledger_revision: sample-v1
+entries:
+  - trial_id: example-trial-with-both-costs
+    provider_reported_cost: 0.42
+    actual_charged_cost: 0.39
+  - trial_id: example-trial-partial
+    provider_reported_cost: 0.1
+  - trial_id: unknown-disposable-id

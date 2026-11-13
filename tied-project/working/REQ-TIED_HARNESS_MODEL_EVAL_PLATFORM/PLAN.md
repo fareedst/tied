@@ -2,9 +2,9 @@
 
 **Workflow:** add-feature → **`refine-plan` (this doc)** → `@build-plan` → `@close-out`  
 **Request token:** `REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM`  
-**plan_phase:** `post-build` (M2 slice)  
-**milestone:** M2 GREEN — close-out pending  
-**profile_depth:** `minimal` · **gate_policy:** `advisory` (build-plan M2: **`integrated`** on pricing + verifier blocks)
+**plan_phase:** `close-out` (M3+M4 committed this pass)  
+**milestone:** M3+M4 shipped; platform milestones M1–M4 complete through close-out  
+**profile_depth:** `minimal` · **gate_policy:** `advisory` (build-plan M4: **`integrated`** on replay idempotency + baseline compare blocks; no network)
 
 **Origin:** Sponsor feature spec *Cursor / Claude Harness and Model Evaluation Platform* v1.0 (F-01…F-19, four milestones).  
 **Cursor plan:** `.cursor/plans/harness_model_eval_platform_3b2ec5c2.plan.md`
@@ -17,7 +17,46 @@
 
 ---
 
-## 1. Refine (Touchpoint 1 — RESOLVE) — pass 2 closed 2026-11-12
+## 1. Refine (Touchpoint 1 — RESOLVE) — pass 3 M3/M4 · 2026-11-13
+
+| Sponsor term | Resolved concept | Disposition |
+| --- | --- | --- |
+| **Billing reconciliation (F-10)** | Operator **billing ledger** YAML import; attach `provider_reported_cost` / `actual_charged_cost` to existing `trial_id` rows; **`report reconcile`** compares against `harness_estimated_cost` | **Locked** — see **D-BILLING-LEDGER**, **D-BILLING-OPTIN** |
+| **Provider billing APIs** | **Out of M3 build** — live Cursor/Anthropic usage APIs deferred to LEAP proposal; M3 is file-backed only | **Locked** (sponsor non-goal preserved) |
+| **Regression baseline (F-15)** | Committed **baseline manifest** per suite scenario × harness bucket under `docs/demos/harness-eval/baselines/` | **Locked** — see **D-REGRESSION-BASELINE** |
+| **Historical replay (F-16)** | **`replay batch`** driven by a path manifest (WF runs registry export or operator list); wraps existing `events import` idempotently | **Locked** — M4 after M3 ships |
+| **Milestone order** | **M3 billing** then **M4 regression** (PLAN §8); separate `@build-plan` / `@close-out` per milestone | **Locked** |
+
+**Costly choices (M3/M4):**
+
+1. SQLite **schema v3** for nullable provider/actual cost columns — third operator-visible migration.
+2. Baselines live in **committed YAML** beside suites (not facilitator grades) — drift managed via content hash on baseline file.
+3. Replay batch may re-touch large disposable trees — operator supplies manifest only; no automatic cloud fetch.
+
+---
+
+## 1b. Refine (Touchpoint 1 — RESOLVE) — pass 4 M4 · 2026-11-13
+
+| Sponsor term | Resolved concept | Disposition |
+| --- | --- | --- |
+| **Baseline bind key** | Match store `trial` row to expectation via **`wf_id` + `harness`** (from manifest), optional **`model_slug`** filter; explicit **`trial_id`** override when present on expectation row | **Locked** — **D-BASELINE-BIND** |
+| **Tolerance model** | Per-metric **`value`** + **`tolerance_pct`** and/or **`tolerance_abs`**; metric omitted or `null` → skip compare; observed `null` vs non-null baseline → fail | **Locked** — **D-BASELINE-TOLERANCE** |
+| **Baseline integrity** | Same SHA-256 body pattern as suites (`content_integrity_sha256` over stable JSON sans hash field) | **Locked** (reuse suite integrity helper) |
+| **Replay manifest** | Committed schema **`harness-eval-replay-manifest-v1`**; entries = `{ client_root, trial_id?, jsonl_paths?[] }`; missing client dir → **skip** (no throw) | **Locked** — **D-REPLAY-MANIFEST** |
+| **Registry compose** | M4 does **not** parse [traditional-workflow-trial-runs-registry.md](../../../docs/demos/traditional-workflow-trial-runs-registry.md); operator maps **Client ID** → `client_root` manually or via ad-hoc script (LEAP) | **Locked** |
+| **CLI surface** | `regression baseline validate`, `regression compare --baseline --trial-id`, `replay batch --manifest` | **Locked** |
+
+**M4 costly choices:**
+
+1. Baselines are **harness-metric** only — never WF facilitator grades (**D-PROOF-BOUNDARY**).
+2. Replay uses existing **`importWfClient`** — no parallel ingest path (idempotency inherits SC-HMEP-M1-03).
+3. Compare CLI exits **1** on first failing expectation when `--strict` default; summary JSON always printed.
+
+**Parallel track:** M3 **`@close-out`** remains recommended before M4 commit but is not a build-plan hard gate for uncommitted M3 work.
+
+---
+
+## 1a. Refine (Touchpoint 1 — RESOLVE) — pass 2 closed 2026-11-12
 
 | Sponsor term | Resolved concept | Disposition |
 | --- | --- | --- |
@@ -59,6 +98,12 @@
 | **D-WF-MANIFEST-ONLY** | `harness-eval events import --wf-client <path>` reads `wf-trial-orchestrator-run.v1.json` + env from manifest; JSONL optional via repeated `--jsonl` |
 | **D-CONFIG-FINGERPRINT** | SHA-256 over stable JSON of harness, harness_version, requested_model, effort, permission_policy, pricing_mode revision id |
 | **D-PROOF-BOUNDARY** | Token/cost metrics never merged into `@record-wf-trial` prose in M1; reports cross-link readouts only |
+| **D-BILLING-LEDGER** | Billing ledger: `docs/demos/harness-eval/billing/` (schema `harness-eval-billing-ledger-v1`); match key `trial_id`; unmatched lines → structured skip (no row fabrication) |
+| **D-BILLING-OPTIN** | `billing import` requires explicit `--ledger`; no default credentials; missing ledger → costs stay `null` |
+| **D-REGRESSION-BASELINE** | Baselines: `docs/demos/harness-eval/baselines/`; compare tolerances on tokens, `wall_clock_ms`, nullable costs; **D-PROOF-BOUNDARY** unchanged |
+| **D-BASELINE-BIND** | Expectation row keys: `wf_id`, `harness`, optional `model_slug`, optional `trial_id` pin |
+| **D-BASELINE-TOLERANCE** | `tolerance_pct` / `tolerance_abs` on numeric metrics; null baseline metric skips field |
+| **D-REPLAY-MANIFEST** | Replay manifests: `docs/demos/harness-eval/replay/`; schema `harness-eval-replay-manifest-v1` |
 
 ---
 
@@ -124,7 +169,54 @@ Cost fields (M2+): `harness_estimated_cost`, `normalized_list_price_cost`, `prov
 | SC-HMEP-M2-05 | `harness-eval report cohort` aggregates trials by `wf_id` × `harness` with tokens, wall clock, estimated cost |
 | SC-HMEP-M2-06 | `harness-eval verify trial` cross-links suite scenario `wf_id` with store row (no facilitator grade merge) |
 
-**Still M3+:** provider billing APIs, `actual_charged_cost`, regression baselines (F-15–F-16).
+## 6c. Acceptance criteria (Milestone 3 — `@build-plan` next)
+
+| ID | Criterion |
+| --- | --- |
+| SC-HMEP-M3-01 | Billing ledger YAML validates against `harness-eval-billing-ledger-v1`; unknown `trial_id` lines recorded as skips, import exit 0 with summary |
+| SC-HMEP-M3-02 | SQLite migrates v2→v3 with nullable `provider_reported_cost`, `actual_charged_cost`; M2 rows preserved |
+| SC-HMEP-M3-03 | After `billing import`, trial row costs updated; missing ledger fields remain `null` (not `0`) |
+| SC-HMEP-M3-04 | `report reconcile` emits per-trial delta JSON: `harness_estimated_cost` vs `provider_reported_cost` vs `actual_charged_cost` (null-safe) |
+| SC-HMEP-M3-05 | Without `--ledger`, no billing mutation; CLI documents opt-in in README |
+
+## 6d. Acceptance criteria (Milestone 4 — after M3 close-out)
+
+| ID | Criterion |
+| --- | --- |
+| SC-HMEP-M4-01 | Baseline manifest validates; `regression baseline validate` fails on content hash mismatch |
+| SC-HMEP-M4-02 | `regression compare` fails when observed metrics exceed baseline tolerances (tokens or wall clock) |
+| SC-HMEP-M4-03 | `replay batch --manifest` imports each path idempotently (SC-HMEP-M1-03 holds per path) |
+| SC-HMEP-M4-04 | Manifest-only replay preserves null tokens; cohort keys (`wf_id`, `harness`, fingerprint) remain queryable |
+| SC-HMEP-M4-05 | Replay manifest YAML validates; missing `client_root` dirs skipped with summary (exit 0) |
+
+### M4 baseline schema (normative sketch)
+
+```yaml
+schema_version: harness-eval-baseline-v1
+baseline_id: engineering-suite-v1-baseline
+suite_ref: docs/demos/harness-eval/suites/engineering-suite-v1.yaml
+content_integrity_sha256: <computed at build-plan>
+expectations:
+  - bind:
+      wf_id: WF-10
+      harness: cursor
+    metrics:
+      wall_clock_ms: { value: 600000, tolerance_pct: 20 }
+      input_tokens: null  # explicit skip
+```
+
+### M4 replay manifest sketch
+
+```yaml
+schema_version: harness-eval-replay-manifest-v1
+manifest_revision: operator-batch-1
+entries:
+  - client_root: /abs/path/to/1794525072-wf-agentstream-wf-10-cursor-grok47med
+    trial_id: 1794525072-wf-agentstream-wf-10-cursor-grok47med
+    jsonl_paths: []  # optional captures
+```
+
+**Deferred beyond M4:** live provider billing APIs; web dashboard; `trial run` subprocess tee (optional tail from M1).
 
 ---
 
@@ -147,11 +239,33 @@ Cost fields (M2+): `harness_estimated_cost`, `normalized_list_price_cost`, `prov
 
 ## 8. Milestones (post-M1)
 
-| Milestone | Features | Goal |
+| Milestone | Features | Goal | Status |
+| --- | --- | --- | --- |
+| **M2** | F-09, F-11–F-14, F-18 | Verifiers, pricing catalog, comparative reports | **Shipped** `dca69377` |
+| **M3** | F-10 | File-backed billing reconciliation + reconcile report | **Shipped** close-out 2026-11-13 |
+| **M4** | F-15, F-16 | Regression baselines + batch historical replay | **Shipped** close-out 2026-11-13 |
+
+### M3 modules (build-plan)
+
+| Module | Path | Spec |
 | --- | --- | --- |
-| **M2** | F-09, F-11–F-14, F-18 | Verifiers, pricing catalog, comparative reports |
-| **M3** | F-10 | Optional billing reconciliation |
-| **M4** | F-15, F-16 | Regression baselines, full historical replay |
+| Billing ledger loader | `src/billing/ledger.ts` | F-10 |
+| Schema v3 migrate | `src/store/schema.ts`, `migrate.ts` | SC-HMEP-M3-02 |
+| Billing import CLI | `src/cli/billing-import.ts` | SC-HMEP-M3-01, M3-03 |
+| Reconcile report | `src/report/reconcile.ts` | SC-HMEP-M3-04 |
+| Contracts | `mcp-server/contracts/harness-eval/harness-eval-billing-ledger.schema.json` | F-10 |
+| Sample ledger | `docs/demos/harness-eval/billing/sample-ledger-v1.yaml` | operator doc |
+
+### M4 modules (build-plan after M3)
+
+| Module | Path | Spec |
+| --- | --- | --- |
+| Baseline loader + integrity | `src/regression/baseline.ts`, reuse `suite/integrity.ts` | F-15, SC-HMEP-M4-01 |
+| Compare engine | `src/regression/compare.ts` | SC-HMEP-M4-02 |
+| Replay batch | `src/runner/replay.ts`, wire `importWfClient` | F-16, SC-HMEP-M4-03..05 |
+| CLI | `src/cli/main.ts` subcommands `regression *`, `replay batch` | F-15, F-16 |
+| Contracts | `harness-eval-baseline.schema.json`, `harness-eval-replay-manifest.schema.json` | F-15, F-16 |
+| Draft artifacts | `baselines/engineering-suite-v1-baseline.yaml`, `replay/sample-replay-batch-v1.yaml` | operator doc |
 
 ---
 
@@ -164,7 +278,7 @@ Cost fields (M2+): `harness_estimated_cost`, `normalized_list_price_cost`, `prov
 
 ---
 
-## 7b. Build sequence (`@build-plan` M2)
+## 7b. Build sequence (`@build-plan` M2 — done)
 
 | Step | Deliverable |
 | --- | --- |
@@ -177,11 +291,37 @@ Cost fields (M2+): `harness_estimated_cost`, `normalized_list_price_cost`, `prov
 
 ---
 
+## 7c. Build sequence (`@build-plan` M3)
+
+| Step | Deliverable |
+| --- | --- |
+| 1 | LEAP REQ index SC-HMEP-M3-* + IMPL blocks: `IMPORT_BILLING_LEDGER`, `MIGRATE_EVAL_SCHEMA_V3`, `REPORT_BILLING_RECONCILE` |
+| 2 | `pseudocode_validate`; integrated inquiry on billing-import + null-cost invariants |
+| 3 | RED: SC-HMEP-M3-01…05 |
+| 4 | GREEN: ledger loader, migrate v3, `billing import`, `report reconcile` |
+| 5 | Contract `harness-eval-billing-ledger.schema.json`; sample ledger + README |
+| 6 | Vocab + CITDP M3 delta; persist `citdp/`; `tied_validate_consistency` |
+
+## 7d. Build sequence (`@build-plan` M4)
+
+| Step | Deliverable |
+| --- | --- |
+| 1 | LEAP REQ **SC-HMEP-M4-01…05** + IMPL: `VALIDATE_REGRESSION_BASELINE`, `COMPARE_TRIAL_TO_BASELINE`, `REPLAY_BATCH_IMPORT`, `VALIDATE_REPLAY_MANIFEST` |
+| 2 | `pseudocode_validate`; integrated inquiry on replay idempotency + null-token invariants |
+| 3 | RED: SC-HMEP-M4-01…05 + contract tests |
+| 4 | GREEN: baseline load/compare, replay batch → `importWfClient` loop |
+| 5 | Draft baseline + sample replay manifest; README M4 operator recipe (registry Client ID mapping note) |
+| 6 | Vocab + CITDP M4 delta; `tied_validate_consistency` |
+
+---
+
 ## 10. Handoff
 
-**Do next:** close-out when verification gate passes (M2).
+**Session log (2026-11-13):** [evidence/session-handoff.md](./evidence/session-handoff.md) — M3 built uncommitted; M4 refined; next **`@build-plan` M4**.
 
-**Operator smoke (post build):**
+**Do next:** sponsor **`@close-out` M3** (scoped) then **`@close-out` M4** or combined HMEP commit. M4 build evidence: [evidence/build-plan-m4-evidence.md](./evidence/build-plan-m4-evidence.md).
+
+**Operator smoke (M2 — still valid):**
 
 ```bash
 # After a WF disposable client run (optional JSONL from captured agent output):

@@ -1,6 +1,6 @@
-/** [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] SQLite schema (v2 M2) */
+/** [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] SQLite schema (v3 M3) */
 
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 
 export const MIGRATION_SQL_V1 = `
 CREATE TABLE IF NOT EXISTS schema_version (
@@ -56,5 +56,17 @@ export const V2_TRIAL_COLUMNS: { name: string; ddl: string }[] = [
   {
     name: "normalized_list_price_cost",
     ddl: "ALTER TABLE trials ADD COLUMN normalized_list_price_cost REAL",
+  },
+];
+
+/** Columns added in M3 — applied idempotently via migrateToV3. */
+export const V3_TRIAL_COLUMNS: { name: string; ddl: string }[] = [
+  {
+    name: "provider_reported_cost",
+    ddl: "ALTER TABLE trials ADD COLUMN provider_reported_cost REAL",
+  },
+  {
+    name: "actual_charged_cost",
+    ddl: "ALTER TABLE trials ADD COLUMN actual_charged_cost REAL",
   },
 ];

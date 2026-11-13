@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Harness eval M3+M4 ([REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM], [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM])** — File-backed `billing import` / `report reconcile` (schema v3); regression `baseline validate` + `compare`; `replay batch` manifest wrapping idempotent `importWfClient`; contracts and operator samples under `docs/demos/harness-eval/{billing,baselines,replay}/`. Close-out: HMEP M3+M4 2026-11-13.
+
 - **PROMPT-WF-09 facilitator readouts (Claude Haiku/Sonnet × low/medium/high @ 1794350349…1794353174)** — Six **ordered concurrent map** cells via `workflow_trial_agentstream wf-09` on **4.2.1**; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md) updated via `@record-wf-trial`. All cells **`composition_tests: 0`** on size receipts (unit-only proof).
 
 - **WF trial composition prompts ([REQ-WF_TRIAL_COMPOSITION_PROMPTS], [ARCH-WF_TRIAL_COMPOSITION_PROMPTS], [IMPL-WF_TRIAL_COMPOSITION_PROMPTS])** — **PROMPT-WF-09…12** in [catalog-traditional-workflow-trial-prompts.md](docs/demos/catalog-traditional-workflow-trial-prompts.md) (unit + module binding tests); `workflow_trial_agentstream wf-09`…`wf-12`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_COMPOSITION_PROMPTS/PLAN.md).

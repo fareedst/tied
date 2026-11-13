@@ -1,6 +1,6 @@
 import { DatabaseSync, type EvalDatabase } from "../lib/sqlite.js";
 import { MIGRATION_SQL_V1, SCHEMA_VERSION } from "./schema.js";
-import { migrateToV2 } from "./migrate.js";
+import { migrateToV2, migrateToV3 } from "./migrate.js";
 
 export function openEvalDatabase(dbPath: string): EvalDatabase {
   const db = new DatabaseSync(dbPath);
@@ -11,6 +11,12 @@ export function openEvalDatabase(dbPath: string): EvalDatabase {
   const version = row?.version ?? 1;
   if (version < 2) {
     migrateToV2(db);
+  }
+  const mid = db.prepare("SELECT version FROM schema_version LIMIT 1").get() as
+    | { version: number }
+    | undefined;
+  if ((mid?.version ?? 0) < 3) {
+    migrateToV3(db);
   }
   const after = db.prepare("SELECT version FROM schema_version LIMIT 1").get() as
     | { version: number }

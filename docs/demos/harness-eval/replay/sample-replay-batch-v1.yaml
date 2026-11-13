@@ -1,0 +1,9 @@
+# Sample replay manifest — map registry Client ID to disposable client_root manually (no markdown parser in M4).
+schema_version: harness-eval-replay-manifest-v1
+manifest_revision: operator-batch-sample-v1
+entries:
+  - client_root: /abs/path/to/1794525072-wf-agentstream-wf-10-cursor-grok47med
+    trial_id: 1794525072-wf-agentstream-wf-10-cursor-grok47med
+    jsonl_paths: []
+  - client_root: /abs/path/to/missing-client-dir-should-skip
+    trial_id: placeholder-missing

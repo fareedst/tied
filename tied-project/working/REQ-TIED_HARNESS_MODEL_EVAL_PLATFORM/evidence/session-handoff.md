@@ -1,10 +1,10 @@
 # Session handoff — REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM
 
 **handoff_kind:** session  
-**date:** 2026-11-12  
+**date:** 2026-11-13  
 **request_token:** REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM  
 **prompt_type:** handoff  
-**plan_phase:** M2 **build-plan GREEN** (verification gate deferred); M1 close-out complete
+**plan_phase:** `close-out` (M3+M4 shipped `a67d052d`); HMEP M1–M4 complete on `main`
 
 ---
 
@@ -12,13 +12,15 @@
 
 | Item | Path / note |
 | --- | --- |
-| Workflow | add-feature → refine-plan → build-plan → `@close-out` → operator smoke |
-| Linked PLAN | [../PLAN.md](../PLAN.md) |
-| Program phase | **M2** implemented (pricing, verifiers, cohort); `@close-out` next |
-| Close-out | [./close-out-handoff.md](./close-out-handoff.md) |
-| Manifest smoke | [./metering-smoke-import.md](./metering-smoke-import.md) *(untracked; stage if committing)* |
-| Stream-json smoke | [./stream-json-capture-import.md](./stream-json-capture-import.md) |
-| Sibling canary | [REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW](../REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/evidence/session-handoff.md) — close-out `c45ed768` |
+| Workflow | M3 build → M4 refine → **`@build-plan` M4** → close-out (M3 + M4) |
+| Linked PLAN | [../PLAN.md](../PLAN.md) — `plan_phase: pre-implementation`, milestone M4 refine pass 4 |
+| Tracker | [../checklist-tracker.yaml](../checklist-tracker.yaml) |
+| Committed tip (M2) | `dca69377` — cohort/pricing close-out |
+| M3 evidence | [./build-plan-m3-evidence.md](./build-plan-m3-evidence.md) |
+| M4 refine | [./refine-plan-m4-pass4.md](./refine-plan-m4-pass4.md) |
+| M3 refine | [./refine-plan-m3-pass3.md](./refine-plan-m3-pass3.md) |
+| M2 close-out | [./close-out-handoff.md](./close-out-handoff.md) |
+| Sibling | [REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW](../REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/) — `c45ed768` |
 
 ---
 
@@ -26,52 +28,48 @@
 
 | Ref | Path |
 | --- | --- |
-| Tracker | [../checklist-tracker.yaml](../checklist-tracker.yaml) |
 | CITDP (persisted) | [../../../citdp/CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml](../../../citdp/CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml) |
 | Test strategy | [../test-strategy.md](../test-strategy.md) |
-| Envelope | [./request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json) |
-| Verification manifest | [./verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json) |
+| LEAP (billing API) | [../leap-proposals/live-provider-billing-api.md](../leap-proposals/live-provider-billing-api.md) |
+| LEAP (registry replay) | [../leap-proposals/registry-replay-manifest-generator.md](../leap-proposals/registry-replay-manifest-generator.md) |
 
 ---
 
 ## Plan execution steps
 
-**Last updated:** 2026-11-12 · **prompt_type:** handoff · **PLAN:** ../PLAN.md
+**Last updated:** 2026-11-13 · **prompt_type:** handoff · **PLAN:** ../PLAN.md
 
-### M2 build-plan (2026-11-12)
+### M4 (required — build-plan)
 
-- [x] SC-HMEP-M2-01…06 RED → GREEN
-- [x] Schema v2 migrate; list-price catalog; CLI `report cohort` + `verify trial`
-- [x] `pseudocode_validate` ok; package + contract tests green
-- [ ] `@close-out` + verification gate (sponsor)
+- [x] SC-HMEP-M4-01…05 — baseline + replay ([build-plan-m4-evidence.md](./build-plan-m4-evidence.md))
 
-### Required (`@build-plan` M1 + `@close-out`)
+### M3 (required — close-out deferred)
 
-- [x] Mint REQ/ARCH/IMPL, package, contracts, suites, vocab, CITDP
-- [x] `pseudocode_validate` ok (Grammar v2)
-- [x] Close-out gates **allowed** (minimal, advisory)
-- [x] Traceable commits `2753c3c1` (M1), `6d26e32c` (FK + stream-json evidence)
-- [x] Manifest-only import on live `wf-meter-01` disposable
-- [x] Live stream-json capture + `--jsonl` import (Claude tokens; Cursor null without `result`)
+- [x] SC-HMEP-M3-01…05 — billing, schema v3, reconcile (build-plan-m3-evidence.md)
+- [x] `@close-out` M3+M4 — `a67d052d`
 
-### Deferred / optional
+### M2 / M1 (shipped)
 
-- [ ] Integrated adversarial inquiry (M2 or strict profile)
-- [ ] `trial-run-thin` — automate stream-json tee in orchestrator raw store
-- [ ] Commit [metering-smoke-import.md](./metering-smoke-import.md) with operator evidence pass
-- [ ] Cursor capture that emits terminal `type:result` + `usage`
+- [x] SC-HMEP-M2-01…06 — `dca69377`
+- [x] SC-HMEP-M1-01…08 — earlier commits on `main`
+
+### Optional
+
+- [ ] Push `main` (ahead of origin)
+- [ ] Integrated adversarial inquiry (strict)
+- [ ] Operator billing smoke with live `trial_id`
 
 ### Changelog (this REQ)
 
 | date | prompt_type | note |
 | --- | --- | --- |
-| 2026-11-12 | build-plan | `@tied/harness-eval` M1 GREEN |
-| 2026-11-12 | close-out | Commit `2753c3c1`; envelope + gates |
-| 2026-11-12 | operator | Manifest-only import smoke on live wf-meter-01 client |
-| 2026-11-12 | close-out | Sibling HEMC `c45ed768` (separate REQ) |
-| 2026-11-12 | operator | Stream-json capture + FK fix `6d26e32c` |
-| 2026-11-12 | handoff | Session ledger refresh |
-| 2026-11-12 | build-plan | M2 pricing, verifiers, cohort report GREEN |
+| 2026-11-12 | build-plan / close-out | M1, M2 shipped |
+| 2026-11-13 | refine-plan | M3/M4 pass 3 |
+| 2026-11-13 | build-plan | M3 GREEN (uncommitted) |
+| 2026-11-13 | refine-plan | M4 pass 4; SC-HMEP-M4-05 |
+| 2026-11-13 | handoff | Session continuity ledger |
+| 2026-11-13 | build-plan | M4 GREEN (uncommitted) |
+| 2026-11-13 | close-out | M3+M4 `a67d052d` |
 
 ---
 
@@ -81,9 +79,11 @@
 | --- | --- |
 | workspace_root | `/Users/fareed/Documents/dev/chatgpt/stdd` |
 | TIED_BASE_PATH | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
+| execution_site | TIED store client repo (stdd) |
 | HARNESS_EVAL_STORE | `$TIED_STORE_ROOT/tied-bundle/reports/harness-eval` |
-| git | `main` **ahead 3** of origin (`2753c3c1`, `c45ed768`, `6d26e32c`); push not requested |
-| dirty (excluded) | `harness-eval` CLI WIP, HEMC handoff SHA drift, unrelated REQ trackers, YAML canonicalizer |
+| git | `main` **ahead 6** of `origin/main`; **HEAD** `a67d052d` (M3+M4); unrelated dirty files remain (see excluded drift) |
+| dirty_scope_hmep | `mcp-server/packages/harness-eval` M3; `docs/demos/harness-eval/billing/`; contracts; `tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/*`; REQ detail M1–M3 criteria |
+| dirty_out_of_scope | yaml-canonicalizer, HEMC handoffs, REQ-WF_TRIAL_RANGE tracker, unrelated CITDP drafts (per prior handoff — do not mix into HMEP close-out) |
 
 ---
 
@@ -91,8 +91,8 @@
 
 | Token | Status |
 | --- | --- |
-| **REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM** | M1 close-out complete; M2 build-plan GREEN (uncommitted) |
-| **REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW** | Close-out complete (`c45ed768`); compose import path |
+| **REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM** | M1–M2 committed; M3 built; M4 refined |
+| **REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW** | Close-out done; compose at import |
 
 **depth_tier:** minimal · **gate_policy:** advisory
 
@@ -102,18 +102,19 @@
 
 | id | kind | status | blocks_current | evidence |
 | --- | --- | --- | --- | --- |
-| REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW | REQ | close-out done | no | [sibling handoff](../REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/evidence/session-handoff.md) |
+| REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW | REQ | close-out done | no | sibling PLAN |
+| HMEP M3 close-out | milestone | pending | no | build-plan-m3-evidence.md |
 
 ---
 
-## Finished this session
+## Finished this session (conversation arc)
 
 | Item | Evidence |
 | --- | --- |
-| HEMC `@close-out` | `c45ed768` |
-| Claude live stream-json → import | `tied-bundle/reports/harness-eval/raw/1794545843-…/claude-post-trial-capture.jsonl`; tokens 3/13 |
-| Cursor live stream-json (partial) | `raw/1794531738-…/cursor-post-trial-capture-v3.jsonl`; 0 observations |
-| FK fix `importWfClient` | `6d26e32c` — trial row before observations |
+| M3 refine pass 3 | PLAN §6c/7c; CITDP; pre_implementation gate allowed |
+| M3 **build-plan** | Schema v3, billing ledger, `report reconcile`; **23** unit + **3** contract tests pass |
+| M4 refine pass 4 | SC-HMEP-M4-05; baseline/replay schemas; D-BASELINE-BIND; registry LEAP |
+| REQ satisfaction | SC-HMEP-M1…M3 on disk via MCP (M4 not minted yet) |
 
 ---
 
@@ -121,28 +122,27 @@
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | **pass** — [close-out-handoff.md](./close-out-handoff.md) |
-| Process contract | **partial** — manifest + envelope; adherence reconcile not_run |
-| Adherence ledger | **not_run** |
-| Operator compose smoke | **pass** — manifest + stream-json import path |
+| Machine close-out | **pass** — `close_out-2026-11-13T06-54-39-818Z.json`; `blocking_gap_count=0` |
+| Process contract | **partial** — minimal; reconcile skipped |
+| Adherence ledger | **not_run** — minimal depth |
 
 ---
 
 ## Do next
 
-1. **`@close-out`** for M2 when sponsor wants traceable commit.
-2. Optional: integrated adversarial inquiry before strict profile close-out.
-3. Optional: commit `metering-smoke-import.md`; push `main` when sponsor wants.
-4. Optional: Cursor `agent` capture with terminal `result` line (or `trial-run-thin` automation).
+1. Push `main` when sponsor requests (ahead of origin).
+2. Operator smoke: billing import + replay batch with real disposable client paths.
+3. Optional LEAP: live provider billing API; registry → replay manifest generator.
 
 ---
 
 ## Constraints
 
-- Compose with `workflow_trial_agentstream`; no WF orchestrator rewrite for M1 tail.
-- No fabricated token counts; null stays null in export.
-- Claude `--mcp-config` is variadic — use `--` before prompt when capturing stream-json.
-- Proof boundary: no merge into `@record-wf-trial` prose for M1 metrics.
+- **D-PROOF-BOUNDARY** — no facilitator grade merge; M4 baselines are harness metrics only.
+- **D-BILLING-OPTIN**, **D-REPLAY-MANIFEST** — file-backed operators paths; no registry markdown parser in M4.
+- Null tokens/costs stay null (no fabricated zeros).
+- **Do not commit** unless sponsor requests; handoff does not run git commit.
+- Push `main` not requested.
 
 ---
 
@@ -153,13 +153,11 @@ cd mcp-server/packages/harness-eval && npm test
 node --test mcp-server/contracts/harness-eval/*.test.mjs
 ```
 
-**Import + query:**
+**M3 operator (when store has trials):**
 
 ```bash
 export TIED_STORE_ROOT="$PWD"
 export HARNESS_EVAL_STORE="$PWD/tied-bundle/reports/harness-eval"
-node mcp-server/packages/harness-eval/dist/cli/main.js events import \
-  --wf-client "<disposable-root>" --trial-id "$(basename <disposable-root>)" \
-  --jsonl "<path-to-capture.jsonl>"
-node mcp-server/packages/harness-eval/dist/cli/main.js query summary --store "$HARNESS_EVAL_STORE"
+harness-eval billing import --ledger docs/demos/harness-eval/billing/sample-ledger-v1.yaml --store "$HARNESS_EVAL_STORE"
+harness-eval report reconcile --store "$HARNESS_EVAL_STORE"
 ```

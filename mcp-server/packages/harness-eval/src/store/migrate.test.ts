@@ -30,7 +30,7 @@ describe("schema migrate SC-HMEP-M2-02", () => {
     };
     assert.equal(row.input_tokens, 10);
     const ver = db.prepare("SELECT version FROM schema_version").get() as { version: number };
-    assert.equal(ver.version, 2);
+    assert.equal(ver.version, 3);
     db.close();
   });
 });

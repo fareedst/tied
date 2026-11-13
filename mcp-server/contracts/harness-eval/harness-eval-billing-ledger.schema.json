@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://tied.local/contracts/harness-eval-billing-ledger-v1.json",
+  "title": "HarnessEvalBillingLedgerV1",
+  "type": "object",
+  "required": ["schema_version", "ledger_revision", "entries"],
+  "properties": {
+    "schema_version": { "const": "harness-eval-billing-ledger-v1" },
+    "ledger_revision": { "type": "string", "minLength": 1 },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["trial_id"],
+        "properties": {
+          "trial_id": { "type": "string", "minLength": 1 },
+          "provider_reported_cost": { "type": ["number", "null"] },
+          "actual_charged_cost": { "type": ["number", "null"] }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,6 +1,6 @@
 # Test strategy — [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM]
 
-**Phase:** refine-plan · **M1 depth:** minimal plan / **integrated** at build for adapters + tokens  
+**Phase:** refine-plan M4 pass 4 · **depth:** minimal / **integrated** at M4 build for replay + compare blocks  
 **Package:** `mcp-server/packages/harness-eval`
 
 ## Satisfaction criteria → tests
@@ -60,7 +60,33 @@ Live captures under `fixtures/live-capture/` gitignored; document CLI versions i
 | SC-HMEP-M2-05 | Cohort JSON by wf_id × harness | `src/report/cohort.test.ts` |
 | SC-HMEP-M2-06 | verify trial CLI suite bind | `src/cli/verify.test.ts` |
 
-## Verification manifest (M1 close-out target)
+## M3 satisfaction criteria → tests (design only)
+
+| ID | Assert | Test home (build-plan) |
+| --- | --- | --- |
+| SC-HMEP-M3-01 | Ledger schema + unknown `trial_id` → skip summary | `src/billing/ledger.test.ts`, contracts `harness-eval-billing-ledger.*` |
+| SC-HMEP-M3-02 | v2 sqlite → v3 columns nullable | `src/store/migrate-v3.test.ts` |
+| SC-HMEP-M3-03 | Partial ledger row → only set columns update | `src/billing/apply.test.ts` |
+| SC-HMEP-M3-04 | Reconcile JSON null-safe deltas | `src/report/reconcile.test.ts` |
+| SC-HMEP-M3-05 | CLI without `--ledger` → no mutation | `src/cli/billing-import.test.ts` |
+
+**Security:** no network fixtures; ledger paths are local YAML only (no API keys in repo).
+
+## M4 satisfaction criteria → tests (design only)
+
+| ID | Assert | Test home (build-plan) |
+| --- | --- | --- |
+| SC-HMEP-M4-01 | Baseline hash + schema; tamper → validate exit ≠ 0 | `src/regression/baseline.test.ts`, contracts `harness-eval-baseline.*` |
+| SC-HMEP-M4-02 | `regression compare` tolerance breach → CLI exit 1; null metric skipped | `src/regression/compare.test.ts`, `src/cli/regression-compare.test.ts` |
+| SC-HMEP-M4-03 | `replay batch` twice → observation count unchanged | `src/runner/replay.test.ts` |
+| SC-HMEP-M4-04 | Batch without jsonl → `input_tokens` null; `wf_id`+`harness` in cohort query | `src/runner/replay-manifest-only.test.ts` |
+| SC-HMEP-M4-05 | Missing `client_root` → skip entry; exit 0 + skip list | `src/runner/replay.test.ts`, contracts `harness-eval-replay-manifest.*` |
+
+**Composition:** replay tests call real `importWfClient` on temp manifest trees (no markdown registry parser).
+
+**Tolerance fixtures:** golden over/under wall_clock_ms rows in `fixtures/regression/`.
+
+## Verification manifest (regression battery)
 
 ```bash
 cd mcp-server/packages/harness-eval && npm test

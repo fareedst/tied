@@ -1,0 +1,21 @@
+# Regression baseline — [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] M4 (harness metrics only; not facilitator grades)
+schema_version: harness-eval-baseline-v1
+baseline_id: engineering-suite-v1-baseline
+suite_ref: docs/demos/harness-eval/suites/engineering-suite-v1.yaml
+content_integrity_sha256: "4e2eda3fa93be7efdf86785e67ecc63234f8dae668890f513d5e496ffccbbe6a"
+expectations:
+  - bind:
+      wf_id: WF-10
+      harness: cursor
+    metrics:
+      wall_clock_ms:
+        value: 600000
+        tolerance_pct: 20
+      input_tokens: null
+  - bind:
+      wf_id: WF-10
+      harness: claude
+    metrics:
+      wall_clock_ms:
+        value: 600000
+        tolerance_pct: 25

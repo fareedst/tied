@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://tied.local/contracts/harness-eval-baseline-v1.json",
+  "title": "HarnessEvalRegressionBaselineV1",
+  "type": "object",
+  "required": ["schema_version", "baseline_id", "expectations"],
+  "properties": {
+    "schema_version": { "const": "harness-eval-baseline-v1" },
+    "baseline_id": { "type": "string", "minLength": 1 },
+    "suite_ref": { "type": "string" },
+    "content_integrity_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "expectations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["bind", "metrics"],
+        "properties": {
+          "bind": {
+            "type": "object",
+            "required": ["wf_id", "harness"],
+            "properties": {
+              "wf_id": { "type": "string" },
+              "harness": { "type": "string" },
+              "model_slug": { "type": "string" },
+              "trial_id": { "type": "string" }
+            }
+          },
+          "metrics": { "type": "object", "additionalProperties": true }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

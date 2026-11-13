@@ -176,3 +176,89 @@ Grammar-Version: v2
   - POST: no facilitator grades; proof boundary D-PROOF-BOUNDARY
   - DATA: tokens, wall_clock_ms, harness_estimated_cost nullable
   - CONTROL: read-only
+
+## IMPORT_BILLING_LEDGER
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M3-01; F-10; D-BILLING-LEDGER.
+- Contract:
+  - INPUT: billing ledger YAML path
+  - PRE: schema_version harness-eval-billing-ledger-v1
+  - OUTPUT: BillingLedger { ledger_revision, entries[] }
+  - POST: invalid schema → throw; each entry has trial_id string
+  - DATA: optional nullable provider_reported_cost, actual_charged_cost per entry
+  - FAILURE_MODES: missing file → throw
+
+## MIGRATE_EVAL_SCHEMA_V3
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M3-02.
+- Contract:
+  - INPUT: open EvalDatabase
+  - PRE: schema_version >= 2
+  - OUTPUT: schema_version 3
+  - POST: ALTER trials ADD provider_reported_cost, actual_charged_cost nullable
+  - DATA: existing M2 rows preserved
+  - FAILURE_MODES: version > 3 → throw at db open
+
+## APPLY_BILLING_LEDGER_ENTRIES
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M3-03; D-BILLING-OPTIN.
+- Contract:
+  - INPUT: entries[], EvalDatabase with matching trial rows
+  - PRE: schema v3
+  - OUTPUT: { updated, skipped_unknown_trial[] }
+  - POST: unknown trial_id → skip; omitted entry field leaves DB column unchanged; never fabricate zero
+  - DATA: UPDATE trials cost columns only for known trial_id
+  - EFFECTS: no INSERT trials from ledger lines
+
+## REPORT_BILLING_RECONCILE
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M3-04; D-PROOF-BOUNDARY.
+- Contract:
+  - INPUT: store database
+  - PRE: eval.sqlite schema v3
+  - OUTPUT: JSON per-trial deltas (estimated vs provider vs actual)
+  - POST: null operands → null deltas; no facilitator grades
+  - CONTROL: read-only
+
+## VALIDATE_REGRESSION_BASELINE
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M4-01; F-15; D-REGRESSION-BASELINE.
+- Contract:
+  - INPUT: baseline YAML path
+  - PRE: schema_version harness-eval-baseline-v1
+  - OUTPUT: integrity result { ok, expected, actual }
+  - POST: reuses suite integrity hash over stable JSON sans hash field
+  - FAILURE_MODES: missing file → throw; mismatch → ok false
+
+## COMPARE_TRIAL_TO_BASELINE
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M4-02; F-15; D-BASELINE-BIND; D-BASELINE-TOLERANCE.
+- Contract:
+  - INPUT: trial_id, baseline path, EvalDatabase
+  - PRE: trial row exists
+  - OUTPUT: CompareTrialSummary JSON; CLI exit 1 when strict and any metric fail
+  - POST: bind matches wf_id+harness (+ optional model_slug/trial_id); null baseline metric skipped; observed null vs expected → fail
+  - DATA: wall_clock_ms, token and nullable cost metrics only
+  - CONTROL: D-PROOF-BOUNDARY — no facilitator grades
+  - FAILURE_MODES: unknown trial → throw
+
+## REPLAY_BATCH_IMPORT
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M4-03, SC-HMEP-M4-04; F-16; D-REPLAY-MANIFEST.
+- Contract:
+  - INPUT: replay manifest YAML path, store root
+  - PRE: schema_version harness-eval-replay-manifest-v1
+  - OUTPUT: ReplayBatchSummary with per-entry status
+  - POST: each existing client_root calls importWfClient (SC-HMEP-M1-03 idempotency); manifest-only preserves null tokens
+  - DATA: skipped_missing_client_root[] listed; exit 0 when only skips (SC-HMEP-M4-05)
+  - EFFECTS: cohort keys wf_id+harness queryable after batch
+
+## VALIDATE_REPLAY_MANIFEST
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M4-05; F-16.
+- Contract:
+  - INPUT: replay manifest path
+  - PRE: schema_version harness-eval-replay-manifest-v1
+  - OUTPUT: { ok } or structured parse error
+  - POST: each entry requires client_root string
+  - FAILURE_MODES: invalid schema → ok false

@@ -12,11 +12,14 @@ export interface TrialRow extends CrossHarnessTrialRow {
   model_slug: string | null;
   harness_estimated_cost: number | null;
   normalized_list_price_cost: number | null;
+  provider_reported_cost: number | null;
+  actual_charged_cost: number | null;
 }
 
 const TRIAL_SELECT = `trial_id, harness, wf_id, input_tokens, output_tokens, reasoning_tokens,
   wall_clock_ms, config_fingerprint, completeness, exit_code, model_slug,
-  harness_estimated_cost, normalized_list_price_cost`;
+  harness_estimated_cost, normalized_list_price_cost,
+  provider_reported_cost, actual_charged_cost`;
 
 export function listTrials(db: EvalDatabase): CrossHarnessTrialRow[] {
   const rows = db
