@@ -1,0 +1,13 @@
+feat(harness-eval): add HMEP M1 package and TIED stack
+
+Introduce @tied/harness-eval for stream-json + WF manifest import,
+SQLite v1 store, and SC-HMEP-M1-01..08 tests. Mint
+REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM with ARCH/IMPL and operator suites.
+
+REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM
+ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM
+IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM
+
+Machine close-out: pass (minimal, advisory).
+Process contract: partial (no adherence reconcile; manifest present).
+Upstream feedback: N/A — no capture this close-out.

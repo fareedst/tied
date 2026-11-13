@@ -1,0 +1,46 @@
+CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  change_definition:
+    current_behavior: "WF trials and agentstream capture orchestration and facilitator readouts; token usage, cache breakdown, and comparable cost are not stored in a harness-neutral schema. Stream-json parsing in agentstream is session/text oriented."
+    desired_behavior: "New harness-eval package ingests Cursor/Claude stream-json and WF orchestrator manifests into versioned raw + SQLite normalized store; null-safe metrics; M1 import/query without rewriting workflow_trial_agentstream."
+    success_criteria:
+      - "SC-HMEP-M1-01 through SC-HMEP-M1-08 in PLAN.md"
+      - "tied_validate_consistency ok after REQ/ARCH/IMPL mint"
+    unchanged_behavior: "workflow_trial_agentstream; tied agentstream checklist turns; @record-wf-trial grading; project-size-batch-compare size/wall_clock/grades columns."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/packages/harness-eval; mcp-server/contracts/harness-eval; docs/demos/harness-eval; scripts/build-commands.sh optional; tied-project/vocab/harness-model-eval.md"
+    tied_tokens_new:
+      - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+      - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+      - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+  non_goals:
+    - "Milestone 2+ pricing, billing APIs, verifier execution in M1"
+    - "Tokenizer fabrication when CLI omits usage"
+    - "Web dashboard or hosted eval service"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Collapse materially different configuration fingerprints"
+        - "Double-count resume cumulative Claude usage"
+        - "Fabricate zero tokens when usage missing"
+        - "Treat agent exit 0 as verified pass without F-12 verifiers"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "SC-HMEP-M1-01 rejects fabricated counts"
+        - "SC-HMEP-M1-02 and SC-HMEP-M1-03 tests green on fixtures"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md"
+        - "tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/test-strategy.md"
+      falsification_questions:
+        - "Does manifest-only import avoid inventing tokens?"
+        - "Does missing usage become null everywhere in export?"
+        - "Does re-import duplicate usage rows?"
+      gate_policy: "advisory"
+      rationale: "M1 close-out uses fixture-backed unit tests; full integrated inquiry deferred to M2."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    unit:
+      - "mcp-server/contracts/harness-eval/*.test.mjs"
+      - "mcp-server/packages/harness-eval/src/**/*.test.ts"

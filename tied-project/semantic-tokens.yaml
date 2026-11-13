@@ -495,6 +495,13 @@ ARCH-GOAGENT-YAML-STEPS:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  cross_references:
+    - "IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+    - "REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+  description: "Split catalog and wf-meter-01 id branch on workflow_trial_agentstream"
+  detail_file: "architecture-decisions/ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW.yaml"
+  name: "Metering canary orchestrator catalog routing"
 ARCH-KAIZEN-FEEDBACK-MCP-WIRING:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
@@ -1121,6 +1128,14 @@ ARCH-TIED_HARNESS_LANGSMITH_COMPOSE:
     registered: "2026-10-21"
   name: "LangSmith HTOL export compose architecture"
   source_index: "architecture-decisions.yaml"
+ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  category: "Tooling"
+  cross_references:
+    - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+  detail_file: "architecture-decisions/ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml"
+  name: "Harness model eval platform architecture"
+  type: "ARCH"
 ARCH-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
@@ -2173,6 +2188,13 @@ IMPL-GOAGENT-TEXT-SOURCES:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  cross_references:
+    - "ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+    - "REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+  description: "normalize_wf_id, catalog resolve, gawk extract for metering canary"
+  detail_file: "implementation-decisions/IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW.yaml"
+  name: "wf-meter-01 shell routing"
 IMPL-KAIZEN-FEEDBACK-MCP-WIRING:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
@@ -3069,6 +3091,14 @@ IMPL-TIED_HARNESS_LANGSMITH_COMPOSE:
     registered: "2026-10-21"
   name: "LangSmith HTOL export compose implementation"
   source_index: "implementation-decisions.yaml"
+IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+  detail_file: "implementation-decisions/IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml"
+  name: "Harness model eval platform implementation"
+  type: "IMPL"
 IMPL-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
@@ -4521,6 +4551,15 @@ REQ-GOAGENT-YAML-STEP-RENDER:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+    - "IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+  description: "wf-meter-01 controlled four-phase trial for harness-eval calibration"
+  detail_file: "requirements/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW.yaml"
+  name: "Harness eval metering canary workflow"
 REQ-KAIZEN-FEEDBACK-ANALYSIS:
   category: "Functional"
   cross_references:
@@ -5178,6 +5217,17 @@ REQ-TIED_HARNESS_LANGSMITH_COMPOSE:
     registered: "2026-10-21"
   name: "LangSmith HTOL export compose"
   source_index: "requirements.yaml"
+REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+  description: "M1 harness-eval package for stream-json and WF manifest import"
+  detail_file: "requirements/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml"
+  name: "Harness model evaluation platform"
+  status: "Draft"
+  type: "REQ"
 REQ-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "ARCH-TIED_HARNESS_PLATFORM_SEAM"

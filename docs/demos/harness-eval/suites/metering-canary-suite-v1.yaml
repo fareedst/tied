@@ -1,0 +1,31 @@
+# Draft suite — [REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW] (plan only; validated at build-plan / HMEP SC-HMEP-M1-05)
+schema_version: harness-eval-suite-v1
+suite_id: metering-canary-suite-v1
+suite_revision: "2026-11-12"
+description: >
+  Controlled four-phase canary for harness metering calibration.
+  Smaller product scope than engineering-suite wf-01; compose with harness-eval import.
+
+scenarios:
+  - scenario_id: wf-meter-01
+    prompt_workflow_ref: PROMPT-WF-METER-01
+    conversation_mode: continued
+    repository_baseline: disposable_greenfield
+    catalog_link: ../../../docs/demos/catalog-harness-metering-lite-workflow.md#prompt-wf-meter-01
+    steps:
+      - step_id: "01"
+        mode: one_shot
+        prompt_ref: add-feature
+      - step_id: "02"
+        mode: continued
+        prompt_ref: refine-plan
+      - step_id: "03"
+        mode: continued
+        prompt_ref: build-plan
+      - step_id: "04"
+        mode: continued
+        prompt_ref: close-out
+    acceptance_checks:
+      - id: manifest_import
+        type: manual
+        note: "SC-HMEP-M1-06 import after HMEP build-plan; manifest-only tokens null OK"

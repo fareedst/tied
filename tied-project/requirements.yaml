@@ -1356,6 +1356,12 @@ REQ-GOAGENT-YAML-STEP-RENDER:
       method: "Manual fixture comparison"
     - coverage: "tools/agentstream/checklist/checklist_test.go"
       method: "Unit tests"
+REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  category: "Tooling"
+  detail_file: "requirements/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW.yaml"
+  name: "Harness eval metering canary workflow"
+  priority: "P2"
+  status: "Implemented"
 REQ-KAIZEN-FEEDBACK-ANALYSIS:
   category: "Functional"
   detail_file: "requirements/REQ-KAIZEN-FEEDBACK-ANALYSIS.yaml"
@@ -2944,6 +2950,18 @@ REQ-TIED_HARNESS_LANGSMITH_COMPOSE:
   detail_file: "requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml"
   status: "Implemented"
   type: "requirement"
+REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+    - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+    - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  description: "Normalize Cursor/Claude stream-json and WF orchestrator manifests into harness-neutral eval store."
+  detail_file: "requirements/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml"
+  name: "Harness model evaluation platform (M1)"
+  status: "Draft"
 REQ-TIED_HARNESS_PLATFORM_SEAM:
   category: "Functional"
   cross_references:

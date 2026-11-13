@@ -1,0 +1,10 @@
+IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM-pseudocode.md"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-12"
+  related_architecture:
+    - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+  related_requirements:
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"

@@ -1,0 +1,52 @@
+# Draft suite — [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] (plan only; validated at build-plan)
+schema_version: harness-eval-suite-v1
+suite_id: engineering-suite-v1
+suite_revision: "2026-11-12"
+content_integrity_sha256: "5249925f430d57aa4ec8f8b806da2d790cfc139709f8ba2dae7593fde75ce08a"
+description: >
+  WF-aligned engineering scenarios for Cursor vs Claude harness comparisons.
+  Prompt bodies reference catalog PROMPT-WF-NN; hashes enforced by harness-eval suite validate.
+  For controlled metering calibration see metering-canary-suite-v1.yaml (wf-meter-01).
+
+scenarios:
+  - scenario_id: wf-01
+    prompt_workflow_ref: PROMPT-WF-01
+    conversation_mode: continued
+    repository_baseline: disposable_greenfield
+    catalog_link: ../../../docs/demos/catalog-traditional-workflow-trial-prompts.md#prompt-wf-01
+    steps:
+      - step_id: "01"
+        mode: one_shot
+        prompt_ref: add-feature
+      - step_id: "02"
+        mode: continued
+        prompt_ref: refine-plan
+      - step_id: "03"
+        mode: continued
+        prompt_ref: build-plan
+      - step_id: "04"
+        mode: continued
+        prompt_ref: close-out
+    acceptance_checks:
+      - id: facilitator_readout
+        type: manual
+        note: "Independent verification deferred to M2; M1 uses manifest + optional JSONL only"
+
+  - scenario_id: wf-10
+    prompt_workflow_ref: PROMPT-WF-10
+    conversation_mode: continued
+    repository_baseline: disposable_greenfield
+    catalog_link: ../../../docs/demos/catalog-traditional-workflow-trial-prompts.md
+    steps:
+      - step_id: "01"
+        mode: one_shot
+        prompt_ref: add-feature
+      - step_id: "02"
+        mode: continued
+        prompt_ref: refine-plan
+      - step_id: "03"
+        mode: continued
+        prompt_ref: build-plan
+      - step_id: "04"
+        mode: continued
+        prompt_ref: close-out

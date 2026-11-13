@@ -1,0 +1,2 @@
+{"type":"tool_call","subtype":"failed","uuid":"cursor-tool-fail-1"}
+{"type":"result","subtype":"error","uuid":"cursor-tool-fail-result","usage":{"input_tokens":10,"output_tokens":2}}

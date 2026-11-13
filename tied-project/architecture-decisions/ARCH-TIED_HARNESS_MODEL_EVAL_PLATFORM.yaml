@@ -1,0 +1,14 @@
+ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  consequences:
+    negative:
+      - "Parser duplication vs agentstream"
+      - "SQLite migration operator burden"
+    positive:
+      - "Null-safe cross-harness queries"
+      - "WF disposable import without JSONL"
+  context: "Compose with workflow_trial_agentstream; duplicate stream-json parsers in harness-eval M1."
+  decision: "Package @tied/harness-eval under mcp-server/packages/harness-eval; HARNESS_EVAL_STORE default tied-bundle/reports/harness-eval; SQLite schema v1; manifest-only WF import allowed with null tokens."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-12"

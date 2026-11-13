@@ -1291,6 +1291,10 @@ IMPL-GOAGENT-TEXT-SOURCES:
       - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
       - "text_test.go"
+IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  detail_file: "implementation-decisions/IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW.yaml"
+  name: "wf-meter-01 shell routing implementation"
+  status: "Implemented"
 IMPL-KAIZEN-FEEDBACK-MCP-WIRING:
   detail_file: "implementation-decisions/IMPL-KAIZEN-FEEDBACK-MCP-WIRING.yaml"
   name: "Kaizen feedback MCP handler wiring"
@@ -2786,6 +2790,12 @@ IMPL-TIED_HARNESS_LANGSMITH_COMPOSE:
   detail_file: "implementation-decisions/IMPL-TIED_HARNESS_LANGSMITH_COMPOSE.yaml"
   name: "LangSmith HTOL export compose implementation"
   status: "Active"
+IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  cross_references:
+    - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+  detail_file: "implementation-decisions/IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml"
+  name: "Harness model eval platform implementation"
 IMPL-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "ARCH-TIED_HARNESS_PLATFORM_SEAM"

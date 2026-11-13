@@ -1,0 +1,2 @@
+{"type":"assistant","message":{"content":[{"type":"tool_use","name":"Bash"}]}}
+{"type":"result","subtype":"error_during_execution","uuid":"claude-tool-fail","usage":{"input_tokens":4,"output_tokens":1}}

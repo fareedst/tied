@@ -1,0 +1,2 @@
+{"type":"system","subtype":"init","session_id":"cursor-fix-1"}
+{"type":"result","subtype":"success","uuid":"cursor-usage-1","usage":{"input_tokens":120,"output_tokens":45}}

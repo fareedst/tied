@@ -1,0 +1,29 @@
+REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-12"
+  rationale:
+    why: "WF trials lack cross-harness token/timing storage; agentstream does not persist usage."
+  satisfaction_criteria:
+    - criterion: "--wf-client import round-trips manifest + fingerprint"
+      id: "SC-HMEP-M1-06"
+    - criterion: "Claude resume cumulative usage applied once"
+      id: "SC-HMEP-M1-02"
+    - criterion: "cross-harness summary JSON aggregates trials"
+      id: "SC-HMEP-M1-08"
+    - criterion: "Cursor fixtures with/without usage — null not zero"
+      id: "SC-HMEP-M1-01"
+    - criterion: "diagnostics reports fixture coverage by harness"
+      id: "SC-HMEP-M1-07"
+    - criterion: "Overlapping token categories flagged incomplete"
+      id: "SC-HMEP-M1-04"
+    - criterion: "Re-import same origin_id idempotent"
+      id: "SC-HMEP-M1-03"
+    - criterion: "suite validate fails on prompt hash mismatch"
+      id: "SC-HMEP-M1-05"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    implementation:
+      - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"

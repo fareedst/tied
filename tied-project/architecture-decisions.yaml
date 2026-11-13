@@ -1204,6 +1204,10 @@ ARCH-GOAGENT-YAML-STEPS:
     requirements:
       - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
+ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  detail_file: "architecture-decisions/ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW.yaml"
+  name: "Metering canary orchestrator catalog routing"
+  status: "Implemented"
 ARCH-KAIZEN-FEEDBACK-MCP-WIRING:
   detail_file: "architecture-decisions/ARCH-KAIZEN-FEEDBACK-MCP-WIRING.yaml"
   name: "Kaizen feedback MCP composition architecture"
@@ -2201,6 +2205,12 @@ ARCH-TIED_HARNESS_LANGSMITH_COMPOSE:
   detail_file: "architecture-decisions/ARCH-TIED_HARNESS_LANGSMITH_COMPOSE.yaml"
   name: "LangSmith client-side HTOL export compose"
   status: "Active"
+ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM:
+  cross_references:
+    - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+  detail_file: "architecture-decisions/ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml"
+  name: "Harness model eval platform architecture"
 ARCH-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "REQ-TIED_HARNESS_PLATFORM_SEAM"

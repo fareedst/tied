@@ -1,0 +1,2 @@
+{"type":"result","subtype":"success","uuid":"claude-resume-a","session_id":"resume-sess","usage":{"input_tokens":80,"output_tokens":20}}
+{"type":"result","subtype":"success","uuid":"claude-resume-b","session_id":"resume-sess","usage":{"input_tokens":200,"output_tokens":90,"output_tokens_details":{"thinking_tokens":15}}}

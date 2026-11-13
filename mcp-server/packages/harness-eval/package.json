@@ -1,0 +1,25 @@
+{
+  "name": "@tied/harness-eval",
+  "version": "0.1.0",
+  "description": "Harness-neutral model eval store [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM]",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "harness-eval": "./dist/cli/main.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && npx tsx --test 'src/**/*.test.ts'"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}
