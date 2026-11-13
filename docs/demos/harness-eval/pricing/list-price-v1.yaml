@@ -1,0 +1,15 @@
+# List-price catalog — [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] M2 (illustrative USD/MTok)
+schema_version: harness-eval-pricing-v1
+catalog_revision: "2026-11-12"
+currency: USD
+pricing_mode: list_price
+models:
+  - model_slug: claude-sonnet-5-5
+    input_usd_per_mtok: 3.0
+    output_usd_per_mtok: 15.0
+  - model_slug: claude-haiku-5-5
+    input_usd_per_mtok: 0.8
+    output_usd_per_mtok: 4.0
+  - model_slug: grok-4.7-med
+    input_usd_per_mtok: 2.0
+    output_usd_per_mtok: 10.0

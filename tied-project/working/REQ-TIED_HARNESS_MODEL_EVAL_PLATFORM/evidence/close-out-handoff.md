@@ -1,21 +1,20 @@
-# Close-out handoff — REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM
+# Close-out handoff — REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM (M2)
 
-**date:** 2026-11-12  
+**date:** 2026-11-13  
 **prompt_type:** close-out
 
 ### Completion signals
 
-- **Machine close-out:** pass — gate `close_out` allowed=true; envelope `fail_on_error_gaps` blocking_gaps=0; path `tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/evidence/request-evidence-envelope.v1.json`
-- **Process contract:** partial — dual-write minimal; verification manifest present; PSA Layer C n/a; adversarial inquiry waived (minimal-depth-no-inquiry)
+- **Machine close-out:** pass — gate `close_out` allowed=true; envelope `blocking_gap_count=0`; path `tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/evidence/request-evidence-envelope.v1.json`; receipt `tied-bundle/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/gates/close_out-2026-11-13T06-22-00-195Z.json`
+- **Process contract:** partial — dual-write minimal; verification manifest refreshed for M2; integrated inquiry still deferred
 - **Adherence ledger:** not_run — reconcile skipped (minimal)
-- **Workspace cleanliness (scoped REQ):** pass in same pass — HMEP-only staging; canary/WF drift excluded from commit
+- **Workspace cleanliness (scoped REQ):** pass — HMEP M2-only staging
 
 ### Remaining risks
 
-- Integrated adversarial inquiry deferred to M2
-- Operator smoke **done** — see [metering-smoke-import.md](./metering-smoke-import.md) (manifest-only; null tokens)
-- Sibling REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW close-out completed in a follow-on commit
+- List-price catalog is illustrative (not provider billing)
+- Integrated adversarial inquiry optional before strict profile
 
 ### Commit
 
-**SHA:** `2753c3c1` — see `proposed-commit-message.txt` and `traceable-commit-evidence.md`.
+**SHA:** _(pending same pass)_

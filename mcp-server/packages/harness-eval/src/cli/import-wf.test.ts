@@ -26,7 +26,8 @@ describe("import wf SC-HMEP-M1-06", () => {
     };
     fs.writeFileSync(resolveManifestPath(client), JSON.stringify(manifest, null, 2));
     const trialId = "trial-wf-02";
-    importWfClient({ clientRoot: client, trialId, storeRoot: store });
+    const { db: importDb } = importWfClient({ clientRoot: client, trialId, storeRoot: store });
+    importDb.close();
     const db = openEvalDatabase(path.join(store, "eval.sqlite"));
     const trials = listTrials(db);
     assert.equal(trials.length, 1);

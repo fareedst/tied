@@ -1,6 +1,6 @@
 # Harness-eval (plan)
 
-**Status:** M1 build-plan GREEN — see [PLAN.md](../../tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md).
+**Status:** M1 close-out complete; **M2** pricing, verifiers, cohort report GREEN — see [PLAN.md](../../tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md).
 
 Repeatable measurement for **Cursor Agent CLI** and **Claude Code CLI** stream-json telemetry, composed with existing [workflow trials](../catalog-traditional-workflow-trial-prompts.md) without replacing `workflow_trial_agentstream`.
 
@@ -17,11 +17,16 @@ harness-eval events import --wf-client "/path/to/disposable-client" \
 # Optional: --jsonl /path/to/capture.jsonl (repeatable)
 ```
 
-4. Query or export normalized trials:
+4. Query, verify, or report:
 
 ```bash
 harness-eval diagnostics --store "$HARNESS_EVAL_STORE"
+harness-eval query summary --store "$HARNESS_EVAL_STORE"
+harness-eval report cohort --store "$HARNESS_EVAL_STORE"
+harness-eval verify trial --trial-id "<id>" --suite docs/demos/harness-eval/suites/engineering-suite-v1.yaml --store "$HARNESS_EVAL_STORE"
 ```
+
+List-price catalog (M2): [`pricing/list-price-v1.yaml`](pricing/list-price-v1.yaml). Unknown models keep `harness_estimated_cost` null.
 
 **Proof boundary:** Token and cost metrics here are independent from `@record-wf-trial` session grading and from [project size cohort](../catalog-tied-size-and-trial-statistics.md) tables.
 

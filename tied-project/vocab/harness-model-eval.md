@@ -20,6 +20,8 @@
 | **proof boundary** | Token and harness-eval metrics are not merged into `@record-wf-trial` prose grading in HMEP M1. |
 | **engineering-suite-v1** | Named harness-eval suite scenario family for engineering workflow fixtures. |
 | **SC-HMEP-M1** | HMEP milestone 1 scope boundary: store schema, import paths, and explicit non-implications vs facilitator readouts. |
+| **SC-HMEP-M2** | Pricing catalog, schema v2 cost columns, suite verifiers (`token_present`), and `report cohort` CLI. |
+| **list-price-v1** | Committed USD/MTok catalog under `docs/demos/harness-eval/pricing/`. |
 
 ## Boundaries
 

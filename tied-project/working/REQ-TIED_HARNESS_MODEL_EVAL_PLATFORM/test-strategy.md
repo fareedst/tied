@@ -49,6 +49,17 @@ Live captures under `fixtures/live-capture/` gitignored; document CLI versions i
 5. GREEN SQLite schema + normalize + CLI
 6. Composition: import WF manifest fixture tree
 
+## M2 satisfaction criteria → tests
+
+| ID | Assert | Test home |
+| --- | --- | --- |
+| SC-HMEP-M2-01 | Pricing YAML + unknown slug → null cost | `src/pricing/catalog.test.ts`, contracts `harness-eval-pricing.*` |
+| SC-HMEP-M2-02 | Legacy v1 sqlite migrates | `src/store/migrate.test.ts` |
+| SC-HMEP-M2-03 | Import + JSONL → `harness_estimated_cost` | `src/runner/import-wf-m2.test.ts` |
+| SC-HMEP-M2-04 | `token_present` verifier | `src/verify/trial.test.ts` |
+| SC-HMEP-M2-05 | Cohort JSON by wf_id × harness | `src/report/cohort.test.ts` |
+| SC-HMEP-M2-06 | verify trial CLI suite bind | `src/cli/verify.test.ts` |
+
 ## Verification manifest (M1 close-out target)
 
 ```bash

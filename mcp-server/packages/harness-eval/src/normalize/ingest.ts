@@ -45,15 +45,16 @@ export function upsertTrialSummary(
     finished_at?: string;
     wall_clock_ms?: number | null;
     exit_code?: number | null;
+    model_slug?: string | null;
   },
 ): void {
   db.prepare(
     `INSERT INTO trials (
       trial_id, harness, wf_id, config_fingerprint, started_at, finished_at, wall_clock_ms,
-      exit_code, input_tokens, output_tokens, reasoning_tokens, completeness
+      exit_code, input_tokens, output_tokens, reasoning_tokens, completeness, model_slug
     ) VALUES (
       @trial_id, @harness, @wf_id, @config_fingerprint, @started_at, @finished_at, @wall_clock_ms,
-      @exit_code, @input_tokens, @output_tokens, @reasoning_tokens, @completeness
+      @exit_code, @input_tokens, @output_tokens, @reasoning_tokens, @completeness, @model_slug
     )
     ON CONFLICT(trial_id) DO UPDATE SET
       harness = excluded.harness,
@@ -66,7 +67,8 @@ export function upsertTrialSummary(
       input_tokens = COALESCE(excluded.input_tokens, trials.input_tokens),
       output_tokens = COALESCE(excluded.output_tokens, trials.output_tokens),
       reasoning_tokens = COALESCE(excluded.reasoning_tokens, trials.reasoning_tokens),
-      completeness = COALESCE(excluded.completeness, trials.completeness)`,
+      completeness = COALESCE(excluded.completeness, trials.completeness),
+      model_slug = COALESCE(excluded.model_slug, trials.model_slug)`,
   ).run({
     trial_id: summary.trial_id,
     harness: meta.harness,
@@ -76,6 +78,7 @@ export function upsertTrialSummary(
     finished_at: meta.finished_at ?? null,
     wall_clock_ms: meta.wall_clock_ms ?? null,
     exit_code: meta.exit_code ?? null,
+    model_slug: meta.model_slug ?? null,
     input_tokens: summary.input_tokens,
     output_tokens: summary.output_tokens,
     reasoning_tokens: summary.reasoning_tokens,

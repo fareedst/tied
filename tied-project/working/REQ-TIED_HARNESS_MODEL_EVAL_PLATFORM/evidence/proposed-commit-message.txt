@@ -1,13 +1,9 @@
-feat(harness-eval): add HMEP M1 package and TIED stack
+feat(harness-eval): M2 pricing, verifiers, cohort report
 
-Introduce @tied/harness-eval for stream-json + WF manifest import,
-SQLite v1 store, and SC-HMEP-M1-01..08 tests. Mint
-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM with ARCH/IMPL and operator suites.
+[REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] Milestone 2: SQLite schema v2,
+list-price catalog, harness_estimated_cost on import, suite verifiers
+(token_present), report cohort and verify trial CLI. SC-HMEP-M2-01..06
+green; close_out allowed (minimal, advisory).
 
-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM
-ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM
-IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM
-
-Machine close-out: pass (minimal, advisory).
-Process contract: partial (no adherence reconcile; manifest present).
-Upstream feedback: N/A — no capture this close-out.
+Machine close-out: gate allowed, envelope blocking gaps 0.
+Excluded: unrelated REQ trackers and yaml-canonicalizer drift.

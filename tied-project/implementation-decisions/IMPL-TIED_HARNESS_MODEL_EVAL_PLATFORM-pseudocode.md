@@ -118,3 +118,61 @@ Grammar-Version: v2
   - CONTROL: static harness map per fixture id
   - EFFECTS: readdir fixtures dir
   - FAILURE_MODES: missing dir → empty report
+
+## LOAD_LIST_PRICE_CATALOG
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M2-01; F-11.
+- Contract:
+  - INPUT: catalog YAML path (default docs/demos/harness-eval/pricing/list-price-v1.yaml)
+  - PRE: schema_version harness-eval-pricing-v1
+  - OUTPUT: PricingCatalog { catalog_revision, rates by model_slug }
+  - POST: missing model entry → lookup returns null rates (not zero)
+  - DATA: input_usd_per_mtok, output_usd_per_mtok per model_slug
+  - CONTROL: explicit catalog_revision in fingerprint pricing_mode
+  - FAILURE_MODES: invalid schema → throw
+
+## ESTIMATE_HARNESS_LIST_PRICE
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M2-03; F-09.
+- Contract:
+  - INPUT: trial token summary + catalog rates
+  - PRE: completeness === complete and input/output token counts non-null
+  - OUTPUT: harness_estimated_cost USD number or null
+  - POST: never fabricate cost when tokens or rates missing
+  - DATA: nullable cost columns on trials row
+  - CONTROL: normalized_list_price_cost mirrors harness_estimated_cost in M2
+  - EFFECTS: UPDATE trials cost fields on import
+
+## MIGRATE_EVAL_SCHEMA_V2
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M2-02.
+- Contract:
+  - INPUT: open EvalDatabase
+  - PRE: schema_version 1 or fresh
+  - OUTPUT: schema_version 2
+  - POST: ALTER trials ADD model_slug, pricing_catalog_revision, harness_estimated_cost, normalized_list_price_cost
+  - DATA: existing M1 trial rows unchanged except new null columns
+  - FAILURE_MODES: version > supported → throw
+
+## RUN_TRIAL_VERIFIERS
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M2-04; F-12.
+- Contract:
+  - INPUT: suite doc, trial_id, store database
+  - PRE: scenario acceptance_checks defined
+  - OUTPUT: verifier results[] with pass/fail
+  - POST: token_present fails when observation_count=0 even if exit_code=0
+  - DATA: acceptance check types token_present | exit_success | manual
+  - CONTROL: manual checks skipped in M2 machine pass
+  - FAILURE_MODES: unknown trial → fail closed
+
+## REPORT_COHORT_BY_WF_ID
+
+- [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM] SC-HMEP-M2-05; F-14.
+- Contract:
+  - INPUT: store database
+  - PRE: eval.sqlite schema v2
+  - OUTPUT: JSON cohort rows grouped by wf_id and harness
+  - POST: no facilitator grades; proof boundary D-PROOF-BOUNDARY
+  - DATA: tokens, wall_clock_ms, harness_estimated_cost nullable
+  - CONTROL: read-only

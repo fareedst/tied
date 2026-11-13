@@ -2,8 +2,9 @@
 
 **Workflow:** add-feature → **`refine-plan` (this doc)** → `@build-plan` → `@close-out`  
 **Request token:** `REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM`  
-**plan_phase:** `pre-implementation`  
-**profile_depth:** `minimal` · **gate_policy:** `advisory` (build-plan: **`integrated`** on adapter/token slices only)
+**plan_phase:** `post-build` (M2 slice)  
+**milestone:** M2 GREEN — close-out pending  
+**profile_depth:** `minimal` · **gate_policy:** `advisory` (build-plan M2: **`integrated`** on pricing + verifier blocks)
 
 **Origin:** Sponsor feature spec *Cursor / Claude Harness and Model Evaluation Platform* v1.0 (F-01…F-19, four milestones).  
 **Cursor plan:** `.cursor/plans/harness_model_eval_platform_3b2ec5c2.plan.md`
@@ -112,11 +113,22 @@ Cost fields (M2+): `harness_estimated_cost`, `normalized_list_price_cost`, `prov
 | SC-HMEP-M1-07 | `harness-eval diagnostics` reports parser fixture coverage by harness label |
 | SC-HMEP-M1-08 | JSON export or SQL query aggregates trials across `cursor` and `claude` without source JSONL |
 
-**Deferred to M2+:** SC-HMEP-M2-* (pricing, verifiers, cohort reports, F-09–F-14).
+## 6b. Acceptance criteria (Milestone 2 — this build-plan)
+
+| ID | Criterion |
+| --- | --- |
+| SC-HMEP-M2-01 | Committed list-price catalog validates; unknown `model_slug` → `harness_estimated_cost` stays `null` (not `0`) |
+| SC-HMEP-M2-02 | SQLite migrates v1→v2 with nullable cost columns; existing M1 rows preserved |
+| SC-HMEP-M2-03 | After import with `completeness: complete` tokens, `harness_estimated_cost` derived from catalog revision recorded on trial |
+| SC-HMEP-M2-04 | Suite `acceptance_checks` type `token_present` fails when `exit_code === 0` but zero observations |
+| SC-HMEP-M2-05 | `harness-eval report cohort` aggregates trials by `wf_id` × `harness` with tokens, wall clock, estimated cost |
+| SC-HMEP-M2-06 | `harness-eval verify trial` cross-links suite scenario `wf_id` with store row (no facilitator grade merge) |
+
+**Still M3+:** provider billing APIs, `actual_charged_cost`, regression baselines (F-15–F-16).
 
 ---
 
-## 7. Build sequence (`@build-plan`)
+## 7. Build sequence (`@build-plan` M1 — done)
 
 | Step | Deliverable |
 | --- | --- |
@@ -152,9 +164,22 @@ Cost fields (M2+): `harness_estimated_cost`, `normalized_list_price_cost`, `prov
 
 ---
 
+## 7b. Build sequence (`@build-plan` M2)
+
+| Step | Deliverable |
+| --- | --- |
+| 1 | LEAP REQ satisfaction + IMPL pseudo-code blocks for pricing, verify, report, schema v2 |
+| 2 | `pseudocode_validate`; integrated inquiry on pricing + verifier blocks |
+| 3 | RED: SC-HMEP-M2-01…06 |
+| 4 | GREEN: catalog, migrate v2, cost attach on import, verify + report CLI |
+| 5 | Contracts `harness-eval-pricing.schema.json`; update README operator recipe |
+| 6 | Vocab + CITDP M2 delta; `tied_validate_consistency` |
+
+---
+
 ## 10. Handoff
 
-**Do next:** `@build-plan` linked to this folder.
+**Do next:** close-out when verification gate passes (M2).
 
 **Operator smoke (post build):**
 

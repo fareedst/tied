@@ -19,6 +19,8 @@ import {
   insertObservations,
   upsertTrialSummary,
 } from "../normalize/ingest.js";
+import { loadPricingCatalog } from "../pricing/catalog.js";
+import { applyTrialPricing } from "../pricing/apply.js";
 
 const MANIFEST_REL = path.join(
   "tied-project",
@@ -129,9 +131,27 @@ export function importWfClient(input: {
     finished_at: manifest.finished_at,
     wall_clock_ms: wallClockMs(manifest),
     exit_code: manifest.exit_code ?? null,
+    model_slug: manifest.model_slug ?? null,
   });
 
   const inserted = insertObservations(db, input.trialId, observations);
+
+  try {
+    const catalog = loadPricingCatalog();
+    applyTrialPricing(
+      db,
+      input.trialId,
+      {
+        completeness: summary.completeness,
+        input_tokens: summary.input_tokens,
+        output_tokens: summary.output_tokens,
+      },
+      manifest.model_slug ?? null,
+      catalog,
+    );
+  } catch (err) {
+    console.error(`DIAGNOSTIC: pricing catalog skip ${(err as Error).message}`);
+  }
 
   appendImportReceipt(importsLog, {
     at: new Date().toISOString(),

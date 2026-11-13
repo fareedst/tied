@@ -1,9 +1,10 @@
 CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
   change_definition:
     current_behavior: "WF trials and agentstream capture orchestration and facilitator readouts; token usage, cache breakdown, and comparable cost are not stored in a harness-neutral schema. Stream-json parsing in agentstream is session/text oriented."
-    desired_behavior: "New harness-eval package ingests Cursor/Claude stream-json and WF orchestrator manifests into versioned raw + SQLite normalized store; null-safe metrics; M1 import/query without rewriting workflow_trial_agentstream."
+    desired_behavior: "harness-eval ingests WF manifests and stream-json into SQLite v2 with list-price catalog, suite verifiers, and cohort report CLI; null-safe tokens and costs; no @record-wf-trial grade merge."
     success_criteria:
       - "SC-HMEP-M1-01 through SC-HMEP-M1-08 in PLAN.md"
+      - "SC-HMEP-M2-01 through SC-HMEP-M2-06 in PLAN.md"
       - "tied_validate_consistency ok after REQ/ARCH/IMPL mint"
     unchanged_behavior: "workflow_trial_agentstream; tied agentstream checklist turns; @record-wf-trial grading; project-size-batch-compare size/wall_clock/grades columns."
   impact_analysis:
@@ -13,7 +14,7 @@ CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
       - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
       - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
   non_goals:
-    - "Milestone 2+ pricing, billing APIs, verifier execution in M1"
+    - "Milestone 3+ provider billing APIs and actual_charged_cost"
     - "Tokenizer fabrication when CLI omits usage"
     - "Web dashboard or hosted eval service"
   risk_analysis:
@@ -28,6 +29,7 @@ CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
       disconfirming_observations:
         - "SC-HMEP-M1-01 rejects fabricated counts"
         - "SC-HMEP-M1-02 and SC-HMEP-M1-03 tests green on fixtures"
+        - "SC-HMEP-M2-04 token_present fails exit-0 without observations"
       evidence_references:
         - "tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md"
         - "tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/test-strategy.md"

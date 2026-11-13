@@ -1,6 +1,6 @@
-/** [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] SQLite schema v1 */
+/** [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] SQLite schema (v2 M2) */
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 
 export const MIGRATION_SQL_V1 = `
 CREATE TABLE IF NOT EXISTS schema_version (
@@ -41,3 +41,20 @@ CREATE TABLE IF NOT EXISTS token_observations (
 
 CREATE INDEX IF NOT EXISTS idx_observations_trial ON token_observations(trial_id);
 `;
+
+/** Columns added in M2 — applied idempotently via migrateToV2. */
+export const V2_TRIAL_COLUMNS: { name: string; ddl: string }[] = [
+  { name: "model_slug", ddl: "ALTER TABLE trials ADD COLUMN model_slug TEXT" },
+  {
+    name: "pricing_catalog_revision",
+    ddl: "ALTER TABLE trials ADD COLUMN pricing_catalog_revision TEXT",
+  },
+  {
+    name: "harness_estimated_cost",
+    ddl: "ALTER TABLE trials ADD COLUMN harness_estimated_cost REAL",
+  },
+  {
+    name: "normalized_list_price_cost",
+    ddl: "ALTER TABLE trials ADD COLUMN normalized_list_price_cost REAL",
+  },
+];

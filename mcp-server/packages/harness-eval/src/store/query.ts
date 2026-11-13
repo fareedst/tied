@@ -4,6 +4,20 @@
 import type { EvalDatabase } from "../lib/sqlite.js";
 import type { CrossHarnessTrialRow } from "../types.js";
 
+export interface TrialRow extends CrossHarnessTrialRow {
+  wf_id: string | null;
+  reasoning_tokens: number | null;
+  completeness: string | null;
+  exit_code: number | null;
+  model_slug: string | null;
+  harness_estimated_cost: number | null;
+  normalized_list_price_cost: number | null;
+}
+
+const TRIAL_SELECT = `trial_id, harness, wf_id, input_tokens, output_tokens, reasoning_tokens,
+  wall_clock_ms, config_fingerprint, completeness, exit_code, model_slug,
+  harness_estimated_cost, normalized_list_price_cost`;
+
 export function listTrials(db: EvalDatabase): CrossHarnessTrialRow[] {
   const rows = db
     .prepare(
@@ -12,6 +26,16 @@ export function listTrials(db: EvalDatabase): CrossHarnessTrialRow[] {
     )
     .all() as CrossHarnessTrialRow[];
   return rows;
+}
+
+export function listTrialRows(db: EvalDatabase): TrialRow[] {
+  return db.prepare(`SELECT ${TRIAL_SELECT} FROM trials ORDER BY trial_id`).all() as TrialRow[];
+}
+
+export function getTrialRow(db: EvalDatabase, trialId: string): TrialRow | undefined {
+  return db.prepare(`SELECT ${TRIAL_SELECT} FROM trials WHERE trial_id = ?`).get(trialId) as
+    | TrialRow
+    | undefined;
 }
 
 export function crossHarnessSummaryJson(db: EvalDatabase): string {

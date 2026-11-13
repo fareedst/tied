@@ -11,15 +11,25 @@ import { loadSuiteFile } from "../suite/load.js";
 import { validateSuiteIntegrity } from "../suite/integrity.js";
 import { importWfClient } from "../runner/import-wf.js";
 import { formatDiagnosticsReport } from "./diagnostics.js";
+import { cohortReportJson } from "../report/cohort.js";
+import { getTrialRow } from "../store/query.js";
+import {
+  allVerifiersPass,
+  findScenarioForWfId,
+  runTrialVerifiers,
+  type SuiteScenario,
+} from "../verify/trial.js";
 
 function usage(): void {
-  console.error(`harness-eval — [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] M1
+  console.error(`harness-eval — [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM]
 
 Usage:
   harness-eval suite validate <suite.yaml>
   harness-eval events import --wf-client <path> --trial-id <id> [--jsonl <path>]... [--store <dir>]
   harness-eval diagnostics [--store <dir>]
   harness-eval query summary [--store <dir>]
+  harness-eval report cohort [--store <dir>]
+  harness-eval verify trial --trial-id <id> --suite <suite.yaml> [--store <dir>]
 `);
 }
 
@@ -112,6 +122,46 @@ export function runCli(argv: string[]): number {
     console.log(formatDiagnosticsReport(storeRoot));
     return 0;
   }
+  if (cmd[0] === "report" && cmd[1] === "cohort") {
+    const storeRoot = resolveStoreRoot(typeof flags.store === "string" ? flags.store : undefined);
+    const { dbPath } = ensureStoreLayout(storeRoot);
+    if (!fs.existsSync(dbPath)) {
+      console.log(JSON.stringify({ by_wf_id: {}, trials: [] }, null, 2));
+      return 0;
+    }
+    const db = openEvalDatabase(dbPath);
+    console.log(cohortReportJson(db));
+    db.close();
+    return 0;
+  }
+  if (cmd[0] === "verify" && cmd[1] === "trial") {
+    const trialId = flags["trial-id"];
+    const suitePath = flags.suite;
+    if (typeof trialId !== "string" || typeof suitePath !== "string") {
+      usage();
+      return 2;
+    }
+    const storeRoot = resolveStoreRoot(typeof flags.store === "string" ? flags.store : undefined);
+    const { dbPath } = ensureStoreLayout(storeRoot);
+    if (!fs.existsSync(dbPath)) {
+      console.error("DEBUG: no eval store");
+      return 1;
+    }
+    const db = openEvalDatabase(dbPath);
+    const trial = getTrialRow(db, trialId);
+    if (!trial) {
+      console.error(`DEBUG: unknown trial_id=${trialId}`);
+      db.close();
+      return 1;
+    }
+    const suiteDoc = loadSuiteFile(suitePath) as { scenarios?: SuiteScenario[] };
+    const scenario = findScenarioForWfId(suiteDoc.scenarios ?? [], trial.wf_id);
+    const results = runTrialVerifiers(db, trial, scenario);
+    console.log(JSON.stringify({ trial_id: trialId, results }, null, 2));
+    const code = allVerifiersPass(results) ? 0 : 1;
+    db.close();
+    return code;
+  }
   if (cmd[0] === "query" && cmd[1] === "summary") {
     const storeRoot = resolveStoreRoot(typeof flags.store === "string" ? flags.store : undefined);
     const { dbPath } = ensureStoreLayout(storeRoot);
@@ -128,11 +178,22 @@ export function runCli(argv: string[]): number {
   return 2;
 }
 
-import { pathToFileURL } from "node:url";
+import { realpathSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
-const invoked = process.argv[1]
-  ? import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href
-  : false;
-if (invoked) {
+function cliEntryMatched(): boolean {
+  if (!process.argv[1]) {
+    return false;
+  }
+  try {
+    const entry = realpathSync(path.resolve(process.argv[1]));
+    const self = realpathSync(fileURLToPath(import.meta.url));
+    return entry === self;
+  } catch {
+    return false;
+  }
+}
+
+if (cliEntryMatched()) {
   process.exit(runCli(process.argv.slice(2)));
 }
