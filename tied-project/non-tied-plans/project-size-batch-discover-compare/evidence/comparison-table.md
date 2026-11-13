@@ -1,6 +1,6 @@
 # Project size comparison (facilitator)
 
-**Generated:** 2026-11-13T00:54:04.200Z
+**Generated:** 2026-11-13T02:07:24.875Z
 **Discover parent:** `/Users/fareed/Documents/dev/test`
 **Pattern (substring):** `wf-agentstream`
 
@@ -40,16 +40,15 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | label | Vocab | REQ | ARCH | IMPL | applied_utf8 | applied_lines | procedures | unit | comp | e2e | utf8/atom | oi/atom | pf/atom | wall_clock | grades |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | wf-01-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | 0 | 0 | 0 | 7 | 6 | — |
+| wf-01-cursor-grok47low | 0 | 1 | 1 | 1 | 2040 | 35 | 5 | 6 | 0 | 0 | 340 | 6 | 1 | 13 | 3.87 · A/A/A-/A-/A/A/A- |
 | wf-01-cursor-grok47medmedium | 8 | 1 | 1 | 1 | 6235 | 131 | 5 | 9 | 0 | 0 | 445 | 9 | 1 | 34 | — |
 | wf-02-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 5 | 6 | — |
 | wf-02-cursor-grok47medmedium | 9 | 1 | 1 | 1 | 2283 | 49 | 3 | 9 | 0 | 0 | 152 | 3 | 1 | 29 | — |
 | wf-03-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 2 | 4 | — |
 | wf-03-cursor-grok47medmedium | 7 | 1 | 1 | 1 | 3882 | 65 | 5 | 9 | 0 | 0 | 299 | 5 | 1 | 35 | — |
 | wf-04-claude-claudehaiku55medium | 0 | 1 | 1 | 1 | 2332 | 39 | 0 | 15 | 0 | 0 | 389 | 7 | 3 | 9 | — |
-| wf-04-cursor-composer25high | 0 | 1 | 1 | 1 | 2664 | 39 | 4 | 8 | 0 | 0 | 444 | 7 | 1 | 13 | — |
 | wf-04-cursor-grok47medmedium | 6 | 1 | 1 | 1 | 6859 | 91 | 5 | 14 | 0 | 0 | 572 | 8 | 1 | 32 | — |
 | wf-05-claude-claudehaiku55medium | 0 | 1 | 1 | 1 | 2237 | 29 | 0 | 25 | 0 | 0 | 373 | 5 | 4 | 6 | — |
-| wf-05-cursor-composer25high | 12 | 1 | 1 | 1 | 4205 | 73 | 5 | 11 | 0 | 0 | 234 | 4 | 1 | 14 | — |
 | wf-05-cursor-grok47medmedium | 15 | 1 | 1 | 1 | 5234 | 122 | 4 | 11 | 0 | 0 | 249 | 6 | 1 | 37 | — |
 | wf-06-claude-claudehaiku55medium | 0 | 1 | 1 | 1 | 2510 | 39 | 4 | 0 | 0 | 0 | 418 | 7 | 0 | 5 | — |
 | wf-06-cursor-composer25high | 0 | 1 | 1 | 1 | 3527 | 69 | 5 | 11 | 0 | 0 | 588 | 12 | 2 | 17 | — |
@@ -66,9 +65,9 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-09-claude-claudesonnet55medium | 0 | 1 | 1 | 1 | 1458 | 23 | 1 | 11 | 0 | 0 | 243 | 4 | 2 | 5 | 3.43 · A/B+/B/A-/B/A-/B+ |
 | wf-10-claude-claudefable52low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — | — | — | 0 | — |
 | wf-10-claude-claudehaiku55high | 0 | 1 | 1 | 2 | 6710 | 176 | 5 | 50 | 0 | 0 | 839 | 22 | 6 | 14 | 3.71 · A/A-/A/A/B+/A-/B+ |
-| wf-10-claude-claudehaiku55low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | 7 | 0 | — | — | — | 5 | 3.04 · A-/C+/A/A/D+/B/B |
+| wf-10-claude-claudehaiku55low | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 16 | 0 | 0 | 0 | 0 | 8 | 4 | 2.90 · A-/C+/A-/B+/D+/B/B |
 | wf-10-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | 0 | 0 | 0 | 11 | 7 | 3.29 · A/B-/A-/A/C+/B+/B |
-| wf-10-claude-claudesonnet46low | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 6 | 4 | 0 | 0 | 0 | 5 | 13 | 3.24 · A-/C+/B/B+/B-/A/A- |
+| wf-10-claude-claudesonnet46low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 2 | 0 | — | — | — | 5 | 2.94 · A-/C+/A/B+/D+/B/B |
 | wf-10-claude-claudesonnet46medium | 0 | 1 | 1 | 1 | 1762 | 43 | 2 | 3 | 4 | 0 | 294 | 7 | 1 | 17 | 2.80 · B+/C/C+/B/C/A-/B+ |
 | wf-10-claude-claudesonnet55high | 0 | 1 | 1 | 3 | 8833 | 136 | 0 | 49 | 9 | 0 | 883 | 14 | 6 | 12 | 3.86 · A/A/A/A/A-/A/B+ |
 | wf-10-claude-claudesonnet55low | 0 | 1 | 1 | 1 | 541 | 4 | 0 | 8 | 0 | 0 | 90 | 1 | 1 | 3 | 2.91 · A/B-/B-/B/C+/B/B- |
@@ -91,16 +90,15 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | label | lbl:wiring | lbl:integration | lbl:contract | comp_inferred |
 | --- | --- | --- | --- | --- |
 | wf-01-claude-claudehaiku55medium | — | — | — | 0 |
+| wf-01-cursor-grok47low | — | — | — | 0 |
 | wf-01-cursor-grok47medmedium | — | — | — | 0 |
 | wf-02-claude-claudehaiku55medium | — | — | — | 0 |
 | wf-02-cursor-grok47medmedium | — | — | — | 0 |
 | wf-03-claude-claudehaiku55medium | — | — | — | 4 |
 | wf-03-cursor-grok47medmedium | — | — | — | 3 |
 | wf-04-claude-claudehaiku55medium | — | — | — | 0 |
-| wf-04-cursor-composer25high | — | — | — | 5 |
 | wf-04-cursor-grok47medmedium | — | — | — | 1 |
 | wf-05-claude-claudehaiku55medium | — | — | — | 0 |
-| wf-05-cursor-composer25high | — | — | — | 0 |
 | wf-05-cursor-grok47medmedium | — | — | — | 0 |
 | wf-06-claude-claudehaiku55medium | — | — | — | 0 |
 | wf-06-cursor-composer25high | — | — | — | 0 |
@@ -117,9 +115,9 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-09-claude-claudesonnet55medium | — | — | — | 0 |
 | wf-10-claude-claudefable52low | — | — | — | 0 |
 | wf-10-claude-claudehaiku55high | — | — | — | 0 |
-| wf-10-claude-claudehaiku55low | 7 | — | — | 0 |
+| wf-10-claude-claudehaiku55low | — | — | — | 0 |
 | wf-10-claude-claudehaiku55medium | — | — | — | 0 |
-| wf-10-claude-claudesonnet46low | 4 | — | — | 0 |
+| wf-10-claude-claudesonnet46low | 2 | — | — | 0 |
 | wf-10-claude-claudesonnet46medium | 4 | — | — | 0 |
 | wf-10-claude-claudesonnet55high | 9 | — | — | 0 |
 | wf-10-claude-claudesonnet55low | — | — | — | 4 |
