@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | **Purpose** | Facilitator index of **PROMPT-WF-01…12** recorded trials — harness, model slug, session grades, orchestrator **Run time**, and **latest for cell** (composition prompts **09–12**; note **paste generation** `goal-first` vs `architect-in-paste` when comparing structure across models) |
-| **Rows** | **119** (matches [Recorded trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
+| **Rows** | **120** (matches [Recorded trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
 | **Status** | Maintainer snapshot |
 | **Last updated** | 2026-11-13 |
 | **Disclaimer** | Store documentation only — not a `[REQ-*]` token, not a maturity score, not a model leaderboard |
@@ -142,6 +142,7 @@ Rows are **PROMPT-WF-01…08** cells from [Recorded trials](catalog-traditional-
 | 09 | 1794351557 | claude | `claude-haiku-5-5` | 0 | 191 | 2.51 · B+/D+/B−/B+/C/B−/C+ | no | [readout](trial-readout-PROMPT-WF-09-claudehaiku55low-1794351557-wf-agentstream-wf-09-claude-claudehaiku55low.md) |
 | 09 | 1794579829 | claude | `claude-haiku-5-5` | 0 | 229 | 2.52 · B+/D+/B−/B+/C/B−/C+ | no | [readout](trial-readout-PROMPT-WF-09-claudehaiku55low-1794579829-wf-agentstream-wf-09-claude-claudehaiku55low.md) |
 | 09 | 1794582335 | claude | `claude-haiku-5-5` | 0 | 206 | 2.56 · B+/D+/B/B+/C/B−/C+ | yes | [readout](trial-readout-PROMPT-WF-09-claudehaiku55low-1794582335-wf-agentstream-wf-09-claude-claudehaiku55low.md) |
+| 09 | 1794586911 | claude | `claude-opus-5-5` | 0 | 299 | 3.62 · A−/A/B+/A−/B+/A/B+ | yes | [readout](trial-readout-PROMPT-WF-09-claudeopus55low-1794586911-wf-agentstream-wf-09-claude-claudeopus55low.md) |
 | 09 | 1794586024 | claude | `claude-sonnet-5-5` | 0 | 213 | 3.28 · A−/B+/B/B+/B/A−/B+ | yes | [readout](trial-readout-PROMPT-WF-09-claudesonnet55low-1794586024-wf-agentstream-wf-09-claude-claudesonnet55low.md) |
 | 09 | 1794352390 | claude | `claude-sonnet-5-5` | 0 | 146 | 2.71 · B/B−/C+/B/C+/B/B− | no | [readout](trial-readout-PROMPT-WF-09-claudesonnet55low-1794352390-wf-agentstream-wf-09-claude-claudesonnet55low.md) |
 | 09 | 1794352615 | claude | `claude-sonnet-5-5` | 0 | 286 | 3.43 · A/B+/B/A−/B/A−/B+ | yes | [readout](trial-readout-PROMPT-WF-09-claudesonnet55medium-1794352615-wf-agentstream-wf-09-claude-claudesonnet55medium.md) |

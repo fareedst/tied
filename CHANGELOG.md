@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-WF-09 facilitator readout (Claude Opus 5.5 low @ 1794586911)** — **4.2.2** via `workflow_trial_agentstream wf-09`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md). **Workflow complete** — orchestrator `exit_code: 0`; **`a6b1ead`**; **8/8** tests; close_out **allowed**; HMEP stream-json import (list-price null for Opus slug). [Readout](docs/demos/trial-readout-PROMPT-WF-09-claudeopus55low-1794586911-wf-agentstream-wf-09-claude-claudeopus55low.md).
+
 - **PROMPT-WF-09 facilitator readout (Claude Sonnet 5.5 low @ 1794586024)** — **4.2.2** via `workflow_trial_agentstream wf-09`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md). **Workflow complete** — orchestrator `exit_code: 0`; **`e0183b7`**; **7/7** tests; close_out **allowed** (adherence **not_run**). HMEP stream-json import. [Readout](docs/demos/trial-readout-PROMPT-WF-09-claudesonnet55low-1794586024-wf-agentstream-wf-09-claude-claudesonnet55low.md).
 
 - **PROMPT-WF-09 facilitator readout (Claude Haiku 5.5 low @ 1794582335)** — **4.2.2** via `workflow_trial_agentstream wf-09`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md). **Split signal** — orchestrator `exit_code: 0`; **9/9** tests uncommitted; close_out **blocked** (CITDP adversarial). [Readout](docs/demos/trial-readout-PROMPT-WF-09-claudehaiku55low-1794582335-wf-agentstream-wf-09-claude-claudehaiku55low.md).
