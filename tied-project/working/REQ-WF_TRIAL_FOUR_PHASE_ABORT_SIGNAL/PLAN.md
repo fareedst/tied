@@ -1,10 +1,10 @@
 # PLAN — REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL
 
-**Status:** build-plan complete — wave 1.5 session highlight · **`@close-out` next**  
+**Status:** close-out complete — wave 1.5 shipped **`50326bab`**  
 **Parent context:** [REQ-WF_TRIAL_PHASE_HANDOFF_GATE](../REQ-WF_TRIAL_PHASE_HANDOFF_GATE/PLAN.md) · [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK](../REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK/PLAN.md)  
 **Cursor plan:** [session_limit_highlight_349881a2.plan.md](../../../../.cursor/plans/session_limit_highlight_349881a2.plan.md)  
 **Request token:** `REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL`  
-**plan_phase:** `post-build` (wave 1.5)  
+**plan_phase:** `close-out-ready` (wave 1.5)  
 **profile_depth:** `minimal` · **gate_policy:** `advisory`
 
 **Wave 1:** committed `3b9ea925` (SC-WF-ABS-01..04)  
@@ -94,4 +94,4 @@ cd mcp-server/packages/agentstream && npm test
 
 ## Do next
 
-**`@close-out`** — commit wave 1.5 + bundled debug/SPT/alias; reconcile CITDP gate if needed.
+Shipped **`50326bab`**. Next: **REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT** close-out (optional second commit).

@@ -33,7 +33,7 @@
 | date | prompt_type | step | note |
 | --- | --- | --- | --- |
 | 2026-11-12 | build-plan | sc-wrc-01..05 | GREEN implementation |
-| 2026-11-12 | close-out | gates + LEAP parent | `merged_decision.allowed: true`; traceable commit |
+| 2026-11-12 | close-out | gates + LEAP parent | `merged_decision.allowed: true`; commit `4096b150` |
 
 ---
 

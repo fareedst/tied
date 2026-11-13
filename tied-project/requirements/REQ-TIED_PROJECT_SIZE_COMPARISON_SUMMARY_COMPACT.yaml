@@ -1,14 +1,14 @@
 REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
   REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
-    acceptance_criteria:
-      - "SC-CSC-01 through SC-CSC-11 in working PLAN"
     description: "Display-only facilitator comparison table UX."
     satisfaction_criteria:
       - criterion: "render tests green and tied_validate_consistency ok."
         id: "SC-CSC-06"
       - criterion: "Summary and verbose use trimmed wf-NN label when pattern matches."
         id: "SC-CSC-02"
-      - criterion: "Summary has no ok column."
-        id: "SC-CSC-01"
+      - criterion: "Summary atom columns Vocab REQ ARCH IMPL immediately after label."
+        id: "SC-CSC-12"
       - criterion: "Summary cross-layer columns utf8/atom oi/atom pf/atom before wall_clock."
         id: "SC-CSC-11"
+      - criterion: "Summary has no ok column."
+        id: "SC-CSC-01"

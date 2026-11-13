@@ -6,10 +6,10 @@ execution_evidence:
     - "impact-discovery"
     - "risk-assessment"
     - "test-strategy"
+    - "traceable-commit"
     - "unit-test-green"
     - "unit-test-red"
     - "verification-gate"
-    - "traceable-commit"
   request: "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
 execution_profile:
   depth_tier: "minimal"
@@ -62,5 +62,5 @@ steps:
   - disposition: "completed"
     slug: "traceable-commit"
     tracking:
-      note: "close-out 18df8220"
+      note: "close-out 45750f77"
       status: "completed"

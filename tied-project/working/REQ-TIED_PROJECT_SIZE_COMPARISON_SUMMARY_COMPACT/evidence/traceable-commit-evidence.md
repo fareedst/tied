@@ -22,4 +22,4 @@ N/A — display-only cohort UX; no `tied_feedback_add`.
 
 Render + tests, IMPL pseudo-code, CITDP, regenerated comparison-table/manifest (batch plan evidence), working handoff/verification, CHANGELOG.
 
-**SHA:** `888f7872`
+**SHA:** `a7088bf6`

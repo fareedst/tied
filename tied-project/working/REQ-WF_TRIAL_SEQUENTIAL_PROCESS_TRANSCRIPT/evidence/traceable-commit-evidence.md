@@ -1,6 +1,6 @@
 # Traceable commit evidence — REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT
 
-**Commit SHA:** `18df8220`
+**Commit SHA:** `45750f77`
 
 ## Gates
 

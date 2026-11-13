@@ -1,6 +1,6 @@
 # Traceable commit evidence — REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL (wave 1.5)
 
-**Commit SHA:** _(pending — filled in same commit)_
+**Commit SHA:** `50326bab`
 
 ## Gates
 

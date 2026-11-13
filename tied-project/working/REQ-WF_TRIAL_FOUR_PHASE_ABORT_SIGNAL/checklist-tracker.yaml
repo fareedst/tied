@@ -6,10 +6,10 @@ execution_evidence:
     - "impact-discovery"
     - "risk-assessment"
     - "test-strategy"
+    - "traceable-commit"
     - "unit-test-green"
     - "unit-test-red"
     - "verification-gate"
-    - "traceable-commit"
   request: "REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL"
 execution_profile:
   depth_tier: "minimal"

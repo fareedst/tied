@@ -26,4 +26,4 @@ Summary **Vocab | REQ | ARCH | IMPL** after `label` (**SC-CSC-12**). See [close-
 
 ## Commit
 
-**`888f7872`** — see [traceable-commit-evidence.md](./traceable-commit-evidence.md).
+**`a7088bf6`** — see [traceable-commit-evidence.md](./traceable-commit-evidence.md).
