@@ -22,4 +22,4 @@ N/A — facilitator readout + display-only grades join.
 
 Grades render/index tests, TIED V+A+I+CITDP, comparison-table/manifest/receipts batch regen, grok47-high readout + catalog/README/CHANGELOG, working close-out evidence.
 
-**SHA:** *(recorded after commit)*
+**SHA:** **c506b177**
