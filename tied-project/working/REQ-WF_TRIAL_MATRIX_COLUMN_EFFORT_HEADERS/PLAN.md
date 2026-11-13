@@ -5,7 +5,7 @@
 **Parent:** [PLAN-WF-TRIAL-COMPARISON-MATRIX](../PLAN-WF-TRIAL-COMPARISON-MATRIX/PLAN.md)  
 **Compose:** [REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX](../REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX/PLAN.md) (Haiku slug labels — post-build)  
 **Primary deliverable:** **9** comparison matrix column headers — **harness · config · MODEL_EFFORT** where effort applies; **composer-2.5** unnamed  
-**plan_phase:** `post-build`  
+**plan_phase:** `closed`  
 **profile_depth:** `minimal` · **gate_policy:** `advisory` · **depth_tier:** `minimal`
 
 ---
