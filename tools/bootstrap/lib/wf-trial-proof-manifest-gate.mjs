@@ -1,5 +1,8 @@
 /**
- * [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] [SC-RPM-05] [SC-RPM-09] [SC-RPM-10]
+ * [REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE] [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE]
+ * [ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE] [ARCH-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE]
+ * [IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE] [SC-PMG-11] [SC-PMG-12] [SC-PMG-13]
+ * [SC-RPM-05] [SC-RPM-09] [SC-RPM-10]
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -18,6 +21,35 @@ export const VALID_PROOF_SUBTYPES = new Set([
   "e2e.ui",
   "e2e.platform_constrained",
 ]);
+
+/** Coarse receipt facets — not valid proof_subtype values (common agent mistake). */
+export const COARSE_PROOF_FACETS = new Set(["unit", "composition", "e2e", "binding_inventory"]);
+
+// [IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE] [SC-PMG-11] [SC-PMG-12] Per-row proof_subtype; FACET_AS_SUBTYPE for coarse facets.
+export function proofSubtypeValidationError(index, value, rowKind = "files") {
+  const loc = `${rowKind}[${index}].proof_subtype`;
+  if (typeof value !== "string" || !value.trim()) {
+    return {
+      code: "SUBTYPE_MISSING",
+      message: `${loc} required (fine label, e.g. unit.default)`,
+    };
+  }
+  if (COARSE_PROOF_FACETS.has(value)) {
+    return {
+      code: "FACET_AS_SUBTYPE",
+      message:
+        `${loc} "${value}" is proof_facet not proof_subtype; ` +
+        `use fine labels (e.g. unit.default, composition.wiring, e2e.ui)`,
+    };
+  }
+  if (!VALID_PROOF_SUBTYPES.has(value)) {
+    return {
+      code: "UNKNOWN_SUBTYPE",
+      message: `${loc} invalid: "${value}"`,
+    };
+  }
+  return null;
+}
 
 const PRIMARY_REL = "tied-project/working/proof-facet-manifest/evidence/proof-facet-manifest.v1.json";
 
@@ -66,16 +98,30 @@ export function validateMinManifestShape(manifest, expectedPromptId) {
   if (!Array.isArray(files) || files.length === 0) {
     errors.push({ code: "FILES_EMPTY", message: "files[] must contain at least one row" });
   } else {
-    const row = files[0];
-    if (!row || typeof row !== "object") {
-      errors.push({ code: "FILE_ROW", message: "files[0] must be an object" });
-    } else {
+    // [IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE] [SC-PMG-11] Validate every files[] row before FILE_EXISTS / FILE_COVERAGE.
+    for (let i = 0; i < files.length; i++) {
+      const row = files[i];
+      if (!row || typeof row !== "object") {
+        errors.push({ code: "FILE_ROW", message: `files[${i}] must be an object` });
+        continue;
+      }
       if (typeof row.path !== "string" || !row.path.trim()) {
-        errors.push({ code: "FILE_PATH", message: "files[0].path required" });
+        errors.push({ code: "FILE_PATH", message: `files[${i}].path required` });
       }
-      if (typeof row.proof_subtype !== "string" || !VALID_PROOF_SUBTYPES.has(row.proof_subtype)) {
-        errors.push({ code: "UNKNOWN_SUBTYPE", message: "files[0].proof_subtype invalid" });
+      const subtypeErr = proofSubtypeValidationError(i, row.proof_subtype);
+      if (subtypeErr) {
+        errors.push(subtypeErr);
       }
+    }
+  }
+  const bindings = manifest.bindings;
+  if (Array.isArray(bindings)) {
+    for (let i = 0; i < bindings.length; i++) {
+      const b = bindings[i];
+      const st = b?.proof_subtype;
+      if (st === undefined) continue;
+      const subtypeErr = proofSubtypeValidationError(i, st, "bindings");
+      if (subtypeErr) errors.push(subtypeErr);
     }
   }
   return { ok: errors.length === 0, errors };
@@ -197,6 +243,15 @@ if (isMain) {
   if (!result.ok) {
     for (const err of result.errors ?? []) {
       process.stderr.write(`ERROR: WF trial proof manifest gate: ${err.message}\n`);
+    }
+    // [IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE] [SC-PMG-13] Operator taxonomy + MCP validate hints (DIAGNOSTIC, not ERROR).
+    if (result.errors?.some((e) => e.code === "FACET_AS_SUBTYPE" || e.code === "UNKNOWN_SUBTYPE")) {
+      process.stderr.write(
+        "DIAGNOSTIC: proof_subtype taxonomy: tied-project/working/REQ-TIED_TRIAL_PROOF_INTENT_STACK/evidence/proof-test-label-taxonomy.md\n",
+      );
+      process.stderr.write(
+        "DIAGNOSTIC: validate before close-out: MCP tied_wf_proof_manifest_validate (repo_root + manifest_path)\n",
+      );
     }
     if (result.expected_path) {
       process.stderr.write(

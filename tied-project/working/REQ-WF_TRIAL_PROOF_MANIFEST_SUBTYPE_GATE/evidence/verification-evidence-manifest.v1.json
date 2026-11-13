@@ -1,0 +1,43 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "pmg-build-plan-verify-2026-11-12",
+  "commit": "d151c746",
+  "covered_tokens": [
+    "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE",
+    "IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "proof_boundaries": [
+    "Bootstrap unit tests only; parent RPM covers orchestrator L3"
+  ],
+  "command_results": [
+    {
+      "id": "pmg-gate-unit",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/wf-trial-proof-manifest-gate.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 245,
+      "artifacts": [
+        "tied-project/working/REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE/evidence/quality-manifest/pmg-gate-unit.stdout.txt",
+        "tied-project/working/REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE/evidence/quality-manifest/pmg-gate-unit.stderr.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "CITDP test_strategy unit path",
+      "evidence_method": "command",
+      "result": "passed"
+    }
+  ]
+}

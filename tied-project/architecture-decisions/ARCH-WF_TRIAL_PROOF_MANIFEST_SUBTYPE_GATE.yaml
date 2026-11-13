@@ -1,0 +1,11 @@
+ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  consequences:
+    - "Enum set duplicated in gate.mjs vs MCP validateWfProofManifest — drift risk; single taxonomy doc remains normative."
+    - "L3 min-shape failure surfaces multiple ERROR lines (one per bad row) before FILE_EXISTS; operators fix manifest without re-running four phases."
+  cross_references:
+    requirements:
+      - "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  decision_id: "ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  rationale: "Coarse proof_facet mistaken for proof_subtype is the dominant WF-10 failure after default-on mandate; gate reports all rows before FILE_EXISTS."
+  status: "Proposed"
+  title: "Per-row proof_subtype validation in L3 gate"

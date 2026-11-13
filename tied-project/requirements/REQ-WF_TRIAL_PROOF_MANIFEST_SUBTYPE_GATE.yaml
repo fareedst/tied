@@ -1,0 +1,21 @@
+REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  acceptance_criteria:
+    - "SC-PMG-11"
+    - "SC-PMG-12"
+    - "SC-PMG-13"
+  description: "Post-four-phase gate must reject coarse proof_facet values in proof_subtype with per-row errors and taxonomy pointers; align adjunct docs."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_TRIAL_PROOF_INTENT_STACK"
+      - "REQ-WF_TRIAL_PROOF_MANIFEST_LITE"
+      - "REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE"
+  request_id: "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  satisfaction_criteria:
+    - criterion: "FACET_AS_SUBTYPE error names row index and suggests fine labels (unit.default, composition.wiring, e2e.ui)."
+      id: "SC-PMG-12"
+    - criterion: "Gate stderr emits taxonomy path + tied_wf_proof_manifest_validate hint on subtype failures."
+      id: "SC-PMG-13"
+    - criterion: "validateMinManifestShape rejects every files[] row with invalid or coarse-as-subtype proof_subtype (not only files[0])."
+      id: "SC-PMG-11"
+  status: "Draft"
+  title: "WF trial proof manifest subtype validation (wave 3)"

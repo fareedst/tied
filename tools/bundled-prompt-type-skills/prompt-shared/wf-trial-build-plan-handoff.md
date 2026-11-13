@@ -20,7 +20,7 @@ Finalize **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.m
 | RED evidence | Paths to `quality-manifest/*-red.*` if captured; else explicit “RED not archived” |
 | Tracker | Checklist slugs **completed** vs **pending** |
 | **composition_path_declared** | List of path-suffixed composition test files (`src/**/*.binding.test.ts`, etc.) and case counts when **composition-integration** applied |
-| **Proof facet manifest** | `tied-project/working/proof-facet-manifest/evidence/proof-facet-manifest.v1.json` — `files[]` row count vs test files; gate note if validated |
+| **Proof facet manifest** | `tied-project/working/proof-facet-manifest/evidence/proof-facet-manifest.v1.json` — one row per test file with **fine** `proof_subtype` only (`unit.default`, `composition.wiring`, …); run `tied_wf_proof_manifest_validate` before turn 4 — post-four-phase gate fails on coarse facet-as-subtype |
 | Next | `@close-out` + link to wf-trial close-out playbook |
 
 ## RED capture (when product tests exist)

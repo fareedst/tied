@@ -1,0 +1,71 @@
+CITDP-REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  change_definition:
+    current_behavior: "L3 min-shape validates only files[0].proof_subtype with generic invalid message."
+    desired_behavior: "Per-row proof_subtype validation; FACET_AS_SUBTYPE for coarse facet strings; taxonomy DIAGNOSTICs on CLI."
+    non_goals:
+      - "Auto-rewrite agent manifests"
+      - "MCP validateWfProofManifest blocking policy change"
+      - "Register disposable run 1794511862"
+    success_criteria:
+      - "SC-PMG-11"
+      - "SC-PMG-12"
+      - "SC-PMG-13"
+    unchanged_behavior: "FILE_EXISTS, FILE_COVERAGE, prompt_id, schema_version checks unchanged from RPM wave 2."
+  completion_criteria:
+    activation:
+      phase: "pre-implementation"
+      request_token: "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+      run_id: "refine-plan-pmg-2026-11-12"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/wf-trial-proof-manifest-gate.test.mjs"
+    manifest_reference: "tied-project/working/REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE/evidence/"
+    proof_boundaries:
+      - "Node unit tests; orchestrator integration covered by parent SC-RPM"
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/wf-trial-proof-manifest-gate.mjs; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-proof-manifest-adjunct.md; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-build-plan-handoff.md"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+      - "IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+      - "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  metadata:
+    created:
+      author: "add-feature"
+      date: "2026-11-12"
+    title: "Proof manifest subtype gate wave 3"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+    citdp_id: "CITDP-REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+    status: "refined"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Operator ignores multi-line ERROR list and skips manifest fix"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "1794511862-style manifest fails with FACET_AS_SUBTYPE on every bad row"
+      disposition: "not_used"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE/evidence/not-applicable-receipt.v1.json"
+      falsification_questions:
+        - "Does multi-row error list match disposable 1794511862 manifest?"
+      gate_policy: "advisory"
+      rationale: "Bootstrap unit tests only."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/wf-trial-proof-manifest-gate.test.mjs"

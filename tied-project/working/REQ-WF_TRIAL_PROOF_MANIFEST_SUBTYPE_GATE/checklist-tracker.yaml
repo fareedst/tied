@@ -1,0 +1,65 @@
+description: "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE — per-row proof_subtype gate"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  request: "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Node unit tests only."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      note: "Multi-row FACET_AS_SUBTYPE cases added @debug; RED stdout not archived (GREEN formalized build-plan 2026-11-12)."
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      note: "9/9 node --test wf-trial-proof-manifest-gate.test.mjs"
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "bootstrap-unit-only"
+    rationale: "No composition binding; gate module unit tests."
+    slug: "composition-integration"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      note: "gates/verification-2026-11-12T20-00-12-695Z.json allowed true"
+      status: "completed"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

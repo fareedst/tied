@@ -1,0 +1,15 @@
+IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+    requirements:
+      - "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  decision_id: "IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE-pseudocode.md"
+  related_files:
+    - "tools/bootstrap/lib/wf-trial-proof-manifest-gate.mjs"
+    - "tools/bootstrap/lib/wf-trial-proof-manifest-gate.test.mjs"
+    - "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-build-plan-handoff.md"
+    - "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-proof-manifest-adjunct.md"
+  status: "Planned"
+  title: "proofSubtypeValidationError in wf-trial-proof-manifest-gate.mjs"
