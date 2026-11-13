@@ -1,0 +1,48 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794586024-wf-agentstream-wf-09-claude-claudesonnet55low",
+  "validator_version": "1.2.0",
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "layers": {
+    "atoms": {
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 1,
+      "corpus_graph_nodes": 3,
+      "corpus_graph_edges": 5,
+      "vocab_preferred_terms": 0
+    },
+    "operational_intent": {
+      "sidecar_count": 1,
+      "procedure_count": 0,
+      "parse_node_count": 0,
+      "gross_lines": 8,
+      "gross_utf8_bytes": 586,
+      "applied_lines": 8,
+      "applied_utf8_bytes": 586,
+      "template_overlap_lines": 0,
+      "template_overlap_utf8_bytes": 0
+    },
+    "proof_facets": {
+      "unit_tests": 7,
+      "composition_tests": 0,
+      "composition_inferred_cases": 0,
+      "binding_inventory_tests": 0,
+      "e2e_tests": 0,
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 7
+      }
+    }
+  },
+  "hashes": {
+    "operational_intent_hash": "36e0b85867818c4b8affd1b738a5255250458acadcc227e89366a239d7696062",
+    "corpus_graph_content_hash": "1777a7fe162fc9675b55e1a13ba0342430a016e889e837413df6791da60deca3"
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 1.3333333333333333,
+    "operational_intent_utf8_per_atom": 97.66666666666667,
+    "proof_facets_per_atom": 1.1666666666666667,
+    "tests_per_procedure": null
+  }
+}
