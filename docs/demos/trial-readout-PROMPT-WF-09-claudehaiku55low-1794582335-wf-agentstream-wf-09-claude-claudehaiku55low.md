@@ -161,20 +161,22 @@ Session capture **4.2.2** from `tied-methodology-version.session.v1.json` at add
 
 ## Harness-eval utilization (HMEP)
 
-**Import run:** 2026-11-13 — manifest-only. Evidence: [harness-eval-import.md](../../tied-project/working/FACILITATOR-WF-09-1794582335-wf-agentstream-wf-09-claude-claudehaiku55low/evidence/harness-eval-import.md).
+**Import run:** 2026-11-13 manifest-only, then **stream-json re-import** (four turns). Evidence: [harness-eval-import.md](../../tied-project/working/FACILITATOR-WF-09-1794582335-wf-agentstream-wf-09-claude-claudehaiku55low/evidence/harness-eval-import.md).
 
 | Metric | Value |
 | --- | --- |
 | `wall_clock_ms` | 206000 |
-| `input_tokens` / `output_tokens` | null |
-| `harness_estimated_cost` | null |
+| `input_tokens` | 32 |
+| `output_tokens` | 14424 |
+| `reasoning_tokens` | 3731 |
+| `completeness` | complete |
+| `harness_estimated_cost` | 0.057722 (list-price) |
 
 ---
 
 ## Facilitator follow-ups
 
 - Sponsor choice: minimal-depth adversarial CITDP waiver vs integrated inquiry before close-out on future cells.
-- Optional `--jsonl` HMEP re-import when billing capture is prioritized.
 
 ---
 
