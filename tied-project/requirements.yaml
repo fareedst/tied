@@ -3632,6 +3632,23 @@ REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
   description: "Compact facilitator comparison Summary: trimmed wf labels, no ok column, one-decimal cross-layer ratios."
   detail_file: "requirements/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml"
   status: "Implemented"
+REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+  category: "Tooling"
+  cross_references:
+    - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+    - "REQ-TIED_PROJECT_SIZE_LAYERS"
+    - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+  description: "Facilitator comparison Summary grades column joined from trial readout Session grading."
+  detail_file: "requirements/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES.yaml"
+  name: "Comparison Summary grades column"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"
+      - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+    related_to:
+      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"
+  status: "Implemented"
 REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
   cross_references:
     - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT"

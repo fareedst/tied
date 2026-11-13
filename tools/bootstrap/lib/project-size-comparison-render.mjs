@@ -1,6 +1,7 @@
 /**
  * [REQ-TIED_PROJECT_SIZE_LAYERS] [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT]
  * [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK]
+ * [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES]
  * Markdown comparison table from snapshot receipts.
  */
 
@@ -8,8 +9,28 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { parseEpochFromBasename } from "./project-size-discover-clients.mjs";
+import { buildTrialReadoutGradesIndex } from "./read-trial-readout-session-grading.mjs";
 
 const FORBIDDEN_PHRASES = ["leaderboard", "maturity_score", "maturity score"];
+
+/** Allow negated disclaimer lines (e.g. "not a leaderboard") while blocking affirmative use. */
+function lineHasForbiddenAffirmative(line, phrase) {
+  const lower = line.toLowerCase();
+  if (!lower.includes(phrase)) return false;
+  if (/\bnot\s+(a\s+)?leaderboard\b/.test(lower)) return false;
+  if (/\bnot\s+.*\bmaturity\b/.test(lower)) return false;
+  return true;
+}
+
+function assertNoForbiddenPhrases(text) {
+  for (const line of text.split("\n")) {
+    for (const phrase of FORBIDDEN_PHRASES) {
+      if (lineHasForbiddenAffirmative(line, phrase)) {
+        throw new Error(`FORBIDDEN_PHRASE_IN_OUTPUT: ${phrase}`);
+      }
+    }
+  }
+}
 
 /** [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT] Batch CLI default epoch floor for WF cohort. */
 export const DEFAULT_SUMMARY_EPOCH_MIN = 1794259000;
@@ -132,6 +153,41 @@ export function renderWallClockCell(receipt) {
   return minutes === null ? "—" : String(minutes);
 }
 
+/**
+ * [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES] Lookup grades display by full discover basename.
+ * @param {string} discoverBasename
+ * @param {Map<string, { display: string }> | Record<string, { display: string }>} gradesIndex
+ * @returns {string}
+ */
+export function renderGradesCell(discoverBasename, gradesIndex) {
+  const key = String(discoverBasename);
+  let entry;
+  if (gradesIndex instanceof Map) {
+    entry = gradesIndex.get(key);
+  } else if (gradesIndex && typeof gradesIndex === "object") {
+    entry = gradesIndex[key];
+  }
+  if (!entry?.display) return "—";
+  return String(entry.display).replace(/\|/g, "\\|");
+}
+
+/**
+ * @param {{
+ *   storeRoot?: string;
+ *   gradesIndex?: Map<string, { display: string }> | Record<string, { display: string }>;
+ * }} meta
+ * @returns {Map<string, { display: string }> | Record<string, { display: string }>}
+ */
+function resolveGradesIndex(meta) {
+  if (meta.gradesIndex !== undefined && meta.gradesIndex !== null) {
+    return meta.gradesIndex;
+  }
+  if (typeof meta.storeRoot === "string" && meta.storeRoot.length > 0) {
+    return buildTrialReadoutGradesIndex(meta.storeRoot);
+  }
+  return new Map();
+}
+
 function tailPath(repoRoot, parts = 3) {
   const segs = String(repoRoot).split(/[/\\]/).filter(Boolean);
   return segs.slice(-parts).join("/");
@@ -203,6 +259,9 @@ function renderColumnDefinitionsSection() {
   lines.push(
     "| **wall_clock** | — | Orchestrator wall duration in **minutes** (nearest integer from `trial_factors.orchestrator_wall_time_seconds` or render-time hydration). Receipt JSON keeps full-second precision; `—` when missing. |",
   );
+  lines.push(
+    "| **grades** | — | Facilitator session bands from linked trial readout (`mean · Req/Tr/Ts/Al/Pr/Ch/Ml` via `meanCompactGrades`); keyed by **full discover basename** in `manifest.v1.json`. Not REQ status; not a leaderboard. `—` when readout missing. |",
+  );
   lines.push("");
   lines.push(
     "Expanded table (`--verbose-table`): **repo (tail)**, **oi_hash**, **verify_ev** (`*consistency*.json` under `tied-project/working/**/evidence/`), **corpus_nodes** / **corpus_edges**, **gross_lines** / **parse_nodes** / **sidecars**, **binding_inv**. Row set matches Summary (`prepareComparisonSummaryRows`); display **label** uses the same trim rule.",
@@ -221,6 +280,8 @@ function renderColumnDefinitionsSection() {
  *   verboseTable?: boolean;
  *   summaryEpochMin?: number;
  *   fineLabels?: boolean;
+ *   storeRoot?: string;
+ *   gradesIndex?: Map<string, { display: string }> | Record<string, { display: string }>;
  * }} meta
  */
 export function renderComparisonMarkdown(rows, meta = {}) {
@@ -240,9 +301,13 @@ export function renderComparisonMarkdown(rows, meta = {}) {
     lines.push(`**Pattern (${mode}):** \`${meta.pattern}\``);
   }
   lines.push("");
-  lines.push("Descriptive cohort evidence only — not grades or REQ status.");
+  lines.push(
+    "Descriptive cohort size evidence; optional **grades** join from trial readouts (facilitator bands only — not REQ status, not a leaderboard).",
+  );
   lines.push("");
   lines.push(...renderColumnDefinitionsSection());
+
+  const gradesIndex = resolveGradesIndex(meta);
 
   const okRows = prepareComparisonSummaryRows(
     rows.filter((r) => r.receipt?.ok === true),
@@ -257,10 +322,10 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   );
   lines.push("");
   lines.push(
-    "| label | Vocab | REQ | ARCH | IMPL | applied_utf8 | applied_lines | procedures | unit | comp | e2e | utf8/atom | oi/atom | pf/atom | wall_clock |",
+    "| label | Vocab | REQ | ARCH | IMPL | applied_utf8 | applied_lines | procedures | unit | comp | e2e | utf8/atom | oi/atom | pf/atom | wall_clock | grades |",
   );
   lines.push(
-    "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
   );
 
   for (const { label, receipt } of okRows) {
@@ -270,6 +335,7 @@ export function renderComparisonMarkdown(rows, meta = {}) {
     const cross = receipt.cross_layer ?? {};
     const displayLabel = trimComparisonDisplayLabel(label);
     const wallCell = renderWallClockCell(receipt);
+    const gradesCell = renderGradesCell(label, gradesIndex);
     lines.push(
       [
         displayLabel,
@@ -287,6 +353,7 @@ export function renderComparisonMarkdown(rows, meta = {}) {
         fmtNum(cross.operational_intent_per_atom, CROSS_LAYER_DECIMALS),
         fmtNum(cross.proof_facets_per_atom, CROSS_LAYER_DECIMALS),
         wallCell,
+        gradesCell,
       ]
         .map((c) => String(c).replace(/\|/g, "\\|"))
         .join(" | ")
@@ -296,7 +363,7 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   }
 
   if (okRows.length === 0) {
-    lines.push("| — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |");
+    lines.push("| — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — |");
   }
 
   lines.push("");
@@ -359,20 +426,12 @@ export function renderComparisonMarkdown(rows, meta = {}) {
   lines.push("");
 
   const text = lines.join("\n");
-  for (const phrase of FORBIDDEN_PHRASES) {
-    if (text.toLowerCase().includes(phrase)) {
-      throw new Error(`FORBIDDEN_PHRASE_IN_OUTPUT: ${phrase}`);
-    }
-  }
+  assertNoForbiddenPhrases(text);
   return text;
 }
 
 export function assertRenderableMarkdown(text) {
-  for (const phrase of FORBIDDEN_PHRASES) {
-    if (text.toLowerCase().includes(phrase)) {
-      throw new Error(`FORBIDDEN_PHRASE: ${phrase}`);
-    }
-  }
+  assertNoForbiddenPhrases(text);
   if (!text.includes("Proof boundary")) {
     throw new Error("MISSING_PROOF_BOUNDARY_SECTION");
   }

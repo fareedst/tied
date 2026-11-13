@@ -1,0 +1,7 @@
+ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+  ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+    constraints:
+      - "Lookup key is full discover basename"
+      - "No leaderboard or maturity language"
+      - "No snapshot receipt fields for grades"
+    description: "buildTrialReadoutGradesIndex at storeRoot; fail-soft em dash; no receipt schema."

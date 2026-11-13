@@ -1,0 +1,43 @@
+CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+  change_definition:
+    current_behavior: "Comparison Summary ends at wall_clock; no facilitator session grades in cohort table."
+    desired_behavior: "Summary adds grades column after wall_clock; cells join trial readout Session grading via full discover basename and meanCompactGrades display; missing readout shows em dash."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/read-trial-readout-session-grading.mjs; tools/bootstrap/lib/project-size-comparison-render.mjs; tools/bootstrap/lib/project-size-comparison-render.test.mjs; tools/bootstrap/lib/project-size-batch-compare.mjs; docs/demos/catalog-tied-size-and-trial-statistics.md"
+    tied_tokens_new:
+      - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
+      - "IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
+      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
+  non_goals:
+    - "Registry row automation"
+    - "Snapshot receipt fields for grades"
+    - "Verbose table grades column"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Operator ranks models by mean grade in Summary"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Proof boundary and glossary state readout-only join"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does cell use display label instead of basename for lookup?"
+      gate_policy: "advisory"
+      rationale: "Facilitator markdown join only."
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  success_criteria:
+    - "SC-CGR-01 through SC-CGR-06 in PLAN.md"
+    - "tied_validate_consistency ok"
+  test_strategy:
+    integration:
+      - "Batch regen comparison-table.md"
+    unit:
+      - "tools/bootstrap/lib/project-size-comparison-render.test.mjs"
+  unchanged_behavior: "prepareComparisonSummaryRows; wall_clock; receipt JSON; manifest targets"

@@ -1,0 +1,26 @@
+copy_hygiene: "refine-plan 2026-11-12 — grades column after wall_clock"
+description: "Tracker — comparison Summary grades join from trial readouts"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Display-only facilitator join; advisory gates; no integrated adversarial inquiry."
+    slug: "sub-adversarial-inquiry-pass"

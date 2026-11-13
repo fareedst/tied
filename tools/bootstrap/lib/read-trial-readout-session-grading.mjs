@@ -1,7 +1,14 @@
 /**
  * [REQ-WF_TRIAL_READOUT_GRADING_RATIONALE] [IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE]
+ * [REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES] [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES]
  */
+import fs from "node:fs";
+import path from "node:path";
+
 const PLACEHOLDER_RE = /^[\s—–\-–]+$/u;
+
+/** Discover basename suffix on trial-readout-PROMPT-WF-*.md filenames. */
+const TRIAL_READOUT_BASENAME_RE = /^trial-readout-PROMPT-WF-\d{2}-[^-]+-(.+)\.md$/i;
 
 const DIMENSIONS = [
   "Requirement interpretation",
@@ -220,6 +227,47 @@ function splitTableRow(line) {
  * @param {string} markdown
  * @returns {string[]}
  */
+/**
+ * [IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES] Map discover basename → grades cell display.
+ * @param {string} storeRoot
+ * @returns {Map<string, { compactSlash: string, display: string }>}
+ */
+export function buildTrialReadoutGradesIndex(storeRoot) {
+  const demosDir = path.join(storeRoot, "docs/demos");
+  /** @type {Map<string, { compactSlash: string, display: string }>} */
+  const index = new Map();
+  if (!fs.existsSync(demosDir)) return index;
+
+  let names;
+  try {
+    names = fs.readdirSync(demosDir);
+  } catch {
+    return index;
+  }
+
+  for (const name of names) {
+    if (!name.startsWith("trial-readout-PROMPT-WF-") || !name.endsWith(".md")) continue;
+    const match = name.match(TRIAL_READOUT_BASENAME_RE);
+    if (!match) continue;
+    const discoverBasename = match[1];
+    if (index.has(discoverBasename)) continue;
+
+    let markdown;
+    try {
+      markdown = fs.readFileSync(path.join(demosDir, name), "utf8");
+    } catch {
+      continue;
+    }
+    const { rows, errors } = parseSessionGradingTable(markdown);
+    if (errors.length > 0 || rows.length === 0) continue;
+    const compactSlash = rows.map((r) => normalizeBand(r.band)).join("/");
+    const { display } = meanCompactGrades(compactSlash);
+    if (display === "—") continue;
+    index.set(discoverBasename, { compactSlash, display });
+  }
+  return index;
+}
+
 export function validateSessionGradingRationales(markdown) {
   const violations = [];
   const { rows, errors } = parseSessionGradingTable(markdown);

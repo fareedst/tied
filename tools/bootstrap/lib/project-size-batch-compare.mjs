@@ -211,6 +211,7 @@ export async function runProjectSizeBatchCompare(argv = process.argv, env = proc
     verboseTable: opts.verboseTable,
     fineLabels: opts.fineLabels,
     summaryEpochMin: opts.summaryEpochMin,
+    storeRoot: opts.storeRoot,
   });
 
   const manifest = {

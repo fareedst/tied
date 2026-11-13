@@ -1,0 +1,16 @@
+REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+  REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+    description: "Append grades column after wall_clock in batch comparison Summary; join trial readouts by full discover basename."
+    satisfaction_criteria:
+      - criterion: "Glossary defines grades; no leaderboard framing."
+        id: "SC-CGR-05"
+      - criterion: "Known readout basename emits meanCompactGrades display cell."
+        id: "SC-CGR-02"
+      - criterion: "Lookup uses full discover basename not display label."
+        id: "SC-CGR-04"
+      - criterion: "Missing readout yields em dash in grades cell."
+        id: "SC-CGR-03"
+      - criterion: "Render tests green and tied_validate_consistency ok."
+        id: "SC-CGR-06"
+      - criterion: "Summary header ends with wall_clock then grades."
+        id: "SC-CGR-01"

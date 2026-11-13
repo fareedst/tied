@@ -3184,6 +3184,17 @@ IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT:
   description: "trimComparisonDisplayLabel and Summary row formatting in comparison render."
   detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_COMPACT.yaml"
   status: "Implemented"
+IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+  cross_references:
+    - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
+    - "IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE"
+    - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
+  description: "Index builder and renderGradesCell wired through batch compare storeRoot."
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES.yaml"
+  implements:
+    - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
+  name: "Grades column in comparison render"
+  status: "Implemented"
 IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK:
   cross_references:
     - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_WALL_CLOCK"

@@ -46,5 +46,10 @@
     "operational_intent_hash": "1bf290483b0208e2d743dce50ca6ade08e4bc387ce2a3b5b64e166ec7cc7443e",
     "corpus_graph_content_hash": "e2d6645318de9c8e2c1d5f85c6644728c4de355d4e22f2e876f9fd791ee1b119"
   },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 1867
+  },
   "diagnostics": []
 }

@@ -1,0 +1,10 @@
+IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+  IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
+    code_locations:
+      - "tools/bootstrap/lib/project-size-batch-compare.mjs"
+      - "tools/bootstrap/lib/project-size-comparison-render.mjs"
+      - "tools/bootstrap/lib/project-size-comparison-render.test.mjs"
+      - "tools/bootstrap/lib/read-trial-readout-session-grading.mjs"
+    description: "Grades index scan and Summary column append."
+    essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES-pseudocode.md"
+    implementation_approach: "Export buildTrialReadoutGradesIndex; renderGradesCell; pass storeRoot from batch CLI."

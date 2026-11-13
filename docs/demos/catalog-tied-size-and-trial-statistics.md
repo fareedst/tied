@@ -33,7 +33,7 @@ Receipt `cross_layer` holds simple ratios (e.g. `operational_intent_per_atom`, `
 
 ## Facilitator cohort summary (discover batch)
 
-**Authoritative multi-client table:** [`comparison-table.md`](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) — **`## Summary`** rows with size layers plus **`wall_clock`** (orchestrator wall time in **whole minutes**). Rows dedupe by display label (`wf-NN-…`); latest discover epoch wins.
+**Authoritative multi-client table:** [`comparison-table.md`](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) — **`## Summary`** rows with size layers plus **`wall_clock`** (orchestrator wall time in **whole minutes**) and optional **`grades`** (`mean · Req/Tr/Ts/Al/Pr/Ch/Ml` from trial readouts; not REQ status). Rows dedupe by display label (`wf-NN-…`); latest discover epoch wins.
 
 Regenerate after new disposable clients land under the discover parent (default `~/Documents/dev/test`):
 

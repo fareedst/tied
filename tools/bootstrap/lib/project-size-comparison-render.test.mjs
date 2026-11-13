@@ -10,10 +10,15 @@ import {
   orchestratorWallTimeSeconds,
   prepareComparisonSummaryRows,
   renderComparisonMarkdown,
+  renderGradesCell,
   renderWallClockCell,
   sortSummaryRowsByDisplayLabel,
   trimComparisonDisplayLabel,
 } from "./project-size-comparison-render.mjs";
+import {
+  buildTrialReadoutGradesIndex,
+  meanCompactGrades,
+} from "./read-trial-readout-session-grading.mjs";
 
 const DOGFOOD = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -21,7 +26,7 @@ const DOGFOOD = path.resolve(
 );
 
 const SUMMARY_HEADER =
-  /\| label \| Vocab \| REQ \| ARCH \| IMPL \| applied_utf8 \| applied_lines \| procedures \| unit \| comp \| e2e \| utf8\/atom \| oi\/atom \| pf\/atom \| wall_clock \|/;
+  /\| label \| Vocab \| REQ \| ARCH \| IMPL \| applied_utf8 \| applied_lines \| procedures \| unit \| comp \| e2e \| utf8\/atom \| oi\/atom \| pf\/atom \| wall_clock \| grades \|/;
 
 const minimalOkReceipt = {
   ok: true,
@@ -82,7 +87,7 @@ test("renderComparisonMarkdown from dogfood receipt", () => {
   assert.match(md, SUMMARY_HEADER);
   assert.doesNotMatch(md, /\| label \| ok \|/);
   assert.match(md, /\| stdd-store \| 933 \| 194 \| 189 \| 230 \|/);
-  assert.match(md, /\| stdd-store \|.*\| — \| 7 \| 0 \|/);
+  assert.match(md, /\| stdd-store \|.*\| — \| 7 \| 0 \| — \|/);
 });
 
 test("renderComparisonMarkdown trims wf label and verbose table", () => {
@@ -168,7 +173,7 @@ test("cross-layer integer rounding", () => {
     },
   };
   const md = renderComparisonMarkdown([{ label: "stdd-store", receipt }]);
-  assert.match(md, /\| stdd-store \|.*\| 33 \| 3 \| 1 \| — \|/);
+  assert.match(md, /\| stdd-store \|.*\| 33 \| 3 \| 1 \| — \| — \|/);
 });
 
 test("atom column order SC-CSC-12", () => {
@@ -241,7 +246,7 @@ test("cross-layer column order SC-CSC-11", () => {
   };
   const md = renderComparisonMarkdown([{ label: "stdd-store", receipt }], { summaryEpochMin: 0 });
   assert.match(md, SUMMARY_HEADER);
-  assert.match(md, /\| stdd-store \|.*\| 20 \| 10 \| 30 \| — \|/);
+  assert.match(md, /\| stdd-store \|.*\| 20 \| 10 \| 30 \| — \| — \|/);
   const defs = md.split("## Summary")[0];
   const utf8Pos = defs.indexOf("**utf8/atom**");
   const oiPos = defs.indexOf("**oi/atom**");
@@ -275,5 +280,65 @@ test("renderComparisonMarkdown wall_clock last column SC-CWC-01 SC-CWC-04", () =
   );
   assert.doesNotMatch(md, /\| wall_time \|/);
   assert.match(md, /\*\*wall_clock\*\*/);
-  assert.match(md, /\| wf-06-cursor-composer25high \|.*\| 17 \|/);
+  assert.match(md, /\| wf-06-cursor-composer25high \|.*\| 17 \| — \|/);
+});
+
+test("SC-CGR-02 grades cell from injected index", () => {
+  const basename = "1799990001-wf-agentstream-wf-10-cursor-test";
+  const display = "3.50 · A/A/A/A/A/A/A";
+  const md = renderComparisonMarkdown([{ label: basename, receipt: minimalOkReceipt }], {
+    summaryEpochMin: 0,
+    gradesIndex: new Map([[basename, { display }]]),
+  });
+  assert.match(md, SUMMARY_HEADER);
+  assert.match(md, new RegExp(`\\| wf-10-cursor-test \\|.*\\| ${display.replace(/\./g, "\\.")} \\|`));
+});
+
+test("SC-CGR-03 missing grades index entry", () => {
+  assert.equal(renderGradesCell("unknown-basename", new Map()), "—");
+  const md = renderComparisonMarkdown([{ label: "no-readout-fixture", receipt: minimalOkReceipt }], {
+    summaryEpochMin: 0,
+    gradesIndex: new Map(),
+  });
+  assert.match(md, /\| no-readout-fixture \|.*\| — \| — \|$/m);
+});
+
+test("SC-CGR-04 dedupe winner basename drives grades lookup", () => {
+  const older = "1794259100-wf-agentstream-wf-06-a";
+  const newer = "1794259200-wf-agentstream-wf-06-a";
+  const olderDisplay = "1.00 · F/F/F/F/F/F/F";
+  const newerDisplay = "4.00 · A/A/A/A/A/A/A";
+  const rows = [
+    { label: older, receipt: minimalOkReceipt },
+    { label: newer, receipt: minimalOkReceipt },
+  ];
+  const md = renderComparisonMarkdown(rows, {
+    summaryEpochMin: 0,
+    gradesIndex: new Map([
+      [older, { display: olderDisplay }],
+      [newer, { display: newerDisplay }],
+    ]),
+  });
+  assert.match(md, new RegExp(`\\| wf-06-a \\|.*\\| ${newerDisplay.replace(/\./g, "\\.")} \\|`));
+  assert.doesNotMatch(md, /1\.00 · F/);
+});
+
+test("SC-CGR-05 glossary grades and intro wording", () => {
+  const md = renderComparisonMarkdown([{ label: "stdd-store", receipt: minimalOkReceipt }], {
+    summaryEpochMin: 0,
+  });
+  assert.match(md, /\*\*grades\*\*/);
+  assert.match(md, /Req\/Tr\/Ts\/Al\/Pr\/Ch\/Ml/);
+  assert.match(md, /not REQ status, not a leaderboard/);
+  assertRenderableMarkdown(md);
+});
+
+test("buildTrialReadoutGradesIndex indexes grok47med WF-10 readout", () => {
+  const storeRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+  const index = buildTrialReadoutGradesIndex(storeRoot);
+  const key = "1794525072-wf-agentstream-wf-10-cursor-grok47med";
+  assert.ok(index.has(key), `expected readout index for ${key}`);
+  const entry = index.get(key);
+  assert.match(entry.display, /^\d+\.\d{2} · /);
+  assert.equal(entry.display, meanCompactGrades(entry.compactSlash).display);
 });
