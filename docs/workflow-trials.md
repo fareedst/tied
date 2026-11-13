@@ -42,11 +42,13 @@ workflow_trial_range cursor gpt-5.6-luna-low-fast luna-low medium 2 2
 workflow_trial_range claude claude-haiku-5-5 haiku-5-5 medium 2 2
 
 source scripts/build-commands.sh
-workflow_trial_range cursor composer-2.5 high 8
-workflow_trial_range cursor grok-4.7 medium 8
-workflow_trial_range claude fable-5-2 low 10 10
+workflow_trial_range cursor composer-2.5 medium 10 10
+echo_exec workflow_trial_range cursor cursor-grok-4.6 low 10 10
+echo_exec workflow_trial_range cursor grok-4.7 low 10 10
+workflow_trial_range claude fable-5-2 low 10 10 # limited
 workflow_trial_range claude haiku-5-5 high 8
 workflow_trial_range claude sonnet-5-5 high 8
+echo_exec workflow_trial_range claude sonnet-4-6 low 10 10
 
 $ agent models | grep grok | sort
 
