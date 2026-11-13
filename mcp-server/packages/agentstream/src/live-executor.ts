@@ -53,6 +53,7 @@ import {
   harnessTraceEnabled,
   resolveHarnessTracePath,
 } from "./harness-turn-trace.js";
+import { hmepStreamCaptureEnabled } from "./hmep-stream-capture.js";
 import { formatCursorLiveSessionOracleDiagnostic } from "./cursor-stream.js";
 import {
   parseTrackerCompletionReceipt,
@@ -540,6 +541,10 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       cfg.modelEffort.trim() !== "-"
     ) {
       effortEnv.push(`CLAUDE_CODE_EFFORT_LEVEL=${cfg.modelEffort.trim()}`);
+    }
+    if (hmepStreamCaptureEnabled()) {
+      process.env.AGENTSTREAM_HMEP_CAPTURE_WORKSPACE = cfg.workspace;
+      process.env.AGENTSTREAM_HMEP_CAPTURE_TURN_INDEX = String(cfg.firstTurn + i);
     }
     const turnOutcome = await liveBinding.runTurn(argv, [
       ...extraEnv,

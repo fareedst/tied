@@ -136,6 +136,24 @@ test("isOrderedListKey matches documented pattern ORD-TDD-SEQUENCE", () => {
   assert.equal(ORDERED_LIST_KEY_PATTERN.includes("_seq"), true);
 });
 
+// [REQ-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE] MCP `created` arrays are insertion-ordered (tie on created_at must not reorder).
+test("preserves created list order when record created_at ties REQ-LEAP_PROPOSAL_QUEUE", () => {
+  const ts = "2026-11-13T00:00:00.000Z";
+  const payload = {
+    ok: true,
+    created: [
+      { summary: "first", created_at: ts, id: "lpq-b" },
+      { summary: "second", created_at: ts, id: "lpq-a" },
+    ],
+  };
+  const result = canonicalizeValue(payload) as { created: Array<{ summary: string }> };
+  assert.deepEqual(
+    result.created.map((p) => p.summary),
+    ["first", "second"],
+  );
+  assert.equal(isOrderedListKey("created"), true);
+});
+
 // [REQ-CITDP_ORDERED_LIST_KEYS] CITDP evidence.command_seq preserves verification battery order.
 test("preserves nested evidence.command_seq order REQ-CITDP_ORDERED_LIST_KEYS", () => {
   const result = canonicalizeValue({

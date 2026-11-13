@@ -1,0 +1,26 @@
+copy_hygiene: "refine-plan 2026-11-13 — Claude Haiku toolset_key / column header fix"
+description: "Tracker — comparison matrix Claude Haiku toolset labels"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Pivot label correction; facilitator doc + small bootstrap module."
+    slug: "sub-adversarial-inquiry-pass"

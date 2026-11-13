@@ -1,0 +1,25 @@
+CITDP-REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX:
+  change_definition:
+    current_behavior: "Latest-run comparison matrix uses toolset_key claude:composer-2.5 and header Claude · composer-2.5 (Haiku) for Claude Haiku runs; confuses facilitators (e.g. WF-09 1794582335)."
+    desired_behavior: "Haiku baseline and medium columns use config_id claude-haiku-5-5, headers Claude · claude-haiku-5-5 (and effort=medium variant), keys claude:claude-haiku-5-5[@medium]; slug map identity for claude-haiku-5-5; registry matrix regenerated."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/wf-trial-comparison-matrix.mjs; wf-trial-comparison-matrix.test.mjs; PLAN-WF-TRIAL-COMPARISON-MATRIX/evidence/build-comparison-matrix.mjs; PLAN-WF-TRIAL-COMPARISON-MATRIX/PLAN.md; docs/demos/traditional-workflow-trial-runs-registry.md"
+    tied_tokens_new: []
+  non_goals:
+    - "New REQ/ARCH/IMPL mint unless sponsor extends at build-plan"
+    - "claude-sonnet-4-6 matrix column"
+    - "Master Latest reconciliation"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+    risk_assessment:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+  success_criteria:
+    - "SC-WF-CMX-07 through SC-WF-CMX-10 in PLAN.md"
+  test_strategy:
+    integration:
+      - "tied-project/working/PLAN-WF-TRIAL-COMPARISON-MATRIX/evidence/build-comparison-matrix.mjs --check"
+    unit:
+      - "tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"

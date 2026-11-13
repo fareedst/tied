@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-WF-09 facilitator readout (Claude Haiku 5.5 low @ 1794582335)** — **4.2.2** via `workflow_trial_agentstream wf-09`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md). **Split signal** — orchestrator `exit_code: 0`; **9/9** tests uncommitted; close_out **blocked** (CITDP adversarial). [Readout](docs/demos/trial-readout-PROMPT-WF-09-claudehaiku55low-1794582335-wf-agentstream-wf-09-claude-claudehaiku55low.md).
+
 - **Harness eval metering canary workflow ([REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW], [ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW], [IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW])** — `workflow_trial_agentstream wf-meter-01`, metering-lite catalog, SC-HEMC-01..05 bootstrap tests; close_out **allowed** (minimal, advisory). Plan: [PLAN.md](tied-project/working/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/PLAN.md).
 
 - **Harness model eval platform M2 ([REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM])** — SQLite v2 cost columns, committed list-price catalog, `harness-eval report cohort` + `verify trial`, suite `token_present` verifiers; SC-HMEP-M2-01..06 green; close_out **allowed** (minimal, advisory). Plan: [PLAN.md](tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md).

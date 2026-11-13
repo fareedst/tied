@@ -1,6 +1,6 @@
 {
-  "built_at": "2026-11-11T19:44:50.732Z",
-  "content_hash": "dfd1f286268ec253b053366493049403422cdd874bf591eff7f557953e9e7903",
+  "built_at": "2026-11-13T15:58:21.155Z",
+  "content_hash": "db3025e87e4f8cbc6b4e4d2c25478a1f1a5d868208865228a8fd182ca643802e",
   "edges": [
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/adherence-evidence-resolve.ts#fileContentHash",
@@ -1483,6 +1483,11 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/paths.ts#claudeFixturesDirFromModule"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#appendHmepStreamJsonLineFromEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#claudeAgentDriverLaunchAndParse",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#buildSharedReceipt"
@@ -1546,6 +1551,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#collectClaudeStreamFromSpawn",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#collectClaudeStreamFromSpawn",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.ts#collectClaudeStreamFromSpawn",
@@ -2573,6 +2583,11 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-load-turns.ts#Turn"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/executor-run.ts#appendHmepStreamJsonLineFromEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/executor-run.ts#ContextLogPruneHook",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.ts#ContextLogPruneHook"
@@ -2651,6 +2666,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/executor-run.ts#runAgent",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/executor-run.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/executor-run.ts#runAgent",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/executor-run.ts#runAgent",
@@ -2958,6 +2978,96 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/harness-turn-trace.ts#defaultHarnessTracePath"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts#afterEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#afterEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts#appendHmepStreamJsonLine",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts#hmepStreamCaptureEnabled",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts#resolveHmepStreamJsonPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#resolveHmepStreamJsonPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLine",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLine",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#resolveHmepStreamJsonPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#readHmepCaptureTurnFromEnv"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#readHmepCaptureWorkspaceFromEnv"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#envTruthy"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#envTruthy"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureSkipped"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureSkipped",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#envTruthy"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#readHmepCaptureTurnFromEnv",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#Number"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#resolveHmepStreamJsonPath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#String"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/htmlformat.ts#applyNonCompactHtmlToTurns",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/htmlformat.ts#formatNonCompactHtml"
@@ -3006,6 +3116,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/index.ts#extractChecklistTrackerPreview",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/ts-native-args.ts#extractChecklistTrackerPreview"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/index.ts#liveExitStdoutIsOperatorMirrorOnly",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#liveExitStdoutIsOperatorMirrorOnly"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/index.ts#main",
@@ -3326,6 +3441,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/index.ts#runLiveOrReject",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/index.ts#runLiveOrReject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#liveExitStdoutIsOperatorMirrorOnly"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/index.ts#runLiveOrReject",
@@ -4143,6 +4263,51 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/harness-select.ts#AgentHarnessProfile"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#emitTurnOperatorLine",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitTurnOperatorLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#execFileSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:child_process.ts#execFileSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#executeLiveRun",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#isTurnOperatorLine",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#isTurnOperatorLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#liveExitStdoutIsOperatorMirrorOnly",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#liveExitStdoutIsOperatorMirrorOnly"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#liveTestdataDirFromModule",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/paths.ts#liveTestdataDirFromModule"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#parseDryRunConfig",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/dry-run-config.ts#parseDryRunConfig"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.test.ts#agentstreamCliEntryFromModule",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/paths.ts#agentstreamCliEntryFromModule"
@@ -4293,6 +4458,11 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/model-effort.ts#cursorSlugMayMismatchEffort"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#detectClaudeSessionLimitLine",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#detectClaudeSessionLimitLine"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#DryRunConfig",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/dry-run-config.ts#DryRunConfig"
@@ -4301,6 +4471,26 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#DryRunStreams",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/executor-dry-run.ts#DryRunStreams"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitTurnOperatorLine",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#isTurnOperatorLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitTurnOperatorLine",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitTurnOperatorLine",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#writeSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitTurnOperatorLine",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#writeSync"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#ensureTracker",
@@ -4435,6 +4625,11 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.ts#createContextLogPruneHook"
     },
     {
@@ -4510,12 +4705,37 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitOperatorLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitOperatorLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitTurnOperatorLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#evaluateTraceableCommitEnvelope"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#handleTrackerTurn"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#maybeHighlightClaudeSessionLimit"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#String"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
@@ -4595,6 +4815,21 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#detectClaudeSessionLimitLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#formatSessionLimitHighlightBlock"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#writeSessionLimitHighlightToFd2"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/tracker-ensure.ts#ensureTracker"
     },
     {
@@ -4611,6 +4846,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#formatCursorLiveSessionOracleDiagnostic",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/cursor-stream.ts#formatCursorLiveSessionOracleDiagnostic"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#formatSessionLimitHighlightBlock",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#formatSessionLimitHighlightBlock"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#handleTrackerTurn",
@@ -4693,6 +4933,11 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/adherence-live.ts#hashSessionId"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#hmepStreamCaptureEnabled",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#InstructionCorrelation",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/adherence-live.ts#InstructionCorrelation"
@@ -4726,6 +4971,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#knownStepStubs",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/pipeline-route.ts#knownStepStubs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#liveExitStdoutIsOperatorMirrorOnly",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#isTurnOperatorLine"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#newRunId",
@@ -4793,6 +5043,11 @@
       "to_symbol_id": "mcp-server/packages/agentstream/src/pipeline-session.ts#sessionForTurn"
     },
     {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#SessionLimitHighlightState",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#SessionLimitHighlightState"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#sourceRevision",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/adherence-live.ts#sourceRevision"
@@ -4821,6 +5076,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#writeActiveTurnMarker",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/adherence-live.ts#writeActiveTurnMarker"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#writeSessionLimitHighlightToFd2",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#writeSessionLimitHighlightToFd2"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/model-effort.test.ts#applyCursorModelForAgent",
@@ -5301,6 +5561,61 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts#Turn",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-load-turns.ts#Turn"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.test.ts#appendSessionLimitHighlightOnce",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#appendSessionLimitHighlightOnce"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.test.ts#detectClaudeSessionLimitLine",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#detectClaudeSessionLimitLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.test.ts#formatSessionLimitHighlightBlock",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#formatSessionLimitHighlightBlock"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.test.ts#WF_TRIAL_SESSION_LIMIT_HEADLINE",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#WF_TRIAL_SESSION_LIMIT_HEADLINE"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#appendSessionLimitHighlightOnce",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#detectClaudeSessionLimitLine"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#appendSessionLimitHighlightOnce",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#formatSessionLimitHighlightBlock"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#appendSessionLimitHighlightOnce",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#writeStderr"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#writeSessionLimitHighlightToFd2",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#appendSessionLimitHighlightOnce"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#writeSessionLimitHighlightToFd2",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#writeSync"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/tddloop-load.ts#formatStep",
@@ -7046,6 +7361,1901 @@
       "from_symbol_id": "mcp-server/packages/cli/src/tied-next.test.ts#runTiedNext",
       "kind": "imports",
       "to_symbol_id": "mcp-server/dist/dae/tied-next.ts#runTiedNext"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.test.ts#parseClaudeStreamJsonFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#parseClaudeStreamJsonFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#assessObservationCompleteness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#assessObservationCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#maxFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#max"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#maxFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#max"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#maxFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#max"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#maxFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#max"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#maxFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#max"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#parseClaudeStreamJsonFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#maxFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#parseClaudeStreamJsonFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#parseClaudeStreamJsonFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#assessObservationCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#parseClaudeStreamJsonFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#TokenFields",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#TokenObservation",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenObservation"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#usageObjectToFields",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.test.ts#parseCursorStreamJsonFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#parseCursorStreamJsonFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#assessObservationCompleteness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#assessObservationCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#parseCursorStreamJsonFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#parseCursorStreamJsonFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#assessObservationCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#parseCursorStreamJsonFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#TokenObservation",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenObservation"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#usageObjectToFields",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.test.ts#applyBillingEntries",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.ts#applyBillingEntries"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.test.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.test.ts#migrateToV2",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV2"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.test.ts#migrateToV3",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV3"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.test.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.ts#BillingLedgerEntry",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.ts#BillingLedgerEntry"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/import.ts#applyBillingEntries",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.ts#applyBillingEntries"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/import.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/import.ts#importBillingLedger",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.ts#applyBillingEntries"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/import.ts#importBillingLedger",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.ts#parseBillingLedgerFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/import.ts#parseBillingLedgerFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.ts#parseBillingLedgerFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.test.ts#applyBillingEntries",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.ts#applyBillingEntries"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.test.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.test.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.test.ts#parseBillingLedgerFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.ts#parseBillingLedgerFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/billing-import.test.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/billing-import.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/billing-import.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/billing-import.test.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/billing-import.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/billing-import.test.ts#runCli",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.test.ts#fixtureCoverageReport",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts#fixtureCoverageReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts#formatDiagnosticsReport",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts#fixtureCoverageReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/import-wf.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/import-wf.test.ts#importWfClient",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/import-wf.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/import-wf.test.ts#listTrials",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#listTrials"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/import-wf.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/import-wf.test.ts#resolveManifestPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveManifestPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#allVerifiersPass",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#allVerifiersPass"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#cliEntryMatched",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:fs.ts#realpathSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#cliEntryMatched",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:fs.ts#realpathSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#cliEntryMatched",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#cohortReportJson",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#cohortReportJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#compareTrialToBaselineFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareTrialToBaselineFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#crossHarnessSummaryJson",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#crossHarnessSummaryJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#ensureStoreLayout",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#findScenarioForWfId",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#findScenarioForWfId"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#formatDiagnosticsReport",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts#formatDiagnosticsReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#getTrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#getTrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#importBillingLedger",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/import.ts#importBillingLedger"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#importWfClient",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#loadSuiteFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/load.ts#loadSuiteFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#realpathSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:fs.ts#realpathSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#reconcileReportJson",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#reconcileReportJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#replayBatchFromManifest",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#resolveStoreRoot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/billing/import.ts#importBillingLedger"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts#formatDiagnosticsReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#parseArgs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#validateRegressionBaselineIntegrity"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareTrialToBaselineFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#cohortReportJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#reconcileReportJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#crossHarnessSummaryJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#getTrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#validateSuiteIntegrity"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/load.ts#loadSuiteFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/load.ts#loadSuiteFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#allVerifiersPass"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#findScenarioForWfId"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#runTrialVerifiers"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runTrialVerifiers",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#runTrialVerifiers"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#SuiteScenario",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#SuiteScenario"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#validateRegressionBaselineIntegrity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#validateRegressionBaselineIntegrity"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#validateSuiteIntegrity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#validateSuiteIntegrity"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/regression-compare.test.ts#computeSuiteIntegritySha256",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegritySha256"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/regression-compare.test.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/regression-compare.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/regression-compare.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/regression-compare.test.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/regression-compare.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/regression-compare.test.ts#runCli",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/verify.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/verify.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/verify.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/verify.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/verify.test.ts#runCli",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/cli/verify.test.ts#upsertTrialSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#upsertTrialSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/config/fingerprint.ts#configurationFingerprint",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/node:crypto.ts#createHash"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/config/fingerprint.ts#createHash",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/node:crypto.ts#createHash"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/node:sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.test.ts#countObservationsForTrial",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#countObservationsForTrial"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.test.ts#insertObservations",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#insertObservations"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.test.ts#upsertTrialSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#upsertTrialSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#TokenObservation",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenObservation"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#TrialTokenSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TrialTokenSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#applyTrialPricing",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#lookupModelRate"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#applyTrialPricing",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/estimate.ts#estimateHarnessListPrice"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#estimateHarnessListPrice",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/estimate.ts#estimateHarnessListPrice"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#lookupModelRate",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#lookupModelRate"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#PricingCatalog",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#PricingCatalog"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#TokenCompleteness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.test.ts#estimateHarnessListPrice",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/estimate.ts#estimateHarnessListPrice"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.test.ts#loadPricingCatalog",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#loadPricingCatalog"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.test.ts#lookupModelRate",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#lookupModelRate"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#defaultPricingCatalogPath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#resolveRepoRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#loadPricingCatalog",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#defaultPricingCatalogPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#resolveRepoRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/estimate.ts#ModelRate",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#ModelRate"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/pricing/estimate.ts#TokenCompleteness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.test.ts#computeSuiteIntegritySha256",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegritySha256"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.test.ts#runCli",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.test.ts#validateRegressionBaselineIntegrity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#validateRegressionBaselineIntegrity"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#validateRegressionBaselineIntegrity",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#parseRegressionBaselineFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#validateRegressionBaselineIntegrity",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#validateSuiteIntegrity"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#validateSuiteIntegrity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#validateSuiteIntegrity"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#compareTrialToBaselineFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareTrialToBaselineFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#computeSuiteIntegritySha256",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegritySha256"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#metricWithinTolerance",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#metricWithinTolerance"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#BaselineExpectation",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#BaselineExpectation"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#BaselineMetricSpec",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#BaselineMetricSpec"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareExpectationToTrial",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#bindMatchesTrial"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareExpectationToTrial",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#metricWithinTolerance"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareExpectationToTrial",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#readTrialMetric"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareTrialToBaselineFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#parseRegressionBaselineFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareTrialToBaselineFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareExpectationToTrial"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareTrialToBaselineFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#getTrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#getTrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#getTrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#parseRegressionBaselineFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#parseRegressionBaselineFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#RegressionBaselineDoc",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#RegressionBaselineDoc"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#TrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#TrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.test.ts#applyTrialPricing",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#applyTrialPricing"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.test.ts#buildCohortReport",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#buildCohortReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.test.ts#loadPricingCatalog",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#loadPricingCatalog"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.test.ts#upsertTrialSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#upsertTrialSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#buildCohortReport",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#listTrialRows"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#cohortReportJson",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#buildCohortReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#listTrialRows",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#listTrialRows"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.test.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.test.ts#migrateToV2",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV2"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.test.ts#migrateToV3",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV3"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.test.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.test.ts#reconcileReportJson",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#reconcileReportJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#listTrialRows",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#listTrialRows"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#reconcileReportJson",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#listTrialRows"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#rowToDelta",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#delta"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#rowToDelta",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#delta"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#TrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#TrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts#getTrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#getTrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts#importWfClient",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts#resolveManifestPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveManifestPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#appendImportReceipt",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#appendImportReceipt"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#applyTrialPricing",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#applyTrialPricing"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#configurationFingerprint",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/fingerprint.ts#configurationFingerprint"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#ensureStoreLayout",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#HarnessLabel",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#HarnessLabel"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/fingerprint.ts#configurationFingerprint"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#appendImportReceipt"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#insertObservations"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#upsertTrialSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#applyTrialPricing"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#loadPricingCatalog"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#normalizeHarnessLabel"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#parseJsonlForHarness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#readWfManifest"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#wallClockMs"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeCursorObservations"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#insertObservations",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#insertObservations"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#loadPricingCatalog",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#loadPricingCatalog"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#mergeClaudeCumulativeSnapshots",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#mergeCursorObservations",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeCursorObservations"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#parseClaudeStreamJsonFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#parseClaudeStreamJsonFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#parseCursorStreamJsonFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#parseCursorStreamJsonFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#parseJsonlForHarness",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#parseOne"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#readWfManifest",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveManifestPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveStoreRoot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#TokenObservation",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenObservation"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#upsertTrialSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#upsertTrialSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#WfManifestV1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#WfManifestV1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay-manifest-only.test.ts#buildCohortReport",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#buildCohortReport"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay-manifest-only.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay-manifest-only.test.ts#getTrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#getTrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay-manifest-only.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay-manifest-only.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay-manifest-only.test.ts#replayBatchFromManifest",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay-manifest-only.test.ts#resolveManifestPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveManifestPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#countObservationsForTrial",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#countObservationsForTrial"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#replayBatchFromManifest",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#resolveManifestPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveManifestPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#runCli",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#writeWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveManifestPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#writeWfClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveManifestPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#importWfClient",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#parseReplayManifestFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#resolveJsonlPaths"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#resolveStoreRoot",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#validateReplayManifestStructure",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#parseReplayManifestFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#migrateToV2",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV2"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#migrateToV3",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV3"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV2"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV3"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#SCHEMA_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#SCHEMA_VERSION"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate-v3.test.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate-v3.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate-v3.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate-v3.test.ts#migrateToV2",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV2"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate-v3.test.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate-v3.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.test.ts#DatabaseSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#DatabaseSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.test.ts#MIGRATION_SQL_V1",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#MIGRATION_SQL_V1"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV2",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#tableHasColumn"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV3",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#tableHasColumn"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#V2_TRIAL_COLUMNS",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#V2_TRIAL_COLUMNS"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#V3_TRIAL_COLUMNS",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/schema.ts#V3_TRIAL_COLUMNS"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/query.test.ts#crossHarnessSummaryJson",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#crossHarnessSummaryJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/query.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/query.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/query.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/query.test.ts#upsertTrialSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#upsertTrialSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#crossHarnessSummaryJson",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#listTrials"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#CrossHarnessTrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#CrossHarnessTrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegritySha256",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegrityBody"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegritySha256",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/node:crypto.ts#createHash"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#createHash",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/node:crypto.ts#createHash"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#validateSuiteIntegrity",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegritySha256"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#validateSuiteIntegrity",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/load.ts#HarnessEvalSuiteDoc",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#HarnessEvalSuiteDoc"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/validate.test.ts#computeSuiteIntegritySha256",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegritySha256"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/validate.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/validate.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/validate.test.ts#runCli",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/suite/validate.test.ts#validateSuiteIntegrity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#validateSuiteIntegrity"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.test.ts#assessObservationCompleteness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#assessObservationCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.test.ts#mergeClaudeCumulativeSnapshots",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.test.ts#usageObjectToFields",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#assessObservationCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#maxField"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#maxField"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#maxField"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#maxField"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#maxField"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeCursorObservations",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#addNullable"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeCursorObservations",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#addNullable"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeCursorObservations",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#addNullable"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeCursorObservations",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#addNullable"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeCursorObservations",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#addNullable"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#TokenCompleteness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenCompleteness"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#TokenFields",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#TokenObservation",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TokenObservation"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#TrialTokenSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/types.ts#TrialTokenSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#num"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#num"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#num"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#num"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#num"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.test.ts#allVerifiersPass",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#allVerifiersPass"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.test.ts#findScenarioForWfId",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#findScenarioForWfId"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.test.ts#getTrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#getTrialRow"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.test.ts#openEvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.test.ts#runTrialVerifiers",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#runTrialVerifiers"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.test.ts#upsertTrialSummary",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#upsertTrialSummary"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#countObservationsForTrial",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#countObservationsForTrial"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#EvalDatabase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/lib/sqlite.ts#EvalDatabase"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#runTrialVerifiers",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#countObservationsForTrial"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#TrialRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#TrialRow"
     },
     {
       "from_symbol_id": "mcp-server/packages/yaml-cli/src/index.ts#main",
@@ -49948,11 +52158,6 @@
       "to_symbol_id": "mcp-server/src/yaml-style-config.ts#getDefaultTiedBasePath"
     },
     {
-      "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#isOrderedListKey",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#Boolean"
-    },
-    {
       "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#recordFingerprint",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#canonicalizeRecordInner"
@@ -65787,6 +67992,8 @@
     "mcp-server/packages/agentstream/src/harness-select.ts",
     "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts",
     "mcp-server/packages/agentstream/src/harness-turn-trace.ts",
+    "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts",
+    "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
     "mcp-server/packages/agentstream/src/htmlformat.ts",
     "mcp-server/packages/agentstream/src/index.ts",
     "mcp-server/packages/agentstream/src/jev-context-log-pruning-stream.test.ts",
@@ -65801,6 +68008,7 @@
     "mcp-server/packages/agentstream/src/live-driver-bind.ts",
     "mcp-server/packages/agentstream/src/live-driver-select.test.ts",
     "mcp-server/packages/agentstream/src/live-driver-select.ts",
+    "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts",
     "mcp-server/packages/agentstream/src/live-executor.test.ts",
     "mcp-server/packages/agentstream/src/live-executor.ts",
     "mcp-server/packages/agentstream/src/model-effort.test.ts",
@@ -65813,6 +68021,8 @@
     "mcp-server/packages/agentstream/src/red/harness-select-phase2.test.ts",
     "mcp-server/packages/agentstream/src/repo-root.ts",
     "mcp-server/packages/agentstream/src/run-pipeline-prep.ts",
+    "mcp-server/packages/agentstream/src/session-limit-highlight.test.ts",
+    "mcp-server/packages/agentstream/src/session-limit-highlight.ts",
     "mcp-server/packages/agentstream/src/tddloop-load.ts",
     "mcp-server/packages/agentstream/src/tied-layout.ts",
     "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts",
@@ -65840,6 +68050,59 @@
     "mcp-server/packages/cli/src/index.ts",
     "mcp-server/packages/cli/src/paths.ts",
     "mcp-server/packages/cli/src/tied-next.test.ts",
+    "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.test.ts",
+    "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts",
+    "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.test.ts",
+    "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts",
+    "mcp-server/packages/harness-eval/src/billing/apply.test.ts",
+    "mcp-server/packages/harness-eval/src/billing/apply.ts",
+    "mcp-server/packages/harness-eval/src/billing/import.ts",
+    "mcp-server/packages/harness-eval/src/billing/ledger.test.ts",
+    "mcp-server/packages/harness-eval/src/billing/ledger.ts",
+    "mcp-server/packages/harness-eval/src/cli/billing-import.test.ts",
+    "mcp-server/packages/harness-eval/src/cli/diagnostics.test.ts",
+    "mcp-server/packages/harness-eval/src/cli/diagnostics.ts",
+    "mcp-server/packages/harness-eval/src/cli/import-wf.test.ts",
+    "mcp-server/packages/harness-eval/src/cli/main.ts",
+    "mcp-server/packages/harness-eval/src/cli/regression-compare.test.ts",
+    "mcp-server/packages/harness-eval/src/cli/verify.test.ts",
+    "mcp-server/packages/harness-eval/src/config/fingerprint.ts",
+    "mcp-server/packages/harness-eval/src/config/paths.ts",
+    "mcp-server/packages/harness-eval/src/lib/sqlite.ts",
+    "mcp-server/packages/harness-eval/src/normalize/ingest.test.ts",
+    "mcp-server/packages/harness-eval/src/normalize/ingest.ts",
+    "mcp-server/packages/harness-eval/src/pricing/apply.ts",
+    "mcp-server/packages/harness-eval/src/pricing/catalog.test.ts",
+    "mcp-server/packages/harness-eval/src/pricing/catalog.ts",
+    "mcp-server/packages/harness-eval/src/pricing/estimate.ts",
+    "mcp-server/packages/harness-eval/src/regression/baseline.test.ts",
+    "mcp-server/packages/harness-eval/src/regression/baseline.ts",
+    "mcp-server/packages/harness-eval/src/regression/compare.test.ts",
+    "mcp-server/packages/harness-eval/src/regression/compare.ts",
+    "mcp-server/packages/harness-eval/src/report/cohort.test.ts",
+    "mcp-server/packages/harness-eval/src/report/cohort.ts",
+    "mcp-server/packages/harness-eval/src/report/reconcile.test.ts",
+    "mcp-server/packages/harness-eval/src/report/reconcile.ts",
+    "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts",
+    "mcp-server/packages/harness-eval/src/runner/import-wf.ts",
+    "mcp-server/packages/harness-eval/src/runner/replay-manifest-only.test.ts",
+    "mcp-server/packages/harness-eval/src/runner/replay.test.ts",
+    "mcp-server/packages/harness-eval/src/runner/replay.ts",
+    "mcp-server/packages/harness-eval/src/store/db.ts",
+    "mcp-server/packages/harness-eval/src/store/migrate-v3.test.ts",
+    "mcp-server/packages/harness-eval/src/store/migrate.test.ts",
+    "mcp-server/packages/harness-eval/src/store/migrate.ts",
+    "mcp-server/packages/harness-eval/src/store/query.test.ts",
+    "mcp-server/packages/harness-eval/src/store/query.ts",
+    "mcp-server/packages/harness-eval/src/store/schema.ts",
+    "mcp-server/packages/harness-eval/src/suite/integrity.ts",
+    "mcp-server/packages/harness-eval/src/suite/load.ts",
+    "mcp-server/packages/harness-eval/src/suite/validate.test.ts",
+    "mcp-server/packages/harness-eval/src/tokens/accounting.test.ts",
+    "mcp-server/packages/harness-eval/src/tokens/accounting.ts",
+    "mcp-server/packages/harness-eval/src/types.ts",
+    "mcp-server/packages/harness-eval/src/verify/trial.test.ts",
+    "mcp-server/packages/harness-eval/src/verify/trial.ts",
     "mcp-server/packages/yaml-cli/src/index.ts",
     "mcp-server/packages/yaml-cli/src/parity.test.ts",
     "mcp-server/packages/yaml-cli/src/paths.ts",
@@ -68132,6 +70395,69 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts",
+      "kind": "function",
+      "name": "setEnv",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts#setEnv"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
+      "kind": "function",
+      "name": "envTruthy",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#envTruthy"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
+      "kind": "function",
+      "name": "appendHmepStreamJsonLine",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLine"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
+      "kind": "function",
+      "name": "appendHmepStreamJsonLineFromEnv",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#appendHmepStreamJsonLineFromEnv"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
+      "kind": "function",
+      "name": "hmepStreamCaptureEnabled",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureEnabled"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
+      "kind": "function",
+      "name": "hmepStreamCaptureSkipped",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#hmepStreamCaptureSkipped"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
+      "kind": "function",
+      "name": "readHmepCaptureTurnFromEnv",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#readHmepCaptureTurnFromEnv"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
+      "kind": "function",
+      "name": "readHmepCaptureWorkspaceFromEnv",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#readHmepCaptureWorkspaceFromEnv"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts",
+      "kind": "function",
+      "name": "resolveHmepStreamJsonPath",
+      "symbol_id": "mcp-server/packages/agentstream/src/hmep-stream-capture.ts#resolveHmepStreamJsonPath"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/packages/agentstream/src/htmlformat.ts",
       "kind": "function",
       "name": "addNonCompactLineBreaks",
@@ -68545,6 +70871,13 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts",
+      "kind": "function",
+      "name": "assertNoOperatorLinesInStderr",
+      "symbol_id": "mcp-server/packages/agentstream/src/live-executor-turn-operator.test.ts#assertNoOperatorLinesInStderr"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/packages/agentstream/src/live-executor.test.ts",
       "kind": "function",
       "name": "runTrackerComposition",
@@ -68575,8 +70908,29 @@
       "exported": true,
       "file": "mcp-server/packages/agentstream/src/live-executor.ts",
       "kind": "function",
+      "name": "emitTurnOperatorLine",
+      "symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#emitTurnOperatorLine"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/live-executor.ts",
+      "kind": "function",
       "name": "executeLiveRun",
       "symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#executeLiveRun"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/live-executor.ts",
+      "kind": "function",
+      "name": "isTurnOperatorLine",
+      "symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#isTurnOperatorLine"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/live-executor.ts",
+      "kind": "function",
+      "name": "liveExitStdoutIsOperatorMirrorOnly",
+      "symbol_id": "mcp-server/packages/agentstream/src/live-executor.ts#liveExitStdoutIsOperatorMirrorOnly"
     },
     {
       "exported": true,
@@ -68836,6 +71190,34 @@
       "kind": "function",
       "name": "buildTurnsFromConfig",
       "symbol_id": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts#buildTurnsFromConfig"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/session-limit-highlight.ts",
+      "kind": "function",
+      "name": "appendSessionLimitHighlightOnce",
+      "symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#appendSessionLimitHighlightOnce"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/session-limit-highlight.ts",
+      "kind": "function",
+      "name": "detectClaudeSessionLimitLine",
+      "symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#detectClaudeSessionLimitLine"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/session-limit-highlight.ts",
+      "kind": "function",
+      "name": "formatSessionLimitHighlightBlock",
+      "symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#formatSessionLimitHighlightBlock"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/session-limit-highlight.ts",
+      "kind": "function",
+      "name": "writeSessionLimitHighlightToFd2",
+      "symbol_id": "mcp-server/packages/agentstream/src/session-limit-highlight.ts#writeSessionLimitHighlightToFd2"
     },
     {
       "exported": false,
@@ -69697,6 +72079,489 @@
       "kind": "function",
       "name": "yamlCliEntryFromCliModule",
       "symbol_id": "mcp-server/packages/cli/src/paths.ts#yamlCliEntryFromCliModule"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts",
+      "kind": "function",
+      "name": "maxFields",
+      "symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#maxFields"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts",
+      "kind": "function",
+      "name": "parseClaudeStreamJsonFile",
+      "symbol_id": "mcp-server/packages/harness-eval/src/adapters/claude/parse-stream.ts#parseClaudeStreamJsonFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts",
+      "kind": "function",
+      "name": "parseCursorStreamJsonFile",
+      "symbol_id": "mcp-server/packages/harness-eval/src/adapters/cursor/parse-stream.ts#parseCursorStreamJsonFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/billing/apply.ts",
+      "kind": "function",
+      "name": "applyBillingEntries",
+      "symbol_id": "mcp-server/packages/harness-eval/src/billing/apply.ts#applyBillingEntries"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/billing/import.ts",
+      "kind": "function",
+      "name": "importBillingLedger",
+      "symbol_id": "mcp-server/packages/harness-eval/src/billing/import.ts#importBillingLedger"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/billing/ledger.ts",
+      "kind": "function",
+      "name": "parseBillingLedgerFile",
+      "symbol_id": "mcp-server/packages/harness-eval/src/billing/ledger.ts#parseBillingLedgerFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts",
+      "kind": "function",
+      "name": "fixtureCoverageReport",
+      "symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts#fixtureCoverageReport"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts",
+      "kind": "function",
+      "name": "formatDiagnosticsReport",
+      "symbol_id": "mcp-server/packages/harness-eval/src/cli/diagnostics.ts#formatDiagnosticsReport"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/cli/main.ts",
+      "kind": "function",
+      "name": "cliEntryMatched",
+      "symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#cliEntryMatched"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/cli/main.ts",
+      "kind": "function",
+      "name": "parseArgs",
+      "symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#parseArgs"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/cli/main.ts",
+      "kind": "function",
+      "name": "usage",
+      "symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#usage"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/cli/main.ts",
+      "kind": "function",
+      "name": "runCli",
+      "symbol_id": "mcp-server/packages/harness-eval/src/cli/main.ts#runCli"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/config/fingerprint.ts",
+      "kind": "function",
+      "name": "configurationFingerprint",
+      "symbol_id": "mcp-server/packages/harness-eval/src/config/fingerprint.ts#configurationFingerprint"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/config/paths.ts",
+      "kind": "function",
+      "name": "ensureStoreLayout",
+      "symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#ensureStoreLayout"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/config/paths.ts",
+      "kind": "function",
+      "name": "resolveStoreRoot",
+      "symbol_id": "mcp-server/packages/harness-eval/src/config/paths.ts#resolveStoreRoot"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/normalize/ingest.ts",
+      "kind": "function",
+      "name": "appendImportReceipt",
+      "symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#appendImportReceipt"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/normalize/ingest.ts",
+      "kind": "function",
+      "name": "countObservationsForTrial",
+      "symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#countObservationsForTrial"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/normalize/ingest.ts",
+      "kind": "function",
+      "name": "insertObservations",
+      "symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#insertObservations"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/normalize/ingest.ts",
+      "kind": "function",
+      "name": "upsertTrialSummary",
+      "symbol_id": "mcp-server/packages/harness-eval/src/normalize/ingest.ts#upsertTrialSummary"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/pricing/apply.ts",
+      "kind": "function",
+      "name": "applyTrialPricing",
+      "symbol_id": "mcp-server/packages/harness-eval/src/pricing/apply.ts#applyTrialPricing"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/pricing/catalog.ts",
+      "kind": "function",
+      "name": "defaultPricingCatalogPath",
+      "symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#defaultPricingCatalogPath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/pricing/catalog.ts",
+      "kind": "function",
+      "name": "loadPricingCatalog",
+      "symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#loadPricingCatalog"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/pricing/catalog.ts",
+      "kind": "function",
+      "name": "lookupModelRate",
+      "symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#lookupModelRate"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/pricing/catalog.ts",
+      "kind": "function",
+      "name": "resolveRepoRoot",
+      "symbol_id": "mcp-server/packages/harness-eval/src/pricing/catalog.ts#resolveRepoRoot"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/pricing/estimate.ts",
+      "kind": "function",
+      "name": "estimateHarnessListPrice",
+      "symbol_id": "mcp-server/packages/harness-eval/src/pricing/estimate.ts#estimateHarnessListPrice"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/regression/baseline.ts",
+      "kind": "function",
+      "name": "parseRegressionBaselineFile",
+      "symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#parseRegressionBaselineFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/regression/baseline.ts",
+      "kind": "function",
+      "name": "validateRegressionBaselineIntegrity",
+      "symbol_id": "mcp-server/packages/harness-eval/src/regression/baseline.ts#validateRegressionBaselineIntegrity"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/regression/compare.test.ts",
+      "kind": "function",
+      "name": "seedTrial",
+      "symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.test.ts#seedTrial"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/regression/compare.ts",
+      "kind": "function",
+      "name": "bindMatchesTrial",
+      "symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#bindMatchesTrial"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/regression/compare.ts",
+      "kind": "function",
+      "name": "compareExpectationToTrial",
+      "symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareExpectationToTrial"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/regression/compare.ts",
+      "kind": "function",
+      "name": "compareTrialToBaselineFile",
+      "symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#compareTrialToBaselineFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/regression/compare.ts",
+      "kind": "function",
+      "name": "metricWithinTolerance",
+      "symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#metricWithinTolerance"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/regression/compare.ts",
+      "kind": "function",
+      "name": "readTrialMetric",
+      "symbol_id": "mcp-server/packages/harness-eval/src/regression/compare.ts#readTrialMetric"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/report/cohort.ts",
+      "kind": "function",
+      "name": "buildCohortReport",
+      "symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#buildCohortReport"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/report/cohort.ts",
+      "kind": "function",
+      "name": "cohortReportJson",
+      "symbol_id": "mcp-server/packages/harness-eval/src/report/cohort.ts#cohortReportJson"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/report/reconcile.ts",
+      "kind": "function",
+      "name": "delta",
+      "symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#delta"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/report/reconcile.ts",
+      "kind": "function",
+      "name": "rowToDelta",
+      "symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#rowToDelta"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/report/reconcile.ts",
+      "kind": "function",
+      "name": "reconcileReportJson",
+      "symbol_id": "mcp-server/packages/harness-eval/src/report/reconcile.ts#reconcileReportJson"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/import-wf.ts",
+      "kind": "function",
+      "name": "importWfClient",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#importWfClient"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/import-wf.ts",
+      "kind": "function",
+      "name": "normalizeHarnessLabel",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#normalizeHarnessLabel"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/import-wf.ts",
+      "kind": "function",
+      "name": "parseJsonlForHarness",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#parseJsonlForHarness"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/import-wf.ts",
+      "kind": "function",
+      "name": "readWfManifest",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#readWfManifest"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/import-wf.ts",
+      "kind": "function",
+      "name": "resolveManifestPath",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#resolveManifestPath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/import-wf.ts",
+      "kind": "function",
+      "name": "wallClockMs",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/import-wf.ts#wallClockMs"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/runner/replay.test.ts",
+      "kind": "function",
+      "name": "writeWfClient",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.test.ts#writeWfClient"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/runner/replay.ts",
+      "kind": "function",
+      "name": "resolveJsonlPaths",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#resolveJsonlPaths"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/replay.ts",
+      "kind": "function",
+      "name": "parseReplayManifestFile",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#parseReplayManifestFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/replay.ts",
+      "kind": "function",
+      "name": "replayBatchFromManifest",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#replayBatchFromManifest"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/runner/replay.ts",
+      "kind": "function",
+      "name": "validateReplayManifestStructure",
+      "symbol_id": "mcp-server/packages/harness-eval/src/runner/replay.ts#validateReplayManifestStructure"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/store/db.ts",
+      "kind": "function",
+      "name": "openEvalDatabase",
+      "symbol_id": "mcp-server/packages/harness-eval/src/store/db.ts#openEvalDatabase"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/store/migrate.ts",
+      "kind": "function",
+      "name": "tableHasColumn",
+      "symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#tableHasColumn"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/store/migrate.ts",
+      "kind": "function",
+      "name": "migrateToV2",
+      "symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV2"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/store/migrate.ts",
+      "kind": "function",
+      "name": "migrateToV3",
+      "symbol_id": "mcp-server/packages/harness-eval/src/store/migrate.ts#migrateToV3"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/store/query.ts",
+      "kind": "function",
+      "name": "crossHarnessSummaryJson",
+      "symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#crossHarnessSummaryJson"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/store/query.ts",
+      "kind": "function",
+      "name": "getTrialRow",
+      "symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#getTrialRow"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/store/query.ts",
+      "kind": "function",
+      "name": "listTrialRows",
+      "symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#listTrialRows"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/store/query.ts",
+      "kind": "function",
+      "name": "listTrials",
+      "symbol_id": "mcp-server/packages/harness-eval/src/store/query.ts#listTrials"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/suite/integrity.ts",
+      "kind": "function",
+      "name": "computeSuiteIntegrityBody",
+      "symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegrityBody"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/suite/integrity.ts",
+      "kind": "function",
+      "name": "computeSuiteIntegritySha256",
+      "symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#computeSuiteIntegritySha256"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/suite/integrity.ts",
+      "kind": "function",
+      "name": "validateSuiteIntegrity",
+      "symbol_id": "mcp-server/packages/harness-eval/src/suite/integrity.ts#validateSuiteIntegrity"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/suite/load.ts",
+      "kind": "function",
+      "name": "loadSuiteFile",
+      "symbol_id": "mcp-server/packages/harness-eval/src/suite/load.ts#loadSuiteFile"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/harness-eval/src/tokens/accounting.ts",
+      "kind": "function",
+      "name": "addNullable",
+      "symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#addNullable"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/tokens/accounting.ts",
+      "kind": "function",
+      "name": "assessObservationCompleteness",
+      "symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#assessObservationCompleteness"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/tokens/accounting.ts",
+      "kind": "function",
+      "name": "mergeClaudeCumulativeSnapshots",
+      "symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeClaudeCumulativeSnapshots"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/tokens/accounting.ts",
+      "kind": "function",
+      "name": "mergeCursorObservations",
+      "symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#mergeCursorObservations"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/tokens/accounting.ts",
+      "kind": "function",
+      "name": "usageObjectToFields",
+      "symbol_id": "mcp-server/packages/harness-eval/src/tokens/accounting.ts#usageObjectToFields"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/verify/trial.ts",
+      "kind": "function",
+      "name": "allVerifiersPass",
+      "symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#allVerifiersPass"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/verify/trial.ts",
+      "kind": "function",
+      "name": "findScenarioForWfId",
+      "symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#findScenarioForWfId"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/harness-eval/src/verify/trial.ts",
+      "kind": "function",
+      "name": "runTrialVerifiers",
+      "symbol_id": "mcp-server/packages/harness-eval/src/verify/trial.ts#runTrialVerifiers"
     },
     {
       "exported": false,

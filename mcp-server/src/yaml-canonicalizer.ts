@@ -21,6 +21,9 @@ export const ORDERED_LIST_KEY_PATTERN =
 const ORDERED_LIST_KEY_REGEX =
   /^(?:order|order_.*|.*_order|.*_order_.*|steps|steps_.*|.*_steps|.*_steps_.*|_order|_order_.*|_seq|_seq_.*|_sequence|_sequence_.*|.*_seq|.*_sequence|seq_.*|sequence_.*)$/;
 
+/** Lists keyed exactly `created` preserve insertion order (MCP batch-create payloads: e.g. LEAP proposal import). */
+const EXACT_ORDERED_LIST_KEYS = new Set(["created"]);
+
 export type CanonicalYamlValue =
   | null
   | string
@@ -237,7 +240,9 @@ function compareCodeUnits(left: string, right: string): number {
 }
 
 export function isOrderedListKey(key: string | undefined): boolean {
-  return Boolean(key && ORDERED_LIST_KEY_REGEX.test(key));
+  if (!key) return false;
+  if (EXACT_ORDERED_LIST_KEYS.has(key)) return true;
+  return ORDERED_LIST_KEY_REGEX.test(key);
 }
 
 // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]

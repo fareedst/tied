@@ -28,6 +28,9 @@
 | **replay manifest** | Batch import list under `docs/demos/harness-eval/replay/` (`harness-eval-replay-manifest-v1`). |
 | **baseline bind** | Match expectation to trial via `wf_id` + `harness` (optional `model_slug` / `trial_id` pin). |
 | **list-price-v1** | Committed USD/MTok catalog under `docs/demos/harness-eval/pricing/`. |
+| **WF_TRIAL_HMEP_CAPTURE** | Env set by `workflow_trial_range` (default-on) so agentstream persists agent NDJSON for HMEP; opt-out `WF_TRIAL_SKIP_HMEP_CAPTURE=1`. |
+| **range HMEP import** | Post-cell `harness-eval events import` with `--jsonl` paths under client `evidence/stream-json/`. |
+| **stream-json capture path** | `tied-project/working/wf-trial-orchestrator-run/evidence/stream-json/turn-{NNN}.jsonl` on disposable clients. |
 
 ## Boundaries
 
@@ -53,3 +56,6 @@
 | SC-HMEP-M3 | Canonical terms |
 | SC-HMEP-M2 | Canonical terms |
 | SC-HMEP-M4 | Canonical terms |
+| range HMEP import | Canonical terms |
+| stream-json capture path | Canonical terms |
+| WF_TRIAL_HMEP_CAPTURE | Canonical terms |

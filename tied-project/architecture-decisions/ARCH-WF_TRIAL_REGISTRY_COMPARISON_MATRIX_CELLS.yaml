@@ -1,0 +1,6 @@
+ARCH-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+  ARCH-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+    constraints:
+      - "Master Run time stays seconds"
+      - "No leaderboard language"
+    description: "Matrix cells import formatWallClockMinutes; grades from master parse only."

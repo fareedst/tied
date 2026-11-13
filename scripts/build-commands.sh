@@ -556,8 +556,10 @@ alias workflow-trial-agentstream=workflow_trial_agentstream
 # [REQ-WF_TRIAL_MODEL_SPEC_CLI] [IMPL-WF_TRIAL_MODEL_SPEC_CLI]
 # shellcheck source=lib/wf-trial-model-spec.inc.sh
 source "${_BUILD_COMMANDS_DIR}/lib/wf-trial-model-spec.inc.sh"
+# shellcheck source=lib/wf-trial-hmep-import.inc.sh
+source "${_BUILD_COMMANDS_DIR}/lib/wf-trial-hmep-import.inc.sh"
 
-# [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] workflow_trial_agentstream inherits default-on proof manifest gate
+# [REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST] [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] workflow_trial_agentstream inherits default-on proof manifest gate
 workflow_trial_range ()
 {
     if [[ $# -eq 0 ]]; then
@@ -572,6 +574,7 @@ usage: workflow_trial_range HARNESS MODEL_REF EFFORT END START [MONIT]
   example: workflow_trial_range cursor luna medium 2 2
   example: workflow_trial_range cursor luna-low medium 2 2
   example: workflow_trial_range claude haiku-5-5 medium 1 1
+  HMEP: default WF_TRIAL_HMEP_CAPTURE=1 (stream-json under client evidence/stream-json/ + harness-eval import after each cell); opt-out WF_TRIAL_SKIP_HMEP_CAPTURE=1
 EOF
         return 0
     fi
@@ -599,18 +602,29 @@ EOF
                 ;;
         esac
     fi
+    if [[ -n "${WF_TRIAL_SKIP_HMEP_CAPTURE:-}" && "${WF_TRIAL_SKIP_HMEP_CAPTURE}" != "0" ]]; then
+        unset WF_TRIAL_HMEP_CAPTURE
+    else
+        export WF_TRIAL_HMEP_CAPTURE=1
+        export WF_TRIAL_HMEP_REPO_ROOT="${_BUILD_COMMANDS_REPO_ROOT}"
+    fi
     for ((num=start; num<=end; num++))
     do
         printf -v NUM '%02d' "$num";
+        local _wf_orch_rc=0
         if [[ "$harness" == "claude" ]]; then
             $monit_to_stderr : HARNESS="$harness" MODEL_CONFIG="$model_config" MODEL_SLUG="$model_slug" MODEL_EFFORT="${effort}" AGENTSTREAM_CLAUDE_LIVE_OK=1
             AGENTSTREAM_CLAUDE_LIVE_OK=1 HARNESS="$harness" MODEL_CONFIG="$model_config" MODEL_SLUG="$model_slug" \
-              $monit_to_stderr workflow_trial_agentstream "wf-${NUM}" || return $?;
+              $monit_to_stderr workflow_trial_agentstream "wf-${NUM}" || _wf_orch_rc=$?
         else
             $monit_to_stderr : HARNESS="$harness" MODEL_CONFIG="$model_config" MODEL_SLUG="$model_slug" MODEL_EFFORT="${effort}"
             HARNESS="$harness" MODEL_CONFIG="$model_config" MODEL_SLUG="$model_slug" \
-              $monit_to_stderr workflow_trial_agentstream "wf-${NUM}" || return $?;
-        fi;
+              $monit_to_stderr workflow_trial_agentstream "wf-${NUM}" || _wf_orch_rc=$?
+        fi
+        wf_trial_hmep_import_cell "wf-${NUM}"
+        if ((_wf_orch_rc != 0)); then
+            return "$_wf_orch_rc"
+        fi
     done
 }
 

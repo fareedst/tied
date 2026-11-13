@@ -3801,6 +3801,18 @@ IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT:
     - "REQ-WF_TRIAL_RANGE_CANONICAL_INPUT"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
   status: "Active"
+IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+    requirements:
+      - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST.yaml"
+  implementation_approach: "hmep-stream-capture.ts; executor-run and claude-driver hooks; live-executor turn env; wf-trial-hmep-import.inc.sh; build-commands workflow_trial_range."
+  name: "WF trial range HMEP auto ingest implementation"
+  related_requirements:
+    - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+  status: "Draft"
 IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
   name: "WF grading rationale parser and contract test"
@@ -3808,6 +3820,15 @@ IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE:
     - "ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE"
   related_requirements:
     - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+IMPL-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+    requirements:
+      - "REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS.yaml"
+  name: "wf-trial-comparison-matrix render"
+  status: "in_progress"
 IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   cross_references:
     architecture_decisions:

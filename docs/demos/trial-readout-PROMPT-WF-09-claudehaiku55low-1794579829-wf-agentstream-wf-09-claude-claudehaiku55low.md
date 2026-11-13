@@ -1,0 +1,185 @@
+# Trial readout: PROMPT-WF-09 → Claude Haiku 5.5 (low effort) → `1794579829-wf-agentstream-wf-09-claude-claudehaiku55low`
+
+| Field | Value |
+| --- | --- |
+| **Recorded** | 2026-11-13 |
+| **Touchpoint** | `add-feature` → `refine-plan` → `build-plan` → `close-out` via **`workflow_trial_agentstream wf-09`** (`HARNESS=claude`) + facilitator inspection |
+| **Trial prompt** | [PROMPT-WF-09](catalog-traditional-workflow-trial-prompts.md#prompt-wf-09) |
+| **Model config** | `claude-haiku-5-5` (`low` effort) |
+| **Model slug** | `claude-haiku-5-5` |
+| **Harness** | `claude-agentstream-four-phase` |
+| **Client root** | `/Users/fareed/Documents/dev/test/1794579829-wf-agentstream-wf-09-claude-claudehaiku55low` |
+| **Factory tag** | `1794579829-wf-agentstream-wf-09-claude-claudehaiku55low` |
+| **Product REQ** | `REQ-ORDERED_CONCURRENT_MAP` |
+| **TIED methodology version (session)** | **4.2.2** — source **`install_json`** — `tied-project/working/REQ-ORDERED_CONCURRENT_MAP/evidence/tied-methodology-version.session.v1.json` (turn add-feature) |
+| **Cohort comparison** | Claude **WF-09** effort replay on **4.2.2** vs prior **4.2.1** Haiku low cell [1794351557](trial-readout-PROMPT-WF-09-claudehaiku55low-1794351557-wf-agentstream-wf-09-claude-claudehaiku55low.md); **composition_tests: 0**. |
+
+Store documentation only; not a catalog `[REQ-*]` token.
+
+---
+
+## Sponsor intent (verbatim)
+
+```text
+Build a TypeScript library that maps work over an array with concurrent execution but returns results in the same order as the input, even when individual items finish out of order. Tests must use deterministic delays so completion order differs from input order. Include automated tests. No graphical UI.
+```
+
+**Catalog stress:** ordered parallel map (**TIED-DEMO-10**). **Proof boundary:** executable behavior + orchestrator log + facilitator replay — not HMEP token/cost metrics.
+
+---
+
+## What was built
+
+- **Product:** `src/ordered-concurrent-map.ts` with limit / fail-fast; facilitator **`npm test` 8/8** pass.
+- **TIED:** Working tree under `REQ-ORDERED_CONCURRENT_MAP`; R+A+I persist and traceable commit **not** completed.
+- **Stack:** `wf-trial-ts-node-test-v1`; orchestrator **`exit_code: 0`**; wall **~229s** (~3.8 min).
+- **Git:** bootstrap-only **`57989a0`** (`TIED 4.2.2`); product + TIED artifacts uncommitted.
+- **Project size layers:** atoms REQ **1** / ARCH **0** / IMPL **0**; unit tests **8**; composition **0**; applied_lines **0** ([facilitator snapshot](../../tied-project/working/FACILITATOR-WF-09-1794579829-wf-agentstream-wf-09-claude-claudehaiku55low/evidence/project-size-snapshot.v1.json)).
+
+---
+
+## Outcome record
+
+**Implementation outcome:** **Partial** — eight passing unit tests at facilitator replay.
+
+**Workflow outcome:** **Incomplete** — build turn finished implementation but **verification** and **close_out** gates blocked; no product commit.
+
+**Grading outcome:** Session bands describe this cell only. **Grade mean (registry compact):** 2.52 · B+/D+/B−/B+/C/B−/C+.
+
+---
+
+## Completion signals (three-way)
+
+| Signal | Status | Notes |
+| --- | --- | --- |
+| **Machine close_out** | **fail** | `close_out_gate_allowed: false` — missing adversarial CITDP fields despite minimal N/A inquiry |
+| **Process contract** | **partial** | `sub-close-out-evidence-sync` / traceable-commit not run |
+| **Adherence ledger** | **not_run** | No `tied_adherence_reconcile_run` on client |
+| **Orchestrator** | **pass** | **`exit_code: 0`** |
+| **Composition stress** | **gap** | **`composition_tests: 0`** |
+
+---
+
+## TIED db capture + workflow inventory
+
+| Artifact | Location |
+| --- | --- |
+| PLAN | `tied-project/working/REQ-ORDERED_CONCURRENT_MAP/PLAN.md` |
+| **Interaction inventory** | `…/evidence/trial-workflow-interaction-inventory.v1.json` |
+| **Orchestrator manifest** | `tied-project/working/wf-trial-orchestrator-run/evidence/wf-trial-orchestrator-run.v1.json` |
+| Verification gate (blocked) | `…/gates/verification-2026-11-13T14-26-36-425Z.json` |
+
+**Facilitator verification (store):** [build-plan-verification-evidence.md](../../tied-project/working/FACILITATOR-WF-09-1794579829-wf-agentstream-wf-09-claude-claudehaiku55low/evidence/build-plan-verification-evidence.md).
+
+---
+
+## Four-turn table
+
+| Turn | Skill | Outcome (observed) |
+| --- | --- | --- |
+| 1 | `add-feature` | REQ scaffold; session semver **4.2.2** |
+| 2 | `refine-plan` | **complete** — ordering + concurrency contract |
+| 3 | `build-plan` | **complete_verification_gate_blocked** — 8/8 tests |
+| 4 | `close-out` | **incomplete_close_out_gate_blocked** — no commit |
+
+---
+
+## Orchestrator process log
+
+| Field | Value |
+| --- | --- |
+| **Manifest** | `/Users/fareed/Documents/dev/test/1794579829-wf-agentstream-wf-09-claude-claudehaiku55low/tied-project/working/wf-trial-orchestrator-run/evidence/wf-trial-orchestrator-run.v1.json` |
+| **Exit code** | **`0`** |
+| **Wall time** | **229s** |
+
+**Friction excerpts:**
+
+- `DIAGNOSTIC: tied_methodology_version=4.2.2 source=orchestrator_resolver`
+- `DIAGNOSTIC: harness=claude model=claude-haiku-5-5 model_effort=low`
+- `DIAGNOSTIC: proof manifest scaffold seeded` (default-on proof manifest gate)
+- `DIAGNOSTIC: wf-trial process log manifest=…/wf-trial-orchestrator-run.v1.json`
+
+---
+
+## Phase boundary audit
+
+| Check | Finding |
+| --- | --- |
+| Git vs tests | **8/8** tests on disk; only bootstrap commit **`57989a0`** — no traceable product commit |
+| R+A+I persist | `persist-implementation-records` still pending per build-plan handoff |
+| Composition | No composition test files — consistent with size receipt |
+| Gate mismatch | Tracker marks adversarial inquiry **not_applicable** at minimal depth; gate still requires adversarial CITDP fields |
+
+---
+
+## Stack compliance
+
+| Check | Result |
+| --- | --- |
+| `implementation_stack_id` | `wf-trial-ts-node-test-v1` |
+| Facilitator `npm test` | **8** pass |
+| Composition cohort | **0** composition test files |
+
+---
+
+## Session grading
+
+| Dimension | Band | Rationale |
+| --- | --- | --- |
+| Requirement interpretation | **B+** | Ordered concurrent map matches sponsor paste; API shape locked in refine. |
+| Traceability closure | **D+** | Bootstrap-only git; green tests uncommitted; REQ index not fully persisted. |
+| Test strategy | **B−** | Eight deterministic delay cases; no binding/composition facet. |
+| Algorithm / implementation | **B+** | Limit, fail-fast, and order preservation present in single module. |
+| Process adherence | **C** | Turn 4 blocked while orchestrator reports success. |
+| Workflow choreography | **B−** | Fast wall clock; verification/close_out gates failed on adversarial checklist mismatch. |
+| Methodology learning readout | **C+** | **4.2.2** replay of Haiku-low WF-09 under default-on proof manifest — process friction documented, not ranked vs 4.2.1. |
+
+**Feedback ingest:** N/A (facilitator default; no store `tied_feedback_add` this pass).
+
+**Future-test rule:** One trial does not prove methodology effectiveness; cohort claims need baseline, pairing disposition, and explicit proof boundaries.
+
+---
+
+## Cross-model notes (PROMPT-WF-09)
+
+Pairs with prior Claude Haiku **low** readout [1794351557](trial-readout-PROMPT-WF-09-claudehaiku55low-1794351557-wf-agentstream-wf-09-claude-claudehaiku55low.md) (**4.2.1**, 10 tests, same split-signal pattern). This cell adds **4.2.2** + proof-manifest scaffold at orchestrator bootstrap. No ranking.
+
+---
+
+## Cohort comparisons vs peer WF readouts
+
+Adds a **4.2.2** datapoint for PROMPT-WF-09 Claude Haiku low. See [runs registry](traditional-workflow-trial-runs-registry.md) row **09 / 1794579829**.
+
+---
+
+## TIED version / dogfood
+
+Session capture **4.2.2** from `tied-methodology-version.session.v1.json` at add-feature — documents disposable bootstrap on current store methodology, not effectiveness of model or effort tier.
+
+---
+
+## Harness-eval utilization (HMEP)
+
+**Import run:** 2026-11-13 — manifest-only (no stream-json on client). Evidence: [harness-eval-import.md](../../tied-project/working/FACILITATOR-WF-09-1794579829-wf-agentstream-wf-09-claude-claudehaiku55low/evidence/harness-eval-import.md).
+
+| Metric | Value |
+| --- | --- |
+| `wall_clock_ms` | 229000 |
+| `input_tokens` / `output_tokens` | null |
+| `harness_estimated_cost` | null |
+
+Token and list-price fields stay null until a capture is imported with `--jsonl`.
+
+---
+
+## Facilitator follow-ups
+
+- Sponsor choice: waive adversarial CITDP fields at minimal depth vs run integrated inquiry before close-out on future 4.2.2 cells.
+- Re-import with `--jsonl` when Claude stream-json capture is available (see HMEP evidence link above).
+
+---
+
+## Related links
+
+- [Traditional workflow catalog](catalog-traditional-workflow-trial-prompts.md)
+- [Facilitator evidence](../../tied-project/working/FACILITATOR-WF-09-1794579829-wf-agentstream-wf-09-claude-claudehaiku55low/evidence/)

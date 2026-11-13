@@ -3178,6 +3178,18 @@ ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT:
     - "REQ-WF_TRIAL_RANGE_CANONICAL_INPUT"
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
   status: "Planned"
+ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  cross_references:
+    requirements:
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+      - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+  decision: "Agentstream appends subprocess NDJSON when WF_TRIAL_HMEP_CAPTURE; workflow_trial_range imports harness-eval after each cell."
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST.yaml"
+  name: "WF trial range HMEP capture architecture"
+  related_requirements:
+    - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+  status: "Draft"
 ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
   name: "WF grading rationale surfaces"
@@ -3186,6 +3198,15 @@ ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE:
     - "IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE"
   related_requirements:
     - "REQ-WF_TRIAL_READOUT_GRADING_RATIONALE"
+ARCH-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+  cross_references:
+    implementation:
+      - "IMPL-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+    requirements:
+      - "REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS.yaml"
+  name: "Registry matrix cell render"
+  status: "in_progress"
 ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   cross_references:
     requirements:

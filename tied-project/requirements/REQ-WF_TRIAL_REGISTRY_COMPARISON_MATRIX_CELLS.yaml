@@ -1,0 +1,12 @@
+REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+  REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+    acceptance_criteria:
+      - "SC-WF-CMX-01 through SC-WF-CMX-06 in working PLAN"
+    description: "Latest-run comparison matrix cells show wall_mins with m suffix and full master Grades string."
+    satisfaction_criteria:
+      - criterion: "Grade line equals master Grades for winning row."
+        id: "SC-WF-CMX-03"
+      - criterion: "Wall line uses formatWallClockMinutes and m suffix."
+        id: "SC-WF-CMX-02"
+      - criterion: "wf-trial-comparison-matrix.test.mjs green."
+        id: "SC-WF-CMX-06"

@@ -17,4 +17,4 @@
 
 ### Commit
 
-**SHA:** _(pending traceable commit this pass)_
+**SHA:** `c45ed768` — see `proposed-commit-message.txt` and `traceable-commit-evidence.md`.

@@ -4826,6 +4826,33 @@ REQ-WF_TRIAL_RANGE_CANONICAL_INPUT:
     related_to:
       - "REQ-WF_TRIAL_MODEL_EFFORT"
   status: "Implemented"
+REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  category: "Tooling"
+  description: "workflow_trial_range default-on persists agent stream-json per turn and runs harness-eval import after each matrix cell."
+  detail_file: "requirements/REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST.yaml"
+  name: "WF trial range HMEP auto capture and import"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    related_to:
+      - "REQ-WF_TRIAL_MODEL_EFFORT"
+  satisfaction_criteria:
+    - criterion: "Hmep import runs after non-zero four-phase exit when client exists."
+      id: "SC-WRH-06"
+    - criterion: "Import with Claude usage JSONL yields observations and list-price when catalog matches."
+      id: "SC-WRH-03"
+    - criterion: "Single-cell workflow_trial_agentstream without range export does not default capture."
+      id: "SC-WRH-05"
+    - criterion: "WF_TRIAL_HMEP_CAPTURE=1 writes turn-*.jsonl under client stream-json evidence."
+      id: "SC-WRH-01"
+    - criterion: "WF_TRIAL_SKIP_HMEP_CAPTURE=1 skips capture and import."
+      id: "SC-WRH-04"
+    - criterion: "workflow_trial_range exports capture env and calls hmep import after each cell."
+      id: "SC-WRH-02"
+  status: "Draft"
 REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
   category: "Documentation"
   description: "Require concise grade-aware Rationale cells in PROMPT-WF facilitator readouts; contract test over docs/demos corpus."
@@ -4835,6 +4862,15 @@ REQ-WF_TRIAL_READOUT_GRADING_RATIONALE:
   related_requirements:
     depends_on:
       - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+    implementation:
+      - "IMPL-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+  detail_file: "requirements/REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS.yaml"
+  name: "WF trial registry comparison matrix cell format"
+  status: "in_progress"
 REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   description: "Dual-stream turn operator lines so wf-trial process.stdout.log carries sequential turn markers and session_id while live stderr flushes immediately."
   detail_file: "requirements/REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"

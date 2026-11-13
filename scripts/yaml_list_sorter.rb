@@ -564,8 +564,11 @@ class YamlListSorter
   # True for order/steps/seq workflow list keys (aligned with mcp-server isOrderedListKey).
   ORDERED_LIST_KEY_PATTERN = /\A(?:order|order_.*|.*_order|.*_order_.*|steps|steps_.*|.*_steps|.*_steps_.*|_order|_order_.*|_seq|_seq_.*|_sequence|_sequence_.*|.*_seq|.*_sequence|seq_.*|sequence_.*)\z/
 
+  EXACT_ORDERED_LIST_KEYS = %w[created].freeze
+
   def order_preserving_key?(key_name)
     return false if key_name.nil?
+    return true if EXACT_ORDERED_LIST_KEYS.include?(key_name)
 
     key_name.match?(ORDERED_LIST_KEY_PATTERN)
   end

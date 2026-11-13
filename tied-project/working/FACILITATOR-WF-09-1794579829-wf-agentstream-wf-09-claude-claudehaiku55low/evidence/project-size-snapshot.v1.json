@@ -1,0 +1,21 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794579829-wf-agentstream-wf-09-claude-claudehaiku55low",
+  "validator_version": "1.2.0",
+  "layers": {
+    "atoms": {
+      "index_req": 1,
+      "index_arch": 0,
+      "index_impl": 0
+    },
+    "proof_facets": {
+      "unit_tests": 8,
+      "composition_tests": 0
+    },
+    "operational_intent": {
+      "applied_lines": 0,
+      "procedure_count": 0
+    }
+  },
+  "proof_boundary": "Facilitator snapshot at record-wf-trial; not REQ Implemented status."
+}

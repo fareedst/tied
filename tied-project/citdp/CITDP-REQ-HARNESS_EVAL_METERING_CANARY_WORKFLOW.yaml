@@ -29,15 +29,15 @@ CITDP-REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
         - "wf-meter-01 breaks WF-01…12 id validation"
       depth_tier: "minimal"
       disconfirming_observations:
-        - "SC-HEMC contract tests reject wf-meter-01 id collisions with wf-01..12"
         - "Gawk metering remainder extraction covered by metering-catalog-contract tests"
+        - "SC-HEMC contract tests reject wf-meter-01 id collisions with wf-01..12"
       evidence_references:
         - "tied-project/working/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/PLAN.md"
         - "tied-project/working/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/test-strategy.md"
       falsification_questions:
-        - "Does wf-meter-01 remain isolated from production WF catalog ids?"
-        - "Does empty METER gawk extract fail closed in tests?"
         - "Can operators confuse metering-lite catalog with PROMPT-WF-01 grading?"
+        - "Does empty METER gawk extract fail closed in tests?"
+        - "Does wf-meter-01 remain isolated from production WF catalog ids?"
       gate_policy: "advisory"
       rationale: "M1 close-out uses bootstrap contract tests; live SC-HEMC-06 optional; integrated inquiry deferred."
   risk_assessment:

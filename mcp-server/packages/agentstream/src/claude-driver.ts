@@ -24,6 +24,7 @@ import {
   type ClaudeStreamEvent,
   type ClaudeExitMetadata,
 } from "./claude-stream.js";
+import { appendHmepStreamJsonLineFromEnv } from "./hmep-stream-capture.js";
 
 export type ClaudePinnedContract = {
   cliVersion: string;
@@ -190,6 +191,7 @@ export async function collectClaudeStreamFromSpawn(
     rl.on("line", (line) => {
       const trimmed = line.trim();
       if (trimmed !== "") {
+        appendHmepStreamJsonLineFromEnv(trimmed);
         lines.push(trimmed);
         // Stream assistant/thinking to stdout (Cursor runAgent parity).
         try {

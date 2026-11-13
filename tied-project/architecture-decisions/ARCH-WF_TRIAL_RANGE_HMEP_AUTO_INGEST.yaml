@@ -1,0 +1,12 @@
+ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  consequences:
+    - "Disposable clients grow stream-json artifacts"
+    - "HARNESS_EVAL_STORE updated after each range cell"
+  context: "Implements deferred HMEP thin capture for matrix runs only."
+  decision: "Single env gate WF_TRIAL_HMEP_CAPTURE drives hmep-stream-capture in agentstream; shell wf-trial-hmep-import.inc.sh resolves disposable client and passes --jsonl paths; soft-fail import by default."
+  status: "Draft"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+    requirements:
+      - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"

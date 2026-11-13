@@ -1,0 +1,10 @@
+IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  decision: "hmep-stream-capture module with env-gated append; shell import helper; range orchestration export and post-cell import."
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST-pseudocode.md"
+  implementation_approach: "See IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST-pseudocode.md"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+    requirements:
+      - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"

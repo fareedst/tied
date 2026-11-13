@@ -1,0 +1,29 @@
+REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  name: "WF trial range HMEP auto capture and import"
+  rationale:
+    benefits:
+      - "Automatic cohort utilization for workflow_trial_range"
+      - "Composes with HMEP M2 pricing"
+    problems_solved:
+      - "Manifest-only harness-eval import on range cells"
+      - "Manual post-trial jsonl capture"
+    why: "Matrix range runs left HMEP token and harness_estimated_cost null without stream-json on disk."
+  satisfaction_criteria:
+    - criterion: "Capture on writes turn-*.jsonl."
+      id: "SC-WRH-01"
+    - criterion: "Claude JSONL import yields tokens and cost when complete."
+      id: "SC-WRH-03"
+    - criterion: "Import after failed orchestrator when client present."
+      id: "SC-WRH-06"
+    - criterion: "No default capture on single-cell."
+      id: "SC-WRH-05"
+    - criterion: "Range sets env and import hook."
+      id: "SC-WRH-02"
+    - criterion: "Skip env disables both paths."
+      id: "SC-WRH-04"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+    implementation:
+      - "IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"

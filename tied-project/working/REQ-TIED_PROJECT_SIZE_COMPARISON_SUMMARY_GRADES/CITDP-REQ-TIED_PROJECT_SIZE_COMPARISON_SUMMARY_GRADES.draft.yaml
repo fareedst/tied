@@ -5,20 +5,20 @@ CITDP-REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES:
   impact_analysis:
     modules_or_boundaries: "tools/bootstrap/lib/read-trial-readout-session-grading.mjs; tools/bootstrap/lib/project-size-comparison-render.mjs; tools/bootstrap/lib/project-size-comparison-render.test.mjs; tools/bootstrap/lib/project-size-batch-compare.mjs; tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md (regenerated); docs/demos/catalog-tied-size-and-trial-statistics.md (cross-link if needed)"
     tied_tokens_new:
-      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
       - "ARCH-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
       - "IMPL-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
+      - "REQ-TIED_PROJECT_SIZE_COMPARISON_SUMMARY_GRADES"
   non_goals:
-    - "Snapshot receipt fields for grades"
-    - "Registry row automation"
     - "Leaderboard or maturity language"
+    - "Registry row automation"
+    - "Snapshot receipt fields for grades"
     - "Verbose table grades column"
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Operator ranks models by mean grade in Summary"
         - "Operator assumes grades prove REQ satisfaction"
+        - "Operator ranks models by mean grade in Summary"
       depth_tier: "minimal"
       disconfirming_observations:
         - "Proof boundary and glossary state readout-only join"

@@ -1,0 +1,51 @@
+CITDP-REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  change_definition:
+    current_behavior: "workflow_trial_range loops workflow_trial_agentstream only.\nAgentstream parses agent stream-json in memory and does not persist NDJSON.\nOperators run harness-eval events import separately; without --jsonl, tokens and harness_estimated_cost stay null (manifest-only).\n"
+    desired_behavior: "workflow_trial_range enables WF_TRIAL_HMEP_CAPTURE by default.\nAgentstream appends per-turn stream-json under tied-project/working/wf-trial-orchestrator-run/evidence/stream-json/.\nAfter each range cell, shell invokes harness-eval import with discovered jsonl paths (partial metrics when four-phase exit non-zero).\n"
+    success_criteria:
+      - "SC-WRH-01 through SC-WRH-06 in PLAN.md"
+      - "tied_validate_consistency ok after LEAP"
+    unchanged_behavior: "workflow_trial_agentstream without range parent (no capture default).\n@record-wf-trial grading and HMEP proof boundary.\nHMEP billing import opt-in.\nSingle-cell orchestrator manifest and process log semantics.\n"
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/packages/agentstream/src/hmep-stream-capture.ts (new)\nmcp-server/packages/agentstream/src/executor-run.ts\nmcp-server/packages/agentstream/src/claude-driver.ts\nmcp-server/packages/agentstream/src/live-executor.ts\nscripts/lib/wf-trial-hmep-import.inc.sh (new)\nscripts/build-commands.sh workflow_trial_range\nscripts/_build_commands_cli_guide.inc.sh\ntied-project/vocab/harness-model-eval.md\ndocs/demos/harness-eval/README.md\ntools/bootstrap workflow-trial range shell tests (new or extended)\n"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+      - "IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+      - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+  non_goals:
+    - "Default capture on workflow_trial_agentstream alone"
+    - "HARNESS_EVAL_STORE/raw mirroring"
+    - "HMEP importWfClient auto-jsonl discovery"
+    - "Retroactive WF-09 client 1794579829"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Import soft-fail hides harness-eval misconfig during cohort runs"
+        - "Newest-client glob picks wrong disposable when parallel same-tag runs"
+        - "Unbounded NDJSON growth on long range matrices"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "hmep-stream-capture unit tests gate enablement and path layout"
+        - "Shell contract tests pin client resolve and skip-capture paths"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST/PLAN.md"
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST/test-strategy.md"
+      falsification_questions:
+        - "Does Claude multi-turn import use max cumulative snapshot not sum?"
+        - "Does import run when orchestrator exit_code is non-zero?"
+        - "Does skip env prevent both file write and import?"
+      gate_policy: "advisory"
+      rationale: "Orchestration and append-only I/O; no new auth or external APIs."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "Fixture client dir + synthetic turn-001.jsonl through wf_trial_hmep_import_cell"
+    shell:
+      - "tools/bootstrap/wf-trial-hmep-import.test.mjs or workflow-trial-agentstream-sh.test.mjs extension"
+    unit:
+      - "mcp-server/packages/agentstream/src/hmep-stream-capture.test.ts"
+      - "mcp-server/packages/harness-eval/src/runner/import-wf-m2.test.ts (existing regressions)"

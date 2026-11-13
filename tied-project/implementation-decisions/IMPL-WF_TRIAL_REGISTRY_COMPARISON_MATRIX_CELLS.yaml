@@ -1,0 +1,9 @@
+IMPL-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+  IMPL-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+    code_locations:
+      - "tied-project/working/PLAN-WF-TRIAL-COMPARISON-MATRIX/evidence/build-comparison-matrix.mjs"
+      - "tools/bootstrap/lib/wf-trial-comparison-matrix.mjs"
+      - "tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"
+    description: "renderWfTrialComparisonMatrixCell in tools/bootstrap/lib."
+    essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS-pseudocode.md"
+    implementation_approach: "Shared formatter module; build-comparison-matrix imports renderer."

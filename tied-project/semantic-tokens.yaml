@@ -1630,6 +1630,9 @@ ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
   status: "Planned"
   type: "ARCH"
+ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST.yaml"
+  kind: "architecture"
 ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   cross_references:
     - "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
@@ -3596,6 +3599,9 @@ IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_RANGE_CANONICAL_INPUT.yaml"
   status: "Planned"
   type: "IMPL"
+IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST.yaml"
+  kind: "implementation"
 IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   cross_references:
     - "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
@@ -5798,6 +5804,9 @@ REQ-WF_TRIAL_RANGE_CANONICAL_INPUT:
   name: "WF trial range canonical input"
   status: "Planned"
   type: "REQ"
+REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
+  detail_file: "requirements/REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST.yaml"
+  kind: "requirement"
 REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   cross_references:
     - "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"

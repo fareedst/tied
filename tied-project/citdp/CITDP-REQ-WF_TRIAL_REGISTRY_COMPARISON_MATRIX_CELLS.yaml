@@ -1,0 +1,30 @@
+CITDP-REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS:
+  change_definition:
+    current_behavior: "Registry Latest-run comparison matrix cells show orchestrator wall time as NNNs and session grade mean only (two bold lines + readout)."
+    desired_behavior: "Matrix cells show wall_mins as nearest integer with m suffix via formatWallClockMinutes; second line is full master Grades string (mean · dimension bands); readout link unchanged; master Run time column stays seconds."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/wf-trial-comparison-matrix.mjs; wf-trial-comparison-matrix.test.mjs; PLAN-WF-TRIAL-COMPARISON-MATRIX/evidence/build-comparison-matrix.mjs; docs/demos/traditional-workflow-trial-runs-registry.md comparison section"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+      - "IMPL-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+      - "REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS"
+  non_goals:
+    - "buildTrialReadoutGradesIndex join for matrix cells"
+    - "Master table Run time unit change"
+    - "record-wf-trial auto-regen"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS/evidence/sub-adversarial-inquiry-pass-na.md"
+      gate_policy: "advisory"
+    risk_assessment:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+  success_criteria:
+    - "SC-WF-CMX-01 through SC-WF-CMX-06 in PLAN.md"
+  test_strategy:
+    integration:
+      - "tied-project/working/PLAN-WF-TRIAL-COMPARISON-MATRIX/evidence/build-comparison-matrix.mjs --check"
+    unit:
+      - "tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"

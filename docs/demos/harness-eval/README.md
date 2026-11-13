@@ -6,8 +6,8 @@ Repeatable measurement for **Cursor Agent CLI** and **Claude Code CLI** stream-j
 
 ## Planned operator flow (M1)
 
-1. Run a disposable WF trial as today (`workflow_trial_agentstream wf-NN`).
-2. Optionally capture agent stream-json paths (not persisted by agentstream by default).
+1. Run a disposable WF trial as today (`workflow_trial_agentstream wf-NN`), or a matrix via `workflow_trial_range` (default-on HMEP capture under client `evidence/stream-json/` + post-cell `harness-eval events import`; opt-out `WF_TRIAL_SKIP_HMEP_CAPTURE=1`).
+2. Single-cell runs still require manual `--jsonl` unless `WF_TRIAL_HMEP_CAPTURE=1` is exported before agentstream.
 3. Import into the eval store:
 
 ```bash

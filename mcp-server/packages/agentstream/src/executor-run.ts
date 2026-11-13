@@ -16,6 +16,7 @@ import {
   enqueueToolGateLineCheck,
 } from "./jev-harness-live-tool-gate.js";
 import { extractCursorSessionFromLine } from "./cursor-stream.js";
+import { appendHmepStreamJsonLineFromEnv } from "./hmep-stream-capture.js";
 
 export type RunAgentOptions = {
   jevToolGate?: JevLiveToolGate | null;
@@ -97,6 +98,7 @@ export async function runAgent(
       if (trimmed === "") {
         return;
       }
+      appendHmepStreamJsonLineFromEnv(trimmed);
       let obj: Record<string, unknown>;
       try {
         obj = JSON.parse(trimmed) as Record<string, unknown>;
