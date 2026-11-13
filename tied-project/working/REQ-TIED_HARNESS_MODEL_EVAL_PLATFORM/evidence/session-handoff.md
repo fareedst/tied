@@ -4,7 +4,8 @@
 **date:** 2026-11-12  
 **request_token:** REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM  
 **prompt_type:** handoff  
-**plan_phase:** implementation (M1 build-plan GREEN)  
+**plan_phase:** M1 **close-out complete** (operator smoke verified)  
+**commit:** `2753c3c1` on `main` (HMEP scope; pushed **not** requested)
 
 ---
 
@@ -12,11 +13,12 @@
 
 | Item | Path / note |
 | --- | --- |
-| Workflow | add-feature → refine-plan → **`@build-plan`** → `@close-out` |
+| Workflow | add-feature → refine-plan → build-plan → **`@close-out` (done)** |
 | Linked PLAN | [../PLAN.md](../PLAN.md) |
-| Program phase | Milestone 1 only (F-01–F-08, F-17 subset, F-19); M2+ deferred |
-| Cursor plan (intent) | `.cursor/plans/harness_model_eval_platform_3b2ec5c2.plan.md` |
-| Metering fixture (sibling) | [REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW](../REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/PLAN.md) — **build-plan GREEN** |
+| Program phase | Milestone 1 shipped; M2+ deferred |
+| Close-out | [./close-out-handoff.md](./close-out-handoff.md) |
+| Metering smoke | [./metering-smoke-import.md](./metering-smoke-import.md) |
+| Sibling canary | [REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW](../REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/PLAN.md) — **close-out complete** (see sibling session-handoff) |
 
 ---
 
@@ -25,51 +27,39 @@
 | Ref | Path |
 | --- | --- |
 | Tracker | [../checklist-tracker.yaml](../checklist-tracker.yaml) |
-| CITDP (working) | [../CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml](../CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml) |
+| CITDP (persisted) | [../../../citdp/CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml](../../../citdp/CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml) |
 | Test strategy | [../test-strategy.md](../test-strategy.md) |
-| Refine evidence | [./refine-plan-evidence.md](./refine-plan-evidence.md) |
-| Envelope | not created (pre-implementation) |
+| Envelope | [./request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json) |
+| Verification manifest | [./verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json) |
 
 ---
 
 ## Plan execution steps
 
-**Last updated:** 2026-11-12 · **prompt_type:** handoff · **PLAN:** ../PLAN.md
+**Last updated:** 2026-11-12 · **prompt_type:** handoff
 
-### Required (`@build-plan`)
+### Required (`@build-plan` + `@close-out`)
 
-- [x] `mint-req-arch-impl` — REQ/ARCH/IMPL + semantic-tokens via TIED MCP
-- [x] `impl-pseudocode` — essence_pseudocode sidecar; `pseudocode_validate` ok
-- [ ] `adversarial-adapters` — integrated inquiry on F-04/F-05/F-08 (advisory; optional close-out)
-- [x] `red-contracts` — `mcp-server/contracts/harness-eval/`
-- [x] `red-fixtures` — SC-HMEP-M1-01…08
-- [x] `green-package` — `mcp-server/packages/harness-eval` M1 modules
-- [x] `suite-draft` — `engineering-suite-v1.yaml` + integrity hash
-- [x] `operator-doc` — `docs/demos/harness-eval/README.md`
-- [x] `vocab-record` — `tied-project/vocab/harness-model-eval.md` + routing row
-- [x] `citdp-persist` — `tied-project/citdp/CITDP-REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml`
-- [x] `validate` — `pseudocode_validate` ok; repo-wide `tied_validate_consistency` has pre-existing gaps unrelated to HMEP
+- [x] Mint REQ/ARCH/IMPL, package, contracts, suites, vocab, CITDP
+- [x] `pseudocode_validate` ok (Grammar v2)
+- [x] Close-out gates **allowed** (minimal, advisory)
+- [x] Traceable commit `2753c3c1`
+- [x] **`metering-smoke`** — live `wf-meter-01` disposable → manifest-only import ([evidence](./metering-smoke-import.md))
 
-### Optional (M1 tail)
+### Deferred / optional
 
-- [ ] `trial-run-thin` — subprocess wrapper persisting stream-json to raw store
-- [ ] `metering-smoke` — optional `wf-meter-01` live run → import after HMEP import CLI GREEN
-
-### Recommendations
-
-- Capture live stream-json fixtures before locking parser assumptions (`fixtures/live-capture/` gitignored).
-- `tied_checklist_gate_validate` `pre_implementation` after HMEP REQ mint.
-- Use sibling **`wf-meter-01`** dry-run or live smoke for manifest import fixtures.
+- [ ] Integrated adversarial inquiry (M2 or strict profile)
+- [ ] `trial-run-thin` — subprocess persist stream-json to raw store
+- [ ] `--jsonl` re-import when captures exist (token rows non-null only when usage present)
 
 ### Changelog (this REQ)
 
 | date | prompt_type | note |
 | --- | --- | --- |
-| 2026-11-12 | add-feature | Cursor plan; compose-bridge + package path |
-| 2026-11-12 | refine-plan | Locked D-SUITE-LOCATION, D-STORE-ROOT, D-WF-MANIFEST-ONLY, D-PARSER-DUP |
-| 2026-11-12 | handoff | Pre-implementation ledger |
-| 2026-11-12 | sibling build-plan | [Metering canary](../REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/evidence/session-handoff.md) GREEN; compose suite cross-links |
-| 2026-11-12 | handoff | Program resume; HMEP build-plan is Do next |
+| 2026-11-12 | build-plan | `@tied/harness-eval` M1 GREEN |
+| 2026-11-12 | close-out | Commit `2753c3c1`; envelope + gates |
+| 2026-11-12 | operator | Manifest-only import smoke on live wf-meter-01 client |
+| 2026-11-12 | handoff | Post-close-out resume ledger |
 
 ---
 
@@ -79,44 +69,19 @@
 | --- | --- |
 | workspace_root | `/Users/fareed/Documents/dev/chatgpt/stdd` |
 | TIED_BASE_PATH | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
-| execution_site | store (TIED methodology repo) |
-| HARNESS_EVAL_STORE (planned) | `$TIED_STORE_ROOT/tied-bundle/reports/harness-eval` |
-| git policy | uncommitted: HMEP working tree + canary implementation slice on `main`; no commit unless sponsor asks |
+| HARNESS_EVAL_STORE | `$TIED_STORE_ROOT/tied-bundle/reports/harness-eval` |
+| git | HMEP + HEMC committed; HMEP CLI smoke / unrelated REQ WIP may remain dirty |
 
 ---
 
 ## Requirements and dependencies
 
-| Token / item | Role |
+| Token | Status |
 | --- | --- |
-| **REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM** | primary (minted; M1 tests GREEN) |
-| depth_tier | `minimal` (plan); **integrated** at build for adapters/tokens |
-| gate_policy | `advisory` |
+| **REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM** | M1 implemented; close-out complete |
+| **REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW** | Implemented; **close-out complete** (sibling commit) |
 
-**Compose (do not reopen):** REQ-GOAGENT-AGENT-EXECUTOR, REQ-TIED_CLAUDE_LIVE_DRIVER, REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG, REQ-TIED_HARNESS_PLATFORM_SEAM.
-
-**depends_on:** none blocking build-plan start.
-
-**blocks:** none.
-
----
-
-## Related and pending prior requests
-
-| id | kind | status | owner | blocks_current | evidence_link |
-| --- | --- | --- | --- | --- | --- |
-| REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM | REQ | active | agent | no | [../PLAN.md](../PLAN.md) |
-| REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW | REQ | implemented (close-out deferred) | agent | no | [../REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/evidence/session-handoff.md](../REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/evidence/session-handoff.md) |
-
----
-
-## Finished this session (program thread)
-
-| Item | Evidence |
-| --- | --- |
-| HMEP plan stack | [PLAN.md](../PLAN.md), [test-strategy.md](../test-strategy.md), draft [engineering-suite-v1.yaml](../../../../docs/demos/harness-eval/suites/engineering-suite-v1.yaml) |
-| Sibling metering canary | `wf-meter-01` orchestrator; see canary handoff |
-| **Not done (HMEP)** | `mcp-server/packages/harness-eval`, REQ/ARCH/IMPL mint, RED SC-HMEP-M1-* |
+**depth_tier (close-out):** minimal · **gate_policy:** advisory
 
 ---
 
@@ -124,49 +89,42 @@
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | **not_run** |
-| Process contract | **partial** — plan artifacts; HMEP package not started |
+| Machine close-out | **pass** — [close-out-handoff.md](./close-out-handoff.md) |
+| Process contract | **partial** — manifest + envelope; adherence reconcile not_run |
 | Adherence ledger | **not_run** |
+| Operator compose smoke | **pass** — manifest-only import; null tokens |
 
 ---
 
 ## Do next
 
-1. **`@close-out`** REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM (verification manifest below).
-2. Optional: `metering-smoke` — live `wf-meter-01` → `harness-eval events import --wf-client`.
-3. Optional: `@close-out` canary REQ in a separate commit if sponsor wants.
+1. Capture Claude/Cursor **stream-json** for the same disposable client → re-import with `--jsonl` (SC-HMEP-M1-01..02 live).
+2. **M2** per [PLAN.md](../PLAN.md) (pricing, verifiers, integrated inquiry).
+3. Optional live `wf-meter-01` smoke (SC-HEMC-06) before metering experiments.
 
 ---
 
-## Constraints
+## Constraints (unchanged)
 
-- M1: **compose** with `workflow_trial_agentstream`; do not rewrite WF orchestrator core.
-- Do not fabricate token counts when stream-json omits `usage`.
-- Do not merge eval metrics into `@record-wf-trial` prose in M1.
-- No commit unless sponsor requests.
+- Compose with `workflow_trial_agentstream`; no WF orchestrator rewrite in M1.
+- No fabricated token counts; null stays null in export.
+- Proof boundary: no merge into `@record-wf-trial` prose for M1 metrics.
 
 ---
 
 ## Repeatable verification
-
-Post HMEP build-plan (target):
 
 ```bash
 cd mcp-server/packages/harness-eval && npm test
 node --test mcp-server/contracts/harness-eval/*.test.mjs
 ```
 
-Metering canary (available now):
+**Import + query (manifest-only):**
 
 ```bash
-source scripts/build-commands.sh && workflow_trial_agentstream wf-meter-01 --dry-run
+export TIED_STORE_ROOT="$PWD"
+export HARNESS_EVAL_STORE="$PWD/tied-bundle/reports/harness-eval"
+node mcp-server/packages/harness-eval/dist/cli/main.js events import \
+  --wf-client "<disposable-root>" --trial-id "$(basename <disposable-root>)"
+node mcp-server/packages/harness-eval/dist/cli/main.js query summary --store "$HARNESS_EVAL_STORE"
 ```
-
----
-
-## Paths (chat index only)
-
-- [PLAN.md](../PLAN.md)
-- [test-strategy.md](../test-strategy.md)
-- [checklist-tracker.yaml](../checklist-tracker.yaml)
-- [docs/demos/harness-eval/README.md](../../../../docs/demos/harness-eval/README.md)

@@ -1,0 +1,13 @@
+ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  consequences:
+    negative:
+      - "Second catalog to maintain"
+    positive:
+      - "Additive orchestrator branch"
+      - "Isolated metering catalog"
+  context: "Compose with REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM without changing WF-01…12."
+  decision: "wf-meter-01 resolves WF-METER-01, uses catalog-harness-metering-lite-workflow.md, and gawk delimiter ^### PROMPT- exclusive of current header."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-12"

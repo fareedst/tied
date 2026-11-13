@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-WF_TRIAL_COMPOSITION_PROMPTS] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK] [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK] [REQ-WF_TRIAL_PHASE_HANDOFF_GATE] [REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_OPERATOR_HELP] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-WF_TRIAL_MODEL_EFFORT] [REQ-WF_TRIAL_MODEL_SPEC_CLI] [REQ-WF_TRIAL_COMPOSITION_PROMPTS] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK] [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] [REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK] [REQ-WF_TRIAL_PHASE_HANDOFF_GATE] [REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL] [REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -16,7 +16,8 @@ fi
 
 REPO_ROOT_DEFAULT="$(cd "${SCRIPT_DIR}/.." && pwd -P)"
 MARKER_REL="tied-install.sh"
-CATALOG_REL="docs/demos/catalog-traditional-workflow-trial-prompts.md"
+CATALOG_REL_TRADITIONAL="docs/demos/catalog-traditional-workflow-trial-prompts.md"
+CATALOG_REL_METERING="docs/demos/catalog-harness-metering-lite-workflow.md"
 FOUR_PHASE="${SCRIPT_DIR}/run-traditional-four-phase-agentstream.sh"
 
 PROMPT_PREFACE_DEFAULT="Without pausing for user approval, select and execute the implemented products to be more comprehensive and capable. Use Typescript for code. -- "
@@ -26,15 +27,34 @@ fail() {
   exit "${2:-2}"
 }
 
+wf_trial_is_meter_wf_id() {
+  local raw_upper="$1"
+  [[ "$raw_upper" == "WF-METER-01" ]]
+}
+
+resolve_wf_trial_catalog_rel() {
+  local wf_norm="$1"
+  if wf_trial_is_meter_wf_id "$wf_norm"; then
+    printf '%s' "$CATALOG_REL_METERING"
+  else
+    printf '%s' "$CATALOG_REL_TRADITIONAL"
+  fi
+}
+
 normalize_wf_id() {
   local raw="$1"
   raw="${raw#PROMPT-}"
   raw="${raw#prompt-}"
   raw="$(printf '%s' "$raw" | tr '[:lower:]' '[:upper:]')"
-  if [[ ! "$raw" =~ ^WF-(0[1-9]|1[0-2])$ ]]; then
-    fail "invalid WF id (expected WF-01 … WF-12): $1"
+  if wf_trial_is_meter_wf_id "$raw"; then
+    printf '%s' "$raw"
+    return 0
   fi
-  printf '%s' "$raw"
+  if [[ "$raw" =~ ^WF-(0[1-9]|1[0-2])$ ]]; then
+    printf '%s' "$raw"
+    return 0
+  fi
+  fail "invalid WF id (expected WF-01 … WF-12 or WF-METER-01): $1"
 }
 
 normalize_wf_tag_suffix() {
@@ -50,7 +70,7 @@ extract_feature_remainder() {
   gawk -v wf="$wf_id" '
     BEGIN { hdr = "### PROMPT-" wf }
     $0 == hdr { insec = 1; next }
-    insec && /^### PROMPT-WF-/ { exit }
+    insec && /^### PROMPT-/ && $0 != hdr { exit }
     insec && /^```text$/ { intext = 1; next }
     insec && intext && /^```$/ { exit }
     insec && intext { print }
@@ -102,6 +122,7 @@ done
 command -v gawk >/dev/null 2>&1 || fail "gawk not found (install GNU awk, e.g. brew install gawk)"
 
 WF_NORM="$(normalize_wf_id "$WF_ID")"
+CATALOG_REL="$(resolve_wf_trial_catalog_rel "$WF_NORM")"
 CATALOG="${REPO_ROOT}/${CATALOG_REL}"
 [[ -f "$CATALOG" && -r "$CATALOG" ]] || fail "catalog missing: $CATALOG"
 

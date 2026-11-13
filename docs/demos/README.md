@@ -10,6 +10,7 @@ Human-readable catalogs for picking small programs and TIED-shaped build exercis
 | [TIED compact demo tool catalog](catalog-tied-compact-tools.md) | TIED traceability, TDD, composition, **Kaizen loop**, **methodology learning experiment**, explicit **proof boundaries** |
 | [Greenfield plan-new-feature prompt catalog](catalog-greenfield-plan-new-feature-prompts.md) | Plain-language `@add-feature` trial prompts for `test-new-tied-client` clients (facilitator grading maps to `TIED-DEMO-*`) |
 | [Traditional four-phase workflow trial catalog](catalog-traditional-workflow-trial-prompts.md) | Compact **PROMPT-WF-01…12** remainders (09–12 require module binding tests); four-phase skills; LLM comparison (Composer 2.5, Luna, Grok, Claude) |
+| [Harness metering lite workflow](catalog-harness-metering-lite-workflow.md) | **`wf-meter-01`** canary for harness-eval calibration; minimal GREEN product; [REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW](../tied-project/working/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/PLAN.md) |
 | [Traditional workflow trial runs registry](traditional-workflow-trial-runs-registry.md) | Facilitator matrix of **Recorded trials** rows (harness, model, grades, disposable dirname era, latest-for-cell) |
 | [Project size batch comparison (summary)](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) | Discover cohort **Summary** — atoms, proof facets, **`wall_clock`** (minutes); see [size catalog](catalog-tied-size-and-trial-statistics.md) |
 

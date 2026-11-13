@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Harness eval metering canary workflow ([REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW], [ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW], [IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW])** — `workflow_trial_agentstream wf-meter-01`, metering-lite catalog, SC-HEMC-01..05 bootstrap tests; close_out **allowed** (minimal, advisory). Plan: [PLAN.md](tied-project/working/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/PLAN.md).
+
 - **Harness model eval platform M1 ([REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM], [ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM], [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM])** — `@tied/harness-eval` package (`mcp-server/packages/harness-eval`), contracts, stream-json fixtures, WF manifest import CLI, `engineering-suite-v1.yaml`; SC-HMEP-M1-01..08 green; close_out **allowed** (minimal, advisory). Plan: [PLAN.md](tied-project/working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md).
 
 - **PROMPT-WF-10 facilitator readout (Claude Sonnet 4.6 low @ 1794533928)** — **4.2.2** via `workflow_trial_agentstream wf-10` (`HARNESS=claude`; **`claude-sonnet-4-6`**); catalog + [demos index](docs/demos/README.md) + project-size [comparison table](tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md). **Split signal** — orchestrator `exit_code: 0`; **22/22** tests **uncommitted**; phase-handoff gate **ERROR**; close-out **not_run**. [Readout](docs/demos/trial-readout-PROMPT-WF-10-claudesonnet46low-1794533928-wf-agentstream-wf-10-claude-claudesonnet46low.md).

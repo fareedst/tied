@@ -148,9 +148,11 @@ _how_build() {
   _how_header "Build"
   _how_render_body <<'EOF'
   build-workspace            ./build-workspace.sh (mcp-server + tools/bootstrap)
-  build-mcp                  npm install + build in mcp-server/ only
+  build-mcp                  npm install + build in mcp-server/ (all @tied/* workspaces)
   build-agentstream          npm -w build @tied/agentstream + @tied/cli (incremental)
-  build-all                  same as build-workspace
+  build-harness-eval         npm -w build @tied/harness-eval only ([REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM])
+  build-all                  build-workspace + verify workspace tool dists + mcp-server/.bin on PATH
+  harness-eval …             HMEP CLI (alias; also npm bin after build — events import, diagnostics)
 EOF
 }
 
@@ -339,6 +341,8 @@ _how_env() {
   TIED_CLAUDE_CLIENT_WITH_CONSISTENCY=1  opt-in consistency during Claude client validation
   AGENTSTREAM                prebuilt agentstream binary for batch drivers
   AGENTSTREAM_TIED_MCP_PREFLIGHT=1   opt-in MCP preflight before live agent turns
+  HARNESS_EVAL_STORE         HMEP SQLite store (default: $TIED_STORE_ROOT/tied-bundle/reports/harness-eval)
+  PATH (on source)           prepends mcp-server/node_modules/.bin when present (tied, harness-eval, …)
 
 Quality matrix: tied-bundle/docs/quality-assurance-commands.md
 EOF

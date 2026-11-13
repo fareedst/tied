@@ -1,0 +1,15 @@
+REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-12"
+  rationale:
+    why: "HMEP needs bounded four-phase trials for metering calibration."
+  satisfaction_criteria:
+    - criterion: "wf-meter-01 dry-run extracts remainder"
+      id: "SC-HEMC-01"
+  traceability:
+    architecture:
+      - "ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+    implementation:
+      - "IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW"

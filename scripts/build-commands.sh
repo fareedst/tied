@@ -139,6 +139,8 @@ alias build-agentstream=build_agentstream
 build_mcp() {
   echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm install
   echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build
+  _build_commands_assert_workspace_tools || return $?
+  _build_commands_prepend_mcp_bin
 }
 alias build-mcp=build_mcp
 
@@ -147,8 +149,66 @@ build_workspace() {
 }
 alias build-workspace=build_workspace
 
+# [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM] [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM]
+_build_commands_workspace_tool_artifacts() {
+  local root="${_BUILD_COMMANDS_REPO_ROOT}/mcp-server"
+  printf '%s\n' \
+    "${root}/dist/index.js" \
+    "${root}/packages/cli/dist/index.js" \
+    "${root}/packages/agentstream/dist/index.js" \
+    "${root}/packages/yaml-cli/dist/index.js" \
+    "${root}/packages/harness-eval/dist/cli/main.js" \
+    "${root}/packages/checklist-resume/dist/checklist-controller-resume.js" \
+    "${root}/packages/bootstrap/dist/paths.js"
+}
+
+_build_commands_prepend_mcp_bin() {
+  local bin="${_BUILD_COMMANDS_REPO_ROOT}/mcp-server/node_modules/.bin"
+  if [[ ! -d "$bin" ]]; then
+    echo "DIAGNOSTIC: mcp-server/node_modules/.bin missing; run build-workspace or build-mcp" >&2
+    return 0
+  fi
+  case ":${PATH}:" in
+    *":${bin}:"*) ;;
+    *) export PATH="${bin}:${PATH}" ;;
+  esac
+}
+
+_build_commands_assert_workspace_tools() {
+  local rc=0
+  local f
+  for f in $(_build_commands_workspace_tool_artifacts); do
+    if [[ ! -f "$f" ]]; then
+      printf 'DIAGNOSTIC: missing workspace tool artifact: %s\n' "$f" >&2
+      rc=1
+    fi
+  done
+  if (( rc != 0 )); then
+    printf 'DIAGNOSTIC: run build-mcp (mcp-server npm install && npm run build) to compile @tied/* workspace packages\n' >&2
+  fi
+  return "$rc"
+}
+
+build_harness_eval() {
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build -w @tied/harness-eval
+}
+alias build-harness-eval=build_harness_eval
+
+harness_eval() {
+  local cli="${_BUILD_COMMANDS_REPO_ROOT}/mcp-server/packages/harness-eval/dist/cli/main.js"
+  if [[ ! -f "$cli" ]]; then
+    echo "harness-eval: missing dist (${cli}); run: build-mcp or build-harness-eval" >&2
+    return 2
+  fi
+  node "$cli" "$@"
+}
+alias harness-eval=harness_eval
+
 build_all() {
-  build_workspace
+  build_workspace || return $?
+  _build_commands_assert_workspace_tools || return $?
+  _build_commands_prepend_mcp_bin
+  printf 'DEBUG: build-all: workspace toolchain verified (mcp-server/node_modules/.bin on PATH)\n'
 }
 alias build-all=build_all
 
@@ -179,6 +239,9 @@ test_tied_cli_smoke() {
   test -f "${root}/tools/bootstrap/tied-install-dispatch.mjs"
   test -f "${root}/mcp-server/packages/yaml-cli/dist/index.js"
   test -f "${root}/mcp-server/packages/agentstream/dist/index.js"
+  test -f "${root}/mcp-server/packages/harness-eval/dist/cli/main.js"
+  test -f "${root}/mcp-server/packages/checklist-resume/dist/checklist-controller-resume.js"
+  test -f "${root}/mcp-server/packages/bootstrap/dist/paths.js"
 }
 
 test_agentstream() {
@@ -700,3 +763,6 @@ alias test-tied-feature-lifecycle=test_tied_feature_lifecycle
 . "${_BUILD_COMMANDS_DIR}/_build_commands_cli_guide.inc.sh"
 
 export ee=echo_exec
+
+# Prepend workspace bins when already built (harness-eval, tied, …).
+_build_commands_prepend_mcp_bin

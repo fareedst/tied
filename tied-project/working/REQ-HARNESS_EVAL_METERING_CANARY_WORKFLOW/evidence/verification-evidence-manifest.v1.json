@@ -1,0 +1,28 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "request_token": "REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW",
+  "generated_at": "2026-11-12T21:35:00-08:00",
+  "commands": [
+    {
+      "id": "hemc-workflow-sh-tests",
+      "command": "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs",
+      "exit_code": 0,
+      "claimed_success": true,
+      "tokens": ["REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW", "SC-HEMC-01", "SC-HEMC-05"]
+    },
+    {
+      "id": "hemc-metering-catalog-contract",
+      "command": "node --test tools/bootstrap/lib/wf-trial-metering-catalog-contract.test.mjs",
+      "exit_code": 0,
+      "claimed_success": true,
+      "tokens": ["REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"]
+    },
+    {
+      "id": "tied-validate-consistency",
+      "command": "tied MCP tied_validate_consistency (repo-wide)",
+      "exit_code": 0,
+      "claimed_success": true,
+      "tokens": ["REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"]
+    }
+  ]
+}

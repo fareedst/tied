@@ -29,6 +29,8 @@
 | 2 | [`tied-yaml-mcp.md`](tied-yaml-mcp.md) | TIED YAML MCP server, `tied-cli`, bundled skill, validation/verify/cycles/backlog/scoped analysis |
 | 2j | [`external-investigation-mcp.md`](external-investigation-mcp.md) | Dual MCP seam, REA Evidence, investigation-to-add-feature handoff; operator guide [`rea-with-tied-operator-guide.md`](../working/DOC-MORLUTO-REA-COMPARISON/rea-with-tied-operator-guide.md) |
 | 2a | [`tied-product-configuration.md`](tied-product-configuration.md) | First-party TIED product configuration: env allowlist, env classes, spawn-injected vs shell export, `[REQ-TIED_ENVIRONMENT_VARIABLE_POLICY]` |
+| 2c | [`harness-model-eval.md`](harness-model-eval.md) | HMEP, `@tied/harness-eval`, HARNESS_EVAL_STORE, stream-json import, configuration fingerprint, SC-HMEP-M1, engineering-suite-v1 |
+| 2c | [`harness-metering-canary.md`](harness-metering-canary.md) | Metering canary, wf-meter-01, PROMPT-WF-METER-01, metering-canary-suite-v1, D-PROOF-BOUNDARY-CANARY, HMEP import calibration |
 | 2c | [`project-operations-mcp.md`](project-operations-mcp.md) | Project lint, git hygiene, sponsor questions MCP tools; `/xlate` and `/unblock` skills |
 | 2e | [`operating-environment-externalities.md`](operating-environment-externalities.md) | OEE: external workflows, compatibility ledger, operating-environment dependency management |
 | 2f | [`easar-recovery.md`](easar-recovery.md) | EASAR Mode C, recovery engagement, Stage 7 validation cases, receipt schemas, `[PROC-EASAR_RECOVERY]` |

@@ -1,0 +1,13 @@
+feat(wf-trial): wf-meter-01 metering canary workflow
+
+Add workflow_trial_agentstream wf-meter-01 with metering-lite catalog,
+bootstrap contract tests SC-HEMC-01..05, and harness-eval suite draft.
+Mint REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW with ARCH/IMPL.
+
+REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW
+ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW
+IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW
+
+Machine close-out: pass (minimal, advisory).
+Process contract: partial (thin_ledger; manifest present).
+Upstream feedback: N/A — no capture this close-out.

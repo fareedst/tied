@@ -1,0 +1,49 @@
+CITDP-REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  change_definition:
+    current_behavior: "Harness metering development reuses full PROMPT-WF-01…12 trials with variable product scope and wall clock; no dedicated orchestrator id or catalog for controlled four-phase canary runs."
+    desired_behavior: "Operators run workflow_trial_agentstream wf-meter-01 against a minimal GREEN PROMPT-WF-METER-01 remainder; manifest imports into harness-eval compose path without changing traditional WF catalog."
+    success_criteria:
+      - "SC-HEMC-01 through SC-HEMC-06 in PLAN.md"
+      - "tied_validate_consistency ok after REQ/ARCH/IMPL mint"
+    unchanged_behavior: "PROMPT-WF-01…12 orchestration and catalogs; workflow_trial_agentstream wf-01…wf-12; HMEP package boundaries."
+  impact_analysis:
+    compose_requests:
+      - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    modules_or_boundaries: "docs/demos/catalog-harness-metering-lite-workflow.md; docs/demos/harness-eval/suites/metering-canary-suite-v1.yaml; scripts/workflow-trial-agentstream.sh; tools/bootstrap/workflow-trial-agentstream-sh.test.mjs; tied-project/vocab/harness-metering-canary.md"
+    tied_tokens_new:
+      - "ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+      - "IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+      - "REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+  non_goals:
+    - "Code enforcement of wall-clock band"
+    - "Forking traditional-four-phase-agentstream.yaml"
+    - "Mandatory @record-wf-trial grading for canary cells"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Canary confused with production WF catalog grading"
+        - "Gawk extract returns empty remainder for METER section"
+        - "wf-meter-01 breaks WF-01…12 id validation"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "SC-HEMC contract tests reject wf-meter-01 id collisions with wf-01..12"
+        - "Gawk metering remainder extraction covered by metering-catalog-contract tests"
+      evidence_references:
+        - "tied-project/working/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/PLAN.md"
+        - "tied-project/working/REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW/test-strategy.md"
+      falsification_questions:
+        - "Does wf-meter-01 remain isolated from production WF catalog ids?"
+        - "Does empty METER gawk extract fail closed in tests?"
+        - "Can operators confuse metering-lite catalog with PROMPT-WF-01 grading?"
+      gate_policy: "advisory"
+      rationale: "M1 close-out uses bootstrap contract tests; live SC-HEMC-06 optional; integrated inquiry deferred."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/wf-trial-metering-catalog-contract.test.mjs (new at build-plan)"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

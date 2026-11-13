@@ -13,9 +13,9 @@
 ### Remaining risks
 
 - Integrated adversarial inquiry deferred to M2
-- Optional: `metering-smoke` wf-meter-01 → import
-- Sibling REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW still uncommitted
+- Operator smoke **done** — see [metering-smoke-import.md](./metering-smoke-import.md) (manifest-only; null tokens)
+- Sibling REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW close-out completed in a follow-on commit
 
 ### Commit
 
-See `proposed-commit-message.txt` and `traceable-commit-evidence.md` after `git commit`.
+**SHA:** `2753c3c1` — see `proposed-commit-message.txt` and `traceable-commit-evidence.md`.

@@ -25,6 +25,7 @@ describe("build-commands how() [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE]", () => {
     assert.equal(r.status, 0, r.stderr);
     assert.equal(r.stdout, "");
     assert.match(r.stderr, /build-workspace/);
+    assert.match(r.stderr, /harness-eval/);
     assert.doesNotMatch(r.stderr, /\x1b\[/);
   });
 

@@ -148,6 +148,29 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.match(r.stderr, /WF-01 .* WF-12|invalid WF id/i);
   });
 
+  it("rejects wf-meter-99 [SC-HEMC-02] [REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW]", () => {
+    const r = runScript(["wf-meter-99"]);
+    assert.notEqual(r.status, 0);
+    assert.match(r.stderr, /invalid WF id/i);
+  });
+
+  it("wf-meter-01 dry-run extracts metering remainder [SC-HEMC-01]", () => {
+    const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "wfmeter-"));
+    const r = runScript(["wf-meter-01", "--dry-run", "--workspace", workspace]);
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    const combined = `${r.stderr}\n${r.stdout}`;
+    assert.match(combined, /meteringCanaryLabel/);
+    assert.match(combined, /harness-meter-canary-v1/);
+    assert.match(r.stderr, /wf=WF-METER-01/);
+  });
+
+  it("help documents wf-meter-01 [SC-HEMC-05]", () => {
+    const r = runScript(["--help"]);
+    assert.equal(r.status, 0);
+    assert.match(r.stderr, /wf-meter-01/);
+    assert.match(r.stderr, /catalog-harness-metering-lite-workflow/i);
+  });
+
   it("wf-09 dry-run accepts extended catalog id [SC-WF-ID-12]", () => {
     const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "wf09-"));
     const r = runScript(["wf-09", "--dry-run", "--workspace", workspace]);

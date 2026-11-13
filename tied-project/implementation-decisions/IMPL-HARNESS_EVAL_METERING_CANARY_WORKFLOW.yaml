@@ -1,0 +1,10 @@
+IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW:
+  essence_pseudocode_path: "implementation-decisions/IMPL-HARNESS_EVAL_METERING_CANARY_WORKFLOW-pseudocode.md"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-12"
+  related_architecture:
+    - "ARCH-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
+  related_requirements:
+    - "REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
