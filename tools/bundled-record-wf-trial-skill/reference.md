@@ -159,6 +159,10 @@ Example: `trial-readout-PROMPT-WF-03-luna-med-1793000001.md`
 
 Same as [record-gf-trial — Feedback ingest modes](../../tools/bundled-record-gf-trial-skill/reference.md#feedback-ingest-modes-facilitator).
 
+## Cohort summary refresh
+
+After publishing or updating readouts, run **`@publish-wf-trial-summaries`** with **no positional args** to regenerate [runs registry](../../docs/demos/traditional-workflow-trial-runs-registry.md), comparison matrix, and [comparison-table](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) from existing `trial-readout-PROMPT-WF-*.md` files ([publish skill](../bundled-publish-wf-trial-summaries-skill/SKILL.md)).
+
 ## Store operator install
 
 From the TIED store repo root:

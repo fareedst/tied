@@ -29,7 +29,8 @@ Receipt `cross_layer` holds simple ratios (e.g. `operational_intent_per_atom`, `
 1. On subject disposable client (read-only): `tied_project_size_snapshot` with `repo_root` = client root.
 2. Optional: archive `tied-project/working/{REQ}/evidence/project-size-snapshot.v1.json`.
 3. `@record-wf-trial` readout **Project size layers** appendix cites the receipt ([reference § Size layers](../../tools/bundled-record-wf-trial-skill/reference.md#project-size-layers)).
-4. Cohort append: `runs.jsonl` via facilitator tooling ([IMPL-TIED_PROJECT_SIZE_COHORT_JSONL](../../tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_COHORT_JSONL.yaml)).
+4. `@publish-wf-trial-summaries` (no args) regen [**comparison-table** Summary](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) via batch discover ([skill](../../tools/bundled-publish-wf-trial-summaries-skill/SKILL.md)).
+5. Cohort append: `runs.jsonl` via facilitator tooling ([IMPL-TIED_PROJECT_SIZE_COHORT_JSONL](../../tied-project/implementation-decisions/IMPL-TIED_PROJECT_SIZE_COHORT_JSONL.yaml)).
 
 ## Facilitator cohort summary (discover batch)
 

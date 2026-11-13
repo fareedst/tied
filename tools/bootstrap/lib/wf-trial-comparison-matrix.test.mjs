@@ -10,6 +10,7 @@ import {
   renderWfTrialComparisonMatrixCell,
   toolsetKeyFromMasterRow,
 } from "./wf-trial-comparison-matrix.mjs";
+import { buildMatrixSection } from "./build-wf-trial-comparison-matrix.mjs";
 
 test("SC-WF-CMX-02 wall line uses formatWallClockMinutes + m suffix", () => {
   const cell = renderWfTrialComparisonMatrixCell({
@@ -110,6 +111,16 @@ test("SC-WF-CMX-11 nine distinct column headers", () => {
   assert.equal(new Set(headers).size, 9);
 });
 
+test("SC-WF-CMX-14 columns sorted alphabetically by header", () => {
+  const headers = MATRIX_COLUMNS.map((c) => c.header);
+  const sorted = [...headers].sort((a, b) => a.localeCompare(b));
+  assert.deepEqual(headers, sorted);
+  assert.match(headers[0], /^Claude /);
+  const firstCursor = headers.findIndex((h) => h.startsWith("Cursor "));
+  const lastClaude = headers.findLastIndex((h) => h.startsWith("Claude "));
+  assert.ok(firstCursor > lastClaude);
+});
+
 test("SC-WF-CMX-12 Haiku baseline header exact", () => {
   const col = MATRIX_COLUMNS.find((c) => c.key === "claude:claude-haiku-5-5");
   assert.equal(col?.header, "Claude · `claude-haiku-5-5` effort=low");
@@ -131,6 +142,14 @@ test("SC-WF-CMX-13 composer misdirected effort readouts map to baseline key", ()
   });
   assert.equal(high, "cursor:composer-2.5");
   assert.ok(!MATRIX_COLUMNS.some((c) => c.key.includes("composer-2.5@")));
+});
+
+test("SC-WF-CMX-15 matrix section ends with repeated header row", () => {
+  const section = buildMatrixSection(new Map(), ["01"]);
+  const tableLines = section.split("\n").filter((line) => line.startsWith("| "));
+  const header = tableLines[0];
+  const footer = tableLines[tableLines.length - 1];
+  assert.equal(footer, header);
 });
 
 test("SC-WF-CMX-04 three-line contract", () => {

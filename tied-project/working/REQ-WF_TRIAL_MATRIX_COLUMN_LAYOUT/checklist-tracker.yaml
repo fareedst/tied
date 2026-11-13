@@ -1,0 +1,9 @@
+description: "Tracker — comparison matrix column layout (sort + footer)"
+request_token: REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT
+profile_depth: minimal
+gate_policy: facilitator_doc_only
+depth_tier: minimal
+steps:
+  build-plan:
+    status: done
+    notes: "Implementation landed before linked PLAN; verification 2026-11-13"

@@ -3213,3 +3213,13 @@ ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
       - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
   status: "Accepted"
+ARCH-WF_TRIAL_SUMMARIES_PUBLISH:
+  cross_references:
+    implementation:
+      - "IMPL-WF_TRIAL_SUMMARIES_PUBLISH"
+    requirements:
+      - "REQ-WF_TRIAL_SUMMARIES_PUBLISH"
+  decision: "Readout corpus and catalog links are source for cohort regen; publish skill orchestrates bootstrap CLI without disposable client access."
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_SUMMARIES_PUBLISH.yaml"
+  name: "WF trial summaries publish boundary"
+  status: "Planned"

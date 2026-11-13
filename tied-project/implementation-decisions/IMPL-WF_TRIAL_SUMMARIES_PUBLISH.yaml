@@ -1,0 +1,3 @@
+IMPL-WF_TRIAL_SUMMARIES_PUBLISH:
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_SUMMARIES_PUBLISH-pseudocode.md"
+  implementation_approach: "Pure libs for catalog link extract and registry refresh; promoted build-wf-trial-comparison-matrix.mjs; STORE_FACILITATOR_SKILLS entry."

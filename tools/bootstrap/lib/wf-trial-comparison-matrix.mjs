@@ -90,13 +90,13 @@ const MATRIX_COLUMN_SPECS = [
   },
 ];
 
-/** Normative column order — [PLAN-WF-TRIAL-COMPARISON-MATRIX] [REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS] */
+/** Column order: alphabetical by header text (Claude toolsets before Cursor at current labels). */
 export const MATRIX_COLUMNS = MATRIX_COLUMN_SPECS.map((spec) => ({
   id: spec.id,
   key: spec.key,
   header: formatMatrixColumnHeader(spec),
   effortTier: spec.effortTier,
-}));
+})).sort((a, b) => a.header.localeCompare(b.header));
 
 /** @type {Map<string, (typeof MATRIX_COLUMNS)[0]>} */
 export const matrixKeyToColumn = new Map(MATRIX_COLUMNS.map((c) => [c.key, c]));

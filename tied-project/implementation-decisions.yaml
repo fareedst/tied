@@ -3837,3 +3837,16 @@ IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
       - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
   status: "Active"
+IMPL-WF_TRIAL_SUMMARIES_PUBLISH:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_SUMMARIES_PUBLISH.yaml"
+  files_affected:
+    - "tools/bootstrap/lib/wf-trial-summaries-publish.mjs"
+    - "tools/bootstrap/manifest.json"
+    - "tools/bundled-publish-wf-trial-summaries-skill/"
+  name: "WF trial summaries publish implementation"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_SUMMARIES_PUBLISH"
+    requirements:
+      - "REQ-WF_TRIAL_SUMMARIES_PUBLISH"

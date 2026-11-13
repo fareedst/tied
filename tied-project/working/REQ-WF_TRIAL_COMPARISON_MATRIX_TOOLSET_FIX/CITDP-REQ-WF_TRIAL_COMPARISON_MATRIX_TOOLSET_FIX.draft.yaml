@@ -6,9 +6,9 @@ CITDP-REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX:
     modules_or_boundaries: "tools/bootstrap/lib/wf-trial-comparison-matrix.mjs; wf-trial-comparison-matrix.test.mjs; PLAN-WF-TRIAL-COMPARISON-MATRIX/evidence/build-comparison-matrix.mjs; PLAN-WF-TRIAL-COMPARISON-MATRIX/PLAN.md; docs/demos/traditional-workflow-trial-runs-registry.md"
     tied_tokens_new: []
   non_goals:
-    - "New REQ/ARCH/IMPL mint unless sponsor extends at build-plan"
     - "claude-sonnet-4-6 matrix column"
     - "Master Latest reconciliation"
+    - "New REQ/ARCH/IMPL mint unless sponsor extends at build-plan"
   risk_analysis:
     adversarial_inquiry:
       depth_tier: "minimal"

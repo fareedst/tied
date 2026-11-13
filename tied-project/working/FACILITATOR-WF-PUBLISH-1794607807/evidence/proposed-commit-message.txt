@@ -1,0 +1,8 @@
+docs(wf-trials): cohort readouts, publish skill, matrix layout
+
+Record Opus/Haiku/Composer WF trials; regen registry (142 rows) and comparison matrix
+with alphabetical columns and repeated header row; ship @publish-wf-trial-summaries
+orchestrator and [REQ-WF_TRIAL_SUMMARIES_PUBLISH] TIED stack.
+
+Tests: wf-trial-comparison-matrix, registry-refresh, summaries-publish contract;
+matrix and publish --check green.

@@ -8,9 +8,9 @@ execution_evidence:
     master_checklist: ""
   completed:
     - disposition: "completed"
-      slug: "verification-gate"
-    - disposition: "completed"
       slug: "traceable-commit"
+    - disposition: "completed"
+      slug: "verification-gate"
   envelope_path: "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     command_seq:

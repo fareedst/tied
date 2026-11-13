@@ -1,0 +1,49 @@
+CITDP-REQ-WF_TRIAL_SUMMARIES_PUBLISH:
+  change_definition:
+    current_behavior: "After @record-wf-trial, facilitators manually regen traditional-workflow-trial-runs-registry.md, comparison-table.md, and Latest-run comparison matrix with ad hoc node scripts; no bundled skill and no single --check entry point."
+    desired_behavior: "Store-only @publish-wf-trial-summaries (no required inputs) runs wf-trial-summaries-publish.mjs to fully refresh cohort summaries from existing trial-readout-PROMPT-WF-*.md files and catalog readout links; optional --check for CI."
+    non_goals:
+      - "Auto git commit"
+      - "Auto-rewrite Recorded trials catalog table body in v1"
+      - "Change record-wf-trial grading or readout contract"
+      - "Leaderboard or maturity_score prose"
+      - "Mutate disposable trial clients"
+    success_criteria:
+      - "SKILL.md documents zero positional args and publish pipeline"
+      - "STORE_FACILITATOR_SKILLS includes publish-wf-trial-summaries; store-facilitator-skills.test.mjs passes"
+      - "wf-trial-summaries-publish.mjs --check passes on committed store after first regen"
+      - "Workflow catalog documents publish step after record-wf-trial"
+    unchanged_behavior: "record-wf-trial per-client readout authorship; BUNDLED_STANDALONE_CLIENT_SKILLS unchanged."
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/store-facilitator-skills.test.mjs"
+      - "node --test tools/bootstrap/lib/wf-trial-summaries-publish*.test.mjs"
+      - "node tools/bootstrap/lib/wf-trial-summaries-publish.mjs --check"
+    proof_boundaries:
+      - "executable_behavior — bootstrap tests + orchestrator"
+      - "facilitator_session_reconstruction — skill procedure matches pipeline"
+  impact_analysis:
+    impl_inventory_notes: "Promote build-comparison-matrix; new orchestrator + pure libs; fourth facilitator skill bundle."
+    modules_or_boundaries: "tools/bundled-publish-wf-trial-summaries-skill/*; tools/bootstrap/lib/wf-trial-summaries-publish.mjs; tools/bootstrap/lib/build-wf-trial-comparison-matrix.mjs; tools/bootstrap/manifest.json; docs/demos/catalog-*.md; tied-project/vocab/project-operations-mcp.md"
+    tied_tokens_affected:
+      - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_SUMMARIES_PUBLISH"
+      - "IMPL-WF_TRIAL_SUMMARIES_PUBLISH"
+      - "REQ-WF_TRIAL_SUMMARIES_PUBLISH"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_SUMMARIES_PUBLISH"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-13"
+    title: "publish-wf-trial-summaries facilitator cohort regen"
+  risk_analysis:
+    abuse_cases:
+      - "Facilitator runs publish with wrong TIED_BASE_PATH"
+      - "Registry drops rows when catalog parser regresses"
+    adversarial_inquiry:
+      activation: "not_applicable"
+      assurance_profile: "baseline-functional"
+      rationale: "Facilitator tooling only; minimal depth_tier."

@@ -14,11 +14,12 @@ import {
 } from "./store-facilitator-skills.mjs";
 
 describe("store-facilitator-skills [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]", () => {
-  it("loadStoreFacilitatorSkills returns record-gf-trial, record-wf-trial, readme-information-architecture", () => {
+  it("loadStoreFacilitatorSkills returns facilitator skills including publish-wf-trial-summaries", () => {
     const entries = loadStoreFacilitatorSkills(TIED_REPO_ROOT);
-    assert.equal(entries.length, 3);
+    assert.equal(entries.length, 4);
     const names = entries.map((e) => e.skillName).sort();
     assert.deepEqual(names, [
+      "publish-wf-trial-summaries",
       "readme-information-architecture",
       "record-gf-trial",
       "record-wf-trial",
@@ -41,6 +42,7 @@ describe("store-facilitator-skills [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]", () => {
     for (const skillName of [
       "record-gf-trial",
       "record-wf-trial",
+      "publish-wf-trial-summaries",
       "readme-information-architecture",
     ]) {
       const skillPath = path.join(skillsDir, skillName, "SKILL.md");
@@ -49,6 +51,8 @@ describe("store-facilitator-skills [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]", () => {
       assert.match(body, new RegExp(`name: ${skillName}`));
       if (skillName.startsWith("record-")) {
         assert.match(body, /bundled-record-/);
+      } else if (skillName === "publish-wf-trial-summaries") {
+        assert.match(body, /bundled-publish-wf-trial-summaries-skill/);
       } else {
         assert.match(body, /bundled-readme-information-architecture-skill/);
       }

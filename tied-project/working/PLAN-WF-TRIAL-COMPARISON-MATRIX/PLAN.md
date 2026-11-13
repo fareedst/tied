@@ -48,6 +48,9 @@
 
 ## Column manifest (normative)
 
+**Layout (2026-11-13):** Derived column order is **alphabetical by header text** (see [REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT](../REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT/PLAN.md)); registry table includes a **repeated header row** as final row for long-table scanning.
+
+
 Column order left → right: **Cursor baseline**, **Claude baseline**, **effort overlay**.
 
 | `column_id` | Header | `toolset_key` |

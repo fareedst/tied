@@ -1,0 +1,2 @@
+ARCH-WF_TRIAL_SUMMARIES_PUBLISH:
+  rationale: "Separates per-trial record-wf-trial from full-index refresh; scripted matrix and registry reduce facilitator drift."

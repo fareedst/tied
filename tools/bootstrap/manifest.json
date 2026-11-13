@@ -78,6 +78,10 @@
       "storeDir": "tools/bundled-record-wf-trial-skill"
     },
     {
+      "skillName": "publish-wf-trial-summaries",
+      "storeDir": "tools/bundled-publish-wf-trial-summaries-skill"
+    },
+    {
       "skillName": "readme-information-architecture",
       "storeDir": "tools/bundled-readme-information-architecture-skill"
     }

@@ -6,9 +6,9 @@ CITDP-REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS:
     modules_or_boundaries: "tools/bootstrap/lib/wf-trial-comparison-matrix.mjs; wf-trial-comparison-matrix.test.mjs; build-comparison-matrix.mjs; traditional-workflow-trial-runs-registry.md; PLAN-WF-TRIAL-COMPARISON-MATRIX/PLAN.md"
     tied_tokens_new: []
   non_goals:
-    - "toolset_key @low suffix"
     - "New matrix columns beyond 9-column shrink"
     - "Rename historical readout files with composer25medium/high"
+    - "toolset_key @low suffix"
   risk_analysis:
     adversarial_inquiry:
       counterexamples:
@@ -18,21 +18,21 @@ CITDP-REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS:
       disconfirming_observations:
         - "Historical composer25medium filenames still visible in master table links"
       evidence_references:
-        - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/sub-adversarial-inquiry-pass-na.md"
         - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/build-plan-verification-evidence.md"
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/sub-adversarial-inquiry-pass-na.md"
       falsification_questions:
         - "Would SC-WF-CMX-13 fail if composer25medium regex were re-enabled?"
-      gate_policy: "advisory"
-    risk_assessment:
-      depth_tier: "minimal"
       gate_policy: "advisory"
     depth_tier: "minimal"
     gate_policy: "advisory"
     rationale: "Facilitator matrix headers and pivot only."
+    risk_assessment:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
   success_criteria:
     - "SC-WF-CMX-10 through SC-WF-CMX-13 in PLAN.md"
   test_strategy:
-    unit:
-      - "tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"
     integration:
       - "build-comparison-matrix.mjs --check"
+    unit:
+      - "tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"

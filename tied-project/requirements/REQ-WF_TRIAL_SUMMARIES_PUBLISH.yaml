@@ -1,0 +1,8 @@
+REQ-WF_TRIAL_SUMMARIES_PUBLISH:
+  satisfaction_criteria:
+    - criterion: "STORE_FACILITATOR_SKILLS lists publish-wf-trial-summaries"
+      id: "SC-WF-PSP-01"
+      metric: "store-facilitator-skills.test.mjs"
+    - criterion: "wf-trial-summaries-publish.mjs --check passes"
+      id: "SC-WF-PSP-03"
+      metric: "wf-trial-summaries-publish-skill-contract.test.mjs"

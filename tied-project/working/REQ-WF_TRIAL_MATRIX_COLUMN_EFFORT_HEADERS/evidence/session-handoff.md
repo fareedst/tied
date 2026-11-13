@@ -65,6 +65,7 @@
 | 2026-11-13 | build-plan | Shipped SC-WF-CMX-10…13 |
 | 2026-11-13 | close-out | Commit `56c24915` |
 | 2026-11-13 | handoff | Full session snapshot; REQ closed |
+| 2026-11-13 | handoff | Thread end: hygiene `a4565161`; HMEP docs `35aae2ec`; bulk wave `d7333a8e`/`9135abdd`; record-wf-trial 1794586024 uncommitted |
 
 ---
 
@@ -75,7 +76,7 @@
 | workspace_root | `/Users/fareed/Documents/dev/chatgpt/stdd` |
 | TIED_BASE_PATH | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
 | execution_site | store |
-| git policy | REQ shipped at `56c24915`; branch ahead of `origin/main`; unrelated dirty files remain (HMEP, HEMC, etc.) — not this REQ |
+| git policy | **HEAD ~`35aae2ec`** (12 commits ahead `origin/main`); dirty: record-wf-trial 1794586024 + incidental CITDP tracker YAML sorts |
 
 ---
 
@@ -96,9 +97,9 @@
 
 | id | Status | Note |
 | --- | --- | --- |
-| REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX | post-build, uncommitted | Close when sponsor asks |
-| REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST | in flight | Dirty tree; separate from this REQ |
-| REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW | in flight | Dirty tree |
+| REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX | post-build | PLAN on disk; CITDP draft dirty (sort) |
+| REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST | post-build | Shipped in `d7333a8e` wave |
+| record-wf-trial 1794586024 | publish pending | Facilitator handoff under `FACILITATOR-WF-09-1794586024-…` |
 
 ---
 
@@ -129,7 +130,7 @@ Detail: [close-out-handoff.md](./close-out-handoff.md)
 **Nearby work (not auto-started):**
 
 - `@close-out` on [REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX](../REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX/PLAN.md) if Haiku-only fix should land separately.
-**Cold resume prompt:** “Read `tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/session-handoff.md`; matrix effort headers shipped in `56c24915`. Continue sibling REQ or HMEP per Related table.”
+**Cold resume prompt:** “Read `tied-project/working/FACILITATOR-WF-09-1794586024-wf-agentstream-wf-09-claude-claudesonnet55low/evidence/session-handoff.md`; commit record-wf-trial publish; matrix REQ closed at `56c24915` + handoff chain `884eadca`/`a4565161`.”
 
 ---
 

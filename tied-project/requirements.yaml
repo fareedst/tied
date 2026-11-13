@@ -4895,3 +4895,16 @@ REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
       - "ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
     implementation:
       - "IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
+REQ-WF_TRIAL_SUMMARIES_PUBLISH:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_SUMMARIES_PUBLISH"
+    implementation:
+      - "IMPL-WF_TRIAL_SUMMARIES_PUBLISH"
+    requirements:
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  description: "Store facilitator skill and CLI to refresh cohort WF trial summary tables from existing readouts without per-trial inputs."
+  detail_file: "requirements/REQ-WF_TRIAL_SUMMARIES_PUBLISH.yaml"
+  name: "WF trial summaries publish skill"
+  status: "Planned"

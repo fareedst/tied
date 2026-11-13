@@ -5816,3 +5816,7 @@ REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   name: "WF trial sequential process transcript"
   status: "Draft"
   type: "REQ"
+REQ-WF_TRIAL_SUMMARIES_PUBLISH:
+  description: "WF trial cohort summaries publish skill and CLI"
+  token: "REQ-WF_TRIAL_SUMMARIES_PUBLISH"
+  type: "requirement"

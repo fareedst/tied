@@ -9,9 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **WF trial comparison matrix layout (working [REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT](tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT/PLAN.md))** — Alphabetical toolset column order by header; repeated header row at bottom of **Latest-run comparison matrix**; SC-WF-CMX-14/15. Plan build 2026-11-13.
+
 - **WF trial comparison matrix effort headers (working [REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS](tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/PLAN.md))** — **9** columns: tiered model headers show `effort=low|medium|high`; `composer-2.5` omits `effort=`; `composer25medium`/`high` readouts pivot to `cursor:composer-2.5`. Module [`wf-trial-comparison-matrix.mjs`](tools/bootstrap/lib/wf-trial-comparison-matrix.mjs); registry regen.
 
 ### Added
+
+- **PROMPT-WF-09/10 facilitator readouts (Cursor Composer 2.5 medium @ 1794606142, 1794606843)** — **8/8** and **18/18** tests; close_out **allowed**; catalog + registry via `@record-wf-trial`.
+
+- **PROMPT-WF-02…08 facilitator readouts (Claude Haiku 5.5 low/medium @ 1794601194…1794605074)** — Seven **4.2.2** cells: WF-02 **low** split (close_out not_run); WF-03…04/06…07 **medium** complete; WF-05 **medium** uncommitted; WF-08 **medium** **0** tests. Catalog + [demos index](docs/demos/README.md) via `@record-wf-trial`.
+
+- **PROMPT-WF-04…08 facilitator readouts (Claude Opus 5.5 low @ 1794597767…1794599749)** — Five **4.2.2** `workflow_trial_agentstream` cells: [WF-04](docs/demos/trial-readout-PROMPT-WF-04-claudeopus55low-1794597767-wf-agentstream-wf-04-claude-claudeopus55low.md), [WF-05](docs/demos/trial-readout-PROMPT-WF-05-claudeopus55low-1794598104-wf-agentstream-wf-05-claude-claudeopus55low.md), [WF-06](docs/demos/trial-readout-PROMPT-WF-06-claudeopus55low-1794598549-wf-agentstream-wf-06-claude-claudeopus55low.md), [WF-07](docs/demos/trial-readout-PROMPT-WF-07-claudeopus55low-1794599237-wf-agentstream-wf-07-claude-claudeopus55low.md) (**workflow complete**); [WF-08](docs/demos/trial-readout-PROMPT-WF-08-claudeopus55low-1794599749-wf-agentstream-wf-08-claude-claudeopus55low.md) (**split signal** — close_out blocked). Catalog + [demos index](docs/demos/README.md) via `@record-wf-trial`.
 
 - **PROMPT-WF-09 facilitator readout (Claude Haiku low @ 1794579829)** — [trial-readout](docs/demos/trial-readout-PROMPT-WF-09-claudehaiku55low-1794579829-wf-agentstream-wf-09-claude-claudehaiku55low.md) (**split signal** — **4.2.2**; **8/8** tests uncommitted; verification + close_out blocked); catalog + runs registry via `@record-wf-trial`.
 
