@@ -94,8 +94,6 @@ export function importWfClient(input: {
   const jsonlPaths = input.jsonlPaths ?? [];
   const observations = parseJsonlForHarness(harness, jsonlPaths, seenOrigin);
 
-  const inserted = insertObservations(db, input.trialId, observations);
-
   let summary =
     harness === "claude"
       ? mergeClaudeCumulativeSnapshots(
@@ -132,6 +130,8 @@ export function importWfClient(input: {
     wall_clock_ms: wallClockMs(manifest),
     exit_code: manifest.exit_code ?? null,
   });
+
+  const inserted = insertObservations(db, input.trialId, observations);
 
   appendImportReceipt(importsLog, {
     at: new Date().toISOString(),

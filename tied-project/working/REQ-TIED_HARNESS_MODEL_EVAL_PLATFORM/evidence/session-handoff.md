@@ -49,8 +49,8 @@
 ### Deferred / optional
 
 - [ ] Integrated adversarial inquiry (M2 or strict profile)
-- [ ] `trial-run-thin` — subprocess persist stream-json to raw store
-- [ ] `--jsonl` re-import when captures exist (token rows non-null only when usage present)
+- [ ] `trial-run-thin` — subprocess persist stream-json to raw store (automate tee in orchestrator)
+- [x] **`stream-json capture`** — live Claude + Cursor NDJSON; `--jsonl` import ([evidence](./stream-json-capture-import.md))
 
 ### Changelog (this REQ)
 
@@ -92,14 +92,14 @@
 | Machine close-out | **pass** — [close-out-handoff.md](./close-out-handoff.md) |
 | Process contract | **partial** — manifest + envelope; adherence reconcile not_run |
 | Adherence ledger | **not_run** |
-| Operator compose smoke | **pass** — manifest-only import; null tokens |
+| Operator compose smoke | **pass** — manifest + stream-json; Claude live tokens; Cursor null when capture lacks `result` |
 
 ---
 
 ## Do next
 
-1. Capture Claude/Cursor **stream-json** for the same disposable client → re-import with `--jsonl` (SC-HMEP-M1-01..02 live).
-2. **M2** per [PLAN.md](../PLAN.md) (pricing, verifiers, integrated inquiry).
+1. **M2** per [PLAN.md](../PLAN.md) (pricing, verifiers, integrated inquiry).
+2. Optional: fix Cursor `agent` post-trial capture so `type:result` + `usage` lands (today: null tokens, correct).
 3. Optional live `wf-meter-01` smoke (SC-HEMC-06) before metering experiments.
 
 ---
