@@ -1,63 +1,29 @@
 #!/usr/bin/env node
 /**
  * Build Latest-run comparison matrix section for traditional-workflow-trial-runs-registry.md
- * [PLAN-WF-TRIAL-COMPARISON-MATRIX]
+ * [PLAN-WF-TRIAL-COMPARISON-MATRIX] [REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS]
+ * [REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX]
+ * [REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS]
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
 
+import {
+  formatMatrixWallMins,
+  MATRIX_COLUMNS,
+  matrixKeyToColumn,
+  renderWfTrialComparisonMatrixCell,
+  toolsetKeyFromMasterRow,
+} from "../../../../tools/bootstrap/lib/wf-trial-comparison-matrix.mjs";
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
 const REGISTRY = path.join(ROOT, "docs/demos/traditional-workflow-trial-runs-registry.md");
-
-const COLUMNS = [
-  { id: "cursor-composer-2.5", header: "Cursor · `composer-2.5`", key: "cursor:composer-2.5" },
-  { id: "cursor-luna-low", header: "Cursor · `luna-low`", key: "cursor:luna-low" },
-  { id: "cursor-luna-med", header: "Cursor · `luna-med`", key: "cursor:luna-med" },
-  { id: "cursor-luna-high", header: "Cursor · `luna-high`", key: "cursor:luna-high" },
-  { id: "cursor-grok47-med", header: "Cursor · `grok47-med`", key: "cursor:grok47-med" },
-  { id: "claude-composer-2.5", header: "Claude · `composer-2.5` (Haiku)", key: "claude:composer-2.5" },
-  { id: "claude-sonnet-5-5", header: "Claude · `claude-sonnet-5-5`", key: "claude:claude-sonnet-5-5" },
-  {
-    id: "cursor-composer-2.5@medium",
-    header: "Cursor · `composer-2.5` effort=medium",
-    key: "cursor:composer-2.5@medium",
-  },
-  {
-    id: "cursor-composer-2.5@high",
-    header: "Cursor · `composer-2.5` effort=high",
-    key: "cursor:composer-2.5@high",
-  },
-  { id: "cursor-luna-low@medium", header: "Cursor · `luna-low` effort=medium", key: "cursor:luna-low@medium" },
-  {
-    id: "claude-composer-2.5@medium",
-    header: "Claude · Haiku effort=medium",
-    key: "claude:composer-2.5@medium",
-  },
-];
-
-const SLUG_TO_CONFIG = {
-  "composer-2.5-fast": "composer-2.5",
-  "gpt-5.6-luna-low-fast": "luna-low",
-  "gpt-5.6-luna-medium-fast": "luna-med",
-  "gpt-5.6-luna-high-fast": "luna-high",
-  "grok-4.7-medium-fast": "grok47-med",
-  "claude-haiku-5-5": "composer-2.5",
-  "claude-sonnet-5-5": "claude-sonnet-5-5",
-};
-
-const EFFORT_MEDIUM_RE =
-  /composer25medium|lunalowmedium|haiku55medium|claudesonnet55medium|luna-low-medium|claude-haiku55medium/i;
-const EFFORT_HIGH_RE =
-  /composer25high|composer25-high|haiku55high|claudesonnet55high|sonnet55high/i;
 
 /** Master table WF column: PROMPT-WF-01…NN (any two-digit index present in registry). */
 const MASTER_ROW_RE =
   /^\| (\d{2}) \| ([^|]+) \| ([^|]+) \| `?([^`|]+)`? \| ([^|]+) \| ([^|]+) \| ([^|]+) \| ([^|]+) \| \[readout\]\(([^)]+)\) \|/;
-
-/** @type {Map<string, typeof COLUMNS[0]>} */
-const keyToColumn = new Map(COLUMNS.map((c) => [c.key, c]));
 
 function loadSpecs() {
   const specPath = path.join(ROOT, "docs/demos/wf-trial-model-specs.yaml");
@@ -80,52 +46,11 @@ function parseMasterRows(md) {
       slug: m[4].trim(),
       runTime: m[6].trim(),
       gradeMean: meanMatch ? meanMatch[1] : "—",
+      gradesDisplay: gradesRaw,
       readout: m[9].trim(),
     });
   }
   return rows;
-}
-
-function effortFromReadout(readoutPath) {
-  const base = path.basename(readoutPath);
-  if (EFFORT_HIGH_RE.test(base)) return "high";
-  if (EFFORT_MEDIUM_RE.test(base)) return "medium";
-  const full = path.join(ROOT, "docs/demos", readoutPath);
-  if (fs.existsSync(full)) {
-    const body = fs.readFileSync(full, "utf8");
-    if (/model_effort=high/.test(body)) return "high";
-    if (/model_effort=medium/.test(body)) return "medium";
-  }
-  return null;
-}
-
-function configFromRow(row) {
-  let config = SLUG_TO_CONFIG[row.slug];
-  if (!config) {
-    if (row.slug.includes("luna") && row.slug.includes("medium")) config = "luna-med";
-    else if (row.slug.includes("grok")) config = "grok47-med";
-    else return null;
-  }
-  if (row.harness === "claude" && row.slug === "claude-sonnet-5-5") {
-    config = "claude-sonnet-5-5";
-  }
-  return config;
-}
-
-function toolsetKey(row) {
-  const config = configFromRow(row);
-  if (!config) return null;
-  const effort = effortFromReadout(row.readout);
-  const base = `${row.harness}:${config}`;
-  if (effort === "medium" || effort === "high") {
-    const keyed = `${base}@${effort}`;
-    if (keyToColumn.has(keyed)) return keyed;
-    // e.g. claude:composer-2.5@high — no dedicated column; pivot uses baseline Haiku cell.
-    if (keyToColumn.has(base)) return base;
-    return null;
-  }
-  if (effort) return null;
-  return base;
 }
 
 /**
@@ -146,28 +71,29 @@ function matrixPromptWfIndices(rows) {
 }
 
 function cellMarkdown(row) {
-  const rt = row.runTime === "—" ? "—" : `${row.runTime}s`;
-  const gm = row.gradeMean === "—" ? "—" : row.gradeMean;
-  if (rt === "—" && gm === "—") return "—";
-  return `**${rt}**<br>**${gm}**<br>[readout](${row.readout})`;
+  return renderWfTrialComparisonMatrixCell({
+    wallSeconds: row.runTime,
+    gradesDisplay: row.gradesDisplay,
+    readout: row.readout,
+  });
 }
 
 function buildMatrixSection(best, wfIndices) {
-  const headerCells = COLUMNS.map((c) => c.header);
+  const headerCells = MATRIX_COLUMNS.map((c) => c.header);
   const lines = [
     "## Latest-run comparison matrix",
     "",
     "Facilitator **cross-toolset** view: same **PROMPT-WF-NN**, newest recorded run per **`toolset_key`** (harness + catalog config + optional effort). Store documentation only — not methodology effectiveness or a model leaderboard. Per-run history and duplicates: [Master runs table](#master-runs-table) above.",
     "",
-    "Each cell: orchestrator **wall time** (seconds, four sponsor turns) · session grade **mean** (0.00–4.00) · readout link.",
+    "Each cell: orchestrator **wall_mins** (nearest integer, `m` suffix, four sponsor turns) · session **Grades** (`mean · Req/Tr/Ts/Al/Pr/Ch/Ml` from master table) · readout link.",
     "",
     `| Prompt | ${headerCells.join(" | ")} |`,
-    `| --- | ${COLUMNS.map(() => "---").join(" | ")} |`,
+    `| --- | ${MATRIX_COLUMNS.map(() => "---").join(" | ")} |`,
   ];
 
   for (const wf of wfIndices) {
     const label = `[PROMPT-WF-${wf}](catalog-traditional-workflow-trial-prompts.md#prompt-wf-${wf})`;
-    const cells = COLUMNS.map((col) => {
+    const cells = MATRIX_COLUMNS.map((col) => {
       const hit = best.get(`${wf}|${col.key}`);
       return hit ? cellMarkdown(hit) : "—";
     });
@@ -178,12 +104,55 @@ function buildMatrixSection(best, wfIndices) {
 }
 
 const SPOT_CHECKS = [
-  { wf: "08", key: "cursor:composer-2.5", runTime: "706", gradeMean: "3.57", readoutIncludes: "1794211741" },
-  { wf: "01", key: "cursor:composer-2.5@medium", runTime: "1125", gradeMean: "3.87", readoutIncludes: "1794256930" },
-  { wf: "03", key: "cursor:composer-2.5@high", runTime: "870", gradeMean: "3.87", readoutIncludes: "1794264348" },
-  { wf: "09", key: "claude:composer-2.5@medium", runTime: "296", gradeMean: "3.06", readoutIncludes: "1794350349" },
-  { wf: "10", key: "claude:composer-2.5@medium", runTime: "427", gradeMean: "3.29", readoutIncludes: "1794407806" },
-  { wf: "10", key: "claude:claude-sonnet-5-5", runTime: "189", gradeMean: "3.07", readoutIncludes: "1794366012" },
+  {
+    wf: "08",
+    key: "cursor:composer-2.5",
+    wallMins: "12m",
+    gradesIncludes: "3.57 ·",
+    readoutIncludes: "1794211741",
+  },
+  {
+    wf: "01",
+    key: "cursor:composer-2.5",
+    wallMins: "19m",
+    gradesIncludes: "3.87 ·",
+    readoutIncludes: "1794256930",
+  },
+  {
+    wf: "03",
+    key: "cursor:composer-2.5",
+    wallMins: "15m",
+    gradesIncludes: "3.87 ·",
+    readoutIncludes: "1794264348",
+  },
+  {
+    wf: "09",
+    key: "claude:claude-haiku-5-5",
+    wallMins: "3m",
+    gradesIncludes: "2.56 ·",
+    readoutIncludes: "1794582335",
+  },
+  {
+    wf: "09",
+    key: "claude:claude-haiku-5-5@medium",
+    wallMins: "5m",
+    gradesIncludes: "3.06 ·",
+    readoutIncludes: "1794350349",
+  },
+  {
+    wf: "10",
+    key: "claude:claude-haiku-5-5@medium",
+    wallMins: "7m",
+    gradesIncludes: "3.29 ·",
+    readoutIncludes: "1794407806",
+  },
+  {
+    wf: "10",
+    key: "claude:claude-sonnet-5-5",
+    wallMins: "12m",
+    gradesIncludes: "3.86 ·",
+    readoutIncludes: "1794411691",
+  },
 ];
 
 function runCheck(best) {
@@ -195,12 +164,13 @@ function runCheck(best) {
       ok = false;
       continue;
     }
-    if (row.runTime !== spot.runTime) {
-      console.error(`CHECK FAIL: ${spot.key} runTime ${row.runTime} !== ${spot.runTime}`);
+    const wallMins = formatMatrixWallMins(row.runTime);
+    if (wallMins !== spot.wallMins) {
+      console.error(`CHECK FAIL: ${spot.key} wallMins ${wallMins} !== ${spot.wallMins}`);
       ok = false;
     }
-    if (row.gradeMean !== spot.gradeMean) {
-      console.error(`CHECK FAIL: ${spot.key} grade ${row.gradeMean} !== ${spot.gradeMean}`);
+    if (!row.gradesDisplay.includes(spot.gradesIncludes)) {
+      console.error(`CHECK FAIL: ${spot.key} grades ${row.gradesDisplay}`);
       ok = false;
     }
     if (!row.readout.includes(spot.readoutIncludes)) {
@@ -219,8 +189,8 @@ function main() {
   const best = new Map();
 
   for (const row of rows) {
-    const key = toolsetKey(row);
-    if (!key || !keyToColumn.has(key)) continue;
+    const key = toolsetKeyFromMasterRow(row, { repoRoot: ROOT });
+    if (!key || !matrixKeyToColumn.has(key)) continue;
     const mapKey = `${row.wf}|${key}`;
     const prev = best.get(mapKey);
     if (!prev || row.clientId > prev.clientId) best.set(mapKey, row);

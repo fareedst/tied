@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **WF trial comparison matrix effort headers (working [REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS](tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/PLAN.md))** — **9** columns: tiered model headers show `effort=low|medium|high`; `composer-2.5` omits `effort=`; `composer25medium`/`high` readouts pivot to `cursor:composer-2.5`. Module [`wf-trial-comparison-matrix.mjs`](tools/bootstrap/lib/wf-trial-comparison-matrix.mjs); registry regen.
+
 ### Added
+
+- **PROMPT-WF-09 facilitator readout (Claude Haiku low @ 1794579829)** — [trial-readout](docs/demos/trial-readout-PROMPT-WF-09-claudehaiku55low-1794579829-wf-agentstream-wf-09-claude-claudehaiku55low.md) (**split signal** — **4.2.2**; **8/8** tests uncommitted; verification + close_out blocked); catalog + runs registry via `@record-wf-trial`.
 
 - **Harness eval M3+M4 ([REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM], [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM])** — File-backed `billing import` / `report reconcile` (schema v3); regression `baseline validate` + `compare`; `replay batch` manifest wrapping idempotent `importWfClient`; contracts and operator samples under `docs/demos/harness-eval/{billing,baselines,replay}/`. Close-out: HMEP M3+M4 2026-11-13.
 

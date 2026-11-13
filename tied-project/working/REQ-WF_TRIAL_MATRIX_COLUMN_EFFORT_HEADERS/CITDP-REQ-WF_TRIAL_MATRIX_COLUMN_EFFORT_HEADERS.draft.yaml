@@ -1,0 +1,38 @@
+CITDP-REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS:
+  change_definition:
+    current_behavior: "Latest-run comparison matrix uses 11 columns; composer overlay columns and headers treat MODEL_EFFORT for composer-2.5; baseline tiered columns omit effort=low in header text."
+    desired_behavior: "9-column manifest; tiered models show effort=low|medium|high in headers; composer-2.5 column has no effort=; composer readouts always pivot to cursor:composer-2.5; remove composer @medium/@high columns."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/wf-trial-comparison-matrix.mjs; wf-trial-comparison-matrix.test.mjs; build-comparison-matrix.mjs; traditional-workflow-trial-runs-registry.md; PLAN-WF-TRIAL-COMPARISON-MATRIX/PLAN.md"
+    tied_tokens_new: []
+  non_goals:
+    - "toolset_key @low suffix"
+    - "New matrix columns beyond 9-column shrink"
+    - "Rename historical readout files with composer25medium/high"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Composer effort=low on header implies MODEL_EFFORT exists for composer-2.5"
+        - "Dropping @medium/@high columns hides latest luna/haiku overlay runs"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Historical composer25medium filenames still visible in master table links"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/build-plan-verification-evidence.md"
+      falsification_questions:
+        - "Would SC-WF-CMX-13 fail if composer25medium regex were re-enabled?"
+      gate_policy: "advisory"
+    risk_assessment:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Facilitator matrix headers and pivot only."
+  success_criteria:
+    - "SC-WF-CMX-10 through SC-WF-CMX-13 in PLAN.md"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"
+    integration:
+      - "build-comparison-matrix.mjs --check"

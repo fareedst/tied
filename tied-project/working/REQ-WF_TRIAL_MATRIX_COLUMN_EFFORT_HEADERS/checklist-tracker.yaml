@@ -1,0 +1,39 @@
+copy_hygiene: "close-out 2026-11-13 — matrix effort headers; composer unnamed"
+description: "Tracker — comparison matrix MODEL_EFFORT in column headings"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed:
+    - disposition: "completed"
+      slug: "verification-gate"
+    - disposition: "completed"
+      slug: "traceable-commit"
+  envelope_path: "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"
+      - "node tied-project/working/PLAN-WF-TRIAL-COMPARISON-MATRIX/evidence/build-comparison-matrix.mjs --check"
+    status: "pass"
+  request: "REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/not-applicable-receipt.v1.json"
+      - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Facilitator matrix header display only."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/evidence/sub-adversarial-inquiry-pass-na.md"
+      policy: "minimal-depth-no-inquiry"
+      status: "not_applicable"

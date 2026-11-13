@@ -53,16 +53,16 @@ Column order left → right: **Cursor baseline**, **Claude baseline**, **effort 
 | `column_id` | Header | `toolset_key` |
 | --- | --- | --- |
 | `cursor-composer-2.5` | Cursor · `composer-2.5` | `cursor:composer-2.5` |
-| `cursor-luna-low` | Cursor · `luna-low` | `cursor:luna-low` |
-| `cursor-luna-med` | Cursor · `luna-med` | `cursor:luna-med` |
-| `cursor-luna-high` | Cursor · `luna-high` | `cursor:luna-high` |
-| `cursor-grok47-med` | Cursor · `grok47-med` | `cursor:grok47-med` |
-| `claude-composer-2.5` | Claude · `composer-2.5` (Haiku) | `claude:composer-2.5` |
-| `claude-sonnet-5-5` | Claude · `claude-sonnet-5-5` | `claude:claude-sonnet-5-5` |
-| `cursor-composer-2.5@medium` | Cursor · `composer-2.5` effort=medium | `cursor:composer-2.5@medium` |
-| `cursor-composer-2.5@high` | Cursor · `composer-2.5` effort=high | `cursor:composer-2.5@high` |
+| `cursor-luna-low` | Cursor · `luna-low` effort=low | `cursor:luna-low` |
+| `cursor-luna-med` | Cursor · `luna-med` effort=low | `cursor:luna-med` |
+| `cursor-luna-high` | Cursor · `luna-high` effort=low | `cursor:luna-high` |
+| `cursor-grok47-med` | Cursor · `grok47-med` effort=low | `cursor:grok47-med` |
+| `claude-haiku-5-5` | Claude · `claude-haiku-5-5` effort=low | `claude:claude-haiku-5-5` |
+| `claude-sonnet-5-5` | Claude · `claude-sonnet-5-5` effort=low | `claude:claude-sonnet-5-5` |
 | `cursor-luna-low@medium` | Cursor · `luna-low` effort=medium | `cursor:luna-low@medium` |
-| `claude-composer-2.5@medium` | Claude · Haiku effort=medium | `claude:composer-2.5@medium` |
+| `claude-haiku-5-5@medium` | Claude · `claude-haiku-5-5` effort=medium | `claude:claude-haiku-5-5@medium` |
+
+**Note:** **9 columns** — `composer-2.5` has no MODEL_EFFORT header or `@medium`/`@high` keys ([REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS](../REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/PLAN.md)).
 
 Config ids and slugs: [`wf-trial-model-specs.yaml`](../../../docs/demos/wf-trial-model-specs.yaml). Slug-only rows map via registry **Model slug** with overrides:
 
@@ -70,15 +70,16 @@ Config ids and slugs: [`wf-trial-model-specs.yaml`](../../../docs/demos/wf-trial
 | --- | --- |
 | `gpt-5.6-luna-medium-fast` | `luna-med` |
 | `grok-4.7-medium-fast` | `grok47-med` |
-| `claude-haiku-5-5` on claude harness | `composer-2.5` (matrix cell label Haiku) |
+| `claude-haiku-5-5` on claude harness | `claude-haiku-5-5` |
 | `claude-sonnet-5-5` | `claude-sonnet-5-5` |
 
 ### Effort classification (per master row)
 
-1. Readout link path: tokens `composer25medium`, `lunalowmedium`, `haiku55medium`, `luna-low-medium`, `claude-haiku55medium` → **`medium`**
-2. Tokens `composer25high`, `composer25-high` → **`high`**
-3. Else if linked readout contains `model_effort=medium` / `model_effort=high` → that tier
-4. Else **no effort suffix** → baseline (`toolset_key` without `@`)
+1. Readout link path: tokens `lunalowmedium`, `haiku55medium`, `luna-low-medium`, `claude-haiku55medium` → **`medium`**
+2. Tokens `haiku55high`, `claudesonnet55high`, `sonnet55high` → **`high`**
+3. Tokens `composer25medium` / `composer25high` in path → **ignored** (misdirected); composer rows always use `cursor:composer-2.5`
+4. Else if linked readout contains `model_effort=medium` / `model_effort=high` → that tier (not for `composer-2.5-fast` slug)
+5. Else **no effort suffix** → baseline (`toolset_key` without `@`)
 
 **Baseline vs effort:** Same slug may appear in both; effort classification is **only** from rules above (never from **Latest** alone).
 
@@ -104,18 +105,18 @@ Place immediately **before** the `---` that precedes `## Footnotes`.
 | Row | `PROMPT-WF-01` … `PROMPT-WF-08` | Each label links to [catalog trial prompt](../../../docs/demos/catalog-traditional-workflow-trial-prompts.md#trial-prompts) anchor |
 | --- | --- | --- |
 
-**Cell format:**
+**Cell format** ([REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS](../REQ-WF_TRIAL_REGISTRY_COMPARISON_MATRIX_CELLS/PLAN.md)):
 
 ```html
-<strong>{run_time}s</strong><br><strong>{grade_mean}</strong><br><a href="...">readout</a>
+<strong>{wall_mins}m</strong><br><strong>{grades_display}</strong><br><a href="...">readout</a>
 ```
 
-In Markdown: `**{run_time}s**<br>**{grade_mean}**<br>[readout]({path})`
+In Markdown: `**19m**<br>**3.87 · A/A−/…**<br>[readout]({path})`
 
 | Field | Source |
 | --- | --- |
-| `run_time` | Master **Run time** or `—` |
-| `grade_mean` | Two decimal places from leading mean in **Grades** |
+| `wall_mins` | `formatWallClockMinutes` on master **Run time** + `m` suffix |
+| `grades_display` | Full master **Grades** cell (`mean ·` bands) |
 | `readout` | Relative link from master row |
 
 **Empty cell:** `—`
@@ -153,3 +154,6 @@ Sponsor commit: optional; not automatic.
 | --- | --- | --- |
 | 2026-11-09 | refine-plan | Locked column manifest, effort classification, `toolset_key` newest-run rule, cell format, build phases; resolved duration = wall clock. |
 | 2026-11-09 | build-plan | `build-comparison-matrix.mjs`; registry comparison section + footnote; catalog link. |
+| 2026-11-13 | refine-plan | **Amendment:** Claude Haiku columns must use `claude-haiku-5-5` (not `composer-2.5`) — see [REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX](../REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX/PLAN.md). |
+| 2026-11-13 | build-plan | Amendment shipped: `MATRIX_COLUMNS` + registry regen ([REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX](../REQ-WF_TRIAL_COMPARISON_MATRIX_TOOLSET_FIX/PLAN.md)). |
+| 2026-11-13 | build-plan | Effort headers + 9-column manifest; composer pivot ([REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS](../REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/PLAN.md)). |

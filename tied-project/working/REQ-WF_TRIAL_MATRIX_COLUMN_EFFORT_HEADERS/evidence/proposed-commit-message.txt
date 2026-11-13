@@ -1,0 +1,8 @@
+feat(wf-matrix): effort headers and 9-column manifest
+
+Add MODEL_EFFORT to comparison matrix column headers for tiered
+models; composer-2.5 stays unnamed; collapse misdirected composer
+medium/high pivots. SC-WF-CMX-10…13; regen registry.
+
+REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS (working PLAN)
+Close-out: gate allowed, envelope blocking_gap_count=0
