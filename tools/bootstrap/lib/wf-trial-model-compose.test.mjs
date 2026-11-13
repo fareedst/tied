@@ -48,6 +48,21 @@ describe("wf-trial-model-compose.mjs", () => {
     assert.equal(r.model_config, "grok47-med");
   });
 
+  it("compose grok46 low [SC-COMPOSE-GROK46]", () => {
+    const r = composeCursorCatalogSlug(
+      "grok46",
+      "low",
+      {
+        catalog_base: "cursor-grok-4.6",
+        model_config_prefix: "grok46",
+        speed_suffix: "fast",
+      },
+      CATALOG,
+    );
+    assert.equal(r.model_slug, "cursor-grok-4.6-low-fast");
+    assert.equal(r.model_config, "grok46-low");
+  });
+
   it("rejects missing effort [SC-COMPOSE-CONFLICT]", () => {
     assert.throws(
       () => composeCursorCatalogSlug("luna", "-", lunaFamily, CATALOG),

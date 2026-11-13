@@ -1,9 +1,9 @@
 # PLAN — [REQ-WF_TRIAL_MODEL_COMPOSE] (refine-plan)
 
-**Status:** close-out complete (`0ad209be`)  
-**Workflow:** add-feature → **refine-plan** → `@build-plan` → close-out  
+**Status:** Wave 1 close-out complete (`0ad209be`); **Wave 2 Grok 4.6 compose** implemented in-tree, pending LEAP close-out  
+**Workflow:** add-feature → **refine-plan** → `@close-out` (Wave 2)  
 **Request token:** `REQ-WF_TRIAL_MODEL_COMPOSE`  
-**plan_phase:** `pre-implementation`  
+**plan_phase:** `post-build` (Wave 2)  
 **profile_depth:** `minimal` · **gate_policy:** `advisory`
 
 **Related:** [REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE](../../requirements/REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE.yaml) · [REQ-WF_TRIAL_MODEL_EFFORT](../../requirements/REQ-WF_TRIAL_MODEL_EFFORT.yaml) · [REQ-WF_TRIAL_MODEL_SPEC_CLI](../../requirements/REQ-WF_TRIAL_MODEL_SPEC_CLI.yaml)
@@ -14,19 +14,22 @@
 
 ---
 
-## 1. Refine (Touchpoint 1 — RESOLVE) — closed
+## 1. Refine (Touchpoint 1 — RESOLVE) — closed (Wave 2 addendum)
 
 | Sponsor term | Resolved concept | Disposition |
 | --- | --- | --- |
-| **Compose family** | Short `MODEL_REF` (`luna`, `grok47`, `sol`, `composer-2.5`) | **Locked** — registry `compose:` in specs YAML |
+| **Compose family** | Short `MODEL_REF` (`luna`, `grok46`, `grok47`, `sol`, `composer-2.5`, `cursor-grok-4.6`) | **Locked** — registry `compose:` in specs YAML |
+| **Grok 4.6 slug** | Catalog uses `cursor-grok-4.6-{effort}-fast` (not bare `cursor-grok-4.6`) | **Locked** — compose `catalog_base: cursor-grok-4.6` |
+| **Grok 4.6 config bucket** | Disposable tag / `MODEL_CONFIG` prefix `grok46-{tier}` (`medium` → `grok46-med`) | **Locked** — mirrors `grok47-*` pattern |
 | **Effort (Cursor)** | Single tier source for slug + `MODEL_EFFORT` | **Locked** — 3rd positional; required when family is compose |
-| **Speed** | Always `-fast` on tiered Cursor WF families | **Locked** — `speed_suffix: fast` in registry |
-| **Tiered matrix id** | `luna-low`, `grok47-med`, … | **Locked** — keep in YAML; **deprecated in docs**; mismatch with `EFFORT` → fail |
-| **Claude** | API base id + `MODEL_EFFORT` | **Locked** — unchanged (no slug tier compose) |
+| **Alternate refs** | Full catalog slug or tiered id still valid; `EFFORT=-` when tier embedded | **Locked** — unchanged catalog/matrix paths |
+| **Claude** | API base id + `MODEL_EFFORT` | **Locked** — unchanged |
+
+**Wave 2 sponsor intent (2026-11-12):** `workflow_trial_range cursor cursor-grok-4.6 low 10 10` must resolve to `MODEL_SLUG=cursor-grok-4.6-low-fast`. Any operator input is acceptable if the final slug matches the committed catalog.
 
 ---
 
-## 2. Problem
+## 2. Problem (Wave 1 — unchanged)
 
 `workflow_trial_range cursor gpt-5.6-luna-low-fast medium 1 1` encodes **low** in `MODEL_SLUG` and **medium** in `MODEL_EFFORT`. [cursorSlugMayMismatchEffort](mcp-server/packages/agentstream/src/model-effort.ts) treats that as ambiguous. Operators want:
 
@@ -35,151 +38,119 @@ workflow_trial_range cursor luna medium 2 2
 # → MODEL_SLUG=gpt-5.6-luna-medium-fast, MODEL_CONFIG=luna-med, MODEL_EFFORT=medium
 ```
 
+## 2b. Problem (Wave 2)
+
+[`docs/workflow-trials.md`](../../../docs/workflow-trials.md) documents `workflow_trial_range cursor cursor-grok-4.6 low …`, but Wave 1 compose families omitted Grok 4.6. Resolver failed with `unknown model ref: cursor-grok-4.6` because only tiered slugs exist in the catalog (e.g. `cursor-grok-4.6-low-fast`).
+
 ---
 
 ## 3. Compose registry (normative)
 
-Extend [wf-trial-model-specs.yaml](../../../docs/demos/wf-trial-model-specs.yaml) — **schema `wf-trial-model-spec.v2`** (validator accepts v1 without `compose`).
+[wf-trial-model-specs.yaml](../../../docs/demos/wf-trial-model-specs.yaml) — **schema `wf-trial-model-spec.v2`**.
 
 ```yaml
-schema: wf-trial-model-spec.v2
 compose:
-  luna:
-    catalog_base: gpt-5.6-luna
-    model_config_prefix: luna
+  luna: { catalog_base: gpt-5.6-luna, model_config_prefix: luna, speed_suffix: fast }
+  grok47: { catalog_base: grok-4.7, model_config_prefix: grok47, speed_suffix: fast }
+  grok46:
+    catalog_base: cursor-grok-4.6
+    model_config_prefix: grok46
     speed_suffix: fast
-  grok47:
-    catalog_base: grok-4.7
-    model_config_prefix: grok47
+  cursor-grok-4.6:   # alias family key — same rules as grok46
+    catalog_base: cursor-grok-4.6
+    model_config_prefix: grok46
     speed_suffix: fast
-  sol:
-    catalog_base: gpt-5.6-sol
-    model_config_prefix: sol
-    speed_suffix: fast
+  sol: { catalog_base: gpt-5.6-sol, model_config_prefix: sol, speed_suffix: fast }
   composer-2.5:
     catalog_base: composer-2.5
     model_config_prefix: composer-2.5
     speed_suffix: fast
-    effort_in_slug: false   # existing composer DIAGNOSTIC; slug stays composer-2.5-fast
-specs:
-  # legacy tiered rows unchanged for backward compat
+    effort_in_slug: false
 ```
 
-**Allowed effort tiers:** `low`, `medium`, `high`, `xhigh`, `max` (same as [MODEL_EFFORT_LEVELS](mcp-server/packages/agentstream/src/model-effort.ts)).
+**Allowed effort tiers:** `low`, `medium`, `high`, `xhigh`, `max`.
 
 ---
 
 ## 4. `model_config` abbreviation (locked)
 
-Align disposable tags / matrix with historical buckets:
+| Effort | `luna` / `sol` | `grok47` | `grok46` |
+| --- | --- | --- | --- |
+| `low` | `luna-low` | `grok47-low` | `grok46-low` |
+| `medium` | `luna-med` | `grok47-med` | `grok46-med` |
+| `high` | `luna-high` | `grok47-high` | `grok46-high` |
+| `xhigh` | `luna-xhigh` | `grok47-xhigh` | `grok46-xhigh` |
+| `max` | `luna-max` | `grok47-max` | `grok46-max` |
 
-| Effort | `luna` / `sol` config | `grok47` config |
-| --- | --- | --- |
-| `low` | `luna-low` | `grok47-low` |
-| `medium` | `luna-med` | `grok47-med` |
-| `high` | `luna-high` | `grok47-high` |
-| `xhigh` | `luna-xhigh` | `grok47-xhigh` |
-| `max` | `luna-max` | `grok47-max` |
-
-Implementation: shared `effortToModelConfigSuffix(effort)` — `medium` → `med`; others identity.
-
-**Slug tier token:** use full effort name in catalog slug (`gpt-5.6-luna-medium-fast`), not `med`.
+Slug tier token in catalog remains full effort name (`cursor-grok-4.6-medium-fast`, not `med`).
 
 ---
 
 ## 5. Resolution algorithm
 
-**API:** `resolveWfTrialModelRef(harness, ref, { effort?, registryPath, catalogPath })`
+Unchanged from Wave 1 (alias → compose → matrix → catalog → fail). Compose step uses same `composeCursorCatalogSlug` with catalog gate.
 
-```text
-PRE: harness cursor|claude; ref trimmed non-empty
-1. alias hop (once), same as catalog resolve
-2. IF harness=cursor AND compose[ref] defined:
-     IF effort missing or "-": FAIL effort_required_for_compose_family
-     IF effort_in_slug=false: slug=base+speed per family rules (composer-2.5-fast)
-     ELSE: slug = catalog_base + "-" + effort + "-" + speed_suffix (xhigh uses xhigh not extra-high in slug)
-     model_config = prefix + "-" + effortToModelConfigSuffix(effort)
-     VERIFY slug in wf-trial-model-catalog.yaml (fail closed if agent models drift)
-     RETURN resolution=compose
-3. Matrix config_id → existing resolveWfTrialModelSpec
-4. Matrix slug scan → existing
-5. Catalog slug → existing
-6. FAIL unknown model ref
+**Wave 2 examples:**
 
-POST tier conflict (when effort provided and not "-"):
-  parsed = parseCursorCatalogSlug(MODEL_SLUG)
-  IF parsed.priorEffort != "" AND normalized(parsed.priorEffort) != normalized(effort):
-    FAIL tier_mismatch — hint: use "cursor {family} {effort}" not "{tiered-id} {effort}"
+```bash
+workflow_trial_range cursor cursor-grok-4.6 low 10 10
+# MODEL_SLUG=cursor-grok-4.6-low-fast, MODEL_CONFIG=grok46-low, MODEL_EFFORT=low
+
+workflow_trial_range cursor grok46 medium 1 1
+# MODEL_SLUG=cursor-grok-4.6-medium-fast, MODEL_CONFIG=grok46-med
+
+workflow_trial_range cursor cursor-grok-4.6-low-fast - 1 1
+# catalog path; MODEL_CONFIG from catalog row (cursor-grok-4.6)
 ```
-
-```mermaid
-flowchart TD
-  ref[MODEL_REF + EFFORT]
-  alias[Alias hop]
-  compose[Compose family]
-  matrix[Matrix / catalog]
-  conflict[Tier conflict check]
-  ok[MODEL_SLUG + MODEL_CONFIG]
-  ref --> alias --> compose
-  compose -->|not family| matrix
-  compose -->|composed| conflict
-  matrix --> conflict
-  conflict --> ok
-```
-
-**CLI:** `wf-trial-model-spec.mjs resolve-ref <harness> <ref> [effort]` — effort optional except compose families.
-
-**Shell:** [wf_trial_resolve_model_ref](../../../scripts/lib/wf-trial-model-spec.inc.sh) passes `workflow_trial_range` 3rd arg into Node **before** exporting `MODEL_EFFORT`.
 
 ---
 
-## 6. Locked decisions
+## 6. Locked decisions (Wave 1 + Wave 2)
 
 | ID | Decision |
 | --- | --- |
 | **D-COMPOSE-SINGLE-TIER** | For compose families, slug tier and `MODEL_EFFORT` use the same operator effort string |
-| **D-COMPOSE-CATALOG-GATE** | Composed slug must exist in committed catalog (or matrix cursor_slug) |
-| **D-COMPOSE-MISMATCH-FAIL** | Tiered id/slug + conflicting effort → error, not DIAGNOSTIC-only |
-| **D-COMPOSE-LEGACY-DASH** | Tiered matrix id + `EFFORT=-` → no conflict check (backward compat) |
-| **D-COMPOSE-COMPOSER** | `composer-2.5` family: `effort_in_slug: false`; retain shell DIAGNOSTIC if effort set |
-| **D-COMPOSE-SCHEMA-V2** | Bump specs schema; v1 files still load with empty `compose` |
-| **D-COMPOSE-DOCS** | Remove `gpt-5.6-luna-low-fast medium` from usage; canonical `luna medium` |
-
-**Costly:** Scripts using `luna-low` + non-matching effort will fail until migrated to `luna {effort}`.
+| **D-COMPOSE-CATALOG-GATE** | Composed slug must exist in committed catalog |
+| **D-COMPOSE-GROK46-BASE** | Grok 4.6 compose uses `cursor-grok-4.6` catalog base (matches `agent models`) |
+| **D-COMPOSE-GROK46-ALIAS** | Family keys `grok46` and `cursor-grok-4.6` are equivalent for compose |
+| **D-COMPOSE-OUT-GROK45** | Grok 4.5 compose deferred unless sponsor requests (`cursor-grok-4.5-*` slugs differ) |
 
 ---
 
-## 7. Modules (build-plan)
+## 7. Modules (Wave 2 — status)
 
-| Module | Path |
-| --- | --- |
-| Compose logic | [wf-trial-model-compose.mjs](../../../tools/bootstrap/lib/wf-trial-model-compose.mjs) (new) |
-| Spec loader v2 | [wf-trial-model-spec.mjs](../../../tools/bootstrap/lib/wf-trial-model-spec.mjs) |
-| Shell | [wf-trial-model-spec.inc.sh](../../../scripts/lib/wf-trial-model-spec.inc.sh), [build-commands.sh](../../../scripts/build-commands.sh) |
-| Tests | `wf-trial-model-compose.test.mjs`, extend spec + shell tests |
+| Module | Path | Wave 2 |
+| --- | --- | --- |
+| Compose registry | `docs/demos/wf-trial-model-specs.yaml` | **done** |
+| Compose logic | `tools/bootstrap/lib/wf-trial-model-compose.mjs` | unchanged |
+| Resolver | `tools/bootstrap/lib/wf-trial-model-spec.mjs` | unchanged |
+| Shell usage | `scripts/build-commands.sh` | **done** (usage lists grok46) |
+| Tests | compose, spec, shell `SC-COMPOSE-GROK46` | **done** |
+| REQ criterion | `tied-project/requirements/REQ-WF_TRIAL_MODEL_COMPOSE.yaml` | **done** (`SC-COMPOSE-GROK46`) |
+| Vocab / trial catalog docs | `agentstream.md`, `catalog-traditional-workflow-trial-prompts.md` | **done** |
 
 ---
 
-## 8. Build-plan order
+## 8. Close-out order (Wave 2)
 
-1. TIED REQ/ARCH/IMPL + pseudo-code  
-2. `pseudocode_validate`  
-3. RED tests  
-4. Registry v2 + compose module + resolver + shell  
-5. Docs / vocab / LEAP effort examples  
-6. `tied_validate_consistency` · close-out  
+1. Re-run verification manifest (three test files)  
+2. LEAP: update working CITDP desired_behavior + persist `tied-project/citdp/CITDP-REQ-WF_TRIAL_MODEL_COMPOSE.yaml` at close-out  
+3. IMPL pseudo-code — append Wave 2 compose families if token comments missing ([PROC-IMPL_PSEUDOCODE_TOKENS])  
+4. `tied_validate_consistency`  
+5. Scoped commit + optional `@close-out` receipt  
+
+**Not required:** new compose module; catalog regen (slugs already present).
 
 ---
 
 ## 9. Out of scope
 
-- Flag-based CLI  
-- Removing tiered matrix YAML rows  
-- Auto-compose for arbitrary catalog slugs without family registry  
-- Changing Claude resolve  
+- `cursor-grok-4.5` compose family  
+- Matrix row `grok46-med` (compose-only; no matrix parity requirement unlike `grok47-med`)  
+- Claude harness changes  
 
 ---
 
 ## Do next
 
-**`@build-plan`** — [evidence/session-handoff.md](./evidence/session-handoff.md)
+**`@close-out`** — Wave 2 LEAP + verification + scoped commit ([evidence/session-handoff.md](./evidence/session-handoff.md))

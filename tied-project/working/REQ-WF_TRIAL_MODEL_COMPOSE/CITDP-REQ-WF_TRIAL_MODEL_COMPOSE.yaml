@@ -6,7 +6,7 @@ CITDP-REQ-WF_TRIAL_MODEL_COMPOSE:
       - "SC-COMPOSE-LUNA"
       - "SC-COMPOSE-USAGE"
   current_behavior: "workflow_trial_range accepts tier-embedded MODEL_REF (luna-low, gpt-5.6-luna-low-fast) and a separate EFFORT positional.\nOperators can specify contradictory tiers (slug low + effort medium).\nUsage examples show gpt-5.6-luna-low-fast with medium effort.\n"
-  desired_behavior: "Compose families (luna, grok47, sol) build gpt-*-{effort}-fast from MODEL_REF + EFFORT.\nTiered matrix ids remain for legacy with EFFORT=- only, or effort must match embedded tier.\nFail closed on tier mismatch with hint to use family + effort.\n"
+  desired_behavior: "Compose families (luna, grok46, grok47, sol, cursor-grok-4.6) build catalog slugs from MODEL_REF + EFFORT (e.g. cursor-grok-4.6 + low → cursor-grok-4.6-low-fast, MODEL_CONFIG grok46-low).\nTiered matrix ids and full catalog slugs remain for legacy with EFFORT=- or matching tier.\nFail closed on tier mismatch with hint to use family + effort.\n"
   metadata:
     created:
       author: "refine-plan"
@@ -25,6 +25,7 @@ CITDP-REQ-WF_TRIAL_MODEL_COMPOSE:
       risk: "Breaking luna-low plus non-matching effort scripts"
   satisfaction_criteria:
     - "SC-COMPOSE-CONFLICT"
+    - "SC-COMPOSE-GROK46"
     - "SC-COMPOSE-GROK47"
     - "SC-COMPOSE-LEGACY"
     - "SC-COMPOSE-LUNA"
