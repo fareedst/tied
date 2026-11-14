@@ -1,0 +1,39 @@
+CITDP-REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS:
+  change_definition:
+    current_behavior: "Comparison matrix has 11 columns; Claude Sonnet/Haiku @high keys missing from manifest; toolsetKeyFromMasterRow falls back to baseline effort=low when @medium/@high column absent, mis-placing high/medium readouts (e.g. WF-10 Sonnet 1794411691 under effort=low)."
+    desired_behavior: "13-column manifest with claudeEffortColumnSpecs() (low/medium/high × haiku + sonnet); @high columns in header row; medium/high rows map only to matching @ keys or omit cell; WF-10 and WF-09 high cells under effort=high headers."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib/wf-trial-comparison-matrix.mjs; wf-trial-comparison-matrix.test.mjs; build-wf-trial-comparison-matrix.mjs; traditional-workflow-trial-runs-registry.md; PLAN-WF-TRIAL-COMPARISON-MATRIX/PLAN.md; tied-project/CHANGELOG.md"
+    tied_tokens_new: []
+  non_goals:
+    - "Registry-driven dynamic column insertion without manifest"
+    - "Cursor MODEL_EFFORT @high columns"
+    - "Store REQ/ARCH/IMPL YAML promotion"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Removing baseline fallback drops cells instead of showing wrong tier"
+        - "Alphabetical sort splits Sonnet low/medium/high non-adjacent"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "WF-10 Haiku low column becomes em dash if no latest low run"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/build-plan-verification-evidence.md"
+      falsification_questions:
+        - "Would SC-WF-CMX-26 fail if fallback to baseline were restored?"
+      gate_policy: "facilitator_doc_only"
+    depth_tier: "minimal"
+    gate_policy: "facilitator_doc_only"
+    rationale: "Facilitator matrix manifest and pivot only; no product code."
+    risk_assessment:
+      depth_tier: "minimal"
+      gate_policy: "facilitator_doc_only"
+  success_criteria:
+    - "SC-WF-CMX-11, 22–26 in PLAN.md"
+    - "Registry spot checks WF-09/10 @high columns"
+  test_strategy:
+    integration:
+      - "build-wf-trial-comparison-matrix.mjs --check"
+      - "wf-trial-summaries-publish.mjs --check"
+    unit:
+      - "tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"

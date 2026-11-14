@@ -1,0 +1,58 @@
+copy_hygiene: "close-out 2026-11-14 — Claude Haiku/Sonnet effort=high matrix columns"
+description: "Tracker — Claude Haiku/Sonnet MODEL_EFFORT high columns + tier manifest"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed:
+    - disposition: "completed"
+      slug: "risk-assessment"
+    - disposition: "completed"
+      slug: "verification-gate"
+    - disposition: "not_applicable"
+      slug: "sub-adversarial-inquiry-pass"
+  envelope_path: "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/wf-trial-comparison-matrix.test.mjs"
+      - "node tools/bootstrap/lib/build-wf-trial-comparison-matrix.mjs --check"
+      - "node tools/bootstrap/lib/wf-trial-summaries-publish.mjs --check"
+    status: "pass"
+  request: "REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS"
+metadata:
+  gate_policy: "facilitator_doc_only"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/not-applicable-receipt.v1.json"
+      - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Facilitator matrix manifest and pivot only."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/sub-adversarial-inquiry-pass-na.md"
+      policy: "minimal-depth-no-inquiry"
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/build-plan-verification-evidence.md"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/build-plan-verification-evidence.md"
+      status: "completed"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

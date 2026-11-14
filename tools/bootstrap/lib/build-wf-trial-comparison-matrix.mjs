@@ -8,6 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
 
+import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
 import { TIED_REPO_ROOT } from "./constants.mjs";
 import {
   formatMatrixWallMins,
@@ -28,7 +29,7 @@ const MASTER_ROW_RE =
  * @param {string} root
  */
 function loadSpecs(root) {
-  const specPath = path.join(root, "docs/demos/wf-trial-model-specs.yaml");
+  const specPath = resolveAhePaths(root).modelSpecsYaml;
   return yaml.load(fs.readFileSync(specPath, "utf8"));
 }
 
@@ -146,6 +147,13 @@ const SPOT_CHECKS = [
   },
   {
     wf: "09",
+    key: "cursor:grok47-low",
+    wallMins: "12m",
+    gradesIncludes: "2.56 ·",
+    readoutIncludes: "1794608051",
+  },
+  {
+    wf: "09",
     key: "claude:claude-haiku-5-5@medium",
     wallMins: "5m",
     gradesIncludes: "3.06 ·",
@@ -160,10 +168,31 @@ const SPOT_CHECKS = [
   },
   {
     wf: "10",
-    key: "claude:claude-sonnet-5-5",
+    key: "claude:claude-sonnet-5-5@high",
     wallMins: "12m",
     gradesIncludes: "3.86 ·",
     readoutIncludes: "1794411691",
+  },
+  {
+    wf: "10",
+    key: "claude:claude-haiku-5-5@high",
+    wallMins: "14m",
+    gradesIncludes: "3.71 ·",
+    readoutIncludes: "1794409094",
+  },
+  {
+    wf: "09",
+    key: "claude:claude-sonnet-5-5@high",
+    wallMins: "13m",
+    gradesIncludes: "3.63 ·",
+    readoutIncludes: "1794353174",
+  },
+  {
+    wf: "09",
+    key: "claude:claude-sonnet-5-5",
+    wallMins: "4m",
+    gradesIncludes: "3.33 ·",
+    readoutIncludes: "1794586024",
   },
 ];
 
@@ -219,7 +248,7 @@ export function buildBestCellsMap(registryMd, root) {
  * @param {{ write?: boolean, checkOnly?: boolean }} opts
  */
 export function patchRegistryComparisonMatrix(root, opts = {}) {
-  const REGISTRY = path.join(root, "docs/demos/traditional-workflow-trial-runs-registry.md");
+  const REGISTRY = resolveAhePaths(root).registry;
   const md = fs.readFileSync(REGISTRY, "utf8");
   const { rows, best } = buildBestCellsMap(md, root);
 
@@ -262,10 +291,7 @@ function main() {
     DEFAULT_ROOT;
   loadSpecs(root);
   if (process.argv.includes("--check")) {
-    const md = fs.readFileSync(
-      path.join(root, "docs/demos/traditional-workflow-trial-runs-registry.md"),
-      "utf8",
-    );
+    const md = fs.readFileSync(resolveAhePaths(root).registry, "utf8");
     const { best } = buildBestCellsMap(md, root);
     process.exit(runMatrixSpotChecks(best) ? 0 : 1);
   }

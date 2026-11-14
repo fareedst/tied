@@ -6,7 +6,7 @@
 | **Date** | 2026-11-14 |
 | **request_token** | `REQ-AGENT_HARNESS_EVALUATION_DOCS` |
 | **prompt_type** | `@build-plan` (after `@add-feature` → `@refine-plan`) |
-| **plan_phase** | `post-build` |
+| **plan_phase** | `close-out-complete` |
 
 ## Plan spine
 
@@ -44,7 +44,7 @@
 ### Optional (not run this session)
 
 - [ ] slice-5b — Full `wf-trial-summaries-publish.mjs` regen (refresh `manifest.v1.json` receipt paths)
-- [ ] slice-6 — `@close-out` + sponsor commit
+- [x] slice-6 — `@close-out` + traceable commit
 
 ## Environment
 
@@ -92,8 +92,8 @@
 
 | Signal | Status |
 | --- | --- |
-| **Machine close-out** | `not_run` — no commit, no envelope sync |
-| **Process contract** | `partial` — implementation on disk; close-out checklist not run |
+| **Machine close-out** | `allowed` — gate `close_out-2026-11-14T16-08-08-945Z.json` |
+| **Process contract** | `complete` — CITDP + verification manifest |
 | **Adherence ledger** | `not_run` — minimal depth |
 
 ## Do next

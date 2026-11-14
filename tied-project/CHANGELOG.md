@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **WF comparison matrix Claude effort tiers (working [REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS](tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/PLAN.md))** — **13** columns via `claudeEffortColumnSpecs()` (Haiku + Sonnet × low/medium/high); no medium/high→low fallback; SC-WF-CMX-22…26; registry matrix regen (WF-09/10 `@high` cells).
+
 - **WF comparison matrix `grok47-low` column (working [REQ-WF_TRIAL_MATRIX_GROK47_LOW_COLUMN](tied-project/working/REQ-WF_TRIAL_MATRIX_GROK47_LOW_COLUMN/PLAN.md))** — **10** toolset columns; `grok-4.7-low-fast` pivots to `cursor:grok47-low`; WF-09 @ 1794608051 in correct cell; SC-WF-CMX-16…19.
 
 - **WF trial comparison matrix layout (working [REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT](tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT/PLAN.md))** — Alphabetical toolset column order by header; repeated header row at bottom of **Latest-run comparison matrix**; SC-WF-CMX-14/15. Plan build 2026-11-13.

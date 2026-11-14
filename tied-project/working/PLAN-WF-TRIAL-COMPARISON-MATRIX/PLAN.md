@@ -61,11 +61,14 @@ Column order left → right: **Cursor baseline**, **Claude baseline**, **effort 
 | `cursor-luna-high` | Cursor · `luna-high` effort=low | `cursor:luna-high` |
 | `cursor-grok47-med` | Cursor · `grok47-med` effort=low | `cursor:grok47-med` |
 | `claude-haiku-5-5` | Claude · `claude-haiku-5-5` effort=low | `claude:claude-haiku-5-5` |
-| `claude-sonnet-5-5` | Claude · `claude-sonnet-5-5` effort=low | `claude:claude-sonnet-5-5` |
-| `cursor-luna-low@medium` | Cursor · `luna-low` effort=medium | `cursor:luna-low@medium` |
 | `claude-haiku-5-5@medium` | Claude · `claude-haiku-5-5` effort=medium | `claude:claude-haiku-5-5@medium` |
+| `claude-haiku-5-5@high` | Claude · `claude-haiku-5-5` effort=high | `claude:claude-haiku-5-5@high` |
+| `claude-sonnet-5-5` | Claude · `claude-sonnet-5-5` effort=low | `claude:claude-sonnet-5-5` |
+| `claude-sonnet-5-5@medium` | Claude · `claude-sonnet-5-5` effort=medium | `claude:claude-sonnet-5-5@medium` |
+| `claude-sonnet-5-5@high` | Claude · `claude-sonnet-5-5` effort=high | `claude:claude-sonnet-5-5@high` |
+| `cursor-luna-low@medium` | Cursor · `luna-low` effort=medium | `cursor:luna-low@medium` |
 
-**Note:** **9 columns** — `composer-2.5` has no MODEL_EFFORT header or `@medium`/`@high` keys ([REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS](../REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/PLAN.md)).
+**Note:** **13 columns** (alphabetical by header) — Claude tier columns from [`claudeEffortColumnSpecs()`](../../../tools/bootstrap/lib/wf-trial-comparison-matrix.mjs) ([REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS](../REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/PLAN.md)). `composer-2.5` has no MODEL_EFFORT header ([REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS](../REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/PLAN.md)).
 
 Config ids and slugs: [`wf-trial-model-specs.yaml`](../../../docs/demos/wf-trial-model-specs.yaml). Slug-only rows map via registry **Model slug** with overrides:
 

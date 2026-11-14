@@ -8,7 +8,9 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
 import { formatWallClockMinutes } from "./project-size-comparison-render.mjs";
+import { deriveCursorModelConfig } from "./wf-trial-model-catalog.mjs";
 
 const COMPOSER_CONFIG_ID = "composer-2.5";
 
@@ -23,8 +25,35 @@ export function formatMatrixColumnHeader({ harnessLabel, configId, effortTier = 
   return `${base} effort=${tier}`;
 }
 
+/** Claude configs that support MODEL_EFFORT low / medium / high overlay columns. */
+export const CLAUDE_EFFORT_TIERED_CONFIGS = ["claude-haiku-5-5", "claude-sonnet-5-5"];
+
+/** @type {Array<"low" | "medium" | "high">} */
+const CLAUDE_EFFORT_TIERS = ["low", "medium", "high"];
+
+/**
+ * @returns {Array<{ id: string; key: string; harnessLabel: string; configId: string; effortTier?: "low" | "medium" | "high" | null }>}
+ */
+export function claudeEffortColumnSpecs() {
+  const specs = [];
+  for (const configId of CLAUDE_EFFORT_TIERED_CONFIGS) {
+    for (const tier of CLAUDE_EFFORT_TIERS) {
+      const key =
+        tier === "low" ? `claude:${configId}` : `claude:${configId}@${tier}`;
+      specs.push({
+        id: tier === "low" ? configId : `${configId}@${tier}`,
+        harnessLabel: "Claude",
+        configId,
+        effortTier: tier,
+        key,
+      });
+    }
+  }
+  return specs;
+}
+
 /** @type {Array<{ id: string; key: string; harnessLabel: string; configId: string; effortTier?: "low" | "medium" | "high" | null }>} */
-const MATRIX_COLUMN_SPECS = [
+const CURSOR_MATRIX_COLUMN_SPECS = [
   {
     id: "cursor-composer-2.5",
     harnessLabel: "Cursor",
@@ -54,25 +83,18 @@ const MATRIX_COLUMN_SPECS = [
     key: "cursor:luna-high",
   },
   {
+    id: "cursor-grok47-low",
+    harnessLabel: "Cursor",
+    configId: "grok47-low",
+    effortTier: "low",
+    key: "cursor:grok47-low",
+  },
+  {
     id: "cursor-grok47-med",
     harnessLabel: "Cursor",
     configId: "grok47-med",
     effortTier: "low",
     key: "cursor:grok47-med",
-  },
-  {
-    id: "claude-haiku-5-5",
-    harnessLabel: "Claude",
-    configId: "claude-haiku-5-5",
-    effortTier: "low",
-    key: "claude:claude-haiku-5-5",
-  },
-  {
-    id: "claude-sonnet-5-5",
-    harnessLabel: "Claude",
-    configId: "claude-sonnet-5-5",
-    effortTier: "low",
-    key: "claude:claude-sonnet-5-5",
   },
   {
     id: "cursor-luna-low@medium",
@@ -81,14 +103,9 @@ const MATRIX_COLUMN_SPECS = [
     effortTier: "medium",
     key: "cursor:luna-low@medium",
   },
-  {
-    id: "claude-haiku-5-5@medium",
-    harnessLabel: "Claude",
-    configId: "claude-haiku-5-5",
-    effortTier: "medium",
-    key: "claude:claude-haiku-5-5@medium",
-  },
 ];
+
+const MATRIX_COLUMN_SPECS = [...CURSOR_MATRIX_COLUMN_SPECS, ...claudeEffortColumnSpecs()];
 
 /** Column order: alphabetical by header text (Claude toolsets before Cursor at current labels). */
 export const MATRIX_COLUMNS = MATRIX_COLUMN_SPECS.map((spec) => ({
@@ -106,6 +123,7 @@ export const SLUG_TO_CONFIG = {
   "gpt-5.6-luna-low-fast": "luna-low",
   "gpt-5.6-luna-medium-fast": "luna-med",
   "gpt-5.6-luna-high-fast": "luna-high",
+  "grok-4.7-low-fast": "grok47-low",
   "grok-4.7-medium-fast": "grok47-med",
   "claude-haiku-5-5": "claude-haiku-5-5",
   "claude-sonnet-5-5": "claude-sonnet-5-5",
@@ -127,7 +145,7 @@ export function effortFromReadout(readoutPath, opts = {}) {
   if (EFFORT_MEDIUM_RE.test(base)) return "medium";
   const root = opts.repoRoot;
   if (root) {
-    const full = path.join(root, "docs/demos", readoutPath);
+    const full = path.join(resolveAhePaths(root).readoutsDir, path.basename(readoutPath));
     if (fs.existsSync(full)) {
       const body = fs.readFileSync(full, "utf8");
       if (/model_effort=high/.test(body)) return "high";
@@ -142,16 +160,51 @@ export function effortFromReadout(readoutPath, opts = {}) {
  * @returns {string | null}
  */
 export function configIdFromMasterRow(row) {
+  if (row.harness === "claude") {
+    let config = SLUG_TO_CONFIG[row.slug];
+    if (row.slug === "claude-sonnet-5-5") {
+      config = "claude-sonnet-5-5";
+    }
+    return config ?? null;
+  }
+  if (row.harness === "cursor") {
+    let config = SLUG_TO_CONFIG[row.slug];
+    if (!config) {
+      config = deriveCursorModelConfig(row.slug);
+    }
+    if (!config && row.slug.includes("luna") && row.slug.includes("medium")) {
+      config = "luna-med";
+    }
+    return config || null;
+  }
   let config = SLUG_TO_CONFIG[row.slug];
-  if (!config) {
-    if (row.slug.includes("luna") && row.slug.includes("medium")) config = "luna-med";
-    else if (row.slug.includes("grok")) config = "grok47-med";
-    else return null;
+  return config ?? null;
+}
+
+/**
+ * @param {{ harness: string; slug: string; readout: string }} row
+ * @param {{ repoRoot?: string }} [opts]
+ * @returns {string | null}
+ */
+/**
+ * @param {{ harness: string; slug: string; readout: string }} row
+ * @param {(key: string) => boolean} hasColumn
+ * @param {{ repoRoot?: string }} [opts]
+ * @returns {string | null}
+ */
+export function toolsetKeyFromMasterRowWithColumnCheck(row, hasColumn, opts = {}) {
+  const config = configIdFromMasterRow(row);
+  if (!config) return null;
+  const base = `${row.harness}:${config}`;
+  if (config === COMPOSER_CONFIG_ID) return base;
+  const effort = effortFromReadout(row.readout, opts);
+  if (effort === "medium" || effort === "high") {
+    const keyed = `${base}@${effort}`;
+    if (hasColumn(keyed)) return keyed;
+    return null;
   }
-  if (row.harness === "claude" && row.slug === "claude-sonnet-5-5") {
-    config = "claude-sonnet-5-5";
-  }
-  return config;
+  if (effort) return null;
+  return hasColumn(base) ? base : null;
 }
 
 /**
@@ -160,19 +213,7 @@ export function configIdFromMasterRow(row) {
  * @returns {string | null}
  */
 export function toolsetKeyFromMasterRow(row, opts = {}) {
-  const config = configIdFromMasterRow(row);
-  if (!config) return null;
-  const base = `${row.harness}:${config}`;
-  if (config === COMPOSER_CONFIG_ID) return base;
-  const effort = effortFromReadout(row.readout, opts);
-  if (effort === "medium" || effort === "high") {
-    const keyed = `${base}@${effort}`;
-    if (matrixKeyToColumn.has(keyed)) return keyed;
-    if (matrixKeyToColumn.has(base)) return base;
-    return null;
-  }
-  if (effort) return null;
-  return base;
+  return toolsetKeyFromMasterRowWithColumnCheck(row, (k) => matrixKeyToColumn.has(k), opts);
 }
 
 /**

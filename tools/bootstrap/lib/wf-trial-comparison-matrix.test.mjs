@@ -9,6 +9,7 @@ import {
   MATRIX_COLUMNS,
   renderWfTrialComparisonMatrixCell,
   toolsetKeyFromMasterRow,
+  toolsetKeyFromMasterRowWithColumnCheck,
 } from "./wf-trial-comparison-matrix.mjs";
 import { buildMatrixSection } from "./build-wf-trial-comparison-matrix.mjs";
 
@@ -88,6 +89,17 @@ test("SC-WF-CMX-08 Claude Haiku medium readout maps to @medium key", () => {
   assert.equal(key, "claude:claude-haiku-5-5@medium");
 });
 
+test("SC-WF-CMX-20 Claude Sonnet medium readout maps to sonnet @medium key", () => {
+  const key = toolsetKeyFromMasterRow({
+    harness: "claude",
+    slug: "claude-sonnet-5-5",
+    readout:
+      "trial-readout-PROMPT-WF-01-claudesonnet55medium-1794617190-wf-agentstream-wf-01-claude-claudesonnet55medium.md",
+  });
+  assert.equal(key, "claude:claude-sonnet-5-5@medium");
+  assert.notEqual(key, "claude:claude-sonnet-5-5");
+});
+
 test("SC-WF-CMX-09 Haiku baseline column header uses catalog slug", () => {
   const col = MATRIX_COLUMNS.find((c) => c.key === "claude:claude-haiku-5-5");
   assert.ok(col);
@@ -105,10 +117,58 @@ test("SC-WF-CMX-10 effort headers on tiered models only", () => {
   }
 });
 
-test("SC-WF-CMX-11 nine distinct column headers", () => {
+test("SC-WF-CMX-11 thirteen distinct column headers", () => {
   const headers = MATRIX_COLUMNS.map((c) => c.header);
-  assert.equal(headers.length, 9);
-  assert.equal(new Set(headers).size, 9);
+  assert.equal(headers.length, 13);
+  assert.equal(new Set(headers).size, 13);
+});
+
+test("SC-WF-CMX-22 Sonnet high readout maps to sonnet @high key", () => {
+  const key = toolsetKeyFromMasterRow({
+    harness: "claude",
+    slug: "claude-sonnet-5-5",
+    readout:
+      "trial-readout-PROMPT-WF-10-claudesonnet55high-1794411691-wf-agentstream-wf-10-claude-claudesonnet55high.md",
+  });
+  assert.equal(key, "claude:claude-sonnet-5-5@high");
+  assert.notEqual(key, "claude:claude-sonnet-5-5");
+});
+
+test("SC-WF-CMX-23 Haiku high readout maps to haiku @high key", () => {
+  const key = toolsetKeyFromMasterRow({
+    harness: "claude",
+    slug: "claude-haiku-5-5",
+    readout:
+      "trial-readout-PROMPT-WF-10-claudehaiku55high-1794409094-wf-agentstream-wf-10-claude-claudehaiku55high.md",
+  });
+  assert.equal(key, "claude:claude-haiku-5-5@high");
+});
+
+test("SC-WF-CMX-24 Claude effort=high column headers present", () => {
+  const haiku = MATRIX_COLUMNS.find((c) => c.key === "claude:claude-haiku-5-5@high");
+  const sonnet = MATRIX_COLUMNS.find((c) => c.key === "claude:claude-sonnet-5-5@high");
+  assert.ok(haiku);
+  assert.ok(sonnet);
+  assert.equal(haiku.header, "Claude · `claude-haiku-5-5` effort=high");
+  assert.equal(sonnet.header, "Claude · `claude-sonnet-5-5` effort=high");
+});
+
+test("SC-WF-CMX-26 medium effort does not fall back to baseline when @medium missing", () => {
+  const row = {
+    harness: "claude",
+    slug: "claude-sonnet-5-5",
+    readout:
+      "trial-readout-PROMPT-WF-01-claudesonnet55medium-1794617190-wf-agentstream-wf-01-claude-claudesonnet55medium.md",
+  };
+  const onlyBaseline = (k) => k === "claude:claude-sonnet-5-5";
+  const key = toolsetKeyFromMasterRowWithColumnCheck(row, onlyBaseline);
+  assert.equal(key, null);
+});
+
+test("SC-WF-CMX-21 Sonnet effort=medium column header present", () => {
+  const col = MATRIX_COLUMNS.find((c) => c.key === "claude:claude-sonnet-5-5@medium");
+  assert.ok(col);
+  assert.equal(col.header, "Claude · `claude-sonnet-5-5` effort=medium");
 });
 
 test("SC-WF-CMX-14 columns sorted alphabetically by header", () => {
@@ -150,6 +210,45 @@ test("SC-WF-CMX-15 matrix section ends with repeated header row", () => {
   const header = tableLines[0];
   const footer = tableLines[tableLines.length - 1];
   assert.equal(footer, header);
+});
+
+test("SC-WF-CMX-16 grok47 low slug maps to cursor:grok47-low", () => {
+  const key = toolsetKeyFromMasterRow({
+    harness: "cursor",
+    slug: "grok-4.7-low-fast",
+    readout:
+      "trial-readout-PROMPT-WF-09-grok47low-1794608051-wf-agentstream-wf-09-cursor-grok47low.md",
+  });
+  assert.equal(key, "cursor:grok47-low");
+});
+
+test("SC-WF-CMX-17 grok47 low not mapped to grok47-med", () => {
+  const key = toolsetKeyFromMasterRow({
+    harness: "cursor",
+    slug: "grok-4.7-low-fast",
+    readout:
+      "trial-readout-PROMPT-WF-09-grok47low-1794608051-wf-agentstream-wf-09-cursor-grok47low.md",
+  });
+  assert.notEqual(key, "cursor:grok47-med");
+});
+
+test("SC-WF-CMX-18 grok47 medium slug maps to cursor:grok47-med", () => {
+  const key = toolsetKeyFromMasterRow({
+    harness: "cursor",
+    slug: "grok-4.7-medium-fast",
+    readout:
+      "trial-readout-PROMPT-WF-10-grok47med-1794525072-wf-agentstream-wf-10-cursor-grok47med.md",
+  });
+  assert.equal(key, "cursor:grok47-med");
+});
+
+test("SC-WF-CMX-19 grok47-low header immediately before grok47-med", () => {
+  const headers = MATRIX_COLUMNS.map((c) => c.header);
+  const lowIdx = headers.indexOf("Cursor · `grok47-low` effort=low");
+  const medIdx = headers.indexOf("Cursor · `grok47-med` effort=low");
+  assert.ok(lowIdx >= 0);
+  assert.ok(medIdx >= 0);
+  assert.equal(lowIdx, medIdx - 1);
 });
 
 test("SC-WF-CMX-04 three-line contract", () => {

@@ -1,0 +1,5 @@
+feat(wf-trials): Claude effort tier matrix columns (13)
+
+Add claudeEffortColumnSpecs() for Haiku/Sonnet low/medium/high columns;
+stop medium/high readouts falling back to effort=low. Regenerate comparison
+matrix registry (WF-09/10 @high cells). Working REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS.
