@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-GOAGENT-LIB-MODULE](../requirements/REQ-GOAGENT-LIB-MODULE.yaml) · [REQ-GOAGENT-CLI-CONFIG](../requirements/REQ-GOAGENT-CLI-CONFIG.yaml) · [REQ-GOAGENT-TEXT-SOURCES](../requirements/REQ-GOAGENT-TEXT-SOURCES.yaml) · [REQ-GOAGENT-FEATURESPEC-BATCH](../requirements/REQ-GOAGENT-FEATURESPEC-BATCH.yaml) · [REQ-GOAGENT-YAML-STEP-RENDER](../requirements/REQ-GOAGENT-YAML-STEP-RENDER.yaml) · [REQ-GOAGENT-PIPELINE-CHAIN](../requirements/REQ-GOAGENT-PIPELINE-CHAIN.yaml) · [REQ-GOAGENT-AGENT-EXECUTOR](../requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml) · [REQ-GOAGENT-NON-COMPACT-HTML-FORMAT](../requirements/REQ-GOAGENT-NON-COMPACT-HTML-FORMAT.yaml) · [REQ-GOAGENT-CHECKLIST-CONTROL](../requirements/REQ-GOAGENT-CHECKLIST-CONTROL.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../../mcp-server/packages/agentstream/README.md`](../../mcp-server/packages/agentstream/README.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`harness-platform-taxonomy.md`](harness-platform-taxonomy.md) (sponsor model/harness/platform bridge; agentstream is not a vendor harness) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`../../mcp-server/packages/agentstream/README.md`](../../mcp-server/packages/agentstream/README.md)
 
 ---
 

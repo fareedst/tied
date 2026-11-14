@@ -1,0 +1,6 @@
+ARCH-TIED_HARNESS_PLATFORM_TAXONOMY:
+  ARCH-TIED_HARNESS_PLATFORM_TAXONOMY:
+    layers:
+      - "platform-adjacent governance"
+      - "tied agentstream orchestration"
+      - "vendor agent harness"

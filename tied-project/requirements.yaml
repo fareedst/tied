@@ -2957,6 +2957,7 @@ REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM:
     - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
     - "REQ-HARNESS_EVAL_METERING_CANARY_WORKFLOW"
     - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
     - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
   description: "Normalize Cursor/Claude stream-json and WF orchestrator manifests into harness-neutral eval store."
   detail_file: "requirements/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml"
@@ -3028,6 +3029,7 @@ REQ-TIED_HARNESS_PLATFORM_SEAM:
     related_to:
       - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
       - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
       - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
       - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
     supersedes: []
@@ -3038,6 +3040,53 @@ REQ-TIED_HARNESS_PLATFORM_SEAM:
     implementation:
       - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
     tests: []
+REQ-TIED_HARNESS_PLATFORM_TAXONOMY:
+  category: "Documentation"
+  description: "Canonical sponsor ↔ TIED vocabulary for model, vendor agent harness, vendor platform, tied agentstream orchestration, platform-adjacent governance, and WF trial matrix dimensions; xlate PRELOAD and optional contract test."
+  detail_file: "requirements/REQ-TIED_HARNESS_PLATFORM_TAXONOMY.yaml"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-14"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-14"
+      reason: "Slices A–D (D1) complete; contract tests green"
+  name: "Harness platform sponsor taxonomy"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_XLATE_SKILL"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Bundled xlate skill PRELOADs harness-platform-taxonomy for harness/model/platform intent"
+      id: "SC-HPT-XLATE"
+      metric: "T-HPT-XLATE-01"
+    - criterion: "REQ-TIED_HARNESS_PLATFORM_SEAM and HMEP REQ reference taxonomy glossary; tied_validate_consistency passes"
+      id: "SC-HPT-RELATE"
+      metric: "tied_validate_consistency"
+    - criterion: "routing.md row 2c links harness-platform-taxonomy with benchmark and xlate keywords"
+      id: "SC-HPT-ROUTE"
+      metric: "T-HPT-ROUTE-01"
+    - criterion: "tied-project/vocab/harness-platform-taxonomy.md documents sponsor bridge, three-layer placement, and WF matrix dimensions"
+      id: "SC-HPT-VOCAB"
+      metric: "vocab-harness-platform-taxonomy-contract.test.mjs T-HPT-GLOSS-01"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_PLATFORM_TAXONOMY"
+    code_annotations: []
+    implementation:
+      - "IMPL-TIED_HARNESS_PLATFORM_TAXONOMY"
+    tests:
+      - "tools/bootstrap/lib/vocab-harness-platform-taxonomy-contract.test.mjs"
+  validation_criteria:
+    - coverage: "vocab and doc contract"
+      method: "node --test tools/bootstrap/lib/vocab-harness-platform-taxonomy-contract.test.mjs"
 REQ-TIED_HARNESS_TRACE_LEARNING_PILOT:
   category: "Methodology"
   description: "Loop 3 compose: HTOL learning experiment charter, templates, store dogfood enrollment, and optional tied_feedback_pilot_run evidence for sponsor-run effectiveness pilots with explicit stop criteria and not_measured outcomes."

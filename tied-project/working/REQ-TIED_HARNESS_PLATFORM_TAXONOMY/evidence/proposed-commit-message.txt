@@ -1,0 +1,15 @@
+docs(vocab): harness platform sponsor taxonomy for agents
+
+REQ-TIED_HARNESS_PLATFORM_TAXONOMY bridge for model, vendor harness,
+tied agentstream orchestration, and platform-adjacent TIED governance.
+Glossary harness-platform-taxonomy.md, xlate PRELOAD, Traefik cross-link,
+HPS/HMEP related_to, bootstrap contract test (4/4).
+
+REQ-TIED_HARNESS_PLATFORM_TAXONOMY
+ARCH-TIED_HARNESS_PLATFORM_TAXONOMY
+IMPL-TIED_HARNESS_PLATFORM_TAXONOMY
+
+Completion signals (close-out hpt-close-out-20261114-r1):
+- Machine: pass — contract tests 4/4 green
+- Process: partial — minimal depth; no integrated inquiry
+- Adherence: N/A — docs/vocab only

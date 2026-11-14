@@ -2809,6 +2809,51 @@ IMPL-TIED_HARNESS_PLATFORM_SEAM:
     requirements:
       - "REQ-TIED_HARNESS_PLATFORM_SEAM"
     tests: []
+IMPL-TIED_HARNESS_PLATFORM_TAXONOMY:
+  code_locations:
+    files:
+      - description: "Canonical sponsor bridge"
+        path: "tied-project/vocab/harness-platform-taxonomy.md"
+      - description: "Harness/platform PRELOAD step"
+        path: "tools/bundled-xlate-skill/SKILL.md"
+      - description: "SC contract tests"
+        path: "tools/bootstrap/lib/vocab-harness-platform-taxonomy-contract.test.mjs"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_HARNESS_PLATFORM_TAXONOMY"
+    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+  decision: "Deliver glossary, routing, xlate skill step, operator cross-links, bootstrap contract test; update HPS/HMEP related_to."
+  detail_file: "implementation-decisions/IMPL-TIED_HARNESS_PLATFORM_TAXONOMY.yaml"
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_HARNESS_PLATFORM_TAXONOMY-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Slice B discoverability"
+      - "Slice D contract test"
+    summary: "Docs and vocab per working PLAN slices A–D (D1)."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-14"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-14"
+      reason: "Initial creation"
+  name: "Harness platform taxonomy implementation"
+  related_decisions:
+    depends_on:
+      - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
+    see_also:
+      - "IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_PLATFORM_TAXONOMY"
+    code_annotations: []
+    requirements:
+      - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+    tests:
+      - "tools/bootstrap/lib/vocab-harness-platform-taxonomy-contract.test.mjs"
 IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT:
   cross_references:
     - "ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT"

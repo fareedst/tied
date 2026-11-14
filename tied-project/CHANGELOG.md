@@ -7,13 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Harness platform sponsor taxonomy ([REQ-TIED_HARNESS_PLATFORM_TAXONOMY], [ARCH-TIED_HARNESS_PLATFORM_TAXONOMY], [IMPL-TIED_HARNESS_PLATFORM_TAXONOMY])** — Canonical [`harness-platform-taxonomy.md`](vocab/harness-platform-taxonomy.md) for model vs vendor harness vs `tied agentstream`; xlate PRELOAD; bootstrap contract test; LEAP links to HPS/HMEP. Plan: [PLAN.md](working/REQ-TIED_HARNESS_PLATFORM_TAXONOMY/PLAN.md).
+
 ### Changed
+
+- **WF comparison matrix `grok47-low` column (working [REQ-WF_TRIAL_MATRIX_GROK47_LOW_COLUMN](tied-project/working/REQ-WF_TRIAL_MATRIX_GROK47_LOW_COLUMN/PLAN.md))** — **10** toolset columns; `grok-4.7-low-fast` pivots to `cursor:grok47-low`; WF-09 @ 1794608051 in correct cell; SC-WF-CMX-16…19.
 
 - **WF trial comparison matrix layout (working [REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT](tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT/PLAN.md))** — Alphabetical toolset column order by header; repeated header row at bottom of **Latest-run comparison matrix**; SC-WF-CMX-14/15. Plan build 2026-11-13.
 
 - **WF trial comparison matrix effort headers (working [REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS](tied-project/working/REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/PLAN.md))** — **9** columns: tiered model headers show `effort=low|medium|high`; `composer-2.5` omits `effort=`; `composer25medium`/`high` readouts pivot to `cursor:composer-2.5`. Module [`wf-trial-comparison-matrix.mjs`](tools/bootstrap/lib/wf-trial-comparison-matrix.mjs); registry regen.
 
 ### Added
+
+- **PROMPT-WF-01…08 facilitator readouts (Grok 4.7 low + Sonnet medium @ 1794615214…1794619211)** — Parallel **4.2.2** wave: Grok **WF-01/02/04** complete; Grok **WF-03** split (`invalid_slug`); Sonnet medium **WF-01…03/05/08** complete; Sonnet **WF-04/06/07** split (green tests, close_out **not_run**). Catalog + [demos index](docs/demos/README.md); registry via `@publish-wf-trial-summaries`.
+
+- **PROMPT-WF-05…08 facilitator readouts (Cursor Grok 4.7 low @ 1794610718…1794613269)** — Chained **4.2.2** batch after WF-09 split: WF-05…07 **workflow complete** (**7/7**, **3/3**, **6/6** tests; close_out **allowed**); WF-08 complete on **2/2** tests. Catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md) via `@record-wf-trial`.
+
+- **PROMPT-WF-09 facilitator readout (Cursor Grok 4.7 low @ 1794608051)** — **split signal** — orchestrator `exit_code: 0`; **4/4** tests uncommitted; close_out **allowed: false** (`invalid_slug` slim tracker). [Readout](docs/demos/trial-readout-PROMPT-WF-09-grok47low-1794608051-wf-agentstream-wf-09-cursor-grok47low.md).
 
 - **PROMPT-WF-09/10 facilitator readouts (Cursor Composer 2.5 medium @ 1794606142, 1794606843)** — **8/8** and **18/18** tests; close_out **allowed**; catalog + registry via `@record-wf-trial`.
 

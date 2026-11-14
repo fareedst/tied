@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Harness platform sponsor taxonomy ([REQ-TIED_HARNESS_PLATFORM_TAXONOMY])** — Sponsor ↔ TIED vocabulary for benchmarking and `/xlate`; see [tied-project CHANGELOG](tied-project/CHANGELOG.md).
+
+- **PROMPT-WF-09 facilitator readout (Cursor Grok 4.7 low @ 1794608051)** — **split signal** — **4/4** tests uncommitted; close_out **blocked**. [Readout](docs/demos/trial-readout-PROMPT-WF-09-grok47low-1794608051-wf-agentstream-wf-09-cursor-grok47low.md).
+
 - **PROMPT-WF-01…03 facilitator readouts (Claude Opus 5.5 low @ 1794587975 / 1794588368 / 1794588694)** — **4.2.2** via chained `workflow_trial_agentstream wf-01..03`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md). All **workflow complete** — orchestrator `exit_code: 0`; **`00faf0f`** / **`dc03a13`** / **`ac8a871`**; **8/8**, **11/11**, **12/12** tests; close_out **allowed**. [WF-01](docs/demos/trial-readout-PROMPT-WF-01-claudeopus55low-1794587975-wf-agentstream-wf-01-claude-claudeopus55low.md) · [WF-02](docs/demos/trial-readout-PROMPT-WF-02-claudeopus55low-1794588368-wf-agentstream-wf-02-claude-claudeopus55low.md) · [WF-03](docs/demos/trial-readout-PROMPT-WF-03-claudeopus55low-1794588694-wf-agentstream-wf-03-claude-claudeopus55low.md).
 
 - **PROMPT-WF-09 facilitator readout (Claude Opus 5.5 low @ 1794586911)** — **4.2.2** via `workflow_trial_agentstream wf-09`; catalog + [runs registry](docs/demos/traditional-workflow-trial-runs-registry.md) + [demos index](docs/demos/README.md). **Workflow complete** — orchestrator `exit_code: 0`; **`a6b1ead`**; **8/8** tests; close_out **allowed**; HMEP stream-json import (list-price null for Opus slug). [Readout](docs/demos/trial-readout-PROMPT-WF-09-claudeopus55low-1794586911-wf-agentstream-wf-09-claude-claudeopus55low.md).

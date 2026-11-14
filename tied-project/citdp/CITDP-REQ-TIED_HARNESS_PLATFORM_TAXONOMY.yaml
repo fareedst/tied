@@ -1,0 +1,17 @@
+# CITDP — REQ-TIED_HARNESS_PLATFORM_TAXONOMY
+request_token: REQ-TIED_HARNESS_PLATFORM_TAXONOMY
+status: closed
+depth_tier: minimal
+gate_policy: advisory
+change_summary: |
+  Sponsor harness/platform/model taxonomy glossary, xlate PRELOAD, contract tests,
+  REQ/ARCH/IMPL traceability; LEAP link to HPS/HMEP.
+success_criteria:
+  - SC-HPT-VOCAB
+  - SC-HPT-ROUTE
+  - SC-HPT-XLATE
+  - SC-HPT-RELATE
+close_out:
+  allowed: true
+  run_id: hpt-close-out-20261114-r1
+  notes: Minimal depth; envelope partial; contract tests 4/4 green

@@ -1,0 +1,12 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "request_token": "REQ-TIED_HARNESS_PLATFORM_TAXONOMY",
+  "commands": [
+    {
+      "id": "T-HPT-contract",
+      "command": "node --test tools/bootstrap/lib/vocab-harness-platform-taxonomy-contract.test.mjs",
+      "exit_code": 0,
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd"
+    }
+  ]
+}

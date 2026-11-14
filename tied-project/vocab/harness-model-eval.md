@@ -2,9 +2,9 @@
 
 **Scope:** `@tied/harness-eval`, stream-json and manifest ingestion, configuration fingerprints, HMEP store layout, and M1 proof boundaries for token metrics vs workflow trial readouts.
 
-**Traceability:** [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM](../requirements/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml) · [ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM](../architecture-decisions/ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml) · [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM](../implementation-decisions/IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml)
+**Traceability:** [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM](../requirements/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml) · [REQ-TIED_HARNESS_PLATFORM_TAXONOMY](../requirements/REQ-TIED_HARNESS_PLATFORM_TAXONOMY.yaml) (sponsor harness vs model labels; HMEP uses **harness profile** dimension) · [ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM](../architecture-decisions/ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml) · [IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM](../implementation-decisions/IMPL-TIED_HARNESS_MODEL_EVAL_PLATFORM.yaml)
 
-**See also:** [`routing.md`](routing.md) (row **2c**) · [`domain-references.md`](domain-references.md) · [`harness-metering-canary.md`](harness-metering-canary.md) · [`agentstream.md`](agentstream.md) · [`quality-assurance.md`](quality-assurance.md) · [PLAN.md](../working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md)
+**See also:** [`routing.md`](routing.md) (row **2c**) · [`domain-references.md`](domain-references.md) · [`harness-platform-taxonomy.md`](harness-platform-taxonomy.md) · [`harness-metering-canary.md`](harness-metering-canary.md) · [`agentstream.md`](agentstream.md) · [`quality-assurance.md`](quality-assurance.md) · [PLAN.md](../working/REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM/PLAN.md)
 
 ---
 

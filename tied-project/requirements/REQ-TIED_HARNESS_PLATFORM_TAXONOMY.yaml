@@ -1,0 +1,6 @@
+REQ-TIED_HARNESS_PLATFORM_TAXONOMY:
+  REQ-TIED_HARNESS_PLATFORM_TAXONOMY:
+    acceptance_criteria:
+      - "Glossary is sole sponsor bridge for model/harness/platform vs tied agentstream"
+      - "No agentstream default behavior change"
+    notes: "LEAP extension of REQ-TIED_HARNESS_PLATFORM_SEAM vocabulary seam."

@@ -2223,6 +2223,48 @@ ARCH-TIED_HARNESS_PLATFORM_SEAM:
     requirements:
       - "REQ-TIED_HARNESS_PLATFORM_SEAM"
     tests: []
+ARCH-TIED_HARNESS_PLATFORM_TAXONOMY:
+  cross_references:
+    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+  decision: "Place sponsor benchmarking vocabulary in tied-project/vocab/harness-platform-taxonomy.md; route via routing row 2c; compose with agentstream and HMEP glossaries without conflating vendor harness with tied agentstream or TIED governance."
+  detail_file: "architecture-decisions/ARCH-TIED_HARNESS_PLATFORM_TAXONOMY.yaml"
+  implementation_approach:
+    details:
+      - "HMEP fingerprint dimensions cross-ref"
+      - "Traefik comparison executive link"
+      - "xlate skill harness/platform PRELOAD step"
+    summary: "Vocab-first bridge with doc cross-links and contract test."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-14"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-14"
+      reason: "Initial creation"
+  name: "Harness platform taxonomy architecture"
+  rationale:
+    benefits:
+      - "Shared RESOLVE for xlate and WF facilitators"
+    problems_solved:
+      - "Conflating tied agentstream with Cursor/Claude harness"
+      - "Missing WF trial orchestration dimension in benchmarks"
+    why: "Sponsors use inconsistent harness/platform labels; a single PRELOAD target prevents matrix misclassification."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    informs: []
+    see_also:
+      - "ARCH-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    supersedes: []
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-TIED_HARNESS_PLATFORM_TAXONOMY"
+    requirements:
+      - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+    tests: []
 ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT:
   cross_references:
     - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"

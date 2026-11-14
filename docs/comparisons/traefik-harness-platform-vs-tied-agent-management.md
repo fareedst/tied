@@ -21,6 +21,8 @@ TIED’s center of gravity is different and complementary. TIED optimizes **inte
 
 **Compose-don’t-replace:** Tune orchestration, context, subagent delegation, and harness-native tracing in the layer where latency and task semantics live; keep **gate authority**, **project YAML writes**, **token traceability**, and **sponsor agency** on the TIED/MCP/checklist plane. Do not collapse “make the agent faster” with “decide what shipped is allowed to mean.”
 
+- **Sponsor vocabulary bridge:** Benchmarking and `/xlate` RESOLVE for **model vs vendor harness vs platform** and **`tied agentstream`** placement use the canonical glossary [harness-platform-taxonomy.md](../../tied-project/vocab/harness-platform-taxonomy.md) ([REQ-TIED_HARNESS_PLATFORM_TAXONOMY](../../tied-project/requirements/REQ-TIED_HARNESS_PLATFORM_TAXONOMY.yaml)); HMEP dimensions remain in [harness-model-eval.md](../../tied-project/vocab/harness-model-eval.md).
+
 ---
 
 ## Source summary (Traefik article claims only)

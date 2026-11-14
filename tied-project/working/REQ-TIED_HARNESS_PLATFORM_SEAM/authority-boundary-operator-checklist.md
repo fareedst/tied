@@ -16,4 +16,4 @@
 | | Agentstream batch: opt-in DAE/Jev middleware only. | **`sub-close-out-evidence-sync`**, envelope validate, adherence reconcile; committed rationale under `tied-project/working/`. |
 | | — | Do not claim merge/ship from chat without gate receipts. |
 
-**Reference:** [Traefik harness/platform × TIED](../../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md) · [PLAN.md](PLAN.md)
+**Reference:** [Traefik harness/platform × TIED](../../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md) · [harness-platform-taxonomy.md](../../vocab/harness-platform-taxonomy.md) (sponsor model/harness/platform bridge) · [PLAN.md](PLAN.md)

@@ -1148,6 +1148,19 @@ ARCH-TIED_HARNESS_PLATFORM_SEAM:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_HARNESS_PLATFORM_TAXONOMY:
+  cross_references:
+    - "IMPL-TIED_HARNESS_PLATFORM_TAXONOMY"
+    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+  description: "Vocab-first sponsor harness/platform layering"
+  detail_file: "architecture-decisions/ARCH-TIED_HARNESS_PLATFORM_TAXONOMY.yaml"
+  metadata:
+    last_updated: "2026-11-14"
+    registered: "2026-11-14"
+  name: "Harness platform taxonomy architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT:
   cross_references:
     - "IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT"
@@ -3113,6 +3126,19 @@ IMPL-TIED_HARNESS_PLATFORM_SEAM:
   name: "Harness–platform seam implementation"
   source_index: "implementation-decisions.yaml"
   status: "Planned"
+  type: "IMPL"
+IMPL-TIED_HARNESS_PLATFORM_TAXONOMY:
+  cross_references:
+    - "ARCH-TIED_HARNESS_PLATFORM_TAXONOMY"
+    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+  description: "Glossary, xlate skill, contract test"
+  detail_file: "implementation-decisions/IMPL-TIED_HARNESS_PLATFORM_TAXONOMY.yaml"
+  metadata:
+    last_updated: "2026-11-14"
+    registered: "2026-11-14"
+  name: "Harness platform taxonomy implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
   type: "IMPL"
 IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT:
   cross_references:
@@ -5245,6 +5271,19 @@ REQ-TIED_HARNESS_PLATFORM_SEAM:
   name: "Harness–platform authority seam"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_HARNESS_PLATFORM_TAXONOMY:
+  cross_references:
+    - "ARCH-TIED_HARNESS_PLATFORM_TAXONOMY"
+    - "IMPL-TIED_HARNESS_PLATFORM_TAXONOMY"
+  description: "Sponsor bridge glossary for model, vendor harness, platform, and agentstream placement"
+  detail_file: "requirements/REQ-TIED_HARNESS_PLATFORM_TAXONOMY.yaml"
+  metadata:
+    last_updated: "2026-11-14"
+    registered: "2026-11-14"
+  name: "Harness platform sponsor taxonomy"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_HARNESS_TRACE_LEARNING_PILOT:
   cross_references:
