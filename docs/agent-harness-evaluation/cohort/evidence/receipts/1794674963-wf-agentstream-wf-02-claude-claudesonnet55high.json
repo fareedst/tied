@@ -1,0 +1,64 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "validator_version": "1.2.0",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794674963-wf-agentstream-wf-02-claude-claudesonnet55high",
+  "layers": {
+    "atoms": {
+      "vocab_preferred_terms": 0,
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 1,
+      "corpus_graph_nodes": 3,
+      "corpus_graph_edges": 10
+    },
+    "operational_intent": {
+      "sidecar_count": 1,
+      "gross_lines": 153,
+      "template_overlap_lines": 15,
+      "applied_lines": 138,
+      "gross_utf8_bytes": 7458,
+      "template_overlap_utf8_bytes": 186,
+      "applied_utf8_bytes": 7272,
+      "procedure_count": 7,
+      "parse_node_count": 54
+    },
+    "proof_facets": {
+      "unit_tests": 55,
+      "composition_tests": 11,
+      "e2e_tests": 10,
+      "binding_inventory_tests": 0,
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 55,
+        "composition.wiring": 11,
+        "e2e.ui": 10
+      },
+      "composition_inferred_cases": 9
+    }
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 23,
+    "operational_intent_utf8_per_atom": 1212,
+    "proof_facets_per_atom": 12.666666666666666,
+    "tests_per_procedure": 10.857142857142858
+  },
+  "hashes": {
+    "operational_intent_hash": "54958df5dcca6044c98e396c3a9fc69f2b887e79e38ceefd4be11e2c1128e9aa",
+    "corpus_graph_content_hash": "381fecafc8fe4e2e718bf41ff9758cdf763c21f8881a3b7e0678b161bd8e949c"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 889
+  },
+  "diagnostics": [],
+  "proof_inference_diagnostics": [
+    {
+      "path": "src/pipeline.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    }
+  ]
+}

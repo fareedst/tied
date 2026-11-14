@@ -4,7 +4,7 @@
 **Track:** `@add-feature` → `@refine-plan` → **`@build-plan`**  
 **Parent:** [REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS](../REQ-WF_TRIAL_MATRIX_COLUMN_EFFORT_HEADERS/PLAN.md) · [REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT](../REQ-WF_TRIAL_MATRIX_COLUMN_LAYOUT/PLAN.md) · [REQ-WF_TRIAL_MATRIX_GROK47_LOW_COLUMN](../REQ-WF_TRIAL_MATRIX_GROK47_LOW_COLUMN/PLAN.md) · [PLAN-WF-TRIAL-COMPARISON-MATRIX](../PLAN-WF-TRIAL-COMPARISON-MATRIX/PLAN.md)  
 **Trigger:** Sponsor: Sonnet 5.5 **high** column missing from **Latest-run comparison matrix**; Haiku/Sonnet **medium**/**high** readouts mis-bucketed under **`effort=low`** when manifest lacks `@medium`/`@high` keys (fallback in `toolsetKeyFromMasterRow`)  
-**plan_phase:** `post-build`  
+**plan_phase:** `closed`  
 **profile_depth:** `minimal` · **gate_policy:** `facilitator_doc_only` · **depth_tier:** `minimal`
 
 ---

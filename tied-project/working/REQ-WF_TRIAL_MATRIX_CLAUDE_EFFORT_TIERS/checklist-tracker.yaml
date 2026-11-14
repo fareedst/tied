@@ -52,7 +52,14 @@ steps:
       evidence_refs:
         - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/build-plan-verification-evidence.md"
       status: "completed"
-  - disposition: "pending"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/traceable-commit-evidence.md"
     slug: "traceable-commit"
     tracking:
-      status: "pending"
+      evidence_refs:
+        - "tied-project/working/REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS/evidence/traceable-commit-evidence.md"
+      status: "completed"
+  close-out:
+    notes: "5afe7ddf traceable commit 2026-11-14; post-close-out handoff 2026-11-14 (Sonnet high WF-01…03)"
+    status: "done"

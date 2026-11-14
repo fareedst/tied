@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-WF-01…03 facilitator readouts (Claude Sonnet 5.5 `high` @ 1794673200…1794675875)** — **4.2.2** wave filling Sonnet `@high` matrix cells: WF-01/02 **workflow complete** (**115/115**, **83/83** tests; close_out **allowed**); WF-03 **split signal** (**25/25** tests; close_out **allowed: false**). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.
+
 - **Agent harness evaluation docs ([REQ-AGENT_HARNESS_EVALUATION_DOCS], [ARCH-AGENT_HARNESS_EVALUATION_DOCS], [IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS])** — Relocate WF/HMEP facilitator markdown to [`docs/agent-harness-evaluation/`](../docs/agent-harness-evaluation/README.md); `agent-harness-eval-docs-paths.mjs`; demos stubs; `agentstream.md` AHE config links + `vocab-agentstream-ahe-config-links.contract.test.mjs`. Plan: [PLAN.md](working/REQ-AGENT_HARNESS_EVALUATION_DOCS/PLAN.md).
 
 - **Harness platform sponsor taxonomy ([REQ-TIED_HARNESS_PLATFORM_TAXONOMY], [ARCH-TIED_HARNESS_PLATFORM_TAXONOMY], [IMPL-TIED_HARNESS_PLATFORM_TAXONOMY])** — Canonical [`harness-platform-taxonomy.md`](vocab/harness-platform-taxonomy.md) for model vs vendor harness vs `tied agentstream`; xlate PRELOAD; bootstrap contract test; LEAP links to HPS/HMEP. Plan: [PLAN.md](working/REQ-TIED_HARNESS_PLATFORM_TAXONOMY/PLAN.md).
