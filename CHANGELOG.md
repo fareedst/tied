@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Agent harness evaluation docs ([REQ-AGENT_HARNESS_EVALUATION_DOCS])** — Facilitator corpus under [`docs/agent-harness-evaluation/`](docs/agent-harness-evaluation/README.md); path module + vocab contract tests; see [tied-project CHANGELOG](tied-project/CHANGELOG.md).
+
 - **Harness platform sponsor taxonomy ([REQ-TIED_HARNESS_PLATFORM_TAXONOMY])** — Sponsor ↔ TIED vocabulary for benchmarking and `/xlate`; see [tied-project CHANGELOG](tied-project/CHANGELOG.md).
 
 - **PROMPT-WF-09 facilitator readout (Cursor Grok 4.7 low @ 1794608051)** — **split signal** — **4/4** tests uncommitted; close_out **blocked**. [Readout](docs/demos/trial-readout-PROMPT-WF-09-grok47low-1794608051-wf-agentstream-wf-09-cursor-grok47low.md).

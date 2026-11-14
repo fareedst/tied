@@ -17,7 +17,7 @@
 | **Agent harness** | Runtime orchestration, tools, context, loop | **vendor agent harness** (Layer 1) · **`harness profile`** (operator flag) | TIED overloads **harness** for `cursor` \| `claude` selection — not “the whole stack” |
 | **Agentic coding platform** / **coding agent platform** | Product + IDE/CLI surface | **vendor platform** (informal) | Cursor app, Anthropic Claude Code product |
 | **Coding CLI** | CLI entry to a coding agent | Part of **vendor agent harness** | e.g. `cursor agent`, `claude` subprocess |
-| **Model** | Weights/API behind the agent | **`MODEL_SLUG`**, **`MODEL_CONFIG`**, **model effort** | Separate trial matrix dimension; catalog `docs/demos/wf-trial-model-catalog.yaml` |
+| **Model** | Weights/API behind the agent | **`MODEL_SLUG`**, **`MODEL_CONFIG`**, **model effort** | Separate trial matrix dimension; catalog `docs/agent-harness-evaluation/config/wf-trial-model-catalog.yaml` |
 | **Model configuration** | Slug + effort + compose family | **`MODEL_CONFIG`**, **`wf-trial-model-spec`**, **`MODEL_EFFORT`** | HMEP **configuration fingerprint** includes harness + model + effort |
 
 ---
@@ -57,7 +57,7 @@ workflow_trial_agentstream  →  tied agentstream  →  --harness cursor|claude 
 
 ## Trial matrix dimensions (benchmarking)
 
-Fair comparison: one disposable client per **(PROMPT-WF-NN × model configuration × harness profile)** ([`catalog-traditional-workflow-trial-prompts.md`](../../docs/demos/catalog-traditional-workflow-trial-prompts.md)).
+Fair comparison: one disposable client per **(PROMPT-WF-NN × model configuration × harness profile)** ([`catalog-traditional-workflow-trial-prompts.md`](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md)). Facilitator corpus index: [`docs/agent-harness-evaluation/README.md`](../../docs/agent-harness-evaluation/README.md).
 
 | Dimension | Env / flag | Example disposable tag segment |
 |-----------|------------|--------------------------------|

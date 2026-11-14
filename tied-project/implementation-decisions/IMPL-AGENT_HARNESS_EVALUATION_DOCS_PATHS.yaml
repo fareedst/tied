@@ -1,0 +1,3 @@
+IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS:
+  implementation_approach: "resolveAhePaths(storeRoot) + cohort comparison-table parent write"
+  summary: "tools/bootstrap/lib/agent-harness-eval-docs-paths.mjs centralizes AHE_* paths; wf-trial and project-size consumers."

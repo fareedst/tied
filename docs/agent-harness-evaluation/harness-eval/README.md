@@ -23,7 +23,7 @@ harness-eval events import --wf-client "/path/to/disposable-client" \
 harness-eval diagnostics --store "$HARNESS_EVAL_STORE"
 harness-eval query summary --store "$HARNESS_EVAL_STORE"
 harness-eval report cohort --store "$HARNESS_EVAL_STORE"
-harness-eval verify trial --trial-id "<id>" --suite docs/demos/harness-eval/suites/engineering-suite-v1.yaml --store "$HARNESS_EVAL_STORE"
+harness-eval verify trial --trial-id "<id>" --suite docs/agent-harness-evaluation/harness-eval/suites/engineering-suite-v1.yaml --store "$HARNESS_EVAL_STORE"
 ```
 
 ### Billing reconciliation (M3, opt-in)
@@ -31,7 +31,7 @@ harness-eval verify trial --trial-id "<id>" --suite docs/demos/harness-eval/suit
 Provider invoice or export data is **not** fetched automatically. Import a ledger YAML explicitly:
 
 ```bash
-harness-eval billing import --ledger docs/demos/harness-eval/billing/sample-ledger-v1.yaml --store "$HARNESS_EVAL_STORE"
+harness-eval billing import --ledger docs/agent-harness-evaluation/harness-eval/billing/sample-ledger-v1.yaml --store "$HARNESS_EVAL_STORE"
 harness-eval report reconcile --store "$HARNESS_EVAL_STORE"
 ```
 
@@ -42,10 +42,10 @@ Sample ledger: [`billing/sample-ledger-v1.yaml`](billing/sample-ledger-v1.yaml).
 Committed baselines under [`baselines/`](baselines/) compare harness metrics (tokens, wall clock, nullable costs) — not WF facilitator grades. Replay manifests under [`replay/`](replay/) batch-import disposable clients via `importWfClient` (idempotent per path).
 
 ```bash
-harness-eval regression baseline validate docs/demos/harness-eval/baselines/engineering-suite-v1-baseline.yaml
-harness-eval regression compare --baseline docs/demos/harness-eval/baselines/engineering-suite-v1-baseline.yaml \
+harness-eval regression baseline validate docs/agent-harness-evaluation/harness-eval/baselines/engineering-suite-v1-baseline.yaml
+harness-eval regression compare --baseline docs/agent-harness-evaluation/harness-eval/baselines/engineering-suite-v1-baseline.yaml \
   --trial-id "<id>" --store "$HARNESS_EVAL_STORE"
-harness-eval replay batch --manifest docs/demos/harness-eval/replay/sample-replay-batch-v1.yaml --store "$HARNESS_EVAL_STORE"
+harness-eval replay batch --manifest docs/agent-harness-evaluation/harness-eval/replay/sample-replay-batch-v1.yaml --store "$HARNESS_EVAL_STORE"
 ```
 
 Map [traditional-workflow-trial-runs-registry](../traditional-workflow-trial-runs-registry.md) **Client ID** → absolute `client_root` in replay YAML manually (or a follow-on LEAP script); M4 does not parse the registry markdown.

@@ -1,0 +1,48 @@
+CITDP-REQ-AGENT_HARNESS_EVALUATION_DOCS:
+  change_definition:
+    current_behavior: "Facilitator WF readouts, HMEP fixtures, and trial config YAML live under docs/demos/ mixed with adopters; tooling hardcodes docs/demos paths."
+    desired_behavior: "Committed docs/agent-harness-evaluation/ corpus; path module AHE_*; demos slim stubs; vocab links to AHE config."
+    success_criteria:
+      - "SC-AHE-PATH-01"
+      - "SC-AHE-MV-01"
+      - "SC-AHE-TOOL-01"
+      - "SC-AHE-VOCAB-01"
+      - "SC-AHE-VOCAB-02"
+      - "SC-AHE-DEMOS-01"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/agent-harness-eval-docs-paths.contract.test.mjs"
+      - "node --test tools/bootstrap/lib/vocab-agentstream-ahe-config-links.contract.test.mjs"
+      - "node --test tools/bootstrap/lib/vocab-harness-platform-taxonomy-contract.test.mjs"
+      - "ruby scripts/validate_vocab_index.rb ."
+    proof_boundaries:
+      - "path and link graph only"
+  record_identity:
+    change_request_id: "REQ-AGENT_HARNESS_EVALUATION_DOCS"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-14"
+    title: "Agent harness evaluation docs corpus relocation"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Stub redirects in docs/demos/ rot while bootstrap still reads old paths"
+        - "validate_vocab passes but operator skills still cite docs/demos trial-readout glob"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "agent-harness-eval-docs-paths.contract.test.mjs T-AHE-MV-01 directories on disk"
+        - "vocab-agentstream-ahe-config-links.contract.test.mjs resolves markdown yaml links"
+        - "wf-trial-summaries-publish.mjs --check uses AHE readout dir"
+      evidence_references:
+        - "tools/bootstrap/lib/agent-harness-eval-docs-paths.mjs"
+        - "tools/bootstrap/lib/agent-harness-eval-docs-paths.contract.test.mjs"
+        - "tied-project/vocab/agentstream.md"
+      falsification_questions:
+        - "Does rg docs/demos in tools/bootstrap/lib still match facilitator generators after wire-up?"
+        - "Does validate_vocab fail when agentstream.md reverts demos links?"
+      gate_policy: "advisory"
+  related_requirements:
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+    - "REQ-WF_TRIAL_SUMMARIES_PUBLISH"

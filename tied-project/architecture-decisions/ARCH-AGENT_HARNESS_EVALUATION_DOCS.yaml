@@ -1,0 +1,3 @@
+ARCH-AGENT_HARNESS_EVALUATION_DOCS:
+  decision: "Layer 1–2 benchmarking markdown under docs/; machine receipts under cohort/evidence/"
+  summary: "Split docs/demos exercise catalogs from docs/agent-harness-evaluation facilitator matrix evidence; single path module."

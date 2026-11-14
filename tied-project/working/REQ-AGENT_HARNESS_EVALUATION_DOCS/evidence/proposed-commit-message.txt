@@ -1,0 +1,11 @@
+feat(docs): agent harness evaluation corpus + path module
+
+Relocate facilitator WF readouts, catalogs, HMEP fixtures, and trial
+config YAML to docs/agent-harness-evaluation/ with AHE_* path constants,
+demos stubs, vocab link fixes, and T-AHE-VOCAB-02 contract test.
+
+[REQ-AGENT_HARNESS_EVALUATION_DOCS] [ARCH-AGENT_HARNESS_EVALUATION_DOCS]
+[IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS]
+
+Completion: close_out allowed (minimal, advisory); envelope 0 blocking gaps;
+validate_vocab + AHE contract tests green. Feedback: N/A.

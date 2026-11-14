@@ -1,0 +1,7 @@
+REQ-AGENT_HARNESS_EVALUATION_DOCS:
+  acceptance_criteria:
+    - "SC-AHE-MV-01 corpus under docs/agent-harness-evaluation"
+    - "SC-AHE-PATH-01 path module and contract test"
+    - "SC-AHE-TOOL-01 publish/regen uses new paths"
+    - "SC-AHE-VOCAB-01 taxonomy links updated"
+  summary: "Committed docs/agent-harness-evaluation/ for facilitator workflow-trial and HMEP benchmarking; path module for regen tooling."
