@@ -1,0 +1,51 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ construction and option validation
+  ✔ constructs with valid options and starts full (0.325ms)
+  ✔ rejects ratePerSecond = 0 with RangeError (0.137167ms)
+  ✔ rejects ratePerSecond = -1 with RangeError (0.036542ms)
+  ✔ rejects ratePerSecond = NaN with RangeError (0.0355ms)
+  ✔ rejects ratePerSecond = Infinity with RangeError (0.034542ms)
+  ✔ rejects burst = 0 with RangeError (0.038166ms)
+  ✔ rejects burst = 0.5 with RangeError (0.039208ms)
+  ✔ rejects burst = 1.5 with RangeError (0.032125ms)
+  ✔ rejects burst = -2 with RangeError (0.038375ms)
+  ✔ rejects burst = NaN with RangeError (0.052041ms)
+  ✔ rejects burst = Infinity with RangeError (0.037917ms)
+  ✔ defaults to a monotonic clock when now is omitted (0.29125ms)
+✔ construction and option validation (1.580458ms)
+▶ lazy refill
+  ✔ adds one token after 1/rate seconds (0.317292ms)
+  ✔ sums fractional accrual across several small advances (0.087667ms)
+  ✔ caps the balance at burst after a long idle period (0.042417ms)
+  ✔ treats a backwards clock as zero elapsed time without throwing (0.037834ms)
+  ✔ refills from the regressed reference without double counting (0.024542ms)
+✔ lazy refill (0.588875ms)
+▶ tryConsume
+  ✔ allows burst consecutive requests at t=0 with remaining counting down, then denies (0.260041ms)
+  ✔ defaults cost to 1 (0.019958ms)
+  ✔ returns { allowed: false, remaining, retryAfterMs } when the limit is exceeded (0.023333ms)
+  ✔ does not throw or block when the limit is exceeded (0.041334ms)
+  ✔ leaves the balance unchanged after a denial (no partial consumption) (0.025958ms)
+  ✔ computes retryAfterMs exactly for a partially filled bucket and rounds up (0.024334ms)
+  ✔ succeeds after advancing the clock by exactly retryAfterMs (0.038709ms)
+  ✔ denies cost > burst with retryAfterMs = Infinity and leaves the balance unchanged (0.022583ms)
+  ✔ throws RangeError for cost = 0 and leaves state unchanged (0.0305ms)
+  ✔ throws RangeError for cost = -1 and leaves state unchanged (0.01275ms)
+  ✔ throws RangeError for cost = NaN and leaves state unchanged (0.011333ms)
+  ✔ throws RangeError for cost = 1.5 and leaves state unchanged (0.013625ms)
+  ✔ throws RangeError for cost = Infinity and leaves state unchanged (0.014333ms)
+✔ tryConsume (0.636834ms)
+▶ availableTokens
+  ✔ reports the post-refill balance without consuming (0.024292ms)
+✔ availableTokens (0.041ms)
+ℹ tests 31
+ℹ suites 4
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.032375

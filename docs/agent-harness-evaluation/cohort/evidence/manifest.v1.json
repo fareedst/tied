@@ -1,6 +1,6 @@
 {
   "schema_version": "project-size-batch-manifest.v1",
-  "generated_at": "2026-11-15T15:43:09.313Z",
+  "generated_at": "2026-11-15T17:06:52.864Z",
   "options": {
     "store_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
     "parent": "/Users/fareed/Documents/dev/test",
@@ -24,6 +24,14 @@
     }
   ],
   "targets": [
+    {
+      "label": "1794761080-wf-agentstream-wf-07-claude-claudesonnet55high",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794761080-wf-agentstream-wf-07-claude-claudesonnet55high"
+    },
+    {
+      "label": "1794757449-wf-agentstream-wf-06-claude-claudesonnet55high",
+      "repo_root": "/Users/fareed/Documents/dev/test/1794757449-wf-agentstream-wf-06-claude-claudesonnet55high"
+    },
     {
       "label": "1794735352-wf-agentstream-wf-05-claude-claudesonnet55high",
       "repo_root": "/Users/fareed/Documents/dev/test/1794735352-wf-agentstream-wf-05-claude-claudesonnet55high"
@@ -215,17 +223,11 @@
     {
       "label": "1794545758-wf-agentstream-wf-meter-01-claude-claudesonnet46low",
       "repo_root": "/Users/fareed/Documents/dev/test/1794545758-wf-agentstream-wf-meter-01-claude-claudesonnet46low"
-    },
-    {
-      "label": "1794545712-wf-agentstream-wf-meter-01-claude-claudesonnet46low",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794545712-wf-agentstream-wf-meter-01-claude-claudesonnet46low"
-    },
-    {
-      "label": "1794543744-wf-agentstream-wf-meter-99-cursor-composer25",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794543744-wf-agentstream-wf-meter-99-cursor-composer25"
     }
   ],
   "receipt_paths": [
+    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794761080-wf-agentstream-wf-07-claude-claudesonnet55high.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794757449-wf-agentstream-wf-06-claude-claudesonnet55high.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794735352-wf-agentstream-wf-05-claude-claudesonnet55high.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794718033-wf-agentstream-wf-05-claude-claudesonnet55high.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794715660-wf-agentstream-wf-04-claude-claudesonnet55high.json",
@@ -273,9 +275,7 @@
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794579829-wf-agentstream-wf-09-claude-claudehaiku55low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794545843-wf-agentstream-wf-meter-01-claude-claudesonnet46low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794545802-wf-agentstream-wf-meter-01-claude-claudesonnet46low.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794545758-wf-agentstream-wf-meter-01-claude-claudesonnet46low.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794545712-wf-agentstream-wf-meter-01-claude-claudesonnet46low.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794543744-wf-agentstream-wf-meter-99-cursor-composer25.json"
+    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794545758-wf-agentstream-wf-meter-01-claude-claudesonnet46low.json"
   ],
   "snapshot_count": 50
 }
