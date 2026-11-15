@@ -1,0 +1,68 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "validator_version": "1.2.0",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794713844-wf-agentstream-wf-03-claude-claudesonnet55high",
+  "layers": {
+    "atoms": {
+      "vocab_preferred_terms": 0,
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 4,
+      "corpus_graph_nodes": 6,
+      "corpus_graph_edges": 33
+    },
+    "operational_intent": {
+      "sidecar_count": 4,
+      "gross_lines": 114,
+      "template_overlap_lines": 13,
+      "applied_lines": 101,
+      "gross_utf8_bytes": 5245,
+      "template_overlap_utf8_bytes": 162,
+      "applied_utf8_bytes": 5083,
+      "procedure_count": 0,
+      "parse_node_count": 0
+    },
+    "proof_facets": {
+      "unit_tests": 27,
+      "composition_tests": 16,
+      "e2e_tests": 0,
+      "binding_inventory_tests": 0,
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 27,
+        "composition.wiring": 16
+      },
+      "composition_inferred_cases": 27
+    }
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 8.416666666666666,
+    "operational_intent_utf8_per_atom": 423.5833333333333,
+    "proof_facets_per_atom": 3.5833333333333335,
+    "tests_per_procedure": null
+  },
+  "hashes": {
+    "operational_intent_hash": "c2ea2620be7e0b4a5de8677e17b48e53f46340406ea7683a793a0c515cefdecb",
+    "corpus_graph_content_hash": "c41d604060cda1293a959cf653b34c734779f76da53b92c315bd05e30ffe797b"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 700
+  },
+  "diagnostics": [],
+  "proof_inference_diagnostics": [
+    {
+      "path": "src/consumer/consumer.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    },
+    {
+      "path": "src/producer/producer.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    }
+  ]
+}

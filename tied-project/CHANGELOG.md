@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-WF-04/05 facilitator readouts (Claude Sonnet 5.5 `high` @ 1794715660, 1794718033)** — WF-04 **workflow complete** (**77/77**; close_out **allowed**); WF-05 **split signal** (**70/70**; close_out **allowed: false**). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.
+
+- **PROMPT-WF-03 facilitator readout (Claude Sonnet 5.5 `high` repeat @ 1794713844)** — **workflow complete** — **`0976ba1d`**; **41/41** tests; close_out **allowed** (replaces split cell @ 1794675875 in matrix). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.
+
 - **PROMPT-WF-01…03 facilitator readouts (Claude Sonnet 5.5 `high` @ 1794673200…1794675875)** — **4.2.2** wave filling Sonnet `@high` matrix cells: WF-01/02 **workflow complete** (**115/115**, **83/83** tests; close_out **allowed**); WF-03 **split signal** (**25/25** tests; close_out **allowed: false**). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.
 
 - **Agent harness evaluation docs ([REQ-AGENT_HARNESS_EVALUATION_DOCS], [ARCH-AGENT_HARNESS_EVALUATION_DOCS], [IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS])** — Relocate WF/HMEP facilitator markdown to [`docs/agent-harness-evaluation/`](../docs/agent-harness-evaluation/README.md); `agent-harness-eval-docs-paths.mjs`; demos stubs; `agentstream.md` AHE config links + `vocab-agentstream-ahe-config-links.contract.test.mjs`. Plan: [PLAN.md](working/REQ-AGENT_HARNESS_EVALUATION_DOCS/PLAN.md).

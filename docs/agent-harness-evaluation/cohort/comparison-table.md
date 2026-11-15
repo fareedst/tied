@@ -1,6 +1,6 @@
 # Project size comparison (facilitator)
 
-**Generated:** 2026-11-14T17:23:46.292Z
+**Generated:** 2026-11-15T04:59:38.917Z
 **Discover parent:** `/Users/fareed/Documents/dev/test`
 **Pattern (substring):** `wf-agentstream`
 
@@ -55,15 +55,17 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-02-cursor-grok47low | 0 | 1 | 1 | 1 | 1373 | 21 | 0 | 0 | 5 | 0 | 229 | 4 | 1 | 15 | 3.81 · A/A/B+/A/A-/A/A- |
 | wf-03-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 4 | 8 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-03-claude-claudeopus55low | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 12 | 0 | 0 | 0 | 0 | 2 | 5 | 3.76 · A/A/B+/A/B+/A/A- |
-| wf-03-claude-claudesonnet55high | 8 | 1 | 1 | 3 | 3973 | 81 | 0 | 12 | 8 | 0 | 221 | 5 | 1 | 10 | 2.51 · B+/D+/B-/B+/C/B-/C+ |
+| wf-03-claude-claudesonnet55high | 0 | 1 | 1 | 4 | 5083 | 101 | 0 | 27 | 16 | 0 | 424 | 8 | 4 | 12 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-03-claude-claudesonnet55medium | 0 | 1 | 1 | 1 | 361 | 4 | 0 | 8 | 0 | 0 | 60 | 1 | 1 | 5 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-03-cursor-grok47low | 6 | 1 | 1 | 1 | 841 | 24 | 3 | 1 | 0 | 0 | 70 | 2 | 0 | 10 | 2.51 · B+/D+/B-/B+/C/B-/C+ |
 | wf-04-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 12 | 4 | 0 | 0 | 0 | 8 | 9 | 3.87 · A/A/A/A-/A-/A/A- |
 | wf-04-claude-claudeopus55low | 0 | 1 | 1 | 1 | 484 | 9 | 1 | 10 | 0 | 0 | 81 | 2 | 2 | 6 | 3.87 · A/A/A-/A/A-/A/A- |
+| wf-04-claude-claudesonnet55high | 0 | 1 | 1 | 1 | 11211 | 181 | 7 | 49 | 11 | 0 | 1869 | 30 | 10 | 15 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-04-claude-claudesonnet55medium | 0 | 1 | 1 | 1 | 789 | 7 | 0 | 5 | 3 | 0 | 132 | 1 | 1 | 5 | 3.51 · A/A-/B+/A/B+/B/B+ |
 | wf-04-cursor-grok47low | 0 | 1 | 1 | 1 | 905 | 14 | 0 | 1 | 0 | 0 | 151 | 2 | 0 | 12 | 3.59 · A-/A/B-/A-/A-/A/B+ |
 | wf-05-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 26 | 0 | 0 | 0 | 0 | 13 | 8 | 3.39 · A-/B+/A/A-/C+/A-/B |
 | wf-05-claude-claudeopus55low | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 1 | 7 | 3.91 · A/A/A/A/A-/A/A- |
+| wf-05-claude-claudesonnet55high | 0 | 1 | 1 | 1 | 6611 | 99 | 6 | 59 | 3 | 0 | 1102 | 17 | 10 | 9 | 2.51 · B+/D+/B-/B+/C/B-/C+ |
 | wf-05-claude-claudesonnet55medium | 0 | 1 | 1 | 1 | 617 | 8 | 0 | 11 | 0 | 0 | 103 | 1 | 2 | 5 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-05-cursor-grok47low | 0 | 1 | 1 | 1 | 1510 | 19 | 0 | 7 | 0 | 0 | 252 | 3 | 1 | 13 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-06-claude-claudehaiku55medium | 0 | 1 | 1 | 1 | 6068 | 115 | 5 | 17 | 0 | 0 | 1011 | 19 | 3 | 11 | 3.87 · A/A/A-/A/A-/A/A- |
@@ -84,8 +86,6 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-09-claude-claudesonnet55low | 0 | 1 | 1 | 1 | 586 | 8 | 0 | 7 | 0 | 0 | 98 | 1 | 1 | 4 | 3.33 · A-/B+/B/B+/B/A-/B+ |
 | wf-09-cursor-composer25med | 0 | 1 | 1 | 1 | 665 | 9 | 0 | 8 | 0 | 0 | 111 | 2 | 1 | 12 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-09-cursor-grok47low | 0 | 1 | 1 | 1 | 1090 | 11 | 0 | 4 | 0 | 0 | 182 | 2 | 1 | 12 | 2.56 · B+/D+/B/B+/C/B-/C+ |
-| wf-10-claude-claudehaiku55low | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 16 | 0 | 0 | 0 | 0 | 8 | 4 | 2.90 · A-/C+/A-/B+/D+/B/B |
-| wf-10-claude-claudesonnet46low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 2 | 0 | — | — | — | 5 | 2.94 · A-/C+/A/B+/D+/B/B |
 | wf-10-cursor-composer25med | 0 | 1 | 1 | 2 | 2014 | 38 | 4 | 18 | 0 | 0 | 252 | 5 | 2 | 12 | 3.83 · A/A-/A-/A-/A-/A/A |
 
 ## Failed / skipped
