@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-WF-05 facilitator readout (Claude Sonnet 5.5 `high` repeat @ 1794735352)** — **workflow complete** — **`239ab1a`**; **50/50** tests; close_out **allowed** (supersedes split cell @ 1794718033 in matrix). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.
+
 - **PROMPT-WF-04/05 facilitator readouts (Claude Sonnet 5.5 `high` @ 1794715660, 1794718033)** — WF-04 **workflow complete** (**77/77**; close_out **allowed**); WF-05 **split signal** (**70/70**; close_out **allowed: false**). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.
 
 - **PROMPT-WF-03 facilitator readout (Claude Sonnet 5.5 `high` repeat @ 1794713844)** — **workflow complete** — **`0976ba1d`**; **41/41** tests; close_out **allowed** (replaces split cell @ 1794675875 in matrix). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.

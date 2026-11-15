@@ -1,0 +1,68 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "validator_version": "1.2.0",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794735352-wf-agentstream-wf-05-claude-claudesonnet55high",
+  "layers": {
+    "atoms": {
+      "vocab_preferred_terms": 0,
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 3,
+      "corpus_graph_nodes": 5,
+      "corpus_graph_edges": 29
+    },
+    "operational_intent": {
+      "sidecar_count": 3,
+      "gross_lines": 133,
+      "template_overlap_lines": 10,
+      "applied_lines": 123,
+      "gross_utf8_bytes": 7850,
+      "template_overlap_utf8_bytes": 129,
+      "applied_utf8_bytes": 7721,
+      "procedure_count": 0,
+      "parse_node_count": 0
+    },
+    "proof_facets": {
+      "unit_tests": 32,
+      "composition_tests": 14,
+      "e2e_tests": 0,
+      "binding_inventory_tests": 0,
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "composition.wiring": 14,
+        "unit.default": 32
+      },
+      "composition_inferred_cases": 32
+    }
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 12.3,
+    "operational_intent_utf8_per_atom": 772.1,
+    "proof_facets_per_atom": 4.6,
+    "tests_per_procedure": null
+  },
+  "hashes": {
+    "operational_intent_hash": "b57724d7d397cbb628ce8d1413af6d43ca0cc6d40c970ef581c5238636f69704",
+    "corpus_graph_content_hash": "8c203ad2a46de8f660af40d39df556a1d964f2d5a055187ef813cb3d277833a3"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 3135
+  },
+  "diagnostics": [],
+  "proof_inference_diagnostics": [
+    {
+      "path": "src/csv/map-rows.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    },
+    {
+      "path": "src/csv/tokenize.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    }
+  ]
+}
