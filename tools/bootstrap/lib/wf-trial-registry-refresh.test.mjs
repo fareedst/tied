@@ -19,7 +19,7 @@ describe("wf-trial-registry-refresh", () => {
   it("SC-WF-PSP-05 meanCompactGrades matches readout session grading", () => {
     const sample = path.join(
       TIED_REPO_ROOT,
-      "docs/demos/trial-readout-PROMPT-WF-01-claudeopus55low-1794587975-wf-agentstream-wf-01-claude-claudeopus55low.md",
+      "docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-01-claudeopus55low-1794587975-wf-agentstream-wf-01-claude-claudeopus55low.md",
     );
     const md = fs.readFileSync(sample, "utf8");
     const fields = scrapeReadoutForRegistryRow(
@@ -35,7 +35,7 @@ describe("wf-trial-registry-refresh", () => {
 
   it("SC-WF-PSP-04 catalog extractor finds trial-readout links", () => {
     const catalog = fs.readFileSync(
-      path.join(TIED_REPO_ROOT, "docs/demos/catalog-traditional-workflow-trial-prompts.md"),
+      path.join(TIED_REPO_ROOT, "docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md"),
       "utf8",
     );
     const links = extractCatalogReadoutLinks(catalog);

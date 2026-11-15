@@ -32,7 +32,10 @@ export function resolveRepoRoot(): string {
 }
 
 export function defaultPricingCatalogPath(): string {
-  return path.join(resolveRepoRoot(), "docs/demos/harness-eval/pricing/list-price-v1.yaml");
+  return path.join(
+    resolveRepoRoot(),
+    "docs/agent-harness-evaluation/harness-eval/pricing/list-price-v1.yaml",
+  );
 }
 
 export function loadPricingCatalog(catalogPath = defaultPricingCatalogPath()): PricingCatalog {

@@ -93,7 +93,7 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 9. **Orchestrator process log** (when manifest or `--orchestrator-log-dir`; else **N/A**).
 10. **Phase boundary audit** (heuristic; document uncertainty).
 11. **Stack compliance** (orchestrated cells): `implementation_stack_id` in inventory; TypeScript under `src/`; facilitator `npm test`; note waivers when `WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1` or Python/alternate runner on disk.
-12. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)). **Rationale** column rules: [Session grading rationale](#session-grading-rationale) below.
+12. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)). **Rationale** column rules: [Session grading rationale](#session-grading-rationale) below.
 13. **Cross-model notes** (same PROMPT-WF, other readouts if any — prose, no ranking).
 14. Cohort comparisons vs peer WF readouts.
 15. TIED version / dogfood paragraph — session resolution per **Methodology version (session)**; when only (4)/(5) apply, say **bootstrap-inferred only** (not effectiveness claim).
@@ -133,7 +133,7 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 | Snapshot | MCP `tied_project_size_snapshot` with `repo_root` = subject client root (read-only). |
 | Evidence | Optional archive: `tied-project/working/{REQ}/evidence/project-size-snapshot.v1.json` on subject or store facilitator folder. |
 | Readout | Add **Project size layers** subsection under **What was built** or **Cohort comparisons**: cite `layers.atoms`, `layers.operational_intent`, `layers.proof_facets`, `hashes.operational_intent_hash`, and receipt `proof_boundary`. |
-| Cohort JSONL | Append via tooling only: [`tied-bundle/reports/wf-trial-cohort/runs.jsonl`](../../tied-bundle/reports/wf-trial-cohort/runs.jsonl) — human metric policy: [`tied-project/config/project-size-metrics.registry.yaml`](../../tied-project/config/project-size-metrics.registry.yaml). Catalog: [catalog-tied-size-and-trial-statistics.md](../../docs/demos/catalog-tied-size-and-trial-statistics.md). |
+| Cohort JSONL | Append via tooling only: [`tied-bundle/reports/wf-trial-cohort/runs.jsonl`](../../tied-bundle/reports/wf-trial-cohort/runs.jsonl) — human metric policy: [`tied-project/config/project-size-metrics.registry.yaml`](../../tied-project/config/project-size-metrics.registry.yaml). Catalog: [catalog-tied-size-and-trial-statistics.md](../../docs/agent-harness-evaluation/catalogs/catalog-tied-size-and-trial-statistics.md). |
 
 ### Proof labels (dissection)
 
@@ -151,7 +151,7 @@ Template: [`tied-bundle/templates/wf-composition-evidence-subcheck.v2.template.j
 
 **Forbidden in size appendix:** leaderboard language, ranking models, implying snapshot proves REQ **Implemented** status.
 
-**Filename pattern:** `docs/demos/trial-readout-PROMPT-WF-{NN}-{modelConfigSlug}-{clientId}.md`
+**Filename pattern:** `docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-{NN}-{modelConfigSlug}-{clientId}.md`
 
 Example: `trial-readout-PROMPT-WF-03-luna-med-1793000001.md`
 
@@ -161,7 +161,7 @@ Same as [record-gf-trial — Feedback ingest modes](../../tools/bundled-record-g
 
 ## Cohort summary refresh
 
-After publishing or updating readouts, run **`@publish-wf-trial-summaries`** with **no positional args** to regenerate [runs registry](../../docs/demos/traditional-workflow-trial-runs-registry.md), comparison matrix, and [comparison-table](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) from existing `trial-readout-PROMPT-WF-*.md` files ([publish skill](../bundled-publish-wf-trial-summaries-skill/SKILL.md)).
+After publishing or updating readouts, run **`@publish-wf-trial-summaries`** with **no positional args** to regenerate [runs registry](../../docs/agent-harness-evaluation/registries/traditional-workflow-trial-runs-registry.md), comparison matrix, and [comparison-table](../../docs/agent-harness-evaluation/cohort/comparison-table.md) from existing `trial-readout-PROMPT-WF-*.md` files ([publish skill](../bundled-publish-wf-trial-summaries-skill/SKILL.md)).
 
 ## Store operator install
 

@@ -1,3 +1,11 @@
+IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS:
+  cross_references:
+    - "ARCH-AGENT_HARNESS_EVALUATION_DOCS"
+    - "IMPL-WF_TRIAL_SUMMARIES_PUBLISH"
+    - "REQ-AGENT_HARNESS_EVALUATION_DOCS"
+  detail_file: "implementation-decisions/IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS.yaml"
+  name: "Agent harness eval docs path module"
+  status: "implemented"
 IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Implementation"
   detail_file: "implementation-decisions/IMPL-AGENTSTREAM_CLAUDE_WF_PARITY.yaml"

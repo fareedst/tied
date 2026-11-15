@@ -26,10 +26,10 @@ node tools/bootstrap/lib/wf-trial-summaries-publish.mjs [--store-root ABS] [flag
 
 | Artifact | Action |
 | --- | --- |
-| [traditional-workflow-trial-runs-registry.md](../../docs/demos/traditional-workflow-trial-runs-registry.md) | Refresh master table grades/exit/run time from readouts; recompute **Latest**; update header |
+| [traditional-workflow-trial-runs-registry.md](../../docs/agent-harness-evaluation/registries/traditional-workflow-trial-runs-registry.md) | Refresh master table grades/exit/run time from readouts; recompute **Latest**; update header |
 | Same file § Latest-run comparison matrix | `build-wf-trial-comparison-matrix.mjs` |
-| [comparison-table.md](../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence/comparison-table.md) | `project-size-batch-compare.mjs --include-trial-factors` |
-| [catalog-traditional-workflow-trial-prompts.md](../../docs/demos/catalog-traditional-workflow-trial-prompts.md) | **Validate** readout links only (no row rewrite v1) |
+| [comparison-table.md](../../docs/agent-harness-evaluation/cohort/comparison-table.md) | `project-size-batch-compare.mjs --include-trial-factors` |
+| [catalog-traditional-workflow-trial-prompts.md](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md) | **Validate** readout links only (no row rewrite v1) |
 
 **Forbidden:** `maturity_score`, leaderboard-as-maturity, disposable client writes, auto git commit.
 

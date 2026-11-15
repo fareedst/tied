@@ -15,8 +15,8 @@ Explicit invocation only (`/publish-wf-trial-summaries`, `@publish-wf-trial-summ
 ## Prerequisites
 
 - Store workspace with **`tied-yaml`** MCP.
-- Readouts under `docs/demos/trial-readout-PROMPT-WF-*.md`.
-- **Recorded trials** links in [workflow catalog](../../docs/demos/catalog-traditional-workflow-trial-prompts.md) maintained by `@record-wf-trial` (this skill does **not** rewrite catalog table rows in v1).
+- Readouts under `docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-*.md`.
+- **Recorded trials** links in [workflow catalog](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md) maintained by `@record-wf-trial` (this skill does **not** rewrite catalog table rows in v1).
 
 ## Procedure
 
@@ -24,7 +24,7 @@ Explicit invocation only (`/publish-wf-trial-summaries`, `@publish-wf-trial-summ
 
 2. **Workspace gate** — `tied_config_get_base_path` must resolve **`{store}/tied-project/`**.
 
-3. **PRELOAD** — [workflow catalog](../../docs/demos/catalog-traditional-workflow-trial-prompts.md); [size catalog](../../docs/demos/catalog-tied-size-and-trial-statistics.md); grading guardrails (no leaderboard).
+3. **PRELOAD** — [workflow catalog](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md); [size catalog](../../docs/agent-harness-evaluation/catalogs/catalog-tied-size-and-trial-statistics.md); grading guardrails (no leaderboard).
 
 4. **Run orchestrator** — From store root:
 

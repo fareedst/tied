@@ -6,7 +6,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd -P)"
 TIED_CLI="${REPO_ROOT}/mcp-server/packages/cli/dist/index.js"
-BATCH="${REPO_ROOT}/docs/demos/traditional-four-phase-agentstream.yaml"
+BATCH="${REPO_ROOT}/docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml"
 GOLD_CLIENT="${WF03_GOLD_CLIENT:-${HOME}/Documents/dev/test/1793760220-wf-agentstream-wf-03}"
 
 usage() {

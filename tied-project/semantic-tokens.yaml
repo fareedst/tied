@@ -1,3 +1,7 @@
+ARCH-AGENT_HARNESS_EVALUATION_DOCS:
+  description: "Layout split demos vs agent-harness-evaluation"
+  token: "ARCH-AGENT_HARNESS_EVALUATION_DOCS"
+  type: "architecture"
 ARCH-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Architecture"
   cross_references:
@@ -1655,6 +1659,10 @@ ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   name: "WF trial sequential transcript architecture"
   status: "Proposed"
   type: "ARCH"
+IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS:
+  description: "agent-harness-eval-docs-paths.mjs"
+  token: "IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS"
+  type: "implementation"
 IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Implementation"
   cross_references:
@@ -4037,6 +4045,10 @@ PROC-YAML_EDIT_LOOP:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+REQ-AGENT_HARNESS_EVALUATION_DOCS:
+  description: "Facilitator benchmarking docs corpus docs/agent-harness-evaluation"
+  token: "REQ-AGENT_HARNESS_EVALUATION_DOCS"
+  type: "requirement"
 REQ-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Tooling"
   cross_references:

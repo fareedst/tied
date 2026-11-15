@@ -9,7 +9,7 @@ import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const CATALOG = path.join(REPO_ROOT, "docs/demos/catalog-traditional-workflow-trial-prompts.md");
+const CATALOG = path.join(REPO_ROOT, "docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md");
 
 /** Architectural mandates forbidden in paste (facilitator grades binding from PLAN/tests). */
 const FORBIDDEN_IN_PASTE = [

@@ -5,6 +5,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
+
 const PLACEHOLDER_RE = /^[\s—–\-–]+$/u;
 
 /** Discover basename suffix on trial-readout-PROMPT-WF-*.md filenames. */
@@ -233,7 +235,7 @@ function splitTableRow(line) {
  * @returns {Map<string, { compactSlash: string, display: string }>}
  */
 export function buildTrialReadoutGradesIndex(storeRoot) {
-  const demosDir = path.join(storeRoot, "docs/demos");
+  const demosDir = resolveAhePaths(storeRoot).readoutsDir;
   /** @type {Map<string, { compactSlash: string, display: string }>} */
   const index = new Map();
   if (!fs.existsSync(demosDir)) return index;

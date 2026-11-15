@@ -20,7 +20,7 @@ const validate = ajv.compile(schema);
 
 const manifestPath = path.join(
   __dirname,
-  "../../../docs/demos/harness-eval/replay/sample-replay-batch-v1.yaml",
+  "../../../docs/agent-harness-evaluation/harness-eval/replay/sample-replay-batch-v1.yaml",
 );
 
 test("sample-replay-batch-v1.yaml matches harness-eval-replay-manifest schema", () => {

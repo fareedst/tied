@@ -211,7 +211,7 @@ function renderColumnDefinitionsSection() {
   lines.push("## Column definitions");
   lines.push("");
   lines.push(
-    "Three layers: **atoms** (agreement footprint), **operational intent** (IMPL pseudo-code mass), **proof facets** (tests and evidence files). See [catalog-tied-size-and-trial-statistics.md](../../../docs/demos/catalog-tied-size-and-trial-statistics.md).",
+    "Three layers: **atoms** (agreement footprint), **operational intent** (IMPL pseudo-code mass), **proof facets** (tests and evidence files). See [catalog-tied-size-and-trial-statistics.md](../catalogs/catalog-tied-size-and-trial-statistics.md).",
   );
   lines.push("");
   lines.push("| Column | Layer | Definition |");

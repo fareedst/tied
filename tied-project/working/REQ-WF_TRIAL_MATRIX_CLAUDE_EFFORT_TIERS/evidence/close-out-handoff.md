@@ -13,7 +13,7 @@
 
 ## Commit
 
-Recorded after traceable-commit (see git log).
+**SHA:** `5afe7ddf` — `feat(wf-trials): Claude effort tier matrix columns (13)`
 
 ## Upstream feedback
 

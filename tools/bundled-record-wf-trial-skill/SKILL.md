@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 **Audience:** facilitator in the **TIED methodology store** repo; subject disposable client is **read-only** unless the sponsor scopes repair.
 
-**When:** After **four-phase** workflow trials ([workflow prompt catalog](../../docs/demos/catalog-traditional-workflow-trial-prompts.md)) on a `test-new-tied-client` disposable client, the facilitator wants a **trial readout** for LLM/workflow comparison and optional **feedback cycle** ingest into the store.
+**When:** After **four-phase** workflow trials ([workflow prompt catalog](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md)) on a `test-new-tied-client` disposable client, the facilitator wants a **trial readout** for LLM/workflow comparison and optional **feedback cycle** ingest into the store.
 
 Explicit invocation only (`/record-wf-trial`, `@record-wf-trial`).
 
@@ -25,9 +25,9 @@ Explicit invocation only (`/record-wf-trial`, `@record-wf-trial`).
 
 3. **Resolve client root** — Absolute path with `{root}/tied-project/`, or numeric id via `TIED_GF_TRIAL_CLIENTS_ROOT` or `TIED_WF_TRIAL_CLIENTS_ROOT` (see reference). Fail closed if not a TIED client layout.
 
-4. **PRELOAD** — [feedback-to-tied.md](../../tied-project/vocab/feedback-to-tied.md), [quality-assurance.md](../../tied-project/vocab/quality-assurance.md); [traditional workflow prompt catalog](../../docs/demos/catalog-traditional-workflow-trial-prompts.md); [TIED compact demo catalog](../../docs/demos/catalog-tied-compact-tools.md) grading guardrails.
+4. **PRELOAD** — [feedback-to-tied.md](../../tied-project/vocab/feedback-to-tied.md), [quality-assurance.md](../../tied-project/vocab/quality-assurance.md); [traditional workflow prompt catalog](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md); [TIED compact demo catalog](../../docs/demos/catalog-tied-compact-tools.md) grading guardrails.
 
-5. **Idempotency** — Glob `docs/demos/trial-readout-PROMPT-WF-*-{clientId}.md` under the store. If a match exists and **`--force`** is absent, **stop** and report existing readout path; do not duplicate catalog rows.
+5. **Idempotency** — Glob `docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-*-{clientId}.md` under the store. If a match exists and **`--force`** is absent, **stop** and report existing readout path; do not duplicate catalog rows.
 
 6. **Discover trial identity (read-only on client)** — Scan `tied-project/working/*/PLAN.md` for `PROMPT-WF-XX`, model config, and model slug; map facilitator index row → **proof_boundary** and workflow stress. Glob **`tied-methodology-version.session.v1.json`** under client `tied-project/working/*/evidence/`; resolve semver per [reference § Methodology version (session)](./reference.md#methodology-version-session). Create store working folder `tied-project/working/FACILITATOR-WF-{slug}-{clientId}/` with PLAN/CITDP/tracker per [FACILITATOR-GF-04 precedent](../../tied-project/working/FACILITATOR-GF-04-1792857852/PLAN.md) when publishing a **new** readout.
 
@@ -35,7 +35,7 @@ Explicit invocation only (`/record-wf-trial`, `@record-wf-trial`).
 
 8. **Inspect completion signals** — Three-way table: machine close_out, process contract, adherence ledger (GF-04 §2.3). Require or flag missing `trial-workflow-interaction-inventory.v1.json`. **Phase boundary audit:** compare git history to inventory turn order; note if product commits precede build-plan turn. **Four-turn table:** skill, outcome (plan updated / tests red / green / close-out signals). **Process log review (when manifest or `--orchestrator-log-dir` present):** read `process.stderr.log` / `process.stdout.log` (default under `tied-project/working/wf-trial-orchestrator-run/evidence/` per `wf-trial-orchestrator-run.v1.json`); extract `DIAGNOSTIC`, `DEBUG`, `ERROR`, and turn-boundary lines; cross-check four-turn table and phase boundary audit. Use ≤12 excerpt bullets in the readout (≤3 quoted lines each).
 
-9. **Grade** — Seven weighted dimensions from [facilitator grading readout](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout); letter bands + **Rationale** per [reference § Session grading rationale](./reference.md#session-grading-rationale) ([REQ-WF_TRIAL_READOUT_GRADING_RATIONALE]). **Cross-model notes:** prose comparison to other readouts for the same PROMPT-WF when they exist — no ranking. **Forbidden:** `maturity_score`, universal scores, CMMI levels, leaderboard-as-maturity. Include **future-test rule** paragraph.
+9. **Grade** — Seven weighted dimensions from [facilitator grading readout](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout); letter bands + **Rationale** per [reference § Session grading rationale](./reference.md#session-grading-rationale) ([REQ-WF_TRIAL_READOUT_GRADING_RATIONALE]). **Cross-model notes:** prose comparison to other readouts for the same PROMPT-WF when they exist — no ranking. **Forbidden:** `maturity_score`, universal scores, CMMI levels, leaderboard-as-maturity. Include **future-test rule** paragraph.
 
 10. **Publish store deliverables** — Author readout per [reference.md § Readout contract](./reference.md); update **Recorded trials** in workflow catalog and [docs/demos/README.md](../../docs/demos/README.md) workflow readouts table; add **CHANGELOG** Unreleased row. **Do not** mint store `[REQ-*]` for the subject product.
 

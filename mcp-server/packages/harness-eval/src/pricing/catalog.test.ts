@@ -10,7 +10,7 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../
 describe("pricing SC-HMEP-M2-01", () => {
   it("unknown model_slug yields null estimated cost", () => {
     const catalog = loadPricingCatalog(
-      path.join(repoRoot, "docs/demos/harness-eval/pricing/list-price-v1.yaml"),
+      path.join(repoRoot, "docs/agent-harness-evaluation/harness-eval/pricing/list-price-v1.yaml"),
     );
     const rate = lookupModelRate(catalog, "nonexistent-model-xyz");
     assert.equal(rate, null);
@@ -25,7 +25,7 @@ describe("pricing SC-HMEP-M2-01", () => {
 
   it("known model with complete tokens yields non-null cost", () => {
     const catalog = loadPricingCatalog(
-      path.join(repoRoot, "docs/demos/harness-eval/pricing/list-price-v1.yaml"),
+      path.join(repoRoot, "docs/agent-harness-evaluation/harness-eval/pricing/list-price-v1.yaml"),
     );
     const rate = lookupModelRate(catalog, "claude-sonnet-5-5");
     assert.ok(rate);

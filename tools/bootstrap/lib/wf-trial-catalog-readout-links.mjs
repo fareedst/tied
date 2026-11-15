@@ -4,6 +4,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
+
 const RECORDED_TRIALS_HEADING = /^## Recorded trials \(facilitator\)\s*$/m;
 const READOUT_LINK_RE = /\]\((trial-readout-PROMPT-WF-[^)]+\.md)\)/g;
 
@@ -39,22 +41,20 @@ export function extractCatalogReadoutLinks(catalogMarkdown) {
  * @param {string} storeRoot
  */
 export function loadCatalogReadoutLinks(storeRoot) {
-  const catalogPath = path.join(
-    storeRoot,
-    "docs/demos/catalog-traditional-workflow-trial-prompts.md",
-  );
+  const catalogPath = resolveAhePaths(storeRoot).wfCatalog;
   const md = fs.readFileSync(catalogPath, "utf8");
   return extractCatalogReadoutLinks(md);
 }
 
 /**
  * @param {string} storeRoot
- * @returns {string[]} basenames under docs/demos
+ * @returns {string[]} readout basenames under agent-harness-evaluation/readouts
  */
 export function globWfTrialReadoutBasenames(storeRoot) {
-  const demosDir = path.join(storeRoot, "docs/demos");
+  const { readoutsDir } = resolveAhePaths(storeRoot);
+  if (!fs.existsSync(readoutsDir)) return [];
   return fs
-    .readdirSync(demosDir)
+    .readdirSync(readoutsDir)
     .filter((n) => n.startsWith("trial-readout-PROMPT-WF-") && n.endsWith(".md"));
 }
 

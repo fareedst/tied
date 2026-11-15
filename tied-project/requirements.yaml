@@ -1,3 +1,11 @@
+REQ-AGENT_HARNESS_EVALUATION_DOCS:
+  cross_references:
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+    - "REQ-WF_TRIAL_SUMMARIES_PUBLISH"
+  detail_file: "requirements/REQ-AGENT_HARNESS_EVALUATION_DOCS.yaml"
+  name: "Agent harness evaluation docs corpus"
+  status: "implemented"
 REQ-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Tooling"
   description: "Close harness/orchestrator gaps so Claude live agentstream on PROMPT-WF-03 four-phase batch reaches the same product class and close_out fingerprint as Cursor gold (argv MCP load, harness-aware batch skills/preload, optional turn trace, dual-harness smoke)."

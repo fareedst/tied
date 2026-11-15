@@ -1,3 +1,10 @@
+ARCH-AGENT_HARNESS_EVALUATION_DOCS:
+  cross_references:
+    - "ARCH-TIED_HARNESS_PLATFORM_TAXONOMY"
+    - "REQ-AGENT_HARNESS_EVALUATION_DOCS"
+  detail_file: "architecture-decisions/ARCH-AGENT_HARNESS_EVALUATION_DOCS.yaml"
+  name: "Agent harness evaluation docs layout"
+  status: "implemented"
 ARCH-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Architecture"
   detail_file: "architecture-decisions/ARCH-AGENTSTREAM_CLAUDE_WF_PARITY.yaml"

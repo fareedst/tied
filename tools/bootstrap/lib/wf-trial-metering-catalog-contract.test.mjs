@@ -7,8 +7,8 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const CATALOG = path.join(REPO_ROOT, "docs/demos/catalog-harness-metering-lite-workflow.md");
-const SUITE = path.join(REPO_ROOT, "docs/demos/harness-eval/suites/metering-canary-suite-v1.yaml");
+const CATALOG = path.join(REPO_ROOT, "docs/agent-harness-evaluation/catalogs/catalog-harness-metering-lite-workflow.md");
+const SUITE = path.join(REPO_ROOT, "docs/agent-harness-evaluation/harness-eval/suites/metering-canary-suite-v1.yaml");
 
 function extractMeterPrompt(md) {
   const hdr = "### PROMPT-WF-METER-01";

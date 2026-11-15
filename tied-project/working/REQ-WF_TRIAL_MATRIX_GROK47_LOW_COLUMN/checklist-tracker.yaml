@@ -1,0 +1,15 @@
+depth_tier: "minimal"
+description: "Tracker — grok47-low comparison matrix column + pivot"
+gate_policy: "facilitator_doc_only"
+profile_depth: "minimal"
+request_token: "REQ-WF_TRIAL_MATRIX_GROK47_LOW_COLUMN"
+steps:
+  build-plan:
+    notes: "SC-WF-CMX-16..19 green; matrix regen 2026-11-13"
+    status: "done"
+  close-out:
+    notes: "Sponsor-only commit"
+    status: "pending"
+  refine-plan:
+    notes: "PLAN + test-strategy + session-handoff 2026-11-13"
+    status: "done"

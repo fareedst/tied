@@ -20,3 +20,7 @@ Cohort readouts, registry/catalog/README, size-batch evidence, publish orchestra
 ## Feedback capture
 
 N/A
+
+## Commit
+
+**SHA:** `f6467a58` — `docs(wf-trials): cohort readouts, publish skill, matrix layout`

@@ -20,7 +20,7 @@ const validate = ajv.compile(schema);
 
 const ledgerPath = path.join(
   __dirname,
-  "../../../docs/demos/harness-eval/billing/sample-ledger-v1.yaml",
+  "../../../docs/agent-harness-evaluation/harness-eval/billing/sample-ledger-v1.yaml",
 );
 
 test("sample-ledger-v1.yaml matches harness-eval-billing-ledger schema SC-HMEP-M3-01", () => {

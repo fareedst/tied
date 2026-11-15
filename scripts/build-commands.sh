@@ -566,7 +566,7 @@ workflow_trial_range ()
         cat >&2 <<'EOF'
 usage: workflow_trial_range HARNESS MODEL_REF EFFORT END START [MONIT]
   HARNESS: cursor|claude (default cursor)
-  MODEL_REF: matrix id, agent catalog slug, or alias (docs/demos/wf-trial-model-specs.yaml + wf-trial-model-catalog.yaml)
+  MODEL_REF: matrix id, agent catalog slug, or alias (docs/agent-harness-evaluation/config/wf-trial-model-specs.yaml + wf-trial-model-catalog.yaml)
   EFFORT: low|medium|high|xhigh|max or - (unset MODEL_EFFORT); compose families (luna, grok46, grok47, grok-4.7, sol, composer-2.5, cursor-grok-4.6) require a tier
   Claude: MODEL_EFFORT -> agent --effort and CLAUDE_CODE_EFFORT_LEVEL
   Cursor compose: EFFORT builds MODEL_SLUG (e.g. luna + medium -> gpt-5.6-luna-medium-fast); legacy tiered slug + mismatched EFFORT fails

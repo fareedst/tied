@@ -18,7 +18,7 @@ describe("cohort report SC-HMEP-M2-05", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "hmep-cohort-"));
     const db = openEvalDatabase(path.join(tmp, "eval.sqlite"));
     const catalog = loadPricingCatalog(
-      path.join(repoRoot, "docs/demos/harness-eval/pricing/list-price-v1.yaml"),
+      path.join(repoRoot, "docs/agent-harness-evaluation/harness-eval/pricing/list-price-v1.yaml"),
     );
     for (const harness of ["cursor", "claude"] as const) {
       const id = `t-${harness}`;

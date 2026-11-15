@@ -13,16 +13,13 @@ import {
   discoverClients,
   sanitizeLabelForFilename,
 } from "./project-size-discover-clients.mjs";
+import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
 import {
   DEFAULT_SUMMARY_EPOCH_MIN,
   renderComparisonMarkdown,
 } from "./project-size-comparison-render.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DEFAULT_OUT = path.resolve(
-  __dirname,
-  "../../../tied-project/non-tied-plans/project-size-batch-discover-compare/evidence",
-);
 
 function usage() {
   console.error(`Usage: node project-size-batch-compare.mjs --store-root PATH [options]
@@ -60,7 +57,8 @@ function parseArgs(argv) {
     verboseTable: false,
     fineLabels: false,
     dryRun: false,
-    outDir: DEFAULT_OUT,
+    outDir: null,
+    outDirExplicit: false,
     summaryEpochMin: DEFAULT_SUMMARY_EPOCH_MIN,
   };
 
@@ -125,6 +123,7 @@ function parseArgs(argv) {
         break;
       case "--out-dir":
         opts.outDir = path.resolve(argv[++i]);
+        opts.outDirExplicit = true;
         break;
       case "-h":
       case "--help":
@@ -142,6 +141,9 @@ function parseArgs(argv) {
   }
   if (!opts.parent) {
     opts.parent = resolveTestRoot(process.env);
+  }
+  if (!opts.outDirExplicit) {
+    opts.outDir = resolveAhePaths(opts.storeRoot).cohortEvidenceDir;
   }
   return opts;
 }
@@ -235,7 +237,9 @@ export async function runProjectSizeBatchCompare(argv = process.argv, env = proc
     snapshot_count: rows.length,
   };
 
-  await writeFile(path.join(opts.outDir, "comparison-table.md"), markdown, "utf8");
+  const comparisonTablePath = resolveAhePaths(opts.storeRoot).comparisonTable;
+  await mkdir(path.dirname(comparisonTablePath), { recursive: true });
+  await writeFile(comparisonTablePath, markdown, "utf8");
   await writeFile(
     path.join(opts.outDir, "manifest.v1.json"),
     `${JSON.stringify(manifest, null, 2)}\n`,

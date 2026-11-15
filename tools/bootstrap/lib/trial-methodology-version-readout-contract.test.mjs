@@ -7,7 +7,7 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { TIED_REPO_ROOT } from "./constants.mjs";
 
-const BATCH = path.join(TIED_REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
+const BATCH = path.join(TIED_REPO_ROOT, "docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml");
 const WF_REF = path.join(TIED_REPO_ROOT, "tools/bundled-record-wf-trial-skill/reference.md");
 const GF_REF = path.join(TIED_REPO_ROOT, "tools/bundled-record-gf-trial-skill/reference.md");
 const CAPTURE_MD = path.join(

@@ -26,7 +26,7 @@
 ### Required
 
 - [x] `build-plan` — sort columns, footer row, tests, registry regen, verification commands
-- [ ] `close-out` — sponsor-only commit + CHANGELOG row
+- [x] `close-out` — commit `f6467a58` (facilitator batch)
 
 ### Changelog (this REQ)
 

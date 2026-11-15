@@ -19,9 +19,9 @@ const WF_REF = path.join(TIED_REPO_ROOT, "tools/bundled-record-wf-trial-skill/re
 const WF_SKILL = path.join(TIED_REPO_ROOT, "tools/bundled-record-wf-trial-skill/SKILL.md");
 const CATALOG = path.join(
   TIED_REPO_ROOT,
-  "docs/demos/catalog-traditional-workflow-trial-prompts.md",
+  "docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md",
 );
-const DEMOS = path.join(TIED_REPO_ROOT, "docs/demos");
+const READOUTS = path.join(TIED_REPO_ROOT, "docs/agent-harness-evaluation/readouts");
 
 describe("trial readout grading rationale [REQ-WF_TRIAL_READOUT_GRADING_RATIONALE]", () => {
   it("T-GR-REF-01 reference documents Session grading rationale rules and examples", () => {
@@ -71,7 +71,7 @@ describe("trial readout grading rationale [REQ-WF_TRIAL_READOUT_GRADING_RATIONAL
 
   it("T-GR-READOUTS-01 all PROMPT-WF readouts pass rationale contract", () => {
     const files = fs
-      .readdirSync(DEMOS)
+      .readdirSync(READOUTS)
       .filter((f) => f.startsWith("trial-readout-PROMPT-WF-") && f.endsWith(".md"))
       .sort();
 
@@ -79,7 +79,7 @@ describe("trial readout grading rationale [REQ-WF_TRIAL_READOUT_GRADING_RATIONAL
 
     const failures = [];
     for (const file of files) {
-      const body = fs.readFileSync(path.join(DEMOS, file), "utf8");
+      const body = fs.readFileSync(path.join(READOUTS, file), "utf8");
       const violations = validateSessionGradingRationales(body);
       if (violations.length) {
         failures.push({ file, violations });

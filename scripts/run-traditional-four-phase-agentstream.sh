@@ -2,7 +2,7 @@
 # run-traditional-four-phase-agentstream — four prompt-type turns via feature-spec batch (no full checklist).
 # [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE]
 # [REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT] [IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT]
-# Texture aligned with tools/bootstrap/lib/console.mjs; see docs/demos/traditional-four-phase-agentstream.yaml
+# Texture aligned with tools/bootstrap/lib/console.mjs; see docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -156,7 +156,7 @@ usage() {
   _dim "FEATURE_REMAINDER  Product invocation remainder (multi-line ok)"
   _dim "MODEL_CONFIG       Optional model bucket for PLAN header evidence"
   _dim "HARNESS            cursor (default) or claude"
-  _dim "BATCH_YAML         Batch template (default: docs/demos/traditional-four-phase-agentstream.yaml)"
+  _dim "BATCH_YAML         Batch template (default: docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml)"
   _out_help ""
   _section "Safety"
   _dim "Live runs: WORKSPACE must lie under TIED_TEST_ROOT (default ~/Documents/dev/test),"
@@ -288,7 +288,7 @@ main() {
   esac
   require_directory "WORKSPACE" "$workspace"
 
-  local batch_template="${BATCH_YAML:-${REPO_ROOT}/docs/demos/traditional-four-phase-agentstream.yaml}"
+  local batch_template="${BATCH_YAML:-${REPO_ROOT}/docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml}"
   [[ -f "$batch_template" && -r "$batch_template" ]] || fail "BATCH_YAML is not readable: $batch_template"
 
   local harness="${HARNESS:-cursor}"

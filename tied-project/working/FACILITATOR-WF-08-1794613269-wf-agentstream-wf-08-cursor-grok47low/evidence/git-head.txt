@@ -1,0 +1,1 @@
+ab7e3507b36b85a0ae48d792df6e89ac8eb36e93 feat(state-machine): close explicit transitions

@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
 import { loadReadoutRegistryFields } from "./wf-trial-readout-registry-fields.mjs";
 
 const MASTER_HEADER =
@@ -77,7 +78,10 @@ export function refreshRegistryFromReadouts(storeRoot, registryMd) {
   for (let i = 0; i < lines.length; i++) {
     const row = parseMasterRow(lines[i]);
     if (!row) continue;
-    const readoutPath = path.join(storeRoot, "docs/demos", row.readout);
+    const readoutPath = path.join(
+      resolveAhePaths(storeRoot).readoutsDir,
+      path.basename(row.readout),
+    );
     if (fs.existsSync(readoutPath)) {
       try {
         const fields = loadReadoutRegistryFields(storeRoot, row.readout);
@@ -124,10 +128,7 @@ export function patchRegistryHeader(md, rowCount, dateIso) {
  * @param {{ write?: boolean }} opts
  */
 export function refreshTraditionalWorkflowTrialRunsRegistry(storeRoot, opts = {}) {
-  const registryPath = path.join(
-    storeRoot,
-    "docs/demos/traditional-workflow-trial-runs-registry.md",
-  );
+  const registryPath = resolveAhePaths(storeRoot).registry;
   const md = fs.readFileSync(registryPath, "utf8");
   const { markdown, masterRowCount } = refreshRegistryFromReadouts(storeRoot, md);
   const today = new Date().toISOString().slice(0, 10);

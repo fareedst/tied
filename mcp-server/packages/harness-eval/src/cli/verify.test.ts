@@ -34,7 +34,7 @@ describe("verify trial CLI SC-HMEP-M2-06", () => {
     db.close();
     const suite = path.join(
       repoRoot,
-      "docs/demos/harness-eval/suites/engineering-suite-v1.yaml",
+      "docs/agent-harness-evaluation/harness-eval/suites/engineering-suite-v1.yaml",
     );
     const code = runCli([
       "verify",

@@ -16,8 +16,8 @@ fi
 
 REPO_ROOT_DEFAULT="$(cd "${SCRIPT_DIR}/.." && pwd -P)"
 MARKER_REL="tied-install.sh"
-CATALOG_REL_TRADITIONAL="docs/demos/catalog-traditional-workflow-trial-prompts.md"
-CATALOG_REL_METERING="docs/demos/catalog-harness-metering-lite-workflow.md"
+CATALOG_REL_TRADITIONAL="docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md"
+CATALOG_REL_METERING="docs/agent-harness-evaluation/catalogs/catalog-harness-metering-lite-workflow.md"
 FOUR_PHASE="${SCRIPT_DIR}/run-traditional-four-phase-agentstream.sh"
 
 PROMPT_PREFACE_DEFAULT="Without pausing for user approval, select and execute the implemented products to be more comprehensive and capable. Use Typescript for code. -- "

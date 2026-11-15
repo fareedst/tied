@@ -20,7 +20,7 @@ const validate = ajv.compile(schema);
 
 const baselinePath = path.join(
   __dirname,
-  "../../../docs/demos/harness-eval/baselines/engineering-suite-v1-baseline.yaml",
+  "../../../docs/agent-harness-evaluation/harness-eval/baselines/engineering-suite-v1-baseline.yaml",
 );
 
 test("engineering-suite-v1-baseline.yaml matches harness-eval-baseline schema", () => {

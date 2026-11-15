@@ -14,10 +14,12 @@ import {
   normalizeBand,
   parseSessionGradingTable,
 } from "./read-trial-readout-session-grading.mjs";
+import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "../../..");
-const DEMOS = path.join(ROOT, "docs/demos");
+
+const DEMOS = resolveAhePaths(ROOT).readoutsDir;
 const dryRun = process.argv.includes("--dry-run");
 const MAX_WORDS = 32;
 

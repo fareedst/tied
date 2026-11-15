@@ -20,7 +20,7 @@ const validate = ajv.compile(schema);
 
 const catalogPath = path.join(
   __dirname,
-  "../../../docs/demos/harness-eval/pricing/list-price-v1.yaml",
+  "../../../docs/agent-harness-evaluation/harness-eval/pricing/list-price-v1.yaml",
 );
 
 test("list-price-v1.yaml matches harness-eval-pricing schema SC-HMEP-M2-01", () => {

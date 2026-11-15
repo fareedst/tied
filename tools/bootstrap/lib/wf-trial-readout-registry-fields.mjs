@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
 import {
   meanCompactGrades,
   normalizeBand,
@@ -130,10 +131,13 @@ export function scrapeReadoutForRegistryRow(markdown, basename) {
 
 /**
  * @param {string} storeRoot
- * @param {string} readoutHref relative under docs/demos
+ * @param {string} readoutHref readout basename or relative href
  */
 export function loadReadoutRegistryFields(storeRoot, readoutHref) {
-  const full = path.join(storeRoot, "docs/demos", path.basename(readoutHref));
+  const full = path.join(
+    resolveAhePaths(storeRoot).readoutsDir,
+    path.basename(readoutHref),
+  );
   const markdown = fs.readFileSync(full, "utf8");
   return scrapeReadoutForRegistryRow(markdown, path.basename(readoutHref));
 }

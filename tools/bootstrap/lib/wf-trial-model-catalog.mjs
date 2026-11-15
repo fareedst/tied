@@ -10,12 +10,14 @@ import {
   canonicalizeCursorAgentModelSlug,
   parseCursorCatalogSlug,
 } from "./cursor-catalog-model-slug.mjs";
+import { AHE_MODEL_CATALOG_REL } from "./agent-harness-eval-docs-paths.mjs";
 import { loadWfTrialModelSpecRegistry } from "./wf-trial-model-spec.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
 export const WF_TRIAL_MODEL_CATALOG_SCHEMA = "wf-trial-model-catalog.v1";
-const DEFAULT_CATALOG_REL = "docs/demos/wf-trial-model-catalog.yaml";
+
+const DEFAULT_CATALOG_REL = AHE_MODEL_CATALOG_REL;
 
 /**
  * @param {string} [repoRoot]

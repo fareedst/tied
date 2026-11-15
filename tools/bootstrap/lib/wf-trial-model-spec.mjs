@@ -13,10 +13,12 @@ import {
 } from "./wf-trial-model-catalog.mjs";
 import { composeCursorCatalogSlug, normalizeComposeEffort } from "./wf-trial-model-compose.mjs";
 import { parseCursorCatalogSlug } from "./cursor-catalog-model-slug.mjs";
+import { AHE_MODEL_CATALOG_REL, AHE_MODEL_SPECS_REL } from "./agent-harness-eval-docs-paths.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
-const DEFAULT_REGISTRY_REL = "docs/demos/wf-trial-model-specs.yaml";
+
+const DEFAULT_REGISTRY_REL = AHE_MODEL_SPECS_REL;
 
 const TIER_EMBEDDED_CONFIG_RE = /-(low|med|medium|high|xhigh|max)$/;
 
@@ -307,7 +309,7 @@ export function resolveWfTrialModelRef(harness, modelRef, registryPath, catalogP
   }
 
   const err = new Error(
-    `unknown model ref: ${ref} (see docs/demos/wf-trial-model-catalog.yaml; regen: node tools/bootstrap/sync-wf-trial-model-catalog.mjs)`,
+    `unknown model ref: ${ref} (see ${AHE_MODEL_CATALOG_REL}; regen: node tools/bootstrap/sync-wf-trial-model-catalog.mjs)`,
   );
   err.code = "UNKNOWN_MODEL_REF";
   throw err;

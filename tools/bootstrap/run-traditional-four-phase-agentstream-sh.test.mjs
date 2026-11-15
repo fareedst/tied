@@ -11,7 +11,7 @@ const FOUR_PHASE_INC = path.join(
   REPO_ROOT,
   "scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh",
 );
-const BATCH_TEMPLATE = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
+const BATCH_TEMPLATE = path.join(REPO_ROOT, "docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml");
 
 /**
  * [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] Facilitator wrapper operator help/diagnostics.
@@ -111,7 +111,7 @@ exit "\$ec"
   });
 
   it("T-BATCH-01 turn 4 documents envelope depth/backfill and turn 1 uses {{HARNESS}} [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", () => {
-    const template = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
+    const template = path.join(REPO_ROOT, "docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml");
     const body = fs.readFileSync(template, "utf8");
     assert.match(body, /\{\{HARNESS\}\}-agentstream-four-phase/);
     assert.match(body, /request_evidence_envelope_backfill/);
@@ -120,7 +120,7 @@ exit "\$ec"
   });
 
   it("T-SHELL-01 expands {{HARNESS}} per HARNESS env [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", () => {
-    const template = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
+    const template = path.join(REPO_ROOT, "docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml");
     const tmp = path.join(REPO_ROOT, "tools/bootstrap/.tmp-four-phase-harness-expand.yaml");
     const r = spawnSync(
       "bash",
@@ -137,7 +137,7 @@ exit "\$ec"
   });
 
   it("expands {{SKILL_ROOT}} per HARNESS [REQ-AGENTSTREAM_CLAUDE_WF_PARITY]", () => {
-    const template = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
+    const template = path.join(REPO_ROOT, "docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml");
     const tmp = path.join(REPO_ROOT, "tools/bootstrap/.tmp-four-phase-expand-test.yaml");
     const runExpand = (skillRoot) =>
       spawnSync(

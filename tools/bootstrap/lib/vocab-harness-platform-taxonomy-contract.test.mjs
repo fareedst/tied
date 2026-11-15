@@ -35,6 +35,8 @@ describe("harness platform taxonomy vocab [REQ-TIED_HARNESS_PLATFORM_TAXONOMY]",
     assert.match(text, /Three-layer placement/);
     assert.match(text, /Trial matrix dimensions/);
     assert.match(text, /vendor agent harness/);
+    assert.match(text, /docs\/agent-harness-evaluation\/config\/wf-trial-model-catalog\.yaml/);
+    assert.match(text, /docs\/agent-harness-evaluation\/catalogs\/catalog-traditional-workflow-trial-prompts\.md/);
   });
 
   it("T-HPT-XLATE-01: bundled xlate skill cites harness-platform-taxonomy", () => {
