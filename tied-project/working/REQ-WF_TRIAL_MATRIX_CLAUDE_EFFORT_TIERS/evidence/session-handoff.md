@@ -76,7 +76,7 @@
 | id | kind | status | blocks_current | evidence_link |
 | --- | --- | --- | --- | --- |
 | REQ-AGENT_HARNESS_EVALUATION_DOCS | REQ | in_progress | no | Accidentally included 2 tracker/handoff paths in `5afe7ddf`; may split or amend |
-| WF trial 4.2.2 readouts | facilitator | recorded | no | Sonnet **high** WF-01…03 @ 1794673200…1794675875 |
+| WF trial 4.2.2 readouts | facilitator | recorded | no | Sonnet **high** WF-01…07 (WF-05 repeat @ 1794735352; WF-06 @ 1794757449; WF-07 @ 1794761080) |
 | cohort comparison-table | publish | synced | no | `@publish-wf-trial-summaries` FACILITATOR-WF-PUBLISH-1794676924 |
 
 ---
@@ -104,8 +104,9 @@
 ## Do next
 
 1. **Optional:** Amend/split commit if sponsor wants `REQ-AGENT_HARNESS_EVALUATION_DOCS` files out of `5afe7ddf`.
-2. **New work:** record remaining Sonnet **high** WF-04…08 cells when disposable clients exist.
-3. **New work:** open fresh REQ for other dirty tree items (HMEP, agentstream scripts) — not part of this token.
+2. **Cohort record (2026-11-15):** Sonnet **`@high`** cells filled for WF-05 repeat (`1794735352`, commit `d88eb451`), WF-06 (`1794757449`), WF-07 (`1794761080`) — pending traceable commit in this handoff.
+3. **New work:** Sonnet **high** WF-08 when disposable client exists.
+4. **New work:** open fresh REQ for other dirty tree items (HMEP, agentstream scripts) — not part of this token.
 
 ---
 
