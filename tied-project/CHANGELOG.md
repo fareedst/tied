@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Git worktree × parallel TIED (non-tied plan)** — Analysis and operator checklists for worktrees vs distributed `tied-project/` merge cost, LangGraph P6, and disposable clients; slug [`git-worktree-parallel-tied`](tied-project/non-tied-plans/git-worktree-parallel-tied/PLAN.md) (f20x essay cross-ref).
+
 - **PROMPT-WF-05/08/09 facilitator readouts (Claude Haiku 5.5 effort tiers @ 1794879357, 1794882821, 1794880253)** — WF-05 **low** **complete** (**21/21**; **`4821cd8`**); WF-08 **medium** **complete** (**6/6**; **`29b348a`**; supersedes split @ 1794605074); WF-09 **low** **incomplete** (**8/8** uncommitted; CITDP close_out blocked). Catalog via `@record-wf-trial`; registry via `@publish-wf-trial-summaries`.
 
 - **PROMPT-WF-04/05 facilitator readouts (Claude Haiku 5.5 `high` repeat @ 1794868809, 1794870183)** — WF-04 **workflow complete (machine)** (**28/28**; **`9d96ac5`**); WF-05 **workflow complete (machine)** (**14/14**; **`d5c759c`**); supersedes incomplete/split cells @ 1794853434 / 1794856466. Catalog via `@record-wf-trial`; registry via `@publish-wf-trial-summaries`.

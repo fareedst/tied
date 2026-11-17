@@ -1,0 +1,4 @@
+docs(non-tied): add git worktree × parallel TIED analysis plan
+
+Operator guidance for when worktrees help distributed tied-project YAML
+versus merge/MCP-path bottlenecks; links LangGraph P6 and f20x worktree essay.
