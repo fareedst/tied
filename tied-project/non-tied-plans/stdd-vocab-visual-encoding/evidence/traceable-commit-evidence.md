@@ -51,7 +51,7 @@ apply on workflow and layer-stack diagrams (non-TIED slug).
 
 | SHA | Scope |
 | --- | --- |
-| _(pending)_ | This table |
+| `aebb4e44` | Scoped paths in scope table above (19 files) |
 
 ## Close-out
 
