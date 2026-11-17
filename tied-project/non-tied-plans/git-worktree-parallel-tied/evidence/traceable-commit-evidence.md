@@ -7,3 +7,5 @@
 **CITDP:** None (optional draft deferred).
 
 **QA:** Document checklist in `test-strategy.md` verified against `PLAN.md` on 2026-11-17 (`@non-tied-close`).
+
+**Commit:** `0d87669f` on `main` (scoped paths only; no push).
