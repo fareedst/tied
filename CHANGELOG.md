@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **LangChain goal engineering Wave 3 ([REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3])** — Feedback-scope compose guide, operator checklist, matrix §2 row **20**, bootstrap contract tests; close_out **allowed** (minimal, advisory). Plan: [PLAN.md](tied-project/working/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3/PLAN.md).
+
 - **Agent harness evaluation docs ([REQ-AGENT_HARNESS_EVALUATION_DOCS])** — Facilitator corpus under [`docs/agent-harness-evaluation/`](docs/agent-harness-evaluation/README.md); path module + vocab contract tests; see [tied-project CHANGELOG](tied-project/CHANGELOG.md).
 
 - **Harness platform sponsor taxonomy ([REQ-TIED_HARNESS_PLATFORM_TAXONOMY])** — Sponsor ↔ TIED vocabulary for benchmarking and `/xlate`; see [tied-project CHANGELOG](tied-project/CHANGELOG.md).

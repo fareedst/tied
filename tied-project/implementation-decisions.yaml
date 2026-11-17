@@ -3008,6 +3008,15 @@ IMPL-TIED_JEV_TOOL_SAFETY_GATING:
   detail_file: "implementation-decisions/IMPL-TIED_JEV_TOOL_SAFETY_GATING.yaml"
   name: "Harness tool safety gating implementation"
   status: "Active"
+IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
+  detail_file: "implementation-decisions/IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3.yaml"
+  name: "LangChain goal engineering Wave 3 doc maintenance"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    requirements:
+      - "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
 IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3:
   detail_file: "implementation-decisions/IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml"
   name: "LangWatch Wave 3 doc-compose implementation"

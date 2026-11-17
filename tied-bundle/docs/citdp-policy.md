@@ -143,6 +143,10 @@ A **hinge field** is a CITDP map that is simultaneously measurement for the agen
 
 Placeholder values (`~`, empty strings) are invalid. The checklist gate emits `hinge_field_incomplete:<dotted.path>` — **warn-only** under `gate_policy: advisory`; **blocking** under `strict-candidate` or `strict-approved`. Instances include adversarial inquiry waivers, `completion_criteria.strict_approval`, BBCE `shared_code_justification`, residual risk, and `disjoint_verifier_waiver`. See `tied-project/vocab/sponsor-agent-relationship.md`.
 
+## Goal-aligned scope literacy
+
+Behavior-changing CITDP records should state **goal-aligned scope** in `change_definition`: what single REQ or checklist item the agent session optimizes, and which **tacit context** zones (sponsor taste, client KPI, brand limits — **LangChain-reported** examples) sit outside written IMPL until charter/selection lane or vocab RECORD captures them. Batch review like a **motion** (one tracker slug batch), not per-file micro-scope. Use [goal-engineering-feedback-scope-compose.md](goal-engineering-feedback-scope-compose.md) and the [goal-aligned scope operator checklist](../../tied-project/working/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3/goal-aligned-scope-operator-checklist.md); pair [LangChain harness × TIED](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md) for trace loops. Label vendor KPI narratives **`not_measured`**. **No new required YAML keys in v1.**
+
 ## References
 
 - `tied-bundle/docs/processes.md` § `[PROC-CITDP]` (especially step 8 — persistence).

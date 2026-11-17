@@ -21,13 +21,9 @@ function countSection2DataRows(text) {
 }
 
 describe("methodology composition matrix LangWatch row [REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3]", () => {
-  it("has exactly 18 §2 data rows including LangWatch agent refactor row 18", () => {
+  it("includes LangWatch agent refactor row 18 identity (global §2 inventory owned by goal-engineering row test)", () => {
     assert.ok(fs.existsSync(matrixPath), `missing matrix: ${matrixPath}`);
     const text = fs.readFileSync(matrixPath, "utf8");
-    assert.match(text, /§2 \*\*18\*\* rows/);
-    assert.match(text, /exactly \*\*18\*\* data rows/);
-    const rowNumbers = countSection2DataRows(text);
-    assert.deepEqual(rowNumbers, Array.from({ length: 18 }, (_, i) => i + 1));
     assert.ok(
       text.includes("LangWatch") && text.includes("agent-directed refactor"),
       "row 18 framework label missing"

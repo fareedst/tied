@@ -1,0 +1,12 @@
+# Draft CITDP — non-tied plan track only (not promoted to tied-project/citdp/)
+change_class: comparisons_doc_only
+depth_tier: minimal
+gate_policy: advisory
+profile_depth: not_measured
+request_token: DOC-LANGCHAIN-GOAL-ENGINEERING-COMPARISON
+tied_tokens_new: []
+source_url: https://www.langchain.com/blog/goal-engineering
+wave: "1-2"
+notes: >
+  LangChain goal engineering outreach; Wave 3 matrix row 20 and REQ behavior Defer.
+  tied_checklist_gate_validate not invoked for doc-complete claims.

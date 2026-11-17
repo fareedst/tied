@@ -10,6 +10,7 @@
 | **Analysis (sibling)** | [LangChain harness engineering × TIED — agent management lens](langchain-harness-engineering-vs-tied-agent-management.md) |
 | **Related analysis (sibling)** | [Traefik harness vs platform × TIED — agent management lens](traefik-harness-platform-vs-tied-agent-management.md) (harness/platform seam mental model) |
 | **Related capture (sibling)** | [traefik-harness-engineering-vs-platform-engineering.md](traefik-harness-engineering-vs-platform-engineering.md) (cites this study in opening narrative) |
+| **Related capture (sibling)** | [langchain-goal-engineering.md](langchain-goal-engineering.md) (goal scope + review UX — distinct from harness tuning) |
 
 ![Improving Deep Agents with harness engineering](https://cdn.prod.website-files.com/65c81e88c254bb0f97633a71/69cba9e8e691fa7cd1fac872_Screenshot-2026-02-12-at-12.25.20---PM.png)
 

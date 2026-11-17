@@ -1,0 +1,48 @@
+REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
+  rationale:
+    benefits:
+      - "Explicit feedback-scope vs gate authority"
+      - "Pair-read harness row 15"
+    problems_solved:
+      - "Chat approval mistaken for gates"
+      - "Matrix row 20 Defer"
+      - "No bundle guide for goal/motion literacy"
+    why: "LangChain Goal Engineering × TIED Wave 2 deferred Wave 3; operators need goal-aligned scope and tacit-context literacy plus matrix row 20."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    related_to:
+      - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+  satisfaction_criteria:
+    - criterion: "citdp-policy goal-aligned scope literacy pointer"
+      id: "SC-LGE-CITDP"
+      metric: "Contract test marker"
+    - criterion: "client-development-index Quick reads links compose guide and comparisons"
+      id: "SC-LGE-INDEX"
+      metric: "Link audit in contract test"
+    - criterion: "goal-aligned scope operator checklist committed under working folder"
+      id: "SC-LGE-CHECKLIST"
+      metric: "File + link audit"
+    - criterion: "goal-engineering-feedback-scope-compose.md passes contract test"
+      id: "SC-LGE-GUIDE"
+      metric: "goal-engineering-feedback-scope-compose-doc.test.mjs"
+    - criterion: "LangChain goal comparison Phase 1 Implemented with REQ back-link"
+      id: "SC-LGE-COMPOSE"
+      metric: "Link audit"
+    - criterion: "Legacy matrix row tests reconciled"
+      id: "SC-LGE-MATRIX-TESTS"
+      metric: "Bootstrap doc test battery"
+    - criterion: "Matrix §2 row 20 + MCM LEAP 19→20"
+      id: "SC-LGE-MATRIX"
+      metric: "methodology-composition-matrix-goal-engineering-row.test.mjs"
+    - criterion: "tied_validate_consistency after implement"
+      id: "SC-LGE-TRACE"
+      metric: "tied_validate_consistency"
+  traceability:
+    architecture:
+      - "ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    implementation:
+      - "IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"

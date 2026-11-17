@@ -2416,6 +2416,15 @@ ARCH-TIED_JEV_TOOL_SAFETY_GATING:
   detail_file: "architecture-decisions/ARCH-TIED_JEV_TOOL_SAFETY_GATING.yaml"
   name: "Harness tool safety gating architecture"
   status: "Active"
+ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
+  detail_file: "architecture-decisions/ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3.yaml"
+  name: "LangChain goal engineering Wave 3 architecture"
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    requirements:
+      - "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
 ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3:
   detail_file: "architecture-decisions/ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml"
   name: "LangWatch Wave 3 doc-compose architecture"

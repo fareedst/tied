@@ -1,0 +1,10 @@
+feat(comparisons): LangChain goal engineering Wave 3 compose + matrix row 20
+
+Doc-compose for goal-aligned scope and feedback-batch literacy (compose guide,
+operator checklist, citdp-policy pointer, client index), methodology-composition
+matrix §2 row 20, and REQ/ARCH/IMPL traceability with bootstrap contract tests.
+
+REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3 · ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3 ·
+IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3
+
+Completion signals: close_out gate allowed; envelope blocking gaps 0 (minimal, advisory).

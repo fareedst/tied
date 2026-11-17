@@ -1,4 +1,10 @@
 REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  description: "Sponsor-facing outreach artifact: one markdown matrix mapping QMM Loop 1/2/3 × well-known and QMM methods (§1, exactly 27 rows) plus Layer C adjacent frameworks (§2, exactly 20 rows). Prefill disposition, tied_center_of_gravity, and evidence_refs from existing comparison docs; mechanism columns agent-drafted for sponsor review. Not ISO/CMMI certification or behavioral equivalence claims."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-17"
+      reason: "§2 row 20 LangChain goal engineering (REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3)"
   REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
     category: "Functional"
     description: "Sponsor-facing outreach artifact: one markdown matrix mapping QMM Loop 1/2/3 × well-known and QMM methods (§1, exactly 27 rows) plus Layer C adjacent frameworks (§2, exactly 18 rows). Prefill disposition, tied_center_of_gravity, and evidence_refs from existing comparison docs; mechanism columns agent-drafted for sponsor review. Not ISO/CMMI certification or behavioral equivalence claims."
@@ -49,4 +55,8 @@ REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
     validation_criteria:
       - coverage: "§1 inventory + §2 inventory + disposition vocabulary"
         method: "Manual row/column/link audit per tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/PLAN.md"
+  satisfaction_criteria:
+    - criterion: "docs/comparisons/methodology-composition-matrix.md exists with §0–§3, §1 exactly 27 data rows, §2 exactly 20 data rows."
+      id: "SC-MCM-DOC"
+      metric: "Row inventory script or manual count per working PLAN"
   status: "Implemented"

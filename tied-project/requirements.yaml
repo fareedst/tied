@@ -3351,6 +3351,17 @@ REQ-TIED_JEV_TOOL_SAFETY_GATING:
   name: "Jev harness tool safety gating (Blueprint D)"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
+  category: "Methodology"
+  detail_file: "requirements/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3.yaml"
+  name: "LangChain goal engineering Wave 3 (feedback-scope compose)"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    implementation:
+      - "IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
 REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3:
   category: "Methodology"
   detail_file: "requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml"

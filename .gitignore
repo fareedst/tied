@@ -58,6 +58,10 @@ docs/comparisons/*
 !docs/comparisons/morluto-rea-reverse-engineering-vs-tied-agent-management.md
 !docs/comparisons/open-specter-legal-workspace.md
 !docs/comparisons/open-specter-legal-workspace-vs-tied-agent-management.md
+!docs/comparisons/open-governance-cannot-sense.md
+!docs/comparisons/open-governance-cannot-sense-vs-tied-agent-management.md
+!docs/comparisons/langchain-goal-engineering.md
+!docs/comparisons/langchain-goal-engineering-vs-tied-agent-management.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

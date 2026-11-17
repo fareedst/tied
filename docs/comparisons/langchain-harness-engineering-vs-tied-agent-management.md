@@ -9,7 +9,7 @@
 | **Article capture (sibling)** | [cursor-continually-improving-agent-harness.md](cursor-continually-improving-agent-harness.md) — read-only capture; **reference only** |
 | **Status / date** | Outreach / analysis snapshot, **2026-10-21** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
 | **Executable follow-up** | [REQ-TIED_HARNESS_PLATFORM_SEAM](../../tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/PLAN.md), [authority-boundary operator checklist](../../tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/authority-boundary-operator-checklist.md) |
-| **Distinct from** | [Traefik harness/platform × TIED](traefik-harness-platform-vs-tied-agent-management.md) (three-layer **seam** mental model); [Cursor harness engineering × TIED](cursor-harness-engineering-vs-tied-agent-management.md) (production evals, online A/B, Keep Rate, tool-reliability ops); [Netflix observability ontology × TIED](netflix-ontology-driven-observability-vs-tied-agent-management.md) (operational identity graph vs empirical trace loop — matrix rows **15** / **17**); [TIED vs Harness²](tied-vs-harness2.md) (recursive **benchmark** harness optimization)—same English word *harness*, different subjects |
+| **Distinct from** | [LangChain goal engineering × TIED](langchain-goal-engineering-vs-tied-agent-management.md) (goal scope + review UX for tacit feedback—not trace/benchmark tuning); [Traefik harness/platform × TIED](traefik-harness-platform-vs-tied-agent-management.md) (three-layer **seam** mental model); [Cursor harness engineering × TIED](cursor-harness-engineering-vs-tied-agent-management.md) (production evals, online A/B, Keep Rate, tool-reliability ops); [Netflix observability ontology × TIED](netflix-ontology-driven-observability-vs-tied-agent-management.md) (operational identity graph vs empirical trace loop — matrix rows **15** / **17**); [TIED vs Harness²](tied-vs-harness2.md) (recursive **benchmark** harness optimization)—same English word *harness*, different subjects |
 | **TIED anchors (reference only)** | [AGENTS.md](../../AGENTS.md), [agent-req-implementation-checklist](../../tied-bundle/docs/agent-req-implementation-checklist.md), [fresh-client-prompt-activation-map](../../tied-bundle/docs/fresh-client-prompt-activation-map.md), [sponsor-agent-relationship](../../tied-project/vocab/sponsor-agent-relationship.md), [agentstream vocab](../../tied-project/vocab/agentstream.md), [agentstream README](../../mcp-server/packages/agentstream/README.md) |
 
 ---
@@ -292,6 +292,8 @@ Operator skim: [authority-boundary operator checklist](../../tied-project/workin
 ## Related documents
 
 - [LangChain article capture (sibling)](langchain-improving-deep-agents-harness-engineering.md)
+- [LangChain goal engineering × TIED (sibling)](langchain-goal-engineering-vs-tied-agent-management.md)
+- [LangChain goal engineering capture](langchain-goal-engineering.md)
 - [Cursor harness engineering × TIED — agent management lens](cursor-harness-engineering-vs-tied-agent-management.md)
 - [Cursor article capture (sibling)](cursor-continually-improving-agent-harness.md)
 - [Traefik harness/platform × TIED — agent management lens](traefik-harness-platform-vs-tied-agent-management.md)

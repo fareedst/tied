@@ -1,0 +1,24 @@
+ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
+  decision: "Canonical compose guide in tied-bundle/docs/goal-engineering-feedback-scope-compose.md; goal-aligned-scope checklist under working folder; citdp-policy literacy pointer; matrix §2 row 20; bootstrap contract tests; no Hone/Actively/KPI authority."
+  implementation_approach:
+    details:
+      - "MCM LEAP 19→20 in same change set"
+      - "No LangChain blog body in repo"
+      - "No new MCP gate tools"
+    summary: "Docs and bootstrap contract tests only."
+  rationale:
+    benefits:
+      - "LangChain-reported vs TIED-existing labeling"
+    problems_solved:
+      - "Conflating review UX with tied_verify"
+      - "Missing goal-aligned scope catalog"
+    why: "Compose-don't-replace per LangChain goal × TIED analysis; distinct from harness row 15."
+  related_decisions:
+    see_also:
+      - "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+  traceability:
+    implementation:
+      - "IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    requirements:
+      - "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"

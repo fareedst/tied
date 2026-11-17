@@ -1267,6 +1267,17 @@ ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
+  cross_references:
+    - "IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    - "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+  description: "Bundle doc compose architecture"
+  detail_file: "architecture-decisions/ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "LangChain goal engineering Wave 3 architecture"
+  type: "ARCH"
 ARCH-TIED_LAYERED_CLIENT_INSTALL:
   cross_references:
     - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
@@ -3253,6 +3264,17 @@ IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER:
   name: "Jev local decision provider implementation"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
+  cross_references:
+    - "ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    - "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+  description: "Doc contract tests and compose maintenance"
+  detail_file: "implementation-decisions/IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "LangChain goal engineering Wave 3 implementation"
   type: "IMPL"
 IMPL-TIED_LAYERED_CLIENT_INSTALL:
   cross_references:
@@ -5406,6 +5428,17 @@ REQ-TIED_JEV_LOCAL_DECISION_PROVIDER:
   name: "Jev local decision provider"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
+  cross_references:
+    - "ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    - "IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+  description: "Compose guide, checklist, matrix row 20, citdp literacy"
+  detail_file: "requirements/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "LangChain goal engineering Wave 3 feedback-scope compose"
   type: "REQ"
 REQ-TIED_LAYERED_CLIENT_INSTALL:
   cross_references:
