@@ -1,5 +1,6 @@
 /**
  * [REQ-AGENT_HARNESS_EVALUATION_DOCS] [IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS]
+ * [REQ-WF_TRIAL_EVALUATION_GUIDE] [IMPL-WF_TRIAL_EVALUATION_GUIDE]
  * Canonical relative and absolute paths for facilitator benchmarking docs.
  */
 import path from "node:path";
@@ -37,6 +38,9 @@ export const AHE_MODEL_SPECS_REL = `${AHE_ROOT_REL}/config/wf-trial-model-specs.
 /** @type {readonly string} */
 export const AHE_HARNESS_EVAL_REL = `${AHE_ROOT_REL}/harness-eval`;
 
+/** @type {readonly string} */
+export const AHE_WORKFLOW_TRIALS_GUIDE_REL = `${AHE_ROOT_REL}/workflow-trials-guide.md`;
+
 /**
  * @param {string} storeRoot repository root (stdd)
  * @returns {{
@@ -51,6 +55,7 @@ export const AHE_HARNESS_EVAL_REL = `${AHE_ROOT_REL}/harness-eval`;
  *   modelCatalogYaml: string;
  *   modelSpecsYaml: string;
  *   harnessEvalRoot: string;
+ *   workflowTrialsGuide: string;
  *   readme: string;
  *   operatorCheatsheet: string;
  * }}
@@ -73,6 +78,7 @@ export function resolveAhePaths(storeRoot) {
     modelCatalogYaml: path.join(root, "config", "wf-trial-model-catalog.yaml"),
     modelSpecsYaml: path.join(root, "config", "wf-trial-model-specs.yaml"),
     harnessEvalRoot: path.join(root, "harness-eval"),
+    workflowTrialsGuide: path.join(root, "workflow-trials-guide.md"),
     readme: path.join(root, "README.md"),
     operatorCheatsheet: path.join(root, "operator-cheatsheet.md"),
   };

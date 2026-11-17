@@ -2,7 +2,7 @@
 
 Human-readable catalogs for picking small programs and TIED-shaped build exercises. None of these pages register `[REQ-*]` tokens or imply universal maturity scores.
 
-**Facilitator benchmarking** (workflow trials, HMEP, cohort size tables): [Agent harness evaluation corpus](../agent-harness-evaluation/README.md) — vocabulary in [harness-platform-taxonomy.md](../../tied-project/vocab/harness-platform-taxonomy.md).
+**Facilitator benchmarking** (workflow trials, HMEP, cohort size tables): [Agent harness evaluation corpus](../agent-harness-evaluation/README.md) — how trials work in plain language: [workflow-trials-guide.md](../agent-harness-evaluation/workflow-trials-guide.md); vocabulary in [harness-platform-taxonomy.md](../../tied-project/vocab/harness-platform-taxonomy.md).
 
 ## Catalogs
 

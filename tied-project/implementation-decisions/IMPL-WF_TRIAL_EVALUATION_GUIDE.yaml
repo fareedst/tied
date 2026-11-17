@@ -1,0 +1,10 @@
+IMPL-WF_TRIAL_EVALUATION_GUIDE:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_EVALUATION_GUIDE"
+    requirements:
+      - "REQ-AGENT_HARNESS_EVALUATION_DOCS"
+      - "REQ-WF_TRIAL_EVALUATION_GUIDE"
+  decision: "Path constant and resolveAhePaths.workflowTrialsGuide; contract test SC-WF-EG-01..05."
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_EVALUATION_GUIDE-pseudocode.md"
+  implementation_approach: "Docs-primary deliverable with bootstrap regression guard."

@@ -10,6 +10,7 @@
 
 | Area | Document |
 | --- | --- |
+| **Public guide** (run · analyze · grade · summarize) | [workflow-trials-guide.md](workflow-trials-guide.md) |
 | WF prompts | [catalog-traditional-workflow-trial-prompts.md](catalogs/catalog-traditional-workflow-trial-prompts.md) |
 | Size + wall clock | [catalog-tied-size-and-trial-statistics.md](catalogs/catalog-tied-size-and-trial-statistics.md) |
 | Metering canary | [catalog-harness-metering-lite-workflow.md](catalogs/catalog-harness-metering-lite-workflow.md) |

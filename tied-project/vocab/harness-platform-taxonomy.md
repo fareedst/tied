@@ -57,7 +57,7 @@ workflow_trial_agentstream  →  tied agentstream  →  --harness cursor|claude 
 
 ## Trial matrix dimensions (benchmarking)
 
-Fair comparison: one disposable client per **(PROMPT-WF-NN × model configuration × harness profile)** ([`catalog-traditional-workflow-trial-prompts.md`](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md)). Facilitator corpus index: [`docs/agent-harness-evaluation/README.md`](../../docs/agent-harness-evaluation/README.md).
+Fair comparison: one disposable client per **(PROMPT-WF-NN × model configuration × harness profile)** ([`catalog-traditional-workflow-trial-prompts.md`](../../docs/agent-harness-evaluation/catalogs/catalog-traditional-workflow-trial-prompts.md)). Facilitator corpus index: [`docs/agent-harness-evaluation/README.md`](../../docs/agent-harness-evaluation/README.md). Public lifecycle narrative (grading, cohort summaries, not a leaderboard): [`workflow-trials-guide.md`](../../docs/agent-harness-evaluation/workflow-trials-guide.md).
 
 | Dimension | Env / flag | Example disposable tag segment |
 |-----------|------------|--------------------------------|

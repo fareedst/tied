@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trials public guide ([REQ-WF_TRIAL_EVALUATION_GUIDE], [ARCH-WF_TRIAL_EVALUATION_GUIDE], [IMPL-WF_TRIAL_EVALUATION_GUIDE])** — [workflow-trials-guide.md](../docs/agent-harness-evaluation/workflow-trials-guide.md) explains run · analyze · grade · cohort summaries (Reddit skeleton appendix); `AHE_WORKFLOW_TRIALS_GUIDE_REL` + `wf-trial-evaluation-guide-contract.test.mjs`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_EVALUATION_GUIDE/PLAN.md).
+
 - **Git worktree × parallel TIED (non-tied plan)** — Analysis and operator checklists for worktrees vs distributed `tied-project/` merge cost, LangGraph P6, and disposable clients; slug [`git-worktree-parallel-tied`](tied-project/non-tied-plans/git-worktree-parallel-tied/PLAN.md) (f20x essay cross-ref).
 
 - **PROMPT-WF-05/08/09 facilitator readouts (Claude Haiku 5.5 effort tiers @ 1794879357, 1794882821, 1794880253)** — WF-05 **low** **complete** (**21/21**; **`4821cd8`**); WF-08 **medium** **complete** (**6/6**; **`29b348a`**; supersedes split @ 1794605074); WF-09 **low** **incomplete** (**8/8** uncommitted; CITDP close_out blocked). Catalog via `@record-wf-trial`; registry via `@publish-wf-trial-summaries`.

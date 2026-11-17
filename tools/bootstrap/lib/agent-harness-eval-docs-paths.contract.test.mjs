@@ -15,6 +15,7 @@ import {
   AHE_REGISTRY_REL,
   AHE_ROOT_REL,
   AHE_WF_CATALOG_REL,
+  AHE_WORKFLOW_TRIALS_GUIDE_REL,
   resolveAhePaths,
 } from "./agent-harness-eval-docs-paths.mjs";
 
@@ -29,6 +30,10 @@ describe("agent harness eval docs paths [REQ-AGENT_HARNESS_EVALUATION_DOCS]", ()
     assert.equal(AHE_COMPARISON_TABLE_REL, `${AHE_ROOT_REL}/cohort/comparison-table.md`);
     assert.equal(AHE_COHORT_EVIDENCE_REL, `${AHE_ROOT_REL}/cohort/evidence`);
     assert.equal(AHE_HARNESS_EVAL_REL, `${AHE_ROOT_REL}/harness-eval`);
+    assert.equal(
+      AHE_WORKFLOW_TRIALS_GUIDE_REL,
+      `${AHE_ROOT_REL}/workflow-trials-guide.md`,
+    );
   });
 
   it("T-AHE-PATH-02: resolveAhePaths joins under store root", () => {
@@ -36,6 +41,7 @@ describe("agent harness eval docs paths [REQ-AGENT_HARNESS_EVALUATION_DOCS]", ()
     assert.equal(p.root, path.join(repoRoot, AHE_ROOT_REL));
     assert.equal(p.readoutsDir, path.join(repoRoot, AHE_READOUTS_REL));
     assert.equal(p.comparisonTable, path.join(repoRoot, AHE_COMPARISON_TABLE_REL));
+    assert.equal(p.workflowTrialsGuide, path.join(repoRoot, AHE_WORKFLOW_TRIALS_GUIDE_REL));
   });
 
   it("T-AHE-MV-01: corpus directories exist on disk", () => {

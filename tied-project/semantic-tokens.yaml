@@ -1596,6 +1596,10 @@ ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   description: "cursor-stream session extractor and live-executor retry boundary"
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   type: "architecture"
+ARCH-WF_TRIAL_EVALUATION_GUIDE:
+  description: "Synthesis doc beside AHE corpus with contract-tested sections"
+  token: "ARCH-WF_TRIAL_EVALUATION_GUIDE"
+  type: "architecture"
 ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
   description: "Process log classifier seam before phase handoff gate"
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL.yaml"
@@ -3579,6 +3583,10 @@ IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
     - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
   description: "executor-run wiring and T-LIVE-SESSION tests"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
+  type: "implementation"
+IMPL-WF_TRIAL_EVALUATION_GUIDE:
+  description: "AHE_WORKFLOW_TRIALS_GUIDE_REL and evaluation guide contract test"
+  token: "IMPL-WF_TRIAL_EVALUATION_GUIDE"
   type: "implementation"
 IMPL-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
   description: "wf-trial-abort-signal.inc.sh and orchestrator hooks"
@@ -5795,6 +5803,10 @@ REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
     - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
   description: "Cursor live session oracle and bounded turn retry for WF four-phase trials"
   detail_file: "requirements/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
+  type: "requirement"
+REQ-WF_TRIAL_EVALUATION_GUIDE:
+  description: "Public workflow-trials-guide for WF run, grade, and cohort summaries"
+  token: "REQ-WF_TRIAL_EVALUATION_GUIDE"
   type: "requirement"
 REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
   description: "Classify provider aborts from orchestrator process logs before handoff gate errors"

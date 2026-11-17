@@ -1,0 +1,13 @@
+ARCH-WF_TRIAL_EVALUATION_GUIDE:
+  consequences:
+    negative:
+      - "Guide must be updated when AHE layout changes"
+    positive:
+      - "Drift caught by contract test"
+      - "External readers see one entry point"
+  cross_references:
+    implementation:
+      - "IMPL-WF_TRIAL_EVALUATION_GUIDE"
+    requirements:
+      - "REQ-WF_TRIAL_EVALUATION_GUIDE"
+  decision: "Single synthesis doc workflow-trials-guide.md; normative prompt tables remain in catalog; Reddit skeleton as final section only."

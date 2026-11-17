@@ -1,0 +1,26 @@
+REQ-WF_TRIAL_EVALUATION_GUIDE:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_EVALUATION_GUIDE"
+    implementation:
+      - "IMPL-WF_TRIAL_EVALUATION_GUIDE"
+  satisfaction_criteria:
+    - criterion: "AHE README links guide"
+      id: "SC-WF-EG-05"
+      metric: "contract test"
+    - criterion: "Allowlisted links resolve"
+      id: "SC-WF-EG-04"
+      metric: "contract test"
+    - criterion: "Guide at AHE_WORKFLOW_TRIALS_GUIDE_REL"
+      id: "SC-WF-EG-01"
+      metric: "wf-trial-evaluation-guide-contract.test.mjs"
+    - criterion: "Leaderboard guardrails and HMEP boundary"
+      id: "SC-WF-EG-03"
+      metric: "contract test"
+    - criterion: "Normative H2 sections"
+      id: "SC-WF-EG-02"
+      metric: "contract test"
+    - criterion: "TIED consistency"
+      id: "SC-WF-EG-06"
+      metric: "tied_validate_consistency"
+  summary: "Committed narrative under docs/agent-harness-evaluation/workflow-trials-guide.md with README index link, path module constant, and bootstrap contract test."

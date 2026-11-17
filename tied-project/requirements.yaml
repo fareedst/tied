@@ -4674,6 +4674,15 @@ REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
       - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
     implementation:
       - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+REQ-WF_TRIAL_EVALUATION_GUIDE:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_EVALUATION_GUIDE"
+    implementation:
+      - "IMPL-WF_TRIAL_EVALUATION_GUIDE"
+  detail_file: "requirements/REQ-WF_TRIAL_EVALUATION_GUIDE.yaml"
+  status: "Implemented"
+  summary: "Public workflow-trials-guide.md synthesizing WF run, analysis, grading, and cohort summaries for sponsors and external readers."
 REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL:
   description: "Classify four-phase provider aborts (session limit, missing session_id) from orchestrator process logs before phase-handoff gate errors."
   detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL.yaml"
