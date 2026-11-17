@@ -1,0 +1,33 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ AC-3 header-only input returns an empty array (0.541541ms)
+✔ AC-4 empty string returns an empty array (0.044ms)
+✔ AC-4 input of only line terminators returns an empty array (0.049209ms)
+✔ AC-5 one data row returns an array of length 1 (0.160917ms)
+✔ AC-6 a short data row throws RangeError naming the 1-based row (0.279083ms)
+✔ AC-6 a short row is not padded (0.061917ms)
+✔ AC-7 a long data row throws RangeError naming the 1-based row (0.19225ms)
+✔ AC-12 a blank interior line throws RangeError when header has several columns (0.078ms)
+✔ AC-12 a blank interior line yields "" when header has exactly one column (0.086542ms)
+✔ AC-1 maps each data row to an object keyed by header names (0.576375ms)
+✔ AC-2 keeps every value a string with no coercion (0.130417ms)
+✔ AC-8 quoted fields may contain commas and line breaks (0.159ms)
+✔ AC-8 a doubled quote inside a quoted field is one quote character (0.197792ms)
+✔ AC-9 accepts CRLF line endings (0.101417ms)
+✔ AC-9 a trailing line terminator does not create an extra row (0.079875ms)
+✔ AC-9 a bare CR that is not part of CRLF stays in the cell (0.062458ms)
+✔ AC-10 header cells are used verbatim with no trimming or case folding (0.043667ms)
+✔ AC-10 duplicate header names throw Error (0.19325ms)
+✔ AC-10 one empty header name is a valid key (0.07825ms)
+✔ AC-10 a second empty header name is a duplicate and throws (0.05075ms)
+✔ AC-11 an unterminated quoted field throws Error (0.049042ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 110.2035

@@ -1,0 +1,40 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ SC-CSV-01: header cells become keys in column order and every value is a string (0.961584ms)
+✔ SC-CSV-01: D-4 header names and cell values keep surrounding spaces (no trimming) (0.068375ms)
+✔ SC-CSV-02: header-only input returns an empty array (0.047875ms)
+✔ SC-CSV-02: header-only input with a trailing LF or CRLF returns an empty array (0.05575ms)
+✔ SC-CSV-03: zero-byte input throws CsvEmptyInputError (0.142333ms)
+✔ SC-CSV-03: D-2 input that is only blank lines after BOM strip throws CsvEmptyInputError (0.046959ms)
+✔ SC-CSV-04: header plus one data record returns an array of length 1 mapping each header to its cell (0.05175ms)
+✔ SC-CSV-05: quoted fields may contain commas, CR, LF, and doubled quotes (RFC 4180) (0.048291ms)
+✔ SC-CSV-05: a field that is only doubled quotes decodes to a literal quote pair (0.058125ms)
+✔ SC-CSV-06: LF and CRLF terminators both produce the same rows (0.093959ms)
+✔ SC-CSV-06: a final terminator does not produce an extra data row (0.044333ms)
+✔ SC-CSV-07: blank lines outside quoted fields are skipped and produce no rows (0.142458ms)
+✔ SC-CSV-07: D-1 blank lines before the header are skipped; the first non-blank record is the header (0.051917ms)
+✔ SC-CSV-07: D-3 a line of spaces is a record, not a blank line (0.041042ms)
+✔ SC-CSV-08: a data record with a different cell count throws CsvRowWidthError naming the 1-based data row (0.258916ms)
+✔ SC-CSV-08: D-6 blank lines and the header are not counted in the width-error row number (0.069083ms)
+✔ SC-CSV-09: duplicate header names throw CsvDuplicateHeaderError (0.048333ms)
+✔ SC-CSV-09: empty header names throw CsvEmptyHeaderError (0.040458ms)
+✔ SC-CSV-09: D-5 header matching is exact and case-sensitive, so Id and id are distinct keys (0.032208ms)
+✔ SC-CSV-10: an unterminated quoted field throws CsvUnterminatedQuoteError (0.350167ms)
+✔ SC-CSV-11: an empty cell maps to the empty string, never undefined (0.048875ms)
+✔ SC-CSV-12: a leading UTF-8 BOM is stripped before the header is read (0.038041ms)
+✔ SC-CSV-12: D-9 a BOM that is not at the start of the text is kept as data (0.028833ms)
+✔ SC-CSV-13: the parser does not mutate its input and returns new arrays and objects on each call (0.109625ms)
+✔ SC-CSV-13: D-10 a header named __proto__ is an own property and does not write the prototype (0.04225ms)
+✔ D-7: a bare CR outside quotes (not followed by LF) is an ordinary cell character (0.02525ms)
+✔ D-8: text after a closing quote is kept literally (lenient, no error) (0.020417ms)
+✔ D-8: a bare quote in an unquoted cell is kept literally (lenient, no error) (0.017958ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 135.476667

@@ -1,0 +1,50 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ transition table (SC-JOB-SM-TABLE)
+  ✔ declares exactly the three states and two events (0.645792ms)
+  ✔ holds exactly the 2 legal entries of the 6 (state, event) pairs (0.088291ms)
+  ✔ exhaustively classifies every 3x2 pair as legal or rejected (0.198791ms)
+✔ transition table (SC-JOB-SM-TABLE) (1.316917ms)
+▶ transition() legal sequence (SC-JOB-SM-LEGAL)
+  ✔ applies idle -start-> running -finish-> done (0.054959ms)
+  ✔ accepts each legal pair individually (0.050916ms)
+✔ transition() legal sequence (SC-JOB-SM-LEGAL) (0.17375ms)
+▶ transition() illegal pairs (SC-JOB-SM-ILLEGAL)
+  ✔ rejects finish in idle with a documented IllegalTransitionError (0.111667ms)
+  ✔ rejects start in running with a documented IllegalTransitionError (0.04075ms)
+  ✔ rejects start in done with a documented IllegalTransitionError (0.036917ms)
+  ✔ rejects finish in done with a documented IllegalTransitionError (0.043625ms)
+  ✔ rejects inherited object keys used as events (0.090875ms)
+  ✔ rejects unknown and inherited-key states (JS callers) (0.064333ms)
+  ✔ rejects an unknown event (0.031875ms)
+✔ transition() illegal pairs (SC-JOB-SM-ILLEGAL) (0.535458ms)
+▶ IllegalTransitionError
+  ✔ exposes name, state, event and the documented message (0.052916ms)
+✔ IllegalTransitionError (0.09025ms)
+▶ canTransition() (SC-JOB-SM-PURE)
+  ✔ agrees with transition() for every pair and never throws (0.037083ms)
+  ✔ returns false rather than throwing for non-string runtime values (0.020791ms)
+✔ canTransition() (SC-JOB-SM-PURE) (0.084125ms)
+▶ purity and immutability (SC-JOB-SM-PURE)
+  ✔ freezes the table and every row (0.045291ms)
+  ✔ leaves the table unchanged after applying all 6 pairs (0.034334ms)
+  ✔ returns the same result for repeated calls (0.015208ms)
+✔ purity and immutability (SC-JOB-SM-PURE) (0.1265ms)
+▶ JobMachine
+  ✔ starts in idle (0.032916ms)
+  ✔ walks the legal sequence and returns each new state (SC-JOB-SM-LEGAL) (0.021916ms)
+  ✔ keeps its state after a rejected event (SC-JOB-SM-PURE) (0.040084ms)
+  ✔ reports the machine's current state in the rejection error (0.025708ms)
+  ✔ keeps independent machines independent (0.015792ms)
+  ✔ does not allow the state to be assigned from outside (0.025209ms)
+✔ JobMachine (0.209583ms)
+ℹ tests 24
+ℹ suites 7
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.199375

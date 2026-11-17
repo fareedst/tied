@@ -141,9 +141,9 @@ const SPOT_CHECKS = [
   {
     wf: "09",
     key: "claude:claude-haiku-5-5",
-    wallMins: "3m",
+    wallMins: "4m",
     gradesIncludes: "2.56 ·",
-    readoutIncludes: "1794582335",
+    readoutIncludes: "1794880253",
   },
   {
     wf: "09",

@@ -1,0 +1,99 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ operators
+  ✔ satisfies("1.1.9", ">=1.2.0") is false (0.41075ms)
+  ✔ satisfies("1.2.0", ">=1.2.0") is true (0.051875ms)
+  ✔ satisfies("1.2.1", ">=1.2.0") is true (0.035625ms)
+  ✔ satisfies("1.1.9", ">1.2.0") is false (0.038708ms)
+  ✔ satisfies("1.2.0", ">1.2.0") is false (0.037458ms)
+  ✔ satisfies("1.2.1", ">1.2.0") is true (0.027959ms)
+  ✔ satisfies("1.1.9", "<=1.2.0") is true (0.025458ms)
+  ✔ satisfies("1.2.0", "<=1.2.0") is true (0.03ms)
+  ✔ satisfies("1.2.1", "<=1.2.0") is false (0.040916ms)
+  ✔ satisfies("1.1.9", "<1.2.0") is true (0.058458ms)
+  ✔ satisfies("1.2.0", "<1.2.0") is false (0.057917ms)
+  ✔ satisfies("1.2.1", "<1.2.0") is false (0.025542ms)
+  ✔ satisfies("1.1.9", "=1.2.0") is false (0.024958ms)
+  ✔ satisfies("1.2.0", "=1.2.0") is true (0.015959ms)
+  ✔ satisfies("1.2.1", "=1.2.0") is false (0.016292ms)
+✔ operators (1.675959ms)
+▶ bare version
+  ✔ satisfies("1.2.0", "1.2.0") is true (0.033ms)
+  ✔ satisfies("1.2.1", "1.2.0") is false (0.01775ms)
+✔ bare version (0.091583ms)
+▶ boundaries
+  ✔ equality is accepted by >= and <= (0.023666ms)
+  ✔ equality is rejected by > and < (0.015125ms)
+  ✔ zero version is valid (0.020583ms)
+✔ boundaries (0.087666ms)
+▶ precedence
+  ✔ 1.10.0 is greater than 1.9.0 (numeric, not lexicographic) (0.024083ms)
+  ✔ major component dominates minor and patch (0.013625ms)
+  ✔ patch component compares numerically (0.013084ms)
+✔ precedence (0.081625ms)
+▶ whitespace
+  ✔ one ASCII space after the operator is accepted (0.023417ms)
+  ✔ leading and trailing whitespace is trimmed from both arguments (0.015792ms)
+  ✔ extra or tab whitespace inside an argument throws TypeError (0.130083ms)
+✔ whitespace (0.199792ms)
+▶ malformed input
+  ✔ comparator "1.2" throws TypeError (0.0645ms)
+  ✔ version "1.2" throws TypeError (0.016042ms)
+  ✔ comparator "1.2.3.4" throws TypeError (0.018458ms)
+  ✔ version "1.2.3.4" throws TypeError (0.010917ms)
+  ✔ comparator "v1.2.3" throws TypeError (0.017334ms)
+  ✔ version "v1.2.3" throws TypeError (0.011417ms)
+  ✔ comparator "1.2.3-beta" throws TypeError (0.017125ms)
+  ✔ version "1.2.3-beta" throws TypeError (0.011ms)
+  ✔ comparator "1.2.3+build" throws TypeError (0.010667ms)
+  ✔ version "1.2.3+build" throws TypeError (0.009917ms)
+  ✔ comparator "01.2.0" throws TypeError (0.010458ms)
+  ✔ version "01.2.0" throws TypeError (0.01775ms)
+  ✔ comparator "a.b.c" throws TypeError (0.01325ms)
+  ✔ version "a.b.c" throws TypeError (0.023375ms)
+  ✔ comparator "" throws TypeError (0.022791ms)
+  ✔ version "" throws TypeError (0.014292ms)
+  ✔ comparator ">=" throws TypeError (0.015125ms)
+  ✔ version ">=" throws TypeError (0.013291ms)
+  ✔ comparator "==1.2.0" throws TypeError (0.0205ms)
+  ✔ version "==1.2.0" throws TypeError (0.009833ms)
+  ✔ comparator "=>1.2.0" throws TypeError (0.011ms)
+  ✔ version "=>1.2.0" throws TypeError (0.008708ms)
+  ✔ comparator "~1.2.0" throws TypeError (0.008834ms)
+  ✔ version "~1.2.0" throws TypeError (0.012709ms)
+  ✔ comparator "^1.2.0" throws TypeError (0.009ms)
+  ✔ version "^1.2.0" throws TypeError (0.0135ms)
+  ✔ comparator "-1.2.0" throws TypeError (0.009041ms)
+  ✔ version "-1.2.0" throws TypeError (0.0105ms)
+  ✔ operator inside the version argument throws TypeError (0.021875ms)
+✔ malformed input (0.622667ms)
+▶ non-string arguments
+  ✔ version undefined throws TypeError (0.049916ms)
+  ✔ comparator undefined throws TypeError (0.014375ms)
+  ✔ version null throws TypeError (0.0085ms)
+  ✔ comparator null throws TypeError (0.008042ms)
+  ✔ version 1 throws TypeError (0.008084ms)
+  ✔ comparator 1 throws TypeError (0.007916ms)
+  ✔ version [object Object] throws TypeError (0.007708ms)
+  ✔ comparator [object Object] throws TypeError (0.007625ms)
+✔ non-string arguments (0.195667ms)
+▶ numeric range
+  ✔ Number.MAX_SAFE_INTEGER component is accepted (0.327458ms)
+  ✔ component above Number.MAX_SAFE_INTEGER throws TypeError (0.030625ms)
+✔ numeric range (0.388959ms)
+▶ result type
+  ✔ returns a strict boolean (0.024083ms)
+✔ result type (0.041875ms)
+▶ export surface
+  ✔ module exports exactly satisfies (0.32625ms)
+✔ export surface (0.348875ms)
+ℹ tests 67
+ℹ suites 10
+ℹ pass 67
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.021875

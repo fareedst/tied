@@ -1,0 +1,19 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ transition: legal single transition idle+start returns running (0.276042ms)
+✔ transition: legal sequence idle->running->stopped->running (0.048084ms)
+✔ transition: illegal transition throws IllegalTransitionError with state and event (0.157833ms)
+✔ transition: every illegal pair throws IllegalTransitionError (0.062458ms)
+✔ STATES and EVENTS are closed sets (0.216416ms)
+✔ transition: inherited key 'toString' as event is rejected (0.037459ms)
+✔ IllegalTransitionError: instanceof Error and name (0.03425ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 106.120167

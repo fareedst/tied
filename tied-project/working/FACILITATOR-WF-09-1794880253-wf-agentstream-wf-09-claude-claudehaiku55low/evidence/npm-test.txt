@@ -1,0 +1,20 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ resolves results in input order when items complete in reverse order (1.78075ms)
+✔ caps in-flight mappers at concurrency and starts the next only after one settles (0.783541ms)
+✔ runs every mapper at once when concurrency is omitted (0.354208ms)
+✔ returns an empty array for empty input without calling the mapper (0.096292ms)
+✔ passes the correct index as the second mapper argument (0.108708ms)
+✔ rejects with the first mapper error and starts no new mappers after it (0.490834ms)
+✔ rejects with TypeError and never calls the mapper for an invalid concurrency (0.128375ms)
+✔ treats a synchronous throw inside the mapper like a rejection (0.04925ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.897958

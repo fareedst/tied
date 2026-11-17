@@ -1,0 +1,31 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ [REQ-PRODUCER_CONSUMER_WIRING] consumer
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] arrival order is preserved (E7) (0.486375ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] a duplicate id throws naming the id and leaves state unchanged (E7) (0.149916ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] out-of-order ids are accepted (E7) (0.051917ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] received returns a copy; mutating it does not change the consumer (E9) (0.057417ms)
+✔ [REQ-PRODUCER_CONSUMER_WIRING] consumer (1.145333ms)
+▶ [REQ-PRODUCER_CONSUMER_WIRING] producer
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] ids start at 1 and increase by 1 (E1) (0.284ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] subscribers receive messages in subscription order (E2) (0.235625ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] unsubscribe stops delivery and a second unsubscribe is a no-op (E4) (0.054292ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] the same listener subscribed twice receives two deliveries (E4) (0.047958ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] a subscribe during dispatch does not receive the message being dispatched (E2) (0.050375ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] a listener throw propagates unchanged, skips later listeners, and still consumes the id (E1, E3) (0.142667ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] delivered messages are frozen and the same instance reaches every listener (E5) (0.050542ms)
+✔ [REQ-PRODUCER_CONSUMER_WIRING] producer (1.298459ms)
+▶ [REQ-PRODUCER_CONSUMER_WIRING] wiring
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] messages produced after connect reach the consumer as the same instances in order (0.320042ms)
+  ✔ [REQ-PRODUCER_CONSUMER_WIRING] the returned disconnect stops delivery to the consumer (0.239584ms)
+✔ [REQ-PRODUCER_CONSUMER_WIRING] wiring (0.916041ms)
+ℹ tests 13
+ℹ suites 3
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 112.051708

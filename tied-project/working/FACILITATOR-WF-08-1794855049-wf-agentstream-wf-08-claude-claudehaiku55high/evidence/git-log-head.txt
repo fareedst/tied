@@ -1,0 +1,1 @@
+fdf0b6582f260e6c5657c9b913625d96f22fd2e3 feat(state): add three-state two-event machine

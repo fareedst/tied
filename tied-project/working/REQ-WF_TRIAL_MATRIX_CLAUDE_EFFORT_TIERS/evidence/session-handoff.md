@@ -104,9 +104,9 @@
 ## Do next
 
 1. **Optional:** Amend/split commit if sponsor wants `REQ-AGENT_HARNESS_EVALUATION_DOCS` files out of `5afe7ddf`.
-2. **Cohort record (2026-11-15):** Sonnet **`@high`** cells — WF-05 repeat `d88eb451`, WF-06…07 `5de5b844` (`1794757449`, `1794761080`).
-3. **New work:** Sonnet **high** WF-08 when disposable client exists.
-4. **New work:** open fresh REQ for other dirty tree items (HMEP, agentstream scripts) — not part of this token.
+2. **Superseded (done):** Sonnet **`@high`** WF-08 @ `1794797980`; Haiku **`@high`** WF-01…08 cohort — see [facilitator cohort handoff](../../FACILITATOR-WF-TRIAL-COHORT/evidence/session-handoff.md) (2026-11-16).
+3. **New work:** open fresh REQ for other dirty tree items (HMEP, agentstream scripts) — not part of this token.
+4. **Store commit:** uncommitted facilitator readouts/registry from 2026-11-16 chat (sponsor-only).
 
 ---
 

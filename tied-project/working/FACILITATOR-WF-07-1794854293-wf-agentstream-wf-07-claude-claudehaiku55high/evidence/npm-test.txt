@@ -1,0 +1,24 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ loadConfig override precedence
+  ✔ replaces a default with a non-null override value (0.476667ms)
+  ✔ keeps the default for a key absent from the override (0.048125ms)
+  ✔ keeps the default when the override is an explicit null on a non-null default (0.038917ms)
+  ✔ keeps the default when the override is an explicit null on a null default (0.035958ms)
+  ✔ replaces the default with falsy non-null values (false, 0, empty string, empty array) (0.053167ms)
+  ✔ does not mutate the defaults or the override object (0.055666ms)
+  ✔ treats an override key holding undefined as absent and keeps the default (0.049625ms)
+  ✔ copies an override key that is not in defaults when its value is neither null nor undefined (0.040334ms)
+  ✔ returns a new object equal to defaults when overrides is undefined or null (0.063333ms)
+  ✔ replaces a nested object in defaults as a whole (shallow merge) and shares its reference (0.073833ms)
+✔ loadConfig override precedence (1.406166ms)
+ℹ tests 10
+ℹ suites 1
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.010625

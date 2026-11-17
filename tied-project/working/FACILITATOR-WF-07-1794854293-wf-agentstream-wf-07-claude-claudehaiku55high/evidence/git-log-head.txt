@@ -1,0 +1,1 @@
+8279f847f4d7f39cd2c1d4bccaf0f891ca32cad9 feat(config): add loadConfig merge

@@ -1,0 +1,40 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ valid index yields a set of ids (0.525083ms)
+✔ duplicate ids collapse to set membership (A3) (0.104792ms)
+✔ invalid JSON throws IndexParseError (0.186125ms)
+✔ non-object root (array or null) throws IndexParseError (0.065375ms)
+✔ missing allowed_ids throws IndexParseError (0.053917ms)
+✔ non-array allowed_ids throws IndexParseError (0.043792ms)
+✔ non-string entry throws IndexParseError (0.042042ms)
+✔ splits markers into matches and orphans against the allowed set (0.508042ms)
+✔ both lists sort by path, then line, then id (0.076542ms)
+✔ duplicate occurrences are counted per row (A7) (0.053958ms)
+✔ empty input yields empty lists (0.051375ms)
+✔ tree fixture reports literal matches and orphans and exits 1 (1.977042ms)
+✔ clean tree with only allowed markers exits 0 with (none) orphans (0.473167ms)
+✔ missing --index exits 2 with empty stdout (0.191583ms)
+✔ root that is a file, not a directory, exits 2 with empty stdout (0.147875ms)
+✔ malformed index exits 2 with empty stdout (0.297083ms)
+✔ --flag=value form is a usage error and exits 2 (0.063875ms)
+✔ unknown flag is a usage error and exits 2 (0.114125ms)
+✔ ts line comment yields a marker with its 1-based line number (0.696ms)
+✔ ts block comment spanning lines is tracked across lines (0.064625ms)
+✔ token inside a string literal with no comment is not a marker (0.053333ms)
+✔ python and shell honour hash line comments (0.06425ms)
+✔ markdown heading is not a comment; html comment is (0.051833ms)
+✔ multi-line html comment in markdown is tracked (0.039959ms)
+✔ duplicate occurrences on one line are each reported (A7) (0.043334ms)
+✔ unknown extension yields no markers (0.034208ms)
+✔ prints Matches and Orphans sections with counts and rows (0.407459ms)
+✔ empty sections print (none) (0.070459ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 146.283583

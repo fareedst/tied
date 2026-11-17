@@ -1,0 +1,29 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+✔ success: stdin is deduplicated to stdout and the exit code is 0 (0.4525ms)
+✔ --help prints the policy and non-guarantees to stdout and exits 0 (0.13775ms)
+✔ unsupported arguments exit 2 with usage on stderr and nothing on stdout (0.067375ms)
+✔ a read error exits 1 and reports the message on stderr (0.102083ms)
+✔ a write error exits 1 and reports the message on stderr (0.086959ms)
+✔ interleaved duplicates keep first appearances in order (0.436416ms)
+✔ all duplicates after the first pass are dropped (0.076917ms)
+✔ empty lines are lines; only the first empty line is kept (0.058042ms)
+✔ a trailing line without a final newline is still a line (0.076875ms)
+✔ comparison is exact: case, whitespace and CRLF are significant (0.087542ms)
+✔ empty input produces no output (0.054708ms)
+✔ multi-byte UTF-8 split across byte chunks decodes correctly (0.089708ms)
+✔ invalid UTF-8 is replaced with U+FFFD (documented non-guarantee) (0.085708ms)
+✔ each kept line is written before the input ends (2.53575ms)
+✔ splitLines joins partial lines across chunk boundaries (0.299625ms)
+✔ splitLines yields nothing for empty input and one empty line for a bare newline (0.049125ms)
+✔ the first-occurrence filter keeps the first copy and rejects later exact copies (0.032625ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 111.826875

@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-WF-05/08/09 facilitator readouts (Claude Haiku 5.5 effort tiers @ 1794879357, 1794882821, 1794880253)** — WF-05 **low** **complete** (**21/21**; **`4821cd8`**); WF-08 **medium** **complete** (**6/6**; **`29b348a`**; supersedes split @ 1794605074); WF-09 **low** **incomplete** (**8/8** uncommitted; CITDP close_out blocked). Catalog via `@record-wf-trial`; registry via `@publish-wf-trial-summaries`.
+
+- **PROMPT-WF-04/05 facilitator readouts (Claude Haiku 5.5 `high` repeat @ 1794868809, 1794870183)** — WF-04 **workflow complete (machine)** (**28/28**; **`9d96ac5`**); WF-05 **workflow complete (machine)** (**14/14**; **`d5c759c`**); supersedes incomplete/split cells @ 1794853434 / 1794856466. Catalog via `@record-wf-trial`; registry via `@publish-wf-trial-summaries`.
+
+- **PROMPT-WF-05…08 facilitator readouts (Claude Haiku 5.5 `high` @ 1794856466…1794855049)** — WF-06…08 **workflow complete (machine)**; WF-05 **split signal** (**28/28** uncommitted; close_out **blocked**). Catalog via `@record-wf-trial`.
+
+- **PROMPT-WF-01…04 facilitator readouts (Claude Haiku 5.5 `high` @ 1794845395…1794853434)** — WF-01…03 **workflow complete (machine)** (**67/67**, **17/17**, **13/13** tests; close_out **allowed**); WF-04 **workflow incomplete** (**0** tests; build-plan blocked). Catalog via `@record-wf-trial`; registry via `@publish-wf-trial-summaries`.
+
+- **PROMPT-WF-08 facilitator readout (Claude Sonnet 5.5 `high` @ 1794797980)** — **workflow complete** — **`a00eea9`**; **24/24** tests; close_out **allowed** (first Sonnet `@high` WF-08 matrix cell). Catalog via `@record-wf-trial`; registry via `@publish-wf-trial-summaries`.
+
 - **PROMPT-WF-07 facilitator readout (Claude Sonnet 5.5 `high` @ 1794761080)** — **workflow complete** — **`bbae47f`**; **118/118** tests; close_out **allowed** (first Sonnet `@high` WF-07 matrix cell). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.
 
 - **PROMPT-WF-06 facilitator readout (Claude Sonnet 5.5 `high` @ 1794757449)** — **workflow complete** — **`fe80244`**; **31/31** tests; close_out **allowed** (first Sonnet `@high` WF-06 matrix cell). Catalog + registry via `@record-wf-trial` / `@publish-wf-trial-summaries`.

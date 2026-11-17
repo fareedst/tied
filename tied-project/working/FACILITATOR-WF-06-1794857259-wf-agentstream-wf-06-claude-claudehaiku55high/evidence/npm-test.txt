@@ -1,0 +1,46 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ CONSTRUCT_TOKEN_BUCKET
+  ✔ starts full at burst capacity (0.261167ms)
+  ✔ works without an injected clock (default monotonic clock) (0.281917ms)
+✔ CONSTRUCT_TOKEN_BUCKET (0.889042ms)
+▶ TRY_CONSUME
+  ✔ allows a consume within burst and decrements remaining by n (0.265625ms)
+  ✔ defaults n to 1 (0.047791ms)
+  ✔ allows equality: tokens equal to n is allowed and leaves zero (0.035542ms)
+  ✔ denies without partial consumption when over limit (0.035583ms)
+  ✔ never throws or waits when a request is denied (0.080042ms)
+  ✔ retryAfterMs is ceil(shortfall / rate * 1000); rate 2 and shortfall 1 gives 500 (0.048958ms)
+  ✔ retryAfterMs is at least 1 on denial and 0 on allow (0.067042ms)
+✔ TRY_CONSUME (0.733291ms)
+▶ REFILL_TOKENS
+  ✔ refills continuously at rate tokens per second, including fractional amounts (0.072667ms)
+  ✔ never raises tokens above burst after idle time (0.033792ms)
+  ✔ a clock that moves backwards never reduces tokens (0.026208ms)
+✔ REFILL_TOKENS (0.202875ms)
+▶ AVAILABLE_TOKENS
+  ✔ returns current tokens without deducting (0.072292ms)
+✔ AVAILABLE_TOKENS (0.095583ms)
+▶ VALIDATE_RATE_AND_BURST
+  ✔ rejects rate that is 0, negative, NaN, or Infinity (0.393042ms)
+  ✔ rejects burst that is 0, 0.5, NaN, or Infinity (0.062083ms)
+  ✔ accepts burst of 1 and fractional burst of 2.5 (0.032833ms)
+✔ VALIDATE_RATE_AND_BURST (0.537875ms)
+▶ VALIDATE_REQUEST_TOKENS
+  ✔ rejects n that is 0, negative, NaN, or Infinity (0.045875ms)
+  ✔ rejects n greater than burst as a RangeError, not a denial (0.022083ms)
+  ✔ an invalid n throws without changing available() (0.031625ms)
+✔ VALIDATE_REQUEST_TOKENS (0.129834ms)
+▶ No I/O
+  ✔ the product module has no import or require of any module (3.361291ms)
+✔ No I/O (3.435ms)
+ℹ tests 20
+ℹ suites 7
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 110.456125

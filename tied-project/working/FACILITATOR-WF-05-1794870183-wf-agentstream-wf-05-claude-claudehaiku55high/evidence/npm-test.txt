@@ -1,0 +1,28 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ REQ-CSV_ROW_OBJECT_MAPPER csvToObjects
+  ✔ header-only file returns [] (0.776625ms)
+  ✔ fully empty input returns [] (0.118417ms)
+  ✔ one-data-row file returns one object (0.123041ms)
+  ✔ all values are strings (0.086417ms)
+  ✔ quoted commas, embedded newlines, doubled quotes (0.070417ms)
+  ✔ LF and CRLF accepted; trailing line terminator adds no row (0.072166ms)
+  ✔ field-count mismatch throws CsvRowLengthError with line number (short and long rows) (0.177917ms)
+  ✔ duplicate header throws CsvHeaderError (including two empty headers) (0.087ms)
+  ✔ unterminated quote throws CsvParseError; text after closing quote throws CsvParseError (0.093292ms)
+  ✔ zero-character lines skipped (leading, between, trailing) (0.076375ms)
+  ✔ a line of spaces only is not blank and fails the length check (0.138625ms)
+  ✔ key order follows header order (0.060833ms)
+  ✔ header named __proto__ becomes an own key (0.054333ms)
+  ✔ headers and values are not trimmed; quoted spaces are kept (0.07425ms)
+✔ REQ-CSV_ROW_OBJECT_MAPPER csvToObjects (2.813125ms)
+ℹ tests 14
+ℹ suites 1
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 142.366375
