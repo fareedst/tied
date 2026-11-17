@@ -41,4 +41,4 @@ FACILITATOR-WF-* handoffs, and CHANGELOG for Claude effort-tier matrix batch.
 
 | SHA | Scope |
 | --- | --- |
-| _(pending)_ | This batch |
+| `788b719b` | 117 files — readouts, receipts, registry/manifest, FACILITATOR-WF-*, CHANGELOG |

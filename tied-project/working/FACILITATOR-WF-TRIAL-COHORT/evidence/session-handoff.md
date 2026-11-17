@@ -38,7 +38,7 @@
 | workspace_root | `/Users/fareed/Documents/dev/chatgpt/stdd` |
 | execution_site | TIED methodology store |
 | TIED_BASE_PATH | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
-| git | `main` **ahead 25**; **large uncommitted** facilitator batch (readouts, registry, catalog, CHANGELOG, cohort receipts) — **no commit** this session unless sponsor asks |
+| git | `main` **ahead** of origin; facilitator batch **committed** `788b719b` (2026-11-16) — no push unless sponsor asks |
 | disposable clients root | `/Users/fareed/Documents/dev/test` |
 
 ---
@@ -63,7 +63,7 @@
 | Haiku WF-04 repeat @ 1794868809 | facilitator | **recorded** | no | [readout @ 1794868809](../../../../docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-04-claudehaiku55high-1794868809-wf-agentstream-wf-04-claude-claudehaiku55high.md) — **28/28**; supersedes incomplete @ 1794853434 |
 | Haiku WF-05 repeat @ 1794870183 | facilitator | **recorded** | no | [readout @ 1794870183](../../../../docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-05-claudehaiku55high-1794870183-wf-agentstream-wf-05-claude-claudehaiku55high.md) — **14/14**; supersedes split @ 1794856466 |
 | Haiku WF-04 repeat client (orphan) | facilitator | unrecorded | no | Disposable `1794867479-…` — cohort receipt only; superseded by `1794868809` recording |
-| Store git commit | sponsor | pending | no | All facilitator edits uncommitted |
+| Store git commit | sponsor | **done** | no | `788b719b` — see [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
 
 ---
 
@@ -94,7 +94,7 @@
 
 ## Do next
 
-1. **Sponsor commit (optional):** Stage facilitator batch (readouts, `catalog-traditional-workflow-trial-prompts.md`, registry, `CHANGELOG.md`, cohort `receipts/`, `FACILITATOR-WF-*` evidence). No push unless requested.
+1. ~~**Sponsor commit (optional)**~~ — **Done:** `788b719b`. No push unless requested.
 2. **Continue matrix:** Sonnet **high** WF-09…12 when disposable clients exist; Haiku **high** WF-09+ likewise.
 3. **Split cleanup:** Historical only — WF-04/05 Haiku high repeats recorded (see pending table).
 5. After new readouts: **`@publish-wf-trial-summaries`** (remember: **master table rows** for new catalog links are not auto-inserted — add rows then publish, or follow prior session pattern).
