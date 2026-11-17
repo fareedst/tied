@@ -1,0 +1,98 @@
+schemaVersion: visual-encoding-domains.v1
+plan: stdd-vocab-visual-encoding
+
+domains:
+  dom.tiedCorpus:
+    fill: "#e7f0ff"
+    stroke: "#003366"
+    classDef: domTiedCorpus
+  dom.agentSurface:
+    fill: "#e0f7fa"
+    stroke: "#006064"
+    classDef: domAgentSurface
+  dom.harnessBench:
+    fill: "#fff3e0"
+    stroke: "#e65100"
+    classDef: domHarnessBench
+  dom.evidenceAssurance:
+    fill: "#f3e5f5"
+    stroke: "#7b1fa2"
+    classDef: domEvidenceAssurance
+  dom.adaptivePractice:
+    fill: "#e8f5e9"
+    stroke: "#2e7d32"
+    classDef: domAdaptivePractice
+  dom.governanceChoice:
+    fill: "#fce4ec"
+    stroke: "#880e4f"
+    classDef: domGovernanceChoice
+  dom.metaVocab:
+    fill: "#f5f5f5"
+    stroke: "#616161"
+    classDef: domMetaVocab
+
+sub_roles:
+  dom.tiedCorpus.methodologyBundle:
+    fill: "#eceff1"
+    stroke: "#455a64"
+  dom.tiedCorpus.projectYaml:
+    fill: "#e7f0ff"
+    stroke: "#003366"
+  dom.tiedCorpus.tokenRegistry:
+    fill: "#c5cae9"
+    stroke: "#283593"
+  dom.evidenceAssurance.proofBoundary:
+    fill: "#ede7f6"
+    stroke: "#6a1b9a"
+  dom.metaVocab.junction:
+    fill: "#f5f5f5"
+    stroke: "#616161"
+
+layers:
+  layer.vocab:
+    fill: "#e8f5e9"
+    stroke: "#2e7d32"
+    classDef: layerVocab
+  layer.citdp:
+    fill: "#fff9c4"
+    stroke: "#f9a825"
+    classDef: layerCitdp
+  layer.req:
+    fill: "#e7f0ff"
+    stroke: "#003366"
+    classDef: layerReq
+  layer.arch:
+    fill: "#e1bee7"
+    stroke: "#6a1b9a"
+    classDef: layerArch
+  layer.impl:
+    fill: "#ffe0b2"
+    stroke: "#ef6c00"
+    classDef: layerImpl
+  layer.tests:
+    fill: "#b2dfdb"
+    stroke: "#00695c"
+    classDef: layerTests
+  layer.leap:
+    fill: "#f8bbd0"
+    stroke: "#c2185b"
+    classDef: layerLeap
+
+plan_roles:
+  plan.proposed:
+    fill: "#e7f0ff"
+    stroke: "#003366"
+    classDef: planProposed
+  plan.pending:
+    fill: "#fff3e0"
+    stroke: "#e65100"
+    classDef: planPending
+  plan.reference:
+    fill: "#eceff1"
+    stroke: "#455a64"
+    classDef: planReference
+
+edges:
+  edge.verified: solid
+  edge.derived: dashed
+  edge.declared: dotted

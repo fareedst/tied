@@ -1,0 +1,11 @@
+# CITDP — stdd-vocab-visual-encoding (non-TIED documentation track)
+# tied_tokens_new intentionally empty — no REQ/ARCH/IMPL minting in this slug.
+
+citdp:
+  slug: stdd-vocab-visual-encoding
+  tied_tokens_new: []
+  scope: |
+    Client vocabulary visual encoding: dom.* registry, term index, docs hub,
+    Tier A Mermaid apply. Pattern reference: hl7receiver vocab-domain-color-map.
+  verification:
+    - tied-project/non-tied-plans/stdd-vocab-visual-encoding/test-strategy.md

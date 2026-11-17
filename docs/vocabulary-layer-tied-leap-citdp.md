@@ -30,14 +30,23 @@ It helps to separate what each layer is for. They compose; they are not substitu
 
 ```mermaid
 flowchart TB
-  Sponsor["Sponsor / agent language"]
-  Vocab["Vocabulary — understanding"]
-  CITDP["CITDP — change analysis"]
-  REQ["REQ — intent locked"]
-  ARCH["ARCH"]
-  IMPL["IMPL pseudo-code"]
-  Tests["Tests + code"]
-  LEAP["LEAP — resync when tests/code diverge"]
+  %% palette: docs/visual-encoding-standards.md
+  classDef domGovernanceChoice fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+  classDef layerVocab fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+  classDef layerCitdp fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  classDef layerReq fill:#e7f0ff,stroke:#003366,stroke-width:2px
+  classDef layerArch fill:#e1bee7,stroke:#6a1b9a,stroke-width:2px
+  classDef layerImpl fill:#ffe0b2,stroke:#ef6c00,stroke-width:2px
+  classDef layerTests fill:#b2dfdb,stroke:#00695c,stroke-width:2px
+  classDef layerLeap fill:#f8bbd0,stroke:#c2185b,stroke-width:2px
+  Sponsor["Sponsor / agent language"]:::domGovernanceChoice
+  Vocab["Vocabulary — understanding"]:::layerVocab
+  CITDP["CITDP — change analysis"]:::layerCitdp
+  REQ["REQ — intent locked"]:::layerReq
+  ARCH["ARCH"]:::layerArch
+  IMPL["IMPL pseudo-code"]:::layerImpl
+  Tests["Tests + code"]:::layerTests
+  LEAP["LEAP — resync when tests/code diverge"]:::layerLeap
 
   Sponsor -->|"RESOLVE preferred terms"| Vocab
   Vocab --> CITDP
@@ -46,8 +55,10 @@ flowchart TB
   REQ --> ARCH --> IMPL --> Tests
   Tests -->|"disagreement"| LEAP
   LEAP -->|"IMPL first, then ARCH/REQ"| IMPL
-  LEAP -.->|"names shift"| Vocab
+  LEAP -.->|"names shift · edge.derived"| Vocab
 ```
+
+**Visual encoding:** `layer.*` stack (vocabulary → LEAP); **GovernanceChoice** = sponsor language; dashed LEAP→Vocab = `edge.derived`. Registry: [visual-encoding-standards.md](visual-encoding-standards.md).
 
 ---
 

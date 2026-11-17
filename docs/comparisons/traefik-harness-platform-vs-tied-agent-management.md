@@ -167,6 +167,11 @@ Traefik’s “application team owns harness; platform owns fleet governance” 
 
 ```mermaid
 flowchart TB
+  %% palette: docs/visual-encoding-standards.md
+  classDef domHarnessBench fill:#fff3e0,stroke:#e65100,stroke-width:2px
+  classDef domTiedCorpus fill:#e7f0ff,stroke:#003366,stroke-width:2px
+  classDef domAgentSurface fill:#e0f7fa,stroke:#006064,stroke-width:2px
+  classDef domMetaVocab fill:#f5f5f5,stroke:#616161,stroke-width:2px
   subgraph traefikL1 [Traefik Layer 1 harness in-process]
     loop[Orchestration loop]
     prompts[System prompt assembly]
@@ -211,7 +216,13 @@ flowchart TB
   trace -.->|observations not gate authority| working
   traefikL2 -.->|client defers gateways| gw
   tiedCore --> sponsor
+  class traefikL1,traefikL2 domHarnessBench
+  class tiedCore domTiedCorpus
+  class tiedHarness domAgentSurface
+  class seam,egress domMetaVocab
 ```
+
+**Visual encoding:** `dom.harnessBench` = Traefik L1/L2; `dom.tiedCorpus` = authoritative TIED core; `dom.agentSurface` = harness-adjacent agent surfaces; dashed edges = `edge.derived`. [visual-encoding-standards.md](../visual-encoding-standards.md).
 
 ---
 

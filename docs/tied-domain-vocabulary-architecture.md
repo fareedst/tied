@@ -140,19 +140,24 @@ Versus the **glossary cross-link subgraph**, these projections share the same di
 
 ```mermaid
 flowchart LR
+  %% palette: docs/visual-encoding-standards.md
+  classDef domAdaptivePractice fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+  classDef domTiedCorpus fill:#e7f0ff,stroke:#003366,stroke-width:2px
+  classDef domTokenRegistry fill:#c5cae9,stroke:#283593,stroke-width:2px
+  classDef domEvidenceAssurance fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
   subgraph corpus["Glossary cross-link subgraph"]
-    R["scoped vocabulary load (PRELOAD)"]
-    G1["Glossary A"]
-    G2["Glossary B"]
+    R["scoped vocabulary load (PRELOAD)"]:::domAdaptivePractice
+    G1["Glossary A"]:::domAdaptivePractice
+    G2["Glossary B"]:::domAdaptivePractice
     G1 --- G2
   end
 
   subgraph stack["Traceability stack · high facet multiplicity"]
-    REQ["REQ detail"]
-    ARCH["ARCH detail"]
-    IMPL["IMPL detail"]
-    PC["essence_pseudocode blocks"]
-    F["distributed facets\ntests · code · lists"]
+    REQ["REQ detail"]:::domTokenRegistry
+    ARCH["ARCH detail"]:::domTokenRegistry
+    IMPL["IMPL detail"]:::domTokenRegistry
+    PC["essence_pseudocode blocks"]:::domTokenRegistry
+    F["distributed facets\ntests · code · lists"]:::domEvidenceAssurance
   end
 
   R --> G1
@@ -167,6 +172,8 @@ flowchart LR
   IMPL --> F
   PC --> F
 ```
+
+**Visual encoding:** glossaries = `dom.adaptivePractice`; stack tokens = `dom.tiedCorpus` / `tokenRegistry`; facets = `dom.evidenceAssurance`. [visual-encoding-standards.md](visual-encoding-standards.md).
 
 ### Dual-tree partition and merged-read skew risk
 
@@ -215,38 +222,46 @@ Mitigations (operational, not automatic):
 
 ```mermaid
 flowchart TB
+  %% palette: docs/visual-encoding-standards.md
+  classDef domAdaptivePractice fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+  classDef domTiedCorpus fill:#e7f0ff,stroke:#003366,stroke-width:2px
+  classDef layerCitdp fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  classDef layerTests fill:#b2dfdb,stroke:#00695c,stroke-width:2px
+  classDef layerLeap fill:#f8bbd0,stroke:#c2185b,stroke-width:2px
   subgraph overlap["Shared core (lexicon ∩ normalization)"]
-    DEF["Definitions & exact spellings"]
-    NORM["Preferred term · demoted synonyms"]
-    LINK["Define-once · cross-topic links"]
+    DEF["Definitions & exact spellings"]:::domAdaptivePractice
+    NORM["Preferred term · demoted synonyms"]:::domAdaptivePractice
+    LINK["Define-once · cross-topic links"]:::domAdaptivePractice
   end
 
   subgraph vocabOnly["Vocabulary control layer"]
-    RT["scoped vocabulary load (PRELOAD)"]
-    TP["vocabulary stewardship obligations"]
-    TR["glossary-to-atom projections → facets"]
-    OWN["dual-tree partition → merged-read skew risk"]
-    NOALG["Terms & relationships — not algorithms"]
+    RT["scoped vocabulary load (PRELOAD)"]:::domTiedCorpus
+    TP["vocabulary stewardship obligations"]:::domTiedCorpus
+    TR["glossary-to-atom projections → facets"]:::domTiedCorpus
+    OWN["dual-tree partition → merged-read skew risk"]:::domTiedCorpus
+    NOALG["Terms & relationships — not algorithms"]:::domAdaptivePractice
   end
 
-  VOCAB(("tied-project/vocab/\nCanonical glossary layer"))
+  VOCAB(("tied-project/vocab/\nCanonical glossary layer")):::domAdaptivePractice
 
   overlap --> VOCAB
   vocabOnly --> VOCAB
 
-  IMPLG["IMPL grammar\nINPUT/OUTPUT/PRE/POST/…"]
-  STACK["Traceability stack\nREQ → ARCH → IMPL → tests"]
-  CITDP["CITDP"]
-  LEAP["LEAP"]
+  IMPLG["IMPL grammar\nINPUT/OUTPUT/PRE/POST/…"]:::domAdaptivePractice
+  STACK["Traceability stack\nREQ → ARCH → IMPL → tests"]:::domTiedCorpus
+  CITDP["CITDP"]:::layerCitdp
+  LEAP["LEAP"]:::layerLeap
 
   VOCAB --> CITDP
   VOCAB --> STACK
-  IMPLG -.->|"distinct layer"| STACK
-  STACK --> Tests["tests + code"]
+  IMPLG -.->|"distinct layer · edge.declared"| STACK
+  STACK --> Tests["tests + code"]:::layerTests
   Tests --> LEAP
-  LEAP -.->|"concept renames"| VOCAB
+  LEAP -.->|"concept renames · edge.derived"| VOCAB
   LEAP --> STACK
 ```
+
+**Visual encoding:** glossary corpus = `dom.adaptivePractice`; control + stack = `dom.tiedCorpus`; CITDP/LEAP/tests = `layer.*`. [visual-encoding-standards.md](visual-encoding-standards.md).
 
 ---
 
