@@ -8,6 +8,7 @@
 | Software engineering degree (Sponsor-proposed) | [software-engineering-degree.md](../../../docs/comparisons/software-engineering-degree.md) | [software-engineering-degree-vs-tied.md](../../../docs/comparisons/software-engineering-degree-vs-tied.md) |
 | Open Governance “Cannot Sense” (Tony Fish) | [open-governance-cannot-sense.md](../../../docs/comparisons/open-governance-cannot-sense.md) | [open-governance-cannot-sense-vs-tied-agent-management.md](../../../docs/comparisons/open-governance-cannot-sense-vs-tied-agent-management.md) |
 | LangChain Goal Engineering | [langchain-goal-engineering.md](../../../docs/comparisons/langchain-goal-engineering.md) | [langchain-goal-engineering-vs-tied-agent-management.md](../../../docs/comparisons/langchain-goal-engineering-vs-tied-agent-management.md) |
+| Furmanov harness-profiler | [afurmanov-harness-profiler.md](../../../docs/comparisons/afurmanov-harness-profiler.md) | [afurmanov-harness-profiler-vs-tied-agent-management.md](../../../docs/comparisons/afurmanov-harness-profiler-vs-tied-agent-management.md) |
 
 **DOC working pattern:** see `tied-project/working/DOC-AI-SDLC-FACTORY-COMPARISON/`, `DOC-OPEN-ONTOLOGIES-COMPARISON/`, and `DOC-NDTP-AI-ONTOLOGY-EXTENSION-COMPARISON/` for refine trackers and handoff evidence.
 

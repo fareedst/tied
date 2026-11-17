@@ -1,0 +1,30 @@
+change_class: "comparisons_doc_only"
+gate_policy: "advisory"
+no_req_mint: true
+profile_depth: "not_measured"
+depth_tier: "minimal"
+request_token: "DOC-AFURMANOV-HARNESS-PROFILER-COMPARISON"
+plan_phase: "close-out-ready"
+steps:
+  session-bootstrap:
+    status: "done"
+  translate-sponsor-intent:
+    notes: "Furmanov harness-profiler × TIED; Wave 1 stub; matrix row Defer."
+    status: "done"
+  change-definition:
+    notes: "Wave 1 stub + Wave 2 + git allowlist; no project YAML."
+    status: "done"
+  impact-discovery:
+    notes: "non-tied-plans/afurmanov-harness-profiler-vs-tied/PLAN.md"
+    status: "done"
+  risk-assessment:
+    notes: "Do not treat profiler tokens or check-trace PASS as tied_verify proof; not_measured."
+    status: "done"
+  pre_implementation:
+    notes: "Outreach DOC; gate advisory attempt documented in evidence/refine-pass1-gate-note.md — not implement-complete."
+    status: "blocked"
+  implement-doc-deliverables:
+    status: "done"
+  test-strategy:
+    notes: "14-section parity, labels, links."
+    status: "done"

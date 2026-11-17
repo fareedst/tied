@@ -1,0 +1,6 @@
+docs(comparisons): Furmanov harness-profiler Waves 1–2 × TIED
+
+Add stub capture and 14-section agent-management analysis for Claude Code
+factory profiling (JSONL, context sequence, check-trace compose vs HTOL).
+Include git allowlist, HTOL source study, skill example row, and DOC working
+evidence—no REQ mint; matrix row remains Defer.
