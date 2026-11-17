@@ -1,0 +1,40 @@
+REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3:
+  rationale:
+    benefits:
+      - "Explicit harness PASS vs platform proof boundary"
+      - "Pair-read HTOL rows 14–15"
+    problems_solved:
+      - "check-trace mistaken for gates"
+      - "No compose guide for factory invariants"
+    why: "Furmanov harness-profiler × TIED Wave 2 deferred operator bundle for factory profile literacy (PASS vs structure, check-trace vs gates)."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+    related_to:
+      - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+  satisfaction_criteria:
+    - criterion: "citdp-policy factory-profile pointer"
+      id: "SC-FFP-CITDP"
+      metric: "Marker in contract test"
+    - criterion: "client-development-index Quick reads links"
+      id: "SC-FFP-INDEX"
+      metric: "Contract test"
+    - criterion: "Comparison Phase 2 Implemented with REQ back-link"
+      id: "SC-FFP-COMPOSE"
+      metric: "Link audit"
+    - criterion: "factory-profile-operator-checklist committed"
+      id: "SC-FFP-CHECKLIST"
+      metric: "File + link audit"
+    - criterion: "furmanov-factory-profile-compose.md passes contract test"
+      id: "SC-FFP-GUIDE"
+      metric: "furmanov-factory-profile-compose-doc.test.mjs"
+    - criterion: "tied_validate_consistency after implement"
+      id: "SC-FFP-TRACE"
+      metric: "tied_validate_consistency"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+    implementation:
+      - "IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"

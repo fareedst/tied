@@ -1100,6 +1100,17 @@ ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY:
   name: "Feedback report skill boundary"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3:
+  cross_references:
+    - "IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+    - "REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+  description: "Compose guide in tied-bundle/docs; checklist under working folder"
+  detail_file: "architecture-decisions/ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "Furmanov factory profile Wave 3 architecture"
+  type: "ARCH"
 ARCH-TIED_GIT_HYGIENE_SAFETY:
   cross_references:
     - "IMPL-TIED_GIT_HYGIENE"
@@ -3097,6 +3108,17 @@ IMPL-TIED_FILES:
   name: "TIED File Creation"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3:
+  cross_references:
+    - "ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+    - "REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+  description: "furmanov-factory-profile-compose-doc.test.mjs and compose guide markers"
+  detail_file: "implementation-decisions/IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "Furmanov factory profile Wave 3 implementation"
   type: "IMPL"
 IMPL-TIED_GIT_HYGIENE:
   cross_references:
@@ -5258,6 +5280,17 @@ REQ-TIED_FEEDBACK_REPORT_SKILL:
   description: "Bundled /feedback sponsor witness capture skill"
   name: "Feedback report skill"
   status: "Active"
+  type: "REQ"
+REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3:
+  cross_references:
+    - "ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+    - "IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+  description: "Factory profile literacy compose; matrix row 21 OutOfScope v1"
+  detail_file: "requirements/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "Furmanov factory profile Wave 3 compose"
   type: "REQ"
 REQ-TIED_GIT_HYGIENE:
   cross_references:

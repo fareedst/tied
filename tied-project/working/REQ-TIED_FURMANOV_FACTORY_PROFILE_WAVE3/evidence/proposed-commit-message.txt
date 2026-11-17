@@ -1,0 +1,3 @@
+feat(comparisons): Furmanov factory profile Wave 3 compose × TIED
+
+Add factory-profile compose guide, operator checklist, client index and citdp-policy pointers, comparison Phase 2–3 reciprocals, R+A+I traceability, and bootstrap doc contract tests—without matrix row 21 or JSONL bridge in v1.

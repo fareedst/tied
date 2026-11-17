@@ -1,0 +1,88 @@
+CITDP-REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3:
+  record_identity:
+    change_request_id: "REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-17"
+    title: "Furmanov factory profile Wave 3 — harness PASS vs structure compose"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  change_definition:
+    current_behavior: "Furmanov harness-profiler × TIED comparison (Waves 1–2) and HTOL source study exist; Wave 3 Phases 2–4 Defer; operators lack a bundle guide for factory profile literacy (PASS vs structural waste, check-trace vs gates)."
+    desired_behavior: "Committed compose guide, client-development-index pointer, factory-profile operator checklist, citdp-policy literacy pointer, comparison Phase 2–3 doc slice marked Implemented with REQ back-link—without Claude plugin mandate, matrix row, or agentstream JSONL bridge code in v1."
+    non_goals:
+      - "harness-profiler as TIED core dependency"
+      - "Furmanov-reported token tables as TIED effectiveness proof"
+      - "check-trace outcomes substituting tied_checklist_gate_validate"
+      - "methodology-composition-matrix §2 row without MCM LEAP"
+      - "agentstream ↔ .harness-profile JSONL bridge (Slice H) in v1"
+    success_criteria:
+      - "Build-plan satisfies SC-FFP-* per PLAN.md"
+      - "furmanov-factory-profile-compose-doc.test.mjs green"
+      - "PLAN slices A–F; G OutOfScope; H Defer"
+    unchanged_behavior:
+      - "Gate authority, MCP YAML path, default agentstream preflight off"
+      - "HTOL observation ≠ gate receipt"
+  impact_analysis:
+    methodology_surface_change_class: "none"
+    modules_or_boundaries: "tied-bundle/docs; client-development-index; working checklist; optional DOC skim"
+    tied_tokens_new:
+      - "REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+      - "ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+      - "IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+    tied_tokens_affected:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Guide claims plugin install mandatory for TIED clients"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Matrix §2 row 21 or JSONL bridge (Slice H) shipped without separate REQ"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/PLAN.md"
+        - "docs/comparisons/afurmanov-harness-profiler-vs-tied-agent-management.md"
+      falsification_questions:
+        - "Does every anti-pattern pair check-trace with gate receipts?"
+        - "Are Furmanov metrics labeled not_measured in guide?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Doc-compose Wave 3; no executable harness bridge in v1."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - id: "QEM-FFP-DOC"
+        proof_boundary: "traceability_structure"
+        evidence_method: "furmanov-factory-profile-compose-doc.test.mjs; tied_validate_consistency"
+        applicability: "applicable"
+  leap_feedback:
+    record_status: "complete"
+    divergences_from_analysis: "none"
+  evidence:
+    proof_boundaries:
+      - "traceability_structure"
+      - "human_decision"
+    command_seq:
+      - "pseudocode_validate IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3 gate_mode"
+      - "node --test tools/bootstrap/lib/furmanov-factory-profile-compose-doc.test.mjs"
+      - "tied_validate_consistency"
+  test_strategy:
+    documentation_only: true
+    mandatory_order: "RED contract test before guide finalization"
+  completion_criteria:
+    activation:
+      request_token: "REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+      phase: "pre_implementation"
+      scope:
+        - "tied-bundle/docs/furmanov-factory-profile-compose.md"
+        - "tied-bundle/docs/client-development-index.md"
+        - "tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/factory-profile-operator-checklist.md"

@@ -43,3 +43,4 @@ Summarizes themes used in the sibling analysis (**Furmanov-reported** / **target
 - Pair with [langchain-harness-engineering-vs-tied-agent-management.md](langchain-harness-engineering-vs-tied-agent-management.md) and [cursor-harness-engineering-vs-tied-agent-management.md](cursor-harness-engineering-vs-tied-agent-management.md) for fleet trace/eval compose (**different center of gravity**).
 - Effectiveness of harness-profiler patterns in TIED clients is **`not_measured`** unless an evaluation cohort is enrolled.
 - **Wave 2:** [afurmanov-harness-profiler-vs-tied-agent-management.md](afurmanov-harness-profiler-vs-tied-agent-management.md) — factory profiler × TIED agent management (**reference only**).
+- **Wave 3 Phase 2:** [furmanov-factory-profile-compose.md](../../tied-bundle/docs/furmanov-factory-profile-compose.md) — operator compose ([REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3](../../tied-project/requirements/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3.yaml)).

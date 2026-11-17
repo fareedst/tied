@@ -147,6 +147,14 @@ Placeholder values (`~`, empty strings) are invalid. The checklist gate emits `h
 
 Behavior-changing CITDP records should state **goal-aligned scope** in `change_definition`: what single REQ or checklist item the agent session optimizes, and which **tacit context** zones (sponsor taste, client KPI, brand limits — **LangChain-reported** examples) sit outside written IMPL until charter/selection lane or vocab RECORD captures them. Batch review like a **motion** (one tracker slug batch), not per-file micro-scope. Use [goal-engineering-feedback-scope-compose.md](goal-engineering-feedback-scope-compose.md) and the [goal-aligned scope operator checklist](../../tied-project/working/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3/goal-aligned-scope-operator-checklist.md); pair [LangChain harness × TIED](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md) for trace loops. Label vendor KPI narratives **`not_measured`**. **No new required YAML keys in v1.**
 
+## Factory profile literacy
+
+Behavior-changing CITDP records should list **factory invariants** beside in-scope proof when multi-skill or subagent sessions apply: expected skill/subagent order, fork vs inline boundaries, and where **harness PASS** lines differ from **`tied_verify`** or gate receipts. Name duplicate-work risks visible only in traces or profiles (**Furmanov-reported** literacy). Use [furmanov-factory-profile-compose.md](furmanov-factory-profile-compose.md) and the [factory profile operator checklist](../../tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/factory-profile-operator-checklist.md); pair [harness trace observation loop](harness-trace-observation-loop.md). **check-trace**-style skills are harness-adjacent—not **`tied_checklist_gate_validate`**. Label Furmanov token metrics **`not_measured`**. **No new required YAML keys in v1.**
+
+## Odourless zones literacy
+
+Behavior-changing CITDP records should name **odourless zones** in `change_definition`: harms that may be real but have **no default sensor** in current TIED reporting (vendor model drift, production traffic, board comfort, cropped enterprise ontologies). List those beside **in-scope** TIED proof (tests, gate receipts, YAML consistency, evidence envelopes). Use [governance-sensing-proof-boundary-compose.md](governance-sensing-proof-boundary-compose.md) and the [odourless zones operator checklist](../../tied-project/working/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3/odourless-zones-operator-checklist.md); label OpenGovernance-reported or organizational metrics **`not_measured`** unless a separate evaluation cohort is enrolled. **No new required YAML keys in v1.**
+
 ## References
 
 - `tied-bundle/docs/processes.md` § `[PROC-CITDP]` (especially step 8 — persistence).

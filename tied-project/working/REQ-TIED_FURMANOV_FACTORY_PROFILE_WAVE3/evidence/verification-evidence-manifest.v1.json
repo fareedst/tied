@@ -1,0 +1,85 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "pseudocode_validate IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3 gate_mode"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 128,
+      "exit_code": 127,
+      "id": "citdp-evidence-1",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/furmanov-factory-profile-compose-doc.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 299,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_validate_consistency"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 115,
+      "exit_code": 127,
+      "id": "citdp-evidence-3",
+      "result": "failed"
+    }
+  ],
+  "commit": "37823ca27d3dd1d4ca86eaa0ea06c47493b33081",
+  "covered_tokens": [
+    "REQ-TIED_EXTERNAL_SERVICE_COMPARISON",
+    "REQ-TIED_HARNESS_PLATFORM_SEAM",
+    "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "human_decision",
+    "traceability_structure"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-1794959456863",
+  "schema_version": "verification-evidence-manifest.v1"
+}

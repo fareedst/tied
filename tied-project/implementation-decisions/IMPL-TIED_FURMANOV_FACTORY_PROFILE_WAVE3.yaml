@@ -1,0 +1,17 @@
+IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3:
+  decision: "Implement PLAN slices A–F via TDD contract test; persist CITDP at build-plan; promote pseudo-code sidecar from working folder."
+  essence_pseudocode_path: "tied-project/working/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3/IMPL-TIED_FURMANOV_FACTORY_PROFILE_WAVE3-pseudocode.md"
+  implementation_approach:
+    details:
+      - "furmanov-factory-profile-compose-doc.test.mjs"
+      - "Optional DOC skim"
+    summary: "Contract test + markdown deliverables."
+  rationale:
+    problems_solved:
+      - "Wave 3 Defer without REQ anchor"
+    why: "Traceable doc-compose with RED/GREEN gate."
+  traceability:
+    architecture:
+      - "ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"
+    requirements:
+      - "REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3"

@@ -7,7 +7,7 @@
 | **Source URL** | [What Did My Software Factory Just Do?](https://afurmanov.com/harness-profiler) (A. Furmanov, 2026-11-15 — **Furmanov-reported**); [github.com/afurmanov/harness-profiler](https://github.com/afurmanov/harness-profiler) (**target-repo-observed**) |
 | **Article capture (sibling)** | [afurmanov-harness-profiler.md](afurmanov-harness-profiler.md) — stub; **reference only** |
 | **Status / date** | Outreach / analysis snapshot, **2026-11-17** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
-| **Executable follow-up** | Wave 3 **Defer** — optional HTOL source-study cross-link; trace export bridge → **`add-feature`** only if sponsor scopes |
+| **Executable follow-up** | **`REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3`** ([furmanov-factory-profile-compose.md](../../tied-bundle/docs/furmanov-factory-profile-compose.md)); JSONL bridge **Defer** |
 | **Distinct from** | [LangChain harness × TIED](langchain-harness-engineering-vs-tied-agent-management.md) (LangSmith + benchmark loop); [Cursor harness × TIED](cursor-harness-engineering-vs-tied-agent-management.md) (Keep Rate, online A/B); [LangChain goal engineering × TIED](langchain-goal-engineering-vs-tied-agent-management.md) (review UX / motions); [Claude Code team review × TIED](claude-code-team-code-review-vs-tied.md) (PR convergence); [Traefik × TIED](traefik-harness-platform-vs-tied-agent-management.md) (harness/platform seam architecture) |
 | **TIED anchors (reference only)** | [AGENTS.md](../../AGENTS.md), [agent-req-implementation-checklist.md](../../tied-bundle/docs/agent-req-implementation-checklist.md), [harness-trace-observation-loop.md](../../tied-bundle/docs/harness-trace-observation-loop.md), [agentstream README](../../mcp-server/packages/agentstream/README.md), [feedback-to-tied.md](../../tied-project/vocab/feedback-to-tied.md), [sponsor-agent-relationship.md](../../tied-project/vocab/sponsor-agent-relationship.md) |
 
@@ -235,8 +235,8 @@ Profiler output and **check-trace** results stay **harness-adjacent**. **Impleme
 | --- | --- | --- |
 | **0** | Wave 1 stub + this analysis + git allowlist | **Done** (2026-11-17) |
 | **1** | HTOL **Source studies** one-line cross-link | **Done** (2026-11-17, doc-only) |
-| **2** | Operator skim under DOC working folder | **Defer** (sponsor) |
-| **3** | agentstream ↔ harness-profiler JSONL bridge | **Defer** → **`add-feature`** |
+| **2** | Compose guide + factory profile operator checklist | **Implemented** ([REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3](../../tied-project/requirements/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3.yaml)) |
+| **3** | agentstream ↔ harness-profiler JSONL bridge | **Defer** (behavior-changing; separate REQ) |
 | **4** | Methodology composition matrix §2 row | **Defer** (sponsor costly choice) |
 
 ---
@@ -275,3 +275,4 @@ Profiler output and **check-trace** results stay **harness-adjacent**. **Impleme
 - [External three-wave comparison template](../../tied-bundle/docs/external-service-three-wave-comparison-template.md)
 - [Working DOC plan](../../tied-project/working/DOC-AFURMANOV-HARNESS-PROFILER-COMPARISON/PLAN-refine-pass1.md)
 - [Non-tied plan](../../tied-project/non-tied-plans/afurmanov-harness-profiler-vs-tied/PLAN.md)
+- [Furmanov factory profile compose guide](../../tied-bundle/docs/furmanov-factory-profile-compose.md) ([REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3](../../tied-project/requirements/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3.yaml))

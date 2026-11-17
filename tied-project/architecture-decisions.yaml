@@ -2196,6 +2196,10 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/snapshot.test.ts"
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3:
+  detail_file: "architecture-decisions/ARCH-TIED_FURMANOV_FACTORY_PROFILE_WAVE3.yaml"
+  name: "Furmanov factory profile Wave 3 architecture"
+  status: "Implemented"
 ARCH-TIED_GIT_HYGIENE_SAFETY:
   cross_references:
     - "IMPL-TIED_GIT_HYGIENE"

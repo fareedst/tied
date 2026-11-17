@@ -2932,6 +2932,10 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Read-only safety checks"
     - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
       method: "Unit tests"
+REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3:
+  detail_file: "requirements/REQ-TIED_FURMANOV_FACTORY_PROFILE_WAVE3.yaml"
+  name: "Furmanov factory profile Wave 3 compose"
+  status: "Implemented"
 REQ-TIED_GIT_HYGIENE:
   category: "Tooling"
   cross_references:
