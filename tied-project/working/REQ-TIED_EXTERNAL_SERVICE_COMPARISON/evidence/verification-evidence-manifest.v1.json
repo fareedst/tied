@@ -1,0 +1,117 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/external-service-comparison-skill.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 275,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/comparison-capture-stub-policy.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 294,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npm test --prefix mcp-server -- src/e2e/prompt-type-skills.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 46511,
+      "exit_code": 0,
+      "id": "citdp-evidence-3",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-4.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-4.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "pseudocode_validate IMPL-TIED_EXTERNAL_SERVICE_COMPARISON gate_mode"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 137,
+      "exit_code": 127,
+      "id": "citdp-evidence-4",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-5.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/quality-manifest/citdp-evidence-5.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_validate_consistency"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 108,
+      "exit_code": 127,
+      "id": "citdp-evidence-5",
+      "result": "failed"
+    }
+  ],
+  "commit": "ed5ea1572101c04a5f9233c9a3263f424deefefc",
+  "covered_tokens": [
+    "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON",
+    "IMPL-TIED_EXTERNAL_SERVICE_COMPARISON",
+    "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "exempt_repo_summaries_may_exceed_line_budget_by_design",
+    "stub_policy_does_not_prove_operator_fetches_compliance_in_ci"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-esc-stub-capture-2026-11-17-r2",
+  "schema_version": "verification-evidence-manifest.v1"
+}

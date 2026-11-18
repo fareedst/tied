@@ -58,7 +58,7 @@ flowchart LR
 
 ### Intent
 
-Read-only **article capture**: offline-readable text, no site chrome, no new REQ tokens in the file body.
+Read-only **external reference index (stub)**: link + metadata + paraphrased **TL;DR** only — **does not reproduce** vendor article body in the repository; no site chrome; no new REQ tokens in the file body.
 
 ### File naming and location
 
@@ -76,7 +76,7 @@ Read-only **article capture**: offline-readable text, no site chrome, no new REQ
 | **Source** | [{Vendor}]({canonical URL}) |
 | **Authors** | {names} |
 | **Published** | {date} |
-| **Purpose** | Read-only article capture for comparison and architecture reference — **external content**; this document does not mint REQ/ARCH/IMPL tokens. |
+| **Purpose** | External reference index for Wave 2 comparison — **link + summary only**; does not mint REQ/ARCH/IMPL tokens and does **not** reproduce the article body. |
 | **Captured** | {YYYY-MM-DD} |
 | **Analysis (sibling)** | *({link after Wave 2})* |
 | **Related capture (sibling)** | *(optional peer captures)* |
@@ -87,13 +87,13 @@ Read-only **article capture**: offline-readable text, no site chrome, no new REQ
 | Remove | Keep |
 | --- | --- |
 | Nav, footer, related posts, locale picker | Metadata, optional hero image URL, `---` separators |
-| Duplicate scraped body | Full article sections |
-| Anchor junk in headings (`## # Foo` → `## Foo`) | Inline code for product identifiers |
-| | **TLDR** (3–5 bullets) before main prose |
-| | **Notes for stdd readers** (proof boundary + links to Wave 2 when done) |
+| Duplicate scraped body; full post prose; extract `.txt` sidecars | **Why this file has no article body** (required for articles) |
+| Anchor junk in headings (`## # Foo` → `## Foo`) | **TL;DR** paraphrase bullets (3–10) labeled **{Vendor}-reported** where needed |
+| Vendor source trees under `docs/` | **Notes for stdd readers** (proof boundary + Wave 2 sibling link) |
 
 ### Wave 1 exit checklist
 
+- [ ] Stub marker present; no reproduced article body or Local extract row
 - [ ] No duplicated sections or navigation leakage
 - [ ] Numeric claims preserved; label **{Vendor}-reported** in Notes if cited elsewhere
 - [ ] `.gitignore` exception added; file tracks in git
@@ -273,4 +273,4 @@ flowchart TD
 - [Methodology composition matrix](../../docs/comparisons/methodology-composition-matrix.md)
 - [Client development index](client-development-index.md)
 
-**Last updated:** 2026-10-21
+**Last updated:** 2026-11-17 (stub capture policy; no in-repo source copy Waves 1–3)

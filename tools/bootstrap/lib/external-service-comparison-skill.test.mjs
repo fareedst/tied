@@ -42,4 +42,39 @@ describe("external-service-comparison skill [REQ-TIED_EXTERNAL_SERVICE_COMPARISO
       assert.doesNotMatch(text, pattern, `forbidden phrasing matched: ${pattern}`);
     }
   });
+
+  it("mandates stub capture and no in-repo source copy across Waves 1–3", () => {
+    const skillPath = path.join(skillDir, "SKILL.md");
+    const text = fs.readFileSync(skillPath, "utf8");
+    assert.ok(
+      text.includes("does not reproduce"),
+      "skill must state captures do not reproduce article body",
+    );
+    assert.ok(
+      text.includes("Why this file has no article body"),
+      "skill must require stub section heading",
+    );
+    assert.match(text, /Wave\s*1.*stub|stub.*Wave\s*1/i, "skill must tie Wave 1 to stub policy");
+    assert.ok(
+      text.includes("url-fetch-receipt"),
+      "skill must document themes-only evidence receipt",
+    );
+    assert.ok(
+      !/full article sections/i.test(text),
+      "skill must not instruct full article sections in repo",
+    );
+    assert.ok(
+      text.includes("Wave 3"),
+      "skill must scope Wave 3 compose",
+    );
+    assert.match(
+      text,
+      /Wave\s*3[\s\S]{0,400}paste|no[\s-]*source[\s-]*copy/i,
+      "skill must forbid vendor paste in Wave 3 compose",
+    );
+    const forbiddenCopy = [/offline-readable.*vendor/i, /Full article sections/i];
+    for (const pattern of forbiddenCopy) {
+      assert.doesNotMatch(text, pattern, `forbidden copy guidance: ${pattern}`);
+    }
+  });
 });

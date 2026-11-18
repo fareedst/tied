@@ -1,7 +1,7 @@
 ARCH-TIED_EXTERNAL_SERVICE_COMPARISON:
   cross_references:
     - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
-  decision: "Treat external service comparison as explicit-only methodology-harness orchestration composing read-only Wave 1–2 outreach under docs/comparisons/ and Wave 3 handoff routing; keep checklist gate authority, MCP project YAML writes, and LEAP promotion on platform-adjacent plane."
+  decision: "Treat external service comparison as explicit-only methodology-harness orchestration composing stub Wave 1 indexes and Wave 2 outreach under docs/comparisons/ with no in-repo vendor article copy (Waves 1–3); Wave 3 handoff routing only; keep checklist gate authority, MCP project YAML writes, and LEAP promotion on platform-adjacent plane."
   implementation_approach:
     details:
       - "Fourth methodology-harness leaf (not core prompt-type router branch)"

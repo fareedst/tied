@@ -29,10 +29,20 @@ tied-project/working/DOC-{SLUG}-COMPARISON/
 13. Proof boundary  
 14. Related documents  
 
+## Wave 1 stub shell (articles)
+
+- Metadata **Purpose:** link + summary only; **does not reproduce** article body  
+- Section **Why this file has no article body** (required)  
+- **TL;DR** paraphrase only; **Notes for stdd readers** optional  
+- `evidence/url-fetch-receipt.md` — themes only (no pasted body)  
+
 ## Verification grep checks
 
+- Wave 1 article captures include stub marker (`Why this file has no article body` or `does not reproduce`)  
+- No `Local extract` companion paths in capture metadata  
 - No unlabeled `{Vendor}-reported` metrics in Wave 2 executive summary tables  
 - Analysis metadata states **reference only; no REQ mint**  
+- Anti-pattern row: pasting vendor article into repository paths  
 - Sibling **Distinct from** section present when overlap risk exists  
 - Capture ↔ analysis relative links resolve  
 

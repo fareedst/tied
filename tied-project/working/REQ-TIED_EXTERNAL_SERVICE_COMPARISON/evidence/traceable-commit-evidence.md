@@ -1,7 +1,45 @@
-# traceable-commit evidence — REQ-TIED_EXTERNAL_SERVICE_COMPARISON
+# Traceable commit evidence — stub-capture-policy
 
-- **VALIDATE:** prompt-composer RECORD for `external-service-comparison` / external service comparison
-- **Product commit:** `a3c844af` — feat(prompt-skills): external-service-comparison harness skill
-- **Gate:** [closeout-run-close-out-gates-final.json](./closeout-run-close-out-gates-final.json) — `merged_decision.allowed=true`, `blocking_gap_count=0`; refreshed `run_id=esc-close-out-20261024`
-- **Hygiene:** [git-hygiene-receipt-2026-10-23.md](./git-hygiene-receipt-2026-10-23.md), [git-hygiene-receipt-2026-10-24.md](./git-hygiene-receipt-2026-10-24.md)
-- **Tests:** verification gate recorded in checklist tracker (`external-service-comparison-skill.test.mjs`, prompt-type-skills e2e)
+| Field | Value |
+| --- | --- |
+| **work_item** | stub-capture-policy |
+| **run_id** | close-out-esc-stub-capture-2026-11-17-r2 |
+| **gate** | `merged_decision.allowed: true`, `blocking_gap_count: 0` |
+
+## Commands
+
+```bash
+node --test tools/bootstrap/lib/external-service-comparison-skill.test.mjs tools/bootstrap/lib/comparison-capture-stub-policy.test.mjs
+pseudocode_validate IMPL-TIED_EXTERNAL_SERVICE_COMPARISON gate_mode  # ok
+```
+
+## Staging map
+
+- `tools/bundled-prompt-type-skills/external-service-comparison/*`
+- `tools/bootstrap/lib/external-service-comparison-skill.test.mjs`
+- `tools/bootstrap/lib/comparison-capture-stub-policy.test.mjs`
+- `tied-bundle/docs/external-service-three-wave-comparison-template.md`
+- `tied-project/requirements/REQ-TIED_EXTERNAL_SERVICE_COMPARISON.yaml`
+- `tied-project/architecture-decisions/ARCH-TIED_EXTERNAL_SERVICE_COMPARISON.yaml`
+- `tied-project/implementation-decisions/IMPL-TIED_EXTERNAL_SERVICE_COMPARISON.yaml`
+- `tied-project/implementation-decisions/IMPL-TIED_EXTERNAL_SERVICE_COMPARISON-pseudocode.md`
+- `tied-project/citdp/CITDP-REQ-TIED_EXTERNAL_SERVICE_COMPARISON-stub-policy.yaml`
+- `tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/PLAN-stub-capture-policy.md`
+- `tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/checklist-tracker-stub-capture-policy.yaml`
+- `tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/test-strategy-stub-capture-policy.md`
+- `tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/*` (stub policy pass)
+- `tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/PLAN.md` (follow-on link)
+- `docs/comparisons/` allowlisted stub retrofits (7 tracked files)
+- `CHANGELOG.md` (Unreleased bullet)
+
+## Excluded drift
+
+See `git-hygiene-receipt-2026-11-17.md`.
+
+## Vocab VALIDATE
+
+Deferred N/A — no new durable glossary terms shipped.
+
+## Feedback capture
+
+**N/A** — methodology store change.

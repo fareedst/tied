@@ -14,3 +14,5 @@
 **DOC working pattern:** see `tied-project/working/DOC-AI-SDLC-FACTORY-COMPARISON/`, `DOC-OPEN-ONTOLOGIES-COMPARISON/`, and `DOC-NDTP-AI-ONTOLOGY-EXTENSION-COMPARISON/` for refine trackers and handoff evidence.
 
 **Lesson:** Factory-reported and **target-repo-observed** labels stay separate from TIED-existing proof; Wave 3 matrix row remains **Defer** unless sponsor promotes.
+
+**Stub policy:** Wave 1 article paths use **link + TL;DR only** (see `langchain-goal-engineering.md`, `hackernoon-observability-contract-ci.md`) — **no in-repo vendor article body** across Waves 1–3 per skill **Forbidden**.

@@ -1,12 +1,12 @@
-feat(prompt-skills): add external-service-comparison harness skill
+feat(esc): stub capture policy for external-service-comparison
 
-Introduce @external-service-comparison as the fourth methodology-harness leaf:
-three-wave read-only comparison procedure, bootstrap contract test, and TIED
-REQ/ARCH/IMPL trace (REQ-TIED_EXTERNAL_SERVICE_COMPARISON).
+Codify no in-repo vendor source copy across Waves 1–3: skill Forbidden/Verify,
+three-wave template, SC-ESC-NO-SOURCE-COPY, comparison-capture-stub-policy.test.mjs,
+and retrofit of allowlisted article captures.
 
-Machine close-out: close_out allowed; envelope blocking_gap_count=0.
-Process: minimal depth with documented depth_change_waiver.
-Tests: external-service-comparison-skill.test.mjs; prompt-type-skills e2e.
-
-Tokens: REQ-TIED_EXTERNAL_SERVICE_COMPARISON, ARCH-TIED_EXTERNAL_SERVICE_COMPARISON,
+REQ-TIED_EXTERNAL_SERVICE_COMPARISON · ARCH-TIED_EXTERNAL_SERVICE_COMPARISON ·
 IMPL-TIED_EXTERNAL_SERVICE_COMPARISON
+
+Close-out: close-out-esc-stub-capture-2026-11-17-r2 (allowed, envelope 0 blocking gaps)
+Tests: external-service-comparison-skill + comparison-capture-stub-policy (27 pass)
+Feedback: N/A

@@ -132,6 +132,8 @@ Ship explicit-only global methodology-harness skill **`@external-service-compari
 
 See [test-strategy.md](test-strategy.md).
 
+**Follow-on (2026-11-17):** Stub capture / no in-repo source copy kaizen — [PLAN-stub-capture-policy.md](PLAN-stub-capture-policy.md).
+
 **Refine-plan boundary:** This pass writes PLAN, CITDP, Tracker, and test strategy only — **no** skill files, token indexes, or RED tests until **`/build-plan`**.
 
 **Next step:** Run **`/build-plan`** on the linked Cursor plan (or this PLAN). First implement steps: integrated adversarial inquiry → REQ/ARCH/IMPL → pseudo-code gate → RED tests.

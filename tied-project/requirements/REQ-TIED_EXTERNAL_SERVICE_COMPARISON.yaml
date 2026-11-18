@@ -1,6 +1,6 @@
 REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
   category: "Methodology"
-  description: "Explicit-only methodology-harness skill @external-service-comparison standardizing three-wave external repository and article comparison (Wave 1 capture, Wave 2 TIED analysis, Wave 3 handoff-only) with mandatory DOC working folders and claim labeling."
+  description: "Explicit-only methodology-harness skill @external-service-comparison standardizing three-wave external comparison with Wave 1 stub indexes (no in-repo vendor source copy), Wave 2 TIED analysis, Wave 3 handoff-only, mandatory DOC working folders, and claim labeling."
   name: "External service comparison skill"
   priority: "P2"
   rationale:
@@ -18,6 +18,9 @@ REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
     related_to:
       - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
   satisfaction_criteria:
+    - criterion: "Article captures use stub policy (no in-repo vendor body) across Waves 1–3"
+      id: "SC-ESC-NO-SOURCE-COPY"
+      metric: "comparison-capture-stub-policy.test.mjs"
     - criterion: "Bundled external-service-comparison skill references template and forbids YAML/gate waiver language"
       id: "SC-ESC-SKILL"
       metric: "external-service-comparison-skill.test.mjs"

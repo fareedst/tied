@@ -1,0 +1,99 @@
+CITDP-REQ-TIED_EXTERNAL_SERVICE_COMPARISON-stub-policy:
+  change_definition:
+    current_behavior: "@external-service-comparison and external-service-three-wave-comparison-template.md still describe Wave 1 as full article capture (offline-readable body, full article sections). Legacy comparisons under docs/comparisons/ include reproduced vendor prose. Recent operator runs use informal stub captures only."
+    desired_behavior: "Normative stub policy across Waves 1–3: committed paths hold link + metadata + paraphrased TL;DR only; no vendor article/README paste, extract sidecars, or vendored source trees. Skill Forbidden/Verify, template, contract tests, and LEAP on REQ-TIED_EXTERNAL_SERVICE_COMPARISON enforce policy. Legacy external article captures retrofitted per evidence/retrofit-inventory.md in batched commits."
+    non_goals:
+      - "Deleting Wave 2 analysis documents"
+      - "Retrofitting sponsor-proposed software-engineering-degree curriculum"
+      - "Retrofitting TIED-owned jev taxonomy reference"
+      - "Minting new REQ token (LEAP amend existing REQ only)"
+      - "CLAIM vendor effectiveness from stub text"
+    success_criteria:
+      - "external-service-comparison-skill.test.mjs asserts stub / no-copy Waves 1–3"
+      - "comparison-capture-stub-policy.test.mjs green with exempt list"
+      - "SC-ESC-NO-SOURCE-COPY on REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "All Batch A retrofit files in retrofit-inventory marked stub in static test"
+      - "tied_validate_consistency after project YAML updates"
+    unchanged_behavior: "Checklist gates, MCP YAML writes, 13 prompt-type leaves, DOC-{SLUG}-COMPARISON working folder, Wave 3 handoff to add-feature."
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/external-service-comparison-skill.test.mjs"
+      - "node --test tools/bootstrap/lib/comparison-capture-stub-policy.test.mjs"
+      - "npm test --prefix mcp-server -- src/e2e/prompt-type-skills.test.ts"
+      - "pseudocode_validate IMPL-TIED_EXTERNAL_SERVICE_COMPARISON gate_mode"
+      - "tied_validate_consistency"
+    manifest_reference: null
+    proof_boundaries:
+      - "stub_policy_does_not_prove_operator_fetches_compliance_in_ci"
+      - "exempt_repo_summaries_may_exceed_line_budget_by_design"
+  impact_analysis:
+    impl_inventory_notes: "tools/bundled-prompt-type-skills/external-service-comparison/*; tools/bootstrap/lib/*-stub*.test.mjs; tied-bundle/docs/external-service-three-wave-comparison-template.md; docs/comparisons/* retrofit batches; tied-project implementation-decisions IMPL-TIED_EXTERNAL_SERVICE_COMPARISON-pseudocode.md"
+    methodology_surface_change_class: "prompt_type_workflow"
+    modules_or_boundaries: "Methodology harness skill; bootstrap tests; comparison markdown outreach"
+    surface_ref: "external-service-comparison"
+    tied_tokens_affected:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "IMPL-TIED_EXTERNAL_SERVICE_COMPARISON"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "implement"
+    tied_stack_updates_required:
+      - "REQ satisfaction criterion SC-ESC-NO-SOURCE-COPY"
+      - "ARCH decision stub redistribution boundary"
+      - "IMPL STUB_CAPTURE_POLICY pseudo-code block"
+  methodology_surface_experiment_link: null
+  persist_policy: "Persist at refine-plan; record_status complete after build-plan + close-out"
+  record_identity:
+    change_request_id: "REQ-TIED_EXTERNAL_SERVICE_COMPARISON-stub-policy"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-17"
+    title: "External service comparison stub capture (no in-repo source copy)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Operators paste article into Wave 2 analysis because Wave 1 stub removed context"
+      - "Static test false green if exempt list too broad"
+      - "Retrofit deletes TL;DR bullets needed by Wave 2 §2"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "close-out-esc-stub-capture-2026-11-17"
+        expiry: "2026-12-31"
+        owner: "REQ-TIED_EXTERNAL_SERVICE_COMPARISON program sponsor"
+        rationale: "Minimal-depth skill/doc kaizen; bootstrap contract tests; no integrated adversarial inquiry on markdown retrofit."
+      counterexamples:
+        - "Skill still says Full article sections in procedure step 6"
+      depth_change_waiver:
+        approval: "close-out-esc-stub-capture-2026-11-17"
+        expiry: "2026-12-31"
+        owner: "REQ-TIED_EXTERNAL_SERVICE_COMPARISON program sponsor"
+        rationale: "Stub policy packaging uses Node contract tests only."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "comparison-capture-stub-policy.test.mjs not wired into bootstrap npm test"
+      eligibility_triggers_matched:
+        - "prompt_type_workflow_surface_refinement"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/PLAN-stub-capture-policy.md"
+        - "tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/retrofit-inventory.md"
+      falsification_questions:
+        - "Do stub captures still label vendor claims and forbid paste in Wave 3 compose?"
+        - "Does SC-ESC-NO-SOURCE-COPY fail if full article guidance returns to SKILL.md?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: "minimal"
+      rationale: "Kaizen on implemented harness skill; depth minimal throughout."
+      research_profile: "read-only"
+    mitigation_summary: "Skill Forbidden/Verify; comparison-capture-stub-policy.test.mjs inventory; retrofit inventory batches."
+  test_strategy:
+    summary: "RED skill contract + stub inventory test before GREEN skill/template; manual link grep after retrofit batches."
+    security_mitigations:
+      - "Skill reinforces no untrusted script execution during fetch"
+  traceability:
+    parent_req: "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+    plan_path: "tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/PLAN-stub-capture-policy.md"

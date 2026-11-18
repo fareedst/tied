@@ -7,6 +7,8 @@ IMPL-TIED_EXTERNAL_SERVICE_COMPARISON:
         path: "tools/bundled-prompt-type-skills/external-service-comparison/SKILL.md"
       - description: "Skill contract test"
         path: "tools/bootstrap/lib/external-service-comparison-skill.test.mjs"
+      - description: "Stub capture policy inventory test"
+        path: "tools/bootstrap/lib/comparison-capture-stub-policy.test.mjs"
     functions: []
   cross_references:
     - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
