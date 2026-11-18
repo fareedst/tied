@@ -1,0 +1,18 @@
+IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+  IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+    essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS-pseudocode.md"
+    metadata:
+      last_updated:
+        date: "2026-11-17"
+        reason: "refine-plan"
+    related_files:
+      - "mcp-server/src/checklist-slug-registry.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/citdp-writer.ts"
+      - "scripts/lib/wf-trial-machine-closeout-exit.inc.sh"
+      - "scripts/lib/wf-trial-process-log.inc.sh"
+      - "scripts/workflow-trial-agentstream.sh"
+      - "tied-install.sh"
+      - "tools/bootstrap/lib/wf-trial-disposable-slug-registry.test.mjs"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    status: "proposed"

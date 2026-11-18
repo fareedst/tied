@@ -1659,6 +1659,13 @@ ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   description: "cursor-stream session extractor and live-executor retry boundary"
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   type: "architecture"
+ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+  cross_references:
+    - "IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+    - "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+  description: "Disposable closeout readiness architecture"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS.yaml"
+  type: "ARCH"
 ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
   cross_references:
     - "IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
@@ -3729,6 +3736,13 @@ IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   description: "executor-run wiring and T-LIVE-SESSION tests"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   type: "implementation"
+IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+  cross_references:
+    - "ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+    - "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+  description: "Disposable closeout readiness implementation"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS.yaml"
+  type: "IMPL"
 IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
   cross_references:
     - "ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
@@ -6032,6 +6046,13 @@ REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
   description: "Cursor live session oracle and bounded turn retry for WF four-phase trials"
   detail_file: "requirements/REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE.yaml"
   type: "requirement"
+REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+  cross_references:
+    - "ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+    - "IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+  description: "Disposable WF closeout readiness (template resolution, minimal CITDP persist, tiered machine closeout, manifest truth)"
+  detail_file: "requirements/REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS.yaml"
+  type: "REQ"
 REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
   cross_references:
     - "ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"

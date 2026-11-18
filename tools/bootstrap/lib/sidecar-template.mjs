@@ -41,6 +41,10 @@ export function copySidecarTemplate(projectRoot, tiedRepoRoot) {
  * @param {string} tiedRepoRoot
  * @param {string[]} basenames
  */
+const REFRESH_IF_NEWER_TEMPLATE_BASENAMES = new Set([
+  "wf-trial-minimal-checklist-tracker.yaml",
+]);
+
 export function copyMethodologyTemplates(projectRoot, tiedRepoRoot, basenames) {
   if (!basenames?.length) {
     return { copied: 0, total: 0 };
@@ -58,7 +62,12 @@ export function copyMethodologyTemplates(projectRoot, tiedRepoRoot, basenames) {
     }
     total += 1;
     const dest = path.join(destDir, basename);
-    if (!fs.existsSync(dest)) {
+    const refreshIfNewer = REFRESH_IF_NEWER_TEMPLATE_BASENAMES.has(basename);
+    let shouldCopy = !fs.existsSync(dest);
+    if (!shouldCopy && refreshIfNewer && fs.existsSync(dest)) {
+      shouldCopy = fs.statSync(src).mtimeMs > fs.statSync(dest).mtimeMs;
+    }
+    if (shouldCopy) {
       copyFileWithAttributes(src, dest);
       copied += 1;
       sayXOfYClient(copied, total, `Copied methodology template into ${dest}.`);

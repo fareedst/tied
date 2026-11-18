@@ -1,0 +1,16 @@
+ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+  ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+    decision: "Disposable closeout readiness resolves slim checklist template from explicit path, client bundle, store bundle, then cwd walk; tied-install materializes wf-trial-minimal template. CITDP open-record validation relaxes adversarial list requirements at minimal depth when tracker declares minimal-depth-no-inquiry. Machine closeout uses tier A (fail closed ERROR exit 1) vs tier B (honest incomplete DIAGNOSTIC exit 0). Orchestrator manifest exit_code is written after machine closeout composite exit."
+    modules:
+      - "mcp-server/src/checklist-slug-registry.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/citdp-writer.ts"
+      - "scripts/lib/wf-trial-machine-closeout-exit.inc.sh"
+      - "scripts/lib/wf-trial-process-log.inc.sh"
+      - "scripts/workflow-trial-agentstream.sh"
+      - "tied-install.sh"
+      - "tools/bootstrap/"
+      - "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-checklist-gates-adjunct.md"
+    related_requirements:
+      - "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+    status: "proposed"

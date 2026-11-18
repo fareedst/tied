@@ -1,0 +1,14 @@
+feat(wf-trial): disposable closeout readiness SC-DCR-01..05
+
+[REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS] Template resolution,
+minimal CITDP open-record waiver, tier B machine closeout, and manifest
+exit ordering. Live WF-01 @ 1794981051 recorded with SC-DCR-06 readout
+fail (verification blocked) while orchestrator tier B exit 0.
+
+[ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS]
+[IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS]
+
+Completion signals (store): machine close_out pass; process partial
+(SC-DCR-06 not pass); adherence N/A.
+
+Open: verification-phase adversarial gate waiver follow-on.

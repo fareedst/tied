@@ -1,5 +1,5 @@
-# wf-trial-machine-closeout-exit.inc.sh — post-four-phase machine closeout fail-closed (default on).
-# [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] [IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT]
+# wf-trial-machine-closeout-exit.inc.sh — post-four-phase tiered machine closeout (default on).
+# [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] [REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS] [IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS]
 
 # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-product-req.inc.sh"
@@ -84,8 +84,7 @@ wf_trial_machine_closeout_exit_check() {
     fi
     if [[ -z "$close_receipt" ]]; then
       printf 'DIAGNOSTIC: wf_trial_machine_closeout_reason=no_close_out_gate_receipt\n' >&2
-      printf 'ERROR: WF trial machine closeout exit: no gates/close_out-*.json with allowed true\n' >&2
-      return 1
+      return 0
     fi
     printf 'DIAGNOSTIC: wf_trial_machine_closeout_reason=close_out_gate_not_allowed\n' >&2
     printf 'ERROR: WF trial machine closeout exit: close_out receipt present but allowed is not true\n' >&2
@@ -106,6 +105,5 @@ wf_trial_machine_closeout_exit_check() {
   fi
 
   printf 'DIAGNOSTIC: wf_trial_machine_closeout_reason=no_close_out_gate_receipt\n' >&2
-  printf 'ERROR: WF trial machine closeout exit: no gates/close_out-*.json with allowed true\n' >&2
-  return 1
+  return 0
 }

@@ -140,6 +140,11 @@ wf_trial_process_log_trap_on_exit() {
   wf_trial_process_log_finalize "$ec"
 }
 
+wf_trial_process_log_refresh_finalize() {
+  WF_TRIAL_PROCESS_LOG_FINALIZED=0
+  wf_trial_process_log_finalize "$1"
+}
+
 wf_trial_process_log_finalize() {
   local exit_code="${1:-0}"
 

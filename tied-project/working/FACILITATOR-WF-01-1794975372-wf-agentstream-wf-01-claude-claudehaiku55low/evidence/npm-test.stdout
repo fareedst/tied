@@ -1,0 +1,49 @@
+
+> test
+> node --import tsx --test 'src/**/*.test.ts'
+
+▶ satisfies: operators at boundaries
+  ✔ >= accepts equal and above, rejects below (0.679833ms)
+  ✔ > rejects equal, accepts above (0.094875ms)
+  ✔ <= accepts equal and below, rejects above (0.077209ms)
+  ✔ < rejects equal, accepts below (0.05925ms)
+  ✔ = accepts only equal (0.04475ms)
+✔ satisfies: operators at boundaries (1.563959ms)
+▶ satisfies: ordering
+  ✔ compares MAJOR, then MINOR, then PATCH as integers (0.043959ms)
+✔ satisfies: ordering (0.095125ms)
+▶ satisfies: rejected input throws an Error naming the input
+  ✔ rejects version "1.2.0-rc.1" (0.317375ms)
+  ✔ rejects version "1.2.0+build" (0.060959ms)
+  ✔ rejects version "v1.2.0" (0.035917ms)
+  ✔ rejects version " 1.2.0" (0.060625ms)
+  ✔ rejects version "1.2.0 " (0.039625ms)
+  ✔ rejects version "01.2.0" (0.023709ms)
+  ✔ rejects version "1.02.0" (0.018292ms)
+  ✔ rejects version "1.2.00" (0.031041ms)
+  ✔ rejects version "1.2" (0.024ms)
+  ✔ rejects version "1.2.0.0" (0.450958ms)
+  ✔ rejects version "a.b.c" (0.0335ms)
+  ✔ rejects version "" (0.017ms)
+  ✔ rejects comparator ">=1.2.0-rc.1" (0.039584ms)
+  ✔ rejects comparator ">=v1.2.0" (0.015166ms)
+  ✔ rejects comparator ">= 1.2.0" (0.011875ms)
+  ✔ rejects comparator " >=1.2.0" (0.014ms)
+  ✔ rejects comparator ">=01.2.0" (0.012291ms)
+  ✔ rejects comparator ">=" (0.01275ms)
+  ✔ rejects comparator ">" (0.01275ms)
+  ✔ rejects comparator "" (0.016542ms)
+  ✔ rejects comparator "1.2.0" (0.01125ms)
+  ✔ rejects comparator "~1.2.0" (0.011875ms)
+  ✔ rejects comparator "==1.2.0" (0.013125ms)
+  ✔ rejects comparator ">>1.2.0" (0.012458ms)
+  ✔ rejects comparator ">=1.2" (0.011833ms)
+✔ satisfies: rejected input throws an Error naming the input (1.596292ms)
+ℹ tests 31
+ℹ suites 3
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 123.038708

@@ -43,6 +43,18 @@ function adversarialSectionPath(citdp: Record<string, unknown>): "adversarial_in
   return undefined;
 }
 
+function tryLoadTrackerForCitdpRequest(base: string, filename: string): unknown | undefined {
+  const requestToken = requestTokenFromCitdpFilename(filename);
+  if (!requestToken) return undefined;
+  const trackerPath = path.join(base, "working", requestToken, "checklist-tracker.yaml");
+  if (!fs.existsSync(trackerPath)) return undefined;
+  try {
+    return yaml.load(fs.readFileSync(trackerPath, "utf8")) as unknown;
+  } catch {
+    return undefined;
+  }
+}
+
 function readExistingRecord(filePath: string, topKey: string): Record<string, unknown> | undefined {
   if (!fs.existsSync(filePath)) return undefined;
   try {
@@ -135,6 +147,7 @@ export function writeCitdpRecord(params: {
       citdp: mergedRecord,
       activation: recordActivation(mergedRecord),
       existingDepthTier: existingDepthTier(existingRecord),
+      tracker: tryLoadTrackerForCitdpRequest(base, filename),
     });
     if (!openRecord.ok) {
       return { ok: false, error: `invalid adversarial CITDP: ${openRecord.diagnostics.join(", ")}` };

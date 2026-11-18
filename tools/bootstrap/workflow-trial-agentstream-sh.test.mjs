@@ -1452,6 +1452,33 @@ ERROR: something else
     }
   });
 
+  it("wf_trial_machine_closeout_exit_check tier B passes without close_out receipt [SC-DCR-04]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-mc-tierb-"));
+    try {
+      const token = "REQ-FIXTURE-MC-TIERB";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        `# handoff\n\nrequest_token: ${token}\n`,
+      );
+      const bash = `
+        # shellcheck source=${PRODUCT_REQ_INC}
+        source "${PRODUCT_REQ_INC}"
+        # shellcheck source=${MACHINE_CLOSEOUT_INC}
+        source "${MACHINE_CLOSEOUT_INC}"
+        wf_trial_machine_closeout_exit_check "${tmp}" "${REPO_ROOT}"
+        echo exit=$?
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      assert.match(r.stderr, /no_close_out_gate_receipt/);
+      assert.doesNotMatch(r.stderr, /ERROR: WF trial machine closeout exit: no gates/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
   it("WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1 passes same fixture [SC-WF-DGA-04]", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-mc-skip-"));
     try {

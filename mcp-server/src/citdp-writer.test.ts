@@ -326,6 +326,53 @@ describe("writeCitdpRecord", () => {
     }
   });
 
+  it("SC-DCR-03 persists minimal CITDP when tracker waives adversarial lists [REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS]", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-citdp-minimal-waiver-"));
+    const prevProject = process.env.TIED_CLIENT_PROJECT_PATH;
+    const prevBase = process.env.TIED_BASE_PATH;
+    try {
+      delete process.env.TIED_CLIENT_PROJECT_PATH;
+      process.env.TIED_BASE_PATH = dir;
+      fs.writeFileSync(path.join(dir, "requirements.yaml"), "{}\n");
+      clearBasePathCache();
+      const token = "REQ-FIXTURE-MINIMAL-WAIVER";
+      const working = path.join(dir, "working", token);
+      fs.mkdirSync(working, { recursive: true });
+      fs.writeFileSync(
+        path.join(working, "checklist-tracker.yaml"),
+        [
+          "schema_version: checklist-tracker.v1",
+          `request: ${token}`,
+          "steps:",
+          "  - slug: sub-adversarial-inquiry-pass",
+          "    disposition: not_applicable",
+          "    policy: minimal-depth-no-inquiry",
+          "",
+        ].join("\n"),
+        "utf8",
+      );
+      const result = writeCitdpRecord({
+        filename: `CITDP-${token}.yaml`,
+        record: {
+          risk_analysis: {
+            adversarial_inquiry: {
+              depth_tier: "minimal",
+              gate_policy: "advisory",
+            },
+          },
+        },
+      });
+      assert.equal(result.ok, true, result.ok ? "" : result.error);
+    } finally {
+      if (prevProject === undefined) delete process.env.TIED_CLIENT_PROJECT_PATH;
+      else process.env.TIED_CLIENT_PROJECT_PATH = prevProject;
+      if (prevBase === undefined) delete process.env.TIED_BASE_PATH;
+      else process.env.TIED_BASE_PATH = prevBase;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
   it("keeps verification gate blocked for integrated depth without activation pairing", () => {
     const citdp = {
       risk_analysis: {

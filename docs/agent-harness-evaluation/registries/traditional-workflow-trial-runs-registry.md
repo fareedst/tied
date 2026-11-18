@@ -5,7 +5,7 @@
 | **Purpose** | Facilitator index of **PROMPT-WF-01…12** recorded trials — harness, model slug, session grades, orchestrator **Run time**, and **latest for cell** (composition prompts **09–12**; note **paste generation** `goal-first` vs `architect-in-paste` when comparing structure across models) |
 | **Rows** | **182** (matches [Recorded trials](../catalogs/catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
 | **Status** | Maintainer snapshot |
-| **Last updated** | 2026-11-17|
+| **Last updated** | 2026-11-18|
 | **Disclaimer** | Store documentation only — not a `[REQ-*]` token, not a maturity score, not a model leaderboard |
 
 Full trial protocol and rubric: [catalog-traditional-workflow-trial-prompts.md](../catalogs/catalog-traditional-workflow-trial-prompts.md).
@@ -200,6 +200,8 @@ Rows are **PROMPT-WF-01…08** cells from [Recorded trials](catalog-traditional-
 | 08 | 1794619211 | claude | `claude-sonnet-5-5` | 0 | 262 | 3.77 · A/A/B+/A-/A-/A/A- | no | [readout](trial-readout-PROMPT-WF-08-claudesonnet55medium-1794619211-wf-agentstream-wf-08-claude-claudesonnet55medium.md) |
 | 08 | 1794797980 | claude | `claude-sonnet-5-5` | 0 | 606 | 3.96 · A/A/A/A/A/A-/A | yes | [readout](trial-readout-PROMPT-WF-08-claudesonnet55high-1794797980-wf-agentstream-wf-08-claude-claudesonnet55high.md) |
 | 01 | 1794845395 | claude | `claude-haiku-5-5` | 0 | 649 | 3.81 · A/A/A/A/B+/A-/A- | yes | [readout](trial-readout-PROMPT-WF-01-claudehaiku55high-1794845395-wf-agentstream-wf-01-claude-claudehaiku55high.md) |
+| 01 | 1794975372 | claude | `claude-haiku-5-5` | 0 | 272 | 3.29 · A/D+/A-/A/C+/A-/A | no | [readout](trial-readout-PROMPT-WF-01-claudehaiku55low-1794975372-wf-agentstream-wf-01-claude-claudehaiku55low.md) |
+| 01 | 1794981051 | claude | `claude-haiku-5-5` | 0 | 217 | 3.38 · A/D+/B+/A/B/A-/A | yes | [readout](trial-readout-PROMPT-WF-01-claudehaiku55low-1794981051-wf-agentstream-wf-01-claude-claudehaiku55low.md) |
 | 02 | 1794846046 | claude | `claude-haiku-5-5` | 0 | 573 | 3.71 · A/A/B+/A/B/A/A- | yes | [readout](trial-readout-PROMPT-WF-02-claudehaiku55high-1794846046-wf-agentstream-wf-02-claude-claudehaiku55high.md) |
 | 03 | 1794852636 | claude | `claude-haiku-5-5` | 0 | 796 | 3.67 · A/A-/B+/A/B+/A-/A- | yes | [readout](trial-readout-PROMPT-WF-03-claudehaiku55high-1794852636-wf-agentstream-wf-03-claude-claudehaiku55high.md) |
 | 04 | 1794853434 | claude | `claude-haiku-5-5` | 0 | 471 | 1.51 · B+/D+/F/F/D+/C/B- | no | [readout](trial-readout-PROMPT-WF-04-claudehaiku55high-1794853434-wf-agentstream-wf-04-claude-claudehaiku55high.md) |

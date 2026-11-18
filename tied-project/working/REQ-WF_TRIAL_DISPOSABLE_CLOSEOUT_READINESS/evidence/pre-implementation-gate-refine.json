@@ -1,0 +1,10 @@
+{
+  "allowed": true,
+  "blocking": false,
+  "depth": "minimal",
+  "diagnostics": [],
+  "gate_receipt_path": "tied-project/working/REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS/gates/pre_implementation-2026-11-18T05-36-21-249Z.json",
+  "ok": true,
+  "phase": "pre_implementation",
+  "prompt_type": "refine-plan"
+}

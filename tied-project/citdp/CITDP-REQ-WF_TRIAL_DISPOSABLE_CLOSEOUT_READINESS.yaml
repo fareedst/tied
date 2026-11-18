@@ -1,0 +1,53 @@
+CITDP-REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+  change_definition:
+    current_behavior: "resolveDefaultDisposableChecklistTemplatePath walks cwd only; thin disposable clients miss wf-trial-minimal template → empty slug union → invalid_slug at verification. validateCitdpOpenRecord rejects minimal disposable CITDP without adversarial lists. Machine closeout treats missing close_out receipt like failure (ERROR + exit 1). wf_trial_process_log_finalize may run before machine closeout, so manifest exit_code 0 disagrees with final shell exit."
+    desired_behavior: "Template resolution uses client bundle, store bundle, then cwd. tied-install materializes slim template. Minimal depth CITDP persist without adversarial fabrication when tracker waives inquiry. Tier A/Tier B machine closeout. Manifest exit_code matches final composite shell exit."
+    non_goals:
+      - "Changing store @build-plan methodology slug registry"
+      - "Integrated-depth adversarial inquiry runs on WF disposable cells"
+      - "Renaming slim slugs"
+    success_criteria:
+      - "SC-DCR-01..05 green in bootstrap/MCP/shell tests"
+      - "SC-DCR-06 live WF-01 at Partial or Full per test-strategy three-way table"
+      - "SC-WF-DGA-06 closed via LEAP + live evidence under this REQ"
+    unchanged_behavior: "Non-disposable store trackers unchanged. WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1 restores legacy skip."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/checklist-slug-registry.ts; mcp-server/src/checklist-validator.ts; mcp-server/src/citdp-writer.ts; tied-install.sh; scripts/lib/wf-trial-machine-closeout-exit.inc.sh; scripts/lib/wf-trial-process-log.inc.sh; scripts/workflow-trial-agentstream.sh; tools/bootstrap/"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+      - "IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+      - "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+    citdp_id: "CITDP-REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    status: "accepted"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Store bundle resolution accidentally loads wrong revision of slim template"
+        - "Tier B masks agents that skip close_out without verification pass"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "1794978904 class: invalid_slug + citdp blocked + ERROR closeout + manifest exit 0"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS/evidence/fixture-thin-templates-1794978904-class.md"
+        - "tied-project/working/REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT/evidence/fixture-disposable-tracker-1794975372.yaml"
+      falsification_questions:
+        - "Does tier B allow shell pass when verification also failed?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Orchestrator + MCP contract tests; one live matrix cell; tier B costly choice accepted."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    unit:
+      - "node --test mcp-server/src/checklist-pseudocode-gate.test.ts"
+      - "node --test tools/bootstrap/lib/wf-trial-disposable-slug-registry.test.mjs"

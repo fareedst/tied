@@ -1,0 +1,68 @@
+description: "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS — disposable closeout readiness"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  request: "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      note: "SC-DCR-01..06; SC-DCR-06 three-way grading locked refine-plan"
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "MCP + shell fixtures + one live WF-01; tiered closeout is orchestrator contract change, not integrated adversarial inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      note: "SC-DCR-01..03 RED"
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      note: "tier B shell + manifest refresh finalize"
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      note: "bootstrap SC-DCR-01..05 green; live SC-DCR-06 partial — verification allowed false @1794981051 (readout fail, tier B shell)"
+      status: "completed"
+  - disposition: "completed"
+    slug: "traceable-commit"
+    tracking:
+      note: "store close_out allowed; SC-DCR-06 not claimed pass"
+      status: "completed"
+workflow_trial_disposable: false

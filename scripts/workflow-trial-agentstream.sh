@@ -250,7 +250,6 @@ ARGS=()
 
 FOUR_PHASE_EXIT=0
 bash "$FOUR_PHASE" "${ARGS[@]}" || FOUR_PHASE_EXIT=$?
-wf_trial_process_log_finalize "$FOUR_PHASE_EXIT"
 PHASE_HANDOFF_EXIT=0
 GATE_EXIT=0
 STRICT_CLOSEOUT_EXIT=0
@@ -270,15 +269,24 @@ if ((DRY_RUN == 0)); then
   wf_trial_machine_closeout_exit_check "$WORKSPACE" "$REPO_ROOT" || MACHINE_CLOSEOUT_EXIT=$?
 fi
 if ((FOUR_PHASE_EXIT != 0)); then
+  wf_trial_process_log_refresh_finalize "$FOUR_PHASE_EXIT"
   exit "$FOUR_PHASE_EXIT"
 fi
 if ((PHASE_HANDOFF_EXIT != 0)); then
+  wf_trial_process_log_refresh_finalize "$PHASE_HANDOFF_EXIT"
   exit "$PHASE_HANDOFF_EXIT"
 fi
 if ((GATE_EXIT != 0)); then
+  wf_trial_process_log_refresh_finalize "$GATE_EXIT"
   exit "$GATE_EXIT"
 fi
 if ((STRICT_CLOSEOUT_EXIT != 0)); then
+  wf_trial_process_log_refresh_finalize "$STRICT_CLOSEOUT_EXIT"
   exit "$STRICT_CLOSEOUT_EXIT"
 fi
-exit "$MACHINE_CLOSEOUT_EXIT"
+ORCHESTRATOR_EXIT=0
+if ((MACHINE_CLOSEOUT_EXIT != 0)); then
+  ORCHESTRATOR_EXIT=$MACHINE_CLOSEOUT_EXIT
+fi
+wf_trial_process_log_refresh_finalize "$ORCHESTRATOR_EXIT"
+exit "$ORCHESTRATOR_EXIT"

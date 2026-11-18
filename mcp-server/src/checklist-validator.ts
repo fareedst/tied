@@ -566,6 +566,16 @@ function requiresMinimalOpenRecordFields(depth: AdversarialDepth): boolean {
   return depth === "minimal" || depth === "strict_candidate";
 }
 
+// [IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS] [REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: minimal open-record skips adversarial lists when tracker waives inquiry.
+function trackerWaivesMinimalAdversarialOpenRecord(tracker: unknown): boolean {
+  if (!isRecord(tracker) || !Array.isArray(tracker.steps)) return false;
+  for (const step of tracker.steps) {
+    if (!isRecord(step) || step.slug !== SUB_ADVERSARIAL_STUB_SLUG) continue;
+    return step.disposition === "not_applicable" && step.policy === "minimal-depth-no-inquiry";
+  }
+  return false;
+}
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: require prior_depth_tier minimal when upgrading an on-disk minimal record to integrated.
 export function validateCitdpDepthUpgrade(input: {
   citdp: unknown;
@@ -585,6 +595,7 @@ export function validateCitdpOpenRecord(input: {
   citdp: unknown;
   activation?: unknown;
   existingDepthTier?: AdversarialDepth | null;
+  tracker?: unknown;
 }): ValidationResult {
   const diagnostics: string[] = [];
   const section = adversarialSection(input.citdp);
@@ -597,7 +608,8 @@ export function validateCitdpOpenRecord(input: {
     diagnostics.push("missing_or_invalid_depth");
     return { ok: false, diagnostics };
   }
-  if (requiresMinimalOpenRecordFields(depth)) {
+  const waiveMinimalLists = depth === "minimal" && trackerWaivesMinimalAdversarialOpenRecord(input.tracker);
+  if (requiresMinimalOpenRecordFields(depth) && !waiveMinimalLists) {
     const requiredFields = [
       ["counterexamples", "missing_counterexamples"],
       ["falsification_questions", "missing_falsification_questions"],

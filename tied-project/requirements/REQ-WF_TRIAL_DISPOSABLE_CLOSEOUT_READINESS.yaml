@@ -1,0 +1,18 @@
+REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+  REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
+    depends_on:
+      - "REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+    description: "Disposable WF clients reach honest machine closeout: template resolution from store env, install materializes slim tracker template, minimal CITDP persist without adversarial fabrication, tiered machine closeout (A fail / B honest incomplete exit 0), manifest exit_code matches final shell exit."
+    satisfaction_criteria:
+      - criterion: "citdp_record_write persists minimal WF CITDP from disposable handoff shape without adversarial fabrication when depth_tier minimal and sub-adversarial-inquiry-pass not_applicable minimal-depth-no-inquiry."
+        id: "SC-DCR-03"
+      - criterion: "Fresh tied-install client contains tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml."
+        id: "SC-DCR-02"
+      - criterion: "Live workflow_trial_range claude haiku-5-5 low 1 1 on new disposable cell: verification allowed true; shell tier B acceptable per test-strategy grading table; orchestrator exit matches manifest; no ERROR on tier B alone."
+        id: "SC-DCR-06"
+      - criterion: "Machine closeout tier A: missing receipt with attempted/blocked signals, allowed false close_out, or incomplete inventory -> ERROR + exit 1; tier B: no receipt and no tier-A signals -> DIAGNOSTIC wf_trial_machine_closeout_reason=no_close_out_gate_receipt without ERROR + exit 0."
+        id: "SC-DCR-04"
+      - criterion: "Orchestrator manifest wf-trial-orchestrator-run.v1.json exit_code matches final shell exit after all post-four-phase hooks including machine closeout."
+        id: "SC-DCR-05"
+      - criterion: "With thin client bundle (no local slim template) but store MCP env, validateCanonicalSlugs accepts red-tests/implement-code on workflow_trial_disposable true tracker."
+        id: "SC-DCR-01"

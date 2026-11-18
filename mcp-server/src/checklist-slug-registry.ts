@@ -81,11 +81,51 @@ export function resetCanonicalChecklistSlugCache(): void {
   cachedSlugs = null;
 }
 
+function envPath(key: string): string | undefined {
+  const raw = process.env[key];
+  if (typeof raw !== "string" || !raw.trim()) return undefined;
+  return raw.trim();
+}
+
+function emitDisposableTemplateDiagnostic(tier: string, resolved: string): void {
+  process.stderr.write(
+    `DIAGNOSTIC: disposable_template_resolution=${tier} path=${resolved}\n`,
+  );
+}
+
+// [IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS] [ARCH-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS] [REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS] — How: resolve slim template client bundle → store → cwd.
 function resolveDefaultDisposableChecklistTemplatePath(): string | undefined {
+  const explicit = envPath("TIED_DISPOSABLE_CHECKLIST_TEMPLATE");
+  if (explicit && existsSync(explicit)) {
+    emitDisposableTemplateDiagnostic("explicit", explicit);
+    return explicit;
+  }
+
+  const clientBundle = envPath("TIED_CLIENT_BUNDLE_PATH");
+  if (clientBundle) {
+    const candidate = path.join(clientBundle, DEFAULT_DISPOSABLE_TEMPLATE_REL);
+    if (existsSync(candidate)) {
+      emitDisposableTemplateDiagnostic("client_bundle", candidate);
+      return candidate;
+    }
+  }
+
+  const storeRoot = envPath("TIED_STORE_ROOT");
+  if (storeRoot) {
+    const candidate = path.join(storeRoot, DEFAULT_DISPOSABLE_TEMPLATE_REL);
+    if (existsSync(candidate)) {
+      emitDisposableTemplateDiagnostic("store_bundle", candidate);
+      return candidate;
+    }
+  }
+
   let dir = process.cwd();
   for (let i = 0; i < 12; i += 1) {
     const candidate = path.join(dir, DEFAULT_DISPOSABLE_TEMPLATE_REL);
-    if (existsSync(candidate)) return candidate;
+    if (existsSync(candidate)) {
+      emitDisposableTemplateDiagnostic("cwd_walk", candidate);
+      return candidate;
+    }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
