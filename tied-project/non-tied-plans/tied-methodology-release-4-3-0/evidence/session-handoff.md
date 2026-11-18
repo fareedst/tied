@@ -13,7 +13,7 @@
 - [x] `phase-c-live-pins` — MCP contracts, `tied-methodology-version.test.ts`, `agent-loader-sync.test.mjs`
 - [x] `phase-d-changelog` — Full `[Unreleased]` → `[4.3.0] - 2026-11-18`; lead **Added** with `[REQ-TIED_AS_OPERATED_BASELINE]`
 - [x] `phase-e-refresh-validate` — [test-strategy.md](../test-strategy.md) close-out battery green
-- [x] `phase-f-close` — Release commit **`81c9882c`**
+- [x] `phase-f-close` — Release commit **`7fee91c3`**
 
 ### Optional
 
@@ -26,7 +26,7 @@
 | 2026-11-18 | non-tied-plan | Cursor plan: 4.3.0 bump, VRAI/RDB inventory strategy |
 | 2026-11-18 | non-tied-refine | Locked README copy, version-inventory, session-handoff steps |
 | 2026-11-18 | non-tied-build | Authority, changelog promote, refresh witness, tests green — [build-handoff.md](./build-handoff.md) |
-| 2026-11-18 | non-tied-close | `81c9882c` — [close-out-handoff.md](./close-out-handoff.md) |
+| 2026-11-18 | non-tied-close | `7fee91c3` — [close-out-handoff.md](./close-out-handoff.md) |
 
 ### Status
 

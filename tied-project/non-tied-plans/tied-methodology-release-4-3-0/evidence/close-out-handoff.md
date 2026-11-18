@@ -2,7 +2,7 @@
 
 **date:** 2026-11-18  
 **prompt_type:** `@non-tied-close`  
-**release_commit:** `81c9882c`
+**release_commit:** `7fee91c3`
 
 ## Scoped commit
 
