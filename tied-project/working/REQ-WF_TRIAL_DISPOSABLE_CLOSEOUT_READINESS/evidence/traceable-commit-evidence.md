@@ -11,3 +11,5 @@
 **Excluded drift:** REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED working edits; unrelated cohort receipt timestamp churn on non-DCR rows; gate-run scratch CITDP fixtures under `tied-project/citdp/CITDP-REQ-{ACTIVATION,NESTED,...}.yaml`
 
 **Feedback upstream:** N/A
+
+**Commit SHA:** `e402a0e9`

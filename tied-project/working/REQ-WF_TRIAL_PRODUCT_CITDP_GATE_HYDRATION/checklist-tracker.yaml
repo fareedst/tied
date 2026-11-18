@@ -6,10 +6,10 @@ execution_evidence:
     - "impact-discovery"
     - "risk-assessment"
     - "test-strategy"
+    - "traceable-commit"
     - "unit-test-green"
     - "unit-test-red"
     - "verification-gate"
-    - "traceable-commit"
   request: "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
 execution_profile:
   depth_tier: "minimal"
@@ -62,5 +62,5 @@ steps:
   - disposition: "completed"
     slug: "traceable-commit"
     tracking:
-      note: "3d8227b1 scoped CGH commit"
+      note: "9dfab16b scoped CGH commit (git log -1 if amended)"
       status: "completed"

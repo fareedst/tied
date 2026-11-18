@@ -53,6 +53,52 @@ describe("tied_checklist_gate_validate composition [REQ-TIED_CHECKLIST_GATE_ENFO
     assert.equal(payload.blocking, false);
   });
 
+  it("SC-MPGW-06 allows minimal CITDP without fabricated adversarial lists when tracker waives [REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER]", async () => {
+    const result = await toolHandler("tied_checklist_gate_validate")({
+      phase: "close_out",
+      tracker: {
+        steps: [
+          {
+            slug: "traceable-commit",
+            disposition: "completed",
+            evidence_refs: ["checklist-gate-mcp.test.ts"],
+          },
+          {
+            slug: "sub-adversarial-inquiry-pass",
+            disposition: "not_applicable",
+            policy: "minimal-depth-no-inquiry",
+            rationale: "Minimal disposable progression: lists not required when stub present.",
+          },
+        ],
+      },
+      citdp: {
+        risk_analysis: {
+          adversarial_inquiry: {
+            depth_tier: "minimal",
+            gate_policy: "advisory",
+          },
+        },
+      },
+    });
+
+    const payload = JSON.parse(result.content[0]?.text ?? "{}") as {
+      allowed?: boolean;
+      blocking?: boolean;
+      diagnostics?: string[];
+    };
+    assert.equal(payload.allowed, true);
+    assert.equal(payload.blocking, false);
+    const listDiagnostics = [
+      "missing_counterexamples",
+      "missing_falsification_questions",
+      "missing_disconfirming_observations",
+      "missing_adversarial_evidence_references",
+    ];
+    for (const code of listDiagnostics) {
+      assert.ok(!payload.diagnostics?.includes(code), `unexpected ${code}`);
+    }
+  });
+
   it("accepts activation with receipt only when expected is omitted", async () => {
     const scope = ["IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT#MCP#block"];
     const scopeHash = stableHash(scope);

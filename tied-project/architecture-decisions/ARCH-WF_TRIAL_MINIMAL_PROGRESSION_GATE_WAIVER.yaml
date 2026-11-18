@@ -1,0 +1,10 @@
+ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+    decision: "Single predicate trackerWaivesMinimalAdversarialOpenRecord gates both CITDP open-record persistence and progression-phase validateAdversarialContract when depth_tier minimal. validateChecklistGate passes tracker into adversarial contract validation at all phases."
+    modules:
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/tools/checklist-gate-mcp.ts"
+      - "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-checklist-gates-adjunct.md"
+    related_requirements:
+      - "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+    status: "proposed"

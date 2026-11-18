@@ -660,6 +660,7 @@ export function validateAdversarialContract(input: {
   phase: GatePhase;
   depth?: AdversarialDepth;
   requiresPairing?: boolean;
+  tracker?: unknown;
   activation?: {
     receipt?: unknown;
     artifacts?: unknown;
@@ -678,7 +679,13 @@ export function validateAdversarialContract(input: {
     diagnostics.push("missing_or_invalid_depth");
     return { ok: false, diagnostics };
   }
-  if (depth === "minimal" || (depth === "strict_candidate" && input.phase === "pre_implementation")) {
+  // [IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER] [REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER] — How: same tracker predicate as validateCitdpOpenRecord at all progression phases.
+  const waiveMinimalLists = depth === "minimal"
+    && trackerWaivesMinimalAdversarialOpenRecord(input.tracker);
+  if (
+    (depth === "minimal" || (depth === "strict_candidate" && input.phase === "pre_implementation"))
+    && !waiveMinimalLists
+  ) {
     const requiredFields = [
       ["counterexamples", "missing_counterexamples"],
       ["falsification_questions", "missing_falsification_questions"],
@@ -1364,7 +1371,11 @@ export function validateChecklistGate(input: {
   const diagnostics: string[] = [];
 
   if (!depth) {
-    const adversarialResult = validateAdversarialContract({ citdp: input.citdp, phase: input.phase });
+    const adversarialResult = validateAdversarialContract({
+      citdp: input.citdp,
+      phase: input.phase,
+      tracker: input.tracker,
+    });
     diagnostics.push(...adversarialResult.diagnostics);
     return {
       allowed: false,
@@ -1538,6 +1549,7 @@ export function validateChecklistGate(input: {
     citdp: input.citdp,
     phase: input.phase,
     depth,
+    tracker: input.tracker,
     requiresPairing: pairingRequired && !closeOutWaiverApplies && Boolean(normalizedActivation),
     activation: normalizedActivation,
   });

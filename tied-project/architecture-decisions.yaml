@@ -3231,6 +3231,11 @@ ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
       - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
   status: "accepted"
+ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER.yaml"
+  related_requirements:
+    - "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+  status: "proposed"
 ARCH-WF_TRIAL_MODEL_CATALOG_RESOLVE:
   cross_references:
     architecture_decisions: []

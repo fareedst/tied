@@ -31,8 +31,8 @@
       "binding_inventory_tests": 0,
       "verify_evidence_files": 0,
       "label_case_counts": {
-        "unit.default": 12,
-        "composition.wiring": 8
+        "composition.wiring": 8,
+        "unit.default": 12
       },
       "composition_inferred_cases": 6
     }

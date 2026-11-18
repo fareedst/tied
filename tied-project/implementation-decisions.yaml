@@ -3858,6 +3858,13 @@ IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
       - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
   status: "Active"
+IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER.yaml"
+  related_architecture:
+    - "ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+  related_requirements:
+    - "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+  status: "proposed"
 IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE:
   cross_references:
     architecture_decisions:

@@ -22,7 +22,7 @@
 
 ## Commit
 
-**Commit SHA:** `3d8227b1`
+**Commit SHA:** `9dfab16b`
 
 Prepared: [proposed-commit-message.txt](./proposed-commit-message.txt), [traceable-commit-evidence.md](./traceable-commit-evidence.md).
 

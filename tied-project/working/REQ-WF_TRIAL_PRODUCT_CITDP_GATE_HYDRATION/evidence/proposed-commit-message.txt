@@ -1,7 +1,3 @@
-Add validation-only product CITDP gate hydration for WF disposable close-out.
+Batch close-out: MPGW waiver, WF-01 1795017442 facilitator publish, and working handoff sync.
 
-Synthesize risk_analysis.adversarial_inquiry at runGateCheckComposition and
-tied_checklist_gate_validate (citdp_path) for minimal/strict_candidate product
-files so path-based tied_gate_check matches inline gate-shaped CITDP. SC-CGH-01..06.
-
-[REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION] [ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION] [IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION]
+Adds REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER (checklist validator + MCP tests), trial readout/registry/cohort for successful 1795017442, facilitator evidence folders, and tracker handoff SHA updates for CGH/DGA/DCR/operator-stderr wave.

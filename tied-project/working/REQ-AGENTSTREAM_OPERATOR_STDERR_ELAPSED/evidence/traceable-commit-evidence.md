@@ -1,5 +1,6 @@
 # Traceable commit — REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED
 
+**commit_sha:** b5f22def  
 **date:** 2026-11-17  
 **depth_tier:** minimal · **gate_policy:** advisory  
 

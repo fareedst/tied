@@ -218,6 +218,121 @@ describe("VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT", ()
   });
 });
 
+const ADVERSARIAL_LIST_DIAGNOSTICS = [
+  "missing_counterexamples",
+  "missing_falsification_questions",
+  "missing_disconfirming_observations",
+  "missing_adversarial_evidence_references",
+] as const;
+
+function minimalCitdpBare(overrides: Record<string, unknown> = {}) {
+  return {
+    risk_analysis: {
+      adversarial_inquiry: {
+        depth_tier: "minimal",
+        gate_policy: "advisory",
+        ...overrides,
+      },
+    },
+  };
+}
+
+// [IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER] [REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER] — How: progression gates honor minimal-depth-no-inquiry tracker stub like open-record.
+describe("minimal progression gate waiver [REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER]", () => {
+  it("SC-MPGW-04 requires four adversarial lists when waiver stub is absent", () => {
+    const trackerWithoutWaiver = {
+      steps: [
+        completedStep("change-definition"),
+        completedStep("risk-assessment"),
+      ],
+    };
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: trackerWithoutWaiver,
+      citdp: minimalCitdpBare(),
+    });
+    assert.equal(result.allowed, false);
+    for (const code of ADVERSARIAL_LIST_DIAGNOSTICS) {
+      assert.ok(result.diagnostics.includes(code), `expected ${code}`);
+    }
+  });
+
+  it("SC-MPGW-05 integrated depth still requires pairing when waive stub is present", () => {
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: {
+        steps: [
+          completedStep("risk-assessment"),
+          completedStep("sub-adversarial-inquiry-pass"),
+          completedStep("verification-gate"),
+          minimalSubStubNotApplicable(),
+        ],
+      },
+      citdp: {
+        risk_analysis: {
+          adversarial_inquiry: {
+            depth_tier: "integrated",
+            gate_policy: "advisory",
+          },
+        },
+      },
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("integrated_depth_requires_pairing"));
+    for (const code of ADVERSARIAL_LIST_DIAGNOSTICS) {
+      assert.ok(!result.diagnostics.includes(code), `unexpected ${code}`);
+    }
+  });
+
+  it("SC-MPGW-01 allows pre_implementation without adversarial lists when tracker waives", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: minimalTracker(),
+      citdp: minimalCitdpBare(),
+    });
+    assert.equal(result.allowed, true);
+    for (const code of ADVERSARIAL_LIST_DIAGNOSTICS) {
+      assert.ok(!result.diagnostics.includes(code), `unexpected ${code}`);
+    }
+  });
+
+  it("SC-MPGW-02 allows verification adversarial contract with slim disposable tracker fixture", () => {
+    const slimDisposable = {
+      workflow_trial_disposable: true,
+      steps: [
+        completedStep("red-tests"),
+        completedStep("implement-code"),
+        minimalSubStubNotApplicable(),
+      ],
+    };
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: slimDisposable,
+      citdp: minimalCitdpBare(),
+    });
+    assert.equal(result.allowed, true);
+    for (const code of ADVERSARIAL_LIST_DIAGNOSTICS) {
+      assert.ok(!result.diagnostics.includes(code), `unexpected ${code}`);
+    }
+  });
+
+  it("SC-MPGW-03 waives adversarial list diagnostics at close_out", () => {
+    const result = validateChecklistGate({
+      phase: "close_out",
+      tracker: {
+        steps: [
+          completedStep("traceable-commit"),
+          minimalSubStubNotApplicable(),
+        ],
+      },
+      citdp: minimalCitdpBare(),
+    });
+    for (const code of ADVERSARIAL_LIST_DIAGNOSTICS) {
+      assert.ok(!result.diagnostics.includes(code), `unexpected ${code}`);
+    }
+  });
+});
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: pair inquiry receipt with four bounded artifacts.
 describe("VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT", () => {
   it("rejects stale identities and accepts a complete matching pair", () => {

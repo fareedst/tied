@@ -8,8 +8,10 @@
 
 **TIED consistency:** `tied_validate_consistency` reports pre-existing unrelated missing refs (`REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE`); not introduced by CGH.
 
-**Excluded drift:** MPGW sibling REQ untracked tree; disposable-gate-alignment / operator-stderr working edits; cohort receipt mtime churn.
+**Follow-on batch (same wave):** MPGW validator waiver, WF-01 **1795017442** readout/registry/cohort, facilitator evidence, sibling REQ handoff SHA sync — single traceable commit after this note.
+
+**Product commit (CGH code):** `375131bf`
 
 **Feedback upstream:** N/A
 
-**Commit SHA:** `3d8227b1`
+**Commit SHA:** `dc4f5bc2` (batch); product CGH `375131bf`

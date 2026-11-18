@@ -4896,6 +4896,28 @@ REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
 REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK:
   detail_file: "requirements/REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK.yaml"
   status: "implemented"
+REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  depends_on:
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"
+    - "REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+  description: "Progression gates honor the same minimal-depth-no-inquiry tracker waiver as citdp_record_write so disposable WF trials pass tied_checklist_gate_validate without fabricated adversarial lists."
+  detail_file: "requirements/REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER.yaml"
+  satisfaction_criteria:
+    - criterion: "Gate replay on frozen client 1794981051 REQ-SEMVER_COMPARATOR verification and close_out allowed true after store MCP deploy (live appendix)."
+      id: "SC-MPGW-07"
+    - criterion: "Integrated depth with minimal-depth-no-inquiry tracker stub still requires adversarial lists and pairing per existing gate tests."
+      id: "SC-MPGW-05"
+    - criterion: "MCP tied_checklist_gate_validate returns allowed true for minimal CITDP without fabricated lists when tracker waives."
+      id: "SC-MPGW-06"
+    - criterion: "Minimal depth without tracker waiver still emits missing counterexamples falsification_questions disconfirming_observations adversarial_evidence_references."
+      id: "SC-MPGW-04"
+    - criterion: "validateChecklistGate phase close_out adversarial list waiver under same predicate (other close_out checks unchanged)."
+      id: "SC-MPGW-03"
+    - criterion: "validateChecklistGate phase pre_implementation allowed true for minimal CITDP without adversarial lists when tracker sub-adversarial-inquiry-pass not_applicable policy minimal-depth-no-inquiry."
+      id: "SC-MPGW-01"
+    - criterion: "validateChecklistGate phase verification allowed true under same waiver with slim disposable tracker shape."
+      id: "SC-MPGW-02"
 REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE:
   category: "Tooling"
   detail_file: "requirements/REQ-WF_TRIAL_MODEL_CATALOG_RESOLVE.yaml"

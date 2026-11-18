@@ -10,6 +10,7 @@
 - **`workflow_trial_disposable: true`** on the tracker enables MCP **disposable gate slug union** — slim template slugs (`red-tests`, `implement-code`, …) are valid at verification/close_out without renaming to methodology `unit-test-*` slugs ([REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT](../../../tied-project/requirements/REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT.yaml)).
 - **Disposable template resolution:** MCP resolves `wf-trial-minimal-checklist-tracker.yaml` via client bundle → store → cwd; thin clients need store `TIED_STORE_ROOT` or install copy ([REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS](../../../tied-project/requirements/REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS.yaml)).
 - Do **not** mark build-plan complete while **`verification` `allowed: false`**; turn 4 requires persisted **`tied-project/citdp/CITDP-{product}.yaml`** and a verification receipt when claiming verification.
+- **Progression gate waiver (minimal disposable):** When the tracker marks **`sub-adversarial-inquiry-pass`** as **`not_applicable`** with **`policy: minimal-depth-no-inquiry`**, `tied_checklist_gate_validate` does **not** require the four adversarial list fields on the CITDP at **pre_implementation**, **verification**, or **close_out** (same rule as `citdp_record_write` open-record). Envelope, traceable commit, and other phase rules still apply — only the fabricated counterexample/falsification lists are waived ([REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER](../../../tied-project/requirements/REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER.yaml)).
 
 ## Numbered gate script
 

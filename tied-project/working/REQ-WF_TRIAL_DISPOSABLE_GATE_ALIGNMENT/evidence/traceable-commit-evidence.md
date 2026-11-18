@@ -10,6 +10,6 @@
 
 **Excluded drift:** harness cohort receipts, operator-stderr REQ, facilitator working folders
 
-**Commit SHA:** `5cd5f857`
+**Commit SHA:** `4b60f474`
 
 **Feedback upstream:** N/A

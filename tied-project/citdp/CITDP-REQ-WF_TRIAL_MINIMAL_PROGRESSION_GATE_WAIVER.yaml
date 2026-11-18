@@ -1,0 +1,51 @@
+CITDP-REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  change_definition:
+    current_behavior: "validateCitdpOpenRecord waives four adversarial list fields at minimal depth when tracker declares minimal-depth-no-inquiry; validateAdversarialContract inside validateChecklistGate always requires those lists at minimal depth without reading tracker. Disposable WF cells persist CITDP but verification and close_out receipts show allowed false with missing_adversarial_* diagnostics."
+    desired_behavior: "validateAdversarialContract accepts optional tracker; when depth minimal and trackerWaivesMinimalAdversarialOpenRecord, skip list requirements at all gate phases matching open-record parity. MCP tied_checklist_gate_validate passes tracker through."
+    non_goals:
+      - "Fabricating adversarial lists in agent prompts"
+      - "Waiving without tracker stub"
+      - "Weakening integrated or strict_candidate adversarial requirements"
+    success_criteria:
+      - "SC-MPGW-01..06 unit and MCP green"
+      - "SC-MPGW-07 live replay on 1794981051"
+    unchanged_behavior: "Integrated depth gate behavior; citdp_record_write open-record path unchanged."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/checklist-validator.ts; mcp-server/src/checklist-validator.test.ts; mcp-server/src/tools/checklist-gate-mcp.test.ts; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-checklist-gates-adjunct.md"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+      - "IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+      - "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+    citdp_id: "CITDP-REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    status: "accepted"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Agents skip close_out discipline because lists are waived"
+        - "Waiver accidentally applies at integrated depth"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "1794981051 verification allowed false despite minimal tracker and persisted CITDP"
+      evidence_references:
+        - "docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-01-claudehaiku55low-1794981051-wf-agentstream-wf-01-claude-claudehaiku55low.md"
+        - "tied-project/working/REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS/evidence/verification-live-wf-01-1794981051.md"
+      falsification_questions:
+        - "Does waiver apply when sub-adversarial-inquiry-pass disposition is not not_applicable?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "MCP unit tests plus optional live gate replay; closes DCR progression gap."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "cd mcp-server && npx tsx --test src/checklist-validator.test.ts src/tools/checklist-gate-mcp.test.ts"
+    unit:
+      - "cd mcp-server && npx tsx --test src/checklist-validator.test.ts"

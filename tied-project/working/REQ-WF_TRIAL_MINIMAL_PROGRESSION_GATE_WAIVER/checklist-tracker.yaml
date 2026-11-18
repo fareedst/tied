@@ -1,0 +1,66 @@
+description: "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER — minimal progression gate waiver"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  request: "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      note: "SC-MPGW-01..07 locked refine-plan"
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "MCP unit + composition tests; optional live gate replay only."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      note: "SC-MPGW-01..06"
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      note: "checklist-gate-mcp SC-MPGW-06"
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      note: "SC-MPGW-07 live replay evidence/sc-mpgw-07-live-replay.md"
+      status: "completed"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"
+workflow_trial_disposable: false

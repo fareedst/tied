@@ -1,0 +1,12 @@
+REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+    description: "Align validateAdversarialContract with validateCitdpOpenRecord minimal waiver via tracker input on validateChecklistGate."
+    satisfaction_criteria_refs:
+      - "SC-MPGW-01"
+      - "SC-MPGW-02"
+      - "SC-MPGW-03"
+      - "SC-MPGW-04"
+      - "SC-MPGW-05"
+      - "SC-MPGW-06"
+      - "SC-MPGW-07"
+    status: "proposed"

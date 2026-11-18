@@ -55,12 +55,12 @@
   "diagnostics": [],
   "proof_inference_diagnostics": [
     {
-      "path": "src/csv/map-rows.test.ts",
+      "path": "src/csv/tokenize.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
     },
     {
-      "path": "src/csv/tokenize.test.ts",
+      "path": "src/csv/map-rows.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
     }

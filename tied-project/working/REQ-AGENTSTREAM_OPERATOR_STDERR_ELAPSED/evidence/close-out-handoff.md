@@ -13,4 +13,4 @@
 
 ## Commit
 
-See [proposed-commit-message.txt](./proposed-commit-message.txt) and [traceable-commit-evidence.md](./traceable-commit-evidence.md).
+**SHA:** `b5f22def` — [proposed-commit-message.txt](./proposed-commit-message.txt)

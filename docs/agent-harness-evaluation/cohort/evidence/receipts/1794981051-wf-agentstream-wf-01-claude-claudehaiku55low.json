@@ -25,13 +25,13 @@
       "parse_node_count": 0
     },
     "proof_facets": {
-      "unit_tests": 8,
+      "unit_tests": 13,
       "composition_tests": 0,
       "e2e_tests": 0,
       "binding_inventory_tests": 0,
       "verify_evidence_files": 0,
       "label_case_counts": {
-        "unit.default": 8
+        "unit.default": 13
       },
       "composition_inferred_cases": 0
     }
@@ -39,12 +39,12 @@
   "cross_layer": {
     "operational_intent_per_atom": 0,
     "operational_intent_utf8_per_atom": 0,
-    "proof_facets_per_atom": 4,
+    "proof_facets_per_atom": 6.5,
     "tests_per_procedure": null
   },
   "hashes": {
     "operational_intent_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "corpus_graph_content_hash": "64a596e85e5616d452855fb944af8a889b33c0254eacc722ac3b4a62d48786ec"
+    "corpus_graph_content_hash": "1fcfde86a638db30622694c15343f4f824ac7fc3f5949b5605d92fef1912e3ad"
   },
   "trial_factors": {
     "implementation_stack_id": "wf-trial-ts-node-test-v1",

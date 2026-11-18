@@ -55,12 +55,7 @@
   "diagnostics": [],
   "proof_inference_diagnostics": [
     {
-      "path": "src/config/edge-cases.test.ts",
-      "binding_inferred": true,
-      "uses_subprocess": false
-    },
-    {
-      "path": "src/config/paths.test.ts",
+      "path": "src/config/validation.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
     },
@@ -70,7 +65,12 @@
       "uses_subprocess": false
     },
     {
-      "path": "src/config/validation.test.ts",
+      "path": "src/config/paths.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": false
+    },
+    {
+      "path": "src/config/edge-cases.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
     }

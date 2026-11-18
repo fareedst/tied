@@ -1708,6 +1708,13 @@ ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
     - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
   type: "ARCH"
+ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  cross_references:
+    - "IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+    - "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+  description: "Gate validator tracker pass-through for minimal adversarial waiver"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER.yaml"
+  type: "ARCH"
 ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   cross_references:
     - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
@@ -3791,6 +3798,13 @@ IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
     - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
     - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
+  type: "IMPL"
+IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  cross_references:
+    - "ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+    - "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+  description: "validateAdversarialContract tracker waiver implementation"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER.yaml"
   type: "IMPL"
 IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   category: "Implementation"
@@ -6112,6 +6126,13 @@ REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
     - "IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
   description: "Dual-stream session_id capture so interleaved WF trials resume turns 2-4"
   detail_file: "requirements/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
+  type: "REQ"
+REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  cross_references:
+    - "ARCH-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+    - "IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+  description: "Minimal progression gate waiver parity (validateAdversarialContract + tracker)"
+  detail_file: "requirements/REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER.yaml"
   type: "REQ"
 REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   category: "Tooling"

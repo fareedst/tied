@@ -5,10 +5,10 @@ execution_evidence:
     - "impact-discovery"
     - "risk-assessment"
     - "test-strategy"
-    - "unit-test-red"
-    - "unit-test-green"
-    - "verification-gate"
     - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
   request: "REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED"
 execution_profile:
   depth_tier: "minimal"

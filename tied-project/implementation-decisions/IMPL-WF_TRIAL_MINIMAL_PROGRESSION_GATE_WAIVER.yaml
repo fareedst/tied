@@ -1,0 +1,13 @@
+IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+  IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER:
+    essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER-pseudocode.md"
+    metadata:
+      last_updated:
+        date: "2026-11-18"
+        reason: "refine-plan"
+    related_files:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      - "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-checklist-gates-adjunct.md"
+    status: "proposed"

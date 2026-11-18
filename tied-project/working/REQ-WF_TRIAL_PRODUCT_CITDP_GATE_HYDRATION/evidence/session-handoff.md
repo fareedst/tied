@@ -26,7 +26,7 @@
 - [x] unit-test-green — @build-plan
 - [x] composition-integration — @build-plan
 - [x] verification-gate — @close-out (SC-CGH-01..06 green)
-- [x] traceable-commit — `3d8227b1`
+- [x] traceable-commit — `9dfab16b` (see `git log -1`)
 
 ### Optional
 
