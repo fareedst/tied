@@ -1,6 +1,6 @@
 # Project size comparison (facilitator)
 
-**Generated:** 2026-11-18T17:38:59.672Z
+**Generated:** 2026-11-18T19:00:06.541Z
 **Discover parent:** `/Users/fareed/Documents/dev/test`
 **Pattern (substring):** `wf-agentstream`
 
@@ -51,7 +51,7 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-03-claude-claudehaiku55high | 0 | 1 | 1 | 1 | 6143 | 108 | 8 | 11 | 2 | 0 | 1024 | 18 | 2 | 13 | 3.67 · A/A-/B+/A/B+/A-/A- |
 | wf-03-claude-claudesonnet55high | 0 | 1 | 1 | 4 | 5083 | 101 | 0 | 27 | 16 | 0 | 424 | 8 | 4 | 12 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-03-claude-claudesonnet55medium | 0 | 1 | 1 | 1 | 361 | 4 | 0 | 8 | 0 | 0 | 60 | 1 | 1 | 5 | 3.87 · A/A/A-/A/A-/A/A- |
-| wf-03-cursor-grok47low | 6 | 1 | 1 | 1 | 841 | 24 | 3 | 1 | 0 | 0 | 70 | 2 | 0 | 10 | 2.51 · B+/D+/B-/B+/C/B-/C+ |
+| wf-03-cursor-grok47low | 0 | 1 | 1 | 1 | 1359 | 25 | 0 | 1 | 0 | 0 | 227 | 4 | 0 | 11 | 3.63 · A/A-/B+/A-/A/A-/B |
 | wf-04-claude-claudehaiku55high | 0 | 1 | 1 | 1 | 11352 | 219 | 11 | 22 | 0 | 0 | 1892 | 37 | 4 | 15 | 3.77 · A/A/A-/A/B+/A-/A- |
 | wf-04-claude-claudesonnet55high | 0 | 1 | 1 | 1 | 11211 | 181 | 7 | 49 | 11 | 0 | 1869 | 30 | 10 | 15 | 3.87 · A/A/A-/A/A-/A/A- |
 | wf-04-claude-claudesonnet55medium | 0 | 1 | 1 | 1 | 789 | 7 | 0 | 5 | 3 | 0 | 132 | 1 | 1 | 5 | 3.51 · A/A-/B+/A/B+/B/B+ |
@@ -70,7 +70,6 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-08-claude-claudehaiku55medium | 0 | 1 | 1 | 1 | 2040 | 31 | 0 | 6 | 0 | 0 | 340 | 5 | 1 | 9 | 3.76 · A/A/B+/A/B+/A-/A |
 | wf-08-claude-claudesonnet55high | 0 | 1 | 1 | 1 | 4294 | 70 | 3 | 21 | 0 | 0 | 716 | 12 | 4 | 10 | 3.96 · A/A/A/A/A/A-/A |
 | wf-08-claude-claudesonnet55medium | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 1 | 4 | 3.77 · A/A/B+/A-/A-/A/A- |
-| wf-08-cursor-grok47low | 0 | 1 | 1 | 1 | 843 | 16 | 0 | 2 | 0 | 0 | 141 | 3 | 0 | 12 | 3.59 · A-/A/B-/A-/A-/A/B+ |
 | wf-09-claude-claudehaiku55low | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 5 | 4 | 3.23 · B+/B+/B+/A-/B-/B+/B |
 | wf-09-cursor-grok47low | 0 | 1 | 1 | 1 | 1462 | 37 | 0 | 6 | 0 | 0 | 244 | 6 | 1 | 13 | 3.59 · A/A-/B+/A-/A-/A-/B |
 

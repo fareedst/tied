@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial readout — PROMPT-WF-03 Grok 4.7 low @ 1795023644** — SC-DCR-06 **Full**; orchestrator **`exit_code: 0`**; **1/1** wiring test; verification + close_out **allowed**; successor to split @ 1794616912. [Readout](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-03-grok47low-1795023644-wf-agentstream-wf-03-cursor-grok47low.md).
+
 - **WF trial readout — PROMPT-WF-09 Grok 4.7 low @ 1795022513** — SC-DCR-06 **Full**; orchestrator **`exit_code: 0`**; **6/6** tests; verification + close_out **allowed**; successor to split @ 1794608051. [Readout](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-09-grok47low-1795022513-wf-agentstream-wf-09-cursor-grok47low.md).
 
 - **WF trial readout — PROMPT-WF-09 Haiku 5.5 low @ 1795021618** — SC-DCR-06 **partial_tier_b**; orchestrator **`exit_code: 0`**; **10/10** tests; agent verification receipt (range assist skip); tier B close_out. [Readout](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-09-claudehaiku55low-1795021618-wf-agentstream-wf-09-claude-claudehaiku55low.md).

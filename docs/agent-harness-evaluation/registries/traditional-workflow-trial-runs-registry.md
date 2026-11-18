@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | **Purpose** | Facilitator index of **PROMPT-WF-01…12** recorded trials — harness, model slug, session grades, orchestrator **Run time**, and **latest for cell** (composition prompts **09–12**; note **paste generation** `goal-first` vs `architect-in-paste` when comparing structure across models) |
-| **Rows** | **186** (matches [Recorded trials](../catalogs/catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
+| **Rows** | **187** (matches [Recorded trials](../catalogs/catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator)) |
 | **Status** | Maintainer snapshot |
 | **Last updated** | 2026-11-18|
 | **Disclaimer** | Store documentation only — not a `[REQ-*]` token, not a maturity score, not a model leaderboard |
