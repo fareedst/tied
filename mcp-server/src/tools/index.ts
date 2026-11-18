@@ -198,6 +198,8 @@ import {
   runGateCheckComposition,
 } from "../dae/gate-check-composition.js";
 import { createMcpGateValidateFn } from "../dae/gate-check-mcp.js";
+import { hydrateCitdpForChecklistGate } from "../dae/citdp-gate-hydration.js";
+import { loadCitdpBodyFromFile } from "../dae/yaml-load.js";
 import { persistGateDecisionReceipt } from "../gate-receipt.js";
 import { runClaimsEvidenceReviewMcp } from "../claims-evidence-review/mcp-handler.js";
 import { collectChecklistActivation } from "../checklist-activation-collect.js";
@@ -2118,14 +2120,17 @@ export const allTools = [
       inputSchema: z.object({
         phase: z.enum(["pre_implementation", "verification", "close_out"]),
         tracker: z.record(z.string(), z.unknown()).optional(),
-        citdp: z.record(z.string(), z.unknown()),
+        citdp: z.record(z.string(), z.unknown()).optional(),
+        citdp_path: z.string().optional().describe(
+          "Load product or checklist CITDP from path when citdp body omitted; hydrates minimal product citdp for gate validate.",
+        ),
         required_step_slugs: z.array(z.string()).optional(),
         activation: z.record(z.string(), z.unknown()).optional(),
         evidence: z.record(z.string(), z.unknown()).optional(),
         tracker_path: z.string().optional().describe(
           "Authoritative Tracker YAML path; when set, loads tracker and marks trackerSource authoritative_file.",
         ),
-        project_root: z.string().optional().describe("Project root for tracker_path and evidence hydration."),
+        project_root: z.string().optional().describe("Project root for tracker_path, citdp_path, and evidence hydration."),
         receipt_persistence: z.object({
           request_token: z.string(),
           gates_dir: z.string(),
@@ -2137,7 +2142,8 @@ export const allTools = [
     handler: async (args: {
       phase: "pre_implementation" | "verification" | "close_out";
       tracker?: Record<string, unknown>;
-      citdp: Record<string, unknown>;
+      citdp?: Record<string, unknown>;
+      citdp_path?: string;
       required_step_slugs?: string[];
       activation?: Record<string, unknown>;
       evidence?: Record<string, unknown>;
@@ -2155,6 +2161,13 @@ export const allTools = [
           ? path.resolve(args.project_root)
           : path.resolve(getBasePath(), "..");
         let evidence = (args.evidence ?? {}) as Record<string, unknown>;
+        if (args.citdp && args.citdp_path) {
+          return textContent(prettyCanonicalJson({
+            ok: false,
+            allowed: false,
+            error: "citdp_and_citdp_path_both_set",
+          }));
+        }
         let tracker: Record<string, unknown>;
         if (args.tracker_path) {
           const trackerAbsolute = path.isAbsolute(args.tracker_path)
@@ -2167,6 +2180,18 @@ export const allTools = [
         } else {
           return textContent(prettyCanonicalJson({ ok: false, error: "missing tracker or tracker_path" }));
         }
+        let citdpBody: Record<string, unknown>;
+        if (args.citdp) {
+          citdpBody = args.citdp;
+        } else if (args.citdp_path) {
+          const citdpAbsolute = path.isAbsolute(args.citdp_path)
+            ? args.citdp_path
+            : path.join(projectRoot, args.citdp_path);
+          citdpBody = loadCitdpBodyFromFile(citdpAbsolute);
+        } else {
+          return textContent(prettyCanonicalJson({ ok: false, error: "missing citdp or citdp_path" }));
+        }
+        const citdp = hydrateCitdpForChecklistGate(citdpBody, tracker);
         if (!evidence.requestToken) {
           const ee = tracker.execution_evidence;
           if (ee && typeof ee === "object" && !Array.isArray(ee)) {
@@ -2186,7 +2211,7 @@ export const allTools = [
           projectRoot,
           phase: args.phase,
           tracker,
-          citdp: args.citdp,
+          citdp,
           requiredStepSlugs: args.required_step_slugs,
         });
         if (preGateReject) {
@@ -2199,7 +2224,7 @@ export const allTools = [
         const result = validateChecklistGate({
           phase: args.phase,
           tracker,
-          citdp: args.citdp,
+          citdp,
           requiredStepSlugs: args.required_step_slugs,
           activation: args.activation as never,
           evidence: hydration.evidence,
@@ -2210,7 +2235,7 @@ export const allTools = [
             gateResult: result,
             phase: args.phase,
             tracker,
-            citdp: args.citdp,
+            citdp,
             gatesDir: args.receipt_persistence.gates_dir,
             ledgerPath: args.receipt_persistence.ledger_path,
             requestToken: args.receipt_persistence.request_token,

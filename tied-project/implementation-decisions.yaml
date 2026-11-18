@@ -3916,6 +3916,13 @@ IMPL-WF_TRIAL_PHASE_HANDOFF_GATE:
       - "ARCH-WF_TRIAL_PHASE_HANDOFF_GATE"
     requirements:
       - "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION:
+  cross_references:
+    - "ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+    - "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+  description: "hydrateCitdpForChecklistGate and gate composition reasons mapping implementation"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION.yaml"
+  status: "in_progress"
 IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE.yaml"
   status: "Planned"

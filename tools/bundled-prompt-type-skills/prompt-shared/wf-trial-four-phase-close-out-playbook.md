@@ -15,6 +15,7 @@ Traditional **agentstream** batch on **disposable** clients; `depth_tier: minima
 ## Close-out gates
 
 - Use **`tied_gate_check`** with **file paths** `citdp_path` + `tracker_path` (inner CITDP body).
+- **`tied_gate_check`** and **`tied_checklist_gate_validate`** hydrate **minimal** or **strict_candidate** product `citdp.v1` files that lack `risk_analysis.adversarial_inquiry` into a checklist-shaped in-memory view for gate validation only; **on-disk** `tied-project/citdp/CITDP-{product}.yaml` is unchanged ([REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION]).
 - **`run-close-out-gates.mjs`:** `--envelope-blocking --reconcile` when dist exists.
 - **`sub-close-out-evidence-sync`:** When a **`gates/verification-*.json`** receipt exists from turn 3, run sync (or `run-close-out-gates.mjs --sync-dispositions`) **before** `tied_gate_check` close_out — do not waive for grade-uplift cohorts.
 - **`--sync-dispositions`:** At minimal depth with verification receipt, **recommended**; still optional for legacy waiver-only cells when no verification receipt was written.

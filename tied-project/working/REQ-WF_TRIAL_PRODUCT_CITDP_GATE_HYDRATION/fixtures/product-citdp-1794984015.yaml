@@ -1,0 +1,22 @@
+CITDP-REQ-SEMVER_COMPARATOR:
+  context: "Small TypeScript library exporting one function that checks whether a semantic version string satisfies a simple comparator such as >=1.2.0. No CLI; tests run via npm test. Product decisions D1-D6 are recorded in working/REQ-SEMVER_COMPARATOR/PLAN.md."
+  gate_policy: "advisory"
+  impact:
+    modules:
+      - "src/semver-comparator.ts"
+    tests:
+      - "src/semver-comparator.test.ts"
+  profile_depth: "minimal"
+  request: "REQ-SEMVER_COMPARATOR"
+  risks:
+    - id: "RISK-001"
+      mitigation: "Compare numerically per component (PLAN D3); test case for 1.10.0 > 1.9.0."
+      risk: "Lexicographic comparison of version parts gives wrong order (e.g. 1.10.0 vs 1.9.0)."
+    - id: "RISK-003"
+      mitigation: "Strict grammar in PLAN (D2, D5). Any widening is a new decision, not a silent change."
+      risk: "Grammar drifts to accept pre-release, build metadata, or whitespace without a requirement."
+    - id: "RISK-002"
+      mitigation: "Throw TypeError on malformed version or comparator (PLAN D4); test each malformed class."
+      risk: "Malformed input returns false and hides comparator typos."
+  schema_version: "citdp.v1"
+  status: "draft"

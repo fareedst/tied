@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial product CITDP gate hydration ([REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION])** — validation-only synthesis of `risk_analysis.adversarial_inquiry` for `profile_depth` minimal/strict_candidate product `citdp.v1` at `runGateCheckComposition` and `tied_checklist_gate_validate` (`citdp_path`); SC-CGH-01..06 green; live WF-01 @ **1795014853** path-based verification/close_out **allowed**. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION/PLAN.md). Complements [REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER].
+
 - **WF trial disposable closeout readiness ([REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS])** — template resolution, minimal CITDP open-record waiver, tier B machine closeout, manifest exit ordering; bootstrap SC-DCR-01..05 green; live WF-01 @ **1794981051** — orchestrator tier B `exit_code: 0` but verification `allowed: false` (**SC-DCR-06** readout **fail**, not claimed pass). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS/PLAN.md). Readout: [trial-readout-PROMPT-WF-01-claudehaiku55low-1794981051](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-01-claudehaiku55low-1794981051-wf-agentstream-wf-01-claude-claudehaiku55low.md).
 
 - **WF trial disposable gate alignment ([REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT])** — MCP disposable slug union when `workflow_trial_disposable: true`; default-on `wf_trial_machine_closeout_exit_check`; SC-WF-DGA-01..05 bootstrap green; SC-WF-DGA-06 live WF deferred. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT/PLAN.md).

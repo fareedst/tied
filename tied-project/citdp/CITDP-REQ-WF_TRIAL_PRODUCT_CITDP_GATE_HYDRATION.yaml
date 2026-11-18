@@ -1,0 +1,47 @@
+CITDP-REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION:
+  change_definition:
+    current_behavior: "runGateCheckComposition loads tied-project/citdp product citdp.v1 bodies and passes them to validateChecklistGate without bridging; minimal product records lack risk_analysis.adversarial_inquiry and fail path-based tied_gate_check with malformed_citdp while inline gate-shaped citdp passes in earlier turns."
+    desired_behavior: "Validation-only hydration synthesizes risk_analysis.adversarial_inquiry for profile_depth minimal or strict_candidate product files before gate validate; integrated or missing profile_depth fail closed; tied_gate_check surfaces gate diagnostics in reasons; optional citdp_path on tied_checklist_gate_validate loads and hydrates when inline citdp omitted."
+    non_goals:
+      - "Change citdp_record_write product schema"
+      - "Envelope depthFromRecord LEAP in this REQ"
+      - "Mutate on-disk product CITDP during gate check"
+    success_criteria:
+      - "SC-CGH-01..06 satisfied in mcp-server tests and 1794984015 live replay"
+    unchanged_behavior: "Checklist-shaped methodology CITDP files and integrated product files without adversarial sections behave as today when hydration predicate false."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/dae/citdp-gate-hydration.ts; mcp-server/src/dae/gate-check-composition.ts; mcp-server/src/dae/gate-check-mcp.ts; mcp-server/src/tools/index.ts; mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+      - "IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+      - "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+    citdp_id: "CITDP-REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+    status: "implemented"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Hydration accidentally applies to integrated product citdp without adversarial section"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "1794984015 close-out tied_gate_check reports malformed_citdp despite MPGW shipping"
+      evidence_references:
+        - "docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-01-claudehaiku55low-1794984015-wf-agentstream-wf-01-claude-claudehaiku55low.md"
+        - "tied-project/working/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION/fixtures/product-citdp-1794984015.yaml"
+      falsification_questions:
+        - "Does inline gate citdp still pass when hydration module regresses?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "MCP unit and composition tests; frozen 1794984015 gate replay for SC-CGH-06."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "cd mcp-server && npx tsx --test src/dae/citdp-gate-hydration.test.ts src/tools/tied-gate-check-mcp.test.ts"
+    unit:
+      - "cd mcp-server && npx tsx --test src/dae/citdp-gate-hydration.test.ts"

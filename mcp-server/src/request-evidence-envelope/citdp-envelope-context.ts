@@ -12,13 +12,11 @@ import yaml from "js-yaml";
 import { resolveWorkingPath } from "../working-root.js";
 import type { DepthTier } from "./types.js";
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
-function identityValue(value: unknown): string | undefined {
-  return typeof value === "string" && value.trim() ? value.trim() : undefined;
-}
+import {
+  adversarialSection,
+  identityValue,
+  isRecord,
+} from "../citdp-adversarial-shape.js";
 
 function relPath(projectRoot: string, absolute: string): string {
   return path.relative(projectRoot, absolute).split(path.sep).join("/");
@@ -31,13 +29,6 @@ async function readOptional(filePath: string): Promise<string | null> {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return null;
     throw error;
   }
-}
-
-function adversarialSection(record: Record<string, unknown>): Record<string, unknown> | undefined {
-  if (isRecord(record.adversarial_inquiry)) return record.adversarial_inquiry;
-  const risk = isRecord(record.risk_analysis) ? record.risk_analysis : undefined;
-  if (risk && isRecord(risk.adversarial_inquiry)) return risk.adversarial_inquiry;
-  return undefined;
 }
 
 function depthFromRecord(record: Record<string, unknown>): DepthTier | undefined {

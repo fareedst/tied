@@ -1,0 +1,7 @@
+Add validation-only product CITDP gate hydration for WF disposable close-out.
+
+Synthesize risk_analysis.adversarial_inquiry at runGateCheckComposition and
+tied_checklist_gate_validate (citdp_path) for minimal/strict_candidate product
+files so path-based tied_gate_check matches inline gate-shaped CITDP. SC-CGH-01..06.
+
+[REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION] [ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION] [IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION]

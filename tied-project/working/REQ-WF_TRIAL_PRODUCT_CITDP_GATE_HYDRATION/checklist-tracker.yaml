@@ -1,0 +1,66 @@
+description: "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION — product CITDP gate hydration"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+    - "traceable-commit"
+  request: "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      note: "SC-CGH-01..06 RED order locked refine-plan"
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "MCP unit/composition tests + one live gate replay; no integrated adversarial inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "composition-integration"
+    tracking:
+      note: "runGateCheckComposition + MCP citdp_path"
+      status: "completed"
+  - disposition: "completed"
+    slug: "verification-gate"
+    tracking:
+      note: "SC-CGH-01..06 green; close_out gate allowed 2026-11-18"
+      status: "completed"
+  - disposition: "completed"
+    slug: "traceable-commit"
+    tracking:
+      note: "3d8227b1 scoped CGH commit"
+      status: "completed"

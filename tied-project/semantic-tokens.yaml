@@ -1722,6 +1722,13 @@ ARCH-WF_TRIAL_PHASE_HANDOFF_GATE:
   name: "WF phase handoff gate architecture"
   status: "Active"
   type: "ARCH"
+ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION:
+  cross_references:
+    - "IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+    - "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+  description: "Validation-only product CITDP gate hydration at DAE composition"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION.yaml"
+  type: "ARCH"
 ARCH-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
   cross_references:
     - "REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE"
@@ -3799,6 +3806,13 @@ IMPL-WF_TRIAL_PHASE_HANDOFF_GATE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
   name: "WF phase handoff gate implementation"
   status: "Active"
+  type: "IMPL"
+IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION:
+  cross_references:
+    - "ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+    - "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+  description: "hydrateCitdpForChecklistGate and gate composition wiring"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION.yaml"
   type: "IMPL"
 IMPL-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
   cross_references:
@@ -6115,6 +6129,13 @@ REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
   detail_file: "requirements/REQ-WF_TRIAL_PHASE_HANDOFF_GATE.yaml"
   name: "WF trial phase handoff gate"
   status: "Active"
+  type: "REQ"
+REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION:
+  cross_references:
+    - "ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+    - "IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+  description: "Hydrate minimal WF product citdp.v1 for path-based tied_gate_check"
+  detail_file: "requirements/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION.yaml"
   type: "REQ"
 REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
   cross_references:

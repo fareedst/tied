@@ -1,0 +1,15 @@
+REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION:
+  satisfaction_criteria:
+    - criterion: "Checklist CITDP with existing risk_analysis.adversarial_inquiry undergoes hydration no-op; validator sees unchanged adversarial shape."
+      id: "SC-CGH-03"
+    - criterion: "Live replay on frozen 1794984015 product citdp plus disposable tracker against store mcp-server dist yields verification and close_out allowed true documented in working evidence."
+      id: "SC-CGH-06"
+    - criterion: "Product citdp.v1 with profile_depth minimal and waiver disposable tracker yields tied_gate_check verification allowed true without malformed_citdp adversarial_inquiry."
+      id: "SC-CGH-01"
+    - criterion: "profile_depth integrated product file without adversarial_inquiry still fails closed with malformed_citdp class diagnostics."
+      id: "SC-CGH-04"
+    - criterion: "Same fixture yields tied_gate_check close_out allowed true at minimal disposable depth with MPGW list waiver when adversarial section synthesized."
+      id: "SC-CGH-02"
+    - criterion: "tied_gate_check failure surfaces reasons from gate diagnostics not only gate_blocked when gate.allowed is false."
+      id: "SC-CGH-05"
+  status: "proposed"

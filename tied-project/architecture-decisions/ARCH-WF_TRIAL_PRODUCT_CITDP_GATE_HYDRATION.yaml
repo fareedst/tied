@@ -1,0 +1,13 @@
+ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION:
+  decision: "runGateCheckComposition hydrates minimal or strict_candidate product citdp.v1 lacking adversarial_inquiry into a shallow in-memory clone before tied_checklist_gate_validate; on-disk product YAML unchanged. Optional tied_checklist_gate_validate citdp_path loads and hydrates when inline citdp omitted; error when both set. Share adversarialSection predicate with request-evidence-envelope context in a small dae module to avoid drift."
+  modules:
+    - "mcp-server/src/dae/citdp-gate-hydration.ts"
+    - "mcp-server/src/dae/gate-check-composition.ts"
+    - "mcp-server/src/dae/gate-check-mcp.ts"
+    - "mcp-server/src/request-evidence-envelope/citdp-envelope-context.ts"
+    - "mcp-server/src/tools/index.ts"
+  related_requirements:
+    - "REQ-TIED_DAE_INCORPORATION"
+    - "REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER"
+    - "REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+  status: "proposed"

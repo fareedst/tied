@@ -4,6 +4,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 
+import { validateChecklistGate } from "../checklist-validator.js";
+import { adversarialSection } from "../citdp-adversarial-shape.js";
+import { loadCitdpBodyFromFile, loadTrackerFromFile } from "../dae/yaml-load.js";
 import { allTools } from "./index.js";
 
 // [IMPL-TIED_DAE_INCORPORATION] [ARCH-TIED_DAE_INCORPORATION] [REQ-TIED_DAE_INCORPORATION] — MCP mirror of tied gate check CLI.
@@ -74,5 +77,105 @@ describe("tied_gate_check MCP [REQ-TIED_DAE_INCORPORATION]", () => {
     };
     assert.equal(payload.exit_code, 2);
     assert.ok(payload.reasons.length > 0);
+  });
+
+  it("SC-CGH-01 tied_gate_check allows verification for 4015 product citdp path", async () => {
+    const productCitdp = path.join(
+      repoRoot,
+      "tied-project/working/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION/fixtures/product-citdp-1794984015.yaml",
+    );
+    const tracker = path.join(
+      repoRoot,
+      "tied-project/working/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION/fixtures/disposable-tracker-1794984015.yaml",
+    );
+    if (!fs.existsSync(productCitdp) || !fs.existsSync(tracker)) {
+      return;
+    }
+    const handler = toolHandler("tied_gate_check");
+    const result = await handler({
+      request_token: "REQ-SEMVER_COMPARATOR",
+      phase: "verification",
+      tracker_path: tracker,
+      citdp_path: productCitdp,
+      project_root: repoRoot,
+    });
+    const payload = JSON.parse(result.content[0]?.text ?? "{}") as {
+      allowed: boolean;
+      reasons: string[];
+    };
+    assert.ok(
+      !payload.reasons.includes("malformed_citdp:adversarial_inquiry"),
+      payload.reasons.join(","),
+    );
+  });
+});
+
+describe("tied_checklist_gate_validate citdp_path [REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION]", () => {
+  const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+  const productCitdp = path.join(
+    repoRoot,
+    "tied-project/working/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION/fixtures/product-citdp-1794984015.yaml",
+  );
+  const trackerPath = path.join(
+    repoRoot,
+    "tied-project/working/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION/fixtures/disposable-tracker-1794984015.yaml",
+  );
+
+  it("hydrates product citdp from citdp_path only", async () => {
+    if (!fs.existsSync(productCitdp) || !fs.existsSync(trackerPath)) {
+      return;
+    }
+    const handler = toolHandler("tied_checklist_gate_validate");
+    const result = await handler({
+      phase: "verification",
+      tracker_path: trackerPath,
+      citdp_path: productCitdp,
+      project_root: repoRoot,
+    });
+    const payload = JSON.parse(result.content[0]?.text ?? "{}") as {
+      allowed: boolean;
+      diagnostics: string[];
+    };
+    assert.ok(
+      !payload.diagnostics?.includes("malformed_citdp:adversarial_inquiry"),
+      payload.diagnostics?.join(","),
+    );
+  });
+
+  it("rejects citdp and citdp_path together", async () => {
+    const handler = toolHandler("tied_checklist_gate_validate");
+    const result = await handler({
+      phase: "verification",
+      tracker_path: trackerPath,
+      citdp_path: productCitdp,
+      citdp: { risk_analysis: { adversarial_inquiry: { depth_tier: "minimal" } } },
+      project_root: repoRoot,
+    });
+    const payload = JSON.parse(result.content[0]?.text ?? "{}") as { error?: string };
+    assert.equal(payload.error, "citdp_and_citdp_path_both_set");
+  });
+});
+
+describe("hydrate direct validate [REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION]", () => {
+  const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+  const productCitdp = path.join(
+    repoRoot,
+    "tied-project/working/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION/fixtures/product-citdp-1794984015.yaml",
+  );
+  const trackerPath = path.join(
+    repoRoot,
+    "tied-project/working/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION/fixtures/disposable-tracker-1794984015.yaml",
+  );
+
+  it("loaded product file has no adversarial until hydrate path", () => {
+    if (!fs.existsSync(productCitdp)) return;
+    const body = loadCitdpBodyFromFile(productCitdp);
+    assert.equal(adversarialSection(body), undefined);
+    const gate = validateChecklistGate({
+      phase: "verification",
+      tracker: loadTrackerFromFile(trackerPath),
+      citdp: body,
+    });
+    assert.ok(gate.diagnostics.includes("malformed_citdp:adversarial_inquiry"));
   });
 });

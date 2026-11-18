@@ -1,0 +1,44 @@
+description: "WF trial disposable minimal greenfield tracker"
+execution_evidence:
+  completed:
+    - "implement-code"
+    - "red-tests"
+  request: "REQ-SEMVER_COMPARATOR"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+request: "REQ-SEMVER_COMPARATOR"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal-depth WF disposable greenfield; integrated adversarial inquiry not run; gate validates union + machine closeout contract."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "pending"
+    slug: "persist-implementation-records"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "red-tests"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "implement-code"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "verification-gate"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"
+workflow_trial_disposable: true

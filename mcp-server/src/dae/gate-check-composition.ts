@@ -6,6 +6,7 @@ import {
 
 import type { GatePhase } from "../checklist-validator.js";
 import { runBranchCheck } from "./branch-check.js";
+import { hydrateCitdpForChecklistGate, gateReasonsFromValidateResult } from "./citdp-gate-hydration.js";
 import { loadCitdpBodyFromFile, loadTrackerFromFile } from "./yaml-load.js";
 
 /** [IMPL-TIED_DAE_INCORPORATION] [ARCH-TIED_DAE_INCORPORATION] [REQ-TIED_DAE_INCORPORATION] — How: W1a composes Tracker/CITDP load, optional prior-slug check, and tied_checklist_gate_validate (injected in tests). */
@@ -26,6 +27,7 @@ export type GateValidateArgs = {
 export type GateValidateResult = {
   allowed: boolean;
   reasons?: string[];
+  diagnostics?: string[];
   blocking?: boolean;
   receipt_path?: string | null;
   ok?: boolean;
@@ -135,7 +137,8 @@ export async function runGateCheckComposition(input: GateCheckInput): Promise<Ga
   let tracker: Record<string, unknown>;
   try {
     tracker = loadTrackerFromFile(trackerAbs);
-    citdp = loadCitdpBodyFromFile(citdpAbs);
+    const citdpRaw = loadCitdpBodyFromFile(citdpAbs);
+    citdp = hydrateCitdpForChecklistGate(citdpRaw, tracker);
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     return {
@@ -192,7 +195,11 @@ export async function runGateCheckComposition(input: GateCheckInput): Promise<Ga
 
   let allowed = gate.allowed === true;
   let exitCode: 0 | 1 | 2 = allowed ? 0 : 1;
-  const reasons = gate.reasons ?? (allowed ? [] : ["gate_blocked"]);
+  const reasons = gateReasonsFromValidateResult({
+    allowed,
+    reasons: gate.reasons,
+    diagnostics: gate.diagnostics,
+  });
   const summary: GateCheckSummary = {
     allowed,
     exit_code: exitCode,

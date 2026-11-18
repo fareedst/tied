@@ -4989,6 +4989,13 @@ REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
       - "ARCH-WF_TRIAL_PHASE_HANDOFF_GATE"
     implementation:
       - "IMPL-WF_TRIAL_PHASE_HANDOFF_GATE"
+REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION:
+  cross_references:
+    - "ARCH-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+    - "IMPL-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION"
+  description: "Hydrate minimal WF product citdp.v1 into checklist-shaped gate input at runGateCheckComposition for path-based tied_gate_check"
+  detail_file: "requirements/REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION.yaml"
+  status: "proposed"
 REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE:
   description: "L3 proof manifest gate validates every files[] row; FACET_AS_SUBTYPE when coarse proof_facet used as proof_subtype; operator diagnostics."
   detail_file: "requirements/REQ-WF_TRIAL_PROOF_MANIFEST_SUBTYPE_GATE.yaml"
