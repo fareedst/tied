@@ -9,9 +9,12 @@
 - [x] unit-test-red — build-plan
 - [x] unit-test-green — build-plan
 - [x] composition-integration — build-plan
-- [ ] verification-gate — close-out
-- [ ] traceable-commit — close-out
+- [x] verification-gate — live @ 1794975372 + bootstrap tests
+- [x] traceable-commit — close-out batch
 
-## Next
+## Completion signals
 
-`@close-out` with linked [PLAN.md](../PLAN.md).
+| Signal | Status |
+| --- | --- |
+| `close_out` gate | allowed (minimal, advisory) |
+| live slim reconcile | `valid slim shape (no replace)` @ 1794975372 |

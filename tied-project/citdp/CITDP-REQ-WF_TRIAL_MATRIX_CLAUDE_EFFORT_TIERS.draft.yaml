@@ -6,14 +6,14 @@ CITDP-REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS:
     modules_or_boundaries: "tools/bootstrap/lib/wf-trial-comparison-matrix.mjs; wf-trial-comparison-matrix.test.mjs; build-wf-trial-comparison-matrix.mjs; traditional-workflow-trial-runs-registry.md; PLAN-WF-TRIAL-COMPARISON-MATRIX/PLAN.md; tied-project/CHANGELOG.md"
     tied_tokens_new: []
   non_goals:
-    - "Registry-driven dynamic column insertion without manifest"
     - "Cursor MODEL_EFFORT @high columns"
+    - "Registry-driven dynamic column insertion without manifest"
     - "Store REQ/ARCH/IMPL YAML promotion"
   risk_analysis:
     adversarial_inquiry:
       counterexamples:
-        - "Removing baseline fallback drops cells instead of showing wrong tier"
         - "Alphabetical sort splits Sonnet low/medium/high non-adjacent"
+        - "Removing baseline fallback drops cells instead of showing wrong tier"
       depth_tier: "minimal"
       disconfirming_observations:
         - "WF-10 Haiku low column becomes em dash if no latest low run"
@@ -29,8 +29,8 @@ CITDP-REQ-WF_TRIAL_MATRIX_CLAUDE_EFFORT_TIERS:
       depth_tier: "minimal"
       gate_policy: "facilitator_doc_only"
   success_criteria:
-    - "SC-WF-CMX-11, 22–26 in PLAN.md"
     - "Registry spot checks WF-09/10 @high columns"
+    - "SC-WF-CMX-11, 22–26 in PLAN.md"
   test_strategy:
     integration:
       - "build-wf-trial-comparison-matrix.mjs --check"

@@ -1,8 +1,9 @@
 # Non-TIED plan: STDD vocabulary visual encoding
 
 **Slug:** `stdd-vocab-visual-encoding`  
+**plan_phase:** `post-build` (slice **D9** — `validate_vocab` hotfix; V11 pass 2026-11-17)  
 **Source:** Cursor plan `stdd_vocab_visual_encoding_25af366b` (refined 2026-11-16 via `@non-tied-refine`)  
-**Handoff:** `@non-tied-build`  
+**Handoff:** `@non-tied-build` on slice D9, then `@non-tied-close` when V11 passes  
 **Parent encoding:** [@informative-color-coding](../../../../.cursor/skills/informative-color-coding/SKILL.md)  
 **Reference client:** [hl7receiver vocab-domain-color-map](https://github.com/fareedst/hl7receiver/blob/main/tied-project/non-tied-plans/vocab-domain-color-map/PLAN.md) (pattern only; paths differ)
 
@@ -24,6 +25,8 @@
 | **Tier A** | Sponsor-locked: hub + T1–T4 diagrams; T5 optional if T1–T4 complete |
 | **Glossary edits** | No color columns in source glossaries; parallel map in D1/D4 only |
 | **TIED track** | No REQ/ARCH/IMPL minting; no product/CSS changes except **docs-only** Tier A Mermaid |
+| **D8 catalog depth (refined 2026-11-17)** | `[PROC-VOCABULARY_INDEX]` membership requires **table rows** in `routing.md` (`## Glossary routing table`) and `domain-references.md` (`## Canonical glossaries`) — cross-topic prose in § Cross-topic notes does **not** satisfy `validate_vocab_index.rb` |
+| **D1/D4 glossary skeleton (refined 2026-11-17)** | `visual-encoding-domains.md` and `term-domain-color-index.md` are glossary `*.md` files — must match `scripts/validate_vocab_index.rb` `REQUIRED_MARKERS` (canonical H1, Traceability, See also, `## Alphabetical index`) |
 
 ### Costly choices (accepted)
 
@@ -214,6 +217,59 @@ flowchart LR
 | D6 | Docs hub | [`docs/visual-encoding-standards.md`](../../../docs/visual-encoding-standards.md) |
 | D7 | Tier A diagram edits | §5 |
 | D8 | Catalog links | `routing.md` + `domain-references.md` cross-topic note → D1/D6 |
+| D9 | Vocab gate compliance | D1/D4 skeleton + catalog **tables** + builder regen — closes `test-all` **`validate_vocab`** |
+
+---
+
+## 4b. Slice D9 — `validate_vocab` hotfix (2026-11-17)
+
+**Trigger:** `ruby scripts/validate_vocab_index.rb .` fails after D1–D8 close-out (`test-all` step 7). Methodology layer (`tied-bundle/vocab/` stubs) resolves to client canonical text — fix **`tied-project/vocab/`** only.
+
+**Root cause:** D8 wired cross-topic prose and one `routing.md` row for D1 but treated D4 as a data artifact, not a glossary. V6 in `test-strategy.md` did not run the repo vocab gate.
+
+```mermaid
+flowchart TD
+  gate[validate_vocab_index.rb]
+  markers[REQUIRED_MARKERS on D1 and D4]
+  catalog[Table links in routing and domain-references]
+  builder[build-term-index.mjs emits compliant D4 header]
+  gate --> markers
+  gate --> catalog
+  builder --> markers
+```
+
+### D9 satisfaction criteria
+
+| Id | Criterion | Evidence |
+| --- | --- | --- |
+| SC-D9-01 | `ruby scripts/validate_vocab_index.rb .` exit **0** | Command output |
+| SC-D9-02 | D4 regen via `build-term-index.mjs` keeps **1083** rows (±0) | `**Row count:**` header |
+| SC-D9-03 | Second regen produces **zero diff** on D4 after builder template lock | V5 + V11 |
+| SC-D9-04 | `tied-bundle/vocab/` stub resolution passes without stub-only edits | Implicit when SC-D9-01 passes |
+
+### D9 execution order (do not reorder)
+
+1. **`patch-index-builder-template`** — In [`evidence/build-term-index.mjs`](./evidence/build-term-index.mjs) `buildMarkdown()`: H1 `# Term domain color index (canonical)`; add `**Traceability:**` + `**See also:**`; emit `domain-references` / `routing` source sections; full table under `## Master index (alphabetical)`; compact `## Alphabetical index` (`Term | Section`) for `validate_vocab_index.rb`.
+2. **`patch-visual-encoding-domains-skeleton`** — Hand-edit [`tied-project/vocab/visual-encoding-domains.md`](../../vocab/visual-encoding-domains.md): `# Visual encoding semantic domains (canonical)`; Traceability / See also blocks (mirror D9 traceability pattern in step 1); `## Alphabetical index` with `Term \| Section` rows only for strings **present** in the file body (seven `dom.*` ids, sub-roles in § Sub-roles, `layer.*` / `plan.*` / `edge.*` axis labels, legend names **TiedCorpus** … **PlanFigure**). Follow [`harness-metering-canary.md`](../../vocab/harness-metering-canary.md) shape.
+3. **`regenerate-term-index`** — `node tied-project/non-tied-plans/stdd-vocab-visual-encoding/evidence/build-term-index.mjs`
+4. **`patch-vocab-catalog-tables`** — [`routing.md`](../../vocab/routing.md): add row for `term-domain-color-index.md` (keywords: term domain color map, `dom.*` lookup, diagram coloring, `build-term-index.mjs`). [`domain-references.md`](../../vocab/domain-references.md): add **Canonical glossaries** table rows for `visual-encoding-domains.md` and `term-domain-color-index.md` (priority `—`, aligned with routing).
+5. **`verify-vocab-gate`** — `ruby scripts/validate_vocab_index.rb .`; update [`test-strategy.md`](./test-strategy.md) V11 row.
+
+### D9 traceability copy (paste into D1/D4)
+
+```markdown
+**Traceability:** [`[PROC-VOCABULARY_INDEX]`](../../tied-bundle/docs/processes.md) · [stdd-vocab-visual-encoding PLAN](../non-tied-plans/stdd-vocab-visual-encoding/PLAN.md) · [@informative-color-coding](../../../../.cursor/skills/informative-color-coding/SKILL.md)
+
+**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`visual-encoding-domains.md`](visual-encoding-domains.md) · [`term-domain-color-index.md`](term-domain-color-index.md) · [`docs/visual-encoding-standards.md`](../../docs/visual-encoding-standards.md)
+```
+
+Adjust relative links per file (D4 See also must link D1; D1 See also must link D4).
+
+### D9 out of scope
+
+- Changing `validate_vocab_index.rb` to exempt D4 or skip alphabetical validation
+- npm audit / `install-scripts` warnings from `test-all` step 6
+- D8b per-glossary See also on all 27 files
 
 ---
 
@@ -250,6 +306,6 @@ See [`test-strategy.md`](./test-strategy.md). Build fills result table when comp
 
 ## 8. Handoff
 
-**Next:** `@non-tied-build` on this folder.
+**Next:** `@non-tied-build` on slice **D9** (this folder). When V11 passes, `@non-tied-close` scoped to D9 files.
 
 **Optional later:** D8b — one-line **See also** on each glossary pointing to D1; Tier B/C doc inventory; `@informative-color-coding` Apply on named product paths.

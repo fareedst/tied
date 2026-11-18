@@ -1,28 +1,28 @@
-change_class: comparisons_doc_only
-gate_policy: outreach_doc_only
+change_class: "comparisons_doc_only"
+gate_policy: "outreach_doc_only"
 no_req_mint: true
-profile_depth: minimal
-request_token: DOC-META-ASTRYX-DESIGN-SYSTEM-COMPARISON
+profile_depth: "minimal"
+request_token: "DOC-META-ASTRYX-DESIGN-SYSTEM-COMPARISON"
 steps:
-  session-bootstrap:
-    status: done
-  translate-sponsor-intent:
-    notes: "Meta Astryx DS agent ergonomics × TIED; repo summary not README dump."
-    status: done
   change-definition:
     notes: "Wave 1 capture + Wave 2 + git allowlist; no project YAML."
-    status: done
+    status: "done"
   impact-discovery:
     notes: "non-tied-plans/meta-astryx-design-system-vs-tied/PLAN.md deliverables."
-    status: done
-  risk-assessment:
-    notes: "Meta scale/vibe pass rates not_measured; not TIED effectiveness proof."
-    status: done
+    status: "done"
+  implement-doc-deliverables:
+    status: "done"
   pre_implementation:
     notes: "Outreach DOC; tied_checklist_gate_validate not claimed for implement-complete."
-    status: blocked
-  implement-doc-deliverables:
-    status: done
+    status: "blocked"
+  risk-assessment:
+    notes: "Meta scale/vibe pass rates not_measured; not TIED effectiveness proof."
+    status: "done"
+  session-bootstrap:
+    status: "done"
   test-strategy:
     notes: "14-section parity, labels, links, no vendor dump."
-    status: done
+    status: "done"
+  translate-sponsor-intent:
+    notes: "Meta Astryx DS agent ergonomics × TIED; repo summary not README dump."
+    status: "done"

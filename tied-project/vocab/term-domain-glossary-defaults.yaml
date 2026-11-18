@@ -1,36 +1,32 @@
-# Default semantic domain per glossary file (D2).
-# Overrides: term-domain-overrides.yaml
-
-schemaVersion: term-domain-glossary-defaults.v1
-
 defaults:
-  tied-methodology.md: dom.tiedCorpus
-  tied-yaml-mcp.md: dom.tiedCorpus
-  tied-product-configuration.md: dom.tiedCorpus
-  async-methodology.md: dom.tiedCorpus
-  feature-orchestration.md: dom.tiedCorpus
-  leap-proposal-queue.md: dom.tiedCorpus
-  feedback-to-tied.md: dom.tiedCorpus
-  config-discovery.md: dom.tiedCorpus
-  agentstream.md: dom.agentSurface
-  agent-stream-ruby.md: dom.agentSurface
-  prompt-composer.md: dom.agentSurface
-  project-operations-mcp.md: dom.agentSurface
-  harness-platform-taxonomy.md: dom.harnessBench
-  harness-model-eval.md: dom.harnessBench
-  harness-metering-canary.md: dom.harnessBench
-  quality-assurance.md: dom.evidenceAssurance
-  fidelity-research.md: dom.evidenceAssurance
-  easar-recovery.md: dom.evidenceAssurance
-  edpc-comprehension.md: dom.evidenceAssurance
-  process-certification-readiness.md: dom.evidenceAssurance
-  behavior-bounded-change-engineering.md: dom.evidenceAssurance
-  operating-environment-externalities.md: dom.adaptivePractice
-  context-adaptive-engineering.md: dom.adaptivePractice
-  residuality.md: dom.adaptivePractice
-  pseudocode-and-citdp.md: dom.adaptivePractice
-  external-investigation-mcp.md: dom.governanceChoice
-  decision-copilot.md: dom.governanceChoice
-  sponsor-agent-relationship.md: dom.governanceChoice
-  routing.md: dom.metaVocab
-  domain-references.md: dom.metaVocab
+  agent-stream-ruby.md: "dom.agentSurface"
+  agentstream.md: "dom.agentSurface"
+  async-methodology.md: "dom.tiedCorpus"
+  behavior-bounded-change-engineering.md: "dom.evidenceAssurance"
+  config-discovery.md: "dom.tiedCorpus"
+  context-adaptive-engineering.md: "dom.adaptivePractice"
+  decision-copilot.md: "dom.governanceChoice"
+  domain-references.md: "dom.metaVocab"
+  easar-recovery.md: "dom.evidenceAssurance"
+  edpc-comprehension.md: "dom.evidenceAssurance"
+  external-investigation-mcp.md: "dom.governanceChoice"
+  feature-orchestration.md: "dom.tiedCorpus"
+  feedback-to-tied.md: "dom.tiedCorpus"
+  fidelity-research.md: "dom.evidenceAssurance"
+  harness-metering-canary.md: "dom.harnessBench"
+  harness-model-eval.md: "dom.harnessBench"
+  harness-platform-taxonomy.md: "dom.harnessBench"
+  leap-proposal-queue.md: "dom.tiedCorpus"
+  operating-environment-externalities.md: "dom.adaptivePractice"
+  process-certification-readiness.md: "dom.evidenceAssurance"
+  project-operations-mcp.md: "dom.agentSurface"
+  prompt-composer.md: "dom.agentSurface"
+  pseudocode-and-citdp.md: "dom.adaptivePractice"
+  quality-assurance.md: "dom.evidenceAssurance"
+  residuality.md: "dom.adaptivePractice"
+  routing.md: "dom.metaVocab"
+  sponsor-agent-relationship.md: "dom.governanceChoice"
+  tied-methodology.md: "dom.tiedCorpus"
+  tied-product-configuration.md: "dom.tiedCorpus"
+  tied-yaml-mcp.md: "dom.tiedCorpus"
+schemaVersion: "term-domain-glossary-defaults.v1"

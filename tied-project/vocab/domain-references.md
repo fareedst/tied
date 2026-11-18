@@ -53,6 +53,8 @@
 | 5i | [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) | BBCE behavioral slices, change locality, declared change surface, boundary violations |
 | 5j | [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) | Sponsor, agent, reviewer roles; instrument vs person branch; agency boundary; hinge fields; consequence ladder; reversible/costly choices |
 | — | [`config-discovery.md`](config-discovery.md) | Planned layered YAML config (stub; `(proposed)` terms) |
+| — | [`visual-encoding-domains.md`](visual-encoding-domains.md) | Seven `dom.*` semantic domains, layer/plan/edge axes, encoding sheet, accessibility gate |
+| — | [`term-domain-color-index.md`](term-domain-color-index.md) | Parallel map: glossary term → primary `dom.*` (+ sub-role); regenerated via `build-term-index.mjs` |
 
 ---
 

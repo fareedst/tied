@@ -8,6 +8,7 @@ execution_evidence:
     - "test-strategy"
     - "unit-test-green"
     - "unit-test-red"
+    - "verification-gate"
   request: "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
 execution_profile:
   depth_tier: "minimal"
@@ -51,11 +52,11 @@ steps:
     slug: "composition-integration"
     tracking:
       status: "completed"
-  - disposition: "pending"
+  - disposition: "completed"
     slug: "verification-gate"
     tracking:
-      status: "pending"
-  - disposition: "pending"
+      status: "completed"
+  - disposition: "completed"
     slug: "traceable-commit"
     tracking:
-      status: "pending"
+      status: "completed"

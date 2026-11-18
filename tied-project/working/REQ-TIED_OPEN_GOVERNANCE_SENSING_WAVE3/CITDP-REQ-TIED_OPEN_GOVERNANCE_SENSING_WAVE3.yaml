@@ -1,58 +1,58 @@
 CITDP-REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
-  record_identity:
-    change_request_id: "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
-    recorded_at: "2026-11-17"
-    title: "Open Governance sensing Wave 3 — proof-boundary and odourless-zone compose"
   change_definition:
     current_behavior: "Open Governance × TIED comparison (Wave 2) exists with Wave 3 Phase 1–3 Defer; operators lack a single bundle guide for what TIED can vs cannot sense and deliberate mercaptan-style observability for the software-delivery slice."
     desired_behavior: "Committed bundle compose doc, client-development-index pointer, odourless-zones operator checklist, CITDP literacy pointer, optional HTOL source-study cross-link, and REQ-tracked satisfaction criteria—without new gate MCP or organizational GRC scope."
     non_goals:
-      - "Store Tony Fish essay body in repo"
       - "Board GRC or model-weight provenance product"
       - "methodology-composition-matrix §2 row without parent REQ row-contract LEAP (19→20)"
       - "Mint effectiveness proof from OpenGovernance-reported claims"
+      - "Store Tony Fish essay body in repo"
     success_criteria:
       - "Build-plan satisfies SC-OGS-* per PLAN.md"
-      - "pre_implementation gate allowed after author-requirement + pseudocode_validate"
       - "PLAN phased slices A–F; matrix row Slice G deferred"
+      - "pre_implementation gate allowed after author-requirement + pseudocode_validate"
     unchanged_behavior:
-      - "Gate authority, MCP YAML write path, harness trace loop semantics"
       - "Default agentstream preflight off"
-  impact_analysis:
-    modules_or_boundaries: "tied-bundle/docs; client-development-index; working-folder checklist; optional citdp-policy pointer; optional HTOL guide marker"
-    tied_tokens_new:
-      - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
-      - "ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
-      - "IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
-    tied_tokens_affected:
-      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
-      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
-      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
-  risk_analysis:
-    adversarial_inquiry:
-      depth_tier: "minimal"
-      gate_policy: "advisory"
-      assurance_profile: "baseline-functional"
-      rationale: "Doc-compose Wave 3; no executable product behavior in scope."
-    quality_evidence_matrix:
-      - id: "QEM-OGS-DOC"
-        proof_boundary: "traceability_structure"
-        evidence: "governance-sensing-proof-boundary-compose-doc.test.mjs; tied_validate_consistency"
-  leap_feedback:
-    record_status: "draft"
-    divergences_from_analysis: "none"
+      - "Gate authority, MCP YAML write path, harness trace loop semantics"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+      scope:
+        - "tied-bundle/docs/client-development-index.md"
+        - "tied-bundle/docs/governance-sensing-proof-boundary-compose.md"
+        - "tied-project/working/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3/odourless-zones-operator-checklist.md"
   evidence:
-    proof_boundaries:
-      - "traceability_structure"
-      - "human_decision"
     command_seq:
       - "pseudocode_validate IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3 gate_mode"
       - "tied_validate_consistency"
-  completion_criteria:
-    activation:
-      request_token: "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
-      phase: "pre_implementation"
-      scope:
-        - "tied-bundle/docs/governance-sensing-proof-boundary-compose.md"
-        - "tied-bundle/docs/client-development-index.md"
-        - "tied-project/working/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3/odourless-zones-operator-checklist.md"
+    proof_boundaries:
+      - "human_decision"
+      - "traceability_structure"
+  impact_analysis:
+    modules_or_boundaries: "tied-bundle/docs; client-development-index; working-folder checklist; optional citdp-policy pointer; optional HTOL guide marker"
+    tied_tokens_affected:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+    tied_tokens_new:
+      - "ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+      - "IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+      - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "draft"
+  record_identity:
+    change_request_id: "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    recorded_at: "2026-11-17"
+    title: "Open Governance sensing Wave 3 — proof-boundary and odourless-zone compose"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Doc-compose Wave 3; no executable product behavior in scope."
+    quality_evidence_matrix:
+      - evidence: "governance-sensing-proof-boundary-compose-doc.test.mjs; tied_validate_consistency"
+        id: "QEM-OGS-DOC"
+        proof_boundary: "traceability_structure"

@@ -1,0 +1,34 @@
+IMPL-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3:
+  approach: "RED/GREEN bootstrap contract tests; bundle guide; index row; checklist; citdp pointer; matrix row 21."
+  code_locations:
+    files:
+      - description: "Compose guide"
+        path: "tied-bundle/docs/farley-executable-spec-compose.md"
+      - description: "Operator checklist"
+        path: "tied-project/working/REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3/executable-spec-operator-checklist.md"
+    functions: []
+  cross_references:
+    architecture:
+      - "ARCH-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+    requirements:
+      - "REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+  decision: "Doc-compose slices A–H per pseudo-code sidecar; matrix test reconciliation."
+  implementation_approach:
+    details:
+      - "tied-bundle/docs/farley-executable-spec-compose.md"
+      - "tools/bootstrap/lib/farley-executable-spec-compose-doc.test.mjs"
+      - "tools/bootstrap/lib/methodology-composition-matrix-farley-executable-spec-row.test.mjs"
+    summary: "Doc-compose per PLAN §3."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-17"
+      reason: "Promote working pseudo-code sidecar"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+    requirements:
+      - "REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+    tests:
+      - "tools/bootstrap/lib/farley-executable-spec-compose-doc.test.mjs"
+      - "tools/bootstrap/lib/methodology-composition-matrix-farley-executable-spec-row.test.mjs"

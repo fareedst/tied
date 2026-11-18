@@ -1,35 +1,47 @@
-citdp:
+CITDP-REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
   change_definition:
-    in_scope:
-      - "Interleaved four-phase agentstream shell driver with post-turn-1 slim tracker reconcile"
-      - "LEAP SC-WF-CLP-05 inter-turn wording"
-      - "WF trial turn-1 batch + add-feature tracker adjunct"
-      - "wf-trial-tracker-shape.mjs and bootstrap tests SC-WF-IST-01..04"
-    out_of_scope:
+    current_behavior: "Turn-1 agents author legacy checklist trackers on disposable clients; post-run copy-if-absent never replaces them; close-out gates fail malformed_tracker:steps."
+    desired_behavior: "Four sequential agentstream invokes with post-turn-1 slim tracker reconcile; shape check via wf-trial-tracker-shape.mjs; backup-before-replace; WF_TRIAL_SKIP_INTERLEAVED_TRACKER_SEED opt-out."
+    non_goals:
       - "Auto-repair execution_evidence.completed slugs on disposable clients"
       - "MCP verification gate adversarial field policy changes"
-      - "WF-METER-01 orchestrator path unless trivially shared"
-    summary: "After turn 1 of workflow_trial_agentstream, replace malformed disposable checklist trackers with the slim template before turns 2-4 so tied_checklist_gate_validate does not fail with malformed_tracker:steps."
-  prompt_type: "refine-plan"
-  request_token: "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
-  risk_assessment:
+    success_criteria:
+      - "Live WF-01 @ 1794975372 emits valid slim shape reconcile (no replace) after turn 1"
+      - "SC-WF-IST-01..05 green in bootstrap tests"
+    unchanged_behavior: "Monolithic four-phase invoke when interleaved seed skipped."
+  impact_analysis:
+    modules_or_boundaries: "scripts/lib/wf-trial-product-req.inc.sh; scripts/lib/wf-trial-interleaved-four-phase.inc.sh; scripts/run-traditional-four-phase-agentstream.sh; tools/bootstrap/lib/wf-trial-tracker-shape.mjs"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+      - "IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+      - "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+    citdp_id: "CITDP-REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+    status: "implemented"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Reconcile overwrites sponsor-custom slim tracker if shape check too loose"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "1794971027 WF-01 showed malformed tracker despite slim template in store"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE/evidence/verification-live-wf-01-1794975372.md"
+        - "tied-project/working/REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does four-process interleave still fail gates when agent writes valid slim shape on turn 1?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
     gate_policy: "advisory"
-    mitigations:
-      - "Abort later turns on non-zero agentstream exit"
-      - "Backup agent tracker to evidence before replace"
-      - "WF_TRIAL_SKIP_INTERLEAVED_TRACKER_SEED escape hatch"
-    profile_depth: "minimal"
-    risks:
-      - "Four agentstream starts increase wall-clock and session fragility"
-      - "Reconcile overwrites valid sponsor-custom slim trackers if shape check too loose"
-      - "Resume session_id parse fails mid-batch"
-  status: "draft"
+    rationale: "Orchestrator shell + bootstrap tests; disposable client backup before replace."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
   test_strategy:
-    cases:
-      - "interleaved hook runs between order 1 and 2"
-      - "legacy wrapper fixture classifies invalid"
-      - "reconcile seeds slim and writes backup"
-      - "skip env restores monolithic batch"
-    command: "node --test tools/bootstrap/lib/wf-trial-tracker-shape.test.mjs && node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
-    framework: "node:test"
-    red_phase: "deferred to build-plan"
+    composition:
+      - "tools/bootstrap/lib/wf-trial-tracker-shape.test.mjs"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

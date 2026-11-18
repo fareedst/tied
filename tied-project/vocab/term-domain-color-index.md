@@ -1,12 +1,14 @@
-# Term → domain color index
+# Term domain color index (canonical)
 
 **Scope:** Parallel map from client glossary terms to [visual-encoding-domains.md](visual-encoding-domains.md) `dom.*` ids.
 
-**Plan:** [stdd-vocab-visual-encoding](../non-tied-plans/stdd-vocab-visual-encoding/PLAN.md)
+**Traceability:** [`[PROC-VOCABULARY_INDEX]`](../../tied-bundle/docs/processes.md) · [stdd-vocab-visual-encoding PLAN](../non-tied-plans/stdd-vocab-visual-encoding/PLAN.md) · [@informative-color-coding](../../.cursor/skills/informative-color-coding/SKILL.md)
+
+**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`visual-encoding-domains.md`](visual-encoding-domains.md) · [visual-encoding-standards.md](../../docs/visual-encoding-standards.md)
 
 **Precedence:** See domain registry § Assignment precedence.
 
-**Row count:** 1083 canonical rows (post-dedupe).
+**Row count:** 1086 canonical rows (post-dedupe).
 
 **Regenerate:** `node tied-project/non-tied-plans/stdd-vocab-visual-encoding/evidence/build-term-index.mjs`
 
@@ -39,12 +41,12 @@ Source: [agentstream.md](agentstream.md)
 
 | Term | Primary domain | Sub-role | Notes |
 | --- | --- | --- | --- |
-| **`--adherence-ledger`** | `dom.agentSurface` | — | — |
-| **`--checklist-tracker-preview`** | `dom.agentSurface` | — | — |
-| **`--checklist-tracker-yaml`** | `dom.agentSurface` | — | — |
-| **`--harness claude`** | `dom.agentSurface` | — | — |
-| **`--resume-from-tracker`** | `dom.agentSurface` | — | — |
-| **`{{SKILL_ROOT}}` batch placeholder** | `dom.agentSurface` | — | — |
+| **--adherence-ledger** | `dom.agentSurface` | — | — |
+| **--checklist-tracker-preview** | `dom.agentSurface` | — | — |
+| **--checklist-tracker-yaml** | `dom.agentSurface` | — | — |
+| **--harness claude** | `dom.agentSurface` | — | — |
+| **--resume-from-tracker** | `dom.agentSurface` | — | — |
+| **{{SKILL_ROOT}} batch placeholder** | `dom.agentSurface` | — | — |
 | **active-turn marker** | `dom.agentSurface` | — | — |
 | **adherence event class** | `dom.agentSurface` | — | Domain conflict: agentstream.md, quality-assurance.md vs quality-assurance.md (kept dom.agentSurface) |
 | **Adherence ledger** | `dom.agentSurface` | — | Domain conflict: agentstream.md, quality-assurance.md vs quality-assurance.md (kept dom.agentSurface) |
@@ -211,10 +213,10 @@ Source: [decision-copilot.md](decision-copilot.md)
 
 | Term | Primary domain | Sub-role | Notes |
 | --- | --- | --- | --- |
-| **`jev_data_tier`** | `dom.governanceChoice` | — | — |
-| **`JEV_DECIDE_TRACE_PATH`** | `dom.governanceChoice` | — | — |
-| **`JEV_DECIDE_TRACE`** | `dom.governanceChoice` | — | — |
-| **`system-one-decide-trace.v1`** | `dom.governanceChoice` | — | — |
+| **jev_data_tier** | `dom.governanceChoice` | — | — |
+| **JEV_DECIDE_TRACE_PATH** | `dom.governanceChoice` | — | — |
+| **JEV_DECIDE_TRACE** | `dom.governanceChoice` | — | — |
+| **system-one-decide-trace.v1** | `dom.governanceChoice` | — | — |
 | **advisory-primary tie-break** | `dom.governanceChoice` | — | — |
 | **agrees** | `dom.governanceChoice` | — | — |
 | **answer_confidence** | `dom.governanceChoice` | — | — |
@@ -561,7 +563,7 @@ Source: [harness-model-eval.md](harness-model-eval.md)
 
 | Term | Primary domain | Sub-role | Notes |
 | --- | --- | --- | --- |
-| **`tied_validate_consistency`** | `dom.harnessBench` | — | — |
+| **tied_validate_consistency** | `dom.harnessBench` | — | — |
 | **baseline bind** | `dom.harnessBench` | — | — |
 | **billing ledger** | `dom.harnessBench` | — | — |
 | **configuration fingerprint** | `dom.harnessBench` | — | Also: harness-platform-taxonomy.md |
@@ -588,8 +590,8 @@ Source: [harness-platform-taxonomy.md](harness-platform-taxonomy.md)
 
 | Term | Primary domain | Sub-role | Notes |
 | --- | --- | --- | --- |
-| **`harness profile`** | `dom.harnessBench` | — | — |
-| **`tied agentstream`** | `dom.metaVocab` | — | Domain conflict: domain-references.md, harness-platform-taxonomy.md vs harness-platform-taxonomy.md (kept dom.metaVocab) |
+| **harness profile** | `dom.harnessBench` | — | — |
+| **tied agentstream** | `dom.metaVocab` | — | Domain conflict: domain-references.md, harness-platform-taxonomy.md vs harness-platform-taxonomy.md (kept dom.metaVocab) |
 | **1 — Vendor harness** | `dom.harnessBench` | — | — |
 | **2 — TIED orchestration** | `dom.harnessBench` | — | — |
 | **3 — TIED governance** | `dom.harnessBench` | — | — |
@@ -604,9 +606,11 @@ Source: [harness-platform-taxonomy.md](harness-platform-taxonomy.md)
 | **Model configuration** | `dom.harnessBench` | — | — |
 | **Orchestration stack** | `dom.harnessBench` | — | — |
 | **platform-adjacent governance** | `dom.harnessBench` | — | — |
+| **Product DS agent plane** | `dom.harnessBench` | — | — |
 | **Prompt Composer** | `dom.harnessBench` | — | Domain conflict: harness-platform-taxonomy.md, prompt-composer.md vs prompt-composer.md (kept dom.harnessBench); Domain conflict: harness-platform-taxonomy.md, prompt-composer.md vs prompt-composer.md (kept dom.harnessBench) |
 | **This glossary / WF trials** | `dom.harnessBench` | — | — |
 | **tied agentstream** | `dom.agentSurface` | — | TypeScript default operator path |
+| **TIED governance** | `dom.harnessBench` | — | — |
 | **vendor agent harness** | `dom.harnessBench` | — | Sponsor taxonomy term |
 | **vendor platform** | `dom.harnessBench` | — | — |
 | **workflow trial orchestrator** | `dom.harnessBench` | — | — |
@@ -645,7 +649,7 @@ Source: [operating-environment-externalities.md](operating-environment-externali
 | **approved obligation** | `dom.adaptivePractice` | — | — |
 | **compatibility ledger** | `dom.adaptivePractice` | — | — |
 | **compatibility stance** | `dom.adaptivePractice` | — | — |
-| **compatibility stance `preserve`** | `dom.adaptivePractice` | — | — |
+| **compatibility stance preserve** | `dom.adaptivePractice` | — | — |
 | **consumer** | `dom.adaptivePractice` | — | — |
 | **environmental stress** | `dom.adaptivePractice` | — | — |
 | **external workflow** | `dom.adaptivePractice` | — | — |
@@ -684,18 +688,18 @@ Source: [project-operations-mcp.md](project-operations-mcp.md)
 
 | Term | Primary domain | Sub-role | Notes |
 | --- | --- | --- | --- |
-| **`/clear-workspace`** | `dom.agentSurface` | — | — |
-| **`/feedback`** | `dom.agentSurface` | — | — |
-| **`/handoff`** | `dom.agentSurface` | — | — |
-| **`/record-gf-trial`** | `dom.agentSurface` | — | — |
-| **`/unblock`** | `dom.agentSurface` | — | — |
-| **`/xlate`** | `dom.agentSurface` | — | — |
-| **`session-handoff.md`** | `dom.agentSurface` | — | — |
-| **`tied_git_hygiene`** | `dom.agentSurface` | — | — |
-| **`tied_project_lint`** | `dom.agentSurface` | — | — |
-| **`tied_sponsor_questions`** | `dom.agentSurface` | — | — |
-| **`unblock` skill** | `dom.agentSurface` | — | — |
-| **`xlate` skill** | `dom.agentSurface` | — | — |
+| **/clear-workspace** | `dom.agentSurface` | — | — |
+| **/feedback** | `dom.agentSurface` | — | — |
+| **/handoff** | `dom.agentSurface` | — | — |
+| **/record-gf-trial** | `dom.agentSurface` | — | — |
+| **/unblock** | `dom.agentSurface` | — | — |
+| **/xlate** | `dom.agentSurface` | — | — |
+| **session-handoff.md** | `dom.agentSurface` | — | — |
+| **tied_git_hygiene** | `dom.agentSurface` | — | — |
+| **tied_project_lint** | `dom.agentSurface` | — | — |
+| **tied_sponsor_questions** | `dom.agentSurface` | — | — |
+| **unblock skill** | `dom.agentSurface` | — | — |
+| **xlate skill** | `dom.agentSurface` | — | — |
 | **clear-workspace skill** | `dom.agentSurface` | — | — |
 | **feedback capture receipt** | `dom.agentSurface` | — | — |
 | **feedback skill** | `dom.agentSurface` | — | — |
@@ -864,7 +868,7 @@ Source: [pseudocode-and-citdp.md](pseudocode-and-citdp.md)
 | **od-nb4-acceptance JSON** | `dom.adaptivePractice` | — | — |
 | **OD-P5-2 acceptance JSON** | `dom.adaptivePractice` | — | — |
 | **onboarding-adherent** | `dom.adaptivePractice` | — | — |
-| **Outside G4 `enrolled_track_regression`** | `dom.adaptivePractice` | — | — |
+| **Outside G4 enrolled_track_regression** | `dom.adaptivePractice` | — | — |
 | **per-request checklist copy** | `dom.adaptivePractice` | — | — |
 | **phase 5 complete vs fleet complete** | `dom.adaptivePractice` | — | — |
 | **phase 5 program exit** | `dom.adaptivePractice` | — | — |
@@ -1214,9 +1218,9 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 
 | Term | Primary domain | Sub-role | Notes |
 | --- | --- | --- | --- |
-| **`TIED_MCP_HARNESS`** | `dom.tiedCorpus` | — | — |
-| **`TIED_MCP_TOOL_PROFILE`** | `dom.tiedCorpus` | — | — |
-| **`tied-yaml-optin`** | `dom.tiedCorpus` | — | — |
+| **TIED_MCP_HARNESS** | `dom.tiedCorpus` | — | — |
+| **TIED_MCP_TOOL_PROFILE** | `dom.tiedCorpus` | — | — |
+| **tied-yaml-optin** | `dom.tiedCorpus` | — | — |
 | **activation collect** | `dom.tiedCorpus` | — | — |
 | **ANALYZE_SOURCE_TERMS** | `dom.tiedCorpus` | — | — |
 | **ANALYZE_TIED_MCP_METRICS** | `dom.tiedCorpus` | — | — |
@@ -1314,38 +1318,123 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **yaml_index_insert** | `dom.tiedCorpus` | — | — |
 | **yaml_semantic_compare** | `dom.tiedCorpus` | — | Also: tied-methodology.md |
 
+## domain references
+
+Source: [domain-references.md](domain-references.md)
+
+| Term | Primary domain | Sub-role | Notes |
+| --- | --- | --- | --- |
+| **tied agentstream** | `dom.metaVocab` | — | Domain conflict: domain-references.md, harness-platform-taxonomy.md vs harness-platform-taxonomy.md (kept dom.metaVocab) |
+| **Adversarial inquiry vs quality-assurance profiles vs pseudo-code validation** | `dom.metaVocab` | — | — |
+| **agent-control layer** | `dom.tiedCorpus` | tokenRegistry | PROC-VOCABULARY_INDEX touchpoints |
+| **agent-stream** | `dom.agentSurface` | — | Historical Ruby — same domain |
+| **agentstream** | `dom.agentSurface` | — | Domain conflict: agentstream.md, domain-references.md vs domain-references.md (kept dom.agentSurface) |
+| **CASE** | `dom.metaVocab` | — | — |
+| **certifiability readiness** | `dom.metaVocab` | — | Domain conflict: domain-references.md, process-certification-readiness.md vs process-certification-readiness.md (kept dom.metaVocab); Domain conflict: domain-references.md, process-certification-readiness.md vs process-certification-readiness.md (kept dom.metaVocab) |
+| **Certifiability readiness vs certification claims** | `dom.metaVocab` | — | — |
+| **checker-backed claim** | `dom.evidenceAssurance` | — | QA glossary owns definition |
+| **Checker-backed claims vs tests vs tied_verify** | `dom.metaVocab` | — | — |
+| **client cohort** | `dom.metaVocab` | — | Domain conflict: domain-references.md, quality-assurance.md vs quality-assurance.md (kept dom.metaVocab) |
+| **client refresh** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **Context profile** | `dom.adaptivePractice` | — | Domain conflict: context-adaptive-engineering.md, domain-references.md vs domain-references.md (kept dom.adaptivePractice) |
+| **Context-adaptive practice layer vs TIED checklist authority** | `dom.metaVocab` | — | — |
+| **context-adaptive-engineering.md** | `dom.metaVocab` | — | — |
+| **Deterministic practice selection** | `dom.adaptivePractice` | — | Domain conflict: context-adaptive-engineering.md, domain-references.md vs domain-references.md (kept dom.adaptivePractice) |
+| **divergent edge** | `dom.metaVocab` | — | Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab) |
+| **Domain vocabulary** | `dom.adaptivePractice` | — | Vs IMPL grammar vocabulary |
+| **Domain vocabulary index** | `dom.metaVocab` | — | — |
+| **domain-references.md** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **dual MCP seam** | `dom.governanceChoice` | — | Distinct from harness/platform seam (matrix §2 row 13) |
+| **Dual MCP seam vs harness/platform seam** | `dom.metaVocab` | — | — |
+| **EASAR recovery** | `dom.metaVocab` | — | — |
+| **easar-recovery.md** | `dom.metaVocab` | — | — |
+| **EDPC program comprehension** | `dom.metaVocab` | — | — |
+| **EDPC vs EASAR recovery baseline** | `dom.metaVocab` | — | — |
+| **edpc-comprehension.md** | `dom.metaVocab` | — | — |
+| **evidence chain profile** | `dom.evidenceAssurance` | — | Not EDPC claims ledger |
+| **Evidence chain profile vs assurance profile vs research profile** | `dom.metaVocab` | — | — |
+| **evidence chain statistics report** | `dom.metaVocab` | — | Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md, quality-assurance.md vs quality-assurance.md (kept dom.metaVocab) |
+| **Evidence chain statistics report vs evidence chain profile** | `dom.metaVocab` | — | — |
+| **evidence-access tier** | `dom.metaVocab` | — | Domain conflict: domain-references.md, edpc-comprehension.md vs edpc-comprehension.md (kept dom.metaVocab); Domain conflict: domain-references.md, edpc-comprehension.md vs edpc-comprehension.md (kept dom.metaVocab) |
+| **evidence-chain profile depth** | `dom.metaVocab` | — | Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md, quality-assurance.md vs quality-assurance.md (kept dom.metaVocab) |
+| **external investigation evidence record** | `dom.metaVocab` | — | Domain conflict: domain-references.md, external-investigation-mcp.md vs external-investigation-mcp.md (kept dom.metaVocab); Domain conflict: domain-references.md, external-investigation-mcp.md vs external-investigation-mcp.md (kept dom.metaVocab); Domain conflict: domain-references.md, external-investigation-mcp.md, quality-assurance.md vs quality-assurance.md (kept dom.metaVocab) |
+| **External investigation evidence vs TIED gate receipts** | `dom.metaVocab` | — | — |
+| **external investigation MCP** | `dom.metaVocab` | — | Domain conflict: domain-references.md, external-investigation-mcp.md vs external-investigation-mcp.md (kept dom.metaVocab); Domain conflict: domain-references.md, external-investigation-mcp.md vs external-investigation-mcp.md (kept dom.metaVocab) |
+| **external-investigation-mcp.md** | `dom.metaVocab` | — | — |
+| **fidelity finding** | `dom.metaVocab` | — | Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab) |
+| **Fidelity research** | `dom.metaVocab` | — | — |
+| **finding lifecycle** | `dom.metaVocab` | — | Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab) |
+| **full catalog** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **gate_mode** | `dom.metaVocab` | — | Domain conflict: domain-references.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.metaVocab); Domain conflict: domain-references.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.metaVocab) |
+| **IMPL grammar vocabulary** | `dom.adaptivePractice` | — | INPUT/OUTPUT/DATA — not token registry |
+| **Layer C static analysis gate** | `dom.metaVocab` | — | Domain conflict: domain-references.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.metaVocab); Domain conflict: domain-references.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.metaVocab) |
+| **Methodology migration** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **Non-canonical LEAP proposals** | `dom.metaVocab` | — | — |
+| **origin layer** | `dom.metaVocab` | — | Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab) |
+| **Practice contract** | `dom.adaptivePractice` | — | Domain conflict: context-adaptive-engineering.md, domain-references.md vs domain-references.md (kept dom.adaptivePractice) |
+| **process-certification-readiness.md** | `dom.metaVocab` | — | — |
+| **Prompt Composer / prompt-type skills** | `dom.metaVocab` | — | — |
+| **proof boundary** | `dom.tiedCorpus` | — | Domain conflict: async-methodology.md, domain-references.md vs domain-references.md (kept dom.tiedCorpus); Domain conflict: async-methodology.md, domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.tiedCorpus); Domain conflict: async-methodology.md, domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.tiedCorpus); Domain conflict: async-methodology.md, domain-references.md, fidelity-research.md, harness-model-eval.md vs harness-model-eval.md (kept dom.tiedCorpus); Domain conflict: async-methodology.md, domain-references.md, fidelity-research.md, harness-model-eval.md vs harness-model-eval.md (kept dom.tiedCorpus); Domain conflict: async-methodology.md, domain-references.md, fidelity-research.md, harness-model-eval.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.tiedCorpus); Domain conflict: async-methodology.md, domain-references.md, fidelity-research.md, harness-model-eval.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.tiedCorpus); Domain conflict: async-methodology.md, domain-references.md, fidelity-research.md, harness-model-eval.md, pseudocode-and-citdp.md, quality-assurance.md vs quality-assurance.md (kept dom.tiedCorpus) |
+| **Pseudo-code Layer C gate** | `dom.metaVocab` | — | — |
+| **REA Evidence** | `dom.governanceChoice` | — | External investigation seam |
+| **read-only research profile** | `dom.metaVocab` | — | Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab) |
+| **Registry atoms vs distributed facets vs traceability graph** | `dom.metaVocab` | — | — |
+| **report input manifest** | `dom.metaVocab` | — | Domain conflict: domain-references.md, quality-assurance.md vs quality-assurance.md (kept dom.metaVocab) |
+| **routing index** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **routing.md** | `dom.metaVocab` | — | Domain conflict: domain-references.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.metaVocab); Domain conflict: domain-references.md, pseudocode-and-citdp.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **specification state** | `dom.metaVocab` | — | Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab); Domain conflict: domain-references.md, fidelity-research.md vs fidelity-research.md (kept dom.metaVocab) |
+| **Sponsor harness taxonomy vs TIED harness profile** | `dom.metaVocab` | — | — |
+| **STDD / TIED repository layout:** | `dom.metaVocab` | — | — |
+| **sub-vocabulary-sync** | `dom.metaVocab` | — | Domain conflict: domain-references.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.metaVocab) |
+| **theorem statement** | `dom.evidenceAssurance` | — | QA glossary |
+| **TIED base path** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md, tied-yaml-mcp.md vs tied-yaml-mcp.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md, tied-yaml-mcp.md vs tied-yaml-mcp.md (kept dom.metaVocab) |
+| **Visual encoding / term-domain color map** | `dom.metaVocab` | — | — |
+| **Vocab directory routing index** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **VOCAB_INDEX** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **Vocabulary layer** | `dom.tiedCorpus` | tokenRegistry | Agent-control / vocab index |
+| **vocabulary merge mode** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
+| **YAML canonicalization** | `dom.metaVocab` | — | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md, tied-yaml-mcp.md vs tied-yaml-mcp.md (kept dom.metaVocab) |
+
+## routing
+
+Source: [routing.md](routing.md)
+
+| Term | Primary domain | Sub-role | Notes |
+| --- | --- | --- | --- |
+| **tied agentstream** | `dom.metaVocab` | — | Domain conflict: domain-references.md, harness-platform-taxonomy.md vs harness-platform-taxonomy.md (kept dom.metaVocab) |
+
 ## Master index (alphabetical)
 
 | Term | Primary domain | Sub-role | Glossary source | Notes |
 | --- | --- | --- | --- | --- |
-| **`--adherence-ledger`** | `dom.agentSurface` | — | agentstream.md | — |
-| **`--checklist-tracker-preview`** | `dom.agentSurface` | — | agentstream.md | — |
-| **`--checklist-tracker-yaml`** | `dom.agentSurface` | — | agentstream.md | — |
-| **`--harness claude`** | `dom.agentSurface` | — | agentstream.md | — |
-| **`--resume-from-tracker`** | `dom.agentSurface` | — | agentstream.md | — |
-| **`{{SKILL_ROOT}}` batch placeholder** | `dom.agentSurface` | — | agentstream.md | — |
-| **`/clear-workspace`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`/feedback`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`/handoff`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`/record-gf-trial`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`/unblock`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`/xlate`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`harness profile`** | `dom.harnessBench` | — | harness-platform-taxonomy.md | — |
-| **`jev_data_tier`** | `dom.governanceChoice` | — | decision-copilot.md | — |
-| **`JEV_DECIDE_TRACE_PATH`** | `dom.governanceChoice` | — | decision-copilot.md | — |
-| **`JEV_DECIDE_TRACE`** | `dom.governanceChoice` | — | decision-copilot.md | — |
-| **`session-handoff.md`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`system-one-decide-trace.v1`** | `dom.governanceChoice` | — | decision-copilot.md | — |
-| **`tied agentstream`** | `dom.metaVocab` | — | domain-references.md, harness-platform-taxonomy.md, routing.md | Domain conflict: domain-references.md, harness-platform-taxonomy.md vs harness-platform-taxonomy.md (kept dom.metaVocab) |
-| **`tied_git_hygiene`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`TIED_MCP_HARNESS`** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
-| **`TIED_MCP_TOOL_PROFILE`** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
-| **`tied_project_lint`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`tied_sponsor_questions`** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`tied_validate_consistency`** | `dom.harnessBench` | — | harness-model-eval.md | — |
-| **`tied-yaml-optin`** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
-| **`unblock` skill** | `dom.agentSurface` | — | project-operations-mcp.md | — |
-| **`xlate` skill** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **--adherence-ledger** | `dom.agentSurface` | — | agentstream.md | — |
+| **--checklist-tracker-preview** | `dom.agentSurface` | — | agentstream.md | — |
+| **--checklist-tracker-yaml** | `dom.agentSurface` | — | agentstream.md | — |
+| **--harness claude** | `dom.agentSurface` | — | agentstream.md | — |
+| **--resume-from-tracker** | `dom.agentSurface` | — | agentstream.md | — |
+| **{{SKILL_ROOT}} batch placeholder** | `dom.agentSurface` | — | agentstream.md | — |
+| **/clear-workspace** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **/feedback** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **/handoff** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **/record-gf-trial** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **/unblock** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **/xlate** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **harness profile** | `dom.harnessBench` | — | harness-platform-taxonomy.md | — |
+| **jev_data_tier** | `dom.governanceChoice` | — | decision-copilot.md | — |
+| **JEV_DECIDE_TRACE_PATH** | `dom.governanceChoice` | — | decision-copilot.md | — |
+| **JEV_DECIDE_TRACE** | `dom.governanceChoice` | — | decision-copilot.md | — |
+| **session-handoff.md** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **system-one-decide-trace.v1** | `dom.governanceChoice` | — | decision-copilot.md | — |
+| **tied agentstream** | `dom.metaVocab` | — | domain-references.md, harness-platform-taxonomy.md, routing.md | Domain conflict: domain-references.md, harness-platform-taxonomy.md vs harness-platform-taxonomy.md (kept dom.metaVocab) |
+| **tied_git_hygiene** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **TIED_MCP_HARNESS** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
+| **TIED_MCP_TOOL_PROFILE** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
+| **tied_project_lint** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **tied_sponsor_questions** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **tied_validate_consistency** | `dom.harnessBench` | — | harness-model-eval.md | — |
+| **tied-yaml-optin** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
+| **unblock skill** | `dom.agentSurface` | — | project-operations-mcp.md | — |
+| **xlate skill** | `dom.agentSurface` | — | project-operations-mcp.md | — |
 | **1 — Vendor harness** | `dom.harnessBench` | — | harness-platform-taxonomy.md | — |
 | **2 — TIED orchestration** | `dom.harnessBench` | — | harness-platform-taxonomy.md | — |
 | **3 — TIED governance** | `dom.harnessBench` | — | harness-platform-taxonomy.md | — |
@@ -1477,7 +1566,7 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **change_locality → 1.0** | `dom.evidenceAssurance` | — | behavior-bounded-change-engineering.md | — |
 | **charter lane** | `dom.governanceChoice` | — | sponsor-agent-relationship.md | — |
 | **checker-backed claim** | `dom.evidenceAssurance` | — | domain-references.md, quality-assurance.md | QA glossary owns definition |
-| **Checker-backed claims vs tests vs `tied_verify`** | `dom.metaVocab` | — | domain-references.md | — |
+| **Checker-backed claims vs tests vs tied_verify** | `dom.metaVocab` | — | domain-references.md | — |
 | **checklist evidence gate** | `dom.evidenceAssurance` | — | fidelity-research.md | — |
 | **checklist_messages** | `dom.agentSurface` | — | agentstream.md | — |
 | **checklist-evidence-sufficiency-benchmark.v1** | `dom.governanceChoice` | — | decision-copilot.md | — |
@@ -1529,7 +1618,7 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **compare_yaml_dirs** | `dom.tiedCorpus` | — | tied-methodology.md, tied-yaml-mcp.md | — |
 | **compatibility ledger** | `dom.adaptivePractice` | — | operating-environment-externalities.md | — |
 | **compatibility stance** | `dom.adaptivePractice` | — | operating-environment-externalities.md | — |
-| **compatibility stance `preserve`** | `dom.adaptivePractice` | — | operating-environment-externalities.md | — |
+| **compatibility stance preserve** | `dom.adaptivePractice` | — | operating-environment-externalities.md | — |
 | **compose-don’t-fork** | `dom.governanceChoice` | — | decision-copilot.md | — |
 | **composition evidence** | `dom.evidenceAssurance` | — | fidelity-research.md, pseudocode-and-citdp.md, tied-methodology.md | Domain conflict: fidelity-research.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.evidenceAssurance); Domain conflict: fidelity-research.md, pseudocode-and-citdp.md vs pseudocode-and-citdp.md (kept dom.evidenceAssurance); Domain conflict: fidelity-research.md, pseudocode-and-citdp.md, tied-methodology.md vs tied-methodology.md (kept dom.evidenceAssurance); Domain conflict: fidelity-research.md, pseudocode-and-citdp.md, tied-methodology.md vs tied-methodology.md (kept dom.evidenceAssurance) |
 | **composition_inferred** | `dom.tiedCorpus` | — | tied-methodology.md | — |
@@ -1962,7 +2051,7 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **outcome loop** | `dom.tiedCorpus` | — | feedback-to-tied.md | — |
 | **outcome observation** | `dom.tiedCorpus` | — | feedback-to-tied.md | — |
 | **outcome_verified event** | `dom.agentSurface` | — | agentstream.md | — |
-| **Outside G4 `enrolled_track_regression`** | `dom.adaptivePractice` | — | pseudocode-and-citdp.md | — |
+| **Outside G4 enrolled_track_regression** | `dom.adaptivePractice` | — | pseudocode-and-citdp.md | — |
 | **over-asking** | `dom.governanceChoice` | — | sponsor-agent-relationship.md | — |
 | **override row** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
 | **owning slice** | `dom.evidenceAssurance` | — | behavior-bounded-change-engineering.md | — |
@@ -2023,6 +2112,7 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **process evidence facet** | `dom.tiedCorpus` | — | tied-methodology.md | — |
 | **process grade** | `dom.evidenceAssurance` | — | fidelity-research.md | — |
 | **process-certification-readiness.md** | `dom.metaVocab` | — | domain-references.md | — |
+| **Product DS agent plane** | `dom.harnessBench` | — | harness-platform-taxonomy.md | — |
 | **production system** | `dom.tiedCorpus` | — | feedback-to-tied.md | — |
 | **Production touch** | `dom.evidenceAssurance` | — | edpc-comprehension.md | — |
 | **program CFG** | `dom.adaptivePractice` | — | pseudocode-and-citdp.md | — |
@@ -2199,7 +2289,7 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **speculative fan-out** | `dom.governanceChoice` | — | decision-copilot.md | — |
 | **sponsor** | `dom.governanceChoice` | — | sponsor-agent-relationship.md | — |
 | **sponsor default-proceed policy** | `dom.adaptivePractice` | — | pseudocode-and-citdp.md | — |
-| **Sponsor harness taxonomy vs TIED `harness profile`** | `dom.metaVocab` | — | domain-references.md | — |
+| **Sponsor harness taxonomy vs TIED harness profile** | `dom.metaVocab` | — | domain-references.md | — |
 | **sponsor witness report** | `dom.agentSurface` | — | project-operations-mcp.md | — |
 | **sponsor-vs-TIED disagreement** | `dom.governanceChoice` | — | sponsor-agent-relationship.md | — |
 | **stale input** | `dom.tiedCorpus` | — | feature-orchestration.md | — |
@@ -2249,6 +2339,7 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **TIED applicability boundary** | `dom.agentSurface` | — | prompt-composer.md | — |
 | **TIED base path** | `dom.metaVocab` | — | domain-references.md, tied-methodology.md, tied-yaml-mcp.md | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md, tied-yaml-mcp.md vs tied-yaml-mcp.md (kept dom.metaVocab); Domain conflict: domain-references.md, tied-methodology.md, tied-yaml-mcp.md vs tied-yaml-mcp.md (kept dom.metaVocab) |
 | **TIED bundle root** | `dom.tiedCorpus` | — | tied-methodology.md | — |
+| **TIED governance** | `dom.harnessBench` | — | harness-platform-taxonomy.md | — |
 | **TIED MCP write authority** | `dom.governanceChoice` | — | external-investigation-mcp.md, tied-yaml-mcp.md | Domain conflict: external-investigation-mcp.md, tied-yaml-mcp.md vs tied-yaml-mcp.md (kept dom.governanceChoice); Domain conflict: external-investigation-mcp.md, tied-yaml-mcp.md vs tied-yaml-mcp.md (kept dom.governanceChoice) |
 | **TIED methodology repository** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
 | **tied next** | `dom.tiedCorpus` | — | tied-methodology.md | — |
@@ -2338,6 +2429,7 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **verify manifest provenance** | `dom.tiedCorpus` | — | tied-yaml-mcp.md | — |
 | **VerifySessionPrompt** | `dom.agentSurface` | — | agentstream.md | — |
 | **view source projection** | `dom.tiedCorpus` | — | feature-orchestration.md | — |
+| **Visual encoding / term-domain color map** | `dom.metaVocab` | — | domain-references.md | — |
 | **Vocab directory routing index** | `dom.metaVocab` | — | domain-references.md, tied-methodology.md | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
 | **Vocab routing index** | `dom.adaptivePractice` | — | pseudocode-and-citdp.md | — |
 | **VOCAB_INDEX** | `dom.metaVocab` | — | domain-references.md, tied-methodology.md | Domain conflict: domain-references.md, tied-methodology.md vs tied-methodology.md (kept dom.metaVocab) |
@@ -2401,3 +2493,12 @@ Source: [tied-yaml-mcp.md](tied-yaml-mcp.md)
 | **yaml_list_sorter** | `dom.tiedCorpus` | — | tied-methodology.md | — |
 | **yaml_semantic_compare** | `dom.tiedCorpus` | — | tied-methodology.md, tied-yaml-mcp.md | — |
 | **yaml_tool** | `dom.tiedCorpus` | — | tied-methodology.md | — |
+
+## Alphabetical index
+
+| Term | Section |
+| --- | --- |
+| Parallel map | Scope |
+| Precedence | Scope |
+| Row count | Scope |
+| Regenerate | Scope |

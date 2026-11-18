@@ -1,67 +1,64 @@
-# Term-level domain overrides (D3). Keys are case-insensitive match targets.
-
-schemaVersion: term-domain-overrides.v1
-
 overrides:
-  dual MCP seam:
-    domain: dom.governanceChoice
-    notes: Distinct from harness/platform seam (matrix §2 row 13)
-  harness/platform seam:
-    domain: dom.harnessBench
-    notes: Traefik comparison vocabulary — not TIED MCP write authority
-  harness profile:
-    domain: dom.agentSurface
-    notes: Prompt-type / prompt-composer sense
-  vendor agent harness:
-    domain: dom.harnessBench
-    notes: Sponsor taxonomy term
-  tied agentstream:
-    domain: dom.agentSurface
-    notes: TypeScript default operator path
-  agent-stream:
-    domain: dom.agentSurface
-    notes: Historical Ruby — same domain
-  run-feature-batch:
-    domain: dom.agentSurface
-    notes: Shell driver; not vendor harness
-  Domain vocabulary:
-    domain: dom.adaptivePractice
-    notes: Vs IMPL grammar vocabulary
-  IMPL grammar vocabulary:
-    domain: dom.adaptivePractice
-    notes: INPUT/OUTPUT/DATA — not token registry
-  vocabulary layer:
-    domain: dom.tiedCorpus
-    sub_role: tokenRegistry
-    notes: Agent-control / vocab index
   agent-control layer:
-    domain: dom.tiedCorpus
-    sub_role: tokenRegistry
-    notes: PROC-VOCABULARY_INDEX touchpoints
+    domain: "dom.tiedCorpus"
+    notes: "PROC-VOCABULARY_INDEX touchpoints"
+    sub_role: "tokenRegistry"
+  agent-stream:
+    domain: "dom.agentSurface"
+    notes: "Historical Ruby — same domain"
   checker-backed claim:
-    domain: dom.evidenceAssurance
-    notes: QA glossary owns definition
-  theorem statement:
-    domain: dom.evidenceAssurance
-    notes: QA glossary
-  REA Evidence:
-    domain: dom.governanceChoice
-    notes: External investigation seam
-  evidence chain profile:
-    domain: dom.evidenceAssurance
-    notes: Not EDPC claims ledger
+    domain: "dom.evidenceAssurance"
+    notes: "QA glossary owns definition"
   claims-ledger:
-    domain: dom.evidenceAssurance
-    notes: EDPC glossary
-  EASAR:
-    domain: dom.evidenceAssurance
-    notes: Mode C receipts
-  edpc_full:
-    domain: dom.evidenceAssurance
-    notes: Deprecated alias for easar_full
-  reversible choice:
-    domain: dom.governanceChoice
-    notes: Sponsor-agent glossary
+    domain: "dom.evidenceAssurance"
+    notes: "EDPC glossary"
   costly choice:
-    domain: dom.governanceChoice
-    notes: Sponsor-agent glossary
+    domain: "dom.governanceChoice"
+    notes: "Sponsor-agent glossary"
+  Domain vocabulary:
+    domain: "dom.adaptivePractice"
+    notes: "Vs IMPL grammar vocabulary"
+  dual MCP seam:
+    domain: "dom.governanceChoice"
+    notes: "Distinct from harness/platform seam (matrix §2 row 13)"
+  EASAR:
+    domain: "dom.evidenceAssurance"
+    notes: "Mode C receipts"
+  edpc_full:
+    domain: "dom.evidenceAssurance"
+    notes: "Deprecated alias for easar_full"
+  evidence chain profile:
+    domain: "dom.evidenceAssurance"
+    notes: "Not EDPC claims ledger"
+  harness profile:
+    domain: "dom.agentSurface"
+    notes: "Prompt-type / prompt-composer sense"
+  harness/platform seam:
+    domain: "dom.harnessBench"
+    notes: "Traefik comparison vocabulary — not TIED MCP write authority"
+  IMPL grammar vocabulary:
+    domain: "dom.adaptivePractice"
+    notes: "INPUT/OUTPUT/DATA — not token registry"
+  REA Evidence:
+    domain: "dom.governanceChoice"
+    notes: "External investigation seam"
+  reversible choice:
+    domain: "dom.governanceChoice"
+    notes: "Sponsor-agent glossary"
+  run-feature-batch:
+    domain: "dom.agentSurface"
+    notes: "Shell driver; not vendor harness"
+  theorem statement:
+    domain: "dom.evidenceAssurance"
+    notes: "QA glossary"
+  tied agentstream:
+    domain: "dom.agentSurface"
+    notes: "TypeScript default operator path"
+  vendor agent harness:
+    domain: "dom.harnessBench"
+    notes: "Sponsor taxonomy term"
+  vocabulary layer:
+    domain: "dom.tiedCorpus"
+    notes: "Agent-control / vocab index"
+    sub_role: "tokenRegistry"
+schemaVersion: "term-domain-overrides.v1"

@@ -12,11 +12,12 @@
 | V3 | Override seed | §2.4 edge-case terms in PLAN present in D3 with matching domains |
 | V4 | Dedupe | Cross-glossary duplicates single row or disambiguated Notes — no conflicting domains for same bold string |
 | V5 | Regen stability | Second `build-term-index.mjs` run produces zero diff on D4 |
-| V6 | Links | `routing.md` + `domain-references.md` link D1 and `docs/visual-encoding-standards.md`; D1 links D4 |
+| V6 | Links | `routing.md` + `domain-references.md` link D1 and `docs/visual-encoding-standards.md`; D1 links D4; **Canonical glossaries** table lists D1 and D4 |
 | V7 | Accessibility | D1 includes grayscale + CVD + label-first legend; Tier A legends name `dom.*` / `layer.*` |
 | V8 | Tier A | T1–T4 each have palette comment, legend, and consistent `classDef` names documented in D6 |
 | V9 | YAML lint | `visual-encoding-domains.v1.yaml`, D2, D3 parse as valid YAML (manual or `node -e` load) |
 | V10 | Anti-patterns | Spot-check vs [informative-color-coding reference](../../../../.cursor/skills/informative-color-coding/reference.md) § Anti-patterns |
+| V11 | `[PROC-VOCABULARY_INDEX]` gate | `ruby scripts/validate_vocab_index.rb .` exit 0 (repo `test-all` step 7) |
 
 ## Build results (2026-11-16)
 
@@ -32,6 +33,13 @@
 | V8 | pass — T1–T4 encoded; W1 sequence uses prose legend |
 | V9 | pass |
 | V10 | pass — ≤7 dom hues; multi-channel labels |
+| V11 | pass — `ruby scripts/validate_vocab_index.rb .` after D9 (`@build-plan` 2026-11-17) |
+
+## D9 results (2026-11-17)
+
+| Id | Result |
+| --- | --- |
+| V11 | pass — validate_vocab_index; D4 **1086** rows; Master index + compact Alphabetical index |
 
 ## Out of scope
 

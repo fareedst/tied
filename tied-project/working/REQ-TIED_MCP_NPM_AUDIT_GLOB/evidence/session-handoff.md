@@ -42,7 +42,7 @@
 
 - 2026-11-17 refine-plan: PLAN, test-strategy, LEAP proposal, session-handoff for mcp-server glob migration and npm audit cleanup (Wave A already on disk).
 - 2026-11-17 build-plan: LEAP stack, npm test/audit witness, CITDP persist, bun.lock sync, CHANGELOG entry.
-- 2026-11-17 close-out: traceable commit (scoped staging); hygiene receipt on disk.
+- 2026-11-17 close-out: traceable commit 10d738e9 (scoped staging); hygiene receipt on disk.
 
 ---
 
@@ -68,6 +68,7 @@
 - LEAP: SC-NODE-MCP-AUDIT-CLEAN, IMPL detail + `MCP_DEPENDENCY_GLOB` pseudo block.
 - Verification: `npm audit`, `npm test`, `tsc` (witness on disk).
 - CITDP `CITDP-REQ-TIED_MCP_NPM_AUDIT_GLOB.yaml`; CHANGELOG Unreleased bullet.
+- **Commit:** `10d738e9` — `fix(mcp-server): clear npm audit via glob migration`
 
 ---
 

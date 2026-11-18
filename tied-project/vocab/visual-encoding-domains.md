@@ -1,16 +1,10 @@
-# Visual encoding — semantic domains (STDD / TIED store)
+# Visual encoding semantic domains (canonical)
 
 **Scope:** Project-wide **semantic domain** ids (`dom.*`) and color literals for diagrams, tables, charts, and docs in the TIED methodology repository.
 
-**Plan:** [stdd-vocab-visual-encoding PLAN](../non-tied-plans/stdd-vocab-visual-encoding/PLAN.md)
+**Traceability:** [`[PROC-VOCABULARY_INDEX]`](../../tied-bundle/docs/processes.md) · [stdd-vocab-visual-encoding PLAN](../non-tied-plans/stdd-vocab-visual-encoding/PLAN.md) · [@informative-color-coding](../../.cursor/skills/informative-color-coding/SKILL.md)
 
-**Term index:** [term-domain-color-index.md](term-domain-color-index.md)
-
-**Machine palette:** [visual-encoding-domains.v1.yaml](visual-encoding-domains.v1.yaml)
-
-**Docs hub:** [visual-encoding-standards.md](../../docs/visual-encoding-standards.md)
-
-**Methodology:** [@informative-color-coding](../../.cursor/skills/informative-color-coding/SKILL.md)
+**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`term-domain-color-index.md`](term-domain-color-index.md) · [visual-encoding-standards.md](../../docs/visual-encoding-standards.md) · [visual-encoding-domains.v1.yaml](visual-encoding-domains.v1.yaml)
 
 ---
 
@@ -144,3 +138,45 @@
 ## Ownership
 
 Client-owned STDD vocabulary; update when glossaries grow or Tier B/C doc rollout extends diagrams. Do not mint TIED tokens for `dom.*` in non-tied tracks.
+
+## Alphabetical index
+
+| Term | Section |
+| --- | --- |
+| AdaptivePractice | Legend (named labels) |
+| AgentSurface | Legend (named labels) |
+| dom.adaptivePractice | Top-level domains (7) |
+| dom.agentSurface | Top-level domains (7) |
+| dom.evidenceAssurance | Top-level domains (7) |
+| dom.governanceChoice | Top-level domains (7) |
+| dom.harnessBench | Top-level domains (7) |
+| dom.metaVocab | Top-level domains (7) |
+| dom.tiedCorpus | Top-level domains (7) |
+| edge.declared | Edge axis (`edge.*`) |
+| edge.derived | Edge axis (`edge.*`) |
+| edge.verified | Edge axis (`edge.*`) |
+| edge.* | Encoding sheet |
+| EvidenceAssurance | Legend (named labels) |
+| GovernanceChoice | Legend (named labels) |
+| HarnessBench | Legend (named labels) |
+| junction | Sub-roles |
+| layer.* | Encoding sheet |
+| layer.arch | Layer axis (`layer.*`) |
+| layer.citdp | Layer axis (`layer.*`) |
+| layer.impl | Layer axis (`layer.*`) |
+| layer.leap | Layer axis (`layer.*`) |
+| layer.req | Layer axis (`layer.*`) |
+| layer.tests | Layer axis (`layer.*`) |
+| layer.vocab | Layer axis (`layer.*`) |
+| LayerStack | Legend (named labels) |
+| methodologyBundle | Sub-roles |
+| MetaVocab | Legend (named labels) |
+| plan.* | Encoding sheet |
+| plan.pending | Plan axis (`plan.*`) |
+| plan.proposed | Plan axis (`plan.*`) |
+| plan.reference | Plan axis (`plan.*`) |
+| PlanFigure | Legend (named labels) |
+| projectYaml | Sub-roles |
+| proofBoundary | Sub-roles |
+| TiedCorpus | Legend (named labels) |
+| tokenRegistry | Sub-roles |

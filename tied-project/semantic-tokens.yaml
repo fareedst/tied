@@ -1678,6 +1678,12 @@ ARCH-WF_TRIAL_IMPLEMENTATION_STACK:
   name: "WF trial implementation stack boundaries"
   status: "Active"
   type: "ARCH"
+ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  cross_references:
+    - "IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+    - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
+  type: "ARCH"
 ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   cross_references:
     - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
@@ -1715,6 +1721,12 @@ ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
   name: "WF trial sequential transcript architecture"
   status: "Proposed"
+  type: "ARCH"
+ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
+  cross_references:
+    - "IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+    - "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN.yaml"
   type: "ARCH"
 IMPL-AGENT_HARNESS_EVALUATION_DOCS_PATHS:
   description: "agent-harness-eval-docs-paths.mjs"
@@ -3719,6 +3731,12 @@ IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
   name: "WF trial implementation stack shell"
   status: "Active"
   type: "IMPL"
+IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  cross_references:
+    - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+    - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
+  type: "IMPL"
 IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   category: "Implementation"
   cross_references:
@@ -3758,6 +3776,12 @@ IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
   name: "WF trial sequential transcript implementation"
   status: "Planned"
+  type: "IMPL"
+IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
+  cross_references:
+    - "ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+    - "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN.yaml"
   type: "IMPL"
 PROC-AGENT_REQ_CHECKLIST:
   cross_references:
@@ -5995,6 +6019,13 @@ REQ-WF_TRIAL_IMPLEMENTATION_STACK:
   name: "WF trial implementation stack"
   status: "Active"
   type: "REQ"
+REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  cross_references:
+    - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+    - "IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+  description: "Dual-stream session_id capture so interleaved WF trials resume turns 2-4"
+  detail_file: "requirements/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
+  type: "REQ"
 REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   category: "Tooling"
   cross_references:
@@ -6038,13 +6069,6 @@ REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
   name: "WF trial sequential process transcript"
   status: "Draft"
   type: "REQ"
-REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
-  cross_references:
-    - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
-    - "IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
-  description: "Dual-stream session_id capture so interleaved WF trials resume turns 2-4"
-  detail_file: "requirements/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
-  type: "REQ"
 REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
   cross_references:
     - "ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
@@ -6052,30 +6076,6 @@ REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
   description: "Post-turn-1 slim checklist tracker reconcile on disposable WF clients"
   detail_file: "requirements/REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN.yaml"
   type: "REQ"
-ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
-  cross_references:
-    - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
-    - "IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
-  detail_file: "architecture-decisions/ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
-  type: "ARCH"
-IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
-  cross_references:
-    - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
-    - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
-  detail_file: "implementation-decisions/IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
-  type: "IMPL"
-ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
-  cross_references:
-    - "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
-    - "IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
-  detail_file: "architecture-decisions/ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN.yaml"
-  type: "ARCH"
-IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
-  cross_references:
-    - "ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
-    - "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
-  detail_file: "implementation-decisions/IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN.yaml"
-  type: "IMPL"
 REQ-WF_TRIAL_SUMMARIES_PUBLISH:
   description: "WF trial cohort summaries publish skill and CLI"
   token: "REQ-WF_TRIAL_SUMMARIES_PUBLISH"

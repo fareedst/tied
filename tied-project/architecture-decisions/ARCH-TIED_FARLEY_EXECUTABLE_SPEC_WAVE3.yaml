@@ -1,0 +1,23 @@
+ARCH-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3:
+  decision: "Canonical compose guide in tied-bundle/docs/farley-executable-spec-compose.md; executable-spec checklist under working folder; citdp-policy literacy pointer; matrix §2 row 21; bootstrap contract tests; no Farley course/skill or protected-spec CI authority."
+  implementation_approach:
+    details:
+      - "MCM LEAP 20→21 in same change set"
+      - "No LinkedIn article body in repo"
+      - "No new MCP gate tools"
+    summary: "Docs and bootstrap contract tests only."
+  rationale:
+    benefits:
+      - "Farley-reported vs TIED-existing labeling"
+    problems_solved:
+      - "Conflating acceptance green with tied_verify"
+      - "Missing executable behavioral contract catalog"
+    why: "Compose-don't-replace per Farley × TIED analysis; distinct from AI-SDLC factory reference repo."
+  related_decisions:
+    see_also:
+      - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  traceability:
+    implementation:
+      - "IMPL-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+    requirements:
+      - "REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"

@@ -1,0 +1,46 @@
+REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3:
+  rationale:
+    benefits:
+      - "Explicit acceptance vs gate authority"
+      - "Pair-read AI-SDLC factory and MCM row 6"
+    problems_solved:
+      - "Markdown SDD mistaken for delivery proof"
+      - "Matrix row 21 Defer"
+      - "No bundle guide for red-first acceptance literacy"
+    why: "Farley executable spec × TIED Wave 2 deferred compose literacy; operators need acceptance/BDD product plane vs TIED token + pseudo-code + gates without Farley course or Gherkin as SoT."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    related_to: []
+  satisfaction_criteria:
+    - criterion: "citdp-policy executable behavioral contract pointer"
+      id: "SC-FES-CITDP"
+      metric: "Contract test marker"
+    - criterion: "client-development-index Quick reads links"
+      id: "SC-FES-INDEX"
+      metric: "Contract test link audit"
+    - criterion: "executable-spec operator checklist committed"
+      id: "SC-FES-CHECKLIST"
+      metric: "File + link audit"
+    - criterion: "Farley comparison Phase 1 Implemented with REQ back-link"
+      id: "SC-FES-COMPOSE"
+      metric: "Link audit"
+    - criterion: "farley-executable-spec-compose.md passes contract test"
+      id: "SC-FES-GUIDE"
+      metric: "farley-executable-spec-compose-doc.test.mjs"
+    - criterion: "Matrix §2 row 21 + MCM LEAP 20→21"
+      id: "SC-FES-MATRIX"
+      metric: "methodology-composition-matrix-farley-executable-spec-row.test.mjs"
+    - criterion: "Slice H matrix test reconciliation green"
+      id: "SC-FES-MATRIX-TESTS"
+      metric: "Bootstrap doc test battery"
+    - criterion: "tied_validate_consistency after implement"
+      id: "SC-FES-TRACE"
+      metric: "tied_validate_consistency"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+    implementation:
+      - "IMPL-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"

@@ -5,8 +5,8 @@ citdp:
 depth_tier: "minimal"
 gate_policy: "advisory"
 methodology_surface_change_class: "none"
-profile_depth: "minimal"
 plan_phase: "post-build"
+profile_depth: "minimal"
 purpose: "Per-request Tracker for REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3."
 request: "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
 request_token: "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
@@ -72,7 +72,7 @@ steps:
   - disposition: "completed"
     id: "persist-citdp-record"
   - disposition: "completed"
-    id: "traceable-commit"
     evidence_refs:
       - kind: "file_path"
         path: "tied-project/working/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3/evidence/traceable-commit-evidence.md"
+    id: "traceable-commit"

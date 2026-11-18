@@ -3831,6 +3831,14 @@ IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
       - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
     requirements:
       - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+    requirements:
+      - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
+  status: "Active"
 IMPL-WF_TRIAL_MODEL_CATALOG_RESOLVE:
   cross_references:
     architecture_decisions:
@@ -3935,14 +3943,6 @@ IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
     requirements:
       - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
-  status: "Active"
-IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
-  cross_references:
-    architecture_decisions:
-      - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
-    requirements:
-      - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
-  detail_file: "implementation-decisions/IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
   status: "Active"
 IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
   cross_references:

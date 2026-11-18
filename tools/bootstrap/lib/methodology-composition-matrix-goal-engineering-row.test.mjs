@@ -21,13 +21,9 @@ function countSection2DataRows(text) {
 }
 
 describe("methodology composition matrix goal engineering row [REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3]", () => {
-  it("has exactly 20 §2 data rows including LangChain goal engineering row 20", () => {
+  it("includes LangChain goal engineering row 20 identity (global §2 inventory owned by farley row test)", () => {
     assert.ok(fs.existsSync(matrixPath), `missing matrix: ${matrixPath}`);
     const text = fs.readFileSync(matrixPath, "utf8");
-    assert.match(text, /§2 \*\*20\*\* rows/);
-    assert.match(text, /exactly \*\*20\*\* data rows/);
-    const rowNumbers = countSection2DataRows(text);
-    assert.deepEqual(rowNumbers, Array.from({ length: 20 }, (_, i) => i + 1));
     assert.ok(
       text.includes("LangChain goal engineering (feedback-aligned scope)"),
       "row 20 framework label missing",

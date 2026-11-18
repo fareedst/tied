@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial slim tracker inter-turn ([REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN])** — post-turn-1 slim checklist reconcile, SC-WF-IST-01..05, interleaved four-phase driver; close_out **allowed** (minimal, advisory). Live reconcile @ **1794975372**. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN/PLAN.md).
+
 - **WF trial interleaved resume capture ([REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE])** — dual-stream `session_id` parse, RETURN-trap hygiene under `set -u`, SC-WF-IRC-01..04; parent [REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN] inter-turn slim tracker reconcile. Live WF-01 Claude Haiku 5.5 low @ **1794975372** — orchestrator `exit_code: 0` (~274s). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE/PLAN.md).
 
 - **PROMPT-WF-01 facilitator readout (Claude Haiku 5.5 low @ 1794971027)** — **4.2.2** via `workflow_trial_agentstream wf-01` (`HARNESS=claude`; **minimal checklist gates**); catalog + [agent-harness-evaluation readouts](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-01-claudehaiku55low-1794971027-wf-agentstream-wf-01-claude-claudehaiku55low.md). **Split signal** — orchestrator `exit_code: 0`; **11/11** tests uncommitted; verification + close_out **blocked** (tracker shape vs slim template).

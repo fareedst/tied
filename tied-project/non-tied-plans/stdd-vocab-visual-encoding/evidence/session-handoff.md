@@ -4,12 +4,21 @@
 | --- | --- |
 | **handoff_kind** | non-tied-plan |
 | **request_token** | stdd-vocab-visual-encoding |
-| **prompt_type** | non-tied-build |
-| **date** | 2026-11-16 |
+| **prompt_type** | build-plan |
+| **plan_phase** | post-build |
+| **date** | 2026-11-17 |
 
 ## Plan execution steps
 
-### Required (`@non-tied-build`)
+### Required (D9 — `@build-plan`)
+
+- [x] `patch-index-builder-template` — D5 emits skeleton, domain-references/routing sections, Master + Alphabetical index
+- [x] `patch-visual-encoding-domains-skeleton` — D1 canonical H1, Traceability, See also, compact alphabetical index
+- [x] `regenerate-term-index` — D4 regen; **1086** rows (was 1083; D1 alphabetical index extraction)
+- [x] `patch-vocab-catalog-tables` — D8 table rows for D1 + D4; routing row for D4
+- [x] `verify-vocab-gate` — V11: `ruby scripts/validate_vocab_index.rb .`
+
+### Required (original build — complete)
 
 - [x] `author-visual-encoding-domains` — D1 + D1b registry and accessibility gate
 - [x] `author-glossary-defaults` — D2 `term-domain-glossary-defaults.yaml` (§1 table)
@@ -27,13 +36,12 @@
 ### Optional
 
 - [ ] `apply-tier-a-t5` — `docs/tied-experience/engineer-agent-lens.md`
-- [x] `non-tied-close` — Scoped commit (2026-11-16)
+- [ ] `contract-test-vocab-gate` — Optional mcp-server contract mirroring `vocab-agentstream-ahe-config-links` (not required if V11 passes)
 
 ### Recommendations
 
-- Optional T5 engineer-agent-lens when expanding Tier A.
-- Follow-on slug `docs-visual-encoding-stdd` for bulk `docs/**` Mermaid inventory.
-- Regenerate index after glossary edits: `node tied-project/non-tied-plans/stdd-vocab-visual-encoding/evidence/build-term-index.mjs`
+- Mark V11 **mandatory** on any future glossary-index artifact that ships as `tied-project/vocab/*.md`.
+- Regenerate D4 after glossary edits: `node tied-project/non-tied-plans/stdd-vocab-visual-encoding/evidence/build-term-index.mjs`
 
 ## Changelog (this REQ)
 
@@ -43,3 +51,5 @@
 | 2026-11-16 | non-tied-refine | Locked domains, overrides, Mermaid API, build steps |
 | 2026-11-16 | non-tied-build | D1–D8, 1083-row index, Tier A T1–T4, test-strategy pass |
 | 2026-11-16 | non-tied-close | Traceable scoped commit; slug closed |
+| 2026-11-17 | refine-plan | D9 slice: `validate_vocab` compliance; V11 gate; reopen pre-implementation |
+| 2026-11-17 | build-plan | D9 implemented; V11 pass; index 1086 rows |

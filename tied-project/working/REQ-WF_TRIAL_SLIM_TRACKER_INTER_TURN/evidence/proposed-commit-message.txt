@@ -1,0 +1,4 @@
+chore(close-out): REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN and workspace sweep
+
+Slim tracker inter-turn close-out; Farley wave 3, harness docs, vocab, and
+comparison reciprocals staged for clean working tree.

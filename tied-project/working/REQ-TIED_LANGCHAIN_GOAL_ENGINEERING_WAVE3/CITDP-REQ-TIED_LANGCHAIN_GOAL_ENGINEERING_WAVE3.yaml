@@ -1,16 +1,15 @@
 CITDP-REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
-  record_identity:
-    change_request_id: "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
-    recorded_at: "2026-11-17"
-    title: "LangChain goal engineering Wave 3 — feedback-scope compose + matrix row 20"
   change_definition:
     current_behavior: "LangChain Goal Engineering × TIED comparison (Wave 2) exists with Wave 3 Phases 1–3 Defer; operators lack bundle guidance for goal-aligned scope, tacit-context handling, and feedback-batch literacy; matrix §2 has 19 rows with goal topic only in header sibling list."
     desired_behavior: "Committed compose guide, client-development-index pointer, goal-aligned-scope operator checklist, CITDP literacy pointer, comparison reciprocals, REQ-tracked satisfaction criteria, methodology-composition-matrix §2 row 20, and LEAP on REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX (19→20)—without Hone/Actively adoption or KPI-as-proof."
+    goal_aligned_scope_notes:
+      - "Batch agent work by REQ/slug (motion analog); avoid per-entity micro-scope."
+      - "CITDP change_definition should name what is in scope for sponsor review vs tacit preference (charter/selection lanes)."
     non_goals:
-      - "Store LangChain blog body in repo"
       - "CRM motion product or business-metric optimizer"
-      - "Vocab RECORD goal-aligned scope glossary (v1)"
       - "Mint effectiveness proof from LangChain-reported claims"
+      - "Store LangChain blog body in repo"
+      - "Vocab RECORD goal-aligned scope glossary (v1)"
     success_criteria:
       - "Build-plan satisfies SC-LGE-* per PLAN.md"
       - "pre_implementation gate allowed after author-requirement + pseudocode_validate"
@@ -18,47 +17,48 @@ CITDP-REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3:
     unchanged_behavior:
       - "Gate authority, MCP YAML write path, HTOL semantics"
       - "LangChain harness row 15 scope (trace loop)"
-    goal_aligned_scope_notes:
-      - "CITDP change_definition should name what is in scope for sponsor review vs tacit preference (charter/selection lanes)."
-      - "Batch agent work by REQ/slug (motion analog); avoid per-entity micro-scope."
-  impact_analysis:
-    modules_or_boundaries: "tied-bundle/docs; client-development-index; methodology-composition-matrix.md; citdp-policy pointer; bootstrap doc tests"
-    tied_tokens_new:
-      - "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
-      - "ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
-      - "IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
-    tied_tokens_affected:
-      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
-      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
-      - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
-      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
-      - "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"
-  risk_analysis:
-    adversarial_inquiry:
-      depth_tier: "minimal"
-      gate_policy: "advisory"
-      assurance_profile: "baseline-functional"
-      rationale: "Doc-compose Wave 3 + matrix row; no new MCP gate tools."
-    quality_evidence_matrix:
-      - id: "QEM-LGE-DOC"
-        proof_boundary: "traceability_structure"
-        evidence: "goal-engineering-feedback-scope-compose-doc.test.mjs; methodology-composition-matrix-goal-engineering-row.test.mjs; tied_validate_consistency"
-  leap_feedback:
-    record_status: "draft"
-    divergences_from_analysis: "none"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+      scope:
+        - "docs/comparisons/methodology-composition-matrix.md"
+        - "tied-bundle/docs/client-development-index.md"
+        - "tied-bundle/docs/goal-engineering-feedback-scope-compose.md"
+        - "tied-project/working/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3/goal-aligned-scope-operator-checklist.md"
   evidence:
-    proof_boundaries:
-      - "traceability_structure"
-      - "human_decision"
     command_seq:
       - "pseudocode_validate IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3 gate_mode"
       - "tied_validate_consistency"
-  completion_criteria:
-    activation:
-      request_token: "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
-      phase: "pre_implementation"
-      scope:
-        - "tied-bundle/docs/goal-engineering-feedback-scope-compose.md"
-        - "tied-bundle/docs/client-development-index.md"
-        - "tied-project/working/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3/goal-aligned-scope-operator-checklist.md"
-        - "docs/comparisons/methodology-composition-matrix.md"
+    proof_boundaries:
+      - "human_decision"
+      - "traceability_structure"
+  impact_analysis:
+    modules_or_boundaries: "tied-bundle/docs; client-development-index; methodology-composition-matrix.md; citdp-policy pointer; bootstrap doc tests"
+    tied_tokens_affected:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    tied_tokens_new:
+      - "ARCH-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+      - "IMPL-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+      - "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "draft"
+  record_identity:
+    change_request_id: "REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3"
+    recorded_at: "2026-11-17"
+    title: "LangChain goal engineering Wave 3 — feedback-scope compose + matrix row 20"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Doc-compose Wave 3 + matrix row; no new MCP gate tools."
+    quality_evidence_matrix:
+      - evidence: "goal-engineering-feedback-scope-compose-doc.test.mjs; methodology-composition-matrix-goal-engineering-row.test.mjs; tied_validate_consistency"
+        id: "QEM-LGE-DOC"
+        proof_boundary: "traceability_structure"

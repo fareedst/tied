@@ -1,0 +1,96 @@
+CITDP-REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3:
+  change_definition:
+    current_behavior: "Farley executable spec × TIED Waves 1–2 committed; Wave 3 Phase 1 Defer in comparison; operators lack bundle guide for acceptance/BDD product plane vs TIED token + pseudo-code + gate authority (markdown SDD drift, agent-written tests, red-before-agent)."
+    desired_behavior: "Committed compose guide, client-development-index pointer, executable-spec operator checklist, citdp-policy pointer, comparison Phase 1 Implemented with REQ back-link, methodology-composition-matrix §2 row 21 + MCM LEAP—without Farley course/skill, Gherkin as SoT, or protected-spec CI in stdd v1."
+    non_goals:
+      - "Acceptance suite green substituting tied_checklist_gate_validate or tied_verify"
+      - "Client protected-acceptance playbook (Wave 2 Phase 2) in v1"
+      - "Cucumber/Gherkin replacing REQ/ARCH/IMPL YAML authority"
+      - "Farley commercial ATDD course or bundled agent skill as TIED core"
+      - "Farley-reported industry anecdotes as TIED effectiveness proof"
+      - "methodology-composition-matrix §2 row 21 without MCM LEAP (Slice G)"
+    success_criteria:
+      - "Build-plan satisfies SC-FES-* per PLAN.md"
+      - "farley-executable-spec-compose-doc.test.mjs green"
+      - "methodology-composition-matrix-farley-executable-spec-row.test.mjs green"
+      - "PLAN slices A–H; Slice H reconciles legacy MCM count tests"
+    unchanged_behavior:
+      - "AI-SDLC factory comparison remains essay vs repo split"
+      - "Comparison body does not mint tokens in prose"
+      - "Gate authority, MCP YAML path, default agentstream preflight off"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+      scope:
+        - "docs/comparisons/dave-farley-spec-must-be-executable-vs-tied-agent-management.md"
+        - "docs/comparisons/methodology-composition-matrix.md"
+        - "tied-bundle/docs/citdp-policy.md"
+        - "tied-bundle/docs/client-development-index.md"
+        - "tied-bundle/docs/farley-executable-spec-compose.md"
+        - "tied-project/working/REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3/executable-spec-operator-checklist.md"
+  evidence:
+    command_seq:
+      - "pseudocode_validate IMPL-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3 gate_mode"
+      - "node --test tools/bootstrap/lib/farley-executable-spec-compose-doc.test.mjs"
+      - "node --test tools/bootstrap/lib/methodology-composition-matrix-farley-executable-spec-row.test.mjs"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "human_decision"
+      - "traceability_structure"
+  impact_analysis:
+    methodology_surface_change_class: "none"
+    modules_or_boundaries: "tied-bundle/docs; docs/comparisons; bootstrap contract tests; MCM parent REQ"
+    tied_tokens_affected:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    tied_tokens_new:
+      - "ARCH-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+      - "IMPL-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+      - "REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "draft"
+  record_identity:
+    change_request_id: "REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-17"
+    title: "Farley executable spec Wave 3 — acceptance contract compose + MCM row 21"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Acceptance pass rates cited as tied_verify substitute"
+        - "Guide mandates Farley ATDD skill for every TIED client"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Gherkin features described as replacing REQ detail files"
+        - "Matrix §2 row 21 shipped without MCM LEAP or Slice H test update"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/comparisons/dave-farley-spec-must-be-executable-vs-tied-agent-management.md"
+        - "tied-project/working/REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3/PLAN.md"
+      falsification_questions:
+        - "Are Farley course claims labeled not_measured in guide?"
+        - "Does every anti-pattern separate acceptance green from gate receipts?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Doc-compose Wave 3; no Farley skill or protected-spec CI in stdd core v1."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        evidence_method: "farley-executable-spec-compose-doc.test.mjs; matrix row test; tied_validate_consistency"
+        id: "QEM-FES-DOC"
+        proof_boundary: "traceability_structure"
+  test_strategy:
+    path: "tied-project/working/REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3/test-strategy.md"

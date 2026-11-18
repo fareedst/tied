@@ -149,11 +149,13 @@ function buildMarkdown() {
     }
   }
 
-  let md = `# Term → domain color index
+  let md = `# Term domain color index (canonical)
 
 **Scope:** Parallel map from client glossary terms to [visual-encoding-domains.md](visual-encoding-domains.md) \`dom.*\` ids.
 
-**Plan:** [stdd-vocab-visual-encoding](../non-tied-plans/stdd-vocab-visual-encoding/PLAN.md)
+**Traceability:** [\`[PROC-VOCABULARY_INDEX]\`](../../tied-bundle/docs/processes.md) · [stdd-vocab-visual-encoding PLAN](../non-tied-plans/stdd-vocab-visual-encoding/PLAN.md) · [@informative-color-coding](../../.cursor/skills/informative-color-coding/SKILL.md)
+
+**See also:** [\`routing.md\`](routing.md) · [\`domain-references.md\`](domain-references.md) · [\`visual-encoding-domains.md\`](visual-encoding-domains.md) · [visual-encoding-standards.md](../../docs/visual-encoding-standards.md)
 
 **Precedence:** See domain registry § Assignment precedence.
 
@@ -165,12 +167,11 @@ function buildMarkdown() {
 
 `;
 
-  for (const f of files) {
-    if (f === "routing.md" || f === "domain-references.md") continue;
+  const emitSourceSection = (f) => {
     const sectionRows = (bySource.get(f) ?? []).sort((a, b) =>
       a.term.localeCompare(b.term),
     );
-    if (!sectionRows.length) continue;
+    if (!sectionRows.length) return;
     const title = f.replace(/\.md$/, "").replace(/-/g, " ");
     md += `## ${title}\n\nSource: [${f}](${f})\n\n`;
     md += `| Term | Primary domain | Sub-role | Notes |\n| --- | --- | --- | --- |\n`;
@@ -181,18 +182,34 @@ function buildMarkdown() {
           : r.sources.size > 1
             ? `Also: ${[...r.sources].filter((s) => s !== f).join(", ")}`
             : "—";
-      md += `| **${r.term}** | \`${r.domain}\` | ${r.sub_role === "—" ? "—" : r.sub_role} | ${notes} |\n`;
+      const display = r.term.replace(/`/g, "");
+      md += `| **${display}** | \`${r.domain}\` | ${r.sub_role === "—" ? "—" : r.sub_role} | ${notes} |\n`;
     }
     md += "\n";
+  };
+
+  for (const f of files) {
+    if (f === "routing.md" || f === "domain-references.md") continue;
+    emitSourceSection(f);
   }
+  emitSourceSection("domain-references.md");
+  emitSourceSection("routing.md");
 
   md += `## Master index (alphabetical)\n\n`;
   md += `| Term | Primary domain | Sub-role | Glossary source | Notes |\n| --- | --- | --- | --- | --- |\n`;
   for (const r of rows) {
     const src = [...r.sources].sort().join(", ");
     const notes = r.notes.length ? r.notes.join("; ") : "—";
-    md += `| **${r.term}** | \`${r.domain}\` | ${r.sub_role === "—" ? "—" : r.sub_role} | ${src} | ${notes} |\n`;
+    const display = r.term.replace(/`/g, "");
+    md += `| **${display}** | \`${r.domain}\` | ${r.sub_role === "—" ? "—" : r.sub_role} | ${src} | ${notes} |\n`;
   }
+
+  md += `\n## Alphabetical index\n\n`;
+  md += `| Term | Section |\n| --- | --- |\n`;
+  md += `| Parallel map | Scope |\n`;
+  md += `| Precedence | Scope |\n`;
+  md += `| Row count | Scope |\n`;
+  md += `| Regenerate | Scope |\n`;
 
   return { md, rowCount: rows.length };
 }

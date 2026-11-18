@@ -1,37 +1,87 @@
-schemaVersion: visual-encoding-domains.v1
-plan: stdd-vocab-visual-encoding
-
 domains:
-  dom.tiedCorpus:
-    fill: "#e7f0ff"
-    stroke: "#003366"
-    classDef: domTiedCorpus
-  dom.agentSurface:
-    fill: "#e0f7fa"
-    stroke: "#006064"
-    classDef: domAgentSurface
-  dom.harnessBench:
-    fill: "#fff3e0"
-    stroke: "#e65100"
-    classDef: domHarnessBench
-  dom.evidenceAssurance:
-    fill: "#f3e5f5"
-    stroke: "#7b1fa2"
-    classDef: domEvidenceAssurance
   dom.adaptivePractice:
+    classDef: "domAdaptivePractice"
     fill: "#e8f5e9"
     stroke: "#2e7d32"
-    classDef: domAdaptivePractice
+  dom.agentSurface:
+    classDef: "domAgentSurface"
+    fill: "#e0f7fa"
+    stroke: "#006064"
+  dom.evidenceAssurance:
+    classDef: "domEvidenceAssurance"
+    fill: "#f3e5f5"
+    stroke: "#7b1fa2"
   dom.governanceChoice:
+    classDef: "domGovernanceChoice"
     fill: "#fce4ec"
     stroke: "#880e4f"
-    classDef: domGovernanceChoice
+  dom.harnessBench:
+    classDef: "domHarnessBench"
+    fill: "#fff3e0"
+    stroke: "#e65100"
   dom.metaVocab:
+    classDef: "domMetaVocab"
     fill: "#f5f5f5"
     stroke: "#616161"
-    classDef: domMetaVocab
-
+  dom.tiedCorpus:
+    classDef: "domTiedCorpus"
+    fill: "#e7f0ff"
+    stroke: "#003366"
+edges:
+  edge.declared: "dotted"
+  edge.derived: "dashed"
+  edge.verified: "solid"
+layers:
+  layer.arch:
+    classDef: "layerArch"
+    fill: "#e1bee7"
+    stroke: "#6a1b9a"
+  layer.citdp:
+    classDef: "layerCitdp"
+    fill: "#fff9c4"
+    stroke: "#f9a825"
+  layer.impl:
+    classDef: "layerImpl"
+    fill: "#ffe0b2"
+    stroke: "#ef6c00"
+  layer.leap:
+    classDef: "layerLeap"
+    fill: "#f8bbd0"
+    stroke: "#c2185b"
+  layer.req:
+    classDef: "layerReq"
+    fill: "#e7f0ff"
+    stroke: "#003366"
+  layer.tests:
+    classDef: "layerTests"
+    fill: "#b2dfdb"
+    stroke: "#00695c"
+  layer.vocab:
+    classDef: "layerVocab"
+    fill: "#e8f5e9"
+    stroke: "#2e7d32"
+plan: "stdd-vocab-visual-encoding"
+plan_roles:
+  plan.pending:
+    classDef: "planPending"
+    fill: "#fff3e0"
+    stroke: "#e65100"
+  plan.proposed:
+    classDef: "planProposed"
+    fill: "#e7f0ff"
+    stroke: "#003366"
+  plan.reference:
+    classDef: "planReference"
+    fill: "#eceff1"
+    stroke: "#455a64"
+schemaVersion: "visual-encoding-domains.v1"
 sub_roles:
+  dom.evidenceAssurance.proofBoundary:
+    fill: "#ede7f6"
+    stroke: "#6a1b9a"
+  dom.metaVocab.junction:
+    fill: "#f5f5f5"
+    stroke: "#616161"
   dom.tiedCorpus.methodologyBundle:
     fill: "#eceff1"
     stroke: "#455a64"
@@ -41,58 +91,3 @@ sub_roles:
   dom.tiedCorpus.tokenRegistry:
     fill: "#c5cae9"
     stroke: "#283593"
-  dom.evidenceAssurance.proofBoundary:
-    fill: "#ede7f6"
-    stroke: "#6a1b9a"
-  dom.metaVocab.junction:
-    fill: "#f5f5f5"
-    stroke: "#616161"
-
-layers:
-  layer.vocab:
-    fill: "#e8f5e9"
-    stroke: "#2e7d32"
-    classDef: layerVocab
-  layer.citdp:
-    fill: "#fff9c4"
-    stroke: "#f9a825"
-    classDef: layerCitdp
-  layer.req:
-    fill: "#e7f0ff"
-    stroke: "#003366"
-    classDef: layerReq
-  layer.arch:
-    fill: "#e1bee7"
-    stroke: "#6a1b9a"
-    classDef: layerArch
-  layer.impl:
-    fill: "#ffe0b2"
-    stroke: "#ef6c00"
-    classDef: layerImpl
-  layer.tests:
-    fill: "#b2dfdb"
-    stroke: "#00695c"
-    classDef: layerTests
-  layer.leap:
-    fill: "#f8bbd0"
-    stroke: "#c2185b"
-    classDef: layerLeap
-
-plan_roles:
-  plan.proposed:
-    fill: "#e7f0ff"
-    stroke: "#003366"
-    classDef: planProposed
-  plan.pending:
-    fill: "#fff3e0"
-    stroke: "#e65100"
-    classDef: planPending
-  plan.reference:
-    fill: "#eceff1"
-    stroke: "#455a64"
-    classDef: planReference
-
-edges:
-  edge.verified: solid
-  edge.derived: dashed
-  edge.declared: dotted

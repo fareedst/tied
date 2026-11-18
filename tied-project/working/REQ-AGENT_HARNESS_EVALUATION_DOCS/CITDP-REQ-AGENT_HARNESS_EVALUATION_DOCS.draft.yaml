@@ -3,12 +3,12 @@ CITDP-REQ-AGENT_HARNESS_EVALUATION_DOCS:
     current_behavior: "Facilitator WF readouts, HMEP fixtures, and trial config YAML live under docs/demos/ mixed with adopters; tooling hardcodes docs/demos paths."
     desired_behavior: "Committed docs/agent-harness-evaluation/ corpus; path module AHE_*; demos slim stubs; vocab links to AHE config."
     success_criteria:
-      - "SC-AHE-PATH-01"
+      - "SC-AHE-DEMOS-01"
       - "SC-AHE-MV-01"
+      - "SC-AHE-PATH-01"
       - "SC-AHE-TOOL-01"
       - "SC-AHE-VOCAB-01"
       - "SC-AHE-VOCAB-02"
-      - "SC-AHE-DEMOS-01"
   evidence:
     command_seq:
       - "node --test tools/bootstrap/lib/agent-harness-eval-docs-paths.contract.test.mjs"
@@ -24,6 +24,10 @@ CITDP-REQ-AGENT_HARNESS_EVALUATION_DOCS:
     profile_depth: "minimal"
     recorded_at: "2026-11-14"
     title: "Agent harness evaluation docs corpus relocation"
+  related_requirements:
+    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
+    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
+    - "REQ-WF_TRIAL_SUMMARIES_PUBLISH"
   risk_analysis:
     adversarial_inquiry:
       counterexamples:
@@ -35,14 +39,10 @@ CITDP-REQ-AGENT_HARNESS_EVALUATION_DOCS:
         - "vocab-agentstream-ahe-config-links.contract.test.mjs resolves markdown yaml links"
         - "wf-trial-summaries-publish.mjs --check uses AHE readout dir"
       evidence_references:
-        - "tools/bootstrap/lib/agent-harness-eval-docs-paths.mjs"
-        - "tools/bootstrap/lib/agent-harness-eval-docs-paths.contract.test.mjs"
         - "tied-project/vocab/agentstream.md"
+        - "tools/bootstrap/lib/agent-harness-eval-docs-paths.contract.test.mjs"
+        - "tools/bootstrap/lib/agent-harness-eval-docs-paths.mjs"
       falsification_questions:
         - "Does rg docs/demos in tools/bootstrap/lib still match facilitator generators after wire-up?"
         - "Does validate_vocab fail when agentstream.md reverts demos links?"
       gate_policy: "advisory"
-  related_requirements:
-    - "REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM"
-    - "REQ-TIED_HARNESS_PLATFORM_TAXONOMY"
-    - "REQ-WF_TRIAL_SUMMARIES_PUBLISH"

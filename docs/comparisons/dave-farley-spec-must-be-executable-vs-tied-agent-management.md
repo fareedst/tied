@@ -7,7 +7,7 @@
 | **Source URL** | [The Spec Must Be Executable](https://www.linkedin.com/pulse/spec-must-executable-dave-farley-jrnxe/) (Dave Farley, 2026-10-25 — **Farley-reported**) |
 | **Article capture (sibling)** | [dave-farley-spec-must-be-executable.md](dave-farley-spec-must-be-executable.md) — metadata + TL;DR only; **full text off-repo** |
 | **Status / date** | Outreach / analysis snapshot, **2026-11-17** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
-| **Executable follow-up** | Wave 3 candidates in § Phased recommendations (**Defer** until scoped **`add-feature`** / **`build-plan`**) |
+| **Executable follow-up** | [REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3](../../tied-project/requirements/REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3.yaml) · [farley-executable-spec-compose.md](../../tied-bundle/docs/farley-executable-spec-compose.md) |
 | **Distinct from** | [AI-SDLC factory × TIED](ai-sdlc-atdd-software-factory-vs-tied.md); [Persante SDD × TIED](persante-sdd-skills-vs-tied-agent-management.md); [TIED vs well-known methodologies](tied-vs-well-known-methodologies.md); [Software engineering degree × TIED](software-engineering-degree-vs-tied.md); [Anthropic FV × TIED](anthropic-llm-formal-verification-vs-tied-agent-management.md); [HackerNoon observability contract × TIED](hackernoon-observability-contract-ci-vs-tied-agent-management.md) |
 | **TIED anchors (reference only)** | [AGENTS.md](../../AGENTS.md), [agent-req-implementation-checklist.md](../../tied-bundle/docs/agent-req-implementation-checklist.md), [processes.md](../../tied-bundle/docs/processes.md) ([PROC-TIED_DEV_CYCLE](../../tied-bundle/docs/processes.md)), [pseudocode-writing-and-validation.md](../../tied-bundle/docs/pseudocode-writing-and-validation.md), [sponsor-agent-relationship.md](../../tied-project/vocab/sponsor-agent-relationship.md), [quality-assurance.md](../../tied-project/vocab/quality-assurance.md) |
 
@@ -257,9 +257,9 @@ Client **acceptance suites** and Farley **course skill** sit **harness-adjacent*
 | Phase | Action | Status |
 | --- | --- | --- |
 | **0** | Wave 1 stub + this analysis + git allowlist | **Done** (2026-11-17) |
-| **1** | Bundle doc: acceptance-spec vs IMP pseudo-code literacy | **Defer** |
+| **1** | Bundle doc: acceptance-spec vs IMP pseudo-code literacy | **Implemented** ([farley-executable-spec-compose.md](../../tied-bundle/docs/farley-executable-spec-compose.md), [REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3](../../tied-project/requirements/REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3.yaml)) |
 | **2** | Client playbook: protected acceptance + TIED tokens | **Defer** |
-| **3** | Methodology composition matrix §2 row | **Defer** |
+| **3** | Methodology composition matrix §2 row | **Implemented** (row **21**; [REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3](../../tied-project/requirements/REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3.yaml)) |
 | **4** | Install Farley ATDD skill as TIED core | **OutOfScope** |
 
 ---

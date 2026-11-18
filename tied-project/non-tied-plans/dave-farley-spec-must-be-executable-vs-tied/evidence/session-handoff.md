@@ -47,7 +47,7 @@ All PLAN build steps complete (2026-11-17).
 
 ## Next step
 
-Optional **`@non-tied-close`** when sponsor requests scoped git commit.
+**non-tied-close** complete (2026-11-17): scoped traceable commit recorded in `evidence/traceable-commit-evidence.md`.
 
 ## Forbidden completed
 
@@ -59,3 +59,4 @@ No project REQ/ARCH/IMPL writes; Farley course outcomes not cited as TIED proof.
 | --- | --- | --- |
 | 2026-11-17 | non-tied-refine | Initial PLAN, CITDP, test-strategy, session-handoff |
 | 2026-11-17 | non-tied-build | Wave 1–2 docs, DOC working, allowlist, examples row, AI-SDLC sibling backlink |
+| 2026-11-17 | non-tied-close | Scoped traceable commit; scope in traceable-commit-evidence.md |

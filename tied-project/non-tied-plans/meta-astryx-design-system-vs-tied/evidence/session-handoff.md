@@ -27,7 +27,7 @@ All PLAN build steps complete (2026-11-17).
 
 ## Next step
 
-**non-tied-close** complete (2026-11-17): traceable commit `d819bcf6` recorded in `evidence/traceable-commit-evidence.md`.
+**non-tied-close** complete (2026-11-17). Wave 3 → `@add-feature` via [add-feature-handoff.md](../../../working/DOC-META-ASTRYX-DESIGN-SYSTEM-COMPARISON/evidence/add-feature-handoff.md) and [REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3/evidence/session-handoff.md](../../../working/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3/evidence/session-handoff.md).
 
 ## Forbidden completed
 
@@ -39,4 +39,4 @@ No project REQ/ARCH/IMPL writes; Meta scale metrics not cited as TIED proof.
 | --- | --- | --- |
 | 2026-11-17 | non-tied-refine | Initial PLAN, CITDP, test-strategy |
 | 2026-11-17 | non-tied-build | Wave 1–2 docs, DOC working, allowlist, siblings, examples row |
-| 2026-11-17 | non-tied-close | Traceable commit `d819bcf6`; scope in traceable-commit-evidence.md |
+| 2026-11-17 | non-tied-close | Scoped traceable commit; scope in traceable-commit-evidence.md |

@@ -3,31 +3,31 @@ CITDP-REQ-WF_TRIAL_EVALUATION_GUIDE:
     current_behavior: "WF trial methodology is spread across agent-harness-evaluation index, workflow catalog, facilitator skills, registry, and cohort tables; no single public guide for how trials are run, analyzed, graded, and summarized."
     desired_behavior: "workflow-trials-guide.md synthesizes the WF trial lifecycle for sponsors and external readers (Reddit-adaptable), with README index link, HMEP boundary, forbidden leaderboard guardrails, and bootstrap contract test for headings and links."
     non_goals:
-      - "Rewrite catalog prompts or individual readouts"
       - "Change grading weights or read-trial-readout-session-grading behavior"
-      - "Publish Reddit post from repo automation"
-      - "Leaderboard or maturity_score framing"
       - "Greenfield trial deep-dive beyond one contrast paragraph"
+      - "Leaderboard or maturity_score framing"
+      - "Publish Reddit post from repo automation"
+      - "Rewrite catalog prompts or individual readouts"
     success_criteria:
-      - "workflow-trials-guide.md with normative H2 sections per PLAN"
       - "agent-harness-evaluation README links Public guide"
-      - "wf-trial-evaluation-guide-contract.test.mjs passes"
       - "REQ/ARCH/IMPL-WF_TRIAL_EVALUATION_GUIDE in project YAML"
+      - "wf-trial-evaluation-guide-contract.test.mjs passes"
+      - "workflow-trials-guide.md with normative H2 sections per PLAN"
     unchanged_behavior: "@record-wf-trial and @publish-wf-trial-summaries skills; orchestrator scripts; readout corpus content."
   evidence:
     command_seq:
       - "node --test tools/bootstrap/lib/wf-trial-evaluation-guide-contract.test.mjs"
     proof_boundaries:
-      - "traceability_structure — guide links and TIED tokens"
       - "human_decision — Reddit skeleton voice left to sponsor"
+      - "traceability_structure — guide links and TIED tokens"
   impact_analysis:
     impl_inventory_notes: "Docs-only primary surface; thin path module constant; one contract test."
     modules_or_boundaries: "docs/agent-harness-evaluation/workflow-trials-guide.md; docs/agent-harness-evaluation/README.md; tools/bootstrap/lib/agent-harness-eval-docs-paths.mjs; tools/bootstrap/lib/wf-trial-evaluation-guide-contract.test.mjs; tied-project/vocab/harness-platform-taxonomy.md"
     tied_tokens_affected: []
     tied_tokens_new:
-      - "REQ-WF_TRIAL_EVALUATION_GUIDE"
       - "ARCH-WF_TRIAL_EVALUATION_GUIDE"
       - "IMPL-WF_TRIAL_EVALUATION_GUIDE"
+      - "REQ-WF_TRIAL_EVALUATION_GUIDE"
   record_identity:
     change_request_id: "REQ-WF_TRIAL_EVALUATION_GUIDE"
     depth_tier: "minimal"

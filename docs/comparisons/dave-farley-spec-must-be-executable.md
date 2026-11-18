@@ -40,4 +40,4 @@ Summarizes themes used in the sibling analysis (**Farley-reported**; read off-re
 - Claims above are **summary-only** for comparison traceability. They are **not** independently verified in Wave 1–2 and must not be treated as TIED methodology proof.
 - This essay is **practitioner advocacy**, not a TIED product spec. Wave 2 maps themes to TIED **agent-management proof boundaries**—**not** adoption of Farley’s course or Cucumber/Gherkin as TIED’s authoritative artifact.
 - **Wave 2:** [dave-farley-spec-must-be-executable-vs-tied-agent-management.md](dave-farley-spec-must-be-executable-vs-tied-agent-management.md) — executable spec × TIED agent management (**reference only**).
-- **Wave 3:** **Defer** — doc compose or scoped REQ via `add-feature` only.
+- **Wave 3:** [farley-executable-spec-compose.md](../../tied-bundle/docs/farley-executable-spec-compose.md) ([REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3](../../tied-project/requirements/REQ-TIED_FARLEY_EXECUTABLE_SPEC_WAVE3.yaml)).

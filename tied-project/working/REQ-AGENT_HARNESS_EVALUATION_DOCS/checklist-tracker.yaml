@@ -44,6 +44,6 @@ steps:
     slug: "verification-gate"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-AGENT_HARNESS_EVALUATION_DOCS/evidence/traceable-commit-evidence.md"
       - "tied-project/working/REQ-AGENT_HARNESS_EVALUATION_DOCS/evidence/proposed-commit-message.txt"
+      - "tied-project/working/REQ-AGENT_HARNESS_EVALUATION_DOCS/evidence/traceable-commit-evidence.md"
     slug: "traceable-commit"

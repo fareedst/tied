@@ -45,6 +45,7 @@
 | 5j | [sponsor-agent-relationship.md](sponsor-agent-relationship.md) | sponsor, agent, reviewer, delegated work envelope, instrument branch, person branch, agency boundary condition, hinge field, consequence ladder, reversible choice, costly choice, sponsor-vs-TIED disagreement, over-asking, instrumentalizing the sponsor, RESOLVE charter |
 | — | [config-discovery.md](config-discovery.md) | Layered YAML config, project-local layer, exclude_patterns, `(proposed)` terms |
 | — | [visual-encoding-domains.md](visual-encoding-domains.md) | Visual encoding, `dom.*` semantic domains, term-domain color index, diagram palette, informative-color-coding |
+| — | [term-domain-color-index.md](term-domain-color-index.md) | Term domain color map, glossary term → `dom.*`, diagram coloring, `build-term-index.mjs` |
 
 ---
 

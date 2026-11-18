@@ -7,7 +7,7 @@ REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK:
       - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE"
   satisfaction_criteria:
-    - criterion: "Orchestrator copy-if-absent seeds checklist-tracker.yaml under disposable product working/{product_REQ}/ when phase-handoff-add-feature names request_token."
+    - criterion: "Orchestrator seeds checklist-tracker.yaml under disposable product working/{product_REQ}/ when phase-handoff-add-feature names request_token; inter-turn reconcile after turn 1 may replace malformed shapes before turn 2; post-run copy-if-absent remains when interleaved reconcile did not run."
       id: "SC-WF-CLP-05"
     - criterion: "prompt-shared wf-trial-checklist-gates-adjunct.md gives numbered tied-cli/MCP gate script for turns 2-4."
       id: "SC-WF-CLP-02"

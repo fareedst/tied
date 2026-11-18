@@ -1,6 +1,6 @@
 # PLAN — REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN
 
-**Status:** build-plan complete — ready for `@close-out`  
+**Status:** close-out complete (live verify @ 1794975372)  
 **plan_phase:** `post-build`  
 **Request token:** `REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN`  
 **profile_depth:** `minimal` · **gate_policy:** `advisory`  
