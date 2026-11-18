@@ -1,0 +1,6 @@
+ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
+  decision: "Shell interleave four agentstream processes with post-turn-1 slim tracker reconcile via wf-trial-tracker-shape.mjs; live-only (dry-run stays monolithic)."
+  modules:
+    - "scripts/lib/wf-trial-interleaved-four-phase.inc.sh"
+    - "scripts/lib/wf-trial-product-req.inc.sh"
+    - "tools/bootstrap/lib/wf-trial-tracker-shape.mjs"

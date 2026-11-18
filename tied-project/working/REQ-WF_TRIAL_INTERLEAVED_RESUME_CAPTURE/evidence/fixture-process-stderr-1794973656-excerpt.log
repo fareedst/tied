@@ -1,0 +1,7 @@
+DIAGNOSTIC: WF trial interleaved phase 1/4
+
+--- turn 1/1 (new session) ---
+session_id=28a60a53-d520-4b09-8bd0-3358224cb67b
+DIAGNOSTIC: WF trial slim tracker reconcile: valid slim shape (no replace)
+DIAGNOSTIC: WF trial interleaved phase 2/4
+ERROR: WF trial interleaved: missing session_id after turn 1

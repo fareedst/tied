@@ -1,0 +1,8 @@
+IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  metadata:
+    last_updated:
+      date: "2026-11-17"
+      reason: "build-plan dual-stream resume capture"
+  related_files:
+    - "scripts/lib/wf-trial-interleaved-four-phase.inc.sh"
+    - "tools/bootstrap/lib/wf-trial-tracker-shape.mjs"

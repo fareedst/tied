@@ -1,0 +1,4 @@
+fix(wf-trial): interleaved session_id capture and slim tracker reconcile
+
+Dual-stream per-turn capture fixes missing session_id after turn 1; explicit
+temp-file cleanup under set -u. Live WF-01 @ 1794975372 exits 0 (~274s).

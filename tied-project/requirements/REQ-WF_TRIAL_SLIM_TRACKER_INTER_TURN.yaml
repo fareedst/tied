@@ -1,0 +1,12 @@
+REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
+  satisfaction_criteria:
+    - criterion: "SC-WF-CLP-05 documents inter-turn reconcile semantics."
+      id: "SC-WF-IST-05"
+    - criterion: "Turn-1 batch cites wf-trial-add-feature-tracker-adjunct.md."
+      id: "SC-WF-IST-03"
+    - criterion: "wf_trial_four_phase_run_interleaved runs orders 1-4 with resume chain; reconcile after turn 1."
+      id: "SC-WF-IST-01"
+    - criterion: "wf_trial_reconcile_slim_checklist_tracker replaces legacy wrapper trackers with slim template and backup."
+      id: "SC-WF-IST-02"
+    - criterion: "WF_TRIAL_SKIP_INTERLEAVED_TRACKER_SEED documented; skip restores monolithic four-phase invoke."
+      id: "SC-WF-IST-04"

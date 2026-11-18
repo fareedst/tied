@@ -132,6 +132,73 @@ wf_trial_resolve_product_req_token() {
   return 0
 }
 
+# [REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN] [SC-WF-IST-02]
+wf_trial_tracker_shape_cli() {
+  local store_root="$1"
+  printf '%s/tools/bootstrap/lib/wf-trial-tracker-shape.mjs' "$store_root"
+}
+
+wf_trial_interleaved_tracker_marker() {
+  local ws="$1"
+  printf '%s/tied-project/working/wf-trial-orchestrator-run/evidence/wf-trial-interleaved-tracker-seed.v1.marker' "$ws"
+}
+
+wf_trial_tracker_is_slim_shape() {
+  local tracker_path="$1"
+  local store_root="$2"
+  local cli
+  cli="$(wf_trial_tracker_shape_cli "$store_root")"
+  [[ -f "$cli" ]] || return 2
+  node "$cli" "$tracker_path"
+}
+
+wf_trial_reconcile_slim_checklist_tracker() {
+  local ws="$1"
+  local store_root="$2"
+  local token dest_dir dest src backup evidence_dir shape_ec
+  token="$(wf_trial_resolve_product_req_token "$ws" || true)"
+  if [[ -z "$token" ]]; then
+    printf 'DIAGNOSTIC: WF trial slim tracker reconcile: no product REQ (skip)\n' >&2
+    return 0
+  fi
+
+  dest_dir="${ws}/tied-project/working/${token}"
+  dest="${dest_dir}/checklist-tracker.yaml"
+  mkdir -p "${dest_dir}/evidence"
+
+  if [[ ! -f "$dest" ]]; then
+    materialize_wf_trial_minimal_checklist_tracker "$ws" "$store_root"
+    return 0
+  fi
+
+  wf_trial_tracker_is_slim_shape "$dest" "$store_root"
+  shape_ec=$?
+  if [[ "$shape_ec" -eq 0 ]]; then
+    printf 'DIAGNOSTIC: WF trial slim tracker reconcile: valid slim shape (no replace): %s\n' "$dest" >&2
+    return 0
+  fi
+
+  evidence_dir="${dest_dir}/evidence"
+  backup="${evidence_dir}/checklist-tracker-agent-replaced.v1.bak"
+  cp -f "$dest" "$backup"
+  printf 'DIAGNOSTIC: WF trial slim tracker reconcile: backed up agent tracker to %s\n' "$backup" >&2
+
+  src="${store_root}/tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml"
+  if [[ ! -f "$src" && -f "${ws}/tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml" ]]; then
+    src="${ws}/tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml"
+  fi
+  if [[ ! -f "$src" ]]; then
+    printf 'DIAGNOSTIC: WF trial slim tracker reconcile: template missing: %s\n' "$src" >&2
+    return 1
+  fi
+  sed "s/{{PRODUCT_REQ}}/${token}/g" "$src" >"$dest"
+  printf 'DIAGNOSTIC: WF trial slim tracker reconcile: replaced with slim template: %s\n' "$dest" >&2
+
+  mkdir -p "$(dirname "$(wf_trial_interleaved_tracker_marker "$ws")")"
+  : >"$(wf_trial_interleaved_tracker_marker "$ws")"
+  return 0
+}
+
 materialize_wf_trial_minimal_checklist_tracker() {
   local ws="$1"
   local store_root="$2"

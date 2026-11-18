@@ -20,6 +20,13 @@ const PHASE_HANDOFF_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-phase-
 const ABORT_SIGNAL_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-abort-signal.inc.sh");
 const OPERATOR_HIGHLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-operator-highlight.inc.sh");
 const PRODUCT_REQ_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-product-req.inc.sh");
+const FOUR_PHASE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh");
+const INTERLEAVED_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-interleaved-four-phase.inc.sh");
+const TRACKER_SHAPE_MJS = path.join(REPO_ROOT, "tools/bootstrap/lib/wf-trial-tracker-shape.mjs");
+const LEGACY_TRACKER_FIXTURE = path.join(
+  REPO_ROOT,
+  "tied-project/working/REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN/evidence/fixture-legacy-tracker-1794971027.yaml",
+);
 const FIXTURE_1794504138_STDERR = path.join(
   REPO_ROOT,
   "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL/evidence/fixture-1794504138-process.stderr.log",
@@ -1247,6 +1254,166 @@ ERROR: something else
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true });
     }
+  });
+
+  it("wf_trial_reconcile_slim_checklist_tracker legacy [SC-WF-IST-02]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-reconcile-"));
+    const token = "REQ-RECONCILE-TEST";
+    try {
+      const destDir = path.join(tmp, "tied-project/working", token);
+      const ev = path.join(destDir, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(path.join(ev, "phase-handoff-add-feature.md"), `request_token: ${token}\n`);
+      fs.copyFileSync(
+        LEGACY_TRACKER_FIXTURE,
+        path.join(destDir, "checklist-tracker.yaml"),
+      );
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
+        source "${PRODUCT_REQ_INC}"
+        wf_trial_reconcile_slim_checklist_tracker "${tmp}" "${REPO_ROOT}"
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      assert.match(r.stderr, /replaced with slim template/);
+      const backup = path.join(ev, "checklist-tracker-agent-replaced.v1.bak");
+      assert.ok(fs.existsSync(backup));
+      const rShape = spawnSync("node", [TRACKER_SHAPE_MJS, path.join(destDir, "checklist-tracker.yaml")], {
+        cwd: REPO_ROOT,
+        encoding: "utf8",
+      });
+      assert.equal(rShape.status, 0, rShape.stderr);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_four_phase_run_interleaved survives set -u on success [SC-WF-IRC-04]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-interleaved-setu-"));
+    try {
+      const bash = `
+        set -euo pipefail
+        # shellcheck source=scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh
+        source "${FOUR_PHASE_INC}"
+        # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
+        source "${PRODUCT_REQ_INC}"
+        # shellcheck source=scripts/lib/wf-trial-interleaved-four-phase.inc.sh
+        source "${INTERLEAVED_INC}"
+        wf_trial_four_phase_run_agentstream() {
+          printf 'session_id=set-u-session\\n'
+          return 0
+        }
+        export -f wf_trial_four_phase_run_agentstream
+        wf_trial_four_phase_run_interleaved "${REPO_ROOT}" "${tmp}" node -e 'process.exit(0)'
+        printf ok-setu\\n
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      assert.match(r.stdout, /ok-setu/);
+      assert.doesNotMatch(r.stderr, /unbound variable/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_four_phase_run_interleaved stderr-only session_id [SC-WF-IRC-01]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-interleaved-stderr-"));
+    const token = "REQ-INTERLEAVE-STDERR";
+    try {
+      const destDir = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(destDir, { recursive: true });
+      fs.writeFileSync(path.join(destDir, "phase-handoff-add-feature.md"), `request_token: ${token}\n`);
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh
+        source "${FOUR_PHASE_INC}"
+        # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
+        source "${PRODUCT_REQ_INC}"
+        # shellcheck source=scripts/lib/wf-trial-interleaved-four-phase.inc.sh
+        source "${INTERLEAVED_INC}"
+        WF_TRIAL_STUB_COUNT=0
+        WF_TRIAL_LAST_RESUME=""
+        wf_trial_four_phase_run_agentstream() {
+          WF_TRIAL_STUB_COUNT=$((WF_TRIAL_STUB_COUNT + 1))
+          local prev=""
+          local a
+          for a in "$@"; do
+            if [[ "$prev" == "--resume" ]]; then
+              WF_TRIAL_LAST_RESUME="$a"
+            fi
+            prev="$a"
+          done
+          printf 'session_id=stub-session-stderr\\n' >&2
+          return 0
+        }
+        export -f wf_trial_four_phase_run_agentstream
+        wf_trial_four_phase_run_interleaved "${REPO_ROOT}" "${tmp}" node -e 'process.exit(0)'
+        [[ "$WF_TRIAL_STUB_COUNT" -eq 4 ]] || exit 9
+        printf ok-stderr-interleaved\\n
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      assert.match(r.stdout, /ok-stderr-interleaved/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("wf_trial_four_phase_run_interleaved stub four orders [SC-WF-IST-01]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-interleaved-"));
+    const token = "REQ-INTERLEAVE";
+    try {
+      const destDir = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(destDir, { recursive: true });
+      fs.writeFileSync(path.join(destDir, "phase-handoff-add-feature.md"), `request_token: ${token}\n`);
+      const bash = `
+        # shellcheck source=scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh
+        source "${FOUR_PHASE_INC}"
+        # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
+        source "${PRODUCT_REQ_INC}"
+        # shellcheck source=scripts/lib/wf-trial-interleaved-four-phase.inc.sh
+        source "${INTERLEAVED_INC}"
+        WF_TRIAL_STUB_COUNT=0
+        wf_trial_four_phase_run_agentstream() {
+          WF_TRIAL_STUB_COUNT=$((WF_TRIAL_STUB_COUNT + 1))
+          printf 'session_id=stub-session\\n'
+          return 0
+        }
+        export -f wf_trial_four_phase_run_agentstream
+        wf_trial_four_phase_run_interleaved "${REPO_ROOT}" "${tmp}" node -e 'process.exit(0)'
+        [[ "$WF_TRIAL_STUB_COUNT" -eq 4 ]] || exit 9
+        printf ok-interleaved\\n
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      assert.match(r.stdout, /ok-interleaved/);
+      assert.match(r.stderr, /interleaved phase 1\/4/);
+      assert.match(r.stderr, /slim checklist tracker seeded/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("help documents WF_TRIAL_SKIP_INTERLEAVED_TRACKER_SEED [SC-WF-IST-04]", () => {
+    const r = runScript(["--help"]);
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /WF_TRIAL_SKIP_INTERLEAVED_TRACKER_SEED=1/);
+  });
+
+  it("SC-WF-CLP-05 documents inter-turn reconcile [SC-WF-IST-05]", () => {
+    const req = fs.readFileSync(
+      path.join(REPO_ROOT, "tied-project/requirements/REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK.yaml"),
+      "utf8",
+    );
+    assert.match(req, /inter-turn reconcile/);
+  });
+
+  it("turn-1 batch cites tracker adjunct [SC-WF-IST-03]", () => {
+    const batch = fs.readFileSync(
+      path.join(REPO_ROOT, "docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml"),
+      "utf8",
+    );
+    assert.match(batch, /wf-trial-add-feature-tracker-adjunct/);
+    assert.doesNotMatch(batch, /scaffold custom tracker/i);
   });
 
   it("WF_TRIAL_SKIP_PROCESS_LOG=1 skips evidence dir [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]", () => {

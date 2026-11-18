@@ -1,0 +1,8 @@
+REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  satisfaction_criteria:
+    - criterion: "Interleaved runner parses session_id from per-turn stderr when stdout is empty (operator-only stdout suppressed)."
+      id: "SC-WF-IRC-01"
+    - criterion: "parseSessionIdFromText extracts id from 1794973656 stderr fixture."
+      id: "SC-WF-IRC-02"
+    - criterion: "SC-WF-IST interleaved tests remain green."
+      id: "SC-WF-IRC-03"

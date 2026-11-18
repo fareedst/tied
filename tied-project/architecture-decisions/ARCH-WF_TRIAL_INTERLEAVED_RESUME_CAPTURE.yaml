@@ -1,0 +1,5 @@
+ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  decision: "Dual-stream per-turn capture with stdout-first session_id parse; preserves SC-WF-SPT-03 agentstream exit dedup."
+  modules:
+    - "scripts/lib/wf-trial-interleaved-four-phase.inc.sh"
+    - "tools/bootstrap/lib/wf-trial-tracker-shape.mjs"

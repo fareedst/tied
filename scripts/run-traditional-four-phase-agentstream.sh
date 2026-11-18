@@ -2,6 +2,7 @@
 # run-traditional-four-phase-agentstream — four prompt-type turns via feature-spec batch (no full checklist).
 # [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE]
 # [REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT] [IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT]
+# [REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN] [IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN]
 # Texture aligned with tools/bootstrap/lib/console.mjs; see docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml
 set -euo pipefail
 
@@ -157,6 +158,7 @@ usage() {
   _dim "MODEL_CONFIG       Optional model bucket for PLAN header evidence"
   _dim "HARNESS            cursor (default) or claude"
   _dim "BATCH_YAML         Batch template (default: docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml)"
+  _dim "WF_TRIAL_SKIP_INTERLEAVED_TRACKER_SEED=1  single agentstream invoke (no inter-turn reconcile)"
   _out_help ""
   _section "Safety"
   _dim "Live runs: WORKSPACE must lie under TIED_TEST_ROOT (default ~/Documents/dev/test),"
@@ -185,6 +187,10 @@ require_directory() {
 
 # shellcheck source=lib/wf-trial-run-four-phase-agentstream.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-run-four-phase-agentstream.inc.sh"
+# shellcheck source=lib/wf-trial-product-req.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-product-req.inc.sh"
+# shellcheck source=lib/wf-trial-interleaved-four-phase.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-interleaved-four-phase.inc.sh"
 
 assert_disposable_workspace() {
   local ws="$1"
@@ -354,8 +360,14 @@ main() {
   fi
 
   set +e
-  wf_trial_four_phase_run_agentstream "${cmd[@]}"
-  local agentstream_exit=$?
+  local agentstream_exit=0
+  if ((dry_run == 0)) && wf_trial_interleaved_seed_enabled; then
+    wf_trial_four_phase_run_interleaved "$REPO_ROOT" "$workspace" "${cmd[@]}"
+    agentstream_exit=$?
+  else
+    wf_trial_four_phase_run_agentstream "${cmd[@]}"
+    agentstream_exit=$?
+  fi
   set -e
   # shellcheck source=scripts/lib/wf-trial-envelope-depth-check.inc.sh
   source "${REPO_ROOT}/scripts/lib/wf-trial-envelope-depth-check.inc.sh"

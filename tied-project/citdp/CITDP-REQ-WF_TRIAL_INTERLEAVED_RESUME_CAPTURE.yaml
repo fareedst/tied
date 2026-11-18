@@ -1,0 +1,47 @@
+CITDP-REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  change_definition:
+    current_behavior: "wf_trial_four_phase_run_interleaved captures subprocess stdout only; session_id= reaches parent on fd 2 when live agentstream suppresses operator stdout (SC-WF-SPT-03); turn 2 aborts with missing session_id."
+    desired_behavior: "Dual-stream per-turn temp capture; parse session_id from stdout first else stderr; explicit rm on exit paths under set -u (no RETURN trap); SC-WF-IRC-01..04 bootstrap coverage."
+    non_goals:
+      - "liveExitStdoutIsOperatorMirrorOnly behavior change"
+      - "Phase-handoff and proof-manifest gate policy"
+    success_criteria:
+      - "WF-01 Claude low live four-phase orchestrator exit_code 0 after 1794974815-class trap fix"
+      - "node --test tools/bootstrap/lib/wf-trial-tracker-shape.test.mjs && workflow-trial-agentstream-sh.test.mjs green"
+    unchanged_behavior: "Monolithic four-phase path when WF_TRIAL_SKIP_INTERLEAVED_TRACKER_SEED=1; slim tracker reconcile after turn 1 per REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN."
+  impact_analysis:
+    modules_or_boundaries: "scripts/lib/wf-trial-interleaved-four-phase.inc.sh; scripts/run-traditional-four-phase-agentstream.sh; tools/bootstrap/lib/wf-trial-tracker-shape.mjs; tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    tied_tokens_new:
+      - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+      - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+      - "IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+    citdp_id: "CITDP-REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+    status: "implemented"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "False positive session_id parsed from unrelated stderr noise in per-turn capture file"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "1794974815 live run failed on RETURN trap despite four-phase batch exit 0"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "tied-project/working/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE/evidence/debug-handoff-1794974815-interleaved-return-trap.md"
+      falsification_questions:
+        - "Does dual-stream parse still miss session_id when both streams are empty but orchestrator stderr has id?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Shell capture and parser only; no disposable client mutation beyond existing interleaved seed."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs (SC-WF-IRC-01, SC-WF-IRC-04)"
+      - "tools/bootstrap/lib/wf-trial-tracker-shape.test.mjs (SC-WF-IRC-02)"

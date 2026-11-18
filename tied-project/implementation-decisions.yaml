@@ -3936,6 +3936,22 @@ IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT:
       - "REQ-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_SEQUENTIAL_PROCESS_TRANSCRIPT.yaml"
   status: "Active"
+IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+    requirements:
+      - "REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE.yaml"
+  status: "Active"
+IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN:
+  cross_references:
+    architecture_decisions:
+      - "ARCH-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+    requirements:
+      - "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN.yaml"
+  status: "Active"
 IMPL-WF_TRIAL_SUMMARIES_PUBLISH:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_SUMMARIES_PUBLISH.yaml"
   files_affected:

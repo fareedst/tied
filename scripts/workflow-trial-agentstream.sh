@@ -249,7 +249,13 @@ GATE_EXIT=0
 STRICT_CLOSEOUT_EXIT=0
 if ((DRY_RUN == 0)); then
   wf_trial_abort_signal_apply_workspace "$WORKSPACE"
-  materialize_wf_trial_minimal_checklist_tracker "$WORKSPACE" "$REPO_ROOT"
+  # shellcheck source=lib/wf-trial-product-req.inc.sh
+  source "${SCRIPT_DIR}/lib/wf-trial-product-req.inc.sh"
+  if [[ -f "$(wf_trial_interleaved_tracker_marker "$WORKSPACE")" ]]; then
+    printf 'DIAGNOSTIC: WF trial slim checklist tracker: interleaved reconcile already applied (skip post-run copy-if-absent)\n' >&2
+  else
+    materialize_wf_trial_minimal_checklist_tracker "$WORKSPACE" "$REPO_ROOT"
+  fi
   wf_trial_phase_handoff_gate_check "$WORKSPACE" "$REPO_ROOT" || PHASE_HANDOFF_EXIT=$?
   wf_trial_proof_manifest_gate_check "$WORKSPACE" "$WF_NORM" "$REPO_ROOT" || GATE_EXIT=$?
   wf_trial_strict_closeout_preflight_check "$WORKSPACE" "$REPO_ROOT" || STRICT_CLOSEOUT_EXIT=$?

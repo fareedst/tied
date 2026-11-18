@@ -1,0 +1,13 @@
+tracker:
+  implementation_stack_id: "wf-trial-ts-node-test-v1"
+  plan_phase: "pre-implementation"
+  request_token: "REQ-SEMVER_COMPARATOR"
+  steps:
+    - owner_prompt_type: "add-feature"
+      required: true
+      slug: "scaffold-req-citdp-plan"
+      status: "done"
+    - owner_prompt_type: "build-plan"
+      required: true
+      slug: "red-tests-src"
+      status: "done"
