@@ -3168,6 +3168,15 @@ ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
       - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
     requirements:
       - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
+  cross_references:
+    implementation:
+      - "IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+    requirements:
+      - "REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+  decision: "Union disposable slim checklist slugs into canonical slug validation when workflow_trial_disposable is true; machine-closeout exit is a separate orchestrator layer after four-phase subprocess success."
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT.yaml"
+  status: "accepted"
 ARCH-WF_TRIAL_EVALUATION_GUIDE:
   cross_references:
     implementation:

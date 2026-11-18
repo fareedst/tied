@@ -21,6 +21,13 @@ export const PSEUDOCODE_CHAIN_SLUGS = [
 ] as const;
 
 let cachedSlugs: Set<string> | null = null;
+let cachedDisposableSlugs: Set<string> | null = null;
+
+const DEFAULT_DISPOSABLE_TEMPLATE_REL = path.join(
+  "tied-bundle",
+  "templates",
+  "wf-trial-minimal-checklist-tracker.yaml",
+);
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -72,4 +79,56 @@ export function loadCanonicalChecklistSlugs(checklistPath?: string): Set<string>
 
 export function resetCanonicalChecklistSlugCache(): void {
   cachedSlugs = null;
+}
+
+function resolveDefaultDisposableChecklistTemplatePath(): string | undefined {
+  let dir = process.cwd();
+  for (let i = 0; i < 12; i += 1) {
+    const candidate = path.join(dir, DEFAULT_DISPOSABLE_TEMPLATE_REL);
+    if (existsSync(candidate)) return candidate;
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return undefined;
+}
+
+function slugsFromChecklistStepsDoc(doc: Record<string, unknown>): Set<string> {
+  const slugs = new Set<string>();
+  if (Array.isArray(doc.steps)) {
+    for (const step of doc.steps) {
+      if (isRecord(step) && typeof step.slug === "string" && step.slug.trim()) {
+        slugs.add(step.slug.trim());
+      }
+    }
+  }
+  return slugs;
+}
+
+// [IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] [ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] — How: parse slim WF trial template step slugs for disposable registry union.
+export function loadWfTrialDisposableChecklistSlugs(templatePath?: string): Set<string> {
+  if (cachedDisposableSlugs && !templatePath) return cachedDisposableSlugs;
+  const resolved = templatePath ?? resolveDefaultDisposableChecklistTemplatePath();
+  if (!resolved) {
+    return new Set<string>();
+  }
+  const doc = yaml.load(readFileSync(resolved, "utf8")) as Record<string, unknown>;
+  const slugs = slugsFromChecklistStepsDoc(doc);
+  if (!templatePath) cachedDisposableSlugs = slugs;
+  return slugs;
+}
+
+export function resetWfTrialDisposableChecklistSlugCache(): void {
+  cachedDisposableSlugs = null;
+}
+
+// [IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] — How: union methodology + disposable slugs when tracker carries workflow_trial_disposable.
+export function resolveCanonicalSlugRegistryForTracker(tracker: unknown): Set<string> {
+  const base = loadCanonicalChecklistSlugs();
+  if (!isRecord(tracker) || tracker.workflow_trial_disposable !== true) {
+    return base;
+  }
+  const disposable = loadWfTrialDisposableChecklistSlugs();
+  if (disposable.size === 0) return base;
+  return new Set([...base, ...disposable]);
 }

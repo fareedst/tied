@@ -1,0 +1,48 @@
+CITDP-REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
+  change_definition:
+    current_behavior: "validateCanonicalSlugs loads agent-req-implementation-checklist.yaml only; disposable slim trackers use red-tests and implement-code; gates emit invalid_slug at verification/close_out. Orchestrator exit_code 0 when trial-workflow-interaction-inventory reports close_out incomplete."
+    desired_behavior: "When workflow_trial_disposable is true, union slim template slugs into gate validation; slim template seeds sub-adversarial rationale; default-on wf_trial_machine_closeout_exit_check after four-phase success."
+    non_goals:
+      - "Auto-complete pending tracker steps without agent action"
+      - "Integrated-depth pseudocode gate policy changes"
+      - "Rename disposable slugs to unit-test-red / unit-test-green"
+    success_criteria:
+      - "Live WF-01 satisfies SC-WF-DGA-06 (machine complete or honest shell exit)"
+      - "SC-WF-DGA-01..05 green in bootstrap/MCP tests"
+    unchanged_behavior: "Store REQ trackers without workflow_trial_disposable use methodology slug registry only."
+  impact_analysis:
+    modules_or_boundaries: "mcp-server/src/checklist-slug-registry.ts; mcp-server/src/checklist-validator.ts; scripts/lib/wf-trial-machine-closeout-exit.inc.sh; scripts/workflow-trial-agentstream.sh; tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+      - "IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+      - "REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+    citdp_id: "CITDP-REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+    status: "accepted"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Union registry accidentally accepts prompt-type slugs on disposable clients"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "1794975372 split signal persisted after slim inter-turn reconcile"
+      evidence_references:
+        - "docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-01-claudehaiku55low-1794975372-wf-agentstream-wf-01-claude-claudehaiku55low.md"
+        - "tied-project/working/REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT/evidence/fixture-disposable-tracker-1794975372.yaml"
+      falsification_questions:
+        - "Does slug union without rationale seed still block close_out on minimal disposable cells?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "MCP + shell contract tests; single live matrix cell for SC-WF-DGA-06."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "node --test tools/bootstrap/lib/wf-trial-disposable-slug-registry.test.mjs"
+    unit:
+      - "node --test mcp-server/src/checklist-pseudocode-gate.test.ts"

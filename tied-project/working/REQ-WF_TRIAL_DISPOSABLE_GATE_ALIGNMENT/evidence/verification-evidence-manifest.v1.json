@@ -1,0 +1,28 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "request_token": "REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT",
+  "generated_at": "2026-11-18T05:30:00.000Z",
+  "commands": [
+    {
+      "label": "checklist-pseudocode-gate",
+      "command": "cd mcp-server && npx tsx --test src/checklist-pseudocode-gate.test.ts",
+      "exit_code": 0,
+      "notes": "SC-WF-DGA-01 SC-WF-DGA-03 disposable slug union"
+    },
+    {
+      "label": "wf-trial-disposable-slug-registry",
+      "command": "node --test tools/bootstrap/lib/wf-trial-disposable-slug-registry.test.mjs",
+      "exit_code": 0,
+      "notes": "SC-WF-DGA-01 SC-WF-DGA-02 template rationale"
+    },
+    {
+      "label": "workflow-trial-machine-closeout",
+      "command": "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs",
+      "exit_code": 0,
+      "notes": "SC-WF-DGA-04 SC-WF-DGA-05 machine closeout tests (3 pre-existing interleaved failures excluded — same as prior store baseline)"
+    }
+  ],
+  "open_criteria": [
+    "SC-WF-DGA-06 live workflow_trial_range — sponsor follow-up"
+  ]
+}

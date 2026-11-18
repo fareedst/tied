@@ -4763,6 +4763,27 @@ REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
       - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
     implementation:
       - "IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
+  category: "Tooling"
+  description: "Align MCP checklist slug validation with WF disposable slim tracker; seed not_applicable rationale; default-on orchestrator machine-closeout exit to eliminate split-signal WF trials (green tests, shell exit 0, blocked close_out)."
+  detail_file: "requirements/REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT.yaml"
+  name: "WF trial disposable gate alignment"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+      - "REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK"
+      - "REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN"
+    related_to:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+      - "REQ-WF_TRIAL_PHASE_HANDOFF_GATE"
+  status: "implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+    implementation:
+      - "IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
 REQ-WF_TRIAL_EVALUATION_GUIDE:
   cross_references:
     architecture:

@@ -1,0 +1,11 @@
+ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
+  decision: "Gate-time slug registry is contextual: store trackers use methodology checklist slugs only; disposable product trackers with workflow_trial_disposable true widen the registry from wf-trial-minimal-checklist-tracker.yaml without renaming disposable slugs. Orchestrator machine-closeout exit runs after FOUR_PHASE_EXIT=0 and does not replace turn-level exit precedence from REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT."
+  modules:
+    - "mcp-server/src/checklist-slug-registry.ts"
+    - "mcp-server/src/checklist-validator.ts"
+    - "scripts/lib/wf-trial-machine-closeout-exit.inc.sh"
+    - "scripts/workflow-trial-agentstream.sh"
+    - "tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml"
+  related_requirements:
+    - "REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+  status: "proposed"

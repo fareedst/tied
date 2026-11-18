@@ -1,0 +1,9 @@
+feat(wf-trial): disposable gate slug union and machine closeout exit
+
+Align MCP validateCanonicalSlugs with slim disposable trackers and add
+default-on wf_trial_machine_closeout_exit_check after four-phase success.
+
+REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT
+IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT
+
+Close_out allowed (minimal). SC-WF-DGA-06 live WF deferred.

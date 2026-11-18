@@ -1,0 +1,14 @@
+DIAGNOSTIC: TIED_RUNTIME_IGNORED_SHELL_ENV: global path env ignored; use .cursor/mcp.json and ./tied-install.sh --refresh
+{
+  "allowed": false,
+  "blocking": true,
+  "depth": "minimal",
+  "diagnostics": [
+    "missing_adversarial_evidence_references",
+    "missing_counterexamples",
+    "missing_disconfirming_observations",
+    "missing_falsification_questions"
+  ],
+  "ok": false,
+  "phase": "pre_implementation"
+}

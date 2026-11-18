@@ -142,6 +142,7 @@ wf_trial_agentstream_print_help() {
   _wf_help_note "Phase handoff gate default on · WF_TRIAL_SKIP_PHASE_HANDOFF_GATE=1"
   _wf_help_note "Inter-turn slim tracker reconcile default on · WF_TRIAL_SKIP_INTERLEAVED_TRACKER_SEED=1"
   _wf_help_note "WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT=1 (optional post-four-phase)"
+  _wf_help_note "Machine closeout exit default on · WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1"
   _wf_help_note "WF_TRIAL_STRICT_PREFLIGHT=1 · WF_TRIAL_STRICT_RECONCILE=1"
   _wf_help_note "AGENTSTREAM_CURSOR_MODEL_BRACKET_EFFORT=0 disables Cursor slug rewrite · see vocab/agentstream.md"
   _wf_help_out ""

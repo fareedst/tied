@@ -17,6 +17,7 @@ const STACK_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-implementation-stac
 const PROCESS_LOG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-process-log.inc.sh");
 const PROOF_MANIFEST_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-proof-manifest-gate.inc.sh");
 const PHASE_HANDOFF_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-phase-handoff-gate.inc.sh");
+const MACHINE_CLOSEOUT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-machine-closeout-exit.inc.sh");
 const ABORT_SIGNAL_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-abort-signal.inc.sh");
 const OPERATOR_HIGHLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-operator-highlight.inc.sh");
 const PRODUCT_REQ_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-product-req.inc.sh");
@@ -1414,6 +1415,81 @@ ERROR: something else
     );
     assert.match(batch, /wf-trial-add-feature-tracker-adjunct/);
     assert.doesNotMatch(batch, /scaffold custom tracker/i);
+  });
+
+  it("wf_trial_machine_closeout_exit_check fails on incomplete inventory [SC-WF-DGA-04]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-mc-"));
+    try {
+      const token = "REQ-FIXTURE-MC";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        `# handoff\n\nrequest_token: ${token}\n`,
+      );
+      fs.writeFileSync(
+        path.join(ev, "trial-workflow-interaction-inventory.v1.json"),
+        JSON.stringify(
+          { schema: "trial-workflow-interaction-inventory.v1", close_out_turn: { status: "incomplete" } },
+          null,
+          2,
+        ),
+      );
+      const bash = `
+        # shellcheck source=${PRODUCT_REQ_INC}
+        source "${PRODUCT_REQ_INC}"
+        # shellcheck source=${MACHINE_CLOSEOUT_INC}
+        source "${MACHINE_CLOSEOUT_INC}"
+        wf_trial_machine_closeout_exit_check "${tmp}" "${REPO_ROOT}"
+        echo exit=$?
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.notEqual(r.status, 0, r.stdout);
+      assert.match(r.stderr, /close_out_turn/);
+      assert.match(r.stderr, /DIAGNOSTIC: wf_trial_machine_closeout_reason=/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1 passes same fixture [SC-WF-DGA-04]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-mc-skip-"));
+    try {
+      const token = "REQ-FIXTURE-MC-SKIP";
+      const ev = path.join(tmp, "tied-project/working", token, "evidence");
+      fs.mkdirSync(ev, { recursive: true });
+      fs.writeFileSync(
+        path.join(ev, "phase-handoff-add-feature.md"),
+        `# handoff\n\nrequest_token: ${token}\n`,
+      );
+      fs.writeFileSync(
+        path.join(ev, "trial-workflow-interaction-inventory.v1.json"),
+        JSON.stringify(
+          { schema: "trial-workflow-interaction-inventory.v1", close_out_turn: { status: "incomplete" } },
+          null,
+          2,
+        ),
+      );
+      const bash = `
+        # shellcheck source=${PRODUCT_REQ_INC}
+        source "${PRODUCT_REQ_INC}"
+        # shellcheck source=${MACHINE_CLOSEOUT_INC}
+        source "${MACHINE_CLOSEOUT_INC}"
+        WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1 wf_trial_machine_closeout_exit_check "${tmp}" "${REPO_ROOT}"
+        echo exit=$?
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      assert.match(r.stderr, /WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("help documents WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT [SC-WF-DGA-05]", () => {
+    const r = runScript(["--help"]);
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1/);
   });
 
   it("WF_TRIAL_SKIP_PROCESS_LOG=1 skips evidence dir [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]", () => {

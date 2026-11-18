@@ -15,7 +15,7 @@ Finalize **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.m
 | REQ token | Product request token |
 | Verification gate | Path to `gates/verification-*.json` (required when verification ran; orchestrator may fail under `WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT=1`) |
 | sub-adversarial-inquiry-pass | Tracker disposition **`not_applicable`** before RED (not the slug name in `completed` alone) |
-| Tracker slugs updated | List registry slugs only: `persist-implementation-records`, `red-tests`, `implement-code`, `verification-gate`, … — **not** `build-plan` |
+| Tracker slugs updated | List registry slugs only: `persist-implementation-records`, `red-tests`, `implement-code`, `verification-gate`, … — **not** `build-plan` (disposable union: [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT](../../../tied-project/requirements/REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT.yaml)) |
 | Manifest | `verification-evidence-manifest.v1.json` |
 | RED evidence | Paths to `quality-manifest/*-red.*` if captured; else explicit “RED not archived” |
 | Tracker | Checklist slugs **completed** vs **pending** |

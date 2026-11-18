@@ -3788,6 +3788,14 @@ IMPL-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE:
       - "ARCH-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
     requirements:
       - "REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE"
+IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+    requirements:
+      - "REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT.yaml"
+  status: "implemented"
 IMPL-WF_TRIAL_EVALUATION_GUIDE:
   cross_references:
     architecture:

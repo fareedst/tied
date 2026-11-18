@@ -1,0 +1,14 @@
+REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
+  satisfaction_criteria:
+    - criterion: "Live WF-01 Haiku low cell yields machine complete close_out or orchestrator exit_code not 0 with DIAGNOSTIC machine-closeout reason (no silent split)."
+      id: "SC-WF-DGA-06"
+    - criterion: "Slim template seeds rationale on sub-adversarial-inquiry-pass; default materialize/reconcile does not emit missing_not_applicable_policy_or_rationale."
+      id: "SC-WF-DGA-02"
+    - criterion: "Unit tests prove non-disposable trackers still reject unknown slugs (Wave 2 invalid_slug regression)."
+      id: "SC-WF-DGA-03"
+    - criterion: "validateCanonicalSlugs unions wf-trial-minimal-checklist-tracker.yaml slugs when workflow_trial_disposable is true; verification and close_out gates do not emit invalid_slug:red-tests or invalid_slug:implement-code on completed disposable trackers at minimal depth."
+      id: "SC-WF-DGA-01"
+    - criterion: "wf_trial_machine_closeout_exit_check returns non-zero when close_out_turn.status is incomplete or no gates/close_out-*.json with allowed true (default on; WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1 opt-out)."
+      id: "SC-WF-DGA-04"
+    - criterion: "workflow-trial-agentstream-sh.test.mjs covers hook ordering after FOUR_PHASE_EXIT=0 and respects REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT precedence."
+      id: "SC-WF-DGA-05"

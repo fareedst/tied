@@ -11,6 +11,7 @@ import { buildMutationCacheReport, mutationCacheBlocksVerification } from "./mut
 import {
   loadCanonicalChecklistSlugs,
   PSEUDOCODE_GATE_SLUG,
+  resolveCanonicalSlugRegistryForTracker,
 } from "./checklist-slug-registry.js";
 import { validateMethodologySurfacePairingGate } from "./methodology-conformance-effectiveness-pairing/pairing-gate.js";
 import { validateMethodologySurfaceExperimentGate } from "./methodology-surface-experiment-gate/gate.js";
@@ -1156,7 +1157,8 @@ export function validateCanonicalSlugs(input: {
   tracker: unknown;
   canonicalSlugs?: Set<string>;
 }): ValidationResult {
-  const registry = input.canonicalSlugs ?? loadCanonicalChecklistSlugs();
+  const registry =
+    input.canonicalSlugs ?? resolveCanonicalSlugRegistryForTracker(input.tracker);
   if (registry.size === 0) return { ok: true, diagnostics: [] };
   const diagnostics: string[] = [];
   for (const slug of collectTrackerSlugs(input.tracker)) {

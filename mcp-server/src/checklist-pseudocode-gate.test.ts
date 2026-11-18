@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
+
+import yaml from "js-yaml";
 
 import { REPORT_SCHEMA_VERSION } from "./analysis/pseudocode-ir.js";
 import { PSEUDOCODE_GATE_SLUG } from "./checklist-slug-registry.js";
@@ -195,6 +200,31 @@ describe("Wave 2 pseudocode gate enforcement [REQ-PSEUDOCODE_STATIC_ANALYSIS]", 
     });
     assert.equal(gate.allowed, false);
     assert.ok(gate.diagnostics.some((item) => item.startsWith("invalid_slug:")));
+  });
+});
+
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+const DISPOSABLE_TRACKER_FIXTURE = path.join(
+  REPO_ROOT,
+  "tied-project/working/REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT/evidence/fixture-disposable-tracker-1794975372.yaml",
+);
+
+// [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] [IMPL-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] — disposable slug registry union.
+describe("Disposable gate slug union [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT]", () => {
+  it("SC-WF-DGA-01 accepts red-tests and implement-code on disposable tracker", () => {
+    const tracker = yaml.load(readFileSync(DISPOSABLE_TRACKER_FIXTURE, "utf8"));
+    const result = validateCanonicalSlugs({ tracker });
+    assert.equal(result.ok, true, result.diagnostics.join("; "));
+  });
+
+  it("SC-WF-DGA-03 rejects red-tests without workflow_trial_disposable flag", () => {
+    const result = validateCanonicalSlugs({
+      tracker: {
+        steps: [completedStep("red-tests")],
+      },
+    });
+    assert.equal(result.ok, false);
+    assert.ok(result.diagnostics.includes("invalid_slug:red-tests"));
   });
 });
 

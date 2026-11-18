@@ -11,7 +11,7 @@ REQ-WF_TRIAL_MINIMAL_CHECKLIST_PLAYBOOK:
       id: "SC-WF-CLP-05"
     - criterion: "prompt-shared wf-trial-checklist-gates-adjunct.md gives numbered tied-cli/MCP gate script for turns 2-4."
       id: "SC-WF-CLP-02"
-    - criterion: "tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml lists minimal greenfield slugs and forbids prompt-type slugs in execution_evidence.completed."
+    - criterion: "tied-bundle/templates/wf-trial-minimal-checklist-tracker.yaml lists minimal greenfield slugs and forbids prompt-type slugs in execution_evidence.completed. When workflow_trial_disposable is true, slim slugs (e.g. red-tests, implement-code) are gate-valid via disposable slug union ([REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT])."
       id: "SC-WF-CLP-01"
     - criterion: "traditional-four-phase-agentstream.yaml and wf-trial-agent-preload-contract.yaml reference slim tracker and adjunct."
       id: "SC-WF-CLP-03"
