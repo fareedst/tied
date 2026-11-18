@@ -13,7 +13,7 @@
 | --- | --- |
 | Machine (tests) | 27/27 bootstrap contract tests green |
 | Process (gate) | close_out allowed; receipt under `tied-bundle/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/gates/` |
-| Ledger (commit) | see post-commit SHA below |
+| Ledger (commit) | `58f94114` |
 
 ## Gitignore note
 

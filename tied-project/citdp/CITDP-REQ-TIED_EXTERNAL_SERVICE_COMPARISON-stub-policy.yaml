@@ -38,7 +38,7 @@ CITDP-REQ-TIED_EXTERNAL_SERVICE_COMPARISON-stub-policy:
     tied_tokens_new: []
   leap_feedback:
     divergences_from_analysis: null
-    record_status: "implement"
+    record_status: "complete"
     tied_stack_updates_required:
       - "REQ satisfaction criterion SC-ESC-NO-SOURCE-COPY"
       - "ARCH decision stub redistribution boundary"

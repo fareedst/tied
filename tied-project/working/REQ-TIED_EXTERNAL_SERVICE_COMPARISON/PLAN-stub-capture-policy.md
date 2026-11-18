@@ -11,7 +11,7 @@
 | **Test strategy** | [test-strategy-stub-capture-policy.md](test-strategy-stub-capture-policy.md) |
 | **Retrofit inventory** | [evidence/retrofit-inventory.md](evidence/retrofit-inventory.md) |
 | **Refined** | 2026-11-17 |
-| **plan_phase** | `post-build` (implementation landed; close-out deferred) |
+| **plan_phase** | `close_out_complete` |
 | **depth_tier / gate_policy** | `minimal` / `advisory` |
 | **methodology_surface_change_class** | `prompt_type_workflow` · `surface_ref: external-service-comparison` |
 

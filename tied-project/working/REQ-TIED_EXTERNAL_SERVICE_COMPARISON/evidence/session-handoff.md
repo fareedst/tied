@@ -57,6 +57,7 @@
 
 - 2026-11-17 @refine-plan: Stub capture policy PLAN, CITDP addendum, tracker, retrofit inventory, test strategy, session handoff.
 - 2026-11-17 @build-plan: Skill/template/tests GREEN; article capture retrofit; LEAP REQ/ARCH/IMPL; close-out deferred.
+- 2026-11-17 @close-out: Gate allowed; commit `58f94114`; envelope 0 blocking gaps.
 
 ---
 
@@ -66,7 +67,7 @@
 | --- | --- |
 | workspace_root | `/Users/fareed/Documents/dev/chatgpt/stdd` |
 | TIED_BASE_PATH | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
-| plan_phase | post-build |
+| plan_phase | close_out_complete |
 
 ---
 
@@ -78,4 +79,4 @@
 | depth_tier | minimal |
 | gate_policy | advisory |
 
-**Do next:** `@close-out` on stub-capture-policy when sponsor wants traceable commit; verification gate optional (minimal depth).
+**Do next:** none for stub-capture-policy (complete). Optional: allowlist more `docs/comparisons/onono-*.md` if stubs should ship in git.
