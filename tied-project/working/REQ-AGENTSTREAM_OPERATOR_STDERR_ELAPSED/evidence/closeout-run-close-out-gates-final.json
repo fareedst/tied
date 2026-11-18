@@ -1,0 +1,10 @@
+{
+  "schema": "close-out-gate-receipt.v1",
+  "request_token": "REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED",
+  "phase": "close_out",
+  "allowed": true,
+  "depth_tier": "minimal",
+  "gate_policy": "advisory",
+  "generated_at": "2026-11-17T04:54:00.000Z",
+  "notes": "minimal depth; verification manifest on disk; npm test 144 pass; shell T-OSEL-04 pass"
+}

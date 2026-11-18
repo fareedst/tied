@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Agentstream operator stderr elapsed offset ([REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED], [ARCH-AGENTSTREAM_OPERATOR_STDERR_ELAPSED], [IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED])** — `0000 DIAGNOSTIC:` / `DEBUG:` prefixes from orchestrator `TIED_OPERATOR_EPOCH_MS`; shared [`operator-stderr-line.ts`](mcp-server/packages/agentstream/src/operator-stderr-line.ts) and [`operator-stderr-line.inc.sh`](scripts/lib/operator-stderr-line.inc.sh); opt-out `AGENTSTREAM_OPERATOR_ELAPSED=0`. Tests: agentstream npm test (T-OSEL-01..06), [`run-traditional-four-phase-agentstream-sh.test.mjs`](tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs) (T-OSEL-04). Plan: [PLAN.md](tied-project/working/REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED/PLAN.md).
+
+- **PROMPT-WF-01 facilitator readout (Claude Haiku 5.5 low @ 1794975372)** — **4.2.2** interleaved `workflow_trial_agentstream wf-01` live verify ([REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE], [REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN]); [readout](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-01-claudehaiku55low-1794975372-wf-agentstream-wf-01-claude-claudehaiku55low.md). **Split signal** — orchestrator `exit_code: 0`; **31/31** tests uncommitted; slim reconcile **no replace**; close_out **blocked** (slug registry mismatch).
+
 - **WF trial slim tracker inter-turn ([REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN])** — post-turn-1 slim checklist reconcile, SC-WF-IST-01..05, interleaved four-phase driver; close_out **allowed** (minimal, advisory). Live reconcile @ **1794975372**. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN/PLAN.md).
 
 - **WF trial interleaved resume capture ([REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE])** — dual-stream `session_id` parse, RETURN-trap hygiene under `set -u`, SC-WF-IRC-01..04; parent [REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN] inter-turn slim tracker reconcile. Live WF-01 Claude Haiku 5.5 low @ **1794975372** — orchestrator `exit_code: 0` (~274s). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_INTERLEAVED_RESUME_CAPTURE/PLAN.md).

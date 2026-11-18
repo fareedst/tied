@@ -14,6 +14,11 @@ import {
   applyCursorModelForAgent,
   cursorSlugMayMismatchEffort,
 } from "./model-effort.js";
+import {
+  lineLooksLikeOperatorDiagnostic,
+  operatorDebug,
+  operatorDiagnostic,
+} from "./operator-stderr-line.js";
 import { bindLiveExecutorDriver } from "./live-driver-bind.js";
 import { runTiedPreflight, type DryRunStreams } from "./executor-dry-run.js";
 import { runDaeGatePreflight } from "./dae-gate-preflight.js";
@@ -371,13 +376,15 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
   if (cfg.agentHarness === "cursor" && cfg.modelEffort.trim() !== "") {
     const slugModel = applyCursorModelForAgent(cfg.model, cfg.modelEffort);
     if (slugModel !== cfg.model.trim()) {
-      stderrAcc +=
-        `DEBUG: cursor --model effort slug applied: ${JSON.stringify(slugModel)}\n`;
+      stderrAcc += operatorDebug(
+        `cursor --model effort slug applied: ${JSON.stringify(slugModel)}`,
+      );
     } else if (cursorSlugMayMismatchEffort(cfg.model, cfg.modelEffort)) {
-      stderrAcc +=
-        `DIAGNOSTIC: MODEL_EFFORT=${cfg.modelEffort} set but model slug ` +
-        `${JSON.stringify(cfg.model)} may not encode effort ` +
-        `(rewrite disabled, composer blocklist, or Auto model)\n`;
+      stderrAcc += operatorDiagnostic(
+        `MODEL_EFFORT=${cfg.modelEffort} set but model slug ` +
+          `${JSON.stringify(cfg.model)} may not encode effort ` +
+          `(rewrite disabled, composer blocklist, or Auto model)`,
+      );
     }
   }
 
@@ -414,7 +421,9 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     const turnBanner = `\n--- turn ${cfg.firstTurn + i}/${originalTotal}${label}${stub} ---\n`;
     const bannerEmit = emitOperatorLine(turnBanner);
     if (!bannerEmit.ok) {
-      stderrAcc += `DIAGNOSTIC: turn operator flush failed: ${bannerEmit.detail}\n`;
+      stderrAcc += operatorDiagnostic(
+        `turn operator flush failed: ${bannerEmit.detail}`,
+      );
     }
 
     if (usingTracker && t.stepStub.trim() !== "") {
@@ -428,7 +437,9 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
         integratedDepth: cfg.integratedDepth,
       });
       if (envelopeEval.warn && envelopeEval.message) {
-        stderrAcc += `DIAGNOSTIC: envelope pilot warn: ${envelopeEval.message}\n`;
+        stderrAcc += operatorDiagnostic(
+          `envelope pilot warn: ${envelopeEval.message}`,
+        );
       }
       if (envelopeEval.block) {
         stderrAcc += `agentstream: ${envelopeEval.message}\n`;
@@ -510,7 +521,9 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
       try {
         clearActiveTurnMarker(activeMarkerPath);
       } catch (err) {
-        stderrAcc += `DIAGNOSTIC: active-turn marker clear failed: ${String(err)}\n`;
+        stderrAcc += operatorDiagnostic(
+          `active-turn marker clear failed: ${String(err)}`,
+        );
       }
       activeMarkerPath = "";
     };
@@ -562,10 +575,17 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
         stderrAcc += `agentstream: claude driver error: ${turnOutcome.driverError}\n`;
       }
       if (turnOutcome.stderrTail) {
-        if (turnOutcome.stderrTail.startsWith("DIAGNOSTIC: cursor_live_session_oracle")) {
+        if (
+          lineLooksLikeOperatorDiagnostic(
+            turnOutcome.stderrTail,
+            "cursor_live_session_oracle",
+          )
+        ) {
           stderrAcc += turnOutcome.stderrTail;
         } else {
-          stderrAcc += `DIAGNOSTIC: claude stderr: ${turnOutcome.stderrTail.slice(0, 500)}\n`;
+          stderrAcc += operatorDiagnostic(
+            `claude stderr: ${turnOutcome.stderrTail.slice(0, 500)}`,
+          );
         }
       }
       if (liveBinding.driverKind === "cursor") {
@@ -595,7 +615,9 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     const sessionLine = `session_id=${result.sessionId}\n`;
     const sessionEmit = emitOperatorLine(sessionLine);
     if (!sessionEmit.ok) {
-      stderrAcc += `DIAGNOSTIC: turn operator flush failed: ${sessionEmit.detail}\n`;
+      stderrAcc += operatorDiagnostic(
+        `turn operator flush failed: ${sessionEmit.detail}`,
+      );
     }
     running = result.sessionId;
 
@@ -619,9 +641,11 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
             writableIterableSeen: turnOutcome.retriableStderrSeen === true,
           }),
         );
-        stderrAcc += `DIAGNOSTIC: harness trace appended ${tracePath}\n`;
+        stderrAcc += operatorDiagnostic(`harness trace appended ${tracePath}`);
       } catch (err) {
-        stderrAcc += `DIAGNOSTIC: harness trace write failed: ${String(err)}\n`;
+        stderrAcc += operatorDiagnostic(
+          `harness trace write failed: ${String(err)}`,
+        );
       }
     }
 
@@ -674,7 +698,9 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
             target,
           );
           if (cleared.length > 0) {
-            stderrAcc += `DIAGNOSTIC: agentstream_control goto ${target}; cleared tracker slugs: ${cleared.join(", ")}\n`;
+            stderrAcc += operatorDiagnostic(
+              `agentstream_control goto ${target}; cleared tracker slugs: ${cleared.join(", ")}`,
+            );
           }
         } catch (err) {
           clearMarker();
@@ -689,7 +715,9 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
         stderrAcc += `agentstream: control routing failed: ${String(err)}\n`;
         return { stdout: stdoutAcc, stderr: stderrAcc, exitCode: 1 };
       }
-      stderrAcc += `DIAGNOSTIC: agentstream_control goto ${target}: ${parsed.decision.reason ?? ""}\n`;
+      stderrAcc += operatorDiagnostic(
+        `agentstream_control goto ${target}: ${parsed.decision.reason ?? ""}`,
+      );
     }
     clearMarker();
   }

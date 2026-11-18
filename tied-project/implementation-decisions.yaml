@@ -18,6 +18,10 @@ IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
       - "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY"
     requirements:
       - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
+IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED:
+  detail_file: "implementation-decisions/IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED.yaml"
+  name: "Operator stderr elapsed implementation"
+  status: "Implemented"
 IMPL-ASYNC_BINDING_VALIDATOR:
   category: "Implementation"
   detail_file: "implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR.yaml"

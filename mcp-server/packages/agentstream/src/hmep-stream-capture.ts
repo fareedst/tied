@@ -5,6 +5,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { writeOperatorStderrLine } from "./operator-stderr-line.js";
+
 const ORCH_EVIDENCE_REL = path.join(
   "tied-project",
   "working",
@@ -55,8 +57,9 @@ export function appendHmepStreamJsonLine(workspace: string, turnIndex: number, l
     fs.mkdirSync(path.dirname(outPath), { recursive: true });
     fs.appendFileSync(outPath, `${trimmed}\n`, "utf8");
   } catch (err) {
-    process.stderr.write(
-      `DIAGNOSTIC: hmep_stream_capture append failed: ${(err as Error).message}\n`,
+    writeOperatorStderrLine(
+      "DIAGNOSTIC",
+      `hmep_stream_capture append failed: ${(err as Error).message}`,
     );
   }
 }

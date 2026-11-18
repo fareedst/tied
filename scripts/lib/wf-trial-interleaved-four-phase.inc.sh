@@ -50,7 +50,7 @@ wf_trial_four_phase_run_interleaved() {
   }
 
   for order in 1 2 3 4; do
-    printf 'DIAGNOSTIC: WF trial interleaved phase %s/4\n' "$order" >&2
+    operator_stderr_line DIAGNOSTIC "WF trial interleaved phase ${order}/4"
     : >"$stdout_file"
     : >"$stderr_file"
     local -a turn_cmd=("${base_cmd[@]}" --feature-spec-batch-order "$order")
@@ -81,7 +81,7 @@ wf_trial_four_phase_run_interleaved() {
   done
 
   if ((reconcile_ran)); then
-    printf 'DIAGNOSTIC: WF trial interleaved: four-phase batch complete (reconcile after turn 1)\n' >&2
+    operator_stderr_line DIAGNOSTIC "WF trial interleaved: four-phase batch complete (reconcile after turn 1)"
   fi
   _wf_trial_interleaved_rm_capture_files
   return 0

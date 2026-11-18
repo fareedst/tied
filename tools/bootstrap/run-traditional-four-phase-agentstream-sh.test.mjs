@@ -103,6 +103,24 @@ exit "\$ec"
     assert.notEqual(r.status, 127, r.stderr);
   });
 
+  it("T-OSEL-04 dry-run Launch DIAGNOSTIC lines use elapsed offset [REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED]", () => {
+    const workspace = path.join(REPO_ROOT, "tools/bootstrap/.tmp-four-phase-offset-ws");
+    fs.mkdirSync(path.join(workspace, "tied-project"), { recursive: true });
+    const epoch = String(Date.now());
+    const r = runWrapper(["--dry-run"], {
+      WORKSPACE: workspace,
+      MODEL_SLUG: "composer-2.5-fast",
+      FEATURE_REMAINDER: "offset test",
+      TIED_OPERATOR_EPOCH_MS: epoch,
+    });
+    assert.match(
+      r.stderr,
+      /[0-9]{4} DIAGNOSTIC: harness=/,
+      r.stderr,
+    );
+    assert.match(r.stderr, /[0-9]{4} DIAGNOSTIC: batch=/, r.stderr);
+  });
+
   it("--help does not require WORKSPACE", () => {
     const r = runWrapper(["-h"]);
     assert.equal(r.status, 0, r.stderr);

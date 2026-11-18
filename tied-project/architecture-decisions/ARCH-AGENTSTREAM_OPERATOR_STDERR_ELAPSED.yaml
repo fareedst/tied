@@ -1,0 +1,8 @@
+ARCH-AGENTSTREAM_OPERATOR_STDERR_ELAPSED:
+  context: "WF trial facilitators need monotonic second offsets across interleaved agentstream subprocesses."
+  decision: "Shared orchestrator epoch (TIED_OPERATOR_EPOCH_MS); TS operator-stderr-line.ts and bash operator-stderr-line.inc.sh format at emission time; plain/color per REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE."
+  traceability:
+    implementation:
+      - "IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED"
+    requirements:
+      - "REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED"

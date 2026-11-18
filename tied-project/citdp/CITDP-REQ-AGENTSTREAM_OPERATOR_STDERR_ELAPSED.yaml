@@ -1,0 +1,23 @@
+CITDP-REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED:
+  change_definition:
+    success_criteria:
+      - "SC-OSEL-COLOR"
+      - "SC-OSEL-ORCH-CLOCK"
+      - "SC-OSEL-PLAIN"
+      - "SC-OSEL-PREFIX"
+      - "SC-OSEL-TEST"
+  current_behavior: "tied agentstream and WF trial shell scripts emit DEBUG: and DIAGNOSTIC: lines without elapsed-second prefix.\nOrchestrator and subprocess logs share no monotonic time axis.\nDEBUG vs DIAGNOSTIC differ only by token text.\n"
+  desired_behavior: "Every agentstream-emitted DEBUG and DIAGNOSTIC line is prefixed with four-digit elapsed whole seconds from TIED_OPERATOR_EPOCH_MS (or process start when unset).\nWF orchestrators set and export one epoch for the full four-phase cell; child agentstream inherits it.\nTTY textured stderr colors offset (dim cyan) and category labels (DEBUG dim yellow; DIAGNOSTIC dim label) per REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.\nPlain mode and AGENTSTREAM_OPERATOR_ELAPSED=0 preserve chainable grep.\n"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-17"
+  related_tokens:
+    - "REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED"
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+    - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  risk_analysis:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  title: "Agentstream operator stderr elapsed offset"

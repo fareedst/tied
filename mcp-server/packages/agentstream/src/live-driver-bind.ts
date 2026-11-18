@@ -12,6 +12,7 @@ import {
 import type { AgentHarnessProfile } from "./harness-select.js";
 import { runAgent, type RunResult } from "./executor-run.js";
 import { runCursorTurnWithRetry } from "./cursor-turn-retry.js";
+import { operatorDiagnostic } from "./operator-stderr-line.js";
 import type { ContextLogPruneHook } from "./jev-context-log-pruning-stream.js";
 import type { JevLiveToolGate } from "./jev-harness-live-tool-gate.js";
 import { selectLiveDriver } from "./live-driver-select.js";
@@ -142,7 +143,7 @@ export function bindLiveExecutorDriver(
       );
       const stderrNote =
         retryOut.exitNormalized === true
-          ? "DIAGNOSTIC: cursor_live_session_oracle exit_normalized=true\n"
+          ? operatorDiagnostic("cursor_live_session_oracle exit_normalized=true")
           : undefined;
       return {
         result: retryOut.result,

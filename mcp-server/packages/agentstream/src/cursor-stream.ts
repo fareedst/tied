@@ -3,6 +3,7 @@
  * [REQ-WF_TRIAL_CURSOR_LIVE_SESSION_ORACLE]
  * EXTRACT_CURSOR_SESSION — Cursor NDJSON session oracle (SC-CURSOR-SESSION-01).
  */
+import { operatorDiagnostic } from "./operator-stderr-line.js";
 
 /** Bounded retries after failed turn (3 attempts total). */
 export const CURSOR_TURN_RETRY_MAX = 2;
@@ -56,11 +57,10 @@ export function formatCursorLiveSessionOracleDiagnostic(input: {
   retriable_stderr_seen: boolean;
   attempt_count: number;
 }): string {
-  return (
-    `DIAGNOSTIC: cursor_live_session_oracle ` +
-    `exit_code=${input.exit_code} ` +
-    `session_captured=${input.session_captured} ` +
-    `retriable_stderr_seen=${input.retriable_stderr_seen} ` +
-    `attempt_count=${input.attempt_count}\n`
+  return operatorDiagnostic(
+    `cursor_live_session_oracle exit_code=${input.exit_code} ` +
+      `session_captured=${input.session_captured} ` +
+      `retriable_stderr_seen=${input.retriable_stderr_seen} ` +
+      `attempt_count=${input.attempt_count}`,
   );
 }

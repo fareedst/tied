@@ -15,6 +15,20 @@ import {
   resolveProjectRootForJev,
   taskSummaryFromCfg,
 } from "./jev-harness-shared.js";
+import { operatorDebug, operatorDiagnostic } from "./operator-stderr-line.js";
+
+function pushOperatorPrefixedLine(lines: string[], line: string): void {
+  const t = line.replace(/\n$/, "");
+  if (t.startsWith("DEBUG: ")) {
+    lines.push(operatorDebug(t.slice("DEBUG: ".length)));
+    return;
+  }
+  if (t.startsWith("DIAGNOSTIC: ")) {
+    lines.push(operatorDiagnostic(t.slice("DIAGNOSTIC: ".length)));
+    return;
+  }
+  lines.push(line.endsWith("\n") ? line : `${line}\n`);
+}
 
 export type HarnessToolEvaluation = {
   decision: string;
@@ -69,37 +83,51 @@ function appendProviderDiagnostics(env: NodeJS.ProcessEnv, lines: string[]): voi
   const fallbackRaw = env.TIED_JEV_LOCAL_FALLBACK?.trim().toLowerCase() ?? "skip";
   const fallback =
     fallbackRaw === "remote" || fallbackRaw === "error" ? fallbackRaw : "skip";
-  lines.push(`DEBUG: jev decision provider=${provider} local_fallback=${fallback}\n`);
+  lines.push(operatorDebug(`jev decision provider=${provider} local_fallback=${fallback}`));
   const remoteReady = (env.JEV_API_KEY ?? "").trim() !== "";
   const bridge = env.TIED_JEV_LOCAL_BRIDGE?.trim() ?? "";
   const localReady = bridge !== "" && path.isAbsolute(bridge);
   lines.push(
-    `DEBUG: jev decision backend: remote_ready=${remoteReady} local_ready=${localReady}\n`,
+    operatorDebug(
+      `jev decision backend: remote_ready=${remoteReady} local_ready=${localReady}`,
+    ),
   );
   if (provider === "auto" && fallback === "remote") {
     lines.push(
-      "DIAGNOSTIC: jev auto mode may egress to remote Jev when local fails (TIED_JEV_LOCAL_FALLBACK=remote)\n",
+      operatorDiagnostic(
+        "jev auto mode may egress to remote Jev when local fails (TIED_JEV_LOCAL_FALLBACK=remote)",
+      ),
     );
   }
   if (provider === "remote" && !remoteReady) {
     lines.push(
-      "DIAGNOSTIC: jev harness: JEV_API_KEY missing — blocking tools (bash/Shell) will fail-closed per jev_unavailable_policy\n",
+      operatorDiagnostic(
+        "jev harness: JEV_API_KEY missing — blocking tools (bash/Shell) will fail-closed per jev_unavailable_policy",
+      ),
     );
   }
   if (provider === "local" && !localReady) {
     lines.push(
-      "DIAGNOSTIC: jev local provider misconfigured — blocking harness tools fail-closed\n",
+      operatorDiagnostic(
+        "jev local provider misconfigured — blocking harness tools fail-closed",
+      ),
     );
   }
 }
 
 function bootstrapLines(cfg: DryRunConfig): string[] {
   const lines: string[] = [];
-  lines.push("DEBUG: jev harness preflight: enabled (AGENTSTREAM_JEV_HARNESS or jev.agentstream_harness)\n");
+  lines.push(
+    operatorDebug(
+      "jev harness preflight: enabled (AGENTSTREAM_JEV_HARNESS or jev.agentstream_harness)",
+    ),
+  );
   appendProviderDiagnostics(process.env, lines);
   if (cfg.skipTiedMcpPreflight) {
     lines.push(
-      "DEBUG: jev harness: runs after static tiedpreflight; does not replace tied_checklist_gate_validate or MCP gates\n",
+      operatorDebug(
+        "jev harness: runs after static tiedpreflight; does not replace tied_checklist_gate_validate or MCP gates",
+      ),
     );
   }
   return lines;
@@ -137,14 +165,10 @@ export async function runJevHarnessPreflightLive(
   // Injected deps bypass dist hard-stop (T-CFG unit smoke only).
   const lines: string[] = [];
   const append = (s: string) => {
-    if (!s.endsWith("\n")) {
-      lines.push(s + "\n");
-    } else {
-      lines.push(s);
-    }
+    pushOperatorPrefixedLine(lines, s);
   };
   for (const line of bootstrapLines(cfg)) {
-    lines.push(line.endsWith("\n") ? line : line + "\n");
+    pushOperatorPrefixedLine(lines, line);
   }
 
   if (!hasInjectedDeps) {

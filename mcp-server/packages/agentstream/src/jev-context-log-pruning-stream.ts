@@ -13,6 +13,7 @@ import {
   resolveJevHarnessDistStoreRoot,
   resolveProjectRootForJev,
 } from "./jev-harness-shared.js";
+import { operatorDiagnostic, writeOperatorStderrLine } from "./operator-stderr-line.js";
 
 export type StreamToolResultBody = {
   tool: string;
@@ -115,15 +116,17 @@ export async function createContextLogPruneHook(
   }
   const storeRoot = resolveJevHarnessDistStoreRoot(cfg, process.env);
   if (!storeRoot) {
-    process.stderr.write(
-      "DIAGNOSTIC: context log pruning enabled but mcp-server/dist/jev/context-log-pruner.js missing — run: ./build-workspace.sh from the TIED store\n",
+    writeOperatorStderrLine(
+      "DIAGNOSTIC",
+      "context log pruning enabled but mcp-server/dist/jev/context-log-pruner.js missing — run: ./build-workspace.sh from the TIED store",
     );
     return null;
   }
   const modPath = contextLogPrunerDistPath(storeRoot);
   if (!fs.existsSync(modPath)) {
-    process.stderr.write(
-      "DIAGNOSTIC: context log pruning enabled but mcp-server/dist/jev/context-log-pruner.js missing — run: ./build-workspace.sh from the TIED store\n",
+    writeOperatorStderrLine(
+      "DIAGNOSTIC",
+      "context log pruning enabled but mcp-server/dist/jev/context-log-pruner.js missing — run: ./build-workspace.sh from the TIED store",
     );
     return null;
   }
@@ -142,9 +145,10 @@ export async function createContextLogPruneHook(
         arm: "pruner_jev_on",
         jevConfig: { apiKey },
       });
-      const diagnostic =
-        `DIAGNOSTIC: context log prune: tool output lines ${metrics.input_lines}→${metrics.output_lines} ` +
-        `bytes ${metrics.input_bytes}→${metrics.output_bytes}\n`;
+      const diagnostic = operatorDiagnostic(
+        `context log prune: tool output lines ${metrics.input_lines}→${metrics.output_lines} ` +
+          `bytes ${metrics.input_bytes}→${metrics.output_bytes}`,
+      );
       return { text, diagnostic };
     },
   };

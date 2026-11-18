@@ -3,6 +3,7 @@
 # [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE]
 # [REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT] [IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT]
 # [REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN] [IMPL-WF_TRIAL_SLIM_TRACKER_INTER_TURN]
+# [REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED] [IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED]
 # Texture aligned with tools/bootstrap/lib/console.mjs; see docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml
 set -euo pipefail
 
@@ -118,15 +119,18 @@ _warn() {
   printf '%s\n' "${_YL}WARN:${_R} $*" >&2
 }
 
+# shellcheck source=lib/operator-stderr-line.inc.sh
+source "${SCRIPT_DIR}/lib/operator-stderr-line.inc.sh"
+
 _diag() {
-  printf '%s\n' "${_D}DIAGNOSTIC:${_R} $*" >&2
+  operator_stderr_line DIAGNOSTIC "$*"
 }
 
 if [[ -n "${REPO_ROOT:-}" ]]; then
   case "${REPO_ROOT}" in
     /*) ;;
     *)
-      printf 'DIAGNOSTIC: REPO_ROOT must be absolute, got: %s\n' "${REPO_ROOT}" >&2
+      operator_stderr_line DIAGNOSTIC "REPO_ROOT must be absolute, got: ${REPO_ROOT}"
       exit 1
       ;;
   esac
@@ -278,6 +282,7 @@ main() {
   done
 
   _texture_init
+  operator_stderr_epoch_init
 
   if ((want_help)); then
     usage

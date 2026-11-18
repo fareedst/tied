@@ -1,0 +1,9 @@
+feat(agentstream): elapsed prefix on operator DEBUG/DIAGNOSTIC stderr
+
+WF trials and tied agentstream emit four-digit second offsets from a
+shared orchestrator clock (TIED_OPERATOR_EPOCH_MS), with CLI texture for
+offset and category labels. Opt-out via AGENTSTREAM_OPERATOR_ELAPSED=0.
+
+REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED
+ARCH-AGENTSTREAM_OPERATOR_STDERR_ELAPSED
+IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED

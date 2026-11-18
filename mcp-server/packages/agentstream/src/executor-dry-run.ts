@@ -26,6 +26,7 @@ import {
 } from "./claude-agent-argv.js";
 import { cursorLiveArgvExtras } from "./cursor-agent-argv.js";
 import { applyCursorModelForAgent } from "./model-effort.js";
+import { operatorDebug, operatorDiagnostic } from "./operator-stderr-line.js";
 
 export type DryRunStreams = {
   stdout: string;
@@ -167,15 +168,17 @@ export function renderDryRun(
 function printTiedPreflightReport(res: ReturnType<typeof analyze>): string[] {
   const lines: string[] = [];
   lines.push(
-    `DEBUG: tied-yaml preflight: mcp.json=${res.mcpJsonPath} TIED_BASE_PATH=${JSON.stringify(res.tiedBasePath)} status=${res.status}\n`,
+    operatorDebug(
+      `tied-yaml preflight: mcp.json=${res.mcpJsonPath} TIED_BASE_PATH=${JSON.stringify(res.tiedBasePath)} status=${res.status}`,
+    ),
   );
   for (const e of res.errors) {
-    lines.push(`DIAGNOSTIC: tied-yaml preflight error: ${e}\n`);
+    lines.push(operatorDiagnostic(`tied-yaml preflight error: ${e}`));
   }
   for (const w of res.warnings) {
-    lines.push(`DIAGNOSTIC: tied-yaml preflight warning: ${w}\n`);
+    lines.push(operatorDiagnostic(`tied-yaml preflight warning: ${w}`));
   }
-  lines.push(`DIAGNOSTIC: ${res.runtimeNotice}\n`);
+  lines.push(operatorDiagnostic(res.runtimeNotice));
   return lines;
 }
 
@@ -222,35 +225,45 @@ function tiedPreflightLocateFailure(
   const lines: string[] = [];
   if (err instanceof Error && err.message === ERR_NOT_FOUND) {
     lines.push(
-      `DIAGNOSTIC: tied-yaml preflight: no .cursor/mcp.json under workspace ${cfg.workspace}\n`,
+      operatorDiagnostic(
+        `tied-yaml preflight: no .cursor/mcp.json under workspace ${cfg.workspace}`,
+      ),
     );
     lines.push(
-      "DIAGNOSTIC: fix: add tied-yaml under mcpServers in .cursor/mcp.json if you use MCP in Cursor, or pass --mcp-json PATH; tied-install.sh installs .cursor/skills/tied-yaml only (no mcp.json)\n",
+      operatorDiagnostic(
+        "fix: add tied-yaml under mcpServers in .cursor/mcp.json if you use MCP in Cursor, or pass --mcp-json PATH; tied-install.sh installs .cursor/skills/tied-yaml only (no mcp.json)",
+      ),
     );
     if (cfg.dryRun) {
       lines.push(
-        "DEBUG: dry-run: would prompt or exit non-zero (use -y or --skip-tied-mcp-preflight to bypass)\n",
+        operatorDebug(
+          "dry-run: would prompt or exit non-zero (use -y or --skip-tied-mcp-preflight to bypass)",
+        ),
       );
       return { exitCode: 0, stderr: lines.join("") };
     }
     if (cfg.assumeTiedMcpYes) {
-      lines.push("DIAGNOSTIC: continuing because -y / --yes was set\n");
+      lines.push(operatorDiagnostic("continuing because -y / --yes was set"));
       return { exitCode: 0, stderr: lines.join("") };
     }
     lines.push(
-      "DIAGNOSTIC: non-interactive session: exiting (use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1)\n",
+      operatorDiagnostic(
+        "non-interactive session: exiting (use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1)",
+      ),
     );
     return { exitCode: 1, stderr: lines.join("") };
   }
   if (err instanceof ErrAmbiguous) {
-    lines.push(`DIAGNOSTIC: ${err.message}\n`);
+    lines.push(operatorDiagnostic(err.message));
     if (cfg.dryRun) {
-      lines.push("DEBUG: dry-run: would exit non-zero (pass --mcp-json PATH)\n");
+      lines.push(
+        operatorDebug("dry-run: would exit non-zero (pass --mcp-json PATH)"),
+      );
       return { exitCode: 0, stderr: lines.join("") };
     }
     return { exitCode: 1, stderr: lines.join("") };
   }
-  lines.push(`DIAGNOSTIC: tied-yaml preflight: ${String(err)}\n`);
+  lines.push(operatorDiagnostic(`tied-yaml preflight: ${String(err)}`));
   if (cfg.dryRun) {
     return { exitCode: 0, stderr: lines.join("") };
   }
@@ -266,19 +279,23 @@ function tiedPreflightConfirm(
   const lines = [prefix];
   if (cfg.dryRun) {
     lines.push(
-      `DEBUG: dry-run: would prompt: ${question.trim()} (use -y or --skip-tied-mcp-preflight to bypass)\n`,
+      operatorDebug(
+        `dry-run: would prompt: ${question.trim()} (use -y or --skip-tied-mcp-preflight to bypass)`,
+      ),
     );
     return { exitCode: 0, stderr: lines.join("") };
   }
   if (cfg.assumeTiedMcpYes) {
-    lines.push("DIAGNOSTIC: continuing because -y / --yes was set\n");
+    lines.push(operatorDiagnostic("continuing because -y / --yes was set"));
     return { exitCode: 0, stderr: lines.join("") };
   }
   if (warningOnly) {
     return { exitCode: 0, stderr: lines.join("") };
   }
   lines.push(
-    "DIAGNOSTIC: non-interactive session: exiting (use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1)\n",
+    operatorDiagnostic(
+      "non-interactive session: exiting (use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1)",
+    ),
   );
   return { exitCode: 1, stderr: lines.join("") };
 }

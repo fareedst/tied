@@ -1,0 +1,8 @@
+IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED:
+  essence_pseudocode_path: "implementation-decisions/IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED-pseudocode.md"
+  implementation_approach: "operator-stderr-line.ts module; migrate agentstream emitters; bash inc wired in four-phase and workflow-trial orchestrators."
+  traceability:
+    architecture:
+      - "ARCH-AGENTSTREAM_OPERATOR_STDERR_ELAPSED"
+    requirements:
+      - "REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED"

@@ -30,6 +30,13 @@ REQ-AGENTSTREAM_CLAUDE_WF_PARITY:
       - "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts"
       - "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts"
       - "tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs"
+REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED:
+  category: "Tooling"
+  description: "Operator stderr elapsed-second prefix for DEBUG/DIAGNOSTIC"
+  detail_file: "requirements/REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED.yaml"
+  name: "Agentstream operator stderr elapsed offset"
+  priority: "P2"
+  status: "Implemented"
 REQ-ASYNC_BOUNDARY_ANALYSIS:
   category: "Non-Functional"
   detail_file: "requirements/REQ-ASYNC_BOUNDARY_ANALYSIS.yaml"

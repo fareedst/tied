@@ -1,0 +1,24 @@
+REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED:
+  related_requirements:
+    depends_on:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    related_to:
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  satisfaction_criteria:
+    - criterion: "Agentstream-emitted DEBUG/DIAGNOSTIC lines use SSSS LEVEL unless AGENTSTREAM_OPERATOR_ELAPSED=0"
+      id: "SC-OSEL-PREFIX"
+    - criterion: "Plain mode keeps numeric prefix without ANSI"
+      id: "SC-OSEL-PLAIN"
+    - criterion: "T-OSEL-01..05 green"
+      id: "SC-OSEL-TEST"
+      metric: "node --test mcp-server/packages/agentstream/src/operator-stderr-line.test.ts; node --test tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs"
+    - criterion: "TTY stderr colors offset and category per CLI texture"
+      id: "SC-OSEL-COLOR"
+    - criterion: "WF orchestrator sets TIED_OPERATOR_EPOCH_MS inherited by child agentstream"
+      id: "SC-OSEL-ORCH-CLOCK"
+  traceability:
+    architecture:
+      - "ARCH-AGENTSTREAM_OPERATOR_STDERR_ELAPSED"
+    implementation:
+      - "IMPL-AGENTSTREAM_OPERATOR_STDERR_ELAPSED"

@@ -15,6 +15,10 @@ ARCH-AGENTSTREAM_CLAUDE_WF_PARITY:
     implements_requirements:
       - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
   status: "Active"
+ARCH-AGENTSTREAM_OPERATOR_STDERR_ELAPSED:
+  detail_file: "architecture-decisions/ARCH-AGENTSTREAM_OPERATOR_STDERR_ELAPSED.yaml"
+  name: "Operator stderr elapsed architecture"
+  status: "Implemented"
 ARCH-ASYNC_ANALYSIS_PASS:
   category: "Architecture"
   detail_file: "architecture-decisions/ARCH-ASYNC_ANALYSIS_PASS.yaml"

@@ -1,0 +1,24 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "request_token": "REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED",
+  "generated_at": "2026-11-17T04:54:00.000Z",
+  "commands": [
+    {
+      "label": "operator-stderr-line",
+      "command": "cd mcp-server/packages/agentstream && npm test",
+      "exit_code": 0,
+      "notes": "144 tests incl operator-stderr-line T-OSEL-01..06"
+    },
+    {
+      "label": "four-phase-shell-offset",
+      "command": "node --test tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs",
+      "exit_code": 0,
+      "notes": "T-OSEL-04 elapsed DIAGNOSTIC prefix"
+    },
+    {
+      "label": "tied_validate_consistency",
+      "command": "MCP tied_validate_consistency",
+      "exit_code": 0
+    }
+  ]
+}

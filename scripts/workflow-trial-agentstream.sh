@@ -5,6 +5,9 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
+# shellcheck source=lib/operator-stderr-line.inc.sh
+source "${SCRIPT_DIR}/lib/operator-stderr-line.inc.sh"
+
 # shellcheck source=lib/wf-trial-agentstream-help.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-agentstream-help.inc.sh"
 if wf_trial_help_argv_is_help_only "$@"; then
@@ -84,6 +87,8 @@ else
   REPO_ROOT="$REPO_ROOT_DEFAULT"
 fi
 [[ -e "${REPO_ROOT}/${MARKER_REL}" ]] || fail "not a TIED store root: ${REPO_ROOT}"
+
+operator_stderr_epoch_init
 
 DRY_RUN=0
 WORKSPACE_ARG=""
@@ -214,7 +219,7 @@ source "${SCRIPT_DIR}/lib/wf-trial-abort-signal.inc.sh"
 if wf_trial_implementation_stack_enabled; then
   wf_trial_apply_implementation_stack "$WORKSPACE" "$REPO_ROOT"
 else
-  printf 'DIAGNOSTIC: WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1; skipping stack seed and WF preload\n' >&2
+  operator_stderr_line DIAGNOSTIC "WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1; skipping stack seed and WF preload"
   materialize_disposable_preload_contract "$WORKSPACE"
 fi
 if wf_trial_proof_manifest_gate_enabled; then
@@ -234,7 +239,7 @@ if [[ "${HARNESS:-cursor}" == "claude" && "$DRY_RUN" -eq 0 ]]; then
     node "$VALIDATION" --client-root "$WORKSPACE" --no-agentstream-dry-run --with-claude-code-interactive-smoke || VALIDATION_EXIT=$?
     wf_trial_handle_claude_validation_exit "$VALIDATION_EXIT" "$WORKSPACE" || fail "Claude client validation preflight blocked (WF_TRIAL_STRICT_PREFLIGHT)"
   else
-    printf 'DIAGNOSTIC: run-tied-claude-client-validation.mjs missing; skip Claude preflight\n' >&2
+    operator_stderr_line DIAGNOSTIC "run-tied-claude-client-validation.mjs missing; skip Claude preflight"
   fi
 fi
 
@@ -252,7 +257,7 @@ if ((DRY_RUN == 0)); then
   # shellcheck source=lib/wf-trial-product-req.inc.sh
   source "${SCRIPT_DIR}/lib/wf-trial-product-req.inc.sh"
   if [[ -f "$(wf_trial_interleaved_tracker_marker "$WORKSPACE")" ]]; then
-    printf 'DIAGNOSTIC: WF trial slim checklist tracker: interleaved reconcile already applied (skip post-run copy-if-absent)\n' >&2
+    operator_stderr_line DIAGNOSTIC "WF trial slim checklist tracker: interleaved reconcile already applied (skip post-run copy-if-absent)"
   else
     materialize_wf_trial_minimal_checklist_tracker "$WORKSPACE" "$REPO_ROOT"
   fi

@@ -13,6 +13,7 @@ import type { DryRunConfig } from "./dry-run-config.js";
 import { trackerRequestTokenFromVars } from "./dry-run-config.js";
 import { findRepoRootFromPath } from "./repo-root.js";
 import { analyze, locateMcpJson } from "./tiedpreflight.js";
+import { operatorDebug, operatorDiagnostic } from "./operator-stderr-line.js";
 
 export type DaeGateSpawnResult = {
   status: number | null;
@@ -143,15 +144,19 @@ function formatGateCheckReport(
 ): string[] {
   const lines: string[] = [];
   lines.push(
-    `DEBUG: dae gate preflight: request_token=${JSON.stringify(requestToken)} exit=${String(spawnResult.status)}\n`,
+    operatorDebug(
+      `dae gate preflight: request_token=${JSON.stringify(requestToken)} exit=${String(spawnResult.status)}`,
+    ),
   );
   const out = spawnResult.stdout.trim();
   if (out !== "") {
-    lines.push(`DEBUG: dae gate preflight stdout: ${out.split("\n")[0]}\n`);
+    lines.push(
+      operatorDebug(`dae gate preflight stdout: ${out.split("\n")[0]}`),
+    );
   }
   const err = spawnResult.stderr.trim();
   if (err !== "") {
-    lines.push(`DIAGNOSTIC: dae gate preflight: ${err}\n`);
+    lines.push(operatorDiagnostic(`dae gate preflight: ${err}`));
   }
   return lines;
 }
@@ -170,25 +175,31 @@ export function runDaeGatePreflight(
   if (cfg.skipTiedMcpPreflight) {
     return {
       exitCode: 0,
-      stderr:
-        "DEBUG: dae gate preflight skipped because tied-yaml MCP preflight is skipped (gate check requires MCP; unset --skip-tied-mcp-preflight / AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT)\n",
+      stderr: operatorDebug(
+        "dae gate preflight skipped because tied-yaml MCP preflight is skipped (gate check requires MCP; unset --skip-tied-mcp-preflight / AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT)",
+      ),
     };
   }
 
   const requestToken = resolveBatchRequestToken(cfg);
   if (requestToken === "") {
-    const msg =
-      "DIAGNOSTIC: dae gate preflight: missing batch request_token (set --checklist-var REQUEST=REQ-… or use --checklist-tracker-yaml with request_token)\n";
+    const msg = operatorDiagnostic(
+      "dae gate preflight: missing batch request_token (set --checklist-var REQUEST=REQ-… or use --checklist-tracker-yaml with request_token)",
+    );
     if (cfg.dryRun) {
       return {
         exitCode: 0,
-        stderr: `${msg}DEBUG: dry-run: would exit 2 (use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT to bypass tied-yaml preflight; disable AGENTSTREAM_DAE_GATE_CHECK / dae.agentstream_gate_check to skip gate check)\n`,
+        stderr:
+          msg +
+          operatorDebug(
+            "dry-run: would exit 2 (use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT to bypass tied-yaml preflight; disable AGENTSTREAM_DAE_GATE_CHECK / dae.agentstream_gate_check to skip gate check)",
+          ),
       };
     }
     if (cfg.assumeTiedMcpYes) {
       return {
         exitCode: 0,
-        stderr: `${msg}DIAGNOSTIC: continuing because -y / --yes was set\n`,
+        stderr: msg + operatorDiagnostic("continuing because -y / --yes was set"),
       };
     }
     return { exitCode: 2, stderr: msg };
@@ -202,15 +213,24 @@ export function runDaeGatePreflight(
     const pre = analyze(cfg.workspace, mcpPath);
     tiedBasePath = pre.tiedBasePath;
   } catch (err) {
-    const msg = `DIAGNOSTIC: dae gate preflight: cannot resolve TIED_BASE_PATH (${String(err)})\n`;
+    const msg = operatorDiagnostic(
+      `dae gate preflight: cannot resolve TIED_BASE_PATH (${String(err)})`,
+    );
     if (cfg.dryRun) {
       return {
         exitCode: 0,
-        stderr: `${msg}DEBUG: dry-run: would exit 2 (use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT)\n`,
+        stderr:
+          msg +
+          operatorDebug(
+            "dry-run: would exit 2 (use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT)",
+          ),
       };
     }
     if (cfg.assumeTiedMcpYes) {
-      return { exitCode: 0, stderr: `${msg}DIAGNOSTIC: continuing because -y / --yes was set\n` };
+      return {
+        exitCode: 0,
+        stderr: msg + operatorDiagnostic("continuing because -y / --yes was set"),
+      };
     }
     return { exitCode: 2, stderr: msg };
   }
@@ -229,18 +249,22 @@ export function runDaeGatePreflight(
 
   if (cfg.dryRun) {
     report.push(
-      "DEBUG: dry-run: would exit non-zero for dae gate preflight (gate check still ran when CLI is available)\n",
+      operatorDebug(
+        "dry-run: would exit non-zero for dae gate preflight (gate check still ran when CLI is available)",
+      ),
     );
     if (status === 2) {
       report.push(
-        "DEBUG: dry-run: misconfig exit 2 — use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT for tied-yaml preflight bypass; unset AGENTSTREAM_DAE_GATE_CHECK / dae.agentstream_gate_check to skip gate check\n",
+        operatorDebug(
+          "dry-run: misconfig exit 2 — use -y, --skip-tied-mcp-preflight, or AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT for tied-yaml preflight bypass; unset AGENTSTREAM_DAE_GATE_CHECK / dae.agentstream_gate_check to skip gate check",
+        ),
       );
     }
     return { exitCode: 0, stderr: report.join("") };
   }
 
   if (status === 2 && cfg.assumeTiedMcpYes) {
-    report.push("DIAGNOSTIC: continuing because -y / --yes was set\n");
+    report.push(operatorDiagnostic("continuing because -y / --yes was set"));
     return { exitCode: 0, stderr: report.join("") };
   }
 

@@ -1,5 +1,13 @@
 # wf-trial-process-log.inc.sh — default-on orchestrator stdout/stderr capture for WF trials.
 # [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]
+# [REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED]
+
+_PROCESS_LOG_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+if ! declare -f operator_stderr_line >/dev/null 2>&1; then
+  # shellcheck source=operator-stderr-line.inc.sh
+  source "${_PROCESS_LOG_SCRIPT_DIR}/operator-stderr-line.inc.sh"
+fi
+unset _PROCESS_LOG_SCRIPT_DIR
 
 WF_TRIAL_PROCESS_LOG_FINALIZED="${WF_TRIAL_PROCESS_LOG_FINALIZED:-0}"
 WF_TRIAL_PROCESS_LOG_MANIFEST="${WF_TRIAL_PROCESS_LOG_MANIFEST:-}"
@@ -91,8 +99,10 @@ try {
 " 2>/dev/null
     )" || true
     if [[ -n "$_wf_meth_ver" ]]; then
-      printf 'DIAGNOSTIC: tied_methodology_version=%s source=orchestrator_resolver (secondary; session evidence file canonical)\n' \
-        "$_wf_meth_ver" >>"$stderr_log"
+      printf '%s\n' "$(
+        operator_stderr_line_format DIAGNOSTIC \
+          "tied_methodology_version=${_wf_meth_ver} source=orchestrator_resolver (secondary; session evidence file canonical)"
+      )" >>"$stderr_log"
     fi
   fi
 

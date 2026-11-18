@@ -14,6 +14,7 @@ import {
   resolveProjectRootForJev,
   taskSummaryFromCfg,
 } from "./jev-harness-shared.js";
+import { operatorDiagnostic } from "./operator-stderr-line.js";
 
 export type StreamToolProposal = {
   tool: string;
@@ -110,9 +111,9 @@ export function formatJevToolGateDiagnostic(
   proposal: StreamToolProposal,
   evaluation: HarnessToolEvaluation,
 ): string {
-  return (
-    `DIAGNOSTIC: jev harness live tool gate: tool=${proposal.tool} ` +
-    `decision=${evaluation.decision} reason=${evaluation.reason}\n`
+  return operatorDiagnostic(
+    `jev harness live tool gate: tool=${proposal.tool} ` +
+      `decision=${evaluation.decision} reason=${evaluation.reason}`,
   );
 }
 

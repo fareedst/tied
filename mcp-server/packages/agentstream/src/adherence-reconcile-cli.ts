@@ -8,6 +8,7 @@ import yaml from "js-yaml";
 
 import { computeProcessGrade } from "./adherence-process-grade.js";
 import { reconcileAdherenceChain, type ReconcileReport } from "./adherence-reconcile.js";
+import { operatorDiagnostic } from "./operator-stderr-line.js";
 
 export type AdherenceReconcileCliOptions = {
   ledger: string;
@@ -91,11 +92,11 @@ export function runAdherenceReconcileCli(args: string[]): {
     if (msg === "tracker_required") {
       return {
         exitCode: 2,
-        stderr: "DIAGNOSTIC: --tracker is required\n",
+        stderr: operatorDiagnostic("--tracker is required"),
         stdout: "",
       };
     }
-    return { exitCode: 2, stderr: `DIAGNOSTIC: ${msg}\n`, stdout: "" };
+    return { exitCode: 2, stderr: operatorDiagnostic(msg), stdout: "" };
   }
 
   let workspace = opts.workspace.trim();
@@ -109,7 +110,7 @@ export function runAdherenceReconcileCli(args: string[]): {
   } catch (err) {
     return {
       exitCode: 2,
-      stderr: `DIAGNOSTIC: citdp load failed: ${String(err)}\n`,
+      stderr: operatorDiagnostic(`citdp load failed: ${String(err)}`),
       stdout: "",
     };
   }
@@ -131,13 +132,13 @@ export function runAdherenceReconcileCli(args: string[]): {
     if (msg.includes("requirements")) {
       return {
         exitCode: 2,
-        stderr: `DIAGNOSTIC: requirements index load failed: ${msg}\n`,
+        stderr: operatorDiagnostic(`requirements index load failed: ${msg}`),
         stdout: "",
       };
     }
     return {
       exitCode: 2,
-      stderr: `DIAGNOSTIC: implementation index load failed: ${msg}\n`,
+      stderr: operatorDiagnostic(`implementation index load failed: ${msg}`),
       stdout: "",
     };
   }
@@ -155,7 +156,7 @@ export function runAdherenceReconcileCli(args: string[]): {
   } catch (err) {
     return {
       exitCode: 2,
-      stderr: `DIAGNOSTIC: reconcile failed: ${String(err)}\n`,
+      stderr: operatorDiagnostic(`reconcile failed: ${String(err)}`),
       stdout: "",
     };
   }
