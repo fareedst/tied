@@ -22,7 +22,7 @@
 
 **Feature commit SHA:** `e4ca6ce9` — `feat(tied): enroll REQ-TIED_AS_OPERATED_BASELINE checklist facet and close out.`
 
-**Handoff / workspace commit SHA:** `bf801e90` — `chore(workspace): AOB handoff, WF-10 readout, clear WIP.`
+**Handoff / workspace commit SHA:** `8c3d725d` — `chore(workspace): AOB handoff, WF-10 readout, clear WIP.`
 
 **Prior base:** `3777a4b4` (manifest `commit` field at verify time; refresh manifest commit on replay if needed)
 
