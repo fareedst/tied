@@ -800,6 +800,14 @@ ARCH-TIED_AGENT_LOADER_REFRESH:
   description: "Store template authority with semver gate and preserve flag"
   detail_file: "architecture-decisions/ARCH-TIED_AGENT_LOADER_REFRESH.yaml"
   name: "Agent loader sync architecture"
+ARCH-TIED_AS_OPERATED_BASELINE:
+  cross_references:
+    - "IMPL-TIED_AS_OPERATED_BASELINE"
+    - "REQ-TIED_AS_OPERATED_BASELINE"
+  description: "RDB working layout and snapshot receipts."
+  name: "As-operated baseline evidence layout"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   cross_references:
     - "ARCH-TIED_STRUCTURE"
@@ -2765,6 +2773,14 @@ IMPL-TIED_AGENT_LOADER_REFRESH:
   description: "agent-loader-sync.mjs wired from db layer and legacy bootstrap"
   detail_file: "implementation-decisions/IMPL-TIED_AGENT_LOADER_REFRESH.yaml"
   name: "Agent loader sync implementation"
+IMPL-TIED_AS_OPERATED_BASELINE:
+  cross_references:
+    - "ARCH-TIED_AS_OPERATED_BASELINE"
+    - "REQ-TIED_AS_OPERATED_BASELINE"
+  description: "Checklist facet and snapshot minimum scanner."
+  name: "As-operated baseline facet implementation"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM:
   cross_references:
     - "ARCH-TIED_BOUNDED_COMPOSITION"
@@ -4135,6 +4151,16 @@ PROC-TEST_STRATEGY:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+PROC-TIED_AS_OPERATED_BASELINE:
+  cross_references:
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_AS_OPERATED_BASELINE"
+  description: "RDB phases 0-7 enrollment vs VRAI; links runbook."
+  detail_file: "null"
+  name: "As-operated baseline process"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
 PROC-TIED_CORPUS_GRAPH_COMPREHENSION:
   cross_references:
     - "PROC-EDPC_COMPREHENSION"
@@ -5128,6 +5154,16 @@ REQ-TIED_AGENT_LOADER_REFRESH:
   description: "Bootstrap syncs client AGENTS.md when loader semver lags store"
   detail_file: "requirements/REQ-TIED_AGENT_LOADER_REFRESH.yaml"
   name: "Agent loader semver sync on install"
+REQ-TIED_AS_OPERATED_BASELINE:
+  cross_references:
+    - "ARCH-TIED_AS_OPERATED_BASELINE"
+    - "IMPL-TIED_AS_OPERATED_BASELINE"
+    - "PROC-TIED_AS_OPERATED_BASELINE"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "RDB phases 0-7 as-operated evidence vs VRAI; checklist facet as_operated_baseline."
+  name: "As-operated baseline (RDB phases 0–7 vs VRAI)"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_ASYNC_METHODOLOGY:
   cross_references:
     - "ARCH-ASYNC_CHECKLIST_INTEGRATION"

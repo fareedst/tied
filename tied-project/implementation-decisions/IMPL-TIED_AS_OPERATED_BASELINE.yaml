@@ -1,0 +1,24 @@
+IMPL-TIED_AS_OPERATED_BASELINE:
+  IMPL-TIED_AS_OPERATED_BASELINE:
+    code_locations:
+      files:
+        - description: "Facet shape and progression validation"
+          path: "mcp-server/src/as-operated-baseline/facet.ts"
+        - description: "Snapshot-A and Snapshot-B filesystem checks"
+          path: "mcp-server/src/as-operated-baseline/snapshot-minimums.ts"
+        - description: "validateChecklistGate integration"
+          path: "mcp-server/src/checklist-validator.ts"
+      functions:
+        - description: "Gate hook for active mode snapshots"
+          file: "mcp-server/src/as-operated-baseline/facet.ts"
+          name: "validateAsOperatedBaselineProgression"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_AS_OPERATED_BASELINE"
+      requirements:
+        - "REQ-TIED_AS_OPERATED_BASELINE"
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    description: "Implements as_operated_baseline tracker facet and RDB snapshot validation at composition-integration and verification-gate."
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_AS_OPERATED_BASELINE-pseudocode.md"
+    name: "As-operated baseline checklist facet"
+    status: "Active"

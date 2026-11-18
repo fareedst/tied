@@ -190,6 +190,33 @@ See [brownfield-intent-elevation.md](brownfield-intent-elevation.md).
 
 ---
 
+## `[PROC-TIED_AS_OPERATED_BASELINE]` As-operated baseline (RDB phases 0–7)
+
+### Purpose
+Enroll **Replacement Discovery Baseline** runbook phases **0–7** as an **as-operated** evidence package—what the implemented system controls at boundaries—distinct from **VRAI** (`tied-project/` REQ/ARCH/IMPL design intent). Phases **8–11** and artifacts **10–13** are **forbidden** as completion criteria for this process.
+
+### Scope
+Checklist Tracker facet `as_operated_baseline` on `[PROC-AGENT_REQ_CHECKLIST]` trackers; filesystem validation under `tied-project/working/{REQ-TOKEN}/replacement-discovery/`. Does not mint RDB record prefixes as semantic tokens; does not promote observed RDB rows to REQ without `[PROC-BROWNFIELD_INTENT_ELEVATION]`.
+
+### Token references
+- `[REQ-TIED_AS_OPERATED_BASELINE]`, `[ARCH-TIED_AS_OPERATED_BASELINE]`, `[IMPL-TIED_AS_OPERATED_BASELINE]`
+- `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]` — `validateChecklistGate` integration
+- Runbook: [replacement-discovery-baseline-runbook.md](../../docs/methodologies/replacement-discovery-baseline-runbook.md) (generic body; not a `[PROC-*]` until separately promoted)
+
+### Modes (`as_operated_baseline.mode`)
+- **`follow_up_only` (default)** — snapshots optional; facet shape validated only
+- **`active`** — **Snapshot-A** required before `composition-integration` completes; **Snapshot-B** (analysis gates G-0–G-7, G-9) before `verification-gate`
+
+### Artifacts
+- Layout and minimums: [as-operated-baseline.md](../../tied-project/vocab/as-operated-baseline.md)
+- Receipts: `evidence/rdb-snapshot-composition-integration-receipt.v1.json`, `evidence/rdb-snapshot-pre-verification-gate-receipt.v1.json`
+- Dogfood shapes: `tied-project/working/DOC-TIED-RDB-ANALYSIS/replacement-discovery/`
+
+### Status
+Active
+
+---
+
 ## `[PROC-CONTEXT_ADAPTIVE_PRACTICE]` Context-adaptive practice orchestration (CASE v1)
 
 ### Purpose

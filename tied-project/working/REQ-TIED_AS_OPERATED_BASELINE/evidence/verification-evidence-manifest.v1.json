@@ -1,0 +1,68 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "aob-close-20261118",
+  "commit": "3777a4b410af24a0bcec46ccb25d9dcd48a20d64",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "aob-mcp-server-test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 59842,
+      "artifacts": [
+        "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/aob-mcp-server-test.stdout.txt",
+        "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/aob-mcp-server-test.stderr.txt"
+      ]
+    },
+    {
+      "id": "aob-as-operated-pattern",
+      "command": [
+        "npm",
+        "test",
+        "--",
+        "--test-name-pattern",
+        "as_operated_baseline"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 54505,
+      "artifacts": [
+        "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/aob-as-operated-pattern.stdout.txt",
+        "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/aob-as-operated-pattern.stderr.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "unit-as-operated-baseline",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "SC-AOB-VALIDATOR",
+      "evidence_method": "command",
+      "result": "passed",
+      "command_or_test": "npm test --prefix mcp-server"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_AS_OPERATED_BASELINE",
+    "IMPL-TIED_AS_OPERATED_BASELINE",
+    "ARCH-TIED_AS_OPERATED_BASELINE"
+  ],
+  "proof_boundaries": [
+    "no-rdb-prefix-semantic-tokens",
+    "read-only-tied-yaml",
+    "working-folder-snapshots-only"
+  ],
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  }
+}

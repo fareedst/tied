@@ -1,0 +1,11 @@
+{
+  "schema_version": "rdb-snapshot-receipt.v1",
+  "request_token": "REQ-TIED_AS_OPERATED_BASELINE",
+  "gate_slug": "composition-integration",
+  "snapshot_tier": "A",
+  "working_root": "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/replacement-discovery",
+  "source": "DOC-TIED-RDB-ANALYSIS",
+  "validated_at": "2026-11-18T19:06:00.000Z",
+  "validator": "validateSnapshotA",
+  "result": "pass"
+}

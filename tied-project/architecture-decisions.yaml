@@ -1780,6 +1780,11 @@ ARCH-TIED_AGENT_LOADER_REFRESH:
       - "REQ-TIED_AGENT_LOADER_REFRESH"
   decision: "Store AGENTS.md template is loader authority; semver compare gates overwrite; preserve flag is explicit brownfield contract."
   detail_file: "architecture-decisions/ARCH-TIED_AGENT_LOADER_REFRESH.yaml"
+ARCH-TIED_AS_OPERATED_BASELINE:
+  description: "working/{REQ}/replacement-discovery layout, snapshot receipts, EDPC/BFIE compose boundaries, checklist validator facet."
+  detail_file: "architecture-decisions/ARCH-TIED_AS_OPERATED_BASELINE.yaml"
+  name: "As-operated baseline evidence layout and checklist facet"
+  status: "Implemented"
 ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   cross_references:
     - "ARCH-TIED_STRUCTURE"

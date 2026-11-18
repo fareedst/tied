@@ -2075,6 +2075,11 @@ IMPL-TIED_AGENT_LOADER_REFRESH:
   decision: "tools/bootstrap/lib/agent-loader-sync.mjs; wired from layers/db.mjs, bootstrap.mjs, install-layers CLI."
   detail_file: "implementation-decisions/IMPL-TIED_AGENT_LOADER_REFRESH.yaml"
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_AGENT_LOADER_REFRESH-pseudocode.md"
+IMPL-TIED_AS_OPERATED_BASELINE:
+  description: "Checklist facet reader, Snapshot-A/B minimum scanner, integration with validateChecklistGate."
+  detail_file: "implementation-decisions/IMPL-TIED_AS_OPERATED_BASELINE.yaml"
+  name: "As-operated baseline checklist facet"
+  status: "Active"
 IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM:
   detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM.yaml"
   name: "Bounded agentstream driver seam"

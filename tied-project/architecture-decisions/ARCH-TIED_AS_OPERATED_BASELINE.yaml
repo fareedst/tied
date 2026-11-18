@@ -1,0 +1,17 @@
+ARCH-TIED_AS_OPERATED_BASELINE:
+  ARCH-TIED_AS_OPERATED_BASELINE:
+    consequences:
+      negative:
+        - "Active mode imposes authoring burden before composition and verification"
+      positive:
+        - "Composable with EDPC and BFIE without duplicate ledgers"
+        - "Reuses checklist gate enforcement stack"
+    context: "Dogfood DOC-TIED-RDB-ANALYSIS @ 06178d55 proves shapes; enrollment adds normative gates without replacement phases 8–11."
+    decision: "As-operated RDB packages live under tied-project/working/{REQ}/replacement-discovery with v1 snapshot receipts; checklist-validator reads as_operated_baseline tracker facet; no project YAML mutation from snapshot validation."
+    name: "As-operated baseline evidence layout and checklist facet"
+    related_implementations:
+      - "IMPL-TIED_AS_OPERATED_BASELINE"
+    related_requirements:
+      - "REQ-TIED_AS_OPERATED_BASELINE"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    status: "Planned"

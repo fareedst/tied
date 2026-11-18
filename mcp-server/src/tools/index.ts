@@ -2227,7 +2227,7 @@ export const allTools = [
           citdp,
           requiredStepSlugs: args.required_step_slugs,
           activation: args.activation as never,
-          evidence: hydration.evidence,
+          evidence: { ...hydration.evidence, projectRoot },
         });
         let gateReceipt: { path: string; hash: string } | undefined;
         if (args.receipt_persistence) {

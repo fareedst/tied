@@ -4,7 +4,9 @@
 
 **Plan:** [replacement-discovery-baseline/PLAN.md](../../tied-project/non-tied-plans/replacement-discovery-baseline/PLAN.md)
 
-**Pilot (declared):** TIED methodology store (`stdd`) self-re-engineering—subject boundaries in PLAN § Stdd pilot.
+**Pilot (declared):** TIED methodology store (`stdd`)—subject boundaries in PLAN § Stdd analysis boundary.
+
+**Program scope (plan):** **Analysis phase only** (runbook phases **0–7**, artifacts **00–09**). Phases **8–11**, successor design, and next-generation product replacement are **deferred** per [PLAN.md § Phase scope gate](../../tied-project/non-tied-plans/replacement-discovery-baseline/PLAN.md).
 
 **Non-claims:** RDB record prefixes (OUT, CAP, CON, EV, …) are **not** TIED semantic tokens. Observed behavior does not become requirements without brownfield intent elevation / sponsor decision.
 

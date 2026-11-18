@@ -1369,3 +1369,56 @@ describe("EASAR engagement facet [REQ-TIED_EASAR_RECOVERY]", () => {
     assert.ok(result.diagnostics.includes("full_engagement_requires_pilot_or_strict_mode"));
   });
 });
+
+// [REQ-TIED_AS_OPERATED_BASELINE] [IMPL-TIED_AS_OPERATED_BASELINE]
+describe("as_operated_baseline checklist gate [REQ-TIED_AS_OPERATED_BASELINE]", () => {
+  const minimalCitdp = {
+    risk_analysis: {
+      adversarial_inquiry: {
+        depth_tier: "minimal",
+        gate_policy: "advisory",
+        counterexamples: ["active without snapshot"],
+        falsification_questions: ["Can verification pass without Snapshot-B?"],
+        disconfirming_observations: ["gate rejects missing tree"],
+        evidence_references: ["as-operated-baseline.test.ts"],
+      },
+    },
+  };
+
+  it("as_operated_baseline follow_up_only skips snapshot enforcement", () => {
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: {
+        as_operated_baseline: { mode: "follow_up_only" },
+        steps: [{ slug: "verification-gate", disposition: "completed", evidence_refs: ["x"] }],
+      },
+      citdp: minimalCitdp,
+      evidence: { projectRoot: "/tmp", trackerSource: "authoritative_file" },
+    });
+    assert.ok(!result.diagnostics.includes("missing_snapshot_pre_verification"));
+  });
+
+  it("as_operated_baseline active blocks verification-gate without Snapshot-B", () => {
+    const result = validateChecklistGate({
+      phase: "verification",
+      tracker: {
+        as_operated_baseline: { mode: "active", working_root: "/does/not/exist" },
+        steps: [{ slug: "verification-gate", disposition: "completed", evidence_refs: ["x"] }],
+      },
+      citdp: minimalCitdp,
+      evidence: { projectRoot: "/tmp", trackerSource: "authoritative_file" },
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.some((d) => d.includes("missing_snapshot")));
+  });
+
+  it("as_operated_baseline rejects invalid mode", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: { as_operated_baseline: { mode: "on" } },
+      citdp: minimalCitdp,
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("invalid_as_operated_mode"));
+  });
+});

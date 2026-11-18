@@ -15,6 +15,10 @@ import {
 } from "./checklist-slug-registry.js";
 import { validateMethodologySurfacePairingGate } from "./methodology-conformance-effectiveness-pairing/pairing-gate.js";
 import { validateMethodologySurfaceExperimentGate } from "./methodology-surface-experiment-gate/gate.js";
+import {
+  validateAsOperatedBaselineFacetShape,
+  validateAsOperatedBaselineProgression,
+} from "./as-operated-baseline/facet.js";
 import { validateEasarEngagementFacet } from "./easar-receipts/engagement-facet.js";
 import { auditMidLaneSponsorDeferral } from "./relationship/sponsor-decision-lane.js";
 
@@ -1086,6 +1090,8 @@ export type ChecklistGateEvidenceInput = {
   charterCompliance?: CharterComplianceInput;
   /** Optional TIED base path for methodology pairing gate (tests). */
   methodologyPairingBasePath?: string;
+  /** Repo root for as_operated_baseline snapshot paths. */
+  projectRoot?: string;
   /** Optional TIED base path for methodology surface experiment gate (tests). */
   methodologySurfaceExperimentBasePath?: string;
 };
@@ -1441,6 +1447,17 @@ export function validateChecklistGate(input: {
   // [IMPL-TIED_EASAR_RECEIPTS] [REQ-TIED_EASAR_RECOVERY] — How: Mode C engagement facet on Tracker when present.
   const engagementResult = validateEasarEngagementFacet(input.tracker);
   if (!engagementResult.ok) diagnostics.push(...engagementResult.diagnostics);
+
+  // [IMPL-TIED_AS_OPERATED_BASELINE] [REQ-TIED_AS_OPERATED_BASELINE] — How: facet shape + active snapshot gates.
+  const aobShape = validateAsOperatedBaselineFacetShape(input.tracker);
+  if (!aobShape.ok) diagnostics.push(...aobShape.diagnostics);
+  const aobProgress = validateAsOperatedBaselineProgression({
+    tracker: input.tracker,
+    phase: input.phase,
+    projectRoot: input.evidence?.projectRoot,
+    requiredStepSlugs: input.requiredStepSlugs,
+  });
+  if (!aobProgress.ok) diagnostics.push(...aobProgress.diagnostics);
 
   const gatePolicy = identityValue(section?.gate_policy);
   let findingAdvisoryDiagnostics: string[] = [];

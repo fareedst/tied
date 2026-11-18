@@ -1,0 +1,97 @@
+{
+  "token": "REQ-TIED_AS_OPERATED_BASELINE",
+  "index_record": {
+    "name": "As-operated baseline (RDB phases 0–7 vs VRAI)",
+    "category": "Functional",
+    "priority": "P1",
+    "status": "Planned",
+    "description": "Enroll Replacement Discovery analysis slice as TIED as-operated evidence with checklist facet and snapshot gates at composition-integration and verification-gate when mode is active."
+  },
+  "detail_record": {
+    "description": "Normative separation of VRAI design intent from as-operated RDB snapshots; mandatory partial and full snapshots when tracker as_operated_baseline.mode is active.",
+    "metadata": {
+      "last_updated": {
+        "author": "refine-plan",
+        "date": "2026-11-18",
+        "reason": "Refine pass enrollment payload"
+      }
+    },
+    "REQ-TIED_AS_OPERATED_BASELINE": {
+      "category": "Functional",
+      "name": "As-operated baseline (RDB phases 0–7 vs VRAI)",
+      "priority": "P1",
+      "status": "Planned",
+      "description": "TIED enrolls runbook phases 0–7 as an as-operated view at control boundaries, distinct from tied-project VRAI. Checklist facet as_operated_baseline supports follow_up_only (default) or active snapshot enforcement.",
+      "rationale": {
+        "why": "Operators need a monitored as-operated baseline during and after implementation; dogfood proved RDB 0–7 without normative TIED gates.",
+        "problems_solved": [
+          "VRAI mistaken for production boundary reality",
+          "No machine-checkable snapshot before composition or verification",
+          "RDB dogfood evidence not LEAP'd into methodology"
+        ],
+        "benefits": [
+          "Explicit VRAI vs as-operated split",
+          "Checklist-gated snapshots when mode active",
+          "Inherited registry shapes from store dogfood"
+        ]
+      },
+      "related_requirements": {
+        "depends_on": [
+          "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        ],
+        "related_to": [
+          "REQ-TIED_BROWNFIELD_INTENT_ELEVATION",
+          "REQ-TIED_EDPC_COMPREHENSION"
+        ]
+      },
+      "satisfaction_criteria": [
+        {
+          "id": "SC-AOB-ENROLL",
+          "criterion": "REQ/ARCH/IMPL/PROC tokens enrolled with traceability.",
+          "metric": "tied_validate_consistency"
+        },
+        {
+          "id": "SC-AOB-MODE",
+          "criterion": "facet mode follow_up_only default; active enforces snapshots.",
+          "metric": "checklist-tracker schema + validator tests"
+        },
+        {
+          "id": "SC-AOB-SNAPSHOT-COMPOSITION",
+          "criterion": "Snapshot-A minimums at composition-integration when active.",
+          "metric": "PLAN Snapshot-A table"
+        },
+        {
+          "id": "SC-AOB-SNAPSHOT-PREVERIFY",
+          "criterion": "Snapshot-B G-0–G-7,G-9 before verification-gate when active.",
+          "metric": "PLAN Snapshot-B table"
+        },
+        {
+          "id": "SC-AOB-VRAI-BOUNDARY",
+          "criterion": "RDB rows do not auto-become REQ; BFIE default report_only.",
+          "metric": "REQ detail + vocab as-operated-baseline.md"
+        },
+        {
+          "id": "SC-AOB-NO-PHASE-8-11",
+          "criterion": "Phases 8–11 forbidden as completion requirements.",
+          "metric": "REQ detail + PROC"
+        },
+        {
+          "id": "SC-AOB-VALIDATOR",
+          "criterion": "checklist-validator tests cover both modes and both slugs.",
+          "metric": "test-strategy.md matrix"
+        }
+      ],
+      "traceability": {
+        "architecture": [
+          "ARCH-TIED_AS_OPERATED_BASELINE"
+        ],
+        "implementation": [
+          "IMPL-TIED_AS_OPERATED_BASELINE"
+        ],
+        "tests": [
+          "mcp-server/src/checklist-validator.test.ts"
+        ]
+      }
+    }
+  }
+}

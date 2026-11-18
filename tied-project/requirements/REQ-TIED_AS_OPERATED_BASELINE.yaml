@@ -1,0 +1,18 @@
+REQ-TIED_AS_OPERATED_BASELINE:
+  description: "Normative separation of VRAI design intent from as-operated RDB snapshots; mandatory partial and full snapshots when tracker as_operated_baseline.mode is active."
+  metadata:
+    last_updated:
+      author: "refine-plan"
+      date: "2026-11-18"
+      reason: "Refine pass enrollment payload"
+  REQ-TIED_AS_OPERATED_BASELINE:
+    status: "Implemented"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_AS_OPERATED_BASELINE"
+    implementation:
+      - "IMPL-TIED_AS_OPERATED_BASELINE"
+    tests:
+      - "mcp-server/src/as-operated-baseline/as-operated-baseline.test.ts"
+      - "mcp-server/src/checklist-validator.test.ts"

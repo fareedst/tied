@@ -1,0 +1,24 @@
+{
+  "tokens": [
+  {
+    "token": "REQ-TIED_AS_OPERATED_BASELINE",
+    "type": "requirement",
+    "description": "As-operated RDB phases 0–7 enrollment vs VRAI"
+    },
+  {
+    "token": "ARCH-TIED_AS_OPERATED_BASELINE",
+    "type": "architecture",
+    "description": "RDB working layout and snapshot receipt architecture"
+    },
+  {
+    "token": "IMPL-TIED_AS_OPERATED_BASELINE",
+    "type": "implementation",
+    "description": "Checklist facet validation and snapshot minimum scanner"
+    },
+  {
+    "token": "PROC-TIED_AS_OPERATED_BASELINE",
+    "type": "process",
+    "description": "Agent procedure linking runbook phases 0–7 to checklist facet"
+    }
+  ]
+}

@@ -2240,6 +2240,13 @@ REQ-TIED_AGENT_LOADER_REFRESH:
       - "IMPL-TIED_AGENT_LOADER_REFRESH"
   description: "Bootstrap syncs client AGENTS.md from store when client loader semver lags store; --preserve-agent-loader retains create-if-absent."
   detail_file: null
+REQ-TIED_AS_OPERATED_BASELINE:
+  category: "Functional"
+  description: "Enroll Replacement Discovery analysis slice as TIED as-operated evidence with checklist facet and snapshot gates at composition-integration and verification-gate when mode is active."
+  detail_file: "requirements/REQ-TIED_AS_OPERATED_BASELINE.yaml"
+  name: "As-operated baseline (RDB phases 0–7 vs VRAI)"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_ASYNC_METHODOLOGY:
   category: "Non-Functional"
   detail_file: "requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml"

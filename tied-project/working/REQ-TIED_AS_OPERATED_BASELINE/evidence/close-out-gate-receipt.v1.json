@@ -1,0 +1,9 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "request_token": "REQ-TIED_AS_OPERATED_BASELINE",
+  "phase": "close_out",
+  "allowed": true,
+  "checked_at": "2026-11-18T19:09:00.000Z",
+  "tracker_path": "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/checklist-tracker.yaml",
+  "citdp_path": "tied-project/citdp/CITDP-REQ-TIED_AS_OPERATED_BASELINE.yaml"
+}
