@@ -18,7 +18,7 @@
 
 ## Commit
 
-*(SHA recorded after traceable-commit)*
+**`c0d31033`** — `feat(comparisons): HackerNoon observability contract Wave 3 intent/verify × TIED`
 
 ## Gitignore hygiene
 

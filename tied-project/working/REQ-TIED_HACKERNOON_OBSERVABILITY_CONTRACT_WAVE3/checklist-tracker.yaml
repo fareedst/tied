@@ -11,7 +11,7 @@ purpose: "Per-request Tracker for REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAV
 request: "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
 request_token: "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
 source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
-status: "close_out_pending"
+status: "close_out_complete"
 steps:
   - disposition: "completed"
     id: "session-bootstrap"
@@ -74,5 +74,8 @@ steps:
     id: "verification-gate"
   - disposition: "completed"
     id: "persist-citdp-record"
-  - disposition: "pending"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3/evidence/traceable-commit-evidence.md"
     id: "traceable-commit"

@@ -106,15 +106,13 @@
 
 ## Completion signals
 
-**Close-out deferred.** Manifest at [verification-evidence-manifest.v1.json](verification-evidence-manifest.v1.json); checklist gates not persisted.
+**Close-out complete.** Commit **`c0d31033`**; gate receipt under `tied-bundle/working/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3/gates/`.
 
 ---
 
 ## Do next
 
-**Optional:** `@close-out` for gate receipts + traceable commit.
-
-**Workflow evidence:** run **Observability receipt contract smoke** via `workflow_dispatch` or PR touching scoped paths.
+**Workflow evidence:** run **Observability receipt contract smoke** via `workflow_dispatch` or PR touching scoped paths (optional CI URL in handoff).
 
 ---
 
@@ -145,3 +143,4 @@ node --test tools/bootstrap/lib/implement-complete-receipt-contract.test.mjs
 | 2026-11-17 | refine-plan | Pass 2 PLAN slices A–J; enrollment schema rules; additive_ci |
 | 2026-11-17 | handoff | Expanded session-handoff; route to @build-plan |
 | 2026-11-17 | build-plan | Slices A–H GREEN; R+A+I; CITDP persisted; workflow added |
+| 2026-11-17 | close-out | `c0d31033`; close_out allowed; envelope gaps 0 |
