@@ -1,0 +1,92 @@
+CITDP-REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  record_identity:
+    change_request_id: "REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-17"
+    title: "Meta Astryx design system Wave 3 — dual-plane agent instruction compose"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  change_definition:
+    current_behavior: "Meta Astryx × TIED comparison (Waves 1–2) and stub capture exist; Wave 3 phased outreach Defer; operators lack a bundle guide for design-system agent plane vs TIED token/gate authority (current records, vibe-tests, AGENTS.md vs REQ/ARCH/IMPL YAML)."
+    desired_behavior: "Committed compose guide, client-development-index pointer, ds-agent-plane operator checklist, harness-platform-taxonomy cross-link, comparison Phase 1 marked Implemented with REQ back-link—without @astryxdesign npm deps, matrix §2 row, or vibe-style agent-inject e2e in v1."
+    non_goals:
+      - "@astryxdesign/* packages as TIED methodology core dependency"
+      - "Astryx vibe-test harness substituting tied_checklist_gate_validate or tied_verify"
+      - "Knowledge current records replacing MCP tied-project/ YAML authority"
+      - "Meta-reported scale or vibe anecdotes as TIED effectiveness proof"
+      - "methodology-composition-matrix §2 row without MCM LEAP (Slice G)"
+      - "Vibe-style probes on bundled AGENTS.md / agent-inject (Slice H) in v1"
+    success_criteria:
+      - "Build-plan satisfies SC-MAA-* per PLAN.md"
+      - "meta-astryx-ds-agent-plane-compose-doc.test.mjs green"
+      - "PLAN slices A–F; G OutOfScope; H Defer"
+    unchanged_behavior:
+      - "Gate authority, MCP YAML path, default agentstream preflight off"
+      - "Comparison body does not mint tokens in prose"
+      - "tied-install agent-inject unchanged unless separate REQ"
+  impact_analysis:
+    methodology_surface_change_class: "none"
+    modules_or_boundaries: "tied-bundle/docs; tied-project/vocab harness-platform-taxonomy; working checklist; docs/comparisons"
+    tied_tokens_new:
+      - "REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+      - "ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+      - "IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    tied_tokens_affected:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Guide mandates @astryxdesign install for every TIED client"
+        - "Vibe pass rates cited as tied_verify substitute"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Matrix §2 row or Slice H vibe e2e shipped without separate REQ"
+        - "current records described as replacing REQ detail files"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3/PLAN.md"
+        - "docs/comparisons/meta-astryx-design-system-vs-tied-agent-management.md"
+      falsification_questions:
+        - "Does every anti-pattern separate vibe-tests from gate receipts?"
+        - "Are Meta scale claims labeled not_measured in guide?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Doc-compose Wave 3; no Astryx packages or vibe harness in stdd core v1."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - id: "QEM-MAA-DOC"
+        proof_boundary: "traceability_structure"
+        evidence_method: "meta-astryx-ds-agent-plane-compose-doc.test.mjs; tied_validate_consistency"
+        applicability: "applicable"
+  leap_feedback:
+    record_status: "complete"
+    divergences_from_analysis: "none"
+  evidence:
+    proof_boundaries:
+      - "traceability_structure"
+      - "human_decision"
+    command_seq:
+      - "pseudocode_validate IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3 gate_mode"
+      - "node --test tools/bootstrap/lib/meta-astryx-ds-agent-plane-compose-doc.test.mjs"
+      - "tied_validate_consistency"
+  test_strategy:
+    documentation_only: true
+    mandatory_order: "RED contract test before guide finalization"
+  completion_criteria:
+    activation:
+      request_token: "REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+      phase: "pre_implementation"
+      scope:
+        - "tied-bundle/docs/meta-astryx-ds-agent-plane-compose.md"
+        - "tied-bundle/docs/client-development-index.md"
+        - "tied-project/working/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3/ds-agent-plane-operator-checklist.md"
+        - "tied-project/vocab/harness-platform-taxonomy.md"

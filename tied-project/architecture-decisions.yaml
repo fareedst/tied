@@ -2480,6 +2480,13 @@ ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION:
   detail_file: "architecture-decisions/ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION.yaml"
   name: "MCP test mcp.json isolation architecture"
   status: "Implemented"
+ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  cross_references:
+    - "IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    - "REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+  detail_file: "architecture-decisions/ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml"
+  name: "Meta Astryx DS agent plane compose architecture"
+  status: "Implemented"
 ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY.yaml"
   name: "Meta-hub representation boundary"

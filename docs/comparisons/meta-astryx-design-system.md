@@ -65,6 +65,7 @@ From README structure themes (**target-repo-observed**):
 
 ## Notes for stdd readers
 
+- Wave 3 compose guide: [meta-astryx-ds-agent-plane-compose.md](../../tied-bundle/docs/meta-astryx-ds-agent-plane-compose.md) ([REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3](../../tied-project/requirements/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml)).
 - Wave 2 **agent-management** mapping: [meta-astryx-design-system-vs-tied-agent-management.md](meta-astryx-design-system-vs-tied-agent-management.md).
 - Distinct from [Google Agent Skills × TIED](google-agent-skills-vs-tied-agent-management.md) (catalog CI) and [Persante SDD × TIED](persante-sdd-skills-vs-tied-agent-management.md) (wiki feature specs).
 - Process template: [external-service-three-wave-comparison-template.md](../../tied-bundle/docs/external-service-three-wave-comparison-template.md).

@@ -1334,6 +1334,15 @@ ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
 ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION:
   category: "architecture"
   description: "MCP test mcp.json isolation"
+ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  cross_references:
+    - "IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    - "REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+  description: "Compose guide in tied-bundle/docs; checklist under working folder"
+  detail_file: "architecture-decisions/ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
 ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Architecture for docs/comparisons methodology composition matrix"
   type: "architecture"
@@ -3365,6 +3374,15 @@ IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
 IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION:
   category: "implementation"
   description: "MCP test mcp.json isolation"
+IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  cross_references:
+    - "ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    - "REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+  description: "meta-astryx-ds-agent-plane-compose-doc.test.mjs and compose guide markers"
+  detail_file: "implementation-decisions/IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
 IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Markdown-only implementation for methodology composition matrix"
   type: "implementation"
@@ -5563,6 +5581,15 @@ REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
 REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
   category: "requirement"
   description: "Isolate MCP test mcp.json fixtures from developer store checkout"
+REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  cross_references:
+    - "ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    - "IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+  description: "Meta Astryx dual-plane compose; matrix §2 row OutOfScope v1"
+  detail_file: "requirements/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
 REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   cross_references:
     - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"

@@ -3461,6 +3461,13 @@ REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
     tests:
       - "mcp-server/src/mcp-http-server.test.ts"
       - "mcp-server/src/test-helpers/client-path-env.test.ts"
+REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  cross_references:
+    - "ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    - "IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+  detail_file: "requirements/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml"
+  name: "Meta Astryx design system Wave 3 compose"
+  status: "Implemented"
 REQ-TIED_META_HUB_REPRESENTATION:
   category: "Tooling"
   description: "Reconcile divergent working CITDP drafts, regenerate corpus map, and expose MCP/CLI meta-hub operator tools on the TIED store."

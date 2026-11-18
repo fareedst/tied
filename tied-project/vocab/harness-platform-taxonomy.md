@@ -97,6 +97,20 @@ HMEP ([`harness-model-eval.md`](harness-model-eval.md)): metrics use **harness +
 
 ---
 
+## Design-system product agent plane (compose)
+
+Some product stacks (e.g. Meta **Astryx** — **agent-ready design system**) ship a **product-local** instruction plane: `AGENTS.md`, CLI docs, **`current`** knowledge records, and offline vibe-tests for UI codegen. That plane is **harness-adjacent** and **not** TIED methodology core.
+
+| Plane | Examples in sponsor language | TIED placement |
+| --- | --- | --- |
+| **Vendor agent harness** | Cursor Agent, Claude Code session | Layer 1 — subprocess + tools |
+| **Product DS agent plane** | `astryx init`, component agent docs | **OutOfRepo** or product repo only; compose with delivery gates |
+| **TIED governance** | Checklist, MCP YAML, `tied_verify` | Layer 3 — platform-adjacent gates |
+
+Compose guide: [meta-astryx-ds-agent-plane-compose.md](../../tied-bundle/docs/meta-astryx-ds-agent-plane-compose.md) ([REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3](../requirements/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml)) · seam: [REQ-TIED_HARNESS_PLATFORM_SEAM](../requirements/REQ-TIED_HARNESS_PLATFORM_SEAM.yaml).
+
+---
+
 ## Distinct from prompt-type **harness profile**
 
 [`prompt-composer.md`](prompt-composer.md) uses **harness profile** for **bounded turn orchestration** of a leaf prompt type (IDE, Task subagent, or agentstream `--harness`). Same English phrase, two scopes:

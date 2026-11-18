@@ -7,7 +7,7 @@
 | **Source URL** | [github.com/meta/astryx](https://github.com/meta/astryx) (MIT, beta — **target-repo-observed** / **Meta-reported**) |
 | **Repo capture (sibling)** | [meta-astryx-design-system.md](meta-astryx-design-system.md) — **reference only** |
 | **Status / date** | Outreach / analysis snapshot, **2026-11-17** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
-| **Executable follow-up** | Wave 3 **Defer** — matrix §2 row, optional `harness-platform-taxonomy` cross-link unless sponsor scopes **`add-feature`** |
+| **Executable follow-up** | Wave 3 Phase 1 **Implemented** — [REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3](../../tied-project/requirements/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml); matrix §2 row + vibe probes still **Defer** |
 | **Distinct from** | [Google Agent Skills × TIED](google-agent-skills-vs-tied-agent-management.md); [Persante SDD × TIED](persante-sdd-skills-vs-tied-agent-management.md); [LangChain harness × TIED](langchain-harness-engineering-vs-tied-agent-management.md); [Cursor harness × TIED](cursor-harness-engineering-vs-tied-agent-management.md); [Open Ontologies × TIED](open-ontologies-repository-vs-tied-agent-management.md); [Furmanov harness-profiler × TIED](afurmanov-harness-profiler-vs-tied-agent-management.md) |
 | **TIED anchors (reference only)** | [AGENTS.md](../../AGENTS.md), [agent-req-implementation-checklist.md](../../tied-bundle/docs/agent-req-implementation-checklist.md), [client-development-index.md](../../tied-bundle/docs/client-development-index.md), [tied-methodology-evaluation-framework.md](../tied-methodology-evaluation-framework.md), [sponsor-agent-relationship.md](../../tied-project/vocab/sponsor-agent-relationship.md), [harness-platform-taxonomy.md](../../tied-project/vocab/harness-platform-taxonomy.md) |
 
@@ -250,7 +250,7 @@ Astryx **records** and **vibe tests** govern **UI product** semantics. TIED **ga
 | Phase | Action | Status |
 | --- | --- | --- |
 | **0** | Wave 1 capture + this analysis + git allowlist | **Done** (2026-11-17) |
-| **1** | Optional one-line in [harness-platform-taxonomy.md](../../tied-project/vocab/harness-platform-taxonomy.md) | **Defer** |
+| **1** | [harness-platform-taxonomy.md](../../tied-project/vocab/harness-platform-taxonomy.md) cross-link + [compose guide](../../tied-bundle/docs/meta-astryx-ds-agent-plane-compose.md) | **Implemented** ([REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3](../../tied-project/requirements/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml)) |
 | **2** | Methodology composition matrix §2 row | **Defer** |
 | **3** | Vibe-style probes for bundled `AGENTS.md` inject | **Defer** (`add-feature`) |
 

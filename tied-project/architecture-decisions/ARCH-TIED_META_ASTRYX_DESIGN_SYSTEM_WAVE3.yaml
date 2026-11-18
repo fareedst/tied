@@ -1,0 +1,21 @@
+ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  decision: "Canonical compose guide in tied-bundle/docs/meta-astryx-ds-agent-plane-compose.md; ds-agent-plane checklist under working folder; harness-platform-taxonomy cross-link; bootstrap contract tests; no @astryxdesign npm dep; matrix §2 row and vibe e2e OutOfScope/Defer v1."
+  implementation_approach:
+    details:
+      - "No Astryx packages in stdd core"
+      - "No vibe-test as tied_verify substitute"
+    summary: "Docs and bootstrap contract tests only."
+  rationale:
+    benefits:
+      - "Meta-reported vs TIED-existing labeling"
+    problems_solved:
+      - "Knowledge records conflated with YAML authority"
+    why: "Compose-don't-replace per Meta Astryx × TIED analysis."
+  related_decisions:
+    see_also:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+  traceability:
+    implementation:
+      - "IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    requirements:
+      - "REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"

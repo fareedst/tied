@@ -3072,6 +3072,13 @@ IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION:
   detail_file: "implementation-decisions/IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION.yaml"
   name: "MCP test mcp.json isolation implementation"
   status: "Implemented"
+IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  cross_references:
+    - "ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    - "REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+  detail_file: "implementation-decisions/IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3.yaml"
+  name: "Meta Astryx DS agent plane compose implementation"
+  status: "Implemented"
 IMPL-TIED_META_HUB_MCP:
   detail_file: "implementation-decisions/IMPL-TIED_META_HUB_MCP.yaml"
   name: "Meta-hub MCP adapters"

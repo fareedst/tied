@@ -1,0 +1,38 @@
+REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3:
+  rationale:
+    benefits:
+      - "Explicit DS agent plane vs TIED token authority"
+      - "Pair-read Agent Skills and Persante rows"
+    problems_solved:
+      - "current records mistaken for REQ detail"
+      - "Vibe pass conflated with tied_verify"
+    why: "Meta Astryx × TIED Wave 2 deferred operator bundle for dual-plane literacy (AGENTS.md, records, vibe-tests vs gates)."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+    related_to: []
+  satisfaction_criteria:
+    - criterion: "client-development-index Quick reads links"
+      id: "SC-MAA-INDEX"
+      metric: "Contract test"
+    - criterion: "Comparison Phase 1 Implemented with REQ back-link"
+      id: "SC-MAA-COMPOSE"
+      metric: "Link audit"
+    - criterion: "ds-agent-plane-operator-checklist committed"
+      id: "SC-MAA-CHECKLIST"
+      metric: "File + link audit"
+    - criterion: "harness-platform-taxonomy cross-link"
+      id: "SC-MAA-TAXONOMY"
+      metric: "Marker in contract test"
+    - criterion: "meta-astryx-ds-agent-plane-compose.md passes contract test"
+      id: "SC-MAA-GUIDE"
+      metric: "meta-astryx-ds-agent-plane-compose-doc.test.mjs"
+    - criterion: "tied_validate_consistency after implement"
+      id: "SC-MAA-TRACE"
+      metric: "tied_validate_consistency"
+  traceability:
+    architecture:
+      - "ARCH-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"
+    implementation:
+      - "IMPL-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3"

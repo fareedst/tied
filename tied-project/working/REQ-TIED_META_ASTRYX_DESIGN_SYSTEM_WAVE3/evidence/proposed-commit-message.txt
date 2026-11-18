@@ -1,0 +1,3 @@
+feat(comparisons): Meta Astryx design system Wave 3 compose × TIED
+
+Add dual-plane compose guide, operator checklist, client index and taxonomy cross-link, comparison Phase 1 reciprocals, R+A+I traceability, and bootstrap doc contract tests—without matrix §2 row or vibe probes in v1.

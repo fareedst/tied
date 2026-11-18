@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Meta Astryx design system Wave 3 ([REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3])** — `meta-astryx-ds-agent-plane-compose.md`, ds-agent-plane checklist, harness-platform-taxonomy cross-link, client-development-index and comparison Phase 1 reciprocals, bootstrap doc contract tests; close_out **allowed** (minimal, advisory). Matrix §2 row and vibe probes **Defer** v1. Plan: [PLAN.md](tied-project/working/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3/PLAN.md).
+
 - **Open Governance sensing Wave 3 ([REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3])** — `governance-sensing-proof-boundary-compose.md`, odourless-zones checklist, Open Governance × TIED comparison stubs, bootstrap contract test; plan under `tied-project/working/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3/`. Excludes gate-test CITDP scratch files.
 
 - **External service comparison stub policy ([REQ-TIED_EXTERNAL_SERVICE_COMPARISON])** — `@external-service-comparison` forbids in-repo vendor source copy across Waves 1–3; `comparison-capture-stub-policy.test.mjs`; retrofitted legacy article captures under `docs/comparisons/`. Plan: [PLAN-stub-capture-policy.md](tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/PLAN-stub-capture-policy.md).
