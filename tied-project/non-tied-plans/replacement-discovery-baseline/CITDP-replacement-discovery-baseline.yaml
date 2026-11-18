@@ -1,0 +1,11 @@
+change_class: "methodology_doc_import"
+depth_tier: "minimal"
+gate_policy: "advisory"
+notes: |
+  Wave 1 non-TIED: import generic Replacement Discovery Baseline runbook to docs/methodologies/.
+  Wave 2: TIED enrollment for self-re-engineering pilot on stdd store; PROC vs EDPC extension TBD.
+profile_depth: "not_measured"
+request_token: "DOC-REPLACEMENT-DISCOVERY-BASELINE"
+source_url: "sponsor attachment agent_reengineering_deconstruction_runbook.md v1.0"
+tied_tokens_new: []
+wave: "1"
