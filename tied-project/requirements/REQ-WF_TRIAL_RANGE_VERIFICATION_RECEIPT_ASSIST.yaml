@@ -1,0 +1,29 @@
+REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST:
+  name: "WF trial range verification receipt assist default"
+  rationale:
+    benefits:
+      - "Composes with VRCS facilitator persist and manifest telemetry"
+      - "Matrix runs via workflow_trial_range without manual ASSIST=1"
+    problems_solved:
+      - "Operators prefix WF_TRIAL_VERIFICATION_RECEIPT_ASSIST on every range cell"
+      - "WF-09 cohort exit 1 when agent skips receipt_persistence"
+    why: "workflow_trial_range already default-exports HMEP capture; verification closeout needs the same matrix facilitator boundary."
+  satisfaction_criteria:
+    - criterion: "Bootstrap contract test asserts export, skip branch, and usage text."
+      id: "SC-WVR-04"
+    - criterion: "CLI guide mentions range default assist and skip."
+      id: "SC-WVR-06"
+    - criterion: "Orchestrator help documents single-cell opt-in; batch section documents range default."
+      id: "SC-WVR-05"
+    - criterion: "WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST=1 disables assist for the range loop."
+      id: "SC-WVR-02"
+    - criterion: "workflow_trial_range exports WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 when skip unset."
+      id: "SC-WVR-01"
+    - criterion: "Zero-arg usage documents assist default and skip (HMEP-line parity)."
+      id: "SC-WVR-03"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+    implementation:
+      - "IMPL-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"

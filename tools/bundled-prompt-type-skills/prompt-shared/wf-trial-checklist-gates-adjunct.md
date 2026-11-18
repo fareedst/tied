@@ -26,7 +26,7 @@
 3. **Build end (turn 3):**
    - RED once → archive stdout under `evidence/quality-manifest/*-red.stdout.txt`
    - GREEN → `npm test`
-   - `tied_checklist_gate_validate` `phase: verification` with **`receipt_persistence`** → `gates/verification-*.json`
+   - **Required (disposable matrix):** `tied_checklist_gate_validate` `phase: verification` with **`receipt_persistence: true`** → `gates/verification-*.json` before finalizing `phase-handoff-build-plan.md` ([REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC](../../../tied-project/requirements/REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC.yaml))
    - `tied_verify` (update statuses when wired)
    - Sync **`execution_evidence.completed`** only with slugs from slim tracker
    - Complete `proof-facet-manifest.v1.json` (one row per `src/**/*.test.ts`; paths must exist on disk)

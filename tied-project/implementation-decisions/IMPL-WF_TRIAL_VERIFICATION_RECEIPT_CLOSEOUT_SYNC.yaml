@@ -1,0 +1,14 @@
+IMPL-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+  IMPL-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+    essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC-pseudocode.md"
+    metadata:
+      last_updated:
+        date: "2026-11-18"
+        reason: "refine-plan"
+    related_files:
+      - "scripts/lib/wf-trial-handoff-verification-claim.inc.sh"
+      - "scripts/lib/wf-trial-machine-closeout-exit.inc.sh"
+      - "scripts/lib/wf-trial-phase-handoff-gate.inc.sh"
+      - "scripts/lib/wf-trial-verification-receipt-assist.inc.sh"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    status: "proposed"

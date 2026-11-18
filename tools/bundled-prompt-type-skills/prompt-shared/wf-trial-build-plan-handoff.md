@@ -6,6 +6,12 @@
 
 Write a minimal **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.md`** stub first (YAML front matter: `in_progress: true`, `request_token`, `prompt_type: build-plan`) so provider aborts mid-turn still leave a build-plan handoff artifact on disk.
 
+When finalizing, set front matter [REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC](../../../tied-project/requirements/REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC.yaml):
+
+- `verification_receipt_status: persisted | deferred | not_run`
+- `verification_receipt_path:` — relative path to `gates/verification-*.json` when `persisted`
+- Do **not** write Verification gate `allowed: true` unless `verification_receipt_status: persisted` and the receipt file exists.
+
 ## End of turn 3 (build-plan)
 
 Finalize **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.md`** (remove or clear `in_progress`) including:
@@ -13,7 +19,7 @@ Finalize **`tied-project/working/{REQ-TOKEN}/evidence/phase-handoff-build-plan.m
 | Field | Content |
 | --- | --- |
 | REQ token | Product request token |
-| Verification gate | Path to `gates/verification-*.json` (required when verification ran; orchestrator may fail under `WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT=1`) |
+| Verification gate | Path to `gates/verification-*.json` (required when verification ran; machine closeout fails on pass claim without receipt — [REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC](../../../tied-project/requirements/REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC.yaml)) |
 | sub-adversarial-inquiry-pass | Tracker disposition **`not_applicable`** before RED (not the slug name in `completed` alone) |
 | Tracker slugs updated | List registry slugs only: `persist-implementation-records`, `red-tests`, `implement-code`, `verification-gate`, … — **not** `build-plan` (disposable union: [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT](../../../tied-project/requirements/REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT.yaml)) |
 | Manifest | `verification-evidence-manifest.v1.json` |

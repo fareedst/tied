@@ -128,6 +128,18 @@ exit "\$ec"
     assert.match(r.stderr, /Environment/);
   });
 
+  it("T-BATCH-VRCS turn 3 requires receipt_persistence and verification_receipt_status [SC-VRCS-01]", () => {
+    const template = path.join(REPO_ROOT, "docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml");
+    const body = fs.readFileSync(template, "utf8");
+    assert.match(body, /receipt_persistence:\s*true/);
+    assert.match(body, /verification_receipt_status/);
+    const handoff = fs.readFileSync(
+      path.join(REPO_ROOT, "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-build-plan-handoff.md"),
+      "utf8",
+    );
+    assert.match(handoff, /verification_receipt_status/);
+  });
+
   it("T-BATCH-01 turn 4 documents envelope depth/backfill and turn 1 uses {{HARNESS}} [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", () => {
     const template = path.join(REPO_ROOT, "docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml");
     const body = fs.readFileSync(template, "utf8");

@@ -1,0 +1,51 @@
+CITDP-REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST:
+  change_definition:
+    current_behavior: "workflow_trial_range sets HARNESS, MODEL_*, and WF_TRIAL_HMEP_CAPTURE by default but does not export WF_TRIAL_VERIFICATION_RECEIPT_ASSIST.\nOperators prefix WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 for matrix cells such as WF-09 when they want facilitator persist after green npm test.\nSingle-cell workflow_trial_agentstream keeps assist opt-in only (VRCS).\n"
+    desired_behavior: "workflow_trial_range exports WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 before the cell loop unless WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST=1.\nChild workflow_trial_agentstream invocations inherit assist for verification closeout when VRCS preconditions hold.\nOperator docs and help describe range default and skip hatch (HMEP parity).\n"
+    success_criteria:
+      - "SC-WVR-01 through SC-WVR-06 in PLAN.md"
+      - "tied_validate_consistency ok after LEAP"
+    unchanged_behavior: "workflow_trial_agentstream without range parent does not export assist.\nwf_trial_verification_receipt_assist preconditions and manifest verification_receipt_assist semantics.\nMachine closeout tier A/B rules and claim parser.\n"
+  impact_analysis:
+    modules_or_boundaries: "scripts/build-commands.sh workflow_trial_range\nscripts/_build_commands_cli_guide.inc.sh\nscripts/lib/wf-trial-agentstream-help.inc.sh\ndocs/agent-harness-evaluation/wf-trial-closeout-operator-env.md\ntied-project/vocab/agentstream.md\ntools/bootstrap/wf-trial-range-receipt-assist.test.mjs\ntied-project/working/REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC/evidence/handoff-operator-testing.md\n"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+      - "IMPL-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+      - "REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+    upstream:
+      - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
+      - "REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+  non_goals:
+    - "Changing tied_checklist_gate_validate or assist MCP payload"
+    - "Default assist on workflow_trial_agentstream alone"
+    - "Orchestrator detects parent was workflow_trial_range"
+    - "Retroactive regrade of past readouts"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Operator forgets skip when running control cohort via range"
+        - "Pre-exported ASSIST=0 in shell profile overridden by range export (intentional for matrix)"
+        - "Range default assist masks agent failure to receipt_persist until readout inspects verification_receipt_assist"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Manifest flag preserved for @record-wf-trial"
+        - "Shell contract tests pin export and skip branches"
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST/PLAN.md"
+        - "tied-project/working/REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST/test-strategy.md"
+      falsification_questions:
+        - "Does assist still no-op when npm test fails?"
+        - "Does single-cell help avoid claiming range default?"
+        - "Does skip env leave assist unset for all cells in the loop?"
+      gate_policy: "advisory"
+      rationale: "Shell export only; composes with shipped VRCS assist hook."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    regression:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs VRCS assist contracts"
+    shell:
+      - "tools/bootstrap/wf-trial-range-receipt-assist.test.mjs"

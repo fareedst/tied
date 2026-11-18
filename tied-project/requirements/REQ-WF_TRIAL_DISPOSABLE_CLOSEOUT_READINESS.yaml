@@ -10,7 +10,7 @@ REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS:
         id: "SC-DCR-02"
       - criterion: "Live workflow_trial_range claude haiku-5-5 low 1 1 on new disposable cell: verification allowed true; shell tier B acceptable per test-strategy grading table; orchestrator exit matches manifest; no ERROR on tier B alone."
         id: "SC-DCR-06"
-      - criterion: "Machine closeout tier A: missing receipt with attempted/blocked signals, allowed false close_out, or incomplete inventory -> ERROR + exit 1; tier B: no receipt and no tier-A signals -> DIAGNOSTIC wf_trial_machine_closeout_reason=no_close_out_gate_receipt without ERROR + exit 0."
+      - criterion: "Machine closeout tier A: missing receipt with attempted/blocked signals, allowed false close_out, incomplete inventory, or build handoff Verification gate pass claim without gates/verification-*.json (REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC claim parser) -> ERROR + exit 1; tier B: no receipt and no tier-A signals -> DIAGNOSTIC wf_trial_machine_closeout_reason=no_close_out_gate_receipt without ERROR + exit 0."
         id: "SC-DCR-04"
       - criterion: "Orchestrator manifest wf-trial-orchestrator-run.v1.json exit_code matches final shell exit after all post-four-phase hooks including machine closeout."
         id: "SC-DCR-05"

@@ -1,0 +1,52 @@
+CITDP-REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+  change_definition:
+    current_behavior: "Turn 3 build-plan handoffs document verification allowed true without gates/verification-*.json; machine closeout uses grep -qi verification on phase-handoff-build-plan.md triggering verification_handoff_without_receipt (Tier A). Playbook requires receipt_persistence but batch agents skip MCP persist (1795019148 WF-09)."
+    desired_behavior: "Turn 3 prompts and handoff front matter require receipt_persistence or honest deferred status; shared claim parser detects pass claims without receipts; optional WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 persists receipt after green npm test before machine closeout; operator env doc lists bypass recipes."
+    non_goals:
+      - "CGH or MPGW changes"
+      - "Default-on receipt assist"
+      - "Fabricating receipts without tied_checklist_gate_validate"
+    success_criteria:
+      - "Live WF-09 replay documented"
+      - "SC-VRCS-01..07 green"
+    unchanged_behavior: "WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1; close_out receipt allowed true still exits 0."
+  impact_analysis:
+    modules_or_boundaries: "scripts/lib/wf-trial-*.inc.sh; scripts/workflow-trial-agentstream.sh; tools/bootstrap/workflow-trial-agentstream-sh.test.mjs; docs/agent-harness-evaluation/config/traditional-four-phase-agentstream.yaml; tools/bundled-prompt-type-skills/prompt-shared/wf-trial-*.md"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+      - "IMPL-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+      - "REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+    citdp_id: "CITDP-REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    status: "accepted"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Assist masks agent receipt discipline in readouts if not telemetry-labeled"
+        - "Claim parser too loose allows false tier B"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "1795017442 persisted receipts and orchestrator exit 0"
+        - "1795019148 handoff admits not persisted yet Tier A fires"
+      evidence_references:
+        - "/Users/fareed/Documents/dev/test/1795019148-wf-agentstream-wf-09-claude-claudehaiku55low/tied-project/working/REQ-ORDERED_CONCURRENT_MAP/evidence/phase-handoff-build-plan.md"
+        - "docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-01-claudehaiku55low-1795017442-wf-agentstream-wf-01-claude-claudehaiku55low.md"
+      falsification_questions:
+        - "Does deferred front matter prevent Tier A when table still mentions verification-gate slug?"
+      gate_policy: "advisory"
+      research_profile: "integrated-agent"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Harness shell and prompt-shared only; optional live WF-09."
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    unit:
+      - "bash fixtures in workflow-trial-agentstream-sh.test.mjs claim parser cases"

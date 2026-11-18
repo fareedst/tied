@@ -11,7 +11,7 @@ REQ-WF_TRIAL_PHASE_HANDOFF_GATE:
       id: "SC-WF-PHG-02"
     - criterion: "After turns 1-3, orchestrator requires evidence/phase-handoff-{skill}.md under resolved product REQ folder."
       id: "SC-WF-PHG-01"
-    - criterion: "Optional WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT=1 checks persisted CITDP YAML and verification gate receipt when build handoff claims verification."
+    - criterion: "Optional WF_TRIAL_STRICT_CLOSEOUT_PREFLIGHT=1 checks persisted CITDP YAML and fails when build handoff Verification gate pass claim lacks gates/verification-*.json (REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC claim parser)."
       id: "SC-WF-PHG-05"
     - criterion: "wf_trial_resolve_product_req_token accepts table turn-1 handoffs and dirname fallback under working/REQ-*/; resolve failure emits working basenames and found-unparsed handoff DIAGNOSTICs."
       id: "SC-WF-PHG-06"

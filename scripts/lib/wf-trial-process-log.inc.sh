@@ -163,6 +163,22 @@ wf_trial_process_log_finalize() {
 }
 
 # [REQ-WF_TRIAL_FOUR_PHASE_ABORT_SIGNAL] Additive manifest fields when abort classifier runs.
+wf_trial_process_log_set_verification_receipt_assist() {
+  local manifest_path="$1"
+  local used="${2:-0}"
+
+  [[ -f "$manifest_path" ]] || return 0
+  [[ "$used" == "1" ]] || return 0
+
+  node -e '
+    const fs = require("fs");
+    const [path] = process.argv.slice(1);
+    const doc = JSON.parse(fs.readFileSync(path, "utf8"));
+    doc.verification_receipt_assist = true;
+    fs.writeFileSync(path, JSON.stringify(doc, null, 2) + "\n");
+  ' "$manifest_path"
+}
+
 wf_trial_process_log_set_incomplete_reason() {
   local manifest_path="$1"
   local reason="$2"

@@ -273,7 +273,7 @@ _how_smoke() {
   workflow-trial-agentstream wf-02 [--dry-run]   bootstrap + PROMPT-WF extract + four-phase agentstream
                                  disposable dir: {epoch}-wf-agentstream-{wf}-{harness}-{model}[effort]
                                  model from MODEL_CONFIG (else MODEL_SLUG), optional MODEL_EFFORT suffix on tag
-                                 workflow_trial_range HARNESS MODEL_REF EFFORT END START  (EFFORT: low|medium|high|xhigh|max or -; default HMEP capture+import; WF_TRIAL_SKIP_HMEP_CAPTURE=1 opt-out)
+                                 workflow_trial_range HARNESS MODEL_REF EFFORT END START  (EFFORT: low|medium|high|xhigh|max or -; default HMEP capture+import; WF_TRIAL_SKIP_HMEP_CAPTURE=1 opt-out; default WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1; WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST=1 opt-out)
                                  MODEL_REF: matrix id, agent slug, or alias (wf-trial-model-specs.yaml + wf-trial-model-catalog.yaml)
                                  example: workflow_trial_range cursor luna-low medium 2 2
                                  HARNESS=cursor|claude

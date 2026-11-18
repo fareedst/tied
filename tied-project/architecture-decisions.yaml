@@ -3322,6 +3322,17 @@ ARCH-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
   related_requirements:
     - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
   status: "Draft"
+ARCH-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST:
+  cross_references:
+    requirements:
+      - "REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+      - "REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+  decision: "workflow_trial_range exports WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 unless WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST; orchestrator unchanged."
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST.yaml"
+  name: "WF trial range verification receipt assist default"
+  related_requirements:
+    - "REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+  status: "Draft"
 ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
   name: "WF grading rationale surfaces"
@@ -3361,3 +3372,8 @@ ARCH-WF_TRIAL_SUMMARIES_PUBLISH:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_SUMMARIES_PUBLISH.yaml"
   name: "WF trial summaries publish boundary"
   status: "Planned"
+ARCH-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC.yaml"
+  related_requirements:
+    - "REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+  status: "proposed"

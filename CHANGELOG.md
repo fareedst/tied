@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial readout — PROMPT-WF-09 Haiku 5.5 low @ 1795021618** — SC-DCR-06 **partial_tier_b**; orchestrator **`exit_code: 0`**; **10/10** tests; agent verification receipt (range assist skip); tier B close_out. [Readout](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-09-claudehaiku55low-1795021618-wf-agentstream-wf-09-claude-claudehaiku55low.md).
+
+- **WF trial range verification receipt assist default ([REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST])** — `workflow_trial_range` exports `WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1` with `WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST=1` opt-out; bootstrap SC-WVR-01..06. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST/PLAN.md).
+
+- **WF trial verification receipt closeout sync ([REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC])** — handoff claim parser, opt-in post-batch receipt assist, batch prompt contract; bootstrap SC-VRCS-01..07 (3 pre-existing interleaved IRC failures unrelated). Operator env: [wf-trial-closeout-operator-env.md](docs/agent-harness-evaluation/wf-trial-closeout-operator-env.md). Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC/PLAN.md).
+
 - **WF trial minimal progression gate waiver ([REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER])** — checklist validator allows minimal WF disposable runs to progress when adversarial progression steps are intentionally waived; MCP composition tests green. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_MINIMAL_PROGRESSION_GATE_WAIVER/PLAN.md). Pairs with [REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION].
 
 - **WF trial cohort summaries publish** — registry master row + comparison matrix for **1795017442**; `project-size-batch-compare` refresh. Evidence: [publish-summary.md](tied-project/working/FACILITATOR-WF-PUBLISH-1795018763/evidence/publish-summary.md).

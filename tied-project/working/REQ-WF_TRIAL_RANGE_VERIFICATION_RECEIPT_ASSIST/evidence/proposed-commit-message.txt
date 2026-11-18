@@ -1,0 +1,10 @@
+feat(wf-trial): VRCS closeout sync and range default receipt assist
+
+Verification handoff claim parser, opt-in post-batch receipt assist, and
+workflow_trial_range default WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 with skip
+hatch. Bootstrap SC-VRCS and SC-WVR; operator env doc; WF-09 readout @1795021618.
+
+REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC
+REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST
+ARCH/IMPL paired. Suite: wf-trial-range-receipt-assist 5/5; VRCS shell tests
+pass (3 pre-existing interleaved IRC failures in full agentstream sh suite).

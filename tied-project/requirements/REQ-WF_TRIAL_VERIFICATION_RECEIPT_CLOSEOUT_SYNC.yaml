@@ -1,0 +1,12 @@
+REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+  REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+    description: "Three pillars: agent receipt_persistence at turn 3, operator bypass recipes, handoff honesty via claim parser replacing naive grep."
+    satisfaction_criteria_refs:
+      - "SC-VRCS-01"
+      - "SC-VRCS-02"
+      - "SC-VRCS-03"
+      - "SC-VRCS-04"
+      - "SC-VRCS-05"
+      - "SC-VRCS-06"
+      - "SC-VRCS-07"
+    status: "proposed"

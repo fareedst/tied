@@ -1,0 +1,13 @@
+ARCH-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST:
+  consequences:
+    - "@record-wf-trial uses manifest verification_receipt_assist to grade facilitator vs agent"
+    - "Range cohort runs may persist verification receipts via facilitator assist when VRCS preconditions hold"
+  context: "VRCS ships orchestrator assist opt-in; matrix operators primarily invoke workflow_trial_range."
+  decision: "workflow_trial_range exports WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 before the cell loop unless WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST is set; orchestrator does not detect range parent."
+  status: "Draft"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+    requirements:
+      - "REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+      - "REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"

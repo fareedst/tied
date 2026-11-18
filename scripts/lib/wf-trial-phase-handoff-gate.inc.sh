@@ -1,8 +1,11 @@
 # wf-trial-phase-handoff-gate.inc.sh — post-four-phase handoff fail-closed gate.
+# [REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC]
 # [REQ-WF_TRIAL_PHASE_HANDOFF_GATE] [IMPL-WF_TRIAL_PHASE_HANDOFF_GATE]
 
 # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-product-req.inc.sh"
+# shellcheck source=scripts/lib/wf-trial-handoff-verification-claim.inc.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-handoff-verification-claim.inc.sh"
 # shellcheck source=scripts/lib/wf-trial-abort-signal.inc.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-abort-signal.inc.sh"
 
@@ -126,15 +129,9 @@ wf_trial_strict_closeout_preflight_check() {
     return 1
   fi
 
-  local gates_dir="${ws}/tied-project/working/${token}/gates"
-  if [[ -d "$gates_dir" ]]; then
-    local ver_receipt
-    ver_receipt="$(find "$gates_dir" -maxdepth 1 -name 'verification-*.json' 2>/dev/null | head -n 1)"
-    local build_handoff="${ws}/tied-project/working/${token}/evidence/phase-handoff-build-plan.md"
-    if [[ -f "$build_handoff" ]] && grep -qi 'verification' "$build_handoff" && [[ -z "$ver_receipt" ]]; then
-      printf 'ERROR: WF trial strict closeout preflight: build handoff mentions verification but no gates/verification-*.json\n' >&2
-      return 1
-    fi
+  if wf_trial_handoff_claims_verification_pass_without_receipt "$ws" "$token"; then
+    printf 'ERROR: WF trial strict closeout preflight: build handoff claims verification pass but no gates/verification-*.json\n' >&2
+    return 1
   fi
 
   return 0

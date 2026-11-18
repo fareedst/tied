@@ -216,6 +216,8 @@ source "${SCRIPT_DIR}/lib/wf-trial-proof-manifest-gate.inc.sh"
 source "${SCRIPT_DIR}/lib/wf-trial-phase-handoff-gate.inc.sh"
 # shellcheck source=lib/wf-trial-machine-closeout-exit.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-machine-closeout-exit.inc.sh"
+# shellcheck source=lib/wf-trial-verification-receipt-assist.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-verification-receipt-assist.inc.sh"
 # shellcheck source=lib/wf-trial-abort-signal.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-abort-signal.inc.sh"
 if wf_trial_implementation_stack_enabled; then
@@ -253,6 +255,7 @@ bash "$FOUR_PHASE" "${ARGS[@]}" || FOUR_PHASE_EXIT=$?
 PHASE_HANDOFF_EXIT=0
 GATE_EXIT=0
 STRICT_CLOSEOUT_EXIT=0
+RECEIPT_ASSIST_EXIT=0
 MACHINE_CLOSEOUT_EXIT=0
 if ((DRY_RUN == 0)); then
   wf_trial_abort_signal_apply_workspace "$WORKSPACE"
@@ -266,6 +269,10 @@ if ((DRY_RUN == 0)); then
   wf_trial_phase_handoff_gate_check "$WORKSPACE" "$REPO_ROOT" || PHASE_HANDOFF_EXIT=$?
   wf_trial_proof_manifest_gate_check "$WORKSPACE" "$WF_NORM" "$REPO_ROOT" || GATE_EXIT=$?
   wf_trial_strict_closeout_preflight_check "$WORKSPACE" "$REPO_ROOT" || STRICT_CLOSEOUT_EXIT=$?
+  wf_trial_verification_receipt_assist "$WORKSPACE" "$REPO_ROOT" || RECEIPT_ASSIST_EXIT=$?
+  if [[ -n "${WF_TRIAL_PROCESS_LOG_MANIFEST:-}" && "${WF_TRIAL_VERIFICATION_RECEIPT_ASSIST_USED:-0}" -eq 1 ]]; then
+    wf_trial_process_log_set_verification_receipt_assist "$WF_TRIAL_PROCESS_LOG_MANIFEST" 1
+  fi
   wf_trial_machine_closeout_exit_check "$WORKSPACE" "$REPO_ROOT" || MACHINE_CLOSEOUT_EXIT=$?
 fi
 if ((FOUR_PHASE_EXIT != 0)); then

@@ -3953,6 +3953,18 @@ IMPL-WF_TRIAL_RANGE_HMEP_AUTO_INGEST:
   related_requirements:
     - "REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST"
   status: "Draft"
+IMPL-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST:
+  cross_references:
+    architecture:
+      - "ARCH-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+    requirements:
+      - "REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST.yaml"
+  implementation_approach: "build-commands.sh workflow_trial_range assist export; operator docs; wf-trial-range-receipt-assist.test.mjs"
+  name: "WF trial range verification receipt assist default implementation"
+  related_requirements:
+    - "REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+  status: "Draft"
 IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_READOUT_GRADING_RATIONALE.yaml"
   name: "WF grading rationale parser and contract test"
@@ -3998,3 +4010,10 @@ IMPL-WF_TRIAL_SUMMARIES_PUBLISH:
       - "ARCH-WF_TRIAL_SUMMARIES_PUBLISH"
     requirements:
       - "REQ-WF_TRIAL_SUMMARIES_PUBLISH"
+IMPL-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC.yaml"
+  related_architecture:
+    - "ARCH-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+  related_requirements:
+    - "REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+  status: "proposed"

@@ -8,7 +8,7 @@ REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT:
       id: "SC-WF-DGA-03"
     - criterion: "validateCanonicalSlugs unions wf-trial-minimal-checklist-tracker.yaml slugs when workflow_trial_disposable is true; verification and close_out gates do not emit invalid_slug:red-tests or invalid_slug:implement-code on completed disposable trackers at minimal depth."
       id: "SC-WF-DGA-01"
-    - criterion: "wf_trial_machine_closeout_exit_check tier A: non-zero when close_out_turn.status is incomplete, close_out receipt allowed false, or verification handoff without receipt; tier B: exit 0 with DIAGNOSTIC only when no close_out receipt and no tier-A signals (REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS). WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1 opt-out."
+    - criterion: "wf_trial_machine_closeout_exit_check tier A: non-zero when close_out_turn.status is incomplete, close_out receipt allowed false, or build handoff Verification gate pass claim without gates/verification-*.json (handoff claim parser — REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC); tier B: exit 0 with DIAGNOSTIC only when no close_out receipt and no tier-A signals. WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1 opt-out."
       id: "SC-WF-DGA-04"
     - criterion: "workflow-trial-agentstream-sh.test.mjs covers hook ordering after FOUR_PHASE_EXIT=0 and respects REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT precedence; manifest exit_code matches final orchestrator exit after machine closeout."
       id: "SC-WF-DGA-05"

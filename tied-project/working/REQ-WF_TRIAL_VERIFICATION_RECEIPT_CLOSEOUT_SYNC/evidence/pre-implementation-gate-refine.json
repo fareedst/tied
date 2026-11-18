@@ -1,0 +1,9 @@
+{
+  "allowed": true,
+  "blocking": false,
+  "depth": "minimal",
+  "diagnostics": [],
+  "ok": true,
+  "phase": "pre_implementation",
+  "prompt_type": "refine-plan"
+}

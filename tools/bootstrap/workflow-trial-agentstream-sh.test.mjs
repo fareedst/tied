@@ -18,6 +18,8 @@ const PROCESS_LOG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-process-log.i
 const PROOF_MANIFEST_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-proof-manifest-gate.inc.sh");
 const PHASE_HANDOFF_GATE_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-phase-handoff-gate.inc.sh");
 const MACHINE_CLOSEOUT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-machine-closeout-exit.inc.sh");
+const HANDOFF_CLAIM_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-handoff-verification-claim.inc.sh");
+const RECEIPT_ASSIST_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-verification-receipt-assist.inc.sh");
 const ABORT_SIGNAL_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-abort-signal.inc.sh");
 const OPERATOR_HIGHLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-operator-highlight.inc.sh");
 const PRODUCT_REQ_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-product-req.inc.sh");
@@ -1477,6 +1479,172 @@ ERROR: something else
     } finally {
       fs.rmSync(tmp, { recursive: true, force: true });
     }
+  });
+
+  function seedProductReqWorkspace(tmp, token) {
+    const ev = path.join(tmp, "tied-project/working", token, "evidence");
+    fs.mkdirSync(ev, { recursive: true });
+    fs.writeFileSync(
+      path.join(ev, "phase-handoff-add-feature.md"),
+      `# handoff\n\nrequest_token: ${token}\n`,
+    );
+  }
+
+  function writeBuildHandoff(tmp, token, body) {
+    const ev = path.join(tmp, "tied-project/working", token, "evidence");
+    fs.mkdirSync(ev, { recursive: true });
+    fs.writeFileSync(path.join(ev, "phase-handoff-build-plan.md"), body);
+  }
+
+  function runMachineCloseout(tmp) {
+    const bash = `
+      # shellcheck source=${PRODUCT_REQ_INC}
+      source "${PRODUCT_REQ_INC}"
+      # shellcheck source=${HANDOFF_CLAIM_INC}
+      source "${HANDOFF_CLAIM_INC}"
+      # shellcheck source=${MACHINE_CLOSEOUT_INC}
+      source "${MACHINE_CLOSEOUT_INC}"
+      wf_trial_machine_closeout_exit_check "${tmp}" "${REPO_ROOT}"
+    `;
+    return spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+  }
+
+  it("machine closeout F-defer: verification_receipt_status deferred [SC-VRCS-07]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-vrcs-defer-"));
+  try {
+      const token = "REQ-FIXTURE-VRCS-DEFER";
+      seedProductReqWorkspace(tmp, token);
+      writeBuildHandoff(
+        tmp,
+        token,
+        `---
+verification_receipt_status: deferred
+request_token: ${token}
+---
+# build-plan
+
+| Verification gate | pending |
+| Tracker slugs updated | verification-gate pending |
+`,
+      );
+      const r = runMachineCloseout(tmp);
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      assert.match(r.stderr, /no_close_out_gate_receipt/);
+      assert.doesNotMatch(r.stderr, /verification_handoff_without_receipt/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("machine closeout F-WF09: pass claim without receipt [SC-VRCS-02]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-vrcs-wf09-"));
+    try {
+      const token = "REQ-FIXTURE-VRCS-WF09";
+      seedProductReqWorkspace(tmp, token);
+      writeBuildHandoff(
+        tmp,
+        token,
+        `# build-plan\n\n| Verification gate | tied_checklist_gate_validate phase verification: allowed: true, blocking: false. No gates/verification-*.json file was persisted. |\n`,
+      );
+      const r = runMachineCloseout(tmp);
+      assert.notEqual(r.status, 0, r.stdout);
+      assert.match(r.stderr, /verification_handoff_without_receipt/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("machine closeout F-naive: slug mention only not Tier A [SC-VRCS-02]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-vrcs-naive-"));
+    try {
+      const token = "REQ-FIXTURE-VRCS-NAIVE";
+      seedProductReqWorkspace(tmp, token);
+      writeBuildHandoff(
+        tmp,
+        token,
+        `# build-plan\n\n| Tracker slugs updated | verification-gate pending |\n`,
+      );
+      const r = runMachineCloseout(tmp);
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+      assert.doesNotMatch(r.stderr, /verification_handoff_without_receipt/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("machine closeout F-receipt on disk passes [SC-VRCS-02]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-vrcs-receipt-"));
+    try {
+      const token = "REQ-FIXTURE-VRCS-RECEIPT";
+      seedProductReqWorkspace(tmp, token);
+      const gates = path.join(tmp, "tied-project/working", token, "gates");
+      fs.mkdirSync(gates, { recursive: true });
+      fs.writeFileSync(path.join(gates, "verification-2026-01-01T00-00-00-000Z.json"), '{"allowed": true}\n');
+      writeBuildHandoff(
+        tmp,
+        token,
+        `# build-plan\n\n| Verification gate | allowed: true; see gates/verification-2026-01-01T00-00-00-000Z.json |\n`,
+      );
+      const r = runMachineCloseout(tmp);
+      assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("verification receipt assist A2 default off [SC-VRCS-04]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-vrcs-assist-off-"));
+    try {
+      const token = "REQ-FIXTURE-VRCS-ASSIST";
+      seedProductReqWorkspace(tmp, token);
+      const bash = `
+        # shellcheck source=${RECEIPT_ASSIST_INC}
+        source "${RECEIPT_ASSIST_INC}"
+        wf_trial_verification_receipt_assist "${tmp}" "${REPO_ROOT}"
+        echo exit=$?
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.doesNotMatch(r.stderr, /verification receipt assist: persisted/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("verification receipt assist A1 stub persists [SC-VRCS-03]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "wf-vrcs-assist-stub-"));
+    try {
+      const token = "REQ-FIXTURE-VRCS-ASSIST-STUB";
+      seedProductReqWorkspace(tmp, token);
+      fs.mkdirSync(path.join(tmp, "tied-project/working", token), { recursive: true });
+      fs.writeFileSync(
+        path.join(tmp, "tied-project/working", token, "checklist-tracker.yaml"),
+        "request: REQ-FIXTURE-VRCS-ASSIST-STUB\nschema_version: checklist-tracker.v1\nsteps: []\n",
+      );
+      fs.writeFileSync(
+        path.join(tmp, "package.json"),
+        JSON.stringify({ name: "stub", scripts: { test: "node -e \"process.exit(0)\"" } }),
+      );
+      const bash = `
+        # shellcheck source=${RECEIPT_ASSIST_INC}
+        source "${RECEIPT_ASSIST_INC}"
+        WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 WF_TRIAL_VERIFICATION_RECEIPT_ASSIST_STUB=1 \\
+          wf_trial_verification_receipt_assist "${tmp}" "${REPO_ROOT}"
+        echo assist_used=$WF_TRIAL_VERIFICATION_RECEIPT_ASSIST_USED
+      `;
+      const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+      assert.equal(r.status, 0, r.stderr);
+      assert.match(r.stderr, /verification receipt assist: stub receipt/);
+      assert.match(r.stdout, /assist_used=1/);
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  it("help documents WF_TRIAL_VERIFICATION_RECEIPT_ASSIST [SC-VRCS-05]", () => {
+    const r = runScript(["--help"]);
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /WF_TRIAL_VERIFICATION_RECEIPT_ASSIST/);
   });
 
   it("WF_TRIAL_SKIP_MACHINE_CLOSEOUT_EXIT=1 passes same fixture [SC-WF-DGA-04]", () => {

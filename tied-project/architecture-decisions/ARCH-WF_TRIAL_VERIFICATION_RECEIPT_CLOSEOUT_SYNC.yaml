@@ -1,0 +1,13 @@
+ARCH-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+  ARCH-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
+    decision: "Shared bash handoff claim parser plus opt-in post-batch receipt assist hook; prompt-shared and four-phase batch strengthen receipt_persistence; machine closeout and strict preflight call one claim predicate."
+    modules:
+      - "docs/agent-harness-evaluation/wf-trial-closeout-operator-env.md"
+      - "scripts/lib/wf-trial-handoff-verification-claim.inc.sh"
+      - "scripts/lib/wf-trial-verification-receipt-assist.inc.sh"
+      - "scripts/workflow-trial-agentstream.sh"
+      - "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-build-plan-handoff.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/wf-trial-checklist-gates-adjunct.md"
+    related_requirements:
+      - "REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC"
+    status: "proposed"

@@ -1,0 +1,10 @@
+IMPL-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST:
+  decision: "Shell export block in workflow_trial_range adjacent to HMEP capture export; operator docs and bootstrap contract tests."
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST-pseudocode.md"
+  implementation_approach: "See IMPL-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST-pseudocode.md"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"
+    requirements:
+      - "REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST"

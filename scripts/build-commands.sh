@@ -559,7 +559,7 @@ source "${_BUILD_COMMANDS_DIR}/lib/wf-trial-model-spec.inc.sh"
 # shellcheck source=lib/wf-trial-hmep-import.inc.sh
 source "${_BUILD_COMMANDS_DIR}/lib/wf-trial-hmep-import.inc.sh"
 
-# [REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST] [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] workflow_trial_agentstream inherits default-on proof manifest gate
+# [REQ-WF_TRIAL_RANGE_HMEP_AUTO_INGEST] [REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE] [REQ-WF_TRIAL_RANGE_VERIFICATION_RECEIPT_ASSIST] workflow_trial_agentstream inherits default-on proof manifest gate
 workflow_trial_range ()
 {
     if [[ $# -eq 0 ]]; then
@@ -575,6 +575,7 @@ usage: workflow_trial_range HARNESS MODEL_REF EFFORT END START [MONIT]
   example: workflow_trial_range cursor luna-low medium 2 2
   example: workflow_trial_range claude haiku-5-5 medium 1 1
   HMEP: default WF_TRIAL_HMEP_CAPTURE=1 (stream-json under client evidence/stream-json/ + harness-eval import after each cell); opt-out WF_TRIAL_SKIP_HMEP_CAPTURE=1
+  Verification receipt assist: default WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1 (post-batch facilitator persist when VRCS preconditions hold); opt-out WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST=1
 EOF
         return 0
     fi
@@ -607,6 +608,11 @@ EOF
     else
         export WF_TRIAL_HMEP_CAPTURE=1
         export WF_TRIAL_HMEP_REPO_ROOT="${_BUILD_COMMANDS_REPO_ROOT}"
+    fi
+    if [[ -n "${WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST:-}" && "${WF_TRIAL_SKIP_VERIFICATION_RECEIPT_ASSIST}" != "0" ]]; then
+        unset WF_TRIAL_VERIFICATION_RECEIPT_ASSIST
+    else
+        export WF_TRIAL_VERIFICATION_RECEIPT_ASSIST=1
     fi
     for ((num=start; num<=end; num++))
     do

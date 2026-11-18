@@ -1,8 +1,11 @@
 # wf-trial-machine-closeout-exit.inc.sh — post-four-phase tiered machine closeout (default on).
 # [REQ-WF_TRIAL_DISPOSABLE_GATE_ALIGNMENT] [REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS] [IMPL-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS]
+# [REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC] [IMPL-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC]
 
 # shellcheck source=scripts/lib/wf-trial-product-req.inc.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-product-req.inc.sh"
+# shellcheck source=scripts/lib/wf-trial-handoff-verification-claim.inc.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/wf-trial-handoff-verification-claim.inc.sh"
 
 _wf_trial_machine_closeout_default_diag_emitted=0
 
@@ -83,6 +86,11 @@ wf_trial_machine_closeout_exit_check() {
       return 0
     fi
     if [[ -z "$close_receipt" ]]; then
+      if wf_trial_handoff_claims_verification_pass_without_receipt "$ws" "$token"; then
+        printf 'DIAGNOSTIC: wf_trial_machine_closeout_reason=verification_handoff_without_receipt\n' >&2
+        printf 'ERROR: WF trial machine closeout exit: build handoff claims verification pass but no gates/verification-*.json\n' >&2
+        return 1
+      fi
       printf 'DIAGNOSTIC: wf_trial_machine_closeout_reason=no_close_out_gate_receipt\n' >&2
       return 0
     fi
@@ -91,17 +99,10 @@ wf_trial_machine_closeout_exit_check() {
     return 1
   fi
 
-  local build_handoff="${ev}/phase-handoff-build-plan.md"
-  if [[ -f "$build_handoff" ]] && grep -qi 'verification' "$build_handoff"; then
-    local ver_receipt=""
-    if [[ -d "$gates_dir" ]]; then
-      ver_receipt="$(find "$gates_dir" -maxdepth 1 -name 'verification-*.json' 2>/dev/null | head -n 1)"
-    fi
-    if [[ -z "$ver_receipt" ]]; then
-      printf 'DIAGNOSTIC: wf_trial_machine_closeout_reason=verification_handoff_without_receipt\n' >&2
-      printf 'ERROR: WF trial machine closeout exit: build handoff mentions verification but no gates/verification-*.json\n' >&2
-      return 1
-    fi
+  if wf_trial_handoff_claims_verification_pass_without_receipt "$ws" "$token"; then
+    printf 'DIAGNOSTIC: wf_trial_machine_closeout_reason=verification_handoff_without_receipt\n' >&2
+    printf 'ERROR: WF trial machine closeout exit: build handoff claims verification pass but no gates/verification-*.json\n' >&2
+    return 1
   fi
 
   printf 'DIAGNOSTIC: wf_trial_machine_closeout_reason=no_close_out_gate_receipt\n' >&2
