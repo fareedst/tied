@@ -84,13 +84,13 @@ describe("readTiedMethodologyVersion [REQ-TIED_SETUP]", () => {
     mkdirSync(path.join(root, "tied-bundle"), { recursive: true });
     writeFileSync(
       path.join(root, "tied-bundle", "install.json"),
-      JSON.stringify({ store_methodology_version: "4.2.2" }),
+      JSON.stringify({ store_methodology_version: "4.3.0" }),
       "utf8",
     );
     const resolved = resolveTiedMethodologyVersion({ project_root: root });
-    assert.equal(resolved.version, "4.2.2");
+    assert.equal(resolved.version, "4.3.0");
     assert.equal(resolved.source, "install_json");
-    assert.equal(readTiedMethodologyVersion({ project_root: root }), "4.2.2");
+    assert.equal(readTiedMethodologyVersion({ project_root: root }), "4.3.0");
   });
 
   it("reads semver from tied-bundle/install.json store_methodology_version [REQ-TIED_CLIENT_OPERATOR_TOOLING]", () => {

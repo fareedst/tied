@@ -1,0 +1,22 @@
+CITDP-tied-methodology-release-4-3-0:
+  tied_tokens_new: []
+  analysis:
+    current_behavior: "Store VERSION and AGENTS read 4.2.2; large CHANGELOG [Unreleased] since 4.2.2; REQ-TIED_AS_OPERATED_BASELINE shipped but not in CHANGELOG lead; ~127 rg hits mix live pins and frozen trial readouts."
+    desired_behavior: "Minor 4.3.0 release: full Unreleased promote, live pins and install.json witness 4.3.0, README VRAI-themed highlights, frozen readouts unchanged."
+    in_scope:
+      - "Authority files and MCP contract examples"
+      - "Changelog promotion with AS_OPERATED lead row"
+      - "tied-install --refresh witness"
+    out_of_scope:
+      - "Project REQ/ARCH/IMPL enrollment for release token"
+      - "Mass trial readout semver rewrite"
+      - "tied-project/CHANGELOG mirror promote unless sponsor extends scope"
+  risks:
+    - id: RDB-FALSE-REWRITE
+      likelihood: low
+      impact: high
+      mitigation: "version-inventory deny list; V3 in test-strategy"
+    - id: UNRELEASED-SIZE
+      likelihood: medium
+      impact: low
+      mitigation: "Full promote per precedent; no line-level trim"

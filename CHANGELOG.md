@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0] - 2026-11-18
+
 ### Added
+
+- **As-operated baseline (RDB phases 0–7 vs VRAI) ([REQ-TIED_AS_OPERATED_BASELINE], [ARCH-TIED_AS_OPERATED_BASELINE], [IMPL-TIED_AS_OPERATED_BASELINE])** — Checklist facet `as_operated_baseline`; Snapshot-A/B at composition-integration and verification-gate when `mode: active`; `[PROC-TIED_AS_OPERATED_BASELINE]`. Plan: [PLAN.md](tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/PLAN.md). Vocab: [as-operated-baseline.md](tied-project/vocab/as-operated-baseline.md).
+
 
 - **As-operated baseline close-out handoff ([REQ-TIED_AS_OPERATED_BASELINE])** — committed `close-out-handoff.md` and session record after verification/close_out gates; workspace hygiene commit for open WIP (replacement-discovery baseline, WF publish handoffs, gate-test CITDP fixtures, source-graph index). Prior feature commit: `e4ca6ce9`.
 

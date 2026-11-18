@@ -1,15 +1,17 @@
 # TIED Methodology
 
-**TIED Methodology Version**: 4.2.2
+**TIED Methodology Version**: 4.3.0
 
 [TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store**—clone it, build the workspace, install methodology into your client, then ship compact features with Prompt Composer. **Visual how-to and methodology by example:** [TIED Experience Hub](docs/tied-experience/index.md). Core seven index: [client development index](tied-bundle/docs/client-development-index.md).
 
-**Release highlights (4.2.2):** Methodology patch since 4.2.1 — **trial proof-intent stack** (L1 path/fine labels through L4 composition evidence subcheck) and **WF trial range proof-manifest mandate** for PROMPT-WF-01…12. Full notes: [CHANGELOG — 4.2.2](CHANGELOG.md#422---2026-11-10).
+**Release highlights (4.3.0):** Methodology minor since 4.2.2 — **VRAI vs as-operated RDB (phases 0–7)**, harness evaluation corpus + model-eval platform, WF disposable closeout stack, and external methodology comparison waves. Full notes: [CHANGELOG — 4.3.0](CHANGELOG.md#430---2026-11-18).
 
-- **Trial proof-intent stack (L1–L4)** — `validator_version` **1.2.0** label case counts, `proof-facet-manifest.v1`, MCP `tied_wf_proof_manifest_validate`, composition subcheck + `@record-wf-trial` proof histogram ([REQ-TIED_TRIAL_PROOF_INTENT_STACK]).
-- **WF range proof-manifest mandate** — `workflow_trial_range` enables post–four-phase manifest gate for all PROMPT-WF-01…12 ([REQ-WF_TRIAL_RANGE_PROOF_MANIFEST_MANDATE]).
-- **NVIDIA Auto-Ontology compose (4.2.1)** — Wave 1 capture + Wave 2 × TIED improvement analysis; plan packages under `tied-project/non-tied-plans/nvidia-auto-ontology-*` (comparisons local gitignored).
-- **Netflix observability Wave 3 (4.2.0)** — methodology composition matrix row 17 ([REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3]); see [CHANGELOG — 4.2.0](CHANGELOG.md#420---2026-11-07) for MCP HTTPS and store README spine.
+- **As-operated baseline** — Checklist facet `as_operated_baseline`; Snapshot-A/B at composition-integration and verification-gate when `mode: active`; VRAI design ≠ RDB evidence ([REQ-TIED_AS_OPERATED_BASELINE], [PROC-TIED_AS_OPERATED_BASELINE]).
+- **Harness evaluation** — Facilitator corpus under `docs/agent-harness-evaluation/`; `@tied/harness-eval` M1/M2 cohort and trial costing ([REQ-AGENT_HARNESS_EVALUATION_DOCS], [REQ-TIED_HARNESS_MODEL_EVAL_PLATFORM]).
+- **WF disposable closeout** — CITDP gate hydration, minimal progression waivers, verification receipt assist, slim inter-turn tracker ([REQ-WF_TRIAL_PRODUCT_CITDP_GATE_HYDRATION], [REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS], [REQ-WF_TRIAL_SLIM_TRACKER_INTER_TURN]).
+- **Agentstream operator stderr** — Elapsed-offset `DIAGNOSTIC:` / `DEBUG:` lines shared across shell and TypeScript orchestrators ([REQ-AGENTSTREAM_OPERATOR_STDERR_ELAPSED]).
+- **Harness platform taxonomy** — Sponsor ↔ TIED vocabulary for benchmarking and `/xlate` ([REQ-TIED_HARNESS_PLATFORM_TAXONOMY]).
+- **Comparison compose waves** — External-service stub policy plus Wave 3 tracks (Meta Astryx, HackerNoon, Furmanov, LangChain, Open Governance, and related) ([REQ-TIED_EXTERNAL_SERVICE_COMPARISON]).
 
 ## How to use this README
 
