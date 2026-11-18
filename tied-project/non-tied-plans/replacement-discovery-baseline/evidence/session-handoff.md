@@ -42,6 +42,7 @@
 | 2026-11-18 | non-tied-refine | Materialized PLAN, test-strategy, handoff; locked paths, discriminant, phase↔EDPC map, header template |
 | 2026-11-18 | non-tied-build | Imported runbook to docs/methodologies/; doc QA pass (12 phases, 12 main sections) |
 | 2026-11-18 | non-tied-close | Scoped commit: runbook + plan folder; traceable-commit-evidence |
+| 2026-11-18 | non-tied-close | Idempotent close: corrected primary SHA `9aa6b278` in traceable evidence |
 
 ## Finished this session
 
