@@ -1,0 +1,12 @@
+# Draft CITDP — non-tied plan track only (not promoted to tied-project/citdp/)
+change_class: comparisons_doc_only
+depth_tier: minimal
+gate_policy: advisory
+profile_depth: not_measured
+request_token: DOC-META-ASTRYX-DESIGN-SYSTEM-COMPARISON
+tied_tokens_new: []
+source_url: https://github.com/meta/astryx
+wave: "1-2"
+notes: >
+  Meta Astryx design-system agent ergonomics outreach; Wave 3 matrix row and REQ behavior Defer.
+  tied_checklist_gate_validate not invoked for doc-complete claims.

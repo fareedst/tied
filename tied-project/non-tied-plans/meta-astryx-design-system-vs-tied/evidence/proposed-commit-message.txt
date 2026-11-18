@@ -1,0 +1,4 @@
+docs(comparisons): Meta Astryx design system Waves 1–2 × TIED
+
+Add repo capture and 14-section agent-management analysis (no vendor README dump).
+Sibling backlinks, git allowlist, non-tied plan, and DOC working bundle.
