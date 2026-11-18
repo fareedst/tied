@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial readout — PROMPT-WF-10 Haiku 5.5 low @ 1795030819** — **workflow complete (machine)** on session **4.3.0**; orchestrator **`exit_code: 0`**; **21/21** tests; verification + close_out **allowed**; commit **`180b4e2`**; successor to split @ 1794533119. [Readout](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-10-claudehaiku55low-1795030819-wf-agentstream-wf-10-claude-claudehaiku55low.md).
+
 - **As-operated baseline (RDB phases 0–7 vs VRAI) ([REQ-TIED_AS_OPERATED_BASELINE], [ARCH-TIED_AS_OPERATED_BASELINE], [IMPL-TIED_AS_OPERATED_BASELINE])** — Checklist facet `as_operated_baseline`; Snapshot-A/B at composition-integration and verification-gate when `mode: active`; `[PROC-TIED_AS_OPERATED_BASELINE]`. Plan: [PLAN.md](tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/PLAN.md). Vocab: [as-operated-baseline.md](tied-project/vocab/as-operated-baseline.md).
 
 

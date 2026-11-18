@@ -1,10 +1,7 @@
 change_class: "methodology_doc_import"
 depth_tier: "minimal"
 gate_policy: "advisory"
-notes: |
-  Wave 1 non-TIED: import generic Replacement Discovery Baseline runbook to docs/methodologies/.
-  Wave 2: execute analysis phases 0-7 on stdd (document current TIED behavior); compose EDPC/EASAR.
-  Replacement phases 8-11 and next-gen product explicitly deferred (sponsor 2026-11-18).
+notes: "Wave 1 non-TIED: import generic Replacement Discovery Baseline runbook to docs/methodologies/.\nWave 2: execute analysis phases 0-7 on stdd (document current TIED behavior); compose EDPC/EASAR.\nReplacement phases 8-11 and next-gen product explicitly deferred (sponsor 2026-11-18).\n"
 profile_depth: "not_measured"
 request_token: "DOC-REPLACEMENT-DISCOVERY-BASELINE"
 source_url: "sponsor attachment agent_reengineering_deconstruction_runbook.md v1.0"

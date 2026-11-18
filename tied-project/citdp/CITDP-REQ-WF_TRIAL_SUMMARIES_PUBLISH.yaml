@@ -9,9 +9,9 @@ CITDP-REQ-WF_TRIAL_SUMMARIES_PUBLISH:
       - "Leaderboard or maturity_score prose"
       - "Mutate disposable trial clients"
     success_criteria:
+      - "STORE_FACILITATOR_SKILLS includes publish-wf-trial-summaries"
       - "wf-trial-registry-author sync; SC-WF-PSP-04/07/08"
       - "wf-trial-summaries-publish.mjs --check passes after regen"
-      - "STORE_FACILITATOR_SKILLS includes publish-wf-trial-summaries"
     unchanged_behavior: "record-wf-trial per-client readout authorship; BUNDLED_STANDALONE_CLIENT_SKILLS unchanged."
   evidence:
     command_seq:

@@ -1,6 +1,6 @@
 {
   "schema_version": "project-size-batch-manifest.v1",
-  "generated_at": "2026-11-18T19:15:31.136Z",
+  "generated_at": "2026-11-18T19:52:52.581Z",
   "options": {
     "store_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
     "parent": "/Users/fareed/Documents/dev/test",
@@ -24,6 +24,10 @@
     }
   ],
   "targets": [
+    {
+      "label": "1795030819-wf-agentstream-wf-10-claude-claudehaiku55low",
+      "repo_root": "/Users/fareed/Documents/dev/test/1795030819-wf-agentstream-wf-10-claude-claudehaiku55low"
+    },
     {
       "label": "1795023644-wf-agentstream-wf-03-cursor-grok47low",
       "repo_root": "/Users/fareed/Documents/dev/test/1795023644-wf-agentstream-wf-03-cursor-grok47low"
@@ -1138,6 +1142,7 @@
     }
   ],
   "receipt_paths": [
+    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795030819-wf-agentstream-wf-10-claude-claudehaiku55low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795023644-wf-agentstream-wf-03-cursor-grok47low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795022513-wf-agentstream-wf-09-cursor-grok47low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795021618-wf-agentstream-wf-09-claude-claudehaiku55low.json",
@@ -1417,5 +1422,5 @@
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1793604353-wf-agentstream-wf-01.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1793597183-wf-agentstream.json"
   ],
-  "snapshot_count": 278
+  "snapshot_count": 279
 }

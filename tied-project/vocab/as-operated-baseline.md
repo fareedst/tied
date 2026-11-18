@@ -1,8 +1,10 @@
-# As-operated baseline (RDB phases 0–7)
+# As-operated baseline (canonical)
 
 **Scope:** TIED methodology enrollment for **Replacement Discovery Baseline** analysis slice (runbook phases **0–7** only). Distinct from **VRAI** and from replacement phases **8–11**.
 
-**Related:** [replacement-discovery-baseline-runbook.md](../../docs/methodologies/replacement-discovery-baseline-runbook.md) · `[REQ-TIED_AS_OPERATED_BASELINE]` · `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]` · `[PROC-AGENT_REQ_CHECKLIST]`
+**Traceability:** [replacement-discovery-baseline-runbook.md](../../docs/methodologies/replacement-discovery-baseline-runbook.md) · `[REQ-TIED_AS_OPERATED_BASELINE]` · `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]` · `[ARCH-TIED_AS_OPERATED_BASELINE]` · `[IMPL-TIED_AS_OPERATED_BASELINE]` · `[PROC-TIED_AS_OPERATED_BASELINE]` · `[PROC-AGENT_REQ_CHECKLIST]`
+
+**See also:** [`routing.md`](routing.md) (row **2k**) · [`edpc-comprehension.md`](edpc-comprehension.md) (BFIE compose) · [`fidelity-research.md`](fidelity-research.md) (observed vs declared)
 
 ---
 
@@ -63,3 +65,19 @@ Registry **shapes** inherit store dogfood [DOC-TIED-RDB-ANALYSIS](../../working/
 ## EDPC / BFIE compose
 
 When EDPC engagement is active, **compose** paths to claims ledger and SCM shell; do not duplicate BFIE matrix bodies inside every registry file. RDB snapshots remain evidence inputs, not substituted VRAI.
+
+---
+
+## Alphabetical index
+
+| Term | Section |
+|------|---------|
+| As-operated baseline | Canonical terms |
+| as_operated_baseline.mode | Canonical terms |
+| BFIE | Authority rules; EDPC / BFIE compose |
+| follow_up_only | Tracker facet (sketch) |
+| RDB | Canonical terms |
+| RDB record prefix | Canonical terms |
+| Snapshot-A | Canonical terms |
+| Snapshot-B | Canonical terms |
+| VRAI | Canonical terms; Authority rules |

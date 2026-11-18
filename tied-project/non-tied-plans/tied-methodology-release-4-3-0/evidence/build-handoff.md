@@ -15,4 +15,4 @@
 
 ## Commit
 
-**`7fee91c3`** — `chore(release): TIED methodology 4.3.0` (see [close-out-handoff.md](./close-out-handoff.md)).
+**`c6f9252d`** — `chore(release): TIED methodology 4.3.0` (see [close-out-handoff.md](./close-out-handoff.md)).

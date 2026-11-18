@@ -2,7 +2,7 @@
 
 **date:** 2026-11-18  
 **prompt_type:** `@non-tied-close`  
-**release_commit:** `7fee91c3`
+**release_commit:** `c6f9252d` (`git log -1 --grep='methodology 4.3.0'`)
 
 ## Scoped commit
 

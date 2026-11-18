@@ -31,8 +31,8 @@
       "binding_inventory_tests": 0,
       "verify_evidence_files": 0,
       "label_case_counts": {
-        "unit.default": 27,
-        "composition.wiring": 16
+        "composition.wiring": 16,
+        "unit.default": 27
       },
       "composition_inferred_cases": 27
     }
@@ -55,12 +55,12 @@
   "diagnostics": [],
   "proof_inference_diagnostics": [
     {
-      "path": "src/producer/producer.test.ts",
+      "path": "src/consumer/consumer.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
     },
     {
-      "path": "src/consumer/consumer.test.ts",
+      "path": "src/producer/producer.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
     }

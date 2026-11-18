@@ -3,18 +3,18 @@ CITDP-REQ-TIED_AS_OPERATED_BASELINE:
     current_behavior: "Replacement Discovery Baseline (phases 0–7) exists as a generic runbook and store dogfood under DOC-TIED-RDB-ANALYSIS without a TIED REQ/PROC or checklist facet. VRAI (tied-project REQ/ARCH/IMPL) and as-operated reality are not machine-separated at composition or verification gates."
     desired_behavior: "Enroll [REQ-TIED_AS_OPERATED_BASELINE], [ARCH-TIED_AS_OPERATED_BASELINE], [IMPL-TIED_AS_OPERATED_BASELINE], and [PROC-TIED_AS_OPERATED_BASELINE] in tied-project/; checklist Tracker facet as_operated_baseline branches follow_up_only vs active; when active, validate Snapshot-A at composition-integration and Snapshot-B before verification-gate using RDB layout and registry minimums inherited from dogfood."
     non_goals:
-      - "Runbook phases 8–11 or artifacts 10–13 as satisfaction criteria"
       - "Dedicated RDB MCP authoring tools in v1"
       - "Promoting RDB CAP/CON rows into REQ indexes without BFIE sponsor elevation"
       - "Replacing EDPC or BFIE ledgers with duplicate registry copies"
+      - "Runbook phases 8–11 or artifacts 10–13 as satisfaction criteria"
     success_criteria:
       - "SC-AOB-ENROLL — REQ/ARCH/IMPL/PROC enrolled with runbook and checklist gate cross-links"
       - "SC-AOB-MODE — facet mode follow_up_only default; active enforces snapshots"
+      - "SC-AOB-NO-PHASE-8-11 — REQ/PROC text forbids replacement-program completion"
       - "SC-AOB-SNAPSHOT-COMPOSITION — Snapshot-A minimums gate composition-integration when active"
       - "SC-AOB-SNAPSHOT-PREVERIFY — Snapshot-B (G-0–G-7, G-9) gates verification-gate when active"
-      - "SC-AOB-VRAI-BOUNDARY — documented separation; BFIE report_only default on RDB dispositions"
       - "SC-AOB-VALIDATOR — checklist-validator unit tests for both modes and both slugs"
-      - "SC-AOB-NO-PHASE-8-11 — REQ/PROC text forbids replacement-program completion"
+      - "SC-AOB-VRAI-BOUNDARY — documented separation; BFIE report_only default on RDB dispositions"
     unchanged_behavior:
       - "[REQ-TIED_BROWNFIELD_INTENT_ELEVATION] elevation semantics"
       - "[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] advisory gate_policy unless sponsor tightens"
@@ -29,28 +29,28 @@ CITDP-REQ-TIED_AS_OPERATED_BASELINE:
     tied_validate_consistency: "required"
     verification_gate_notes: "checklist-validator as_operated_baseline tests; tied_validate_consistency; pre_implementation + verification checklist gates"
   distributed_facet:
-    name: "as_operated_baseline"
-    tracker_key: "as_operated_baseline"
     modes:
-      - "follow_up_only"
       - "active"
+      - "follow_up_only"
+    name: "as_operated_baseline"
     snapshot_gate_slugs:
       - "composition-integration"
       - "verification-gate"
+    tracker_key: "as_operated_baseline"
   evidence:
     command_seq:
       - "npm run lint:ts --prefix mcp-server"
       - "node --test mcp-server/dist/checklist-validator.test.js --test-name-pattern 'as_operated_baseline'"
     manifest_reference: "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/verification-evidence-manifest.v1.json"
     proof_boundaries:
+      - "no-rdb-prefix-semantic-tokens"
       - "read-only-tied-yaml"
       - "working-folder-snapshots-only"
-      - "no-rdb-prefix-semantic-tokens"
   impact_analysis:
     modules_or_boundaries: "mcp-server/src/checklist-validator.ts (+facet module); tied-bundle/docs/processes.md PROC link; tied-project/vocab/as-operated-baseline.md; optional templates under tied-bundle/templates/"
     tied_tokens_affected:
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "PROC-AGENT_REQ_CHECKLIST"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
     tied_tokens_new:
       - "ARCH-TIED_AS_OPERATED_BASELINE"
       - "IMPL-TIED_AS_OPERATED_BASELINE"
@@ -77,9 +77,9 @@ CITDP-REQ-TIED_AS_OPERATED_BASELINE:
   parent_program:
     linked_plan: "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/PLAN.md"
     origin_evidence:
-      - "tied-project/working/DOC-TIED-RDB-ANALYSIS/evidence/analysis-exit-review.md"
       - "docs/methodologies/replacement-discovery-baseline-runbook.md"
       - "tied-project/non-tied-plans/replacement-discovery-baseline/PLAN.md"
+      - "tied-project/working/DOC-TIED-RDB-ANALYSIS/evidence/analysis-exit-review.md"
   record_identity:
     change_request_id: "REQ-TIED_AS_OPERATED_BASELINE"
     record_status: "draft"
@@ -89,22 +89,22 @@ CITDP-REQ-TIED_AS_OPERATED_BASELINE:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "RDB CON row with disposition observed treated as Implemented REQ satisfaction"
         - "active mode declared without Snapshot-A tree on disk but composition-integration marked completed"
         - "Phase 8 readiness checklist item smuggled into verification_gate required steps"
+        - "RDB CON row with disposition observed treated as Implemented REQ satisfaction"
         - "Snapshot writer mutates tied-project/requirements.yaml during refresh"
       depth_tier: "minimal"
       disconfirming_observations:
         - "checklist-validator.test.ts fails when active mode lacks composition snapshot receipt"
-        - "REQ satisfaction criteria text excludes phases 8–11"
         - "Dogfood registry shape diff shows no renamed registry keys vs DOC-TIED-RDB-ANALYSIS"
+        - "REQ satisfaction criteria text excludes phases 8–11"
       evidence_references:
-        - "tied-project/working/DOC-TIED-RDB-ANALYSIS/evidence/analysis-exit-review.md"
         - "tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+        - "tied-project/working/DOC-TIED-RDB-ANALYSIS/evidence/analysis-exit-review.md"
       falsification_questions:
-        - "Does snapshot validation write project TIED YAML?"
         - "Can verification-gate pass in active mode with only Snapshot-A?"
         - "Does PROC enrollment imply replacement authorization?"
+        - "Does snapshot validation write project TIED YAML?"
       gate_policy: "advisory"
       profile_depth: "minimal"
       research_profile: "read-only-research"

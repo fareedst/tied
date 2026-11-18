@@ -23,14 +23,14 @@ records:
     owner: "agent"
     statement: "CAP-003/004 summarize tool families; full mcp-server tool catalog not yet mapped 1:1"
     status: "unknown"
-  - id: "GAP-005"
-    critical_path: true
+  - critical_path: true
+    id: "GAP-005"
     impact_if_wrong: "Wrong write binding in multi-root or identity-routing clients"
     owner: "agent"
     statement: "tied-project/config.yaml identity_routing modes not fully documented in RDB DAT/INT"
     status: "unknown"
-  - id: "GAP-006"
-    critical_path: true
+  - critical_path: true
+    id: "GAP-006"
     impact_if_wrong: "Sponsor over-trusts WF trial shell exit"
     owner: "sponsor"
     statement: "SC-DCR-06 and close_out receipt file conventions still vary by cohort; see FAIL-002 FAIL-005"

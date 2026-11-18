@@ -2,11 +2,11 @@ CITDP-REQ-UPGRADE-MISSING:
   risk_analysis:
     adversarial_inquiry:
       counterexamples:
-        - empty input
-      depth_tier: minimal
+        - "empty input"
+      depth_tier: "minimal"
       disconfirming_observations:
-        - empty input rejected
+        - "empty input rejected"
       evidence_references:
-        - test-1
+        - "test-1"
       falsification_questions:
-        - Can empty input pass?
+        - "Can empty input pass?"

@@ -9,9 +9,9 @@ CITDP-REQ-WF_TRIAL_SUMMARIES_PUBLISH:
       - "Leaderboard or maturity_score prose"
       - "Mutate disposable trial clients"
     success_criteria:
-      - "wf-trial-registry-author sync inserts catalog-linked rows; SC-WF-PSP-04 passes"
-      - "Publish spawns size batch with --limit 0; SC-WF-PSP-07 passes"
       - "1795023644 in master registry and WF-03 cursor:grok47-low matrix; SC-WF-PSP-08"
+      - "Publish spawns size batch with --limit 0; SC-WF-PSP-07 passes"
+      - "wf-trial-registry-author sync inserts catalog-linked rows; SC-WF-PSP-04 passes"
       - "wf-trial-summaries-publish.mjs --check passes after regen"
     unchanged_behavior: "record-wf-trial per-client readout authorship; BUNDLED_STANDALONE_CLIENT_SKILLS unchanged."
   evidence:

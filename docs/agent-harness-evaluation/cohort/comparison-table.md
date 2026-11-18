@@ -1,6 +1,6 @@
 # Project size comparison (facilitator)
 
-**Generated:** 2026-11-18T19:15:31.136Z
+**Generated:** 2026-11-18T19:52:52.581Z
 **Discover parent:** `/Users/fareed/Documents/dev/test`
 **Pattern (substring):** `wf-agentstream`
 
@@ -124,7 +124,7 @@ Rows after epoch floor (when `summary_epoch_min` > 0), dedupe by display **label
 | wf-09-cursor-grok47low | 0 | 1 | 1 | 1 | 1462 | 37 | 0 | 6 | 0 | 0 | 244 | 6 | 1 | 13 | 3.59 · A/A-/B+/A-/A-/A-/B |
 | wf-10-claude-claudefable52low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — | — | — | 0 | — |
 | wf-10-claude-claudehaiku55high | 0 | 1 | 1 | 2 | 6710 | 176 | 5 | 50 | 0 | 0 | 839 | 22 | 6 | 14 | 3.71 · A/A-/A/A/B+/A-/B+ |
-| wf-10-claude-claudehaiku55low | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 16 | 0 | 0 | 0 | 0 | 8 | 4 | 2.90 · A-/C+/A-/B+/D+/B/B |
+| wf-10-claude-claudehaiku55low | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 20 | 1 | 0 | 0 | 0 | 11 | 6 | 3.81 · A/A/A-/A/B+/A/A- |
 | wf-10-claude-claudehaiku55medium | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 21 | 0 | 0 | 0 | 0 | 11 | 7 | 3.29 · A/B-/A-/A/C+/B+/B |
 | wf-10-claude-claudesonnet46low | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 2 | 0 | — | — | — | 5 | 2.94 · A-/C+/A/B+/D+/B/B |
 | wf-10-claude-claudesonnet46medium | 0 | 1 | 1 | 1 | 1762 | 43 | 2 | 3 | 4 | 0 | 294 | 7 | 1 | 17 | 2.80 · B+/C/C+/B/C/A-/B+ |
