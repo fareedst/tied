@@ -59,6 +59,7 @@ Bullets summarize target `README.md`, `PROJECT-PLAN.md`, `docs/development-workf
 | [Heimsbakk × TIED](veronika-heimsbakk-ai-generated-ontologies-vs-tied-agent-management.md) | Meaning ownership for vocab/tokens | Factory **local IDs** vs TIED tokens—bridge only |
 | [Ludanyi × TIED](andras-ludanyi-illusion-of-measurement-judgment-cooperation-vs-tied-agent-management.md) | Proxy metrics and judgment | Factory **evidence for ship** vs TIED **proof for intent change**—related but distinct |
 | [TIED vs well-known methodologies](tied-vs-well-known-methodologies.md) | Broad methodology map | **Single external factory reference repo** with PetClinic proof narrative |
+| [Farley executable spec × TIED](dave-farley-spec-must-be-executable-vs-tied-agent-management.md) | Practitioner essay + four-layer ATDD pedagogy | **Reference repo** with protected `spec/` and run records |
 
 Cross-link Traefik when separating **turn orchestration** (agent prompts, BDD steps) from **governance authority** (who may change verification and YAML truth).
 

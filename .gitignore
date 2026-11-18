@@ -66,6 +66,8 @@ docs/comparisons/*
 !docs/comparisons/afurmanov-harness-profiler-vs-tied-agent-management.md
 !docs/comparisons/hackernoon-observability-contract-ci.md
 !docs/comparisons/hackernoon-observability-contract-ci-vs-tied-agent-management.md
+!docs/comparisons/dave-farley-spec-must-be-executable.md
+!docs/comparisons/dave-farley-spec-must-be-executable-vs-tied-agent-management.md
 !docs/comparisons/meta-astryx-design-system.md
 !docs/comparisons/meta-astryx-design-system-vs-tied-agent-management.md
 docs/social/

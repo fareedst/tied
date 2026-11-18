@@ -11,6 +11,7 @@
 | Furmanov harness-profiler | [afurmanov-harness-profiler.md](../../../docs/comparisons/afurmanov-harness-profiler.md) | [afurmanov-harness-profiler-vs-tied-agent-management.md](../../../docs/comparisons/afurmanov-harness-profiler-vs-tied-agent-management.md) |
 | HackerNoon observability contract CI (Akhil) | [hackernoon-observability-contract-ci.md](../../../docs/comparisons/hackernoon-observability-contract-ci.md) | [hackernoon-observability-contract-ci-vs-tied-agent-management.md](../../../docs/comparisons/hackernoon-observability-contract-ci-vs-tied-agent-management.md) |
 | Meta Astryx design system | [meta-astryx-design-system.md](../../../docs/comparisons/meta-astryx-design-system.md) | [meta-astryx-design-system-vs-tied-agent-management.md](../../../docs/comparisons/meta-astryx-design-system-vs-tied-agent-management.md) |
+| Dave Farley “Spec Must Be Executable” (LinkedIn) | [dave-farley-spec-must-be-executable.md](../../../docs/comparisons/dave-farley-spec-must-be-executable.md) | [dave-farley-spec-must-be-executable-vs-tied-agent-management.md](../../../docs/comparisons/dave-farley-spec-must-be-executable-vs-tied-agent-management.md) |
 
 **DOC working pattern:** see `tied-project/working/DOC-AI-SDLC-FACTORY-COMPARISON/`, `DOC-OPEN-ONTOLOGIES-COMPARISON/`, and `DOC-NDTP-AI-ONTOLOGY-EXTENSION-COMPARISON/` for refine trackers and handoff evidence.
 

@@ -1,0 +1,9 @@
+change_class: "comparisons_doc_only"
+depth_tier: "minimal"
+gate_policy: "advisory"
+notes: "Dave Farley LinkedIn ATDD / executable-spec outreach; Wave 3 matrix row and REQ behavior Defer. Article stub only (no body in repo). tied_checklist_gate_validate not invoked for doc-complete claims.\n"
+profile_depth: "not_measured"
+request_token: "DOC-FARLEY-EXECUTABLE-SPEC-COMPARISON"
+source_url: "https://www.linkedin.com/pulse/spec-must-executable-dave-farley-jrnxe/"
+tied_tokens_new: []
+wave: "1-2"
