@@ -2,7 +2,7 @@
   "schema_version": "project-size-snapshot-receipt.v1",
   "ok": true,
   "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
-  "validator_version": "1.1.0",
+  "validator_version": "1.2.0",
   "repo_root": "/Users/fareed/Documents/dev/test/1794231848-wf-agentstream-wf-08-cursor-gpt56lunalow",
   "layers": {
     "atoms": {
@@ -29,7 +29,11 @@
       "composition_tests": 0,
       "e2e_tests": 0,
       "binding_inventory_tests": 0,
-      "verify_evidence_files": 0
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 2
+      },
+      "composition_inferred_cases": 0
     }
   },
   "cross_layer": {
@@ -41,6 +45,11 @@
   "hashes": {
     "operational_intent_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "corpus_graph_content_hash": "7393f56c7cfba3ad006c7a88f556135cac333ec28c0910579671b342e66ae3d7"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 523
   },
   "diagnostics": []
 }

@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **WF trial summaries publish wave 2 ([REQ-WF_TRIAL_SUMMARIES_PUBLISH])** — catalog append-only registry sync (`wf-trial-registry-author.mjs`); publish size batch **`--limit 0`** (278 snapshots); master + matrix for **1795023644**; SC-WF-PSP-04/07/08. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_SUMMARIES_PUBLISH/PLAN.md).
+
 - **WF trial readout — PROMPT-WF-03 Grok 4.7 low @ 1795023644** — SC-DCR-06 **Full**; orchestrator **`exit_code: 0`**; **1/1** wiring test; verification + close_out **allowed**; successor to split @ 1794616912. [Readout](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-03-grok47low-1795023644-wf-agentstream-wf-03-cursor-grok47low.md).
 
 - **WF trial readout — PROMPT-WF-09 Grok 4.7 low @ 1795022513** — SC-DCR-06 **Full**; orchestrator **`exit_code: 0`**; **6/6** tests; verification + close_out **allowed**; successor to split @ 1794608051. [Readout](docs/agent-harness-evaluation/readouts/trial-readout-PROMPT-WF-09-grok47low-1795022513-wf-agentstream-wf-09-cursor-grok47low.md).

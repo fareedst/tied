@@ -6,6 +6,7 @@ import path from "node:path";
 
 import { resolveAhePaths } from "./agent-harness-eval-docs-paths.mjs";
 import { loadReadoutRegistryFields } from "./wf-trial-readout-registry-fields.mjs";
+import { syncMasterRowsFromCatalogLinks } from "./wf-trial-registry-author.mjs";
 
 const MASTER_HEADER =
   "| WF | Client ID | Harness | Model slug | Exit | Run time | Grades | Latest | Readout |";
@@ -34,7 +35,7 @@ export function parseMasterRow(line) {
   };
 }
 
-function formatMasterRow(row) {
+export function formatMasterRow(row) {
   const slugCell = row.modelSlug === "—" ? "—" : `\`${row.modelSlug}\``;
   return `| ${row.wf} | ${row.clientId} | ${row.harness} | ${slugCell} | ${row.exit} | ${row.runTime} | ${row.grades} | ${row.latest} | [readout](${row.readout}) |`;
 }
@@ -129,12 +130,23 @@ export function patchRegistryHeader(md, rowCount, dateIso) {
  */
 export function refreshTraditionalWorkflowTrialRunsRegistry(storeRoot, opts = {}) {
   const registryPath = resolveAhePaths(storeRoot).registry;
-  const md = fs.readFileSync(registryPath, "utf8");
+  let md = fs.readFileSync(registryPath, "utf8");
+  const sync = syncMasterRowsFromCatalogLinks(storeRoot, md);
+  md = sync.markdown;
   const { markdown, masterRowCount } = refreshRegistryFromReadouts(storeRoot, md);
   const today = new Date().toISOString().slice(0, 10);
   const patched = patchRegistryHeader(markdown, masterRowCount, today);
   if (opts.write !== false) {
     fs.writeFileSync(registryPath, patched);
   }
-  return { registryPath, masterRowCount, markdown: patched };
+  return {
+    registryPath,
+    masterRowCount,
+    markdown: patched,
+    registrySync: {
+      insertedCount: sync.insertedCount,
+      insertedReadouts: sync.insertedReadouts,
+      syncSkipped: sync.syncSkipped,
+    },
+  };
 }

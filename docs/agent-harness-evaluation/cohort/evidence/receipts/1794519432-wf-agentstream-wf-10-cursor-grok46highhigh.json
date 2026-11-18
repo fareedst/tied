@@ -31,8 +31,8 @@
       "binding_inventory_tests": 0,
       "verify_evidence_files": 0,
       "label_case_counts": {
-        "composition.wiring": 5,
-        "unit.colocated": 52
+        "unit.colocated": 52,
+        "composition.wiring": 5
       },
       "composition_inferred_cases": 6
     }

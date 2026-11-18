@@ -1,0 +1,3 @@
+fix(bootstrap): WF publish registry sync and unlimited size batch
+
+Append-only catalog master-row sync fixes missing trials (e.g. 1795023644); publish uses discover limit 0 for full cohort snapshots. SC-WF-PSP-04/07/08; closes REQ-WF_TRIAL_SUMMARIES_PUBLISH wave 2.

@@ -1,7 +1,7 @@
 CITDP-REQ-WF_TRIAL_SUMMARIES_PUBLISH:
   change_definition:
-    current_behavior: "After @record-wf-trial, facilitators manually regen traditional-workflow-trial-runs-registry.md, comparison-table.md, and Latest-run comparison matrix with ad hoc node scripts; no bundled skill and no single --check entry point."
-    desired_behavior: "Store-only @publish-wf-trial-summaries (no required inputs) runs wf-trial-summaries-publish.mjs to fully refresh cohort summaries from existing trial-readout-PROMPT-WF-*.md files and catalog readout links; optional --check for CI."
+    current_behavior: "@publish-wf-trial-summaries refreshes grades on existing master rows only; does not insert new catalog-linked rows (e.g. 1795023644). Size batch uses discover limit 50."
+    desired_behavior: "Publish insert-syncs missing catalog-linked master rows (append-only), refreshes grades/exit/time, rebuilds Latest-run matrix; size batch with unlimited discover (--limit 0). Optional --check for CI."
     non_goals:
       - "Auto git commit"
       - "Auto-rewrite Recorded trials catalog table body in v1"
@@ -9,10 +9,10 @@ CITDP-REQ-WF_TRIAL_SUMMARIES_PUBLISH:
       - "Leaderboard or maturity_score prose"
       - "Mutate disposable trial clients"
     success_criteria:
-      - "SKILL.md documents zero positional args and publish pipeline"
-      - "STORE_FACILITATOR_SKILLS includes publish-wf-trial-summaries; store-facilitator-skills.test.mjs passes"
-      - "wf-trial-summaries-publish.mjs --check passes on committed store after first regen"
-      - "Workflow catalog documents publish step after record-wf-trial"
+      - "wf-trial-registry-author sync inserts catalog-linked rows; SC-WF-PSP-04 passes"
+      - "Publish spawns size batch with --limit 0; SC-WF-PSP-07 passes"
+      - "1795023644 in master registry and WF-03 cursor:grok47-low matrix; SC-WF-PSP-08"
+      - "wf-trial-summaries-publish.mjs --check passes after regen"
     unchanged_behavior: "record-wf-trial per-client readout authorship; BUNDLED_STANDALONE_CLIENT_SKILLS unchanged."
   evidence:
     command_seq:
@@ -23,7 +23,7 @@ CITDP-REQ-WF_TRIAL_SUMMARIES_PUBLISH:
       - "executable_behavior — bootstrap tests + orchestrator"
       - "facilitator_session_reconstruction — skill procedure matches pipeline"
   impact_analysis:
-    impl_inventory_notes: "Promote build-comparison-matrix; new orchestrator + pure libs; fourth facilitator skill bundle."
+    impl_inventory_notes: "Wave 2: wf-trial-registry-author.mjs; discover limit 0; publish --limit 0; matrix spot WF-03."
     modules_or_boundaries: "tools/bundled-publish-wf-trial-summaries-skill/*; tools/bootstrap/lib/wf-trial-summaries-publish.mjs; tools/bootstrap/lib/build-wf-trial-comparison-matrix.mjs; tools/bootstrap/manifest.json; docs/demos/catalog-*.md; tied-project/vocab/project-operations-mcp.md"
     tied_tokens_affected:
       - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"

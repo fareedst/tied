@@ -17,8 +17,9 @@ procedure PUBLISH_WF_TRIAL_SUMMARIES:
   GLOB trial-readout-PROMPT-WF-*.md
   EMIT orphan/missing diagnostics
   UNLESS skip_registry_matrix
+    CALL SYNC_MASTER_ROWS_FROM_CATALOG
     CALL REFRESH_REGISTRY_FROM_READOUTS
     CALL PATCH_REGISTRY_COMPARISON_MATRIX
   UNLESS skip_size_batch
-  CALL project-size-batch-compare WITH include_trial_factors
+  CALL project-size-batch-compare WITH include_trial_factors AND limit_zero
   WRITE FACILITATOR-WF-PUBLISH evidence publish-summary.md

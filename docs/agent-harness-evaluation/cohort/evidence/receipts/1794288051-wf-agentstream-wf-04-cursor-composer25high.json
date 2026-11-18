@@ -54,14 +54,14 @@
   "diagnostics": [],
   "proof_inference_diagnostics": [
     {
-      "path": "src/cli.test.ts",
-      "binding_inferred": true,
-      "uses_subprocess": true
-    },
-    {
       "path": "src/compare-markers-to-index.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
+    },
+    {
+      "path": "src/cli.test.ts",
+      "binding_inferred": true,
+      "uses_subprocess": true
     }
   ]
 }

@@ -2,7 +2,7 @@
   "schema_version": "project-size-snapshot-receipt.v1",
   "ok": true,
   "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
-  "validator_version": "1.1.0",
+  "validator_version": "1.2.0",
   "repo_root": "/Users/fareed/Documents/dev/test/1794183415-wf-agentstream-wf-02-cursor-grok47med",
   "layers": {
     "atoms": {
@@ -29,7 +29,11 @@
       "composition_tests": 0,
       "e2e_tests": 0,
       "binding_inventory_tests": 0,
-      "verify_evidence_files": 0
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 8
+      },
+      "composition_inferred_cases": 0
     }
   },
   "cross_layer": {
@@ -41,6 +45,11 @@
   "hashes": {
     "operational_intent_hash": "0b83cad5fb4c3f6e1ce37da84d422dc3854186b425c13ee4a3f518986241dede",
     "corpus_graph_content_hash": "b0e384a5fb7addb116fbb0d6d28c2c578e36216d65d5cd96999f0d41106a09d5"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 2191
   },
   "diagnostics": []
 }

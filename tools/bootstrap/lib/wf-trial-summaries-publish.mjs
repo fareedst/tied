@@ -61,6 +61,8 @@ function runSizeBatchCompare(storeRoot, opts) {
     "--store-root",
     storeRoot,
     "--include-trial-factors",
+    "--limit",
+    "0",
   ];
   if (opts.dryRun) {
     console.log("DEBUG: would run", "node", args.join(" "));
@@ -97,7 +99,10 @@ export function publishWfTrialSummaries(opts) {
   }
 
   if (!opts.skipRegistryMatrix) {
-    refreshTraditionalWorkflowTrialRunsRegistry(opts.storeRoot, { write: true });
+    const regen = refreshTraditionalWorkflowTrialRunsRegistry(opts.storeRoot, {
+      write: true,
+    });
+    report.registrySync = regen.registrySync;
     const matrix = patchRegistryComparisonMatrix(opts.storeRoot, { write: true });
     if (!matrix.ok) return { ok: false, report, phase: "matrix" };
     report.steps.push("registry");
@@ -140,6 +145,22 @@ export function publishWfTrialSummaries(opts) {
   if (missing.length) {
     lines.push("### Missing readouts (catalog link, file absent)");
     for (const m of missing) lines.push(`- ${m}`);
+    lines.push("");
+  }
+  if (report.registrySync) {
+    lines.push("### Registry sync");
+    lines.push(`- inserted: ${report.registrySync.insertedCount}`);
+    if (report.registrySync.insertedReadouts?.length) {
+      for (const r of report.registrySync.insertedReadouts) {
+        lines.push(`  - ${r}`);
+      }
+    }
+    if (report.registrySync.syncSkipped?.length) {
+      lines.push("- skipped:");
+      for (const s of report.registrySync.syncSkipped) {
+        lines.push(`  - ${s.href}: ${s.reason}`);
+      }
+    }
     lines.push("");
   }
   lines.push(`**Steps:** ${report.steps.join(", ")}`);

@@ -28,7 +28,7 @@ Options:
   --parent PATH           Discover root (default: TIED_TEST_ROOT or ~/Documents/dev/test)
   --pattern TEXT          Basename filter (default: wf-agentstream)
   --pattern-regex         Treat --pattern as RegExp
-  --limit N               Max discover rows (default: 50)
+  --limit N               Max discover rows (default: 50; 0 = unlimited)
   --newest-first          Sort newest epoch/mtime first (default on)
   --no-newest-first       Disable newest-first sort
   --manifest PATH         Extra repo roots (union)

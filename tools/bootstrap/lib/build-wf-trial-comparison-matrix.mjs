@@ -139,6 +139,13 @@ const SPOT_CHECKS = [
     readoutIncludes: "1794264348",
   },
   {
+    wf: "03",
+    key: "cursor:grok47-low",
+    wallMins: "11m",
+    gradesIncludes: "3.63 ·",
+    readoutIncludes: "1795023644",
+  },
+  {
     wf: "09",
     key: "claude:claude-haiku-5-5",
     wallMins: "4m",

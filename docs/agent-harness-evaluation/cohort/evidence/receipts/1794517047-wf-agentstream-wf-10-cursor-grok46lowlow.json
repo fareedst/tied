@@ -32,8 +32,8 @@
       "verify_evidence_files": 0,
       "label_case_counts": {
         "unit.default": 23,
-        "composition.wiring": 2,
-        "e2e.ui": 4
+        "e2e.ui": 4,
+        "composition.wiring": 2
       },
       "composition_inferred_cases": 0
     }

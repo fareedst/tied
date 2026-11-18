@@ -5186,7 +5186,7 @@ REQ-WF_TRIAL_SUMMARIES_PUBLISH:
   description: "Store facilitator skill and CLI to refresh cohort WF trial summary tables from existing readouts without per-trial inputs."
   detail_file: "requirements/REQ-WF_TRIAL_SUMMARIES_PUBLISH.yaml"
   name: "WF trial summaries publish skill"
-  status: "Planned"
+  status: "implemented"
 REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC:
   depends_on:
     - "REQ-WF_TRIAL_DISPOSABLE_CLOSEOUT_READINESS"

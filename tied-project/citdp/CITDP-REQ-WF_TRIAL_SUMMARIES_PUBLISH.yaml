@@ -1,7 +1,7 @@
 CITDP-REQ-WF_TRIAL_SUMMARIES_PUBLISH:
   change_definition:
-    current_behavior: "Facilitators manually regen traditional-workflow-trial-runs-registry.md, comparison-table.md, and Latest-run comparison matrix with ad hoc node scripts; no bundled skill and no single --check entry point."
-    desired_behavior: "Store-only @publish-wf-trial-summaries (no required inputs) runs wf-trial-summaries-publish.mjs to fully refresh cohort summaries from existing trial-readout-PROMPT-WF-*.md files and catalog readout links; optional --check for CI."
+    current_behavior: "Wave 1 publish refreshed existing master rows only; size batch capped at 50 discover rows."
+    desired_behavior: "Publish insert-syncs missing catalog-linked master rows (append-only), refreshes cohort indexes, unlimited size batch (--limit 0); optional --check for CI."
     non_goals:
       - "Auto git commit"
       - "Auto-rewrite Recorded trials catalog table body in v1"
@@ -9,17 +9,17 @@ CITDP-REQ-WF_TRIAL_SUMMARIES_PUBLISH:
       - "Leaderboard or maturity_score prose"
       - "Mutate disposable trial clients"
     success_criteria:
-      - "SKILL.md documents zero positional args and publish pipeline"
-      - "STORE_FACILITATOR_SKILLS includes publish-wf-trial-summaries; store-facilitator-skills.test.mjs passes"
-      - "wf-trial-summaries-publish.mjs --check passes on committed store after first regen"
-      - "Workflow catalog documents publish step after record-wf-trial"
+      - "wf-trial-registry-author sync; SC-WF-PSP-04/07/08"
+      - "wf-trial-summaries-publish.mjs --check passes after regen"
+      - "STORE_FACILITATOR_SKILLS includes publish-wf-trial-summaries"
     unchanged_behavior: "record-wf-trial per-client readout authorship; BUNDLED_STANDALONE_CLIENT_SKILLS unchanged."
   evidence:
     command_seq:
       - "node --test tools/bootstrap/lib/store-facilitator-skills.test.mjs"
       - "node --test tools/bootstrap/lib/wf-trial-summaries-publish*.test.mjs"
-      - "node --test tools/bootstrap/lib/wf-trial-registry-refresh.test.mjs"
-      - "node tools/bootstrap/lib/build-wf-trial-comparison-matrix.mjs --check"
+      - "node --test tools/bootstrap/lib/wf-trial-registry-author.test.mjs"
+      - "node --test tools/bootstrap/lib/project-size-discover-clients.test.mjs"
+      - "node --test tools/bootstrap/lib/wf-trial-summaries-publish-wave2.test.mjs"
       - "node tools/bootstrap/lib/wf-trial-summaries-publish.mjs --check"
     proof_boundaries:
       - "executable_behavior — bootstrap tests + orchestrator"

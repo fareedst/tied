@@ -32,8 +32,8 @@
       "verify_evidence_files": 0,
       "label_case_counts": {
         "unit.default": 60,
-        "composition.wiring": 7,
-        "e2e.ui": 10
+        "e2e.ui": 10,
+        "composition.wiring": 7
       },
       "composition_inferred_cases": 19
     }
@@ -56,12 +56,12 @@
   "diagnostics": [],
   "proof_inference_diagnostics": [
     {
-      "path": "src/pipeline.test.ts",
+      "path": "src/summary.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
     },
     {
-      "path": "src/summary.test.ts",
+      "path": "src/pipeline.test.ts",
       "binding_inferred": true,
       "uses_subprocess": false
     }

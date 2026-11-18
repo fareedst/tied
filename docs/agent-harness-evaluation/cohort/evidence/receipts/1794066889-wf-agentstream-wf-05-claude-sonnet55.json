@@ -1,0 +1,55 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "validator_version": "1.2.0",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794066889-wf-agentstream-wf-05-claude-sonnet55",
+  "layers": {
+    "atoms": {
+      "vocab_preferred_terms": 0,
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 1,
+      "corpus_graph_nodes": 3,
+      "corpus_graph_edges": 10
+    },
+    "operational_intent": {
+      "sidecar_count": 1,
+      "gross_lines": 31,
+      "template_overlap_lines": 0,
+      "applied_lines": 31,
+      "gross_utf8_bytes": 1346,
+      "template_overlap_utf8_bytes": 0,
+      "applied_utf8_bytes": 1346,
+      "procedure_count": 3,
+      "parse_node_count": 27
+    },
+    "proof_facets": {
+      "unit_tests": 8,
+      "composition_tests": 0,
+      "e2e_tests": 0,
+      "binding_inventory_tests": 0,
+      "verify_evidence_files": 0,
+      "label_case_counts": {
+        "unit.default": 8
+      },
+      "composition_inferred_cases": 0
+    }
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 5.166666666666667,
+    "operational_intent_utf8_per_atom": 224.33333333333334,
+    "proof_facets_per_atom": 1.3333333333333333,
+    "tests_per_procedure": 2.6666666666666665
+  },
+  "hashes": {
+    "operational_intent_hash": "4b54b26fe34b8a2cf1c014c4daff810a592e4e97f69d0267b75377cb36ce98db",
+    "corpus_graph_content_hash": "820540f083d3ce65ca765089effe63b71faa06323f8b12148fd9eef669b5d3f2"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 436
+  },
+  "diagnostics": []
+}

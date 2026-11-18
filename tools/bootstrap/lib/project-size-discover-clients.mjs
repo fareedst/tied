@@ -146,7 +146,7 @@ export async function discoverClients(input) {
     candidates.sort(compareNewestFirst);
   }
 
-  const selected = candidates.slice(0, limit);
+  const selected = limit <= 0 ? candidates : candidates.slice(0, limit);
 
   const byRoot = new Map();
   for (const row of selected) {

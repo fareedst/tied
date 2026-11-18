@@ -1,0 +1,53 @@
+{
+  "schema_version": "project-size-snapshot-receipt.v1",
+  "ok": true,
+  "proof_boundary": "Read-only size evidence from subject repo; counts and hashes do not prove REQ satisfaction, test passage, checklist gates, or trial grade.",
+  "validator_version": "1.2.0",
+  "repo_root": "/Users/fareed/Documents/dev/test/1794094975-wf-agentstream-wf-01-cursor-lunalow",
+  "layers": {
+    "atoms": {
+      "vocab_preferred_terms": 0,
+      "index_req": 1,
+      "index_arch": 1,
+      "index_impl": 1,
+      "corpus_graph_nodes": 3,
+      "corpus_graph_edges": 10
+    },
+    "operational_intent": {
+      "sidecar_count": 1,
+      "gross_lines": 19,
+      "template_overlap_lines": 0,
+      "applied_lines": 19,
+      "gross_utf8_bytes": 1369,
+      "template_overlap_utf8_bytes": 0,
+      "applied_utf8_bytes": 1369,
+      "procedure_count": 1,
+      "parse_node_count": 15
+    },
+    "proof_facets": {
+      "unit_tests": 0,
+      "composition_tests": 0,
+      "e2e_tests": 0,
+      "binding_inventory_tests": 0,
+      "verify_evidence_files": 0,
+      "label_case_counts": {},
+      "composition_inferred_cases": 0
+    }
+  },
+  "cross_layer": {
+    "operational_intent_per_atom": 3.1666666666666665,
+    "operational_intent_utf8_per_atom": 228.16666666666666,
+    "proof_facets_per_atom": 0,
+    "tests_per_procedure": 0
+  },
+  "hashes": {
+    "operational_intent_hash": "1fd1f9184646651eb86003067683c22c56378ec56f2fdc9424ea33b411ffa462",
+    "corpus_graph_content_hash": "687c1c4afdf6890090dbadeefbac9f4ed8a565fcd0ded1c1941680ecc95fc5d6"
+  },
+  "trial_factors": {
+    "implementation_stack_id": "wf-trial-ts-node-test-v1",
+    "orchestrator_exit_code": 0,
+    "orchestrator_wall_time_seconds": 434
+  },
+  "diagnostics": []
+}

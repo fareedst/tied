@@ -1,4 +1,4 @@
-copy_hygiene: "refine-plan 2026-11-13 — publish-wf-trial-summaries"
+copy_hygiene: "refine-plan 2026-11-18 pass 3 — insert-only registry sync contract + unlimited size batch"
 description: "Tracker — WF trial summaries publish skill"
 execution_evidence:
   close_out_evidence:
