@@ -2945,6 +2945,16 @@ REQ-TIED_GIT_HYGIENE:
   name: "Git hygiene MCP"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    - "IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+  description: "Wave 3 Phase 1 doc-compose: HackerNoon intent/verify literacy, receipt contract CI, opt-in enrollment validator, path-scoped workflow—no Conftest/LGTM core."
+  detail_file: "requirements/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3.yaml"
+  name: "HackerNoon observability contract Wave 3 — intent/verify compose"
+  priority: "P2"
+  status: "Implemented"
 REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
   category: "Methodology"
   description: "LangChain comparison Phase 3 sponsor promotion: matrix row 15 and harness-trace-analyzer skill compose on HTOL stack."
@@ -3600,6 +3610,56 @@ REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
       - "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT"
     implementation:
       - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
+REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
+  category: "Methodology"
+  description: "Wave 3 Phase 1 doc-compose: bundle guide for odourless-zone literacy, client index pointer, operator checklist, CITDP literacy pointer, and comparison reciprocals—software-delivery proof boundary only."
+  detail_file: "requirements/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3.yaml"
+  name: "Open Governance sensing Wave 3 — proof-boundary compose"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Explicit proof boundary vs organizational GRC"
+      - "Pair-read Ludanyi + HPS authority checklist"
+    problems_solved:
+      - "Green chat mistaken for gate receipts"
+      - "No bundle guide for mercaptan analogs in traceability slice"
+      - "Wave 3 phased items Defer"
+    why: "Open Governance × TIED Wave 2 comparison deferred Wave 3 Phase 1; operators need a single compose guide for what TIED can vs cannot sense."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+    related_to:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  satisfaction_criteria:
+    - criterion: "citdp-policy or template odourless literacy pointer"
+      id: "SC-OGS-CITDP-POINTER"
+      metric: "Contract test marker"
+    - criterion: "client-development-index Quick reads links compose guide and comparisons"
+      id: "SC-OGS-INDEX"
+      metric: "Link audit in contract test"
+    - criterion: "governance-sensing-proof-boundary-compose.md passes contract test"
+      id: "SC-OGS-GUIDE"
+      metric: "governance-sensing-proof-boundary-compose-doc.test.mjs"
+    - criterion: "odourless-zones operator checklist committed under working folder"
+      id: "SC-OGS-CHECKLIST"
+      metric: "File + link audit"
+    - criterion: "Open Governance comparison Phase 1 Implemented with REQ back-link"
+      id: "SC-OGS-COMPOSE"
+      metric: "Link audit"
+    - criterion: "Optional HTOL Open Governance source study"
+      id: "SC-OGS-HTOL"
+      metric: "Deferred unless F2 run"
+    - criterion: "tied_validate_consistency after implement"
+      id: "SC-OGS-TRACE"
+      metric: "tied_validate_consistency"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    implementation:
+      - "IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
 REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
   category: "Methodology"
   description: "Open Ontologies Wave 3 harness compose"

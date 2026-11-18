@@ -1,0 +1,93 @@
+CITDP-REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  record_identity:
+    change_request_id: "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-17"
+    title: "HackerNoon observability contract Wave 3 — intent/verify compose + receipt CI"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  change_definition:
+    current_behavior: "HackerNoon observability-contract × TIED Waves 1–2 committed; Wave 3 Phase 1 Defer; operators lack bundle guide for observably-dead literacy and no opt-in CI check that closed REQ folders carry verify manifests."
+    desired_behavior: "Compose guide, index pointer, intent-verify checklist, citdp-policy pointer, comparison reciprocals, doc contract test, opt-in receipt validator + enrollment schema, path-scoped GitHub workflow—without Conftest/LGTM/OPA in stdd or matrix §2 row in v1."
+    non_goals:
+      - "OPA Conftest or client LGTM stack as TIED core"
+      - "HackerNoon-reported fleet metrics as TIED effectiveness proof"
+      - "Receipt validator substituting tied_checklist_gate_validate"
+      - "Global enrollment of all REQ working folders in v1"
+      - "methodology-composition-matrix §2 row 21 without MCM LEAP"
+    success_criteria:
+      - "Build-plan satisfies SC-HOC-* per PLAN.md"
+      - "hackernoon-observability-contract-compose-doc.test.mjs green"
+      - "implement-complete-receipt-contract.test.mjs green"
+      - "PLAN slices A–H; J OutOfScope"
+    unchanged_behavior:
+      - "Gate authority, MCP YAML path, default agentstream preflight off"
+      - "HTOL observation ≠ gate receipt"
+  impact_analysis:
+    methodology_surface_change_class: "additive_ci"
+    modules_or_boundaries: "tied-bundle/docs; tools/bootstrap/lib; .github/workflows; working checklist"
+    tied_tokens_new:
+      - "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+      - "ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+      - "IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    tied_tokens_affected:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Receipt CI failure blocks merge while gates absent"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Global REQ scan shipped without enrollment schema"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3/PLAN.md"
+        - "docs/comparisons/hackernoon-observability-contract-ci-vs-tied-agent-management.md"
+      falsification_questions:
+        - "Does guide state receipt CI is not gate authority?"
+        - "Are HackerNoon metrics labeled not_measured?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Doc-compose + bootstrap tests; no MCP behavior change."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - id: "QEM-HOC-DOC"
+        proof_boundary: "traceability_structure"
+        evidence_method: "hackernoon-observability-contract-compose-doc.test.mjs; implement-complete-receipt-contract.test.mjs; tied_validate_consistency"
+        applicability: "applicable"
+  leap_feedback:
+    record_status: "complete"
+    divergences_from_analysis: "none"
+  evidence:
+    proof_boundaries:
+      - "traceability_structure"
+      - "human_decision"
+    command_seq:
+      - "pseudocode_validate IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3 gate_mode"
+      - "node --test tools/bootstrap/lib/hackernoon-observability-contract-compose-doc.test.mjs"
+      - "node --test tools/bootstrap/lib/implement-complete-receipt-contract.test.mjs"
+      - "tied_validate_consistency"
+  test_strategy:
+    documentation_only: false
+    mandatory_order: "RED contract tests before guide and validator finalization"
+  completion_criteria:
+    activation:
+      request_token: "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+      phase: "pre_implementation"
+      scope:
+        - "tied-bundle/docs/hackernoon-observability-contract-compose.md"
+        - "tied-bundle/docs/client-development-index.md"
+        - "tied-project/working/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3/intent-verify-operator-checklist.md"
+        - "tools/bootstrap/lib/implement-complete-receipt-contract.mjs"
+        - ".github/workflows/observability-receipt-contract-smoke.yml"

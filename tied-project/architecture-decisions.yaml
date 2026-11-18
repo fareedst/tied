@@ -2207,6 +2207,13 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
   detail_file: "architecture-decisions/ARCH-TIED_GIT_HYGIENE_SAFETY.yaml"
   name: "Git hygiene safety boundary"
   status: "Implemented"
+ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  cross_references:
+    - "IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    - "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+  detail_file: "architecture-decisions/ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3.yaml"
+  name: "HackerNoon observability contract Wave 3 — compose architecture"
+  status: "Accepted"
 ARCH-TIED_HARNESS_LANGCHAIN_PHASE3:
   detail_file: "architecture-decisions/ARCH-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
   name: "LangChain harness Phase 3 architecture"
@@ -2537,6 +2544,16 @@ ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
   detail_file: "architecture-decisions/ARCH-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
   name: "Node-only controlled runner architecture"
   status: "Proposed"
+ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    requirements:
+      - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+  decision: "Canonical compose guide in tied-bundle/docs/governance-sensing-proof-boundary-compose.md; odourless-zones checklist under working folder; citdp-policy literacy pointer; bootstrap contract tests; no organizational GRC product; matrix row 20 OutOfScope v1."
+  detail_file: "architecture-decisions/ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3.yaml"
+  name: "Open Governance sensing proof-boundary doc topology"
+  status: "Active"
 ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE:
   cross_references:
     requirements:

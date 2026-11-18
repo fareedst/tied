@@ -1,0 +1,47 @@
+REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  rationale:
+    benefits:
+      - "Explicit intent vs verify proof boundary"
+      - "Opt-in receipt CI without global REQ scan"
+    problems_solved:
+      - "Green chat mistaken for implement-complete"
+      - "No compose guide for observably-dead literacy"
+    why: "HackerNoon observability-contract × TIED Wave 2 deferred Phase 1; operators need receipt contract literacy and verify manifests for closed enrolled folders."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    related_to:
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+      - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+  satisfaction_criteria:
+    - criterion: "citdp-policy intent-vs-verify pointer"
+      id: "SC-HOC-CITDP"
+      metric: "Contract test marker"
+    - criterion: "client-development-index Quick reads links"
+      id: "SC-HOC-INDEX"
+      metric: "Contract test"
+    - criterion: "Comparison Phase 1 Implemented with REQ back-link"
+      id: "SC-HOC-COMPOSE"
+      metric: "Link audit"
+    - criterion: "hackernoon-observability-contract-compose.md passes contract test"
+      id: "SC-HOC-GUIDE"
+      metric: "hackernoon-observability-contract-compose-doc.test.mjs"
+    - criterion: "intent-verify-operator-checklist committed"
+      id: "SC-HOC-CHECKLIST"
+      metric: "File + link audit"
+    - criterion: "Path-scoped GitHub workflow smoke"
+      id: "SC-HOC-CI"
+      metric: "observability-receipt-contract-smoke.yml"
+    - criterion: "Receipt validator + enrollment schema"
+      id: "SC-HOC-RECEIPT"
+      metric: "implement-complete-receipt-contract.test.mjs"
+    - criterion: "tied_validate_consistency after implement"
+      id: "SC-HOC-TRACE"
+      metric: "tied_validate_consistency"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    implementation:
+      - "IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"

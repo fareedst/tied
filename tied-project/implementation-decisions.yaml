@@ -2793,6 +2793,13 @@ IMPL-TIED_GIT_HYGIENE:
   detail_file: "implementation-decisions/IMPL-TIED_GIT_HYGIENE.yaml"
   name: "Git hygiene implementation"
   status: "Implemented"
+IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  cross_references:
+    - "ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    - "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+  detail_file: "implementation-decisions/IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3.yaml"
+  name: "HackerNoon observability contract Wave 3 — implementation"
+  status: "Implemented"
 IMPL-TIED_HARNESS_LANGCHAIN_PHASE3:
   detail_file: "implementation-decisions/IMPL-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
   name: "LangChain harness Phase 3 implementation"
@@ -3130,6 +3137,16 @@ IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
   detail_file: "implementation-decisions/IMPL-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
   name: "Node-only controlled runner implementation"
   status: "Proposed"
+IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
+  approach: "RED/GREEN bootstrap contract test; bundle guide; client-development-index row; checklist; citdp pointer; comparison Phase 1 reciprocals."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    requirements:
+      - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+  detail_file: "implementation-decisions/IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3.yaml"
+  name: "Open Governance sensing proof-boundary doc maintenance"
+  status: "Active"
 IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE:
   approach: "Doc + templates + index + bootstrap test."
   cross_references:

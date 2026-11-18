@@ -1,0 +1,22 @@
+ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  decision: "Canonical compose guide in tied-bundle/docs/hackernoon-observability-contract-compose.md; intent-verify checklist under working folder; bootstrap doc + receipt contract tests; opt-in enrollment schema; path-scoped workflow; no Conftest/LGTM/OPA in stdd core; matrix §2 row 21 OutOfScope v1."
+  implementation_approach:
+    details:
+      - "Enrollment v1 includes only enrolled_request_tokens from schema"
+      - "Receipt validator must not substitute tied_checklist_gate_validate"
+    summary: "Docs, bootstrap tests, and opt-in receipt CI only."
+  rationale:
+    benefits:
+      - "HackerNoon-reported vs TIED-existing labeling"
+    problems_solved:
+      - "Manifest intent checks conflated with gate receipts"
+    why: "Compose-don't-replace per HackerNoon × TIED analysis."
+  related_decisions:
+    see_also:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+      - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  traceability:
+    implementation:
+      - "IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    requirements:
+      - "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"

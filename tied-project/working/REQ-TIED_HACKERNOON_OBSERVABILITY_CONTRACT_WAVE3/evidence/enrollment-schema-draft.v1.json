@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "implement-complete-receipt-enrollment.v1",
+  "description": "Opt-in REQ tokens subject to implement-complete-receipt-contract validator when plan_phase is closed. Draft for build-plan; promote to tied-bundle/docs/schemas/.",
+  "enrolled_request_tokens": [
+    "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+  ]
+}

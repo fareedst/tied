@@ -1,0 +1,12 @@
+feat(comparisons): HackerNoon observability contract Wave 3 intent/verify × TIED
+
+Add intent/verify compose guide, operator checklist, client index and citdp-policy
+pointers, comparison reciprocals, opt-in implement-complete receipt validator,
+enrollment schema, path-scoped GitHub smoke workflow, and bootstrap contract
+tests—without Conftest/LGTM in stdd or matrix §2 row 21 in v1.
+
+REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3
+ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3
+IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3
+
+Close-out: close_out allowed; envelope blocking gaps 0 (minimal, advisory).

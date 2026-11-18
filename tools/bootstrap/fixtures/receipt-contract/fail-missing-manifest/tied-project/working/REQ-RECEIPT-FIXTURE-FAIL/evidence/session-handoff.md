@@ -1,0 +1,1 @@
+# Fixture handoff — no manifest on disk

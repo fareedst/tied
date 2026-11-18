@@ -1,0 +1,8 @@
+{
+  "commands": [
+    {
+      "command": "node --test tools/bootstrap/lib/implement-complete-receipt-contract.test.mjs",
+      "exit_code": 0
+    }
+  ]
+}

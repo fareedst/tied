@@ -7,7 +7,7 @@
 | **Source URL** | [Your CI Pipeline Should Reject Any Service Without an Observability Contract](https://hackernoon.com/your-ci-pipeline-should-reject-any-service-without-an-observability-contract) (Akhil, 2026-06-23 — **HackerNoon-reported**) |
 | **Article capture (sibling)** | [hackernoon-observability-contract-ci.md](hackernoon-observability-contract-ci.md) — metadata + TL;DR only; **full text off-repo** |
 | **Status / date** | Outreach / analysis snapshot, **2026-11-17** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
-| **Executable follow-up** | Wave 3 **Defer** — optional doc compose on implement-complete “receipt contracts” unless sponsor scopes **`add-feature`** |
+| **Executable follow-up** | [REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3](../../tied-project/requirements/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3.yaml) — Wave 3 Phase 1 intent/verify compose + opt-in receipt CI |
 | **Distinct from** | [Netflix observability ontology × TIED](netflix-ontology-driven-observability-vs-tied-agent-management.md); [Open Governance cannot sense × TIED](open-governance-cannot-sense-vs-tied-agent-management.md); [Traefik harness/platform × TIED](traefik-harness-platform-vs-tied-agent-management.md); [LangChain/Cursor harness × TIED](langchain-harness-engineering-vs-tied-agent-management.md); [Ludanyi × TIED](andras-ludanyi-illusion-of-measurement-judgment-cooperation-vs-tied-agent-management.md); [Anthropic FV × TIED](anthropic-llm-formal-verification-vs-tied-agent-management.md) |
 | **TIED anchors (reference only)** | [AGENTS.md](../../AGENTS.md), [agent-req-implementation-checklist.md](../../tied-bundle/docs/agent-req-implementation-checklist.md), [harness-trace-observation-loop.md](../../tied-bundle/docs/harness-trace-observation-loop.md), [pre-handoff-verification-charter.md](../../tied-bundle/docs/pre-handoff-verification-charter.md), [sponsor-agent-relationship.md](../../tied-project/vocab/sponsor-agent-relationship.md), [quality-assurance.md](../../tied-project/vocab/quality-assurance.md) |
 
@@ -234,7 +234,7 @@ Client **Conftest** and **Loki audit** sit **platform-adjacent**. TIED **impleme
 | Phase | Action | Status |
 | --- | --- | --- |
 | **0** | Wave 1 stub + this analysis + git allowlist | **Done** (2026-11-17) |
-| **1** | Optional compose: “receipt contract” checklist for implement-complete | **Defer** (sponsor) |
+| **1** | Optional compose: “receipt contract” checklist for implement-complete | **Implemented** ([hackernoon-observability-contract-compose.md](../../tied-bundle/docs/hackernoon-observability-contract-compose.md), [REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3](../../tied-project/requirements/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3.yaml)) |
 | **2** | Vocab RECORD (`observably_dead` metaphor in client SRE glossary) | **Defer** |
 | **3** | Methodology composition matrix §2 row | **Defer** |
 | **4** | Client Conftest pack in stdd CI | **OutOfScope** unless separate platform REQ |

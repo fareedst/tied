@@ -1,0 +1,18 @@
+IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  decision: "Implement PLAN slices A–H via RED/GREEN contract tests; persist CITDP at build-plan; promote pseudo-code sidecar from working folder."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3-pseudocode.md"
+  implementation_approach:
+    details:
+      - "hackernoon-observability-contract-compose-doc.test.mjs"
+      - "implement-complete-receipt-contract.mjs"
+      - "observability-receipt-contract-smoke.yml"
+    summary: "Contract tests + receipt validator + markdown deliverables."
+  rationale:
+    problems_solved:
+      - "Wave 3 Phase 1 Defer without REQ anchor"
+    why: "Traceable doc-compose with intent/verify CI literacy."
+  traceability:
+    architecture:
+      - "ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    requirements:
+      - "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"

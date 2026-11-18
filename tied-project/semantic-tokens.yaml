@@ -1119,6 +1119,17 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
   name: "Git hygiene safety"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  cross_references:
+    - "IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    - "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+  description: "Compose guide, receipt validator, workflow; no Conftest core"
+  detail_file: "architecture-decisions/ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "HackerNoon observability contract Wave 3 topology"
+  type: "ARCH"
 ARCH-TIED_HARNESS_LANGCHAIN_PHASE3:
   cross_references:
     - "IMPL-TIED_HARNESS_LANGCHAIN_PHASE3"
@@ -1360,6 +1371,17 @@ ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
   name: "Node-only controlled runner architecture"
   source_index: "architecture-decisions.yaml"
   status: "Proposed"
+  type: "ARCH"
+ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
+  cross_references:
+    - "IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+  description: "Bundle guide and checklist compose; no org GRC scope"
+  detail_file: "architecture-decisions/ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "Open Governance sensing proof-boundary topology"
   type: "ARCH"
 ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
   cross_references:
@@ -3128,6 +3150,17 @@ IMPL-TIED_GIT_HYGIENE:
   name: "Git hygiene implementation"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  cross_references:
+    - "ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    - "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+  description: "Compose doc and receipt contract tests + validator lib"
+  detail_file: "implementation-decisions/IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "HackerNoon observability contract Wave 3 implementation"
+  type: "IMPL"
 IMPL-TIED_HARNESS_LANGCHAIN_PHASE3:
   cross_references:
     - "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"
@@ -3369,6 +3402,17 @@ IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
   name: "Node-only controlled runner implementation"
   source_index: "implementation-decisions.yaml"
   status: "Proposed"
+  type: "IMPL"
+IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
+  cross_references:
+    - "ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+  description: "Doc-compose slices and bootstrap contract test"
+  detail_file: "implementation-decisions/IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "Open Governance sensing proof-boundary doc maintenance"
   type: "IMPL"
 IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
   cross_references:
@@ -5300,6 +5344,17 @@ REQ-TIED_GIT_HYGIENE:
   name: "Git hygiene MCP"
   status: "Active"
   type: "REQ"
+REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3:
+  cross_references:
+    - "ARCH-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+    - "IMPL-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+  description: "HackerNoon intent/verify compose; opt-in receipt CI; matrix §2 row 21 OutOfScope v1"
+  detail_file: "requirements/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "HackerNoon observability contract Wave 3 compose"
+  type: "REQ"
 REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
   cross_references:
     - "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"
@@ -5554,6 +5609,17 @@ REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
   name: "Node-only controlled TIED toolchain runners"
   source_index: "requirements.yaml"
   status: "Proposed"
+  type: "REQ"
+REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
+  cross_references:
+    - "ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    - "IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+  description: "Doc-compose guide, checklist, and comparison reciprocals for odourless-zone literacy"
+  detail_file: "requirements/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-17"
+    registered: "2026-11-17"
+  name: "Open Governance sensing Wave 3 proof-boundary compose"
   type: "REQ"
 REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
   description: "Open Ontologies Wave 3 harness compose"

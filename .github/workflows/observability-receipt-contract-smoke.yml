@@ -1,0 +1,42 @@
+# [REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3]
+# Path-scoped smoke for HackerNoon intent/verify compose + receipt contract tests — not MCP gate authority.
+name: Observability receipt contract smoke
+
+on:
+  push:
+    paths:
+      - "tied-bundle/docs/hackernoon-observability-contract-compose.md"
+      - "tied-bundle/docs/schemas/implement-complete-receipt-enrollment.v1.json"
+      - "tools/bootstrap/lib/hackernoon-observability-contract-compose-doc.test.mjs"
+      - "tools/bootstrap/lib/implement-complete-receipt-contract.mjs"
+      - "tools/bootstrap/lib/implement-complete-receipt-contract.test.mjs"
+      - "tools/bootstrap/fixtures/receipt-contract/**"
+      - "docs/comparisons/hackernoon-observability-contract-ci*.md"
+      - ".github/workflows/observability-receipt-contract-smoke.yml"
+  pull_request:
+    paths:
+      - "tied-bundle/docs/hackernoon-observability-contract-compose.md"
+      - "tied-bundle/docs/schemas/implement-complete-receipt-enrollment.v1.json"
+      - "tools/bootstrap/lib/hackernoon-observability-contract-compose-doc.test.mjs"
+      - "tools/bootstrap/lib/implement-complete-receipt-contract.mjs"
+      - "tools/bootstrap/lib/implement-complete-receipt-contract.test.mjs"
+      - "tools/bootstrap/fixtures/receipt-contract/**"
+      - "docs/comparisons/hackernoon-observability-contract-ci*.md"
+      - ".github/workflows/observability-receipt-contract-smoke.yml"
+  workflow_dispatch:
+
+jobs:
+  receipt-contract-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: HackerNoon compose doc contract test
+        run: node --test tools/bootstrap/lib/hackernoon-observability-contract-compose-doc.test.mjs
+
+      - name: Implement-complete receipt contract test
+        run: node --test tools/bootstrap/lib/implement-complete-receipt-contract.test.mjs

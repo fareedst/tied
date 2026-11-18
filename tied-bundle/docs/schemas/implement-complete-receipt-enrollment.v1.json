@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "implement-complete-receipt-enrollment.v1",
+  "description": "Opt-in REQ tokens subject to implement-complete-receipt-contract validator when plan_phase is closed. v1: enroll explicitly; no default scan of all REQ working folders.",
+  "enrolled_request_tokens": [
+    "REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3"
+  ]
+}
