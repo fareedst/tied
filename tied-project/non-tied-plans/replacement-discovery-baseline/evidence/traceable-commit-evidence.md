@@ -8,4 +8,4 @@
 
 **QA:** `test-strategy.md` checklist satisfied on 2026-11-18 (`@non-tied-build`, verified `@non-tied-close`).
 
-**Commit:** `c21b45c2` on `main` (scoped paths only; no push).
+**Commit:** `9be71609` on `main` (scoped paths only; no push).
