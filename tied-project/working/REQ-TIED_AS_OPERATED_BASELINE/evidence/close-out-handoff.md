@@ -22,7 +22,7 @@
 
 **Feature commit SHA:** `e4ca6ce9` — `feat(tied): enroll REQ-TIED_AS_OPERATED_BASELINE checklist facet and close out.`
 
-**Handoff / workspace commit:** recorded in this close-out replay (see `evidence/traceable-commit-evidence.md`).
+**Handoff / workspace commit SHA:** `e32ba01b` — `chore(workspace): record AOB close-out handoff and clear WIP.`
 
 **Prior base:** `3777a4b4` (manifest `commit` field at verify time; refresh manifest commit on replay if needed)
 

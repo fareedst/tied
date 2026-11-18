@@ -86,7 +86,7 @@
 | workspace_root | `/Users/fareed/Documents/dev/chatgpt/stdd` |
 | execution_site | TIED methodology **store** |
 | TIED_BASE_PATH | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
-| git | feature **`e4ca6ce9`**; handoff/workspace commit via `@close-out` 2026-11-18 (see close-out-handoff) |
+| git | feature **`e4ca6ce9`**; handoff/workspace **`e32ba01b`** (`@close-out` 2026-11-18) |
 
 ## Requirements and dependencies
 
