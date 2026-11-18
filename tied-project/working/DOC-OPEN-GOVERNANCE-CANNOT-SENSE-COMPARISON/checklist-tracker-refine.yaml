@@ -1,0 +1,28 @@
+change_class: "comparisons_doc_only"
+gate_policy: "outreach_doc_only"
+no_req_mint: true
+profile_depth: "minimal"
+request_token: "DOC-OPEN-GOVERNANCE-CANNOT-SENSE-COMPARISON"
+steps:
+  session-bootstrap:
+    status: "done"
+  translate-sponsor-intent:
+    notes: "Open Governance Tony Fish essay × TIED agent-management lens; browser capture."
+    status: "done"
+  change-definition:
+    notes: "Wave 1 + Wave 2 + git allowlist; no project YAML."
+    status: "done"
+  impact-discovery:
+    notes: "PLAN-refine-pass1.md Implement table."
+    status: "done"
+  risk-assessment:
+    notes: "Do not treat governance essay as TIED effectiveness proof; not_measured."
+    status: "done"
+  pre_implementation:
+    notes: "Outreach DOC; tied_checklist_gate_validate not claimed for implement-complete."
+    status: "blocked"
+  implement-doc-deliverables:
+    status: "done"
+  test-strategy:
+    notes: "14-section parity, labels, links."
+    status: "done"

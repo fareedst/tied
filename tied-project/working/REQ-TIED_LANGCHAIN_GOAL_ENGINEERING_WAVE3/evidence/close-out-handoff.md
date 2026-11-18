@@ -18,7 +18,7 @@
 
 ## Commit
 
-_(SHA filled after commit)_
+**`3337599d`** — `feat(comparisons): LangChain goal engineering Wave 3 compose + matrix row 20`
 
 ## Gitignore hygiene
 

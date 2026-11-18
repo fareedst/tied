@@ -1,0 +1,29 @@
+IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
+  approach: "RED/GREEN bootstrap contract test; bundle guide; client-development-index row; checklist; citdp pointer; comparison Phase 1 reciprocals."
+  code_locations:
+    files:
+      - description: "Compose guide"
+        path: "tied-bundle/docs/governance-sensing-proof-boundary-compose.md"
+      - description: "Operator checklist"
+        path: "tied-project/working/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3/odourless-zones-operator-checklist.md"
+    functions: []
+  cross_references:
+    architecture:
+      - "ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    requirements:
+      - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+  decision: "Doc-compose slices A–F per pseudo-code sidecar; optional F2 HTOL markers timeboxed."
+  implementation_approach:
+    details:
+      - "tied-bundle/docs/governance-sensing-proof-boundary-compose.md"
+      - "tools/bootstrap/lib/governance-sensing-proof-boundary-compose-doc.test.mjs"
+    summary: "Doc-compose per PLAN §3."
+  name: "Open Governance sensing proof-boundary doc maintenance"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    requirements:
+      - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    tests:
+      - "tools/bootstrap/lib/governance-sensing-proof-boundary-compose-doc.test.mjs"

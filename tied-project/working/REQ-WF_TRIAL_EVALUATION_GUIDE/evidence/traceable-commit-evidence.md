@@ -10,4 +10,6 @@ node --test tools/bootstrap/lib/wf-trial-evaluation-guide-contract.test.mjs
 # pass
 ```
 
+**SHA:** `1c67ecae` — `docs(wf-trials): public guide, contract test, and Reddit/LinkedIn outreach`
+
 **Excluded (intentional):** `.gitignore` local drift; untracked `.claude/`

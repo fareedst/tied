@@ -1,0 +1,23 @@
+ARCH-TIED_OPEN_GOVERNANCE_SENSING_WAVE3:
+  decision: "Canonical compose guide in tied-bundle/docs/governance-sensing-proof-boundary-compose.md; odourless-zones checklist under working folder; citdp-policy literacy pointer; bootstrap contract tests; no organizational GRC product; matrix row 20 OutOfScope v1."
+  implementation_approach:
+    details:
+      - "No essay body in repo"
+      - "No new MCP gate tools"
+    summary: "Docs and bootstrap contract tests only."
+  rationale:
+    benefits:
+      - "Explicit OpenGovernance-reported vs TIED-existing labeling"
+    problems_solved:
+      - "Conflating board sensing with tied_validate_consistency"
+      - "Missing odourless-zone catalog for sponsors"
+    why: "Compose-don't-replace per Open Governance × TIED analysis; HTOL observations remain non-gate."
+  related_decisions:
+    see_also:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+      - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+  traceability:
+    implementation:
+      - "IMPL-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"
+    requirements:
+      - "REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3"

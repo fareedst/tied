@@ -10,7 +10,7 @@
 
 ## Commit
 
-**`c185fa90`** — Furmanov factory profile Wave 3 compose (see [close-out-handoff.md](close-out-handoff.md))
+**`9c274148`** — Furmanov factory profile Wave 3 compose (see [close-out-handoff.md](close-out-handoff.md))
 
 ---
 

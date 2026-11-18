@@ -1,0 +1,4 @@
+# Evidence receipt — capture withdrawn from repo storage
+# URL: https://opengovernance.net/we-cannot-sense-what-we-cannot-sense-9e0dd14f5941
+# Original method: agent-browser read (2026-11-17)
+# Status: Full article body not committed; Wave 1 is stub; Wave 2 analysis retained.

@@ -31,6 +31,7 @@
 | --- | --- | --- |
 | 2026-11-17 | refine-plan | Locked path, H2 outline, SC-WF-EG-01..06 |
 | 2026-11-17 | build-plan | Guide, contract test, TIED stack, CHANGELOG |
+| 2026-11-17 | handoff | Commit `1c67ecae`; reddit matrix section + LinkedIn teaser |
 
 ## Completion signals
 

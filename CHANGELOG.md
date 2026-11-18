@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Open Governance sensing Wave 3 ([REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3])** — `governance-sensing-proof-boundary-compose.md`, odourless-zones checklist, Open Governance × TIED comparison stubs, bootstrap contract test; plan under `tied-project/working/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3/`. Excludes gate-test CITDP scratch files.
+
 - **External service comparison stub policy ([REQ-TIED_EXTERNAL_SERVICE_COMPARISON])** — `@external-service-comparison` forbids in-repo vendor source copy across Waves 1–3; `comparison-capture-stub-policy.test.mjs`; retrofitted legacy article captures under `docs/comparisons/`. Plan: [PLAN-stub-capture-policy.md](tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/PLAN-stub-capture-policy.md).
 
 - **HackerNoon observability contract Wave 3 ([REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3])** — `hackernoon-observability-contract-compose.md`, intent/verify checklist, opt-in receipt validator + enrollment schema, path-scoped workflow, bootstrap doc + receipt contract tests; close_out **allowed** (minimal, advisory). Matrix §2 row **21** **OutOfScope** v1; no Conftest/LGTM core. Plan: [PLAN.md](tied-project/working/REQ-TIED_HACKERNOON_OBSERVABILITY_CONTRACT_WAVE3/PLAN.md).

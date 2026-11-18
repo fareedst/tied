@@ -26,9 +26,13 @@
 | Contract tests | `tools/bootstrap/lib/goal-engineering-feedback-scope-compose-doc.test.mjs`, `methodology-composition-matrix-goal-engineering-row.test.mjs` |
 | REQ | `tied-project/requirements/REQ-TIED_LANGCHAIN_GOAL_ENGINEERING_WAVE3.yaml` |
 
-## Do next
+## Commit
 
-Optional **`@close-out`** when sponsor wants traceable commit.
+**`3337599d`** — traceable commit complete (compose guide included via amend).
+
+## Remaining on disk (excluded)
+
+**REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3** artifacts restored to working tree for a separate close-out.
 
 ## Deferred
 

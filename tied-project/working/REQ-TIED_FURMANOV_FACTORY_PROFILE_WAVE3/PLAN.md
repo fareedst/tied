@@ -195,6 +195,6 @@
 1. [x] `add-feature` — PLAN, CITDP draft, tracker seed, R+A+I registration, IMPL pseudo-code draft
 2. [x] `@refine-plan` — pass 2 slices, checklist rows, staging map, pseudocode_validate ok
 3. [x] `@build-plan` — RED contract test → doc slices A–F GREEN (2026-11-17)
-4. [x] `@close-out` — commit **`c185fa90`** (2026-11-17)
+4. [x] `@close-out` — commit **`9c274148`** (2026-11-17)
 
 **Do next:** none for this REQ; matrix row **21** / JSONL via future REQ if sponsored.
