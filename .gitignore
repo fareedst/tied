@@ -64,6 +64,8 @@ docs/comparisons/*
 !docs/comparisons/langchain-goal-engineering-vs-tied-agent-management.md
 !docs/comparisons/afurmanov-harness-profiler.md
 !docs/comparisons/afurmanov-harness-profiler-vs-tied-agent-management.md
+!docs/comparisons/hackernoon-observability-contract-ci.md
+!docs/comparisons/hackernoon-observability-contract-ci-vs-tied-agent-management.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

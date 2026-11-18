@@ -8,7 +8,7 @@
 | **Article captures (siblings)** | Traefik: [traefik-harness-engineering-vs-platform-engineering.md](traefik-harness-engineering-vs-platform-engineering.md); LangChain (Terminal Bench 2.0 harness study): [langchain-improving-deep-agents-harness-engineering.md](langchain-improving-deep-agents-harness-engineering.md) — read-only captures; **reference only** |
 | **Status / date** | Outreach / analysis snapshot, **2026-10-20** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
 | **Executable follow-up** | [REQ-TIED_HARNESS_PLATFORM_SEAM](../../tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/PLAN.md) — operator docs and authority checklist derived from this comparison; tokens live in project YAML, not in this outreach file |
-| **Distinct from** | [TIED vs Harness²](tied-vs-harness2.md) (recursive harness optimization paper/tooling)—same English word *harness*, different subject matter |
+| **Distinct from** | [TIED vs Harness²](tied-vs-harness2.md) (recursive harness optimization paper/tooling)—same English word *harness*, different subject matter; [HackerNoon observability contract CI × TIED](hackernoon-observability-contract-ci-vs-tied-agent-management.md) (client K8s telemetry CI, not harness/platform seam) |
 | **TIED anchors (reference only)** | [AGENTS.md](../../AGENTS.md), [agent-req-implementation-checklist](../../tied-bundle/docs/agent-req-implementation-checklist.md), [fresh-client-prompt-activation-map](../../tied-bundle/docs/fresh-client-prompt-activation-map.md), [sponsor-agent-relationship](../../tied-project/vocab/sponsor-agent-relationship.md), [agentstream vocab](../../tied-project/vocab/agentstream.md), [agentstream README](../../mcp-server/packages/agentstream/README.md) |
 
 ---

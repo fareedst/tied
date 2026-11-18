@@ -1,0 +1,28 @@
+change_class: comparisons_doc_only
+gate_policy: outreach_doc_only
+no_req_mint: true
+profile_depth: minimal
+request_token: DOC-HACKERNOON-OBSERVABILITY-CONTRACT-CI-COMPARISON
+steps:
+  session-bootstrap:
+    status: done
+  translate-sponsor-intent:
+    notes: "HackerNoon SRE observability contract × TIED; no article body in repo."
+    status: done
+  change-definition:
+    notes: "Wave 1 stub + Wave 2 + git allowlist; no project YAML."
+    status: done
+  impact-discovery:
+    notes: "PLAN-refine-pass1.md Implement table."
+    status: done
+  risk-assessment:
+    notes: "Author fleet metrics not_measured; not TIED effectiveness proof."
+    status: done
+  pre_implementation:
+    notes: "Outreach DOC; tied_checklist_gate_validate not claimed for implement-complete."
+    status: blocked
+  implement-doc-deliverables:
+    status: done
+  test-strategy:
+    notes: "14-section parity, labels, links, no article paste."
+    status: done

@@ -1,0 +1,12 @@
+# Draft CITDP — non-tied plan track only (not promoted to tied-project/citdp/)
+change_class: comparisons_doc_only
+depth_tier: minimal
+gate_policy: advisory
+profile_depth: not_measured
+request_token: DOC-HACKERNOON-OBSERVABILITY-CONTRACT-CI-COMPARISON
+tied_tokens_new: []
+source_url: https://hackernoon.com/your-ci-pipeline-should-reject-any-service-without-an-observability-contract
+wave: "1-2"
+notes: >
+  HackerNoon SRE observability-contract outreach; Wave 3 matrix row and REQ behavior Defer.
+  Sponsor: no article body in repo. tied_checklist_gate_validate not invoked for doc-complete claims.
