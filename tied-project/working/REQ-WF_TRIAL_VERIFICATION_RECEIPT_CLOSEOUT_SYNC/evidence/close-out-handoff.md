@@ -1,6 +1,6 @@
 # Close-out handoff — REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC
 
-**commit:** `2f39744d`  
+**commit:** `24041123`  
 **date:** 2026-11-18
 
 ## Completion signals

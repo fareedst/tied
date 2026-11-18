@@ -1,7 +1,7 @@
 # Traceable commit — REQ-WF_TRIAL_VERIFICATION_RECEIPT_CLOSEOUT_SYNC
 
 **date:** 2026-11-18  
-**commit:** `2f39744d`
+**commit:** `24041123`
 
 ## Verification
 

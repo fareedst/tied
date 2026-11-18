@@ -1,6 +1,6 @@
 {
   "schema_version": "project-size-batch-manifest.v1",
-  "generated_at": "2026-11-18T16:19:23.948Z",
+  "generated_at": "2026-11-18T17:38:59.672Z",
   "options": {
     "store_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
     "parent": "/Users/fareed/Documents/dev/test",
@@ -24,6 +24,18 @@
     }
   ],
   "targets": [
+    {
+      "label": "1795022513-wf-agentstream-wf-09-cursor-grok47low",
+      "repo_root": "/Users/fareed/Documents/dev/test/1795022513-wf-agentstream-wf-09-cursor-grok47low"
+    },
+    {
+      "label": "1795021618-wf-agentstream-wf-09-claude-claudehaiku55low",
+      "repo_root": "/Users/fareed/Documents/dev/test/1795021618-wf-agentstream-wf-09-claude-claudehaiku55low"
+    },
+    {
+      "label": "1795019148-wf-agentstream-wf-09-claude-claudehaiku55low",
+      "repo_root": "/Users/fareed/Documents/dev/test/1795019148-wf-agentstream-wf-09-claude-claudehaiku55low"
+    },
     {
       "label": "1795017442-wf-agentstream-wf-01-claude-claudehaiku55low",
       "repo_root": "/Users/fareed/Documents/dev/test/1795017442-wf-agentstream-wf-01-claude-claudehaiku55low"
@@ -211,21 +223,12 @@
     {
       "label": "1794613269-wf-agentstream-wf-08-cursor-grok47low",
       "repo_root": "/Users/fareed/Documents/dev/test/1794613269-wf-agentstream-wf-08-cursor-grok47low"
-    },
-    {
-      "label": "1794612441-wf-agentstream-wf-07-cursor-grok47low",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794612441-wf-agentstream-wf-07-cursor-grok47low"
-    },
-    {
-      "label": "1794611506-wf-agentstream-wf-06-cursor-grok47low",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794611506-wf-agentstream-wf-06-cursor-grok47low"
-    },
-    {
-      "label": "1794610718-wf-agentstream-wf-05-cursor-grok47low",
-      "repo_root": "/Users/fareed/Documents/dev/test/1794610718-wf-agentstream-wf-05-cursor-grok47low"
     }
   ],
   "receipt_paths": [
+    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795022513-wf-agentstream-wf-09-cursor-grok47low.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795021618-wf-agentstream-wf-09-claude-claudehaiku55low.json",
+    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795019148-wf-agentstream-wf-09-claude-claudehaiku55low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795017442-wf-agentstream-wf-01-claude-claudehaiku55low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1795014853-wf-agentstream-wf-01-claude-claudehaiku55low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794984015-wf-agentstream-wf-01-claude-claudehaiku55low.json",
@@ -272,10 +275,7 @@
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794616912-wf-agentstream-wf-03-cursor-grok47low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794616005-wf-agentstream-wf-02-cursor-grok47low.json",
     "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794615214-wf-agentstream-wf-01-cursor-grok47low.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794613269-wf-agentstream-wf-08-cursor-grok47low.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794612441-wf-agentstream-wf-07-cursor-grok47low.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794611506-wf-agentstream-wf-06-cursor-grok47low.json",
-    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794610718-wf-agentstream-wf-05-cursor-grok47low.json"
+    "/Users/fareed/Documents/dev/chatgpt/stdd/docs/agent-harness-evaluation/cohort/evidence/receipts/1794613269-wf-agentstream-wf-08-cursor-grok47low.json"
   ],
   "snapshot_count": 50
 }
