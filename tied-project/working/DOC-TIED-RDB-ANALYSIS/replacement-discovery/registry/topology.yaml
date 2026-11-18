@@ -1,0 +1,118 @@
+deploy_test_paths:
+  - evidence_ids:
+      - "EV-023"
+    id: "PATH-BUILD"
+    steps:
+      - "./build-workspace.sh"
+  - evidence_ids:
+      - "EV-022"
+    id: "PATH-FACTORY"
+    steps:
+      - "source scripts/build-commands.sh && test-new-tied-client"
+  - evidence_ids:
+      - "EV-011"
+    id: "PATH-INSTALL"
+    steps:
+      - "./tied-install.sh <client>"
+  - evidence_ids:
+      - "EV-024"
+    id: "PATH-MCP-TEST"
+    steps:
+      - "cd mcp-server && npm test"
+  - evidence_ids:
+      - "EV-015"
+    id: "PATH-WF-TRIAL"
+    steps:
+      - "source scripts/build-commands.sh && workflow_trial_agentstream wf-NN"
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - capabilities:
+      - "CAP-002"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-011"
+      - "EV-023"
+    id: "CMP-006"
+    name: "Bootstrap engine"
+    path: "tools/bootstrap/"
+    role: "Layered install, MCP json generation, verification gates"
+  - capabilities:
+      - "CAP-003"
+      - "CAP-004"
+      - "CAP-007"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-024"
+    id: "CMP-002"
+    name: "mcp-server workspace"
+    path: "mcp-server/"
+    role: "MCP, CLI, agentstream, harness-eval packages"
+  - capabilities:
+      - "CAP-006"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-013"
+    id: "CMP-009"
+    name: "Bundled prompt-type skills"
+    path: "tools/bundled-prompt-type-skills/"
+    role: "Source for client-installed skills (non-tied and TIED lanes)"
+  - capabilities:
+      - "CAP-007"
+      - "CAP-008"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-014"
+    id: "CMP-005"
+    name: "agentstream package"
+    path: "mcp-server/packages/agentstream"
+    role: "Checklist orchestration and harness batch drivers"
+  - capabilities:
+      - "CAP-008"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-015"
+    id: "CMP-010"
+    name: "Harness evaluation artifacts"
+    path: "docs/agent-harness-evaluation/"
+    role: "Trial catalog, readouts, HMEP integration docs"
+  - data:
+      - "DAT-001"
+      - "DAT-007"
+    disposition: "observed"
+    id: "CMP-008"
+    name: "Store project corpus"
+    path: "tied-project/"
+    role: "Store-owned REQ/ARCH/IMPL and working evidence"
+  - data:
+      - "DAT-004"
+      - "DAT-005"
+    disposition: "observed"
+    id: "CMP-007"
+    name: "Methodology corpus"
+    path: "tied-bundle/"
+    role: "Git-tracked methodology indexes, docs, inherited details"
+  - disposition: "observed"
+    evidence_ids:
+      - "EV-022"
+    id: "CMP-001"
+    name: "TIED store repository"
+    path: "."
+    role: "Authoritative methodology implementation and corpus source"
+  - disposition: "observed"
+    evidence_ids:
+      - "EV-023"
+    id: "CMP-003"
+    integrations:
+      - "INT-001"
+      - "INT-002"
+    name: "MCP stdio entry"
+    path: "mcp-server/dist/index.js"
+    role: "Primary automation boundary for IDE and tied-cli"
+  - disposition: "observed"
+    evidence_ids:
+      - "EV-024"
+    id: "CMP-004"
+    name: "tied CLI"
+    path: "mcp-server/packages/cli"
+    role: "Umbrella operator CLI including agentstream subcommand"
+schema_version: 1

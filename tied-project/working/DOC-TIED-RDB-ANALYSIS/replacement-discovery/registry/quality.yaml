@@ -1,0 +1,40 @@
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - contracts:
+      - "CON-015"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+    id: "QUA-004"
+    mechanism: "lint_yaml / yaml_index_validate per PROC-YAML_EDIT_LOOP"
+    name: "YAML lint on mutation"
+    target: "CAP-004"
+  - disposition: "observed"
+    evidence_ids:
+      - "EV-012"
+    id: "QUA-002"
+    mechanism: "tied_validate_consistency before close-out on TIED lanes"
+    name: "Stack consistency validation"
+    target: "CAP-005"
+  - disposition: "observed"
+    evidence_ids:
+      - "EV-024"
+    id: "QUA-001"
+    mechanism: "mcp-server npm test after build via run-mcp-tests.mjs"
+    name: "MCP workspace test gate"
+    target: "CAP-003 CAP-004 CAP-005"
+  - disposition: "observed"
+    evidence_ids:
+      - "EV-025"
+    id: "QUA-005"
+    mechanism: "GitHub workflow windows-bootstrap-smoke on bootstrap and mcp-server paths"
+    name: "Windows bootstrap CI smoke"
+    target: "CAP-002"
+  - disposition: "observed"
+    evidence_ids:
+      - "EV-027"
+    id: "QUA-003"
+    mechanism: "tied_gate_check phases pre_implementation verification close_out with JSON receipts under working/gates/"
+    name: "WF trial gate receipts"
+    target: "CAP-008"
+schema_version: 1

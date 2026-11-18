@@ -1,0 +1,117 @@
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - authority: "derived (non-persistent)"
+    consumers:
+      - "CAP-003"
+      - "CAP-005"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-018"
+    id: "DAT-006"
+    lifecycle: "Recomputed per loadIndex; must not be written back wholesale"
+    location: "MCP read path only — methodology rows plus project overrides by token key"
+    name: "Merged logical index view"
+    related_contracts:
+      - "CON-003"
+      - "CON-016"
+  - authority: "methodology"
+    consumers:
+      - "CAP-003"
+      - "CAP-005"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-020"
+    id: "DAT-005"
+    lifecycle: "Copied on install/refresh; read for merge and traceability"
+    location: "tied-bundle/{requirements,architecture-decisions,implementation-decisions}/"
+    name: "Methodology inherited detail files"
+  - authority: "methodology (read-only in clients)"
+    consumers:
+      - "CAP-003"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-018"
+      - "EV-020"
+    id: "DAT-004"
+    lifecycle: "Refreshed by tied-install --refresh; not MCP-written in client"
+    location: "tied-bundle/*.yaml indexes at client; store repo root tied-bundle/ in store mode"
+    name: "Methodology index YAML"
+  - authority: "methodology bundle"
+    consumers:
+      - "CAP-002"
+      - "CAP-011"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-011"
+      - "EV-020"
+    id: "DAT-009"
+    lifecycle: "install-layers writes; informs resolveMethodologyRoot and MCP env"
+    location: "tied-bundle/install.json; linked-mode .linked-methodology-view marker under tied-project/"
+    name: "Install layout metadata"
+  - authority: "methodology store"
+    consumers:
+      - "ACT-005"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-000"
+      - "EV-018"
+    id: "DAT-010"
+    lifecycle: "Store implements methodology; clients inherit copy via install"
+    location: "repo root tied-bundle/ git-tracked; tied-project/ holds store project indexes"
+    name: "Store methodology corpus (stdd)"
+  - authority: "project"
+    consumers:
+      - "ACT-001"
+      - "ACT-005"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+    id: "DAT-007"
+    lifecycle: "PLAN, CITDP, DOC-* engagements; distinct from tied-bundle/working machine gates"
+    location: "tied-project/working/"
+    name: "Committed working evidence"
+  - authority: "project"
+    consumers:
+      - "CAP-001"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-010"
+    id: "DAT-008"
+    lifecycle: "Plain Markdown; edited directly; PRELOAD/RECORD/VALIDATE touchpoints"
+    location: "tied-project/vocab/*.md"
+    name: "Client domain vocabulary"
+  - authority: "project"
+    consumers:
+      - "CAP-003"
+      - "CAP-004"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-018"
+    id: "DAT-001"
+    lifecycle: "Created by install seed; mutated via MCP/CLI; never overwritten by methodology refresh"
+    location: "tied-project/{requirements,architecture-decisions,implementation-decisions,semantic-tokens}.yaml"
+    name: "Project index YAML"
+  - authority: "project"
+    consumers:
+      - "CAP-004"
+      - "CAP-009"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-018"
+      - "EV-019"
+    id: "DAT-003"
+    lifecycle: "Body stored outside detail YAML; large-text path via impl_detail_set_essence_pseudocode"
+    location: "tied-project/implementation-decisions/IMPL-*-pseudocode.md"
+    name: "IMPL essence pseudo-code sidecar"
+  - authority: "project for client tokens; methodology for inherited tokens"
+    consumers:
+      - "CAP-004"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-019"
+    id: "DAT-002"
+    lifecycle: "One token per file; detail paths follow index token id"
+    location: "tied-project/{requirements,architecture-decisions,implementation-decisions}/*.yaml"
+    name: "Token detail YAML"
+schema_version: 1

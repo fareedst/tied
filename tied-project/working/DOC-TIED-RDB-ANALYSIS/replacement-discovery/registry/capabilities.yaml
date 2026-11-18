@@ -1,0 +1,218 @@
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - actors:
+      - "ACT-001"
+      - "ACT-003"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "prompt-type-router"
+      - "tools/bundled-prompt-type-skills/*/SKILL.md"
+    evidence_ids:
+      - "EV-013"
+    id: "CAP-006"
+    name: "Prompt-type skill routing and execution"
+    purpose:
+      - "OUT-006"
+    trigger: "User invokes @skill or prompt-type-router composition"
+    workflows:
+      - "WF-004"
+  - actors:
+      - "ACT-002"
+      - "ACT-004"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - ".cursor/skills/tied-yaml/scripts/tied-cli.sh"
+    evidence_ids:
+      - "EV-004"
+      - "EV-012"
+    id: "CAP-012"
+    name: "CLI tied-yaml tool surface without IDE MCP"
+    purpose:
+      - "OUT-004"
+      - "OUT-007"
+    trigger: "MCP unavailable in IDE but Node server built"
+    workflows:
+      - "WF-003"
+  - actors:
+      - "ACT-002"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "tied-install --refresh"
+    evidence_ids:
+      - "EV-011"
+    id: "CAP-011"
+    name: "Inherited methodology refresh"
+    purpose:
+      - "OUT-002"
+    trigger: "Operator refresh from store without reinstalling client indexes"
+    workflows:
+      - "WF-002"
+  - actors:
+      - "ACT-002"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "tied-install.sh"
+      - "tools/bootstrap/install-layers.mjs"
+    evidence_ids:
+      - "EV-008"
+      - "EV-011"
+    id: "CAP-002"
+    name: "Layered methodology install into client repo"
+    purpose:
+      - "OUT-002"
+    trigger: "Operator runs install from store against client path"
+    workflows:
+      - "WF-002"
+  - actors:
+      - "ACT-003"
+      - "ACT-004"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "impl_detail_set_essence_pseudocode"
+      - "yaml_detail_create"
+      - "yaml_detail_update"
+      - "yaml_index_insert"
+      - "yaml_index_update"
+    evidence_ids:
+      - "EV-004"
+      - "EV-012"
+    id: "CAP-004"
+    name: "MCP project index and detail mutation"
+    purpose:
+      - "OUT-001"
+      - "OUT-004"
+    trigger: "Authorized write to project TIED indexes or detail files"
+    workflows:
+      - "WF-003"
+  - actors:
+      - "ACT-003"
+      - "ACT-004"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "tied_verify"
+    evidence_ids:
+      - "EV-012"
+    id: "CAP-010"
+    name: "Verification-gated obligation status update"
+    purpose:
+      - "OUT-001"
+      - "OUT-003"
+    trigger: "Test suite green with verification-gated mode"
+    workflows:
+      - "WF-007"
+  - actors:
+      - "ACT-003"
+      - "ACT-004"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "yaml_index_filter"
+      - "yaml_index_list_tokens"
+      - "yaml_index_read"
+    evidence_ids:
+      - "EV-012"
+    id: "CAP-003"
+    name: "MCP declaration index read and filter"
+    purpose:
+      - "OUT-003"
+      - "OUT-007"
+    trigger: "Tool consumer queries obligation indexes"
+    workflows:
+      - "WF-003"
+  - actors:
+      - "ACT-003"
+      - "ACT-005"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "tied-bundle/docs/agent-req-implementation-checklist.md"
+      - "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+    evidence_ids:
+      - "EV-010"
+    id: "CAP-001"
+    name: "Agent requirement implementation checklist"
+    process_token: "PROC-AGENT_REQ_CHECKLIST"
+    purpose:
+      - "OUT-001"
+      - "OUT-006"
+    trigger: "Sponsor or user opens a TIED-tracked change"
+    workflows:
+      - "WF-001"
+  - actors:
+      - "ACT-003"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "pseudocode_analyze"
+      - "pseudocode_validate"
+    evidence_ids:
+      - "EV-010"
+    id: "CAP-009"
+    name: "IMPL pseudo-code validation before RED"
+    purpose:
+      - "OUT-001"
+      - "OUT-006"
+    trigger: "Pre-RED gate on changed IMPL blocks"
+    workflows:
+      - "WF-001"
+  - actors:
+      - "ACT-004"
+      - "ACT-005"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "docs/agent-harness-evaluation/"
+      - "workflow_trial_agentstream"
+    evidence_ids:
+      - "EV-015"
+    id: "CAP-008"
+    name: "Harness workflow trial execution"
+    purpose:
+      - "OUT-005"
+      - "OUT-007"
+    trigger: "Operator runs disposable WF trial cell"
+    workflows:
+      - "WF-005"
+  - actors:
+      - "ACT-004"
+      - "ACT-005"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "mcp-server/packages/agentstream"
+      - "tied agentstream"
+    evidence_ids:
+      - "EV-014"
+    id: "CAP-007"
+    name: "Agentstream checklist orchestration"
+    purpose:
+      - "OUT-006"
+      - "OUT-007"
+    trigger: "Batch or live checklist run with tracker"
+    workflows:
+      - "WF-006"
+  - actors:
+      - "ACT-004"
+      - "ACT-005"
+    confidence: "high"
+    disposition: "observed"
+    entry_points:
+      - "tied_validate_consistency"
+      - "yaml_index_validate"
+    evidence_ids:
+      - "EV-012"
+    id: "CAP-005"
+    name: "Cross-stack TIED consistency validation"
+    purpose:
+      - "OUT-003"
+    trigger: "Pre-close-out or post-batch YAML edits"
+    workflows:
+      - "WF-003"
+      - "WF-007"
+schema_version: 1

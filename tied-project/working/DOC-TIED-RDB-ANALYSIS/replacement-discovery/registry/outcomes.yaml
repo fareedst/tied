@@ -1,0 +1,118 @@
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - actors:
+      - "ACT-001"
+      - "ACT-003"
+    confidence: "high"
+    criticality: "critical"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-007"
+    failure_consequence: "Unauthorized or untraceable changes ship; audit and replay fail."
+    id: "OUT-001"
+    name: "End-to-end traceability"
+    statement: "Stakeholders can follow sponsor intent through declared obligations, design decisions, implementation records, and verifying tests without ad hoc narrative."
+    value_measures:
+      - "Completeness of obligation-to-test linkage"
+      - "Time to answer what a change was supposed to satisfy"
+  - actors:
+      - "ACT-001"
+      - "ACT-004"
+    confidence: "high"
+    criticality: "major"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-007"
+      - "EV-008"
+    failure_consequence: "Harness and IDE integrations break on upgrade; operators disable automation."
+    id: "OUT-007"
+    name: "Stable external tool contracts"
+    statement: "Consumers at the automation boundary can rely on documented tool semantics for reading and updating methodology data without coupling to internal module structure."
+    value_measures:
+      - "Backward compatibility of tool inputs"
+      - "Discoverability of supported operations"
+  - actors:
+      - "ACT-001"
+      - "ACT-005"
+    confidence: "high"
+    criticality: "major"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-000"
+      - "EV-002"
+      - "EV-007"
+    failure_consequence: "Replacement or refactor proceeds on wrong assumptions."
+    id: "OUT-005"
+    name: "Evidence-backed comprehension"
+    statement: "Before large redesign or replacement, stakeholders can consume structured comprehension of current value, boundaries, and uncertainties rather than relying on tacit knowledge."
+    value_measures:
+      - "Coverage of critical paths in comprehension artifacts"
+      - "Explicit residual unknowns with owners"
+  - actors:
+      - "ACT-002"
+      - "ACT-003"
+      - "ACT-004"
+    confidence: "high"
+    criticality: "critical"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-005"
+      - "EV-007"
+    failure_consequence: "Silent corruption of wrong project data or read-only corpus."
+    id: "OUT-004"
+    name: "Bounded automated write authority"
+    statement: "Automated assistants can determine which repository regions they may modify in a given session and refrain from writing elsewhere."
+    value_measures:
+      - "Incidents of cross-repo or wrong-tree writes"
+      - "Session-start verification coverage"
+  - actors:
+      - "ACT-002"
+    confidence: "high"
+    criticality: "critical"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-007"
+    failure_consequence: "Operators avoid upgrades or fork methodology silently."
+    id: "OUT-002"
+    name: "Predictable client adoption"
+    statement: "Teams can attach a shared methodology package to their repository with a documented layout, refresh rules, and separation between inherited guidance and project-owned records."
+    value_measures:
+      - "Effort to onboard a new client repo"
+      - "Safety of refresh (no clobbering project-owned data)"
+  - actors:
+      - "ACT-003"
+      - "ACT-005"
+    confidence: "high"
+    criticality: "major"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-007"
+    failure_consequence: "Skipped validation steps; production logic diverges from declared intent."
+    id: "OUT-006"
+    name: "Unified delivery procedure"
+    statement: "Implementers and agents can follow one ordered checklist that ties analysis, documentation, tests, composition, and verification for obligation-driven work."
+    value_measures:
+      - "Adherence to test-before-code ordering"
+      - "Gate evidence captured per engagement"
+  - actors:
+      - "ACT-004"
+      - "ACT-005"
+    confidence: "high"
+    criticality: "critical"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-007"
+    failure_consequence: "Indexes diverge from artifacts; agents and humans act on stale obligations."
+    id: "OUT-003"
+    name: "Declaration consistency"
+    statement: "Indexes and detail records that describe obligations and decisions can be validated for mutual consistency before work is treated as complete."
+    value_measures:
+      - "Clarity of repair guidance when validation fails"
+      - "Rate of consistency failures caught pre-merge"
+schema_version: 1

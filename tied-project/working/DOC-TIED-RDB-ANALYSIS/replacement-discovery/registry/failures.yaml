@@ -1,0 +1,89 @@
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - capability:
+      - "CAP-001"
+      - "CAP-008"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-027"
+    id: "FAIL-005"
+    mitigation_observed: "Documented LEAP follow-on; operators inspect gate inventory blockers"
+    name: "Verification gate waiver gap (minimal profile)"
+    observed_pattern: "WF-01 1794981051 blocker narrative in trial readout"
+    related_gaps:
+      - "GAP-006"
+    severity: "major"
+    statement: "Open-record adversarial waivers may not propagate to verification-phase tied_checklist_gate_validate."
+  - capability:
+      - "CAP-002"
+    contract:
+      - "CON-023"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-022"
+      - "EV-023"
+    id: "FAIL-003"
+    mitigation_observed: "Operator runs ./build-workspace.sh before install"
+    name: "Unbuilt store workspace"
+    observed_pattern: "README prerequisite chain; build-workspace first step"
+    severity: "major"
+    statement: "tied-install or MCP bootstrap fails when mcp-server/dist/index.js missing after skipped build-workspace."
+  - capability:
+      - "CAP-004"
+    contract:
+      - "CON-004"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-005"
+      - "EV-027"
+    id: "FAIL-001"
+    mitigation_observed: "tied_config_get_base_path at session start; install_mcp_json fail-closed for tied-cli"
+    name: "Wrong TIED base path writes"
+    observed_pattern: "Documented as high-impact in AGENTS.md and CITDP two-folder RISK-010 class"
+    related_gaps:
+      - "GAP-002"
+    severity: "critical"
+    statement: "MCP or CLI writes land under a different clone or repo when TIED_BASE_PATH / multi-root IDE config drifts."
+  - capability:
+      - "CAP-007"
+      - "CAP-008"
+    contract:
+      - "CON-010"
+      - "CON-014"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-027"
+    id: "FAIL-002"
+    mitigation_observed: "Sponsor reads three-way completion table: orchestrator vs machine vs process contract"
+    name: "Orchestrator pass with blocked machine gates"
+    observed_pattern: "WF-01 Haiku cohorts 1794975372 1794981051 readouts — split signal grading"
+    related_gaps:
+      - "GAP-006"
+    severity: "major"
+    statement: "workflow_trial / agentstream may exit 0 while verification or close_out tied_gate_check remains allowed false."
+  - capability:
+      - "CAP-007"
+    contract:
+      - "CON-010"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-028"
+    id: "FAIL-006"
+    mitigation_observed: "./build-workspace.sh on store; TIED_MCP_BIN / TIED_REPO_ROOT for linked clients"
+    name: "Jev harness fail-closed without store dist"
+    observed_pattern: "agentstream README missing-dist hard stop"
+    severity: "major"
+    statement: "Agentstream with Jev harness enabled exits when store-root harness-tool-guard.js not built."
+  - capability:
+      - "CAP-007"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-027"
+      - "EV-028"
+    id: "FAIL-004"
+    mitigation_observed: "tied_adherence_reconcile_run before close-out; sponsor reads band B/C diagnostics"
+    name: "Adherence hash drift after gates"
+    observed_pattern: "WF-01 1795017442 readout — green gates with reconcile hash drift; WF-09 close-out handoff"
+    severity: "major"
+    statement: "Post-gate tracker or CITDP edits desync adherence ledger from gate receipt expectations."
+schema_version: 1

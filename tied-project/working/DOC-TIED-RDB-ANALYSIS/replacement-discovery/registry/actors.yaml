@@ -1,0 +1,81 @@
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - confidence: "high"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-000"
+      - "EV-002"
+      - "EV-007"
+    id: "ACT-001"
+    name: "Sponsor"
+    primary_outcomes:
+      - "OUT-001"
+      - "OUT-005"
+      - "OUT-007"
+    problems_solved:
+      - "Decide when to invest in methodology changes vs defer replacement"
+      - "See evidence-backed picture of current platform behavior before costly commits"
+    role: "Owns program scope, gates replacement work, accepts analysis completeness"
+  - confidence: "high"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-000"
+      - "EV-007"
+      - "EV-008"
+    id: "ACT-005"
+    name: "Methodology implementer"
+    primary_outcomes:
+      - "OUT-003"
+      - "OUT-005"
+      - "OUT-006"
+    problems_solved:
+      - "Evolve shared methodology while clients remain on read-only inheritance"
+      - "Prove behavioral claims via tests and published comprehension artifacts"
+    role: "Maintains the methodology store (corpus, server tooling, bootstrap, harness evidence)"
+  - confidence: "high"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-005"
+      - "EV-007"
+    id: "ACT-003"
+    name: "Coding agent"
+    primary_outcomes:
+      - "OUT-001"
+      - "OUT-004"
+      - "OUT-006"
+    problems_solved:
+      - "Deliver traceable implementation without silent scope drift"
+      - "Know read vs write boundaries before mutating repository state"
+    role: "Executes requirement-driven change under session bootstrap and checklist discipline"
+  - confidence: "high"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-005"
+      - "EV-007"
+    id: "ACT-004"
+    name: "MCP and tool consumer"
+    primary_outcomes:
+      - "OUT-003"
+      - "OUT-004"
+      - "OUT-007"
+    problems_solved:
+      - "Query and update declaration indexes through a stable tool surface"
+      - "Validate consistency and traceability without bespoke parsers"
+    role: "IDE, CLI, harness, or automation that invokes methodology read/write tools"
+  - confidence: "high"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-007"
+    id: "ACT-002"
+    name: "Client operator"
+    primary_outcomes:
+      - "OUT-002"
+      - "OUT-004"
+    problems_solved:
+      - "Bring TIED layout, skills, and validation into a product repo without breaking project data"
+      - "Refresh inherited methodology without overwriting client-specific indexes"
+    role: "Installs and operates methodology in application repositories (non-store clients)"
+schema_version: 1

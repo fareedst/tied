@@ -1,0 +1,95 @@
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - boundary: "Client .cursor/mcp.json points TIED_MCP_BIN or store root; methodology may be stub"
+    data_touched:
+      - "DAT-004"
+      - "DAT-009"
+    direction: "cross-repo"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-011"
+      - "EV-020"
+    id: "INT-003"
+    name: "Linked client → store MCP binary"
+  - boundary: "Does not own YAML write authority; may call gate/adherence tools"
+    data_touched:
+      - "DAT-007"
+    direction: "spawns agent + optional MCP receipts"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-014"
+    id: "INT-005"
+    name: "Agentstream orchestrator"
+    related_capabilities:
+      - "CAP-007"
+  - boundary: "IDE launches mcp-server/dist/index.js with env from .cursor/mcp.json"
+    config_anchors:
+      - "TIED_BASE_PATH"
+      - "TIED_CLIENT_PROJECT_PATH"
+      - "TIED_MCP_BIN"
+    data_touched:
+      - "DAT-001"
+      - "DAT-002"
+      - "DAT-003"
+      - "DAT-006"
+    direction: "inbound tool calls"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-005"
+      - "EV-020"
+    id: "INT-001"
+    name: "Cursor IDE MCP (stdio)"
+    related_contracts:
+      - "CON-003"
+      - "CON-004"
+  - boundary: "Repo-root .mcp.json variant from claude harness install path"
+    data_touched:
+      - "DAT-001"
+    direction: "inbound"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-020"
+    id: "INT-004"
+    name: "Claude Code harness MCP"
+  - boundary: "Resource URIs expose merged index/detail reads to consumers"
+    data_touched:
+      - "DAT-006"
+    direction: "read"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-012"
+    id: "INT-007"
+    name: "MCP tied:// resources"
+  - boundary: "Same tool surface as IDE MCP; TIED_PATH_AUTHORITY=install_mcp_json fail-closed path"
+    data_touched:
+      - "DAT-001"
+      - "DAT-002"
+      - "DAT-003"
+    direction: "inbound"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-012"
+      - "EV-018"
+    id: "INT-002"
+    name: "tied-cli.sh stdio consumer"
+  - boundary: "scripts/lint_yaml.sh, validate_tokens.sh invoked from repo root"
+    data_touched:
+      - "DAT-001"
+      - "DAT-002"
+    direction: "read-mostly"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+    id: "INT-006"
+    name: "Host validation scripts"
+  - boundary: "TIED_METHODOLOGY_BUNDLE_PATH / TIED_CLIENT_BUNDLE_PATH redirect methodology reads"
+    data_touched:
+      - "DAT-004"
+      - "DAT-005"
+    direction: "configuration"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-018"
+    id: "INT-008"
+    name: "Methodology path env overrides"
+schema_version: 1

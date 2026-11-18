@@ -1,0 +1,91 @@
+engagement: "DOC-TIED-RDB-ANALYSIS"
+records:
+  - capabilities:
+      - "CAP-001"
+      - "CAP-004"
+      - "CAP-005"
+      - "CAP-009"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-010"
+    id: "WF-001"
+    name: "TIED-tracked feature delivery"
+    outcomes:
+      - "OUT-001"
+      - "OUT-006"
+    summary: "Checklist from intake through IMPL pseudo-code, RED, GREEN, composition, optional E2E, close-out validation"
+  - capabilities:
+      - "CAP-002"
+      - "CAP-011"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-011"
+    id: "WF-002"
+    name: "Client methodology bootstrap"
+    outcomes:
+      - "OUT-002"
+      - "OUT-004"
+    summary: "Install or refresh linked/full layout; preserve project-owned indexes"
+  - capabilities:
+      - "CAP-003"
+      - "CAP-004"
+      - "CAP-005"
+      - "CAP-012"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-004"
+      - "EV-012"
+    id: "WF-003"
+    name: "MCP YAML edit loop"
+    outcomes:
+      - "OUT-003"
+      - "OUT-004"
+      - "OUT-007"
+    summary: "Read via MCP or CLI, mutate project keys only, lint_yaml, tied_validate_consistency"
+  - capabilities:
+      - "CAP-005"
+      - "CAP-010"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-010"
+      - "EV-012"
+    id: "WF-007"
+    name: "Close-out validation sync"
+    outcomes:
+      - "OUT-001"
+      - "OUT-003"
+    summary: "Tests, optional tied_verify, tied_validate_consistency before traceable commit"
+  - capabilities:
+      - "CAP-006"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-013"
+    id: "WF-004"
+    name: "Non-TIED documented engagement"
+    outcomes:
+      - "OUT-005"
+      - "OUT-006"
+    summary: "non-tied-plan → refine → build → close without project index mutation"
+  - capabilities:
+      - "CAP-007"
+      - "CAP-008"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-015"
+    id: "WF-005"
+    name: "Disposable harness workflow trial"
+    outcomes:
+      - "OUT-005"
+      - "OUT-007"
+    summary: "workflow_trial_agentstream wf-NN with optional HMEP capture and verification receipt assist"
+  - capabilities:
+      - "CAP-007"
+    disposition: "observed"
+    evidence_ids:
+      - "EV-014"
+    id: "WF-006"
+    name: "Agentstream live checklist run"
+    outcomes:
+      - "OUT-006"
+    summary: "Live or dry-run agentstream with lead checklist YAML and optional tracker resume"
+schema_version: 1
