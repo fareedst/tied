@@ -8,7 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { resolveWorkingPath } from "../working-root.js";
 
-import fg from "fast-glob";
+import { globSync } from "glob";
 
 import { loadDetail } from "../detail-loader.js";
 import {
@@ -314,16 +314,16 @@ export function buildClosureJoinReport(input: ClosureJoinBuildInput): ClosureJoi
     }
   }
 
-  // File scan is sync in build path — collectFiles is async; use sync glob via fg.sync
-  const testFiles = fg.sync(input.test_globs ?? [], {
+  // File scan is sync in build path — collectFiles is async; use sync glob
+  const testFiles = globSync(input.test_globs ?? [], {
     cwd: input.project_root,
     absolute: true,
-    onlyFiles: true,
+    nodir: true,
   }) as string[];
-  const codeFiles = fg.sync(input.code_globs ?? [], {
+  const codeFiles = globSync(input.code_globs ?? [], {
     cwd: input.project_root,
     absolute: true,
-    onlyFiles: true,
+    nodir: true,
   }) as string[];
 
   const testContents = new Map<string, string>();

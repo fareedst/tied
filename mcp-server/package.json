@@ -34,7 +34,7 @@
     "@tied/checklist-resume": "*",
     "@modelcontextprotocol/sdk": "^1.32.2",
     "express": "^5.2.1",
-    "fast-glob": "^3.3.3",
+    "glob": "^14.0.6",
     "ignore": "^7.0.5",
     "js-yaml": "^4.1.0",
     "typescript": "^5.4.0",

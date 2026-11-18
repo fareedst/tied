@@ -1,0 +1,10 @@
+fix(mcp-server): clear npm audit via glob migration
+
+Replace fast-glob with glob@14.0.6 and apply hono lockfile bumps so
+mcp-server npm audit reports zero vulnerabilities. LEAP
+SC-NODE-MCP-AUDIT-CLEAN on REQ-TIED_NODE_TOOLCHAIN_DEFAULT and
+MCP_DEPENDENCY_GLOB pseudo block.
+
+Machine: npm audit, npm test, tsc green (witness on disk).
+Process: build-plan + close-out for REQ-TIED_MCP_NPM_AUDIT_GLOB.
+Tokens: REQ-TIED_NODE_TOOLCHAIN_DEFAULT, IMPL-TIED_NODE_TOOLCHAIN_DEFAULT.

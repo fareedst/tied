@@ -8,7 +8,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import fg from "fast-glob";
+import { glob } from "glob";
 import ts from "typescript";
 
 import {
@@ -121,7 +121,7 @@ export async function refreshSourceGraphIndex(input: {
 }): Promise<{ index: SourceGraphIndex; index_path: string }> {
   const repoRoot = path.resolve(input.repo_root);
   const pattern = input.glob ?? "**/*.{ts,tsx,js,jsx}";
-  const files = await fg(pattern, {
+  const files = await glob(pattern, {
     cwd: repoRoot,
     absolute: true,
     ignore: ["**/node_modules/**", "**/dist/**", "**/tied-bundle/reports/source-graph/**"],
@@ -247,7 +247,7 @@ export async function checkSourceGraphFreshness(input: {
 }): Promise<{ ok: boolean; content_hash: string; diagnostics: Array<{ code: string; message: string }> }> {
   const repoRoot = path.resolve(input.repo_root);
   const pattern = input.glob ?? "**/*.{ts,tsx,js,jsx}";
-  const files = await fg(pattern, {
+  const files = await glob(pattern, {
     cwd: repoRoot,
     absolute: true,
     ignore: ["**/node_modules/**", "**/dist/**", "**/tied-bundle/reports/source-graph/**"],

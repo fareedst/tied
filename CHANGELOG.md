@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **MCP npm audit cleanup ([REQ-TIED_MCP_NPM_AUDIT_GLOB])** — `mcp-server` replaces `fast-glob` with `glob@^14.0.6` (clears picomatch advisory chain); `npm audit fix` for transitive `hono` / `@hono/node-server`; `npm audit` → 0 vulnerabilities; LEAP **SC-NODE-MCP-AUDIT-CLEAN** on [REQ-TIED_NODE_TOOLCHAIN_DEFAULT](tied-project/requirements/REQ-TIED_NODE_TOOLCHAIN_DEFAULT.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_MCP_NPM_AUDIT_GLOB/PLAN.md).
+
 - **Meta Astryx design system Wave 3 ([REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3])** — `meta-astryx-ds-agent-plane-compose.md`, ds-agent-plane checklist, harness-platform-taxonomy cross-link, client-development-index and comparison Phase 1 reciprocals, bootstrap doc contract tests; close_out **allowed** (minimal, advisory). Matrix §2 row and vibe probes **Defer** v1. Plan: [PLAN.md](tied-project/working/REQ-TIED_META_ASTRYX_DESIGN_SYSTEM_WAVE3/PLAN.md).
 
 - **Open Governance sensing Wave 3 ([REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3])** — `governance-sensing-proof-boundary-compose.md`, odourless-zones checklist, Open Governance × TIED comparison stubs, bootstrap contract test; plan under `tied-project/working/REQ-TIED_OPEN_GOVERNANCE_SENSING_WAVE3/`. Excludes gate-test CITDP scratch files.

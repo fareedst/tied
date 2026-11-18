@@ -5,7 +5,7 @@
 import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 
-import fg from "fast-glob";
+import { glob } from "glob";
 
 import { buildProjectSizeSnapshot } from "./snapshot-builder.js";
 import { PROOF_BOUNDARY } from "./types.js";
@@ -89,9 +89,9 @@ async function discoverManifestPath(repoRoot: string): Promise<string | null> {
       // continue
     }
   }
-  const hits = await fg("tied-project/working/*/evidence/proof-facet-manifest.v1.json", {
+  const hits = await glob("tied-project/working/*/evidence/proof-facet-manifest.v1.json", {
     cwd: repoRoot,
-    onlyFiles: true,
+    nodir: true,
   });
   return hits[0] ?? null;
 }

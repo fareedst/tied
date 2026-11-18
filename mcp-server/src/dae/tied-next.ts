@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { resolveWorkingPath } from "../working-root.js";
 import { execFileSync } from "node:child_process";
-import fg from "fast-glob";
+import { globSync } from "glob";
 
 import { isRecord, loadCitdpBodyFromFile, loadTrackerFromFile } from "./yaml-load.js";
 
@@ -145,10 +145,10 @@ export function discoverTrackerPaths(
     "working/*/checklist-tracker.yaml",
     "working/**/*checklist*.yaml",
   ];
-  const hits = fg.sync(patterns, {
+  const hits = globSync(patterns, {
     cwd: root,
     absolute: true,
-    onlyFiles: true,
+    nodir: true,
   });
   const tiedDocs = path.join(root, "tied", "docs");
   return hits.filter((p) => !p.startsWith(tiedDocs + path.sep));

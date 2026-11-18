@@ -8,7 +8,7 @@ import { createHash } from "node:crypto";
 import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 
-import fg from "fast-glob";
+import { glob } from "glob";
 import yaml from "js-yaml";
 
 import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
@@ -128,7 +128,7 @@ function orchestratorWallSecondsFromManifest(parsed: Record<string, unknown>): n
 
 async function readTrialFactors(repoRoot: string, tiedRel: string): Promise<TrialFactorsAnnex | undefined> {
   const inventoryGlob = path.posix.join(tiedRel, "working/**/trial-workflow-interaction-inventory.v1.json");
-  const matches = await fg(inventoryGlob, { cwd: repoRoot, onlyFiles: true });
+  const matches = await glob(inventoryGlob, { cwd: repoRoot, nodir: true });
   const annex: TrialFactorsAnnex = {};
   if (matches.length > 0) {
     const sorted = [...matches].sort();
@@ -146,7 +146,7 @@ async function readTrialFactors(repoRoot: string, tiedRel: string): Promise<Tria
     tiedRel,
     "working/wf-trial-orchestrator-run/evidence/wf-trial-orchestrator-run.v1.json",
   );
-  const manifests = await fg(manifestGlob, { cwd: repoRoot, onlyFiles: true });
+  const manifests = await glob(manifestGlob, { cwd: repoRoot, nodir: true });
   if (manifests.length > 0) {
     try {
       const raw = await readFile(path.join(repoRoot, manifests[0]!), "utf8");
@@ -241,9 +241,9 @@ export async function buildProjectSizeSnapshot(input: {
   const indexCounts = await countIndexAtoms(repoRoot, tiedRel);
 
   let vocabPreferred = 0;
-  const vocabFiles = await fg(path.posix.join(tiedRel, "vocab", "*.md").replace(/\\/g, "/"), {
+  const vocabFiles = await glob(path.posix.join(tiedRel, "vocab", "*.md").replace(/\\/g, "/"), {
     cwd: repoRoot,
-    onlyFiles: true,
+    nodir: true,
   });
   for (const rel of vocabFiles.sort()) {
     const text = await readFile(path.join(repoRoot, rel), "utf8");
@@ -256,7 +256,7 @@ export async function buildProjectSizeSnapshot(input: {
   });
 
   const sidecarPattern = path.posix.join(tiedRel, "implementation-decisions", "*-pseudocode.md");
-  const sidecars = await fg(sidecarPattern.replace(/\\/g, "/"), { cwd: repoRoot, onlyFiles: true });
+  const sidecars = await glob(sidecarPattern.replace(/\\/g, "/"), { cwd: repoRoot, nodir: true });
   const mergedBodies: string[] = [];
   let grossLines = 0;
   let templateOverlap = 0;
@@ -288,9 +288,9 @@ export async function buildProjectSizeSnapshot(input: {
   const appliedLines = Math.max(0, grossLines - templateOverlap);
   const appliedUtf8Bytes = Math.max(0, grossUtf8Bytes - templateOverlapUtf8Bytes);
 
-  const testFiles = await fg(
+  const testFiles = await glob(
     ["src/**/*.test.ts", "src/**/*.test.mjs"].map((p) => p.replace(/\\/g, "/")),
-    { cwd: repoRoot, onlyFiles: true },
+    { cwd: repoRoot, nodir: true },
   );
   const proofCounts = {
     unit_tests: 0,
@@ -325,9 +325,9 @@ export async function buildProjectSizeSnapshot(input: {
     }
   }
 
-  const verifyEvidence = await fg(
+  const verifyEvidence = await glob(
     path.posix.join(tiedRel, "working/**/evidence/*consistency*.json").replace(/\\/g, "/"),
-    { cwd: repoRoot, onlyFiles: true },
+    { cwd: repoRoot, nodir: true },
   );
 
   const atomTotal =

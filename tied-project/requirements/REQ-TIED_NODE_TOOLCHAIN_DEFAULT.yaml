@@ -7,8 +7,8 @@ REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
         date: "2026-10-03"
       last_updated:
         author: "build-plan"
-        date: "2026-10-03"
-        reason: "Initial REQ for Node-only controlled runners"
+        date: "2026-11-17"
+        reason: "SC-NODE-MCP-AUDIT-CLEAN after glob migration (REQ-TIED_MCP_NPM_AUDIT_GLOB)"
     name: "Node-only controlled TIED toolchain runners"
     priority: "P1"
     rationale:
@@ -30,6 +30,9 @@ REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
       - criterion: "Canonical controlled files contain no Bun invocations"
         id: "SC-NODE-ONLY-CONTROLLED-FILES"
         metric: "Contract test scans package.json, build-commands.sh, run-mcp-tests.mjs, replay-jev-*.ts"
+      - criterion: "mcp-server npm audit reports no known vulnerabilities at default severity"
+        id: "SC-NODE-MCP-AUDIT-CLEAN"
+        metric: "cd mcp-server && npm audit exits 0 with found 0 vulnerabilities"
       - criterion: "No TIED_TOOLCHAIN_RUNTIME or Bun opt-in env var"
         id: "SC-NODE-ONLY-NO-OPTIN"
         metric: "CITDP change definition and codebase grep"

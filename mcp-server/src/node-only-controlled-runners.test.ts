@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, it } from "node:test";
-import fg from "fast-glob";
+import { globSync } from "glob";
 
 // [IMPL-TIED_NODE_TOOLCHAIN_DEFAULT] [ARCH-TIED_NODE_TOOLCHAIN_DEFAULT] [REQ-TIED_NODE_TOOLCHAIN_DEFAULT] How: Contract test fails on Bun shebang or bun install/run/test spawns in controlled files.
 describe("node-only controlled runners [REQ-TIED_NODE_TOOLCHAIN_DEFAULT]", () => {
@@ -12,7 +12,7 @@ describe("node-only controlled runners [REQ-TIED_NODE_TOOLCHAIN_DEFAULT]", () =>
     "mcp-server/package.json",
     "scripts/build-commands.sh",
     "mcp-server/scripts/run-mcp-tests.mjs",
-    ...fg.sync("mcp-server/scripts/replay-jev-*.ts", { cwd: repoRoot, onlyFiles: true }),
+    ...globSync("mcp-server/scripts/replay-jev-*.ts", { cwd: repoRoot, nodir: true }),
   ].sort();
 
   const forbiddenPatterns: Array<{ label: string; re: RegExp }> = [

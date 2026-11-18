@@ -3,6 +3,7 @@ IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
     essence_pseudocode_path: "implementation-decisions/IMPL-TIED_NODE_TOOLCHAIN_DEFAULT-pseudocode.md"
     implementation_approach:
       details:
+        - "MCP_FILE_GLOB: mcp-server uses glob@^14.0.6 for workspace file discovery; call sites use glob/globSync with nodir true (replaces fast-glob when picomatch advisories have no safe fix)"
         - "NODE_ONLY_MCP_TEST_RUNNER: run-mcp-tests invokes replays via tsx"
         - "NODE_ONLY_SHELL_ALIASES: build-commands.sh uses npm install/run and -w workspace filters"
         - "NODE_ONLY_WORKSPACE_BUILD: tsc then npm run build --workspaces --if-present"

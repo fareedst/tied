@@ -7,7 +7,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-import fg from "fast-glob";
+import { glob } from "glob";
 import yaml from "js-yaml";
 
 import type { BindingInventoryRow } from "../analysis/binding-inventory.js";
@@ -92,9 +92,9 @@ async function scanCompositionFiles(repoRoot: string): Promise<{
   composition_tests: number;
   composition_files: CompositionFileReceipt[];
 }> {
-  const testFiles = await fg(["src/**/*.test.ts", "src/**/*.test.mjs"].map((p) => p.replace(/\\/g, "/")), {
+  const testFiles = await glob(["src/**/*.test.ts", "src/**/*.test.mjs"].map((p) => p.replace(/\\/g, "/")), {
     cwd: repoRoot,
-    onlyFiles: true,
+    nodir: true,
   });
   let composition_tests = 0;
   const composition_files: CompositionFileReceipt[] = [];

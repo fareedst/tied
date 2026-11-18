@@ -6,7 +6,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import fg from "fast-glob";
+import { globSync } from "glob";
 import { getBasePath, getClientProjectRoot, loadIndex, getWritableIndexPath, type IndexName } from "./yaml-loader.js";
 import { getDetailPath, getImplPseudocodeSidecarPath } from "./detail-loader.js";
 import { formatYamlMetadata, writeCanonicalYamlTextAtomic, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
@@ -128,10 +128,10 @@ export function collectExtraSubstitutionPaths(
   }
   if (patterns.length === 0) return [];
 
-  const matches = fg.sync(patterns, {
+  const matches = globSync(patterns, {
     cwd: clientRoot,
     absolute: true,
-    onlyFiles: true,
+    nodir: true,
     ignore: DEFAULT_EXTRA_IGNORE,
     dot: true,
   });

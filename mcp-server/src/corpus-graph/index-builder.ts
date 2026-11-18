@@ -7,7 +7,7 @@ import { createHash } from "node:crypto";
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import fg from "fast-glob";
+import { glob } from "glob";
 import yaml from "js-yaml";
 
 import { prettyCanonicalJson } from "../storage-dump.js";
@@ -149,9 +149,9 @@ async function scanCorpusProject(input: {
   }
 
   const sidecarPattern = path.posix.join(tiedRel, "implementation-decisions", "*-pseudocode.md");
-  const sidecars = await fg(sidecarPattern.replace(/\\/g, "/"), {
+  const sidecars = await glob(sidecarPattern.replace(/\\/g, "/"), {
     cwd: repoRoot,
-    onlyFiles: true,
+    nodir: true,
   });
   for (const rel of sidecars.sort()) {
     const normalized = rel.replace(/\\/g, "/");

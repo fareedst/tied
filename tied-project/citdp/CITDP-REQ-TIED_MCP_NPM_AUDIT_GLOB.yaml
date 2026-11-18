@@ -1,0 +1,47 @@
+CITDP-REQ-TIED_MCP_NPM_AUDIT_GLOB:
+  change_definition:
+    current_behavior: "mcp-server depended on fast-glob; npm audit reported hono moderate and picomatch/high via micromatch with no safe npm audit fix."
+    desired_behavior: "Transitive hono bumps applied; direct fast-glob replaced by glob@^14.0.6; npm audit zero vulnerabilities; npm test and tsc green."
+    non_goals:
+      - "New top-level REQ token beyond SC-NODE-MCP-AUDIT-CLEAN on REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+      - "npm audit fix --force"
+    success_criteria:
+      - "LEAP stack updated for REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+      - "npm audit in mcp-server reports found 0 vulnerabilities"
+      - "npm test exit 0"
+    unchanged_behavior: "Glob semantics for MCP file discovery (nodir, cwd, ignore patterns)"
+  evidence:
+    command_seq:
+      - "cd mcp-server && npm audit"
+      - "cd mcp-server && npx tsc -p ."
+      - "cd mcp-server && npm test"
+    proof_boundaries:
+      - "tied-project/working/REQ-TIED_MCP_NPM_AUDIT_GLOB/evidence/npm-test-audit-witness.md"
+  impact_analysis:
+    architecture: []
+    implementation_decisions:
+      - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
+    modules_or_boundaries: "mcp-server direct dependencies and glob call sites"
+    requirements:
+      - "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: "REQ-TIED_MCP_NPM_AUDIT_GLOB"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-17"
+    title: "MCP mcp-server npm audit cleanup (glob migration)"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "glob edge semantics differ from fast-glob on dot paths"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "npm test full suite pass after migration"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_MCP_NPM_AUDIT_GLOB/evidence/npm-test-audit-witness.md"
+      falsification_questions:
+        - "Would npm audit fix --force be safer?"
+      mitigations:
+        - "Rejected --force; migrated to glob@14.0.6 with clean audit"
+      residual_risk: "low"

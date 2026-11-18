@@ -88,3 +88,22 @@ procedure NODE_ONLY_BUN_FORBIDDEN:
   FOR each controlled path READ content
   IF content matches env bun shebang OR bun install OR bun run OR bun test THEN RETURN error
   RETURN pass
+
+## MCP dependency glob (MCP_DEPENDENCY_GLOB)
+
+procedure MCP_DEPENDENCY_GLOB:
+  # [IMPL-TIED_NODE_TOOLCHAIN_DEFAULT] [ARCH-TIED_NODE_TOOLCHAIN_DEFAULT] [REQ-TIED_NODE_TOOLCHAIN_DEFAULT] How: Replace fast-glob when npm audit flags picomatch chain; audit-clean glob migration for mcp-server file discovery.
+  Contract:
+    INPUT: mcp-server package manifest and TypeScript glob call sites
+    PRE: npm audit reports high picomatch advisories via fast-glob with no non-breaking fix
+    OUTPUT: success | { error: audit_or_build_failed }
+    POST: on success direct glob dependency with npm audit zero vulnerabilities and npm test and tsc pass
+    EFFECTS: IO on package-lock and call sites
+    FAILURE_MODES: audit fix --force would downgrade fast-glob ABORT
+    TERMINATION: total
+  RUN npm audit fix for hono transitive fixes
+  REPLACE fast-glob with glob at version fourteen point zero point six in package.json
+  FOR each call site MAP onlyFiles to nodir AND fg.sync to globSync AND await fg to await glob
+  RUN npm install AND npm audit AND npm test
+  ON audit or test failure RETURN { error: audit_or_build_failed }
+  RETURN success

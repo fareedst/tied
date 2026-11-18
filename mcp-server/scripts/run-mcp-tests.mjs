@@ -7,7 +7,7 @@ import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import fg from "fast-glob";
+import { globSync } from "glob";
 
 const mcpRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const repoRoot = path.resolve(mcpRoot, "..");
@@ -28,7 +28,7 @@ const tsPatterns = [
   "packages/*/src/**/*.test.ts",
 ];
 
-const tsFiles = fg.sync(tsPatterns, { cwd: mcpRoot, absolute: true, onlyFiles: true }).sort();
+const tsFiles = globSync(tsPatterns, { cwd: mcpRoot, absolute: true, nodir: true }).sort();
 
 if (tsFiles.length === 0) {
   console.error("DIAGNOSTIC: run-mcp-tests — no *.test.ts files matched");
@@ -54,7 +54,7 @@ const tsxCmd = fs.existsSync(tsxBin) ? tsxBin : process.platform === "win32" ? "
 const tsxArgs = fs.existsSync(tsxBin) ? ["--test", ...tsFiles] : ["tsx", "--test", ...tsFiles];
 run(tsxCmd, tsxArgs, "tsx TypeScript suite");
 
-const cjsFiles = fg.sync("test/**/*.test.cjs", { cwd: mcpRoot, absolute: true, onlyFiles: true }).sort();
+const cjsFiles = globSync("test/**/*.test.cjs", { cwd: mcpRoot, absolute: true, nodir: true }).sort();
 if (cjsFiles.length > 0) {
   console.error(`DIAGNOSTIC: run-mcp-tests — node --test (${cjsFiles.length} CJS files)`);
   run("node", ["--test", ...cjsFiles], "node CJS suite");
