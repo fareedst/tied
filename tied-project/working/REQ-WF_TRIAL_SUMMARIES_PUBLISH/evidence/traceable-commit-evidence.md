@@ -34,3 +34,7 @@
 **Feedback upstream:** N/A
 
 **Excluded:** unrelated REQ workspaces, MCP fixture churn, `.cursor/plans/`
+
+## Commit
+
+**SHA:** `fc489546` — `fix(bootstrap): WF publish registry sync and unlimited size batch`

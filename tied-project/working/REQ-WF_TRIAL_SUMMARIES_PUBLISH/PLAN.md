@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | **Request token** | `REQ-WF_TRIAL_SUMMARIES_PUBLISH` |
-| **`plan_phase`** | `post-build` (wave 2 complete — registry sync + unlimited size batch) |
+| **`plan_phase`** | `close-out-ready` (wave 2) |
 | **Workflow** | wave 1 **build-complete** → **`@refine-plan` (2026-11-18)** → **`@build-plan`** → `@close-out` |
 | **Linked Cursor plan** | `wf_publish_registry_and_batch_b8ab24a3.plan.md` (wave 2); wave 1: `publish-wf-trial-summaries_skill_bbbf8a92.plan.md` |
 | **Tracker** | [checklist-tracker.yaml](./checklist-tracker.yaml) |

@@ -1,68 +1,69 @@
 {
-  "schema_version": "verification-evidence-manifest.v1",
-  "run_id": "aob-close-20261118",
-  "commit": "3777a4b410af24a0bcec46ccb25d9dcd48a20d64",
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npm run lint:ts --prefix mcp-server"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 322,
+      "exit_code": 1,
+      "id": "citdp-evidence-1",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npm test --prefix mcp-server"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 49783,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    }
+  ],
+  "commit": "fc489546ed0d10bac290a945cebe0f54c079e5af",
+  "covered_tokens": [
+    "PROC-AGENT_REQ_CHECKLIST",
+    "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  ],
   "environment": {
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
   },
-  "command_results": [
-    {
-      "id": "aob-mcp-server-test",
-      "command": [
-        "npm",
-        "test"
-      ],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
-      "exit_code": 0,
-      "result": "passed",
-      "duration_ms": 59842,
-      "artifacts": [
-        "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/aob-mcp-server-test.stdout.txt",
-        "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/aob-mcp-server-test.stderr.txt"
-      ]
-    },
-    {
-      "id": "aob-as-operated-pattern",
-      "command": [
-        "npm",
-        "test",
-        "--",
-        "--test-name-pattern",
-        "as_operated_baseline"
-      ],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
-      "exit_code": 0,
-      "result": "passed",
-      "duration_ms": 54505,
-      "artifacts": [
-        "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/aob-as-operated-pattern.stdout.txt",
-        "tied-project/working/REQ-TIED_AS_OPERATED_BASELINE/evidence/quality-manifest/aob-as-operated-pattern.stderr.txt"
-      ]
-    }
-  ],
-  "quality_rows": [
-    {
-      "id": "unit-as-operated-baseline",
-      "attribute": "baseline-functional",
-      "applicability": "applicable",
-      "rationale": "SC-AOB-VALIDATOR",
-      "evidence_method": "command",
-      "result": "passed",
-      "command_or_test": "npm test --prefix mcp-server"
-    }
-  ],
-  "covered_tokens": [
-    "REQ-TIED_AS_OPERATED_BASELINE",
-    "IMPL-TIED_AS_OPERATED_BASELINE",
-    "ARCH-TIED_AS_OPERATED_BASELINE"
-  ],
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
   "proof_boundaries": [
     "no-rdb-prefix-semantic-tokens",
     "read-only-tied-yaml",
     "working-folder-snapshots-only"
   ],
-  "human_decisions": {
-    "references": [],
-    "stored_separately": true
-  }
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-1795029604312",
+  "schema_version": "verification-evidence-manifest.v1"
 }

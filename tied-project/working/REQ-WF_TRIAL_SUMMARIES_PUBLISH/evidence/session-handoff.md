@@ -3,8 +3,8 @@
 **handoff_kind:** session  
 **Date:** 2026-11-18  
 **request_token:** `REQ-WF_TRIAL_SUMMARIES_PUBLISH`  
-**prompt_type:** `@refine-plan` (wave 2, pass 3)  
-**plan_phase:** `post-build` (wave 2)
+**prompt_type:** `@close-out` (wave 2)  
+**plan_phase:** `close-out-ready`
 
 ---
 
@@ -39,7 +39,7 @@
 
 ### Optional
 
-- [ ] `@close-out` after wave 2 green + sponsor commit cohort docs
+- [x] `@close-out` — commit **`fc489546`**
 - [ ] `D-README` reconcile (still deferred)
 
 ### Changelog (this REQ)
@@ -51,7 +51,7 @@
 
 ## Do next
 
-Optional **`@close-out`** — wave 2 build complete; sponsor commit when ready.
+Closed — commit **`fc489546`**. See [close-out-handoff.md](./close-out-handoff.md).
 
 ---
 

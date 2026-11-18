@@ -5,7 +5,7 @@
 | **handoff_kind** | session |
 | **date** | 2026-11-18 |
 | **request_token** | `REQ-TIED_AS_OPERATED_BASELINE` |
-| **prompt_type** | `@handoff` → **`@close-out`** |
+| **prompt_type** | `@close-out` → **`@handoff`** (record) |
 | **plan_phase** | `close-out-complete` |
 
 ## Plan spine
@@ -16,6 +16,7 @@
 | **Tracker** | [../checklist-tracker.yaml](../checklist-tracker.yaml) |
 | **CITDP** | [../../../citdp/CITDP-REQ-TIED_AS_OPERATED_BASELINE.yaml](../../../citdp/CITDP-REQ-TIED_AS_OPERATED_BASELINE.yaml) |
 | **Build receipt** | [build-plan-handoff.md](./build-plan-handoff.md) |
+| **Close-out receipt** | [close-out-handoff.md](./close-out-handoff.md) |
 | **Refine receipt** | [phase-handoff-refine-plan.md](./phase-handoff-refine-plan.md) |
 | **RDB dogfood (store)** | [DOC-TIED-RDB-ANALYSIS](../../DOC-TIED-RDB-ANALYSIS/) · commit `06178d55` |
 | **Runbook** | [replacement-discovery-baseline-runbook.md](../../../../docs/methodologies/replacement-discovery-baseline-runbook.md) |
@@ -39,7 +40,7 @@
 
 ## Plan execution steps
 
-**Last updated:** 2026-11-18 · **prompt_type:** `@handoff` · **PLAN:** ../PLAN.md
+**Last updated:** 2026-11-18 · **prompt_type:** `@handoff` (record) · **PLAN:** ../PLAN.md
 
 ### Required (close-out)
 
@@ -63,8 +64,8 @@
 
 ### Recommendations
 
-- For **verification gate** with current [checklist-tracker.yaml](../checklist-tracker.yaml) (`mode: active`), either populate `replacement-discovery/` + receipt JSONs per PLAN, or set `as_operated_baseline.mode: follow_up_only` on the close-out tracker copy and record costly choice C1 waiver in CITDP leap_feedback.
 - Inherit registry shapes from [DOC-TIED-RDB-ANALYSIS/registry](../../DOC-TIED-RDB-ANALYSIS/replacement-discovery/registry/) — LEAP, do not fork names.
+- Replay close-out: see [close-out-handoff.md](./close-out-handoff.md) for commit `e4ca6ce9` and regenerable vs committed evidence.
 
 ### Changelog (this REQ)
 
@@ -76,6 +77,7 @@
 | 2026-11-18 | @build-plan | Facet, snapshot minimums, enrollment, tests green |
 | 2026-11-18 | @handoff | close-out-ready; verification/deferred items |
 | 2026-11-18 | @close-out | Gates, envelope, manifest, tied_verify, commit |
+| 2026-11-18 | @handoff | Close-out record → close-out-handoff.md |
 
 ## Environment
 
@@ -84,7 +86,7 @@
 | workspace_root | `/Users/fareed/Documents/dev/chatgpt/stdd` |
 | execution_site | TIED methodology **store** |
 | TIED_BASE_PATH | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
-| git | Traceable commit at close-out (feature stack) |
+| git | feature **`e4ca6ce9`**; handoff/workspace commit via `@close-out` 2026-11-18 (see close-out-handoff) |
 
 ## Requirements and dependencies
 
@@ -120,7 +122,7 @@
 | Signal | Status |
 | --- | --- |
 | Machine close-out | **Complete** — verification + close_out gates allowed |
-| Process contract | **Close-out complete**; `tied_verify` run @ `3777a4b4` |
+| Process contract | **Close-out complete**; `tied_verify` @ pre-commit `3777a4b4`; ship **`e4ca6ce9`** |
 | REQ indexes | **Minted** — Implemented in `tied-project/` |
 
 ## Gate
